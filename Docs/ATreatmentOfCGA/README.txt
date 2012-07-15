@@ -1,1 +1,0 @@
-This paper will be deleted once I have made sure I grab everything from it I want.  It has many mistakes and was written in the days when I had some terminology mixed up, so it is bogus for the most part.

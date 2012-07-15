@@ -1,1 +1,0 @@
-This is an old document I wrote for my coworkers about GA.  Not surprisingly, nobody read it.
