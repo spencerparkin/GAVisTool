@@ -1,0 +1,26 @@
+
+Tasks:
+======
+
+ -- Provide a point sample grapher.
+ -- Would a point-cloud geometry be useful for analyzing graphs of a point sample space?  Convex hulls could then be computed.  These would not be bound to a variable.
+ -- Consider defining basis vectors for other algebras.
+ -- It might be nice to have a place-holder geometry that represents the lighting source.  It could be selected and moved around.  In fact, bind a light to a position vector?
+ -- Static lighting could be improved.  Add more lights to the scene?
+ -- Syntax coloring would be nice in the console window.
+ -- Selected geometries should be drawn a better way.  How about drawing polys at different colors depending on camera face angle to camera or distance to camera?
+ -- Fix bugs in tokenizer such as v.v tokenizing as one thing.
+ -- Bug: "-*e*e0^e1" can happen.  The printing routine has bugs in it.
+ -- Bsp tree can blow up by running out of bsp-analysis heap.
+ -- When the canvas looses focus, you can't zoom in/out.  Fix that.
+ -- To fix tokenizer, '.' is part of token only if the token started with a number.
+ -- Would be nice if the blade class had meet, join and factor methods.
+ -- In some cases the triangle heap is getting blown.  Inc the heap?
+ -- It would be very useful if bind targets had value histories.
+ -- Offer a render mode that lets you draw line-segment based geometries where it can.
+ -- The calculation of transformed normals is totally bogus.
+ -- Bug: points are not selectable.
+ -- A major speed optimization would be to implement the dual with knowledge of the generating vector space of the GA.
+ -- There is a very serious bug where unwanted lines show up in a release build.
+    Is the program using uninitialized data?
+ -- The scripts need to be fixed to reflect my flip in terminology.

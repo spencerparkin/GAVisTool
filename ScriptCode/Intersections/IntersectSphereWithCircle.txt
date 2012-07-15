@@ -1,0 +1,6 @@
+/*
+ * Show the intersection of a sphere with a circle.
+ */
+do
+(
+)

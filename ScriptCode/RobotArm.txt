@@ -1,0 +1,9 @@
+
+/*
+ * This script creats an articulated robot arm with 2 joints and 3 segments.
+ */
+
+do(
+	/* ... */
+	
+)

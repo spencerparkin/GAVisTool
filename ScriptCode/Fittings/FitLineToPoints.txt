@@ -1,0 +1,21 @@
+/*
+ * This script shows how to fit a line to a pair of unique points.
+ */
+do
+(
+	make_pt = "no + v + 0.5*(v . v)*ni",
+
+	pt_a = do( v = -3*e0 - 3*e1 - 3*e2, #make_pt ),
+	pt_b = do( v = 3*e0 + 3*e1 + 3*e2, #make_pt ),
+	bind_point( pt_a, pt_b ),
+	
+	/*
+	 * If we maintained 3 co-linear points that
+	 * never formed a point-pair, then we could
+	 * also formulate the line as the dual of the
+	 * outer product of the 3 points.
+	 */
+	bind_line( lin ),
+	formula_constraint( "lin = -( pt_a ^ pt_b ^ ni )*I" ),
+	geo_color( lin, 0, 0, 1 ),
+)

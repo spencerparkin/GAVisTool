@@ -1,0 +1,34 @@
+/*
+ * This script demonstrates how one might fit a circle to
+ * 3 non-co-linear points.
+ */
+do
+(
+	wipe_env(),
+	bind_point( p0, p1, p2, p3 ),
+	
+	place_obj = "do
+	(
+		t = x*e0 + y*e1 + z*e2,
+		T = 1 - 0.5*t*ni,
+		obj = T*obj*T~
+	)",
+	
+	p0 = do( x=-3, y=-5, z=6, obj=p0, #place_obj ),
+	p1 = do( x=-5, y=3, z=8, obj=p1, #place_obj ),
+	p2 = do( x=3, y=-2, z=-3, obj=p2, #place_obj ),
+	p3 = do( x=2, y=-4, z=0, obj=p3, #place_obj ),
+	
+	bind_circle( cir0 ),
+	bind_dual_circle( cir1 ),
+	
+	formula_constraint( "cir0 = ( p0^p1^p2 )*-I" ),
+	formula_constraint( "cir1 = p0^p1^p3" ),
+	
+	geo_color( p0, 1, 0, 0 ),
+	geo_color( p1, 0, 1, 0 ),
+	geo_color( p2, 1, 0, 1 ),
+	geo_color( p3, 0, 1, 0.5 ),
+	geo_color( cir0, 0, 1, 1 ),
+	geo_color( cir1, 0, 1, 1 ),
+)

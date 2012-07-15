@@ -1,0 +1,6 @@
+/*
+ * Show the intersection between a sphere and a line.
+ */
+do
+(
+)

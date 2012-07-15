@@ -1,0 +1,64 @@
+/*
+ * This script demonstrates how tubes may be represented in the conformal
+ * model of geometric algebra using blade-valued functions of a vector variable.
+ */
+do
+(
+	wipe_env(),
+
+	/*
+	 * Create a line that will be the spine of the tube.
+	 */
+	lin_pt = e0 + 2*e1 + 3*e2,
+	lin_n = e0 + e1 + e2,
+	lin_n = lin_n / sqrt( lin_n . lin_n ),
+	lin = lin_n*i - ( lin_pt . ( lin_n*i ) )*ni,
+	bind_line( lin ),
+	geo_color( lin, 1, 0, 0 ),
+	
+	/*
+	 * Create a sphere that will run along the spine of the tube.
+	 */
+	bind_sphere( sph ),
+	geo_color( lin, 0, 1, 0 ),
+	
+	/*
+	 * Create a point that will be on the tube if and only if it
+	 * is on the sphere that runs along the spine of the tube.
+	 */
+	bind_point( pt ),
+	geo_color( pt, 1, 0, 1 ),
+	
+	/*
+	 * Create a position vector that is constrained to represent
+	 * the position of the point.
+	 */
+	bind_virtual( pt_v ),
+	formula_constraint( "pt_v = ( no^ni ).( ( pt / ( -ni . pt ) )^no^ni )" ),
+	
+	/*
+	 * Create a normal vector that is constrainted to point
+	 * in a direction parallel to the line.
+	 */
+	bind_virtual( lin_n ),
+	formula_constraint( "lin_n = ( no . ( lin^ni ) )*i" ),
+	
+	/* 
+	 * Create a position vector that is constrained to represent
+	 * the point on the line closest to the origin.
+	 */
+	bind_virtual( lin_v ),
+	formula_constraint( "lin_v = -lin_n*( no . lin )*i / ( lin_n . lin_n )" ),
+	
+	/*
+	 * Lastly, constrain the sphere to be the sphere on the line
+	 * closest to the point and having a fixed radius.  The two
+	 * constraints that follow collectively represent the blade-valued
+	 * function of the vector variable pt_v.
+	 */
+	sph_r = 5,
+	bind_scalar_iface( sph_r ),
+	bind_virtual( sph_v ),
+	formula_constraint( "sph_v = lin_v + ( ( pt_v - lin_v ) . lin_n )*lin_n" ),
+	formula_constraint( "sph = no + sph_v + 0.5*( sph_v*sph_v - sph_r*sph_r )*ni" ),
+)

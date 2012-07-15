@@ -1,0 +1,6 @@
+/*
+ * Demonstrate here how we can intersect a plane with a circle.
+ */
+do
+(
+)

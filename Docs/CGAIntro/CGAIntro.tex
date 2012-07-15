@@ -1,0 +1,716 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\title{An Introduction To\\Conformal Geometric Algebra}
+\author{Spencer T. Parkin}
+
+\newcommand{\G}{\mathbb{G}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\nvao}{o}
+\newcommand{\nvai}{\infty}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{identity}{Identity}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{result}{Result}[section]
+
+\begin{document}
+\maketitle
+
+Conformal geometric algebra is a model of
+geometry implemented in the language of geometric algebra.
+This document is my attempt to rigorously build the
+conformal model from the ground up.
+It is only assumed that the reader is familiar with geometric algebra.
+I used the books $\cite{dorst07}$ and $\cite{hestenes87}$
+to learn geometric algebra and the conformal model.
+I recommend them for further study.
+
+\section{Representing Geometry}
+
+We begin by defining how geometries are represented in the model.
+Letting $\R^n$ denote $n$-dimensional Euclidean space, we will
+represent geometries as subsets of this space.  Having done so,
+we may perform unions, intersections and other operations of geometries, but we
+have no easy means of performing any geometric analysis.  Measurements, normals,
+tangents, centers, shape and other things that may characterize a geometry are not
+so easily gleaned or inferred from a set of points.  This is where
+geometric algebra comes in.
+
+Letting $\G$ denote the geometric algebra to be used by our model
+of geometry, we begin by letting $p:\R^n\to\G$ be a vector-valued
+function of a Euclidean point, the definition of which we leave
+open for the moment.  We then use this function in the following definition.
+\begin{definition}\label{def_direct_rep}
+For any blade $B\in\G$, we say that $B$ directly
+represents a geometry as the set of points
+$G(B)=\{x\in\R^n|p(x)\in B\}$.
+\end{definition}
+Recall that for any vector $v\in\G$, we say that $v\in B$ if and only if $v\wedge B=0$.
+Clearly this means that $v$ is in the vector space spanned by any vector factorization
+of $B$.  Letting $B^*$ denote a dual of $B$, it is not hard to show that
+$v\in B^*$ if and only if $v\cdot B=0$.
+\begin{definition}\label{def_dual_rep}
+For any blade $B\in\G$, we say that $B$ dually
+represents a geometry as the set of points
+$G^*(B)=\{x\in\R^n|p(x)\in B^*\}$.
+\end{definition}
+Notice that by any one of these two definitions, if $B$ represents
+a given geometry, then so does $B^*$ by the other definition.
+That is, $G^*(B)=G(B^*)$.
+Furthermore, any non-zero scalar multiple of $B$ is also representative
+of the same geometry.  That is, for all non-zero $\lambda\in\R$,
+we have $G(B)=G(\lambda B)$.
+
+\section{Operations of Geometry}
+
+Noticing that the set of all blades in $\G$ is closed under the
+inner and outer product operations of geometric algebra,
+a natural question arrises as to what geometries are represented
+by the results of these operations in terms of
+the geometries represented by their operands.  To begin to answer this,
+we start with a theorem.
+\begin{theorem}\label{thm_intersect}
+For any vector $v\in\G$ and any two blades $A,B\in\G$,
+if $A\wedge B\neq 0$, then $v\cdot A=0$ and $v\cdot B=0$ if and only if $v\cdot A\wedge B=0$.
+\end{theorem}
+\begin{proof}
+This is proven in lemma $\eqref{lma_intersect}$.
+\end{proof}
+We can apply theorem $\eqref{thm_intersect}$ to get the following result.
+\begin{result}
+For any two blades $A,B\in\G$ such that $A\wedge B\neq 0$, we have
+\begin{equation*}
+G^*(A)\cap G^*(B) = G^*(A\wedge B).
+\end{equation*}
+\end{result}
+Interestingly, we see here that the outer product gives the
+dual representation of the intersection between the two geometries
+dually represented by the blades taken in that product.
+\begin{theorem}\label{thm_union_and_more}
+For any vector $v\in\G$ and any two blades $A,B\in\G$,
+if $v\wedge A=0$ or $v\wedge B=0$, then $v\wedge A\wedge B=0$.
+\end{theorem}
+\begin{proof}
+If $A\wedge B=0$, then we're done.  If $A\wedge B\neq 0$ and $v\in A$ or $v\in B$,
+then $v\in A\cup B$, which is to say that $v$ is in the union of vector sub-spaces
+represented by $A$ and $B$.
+\end{proof}
+Applying theorem $\eqref{thm_union_and_more}$, we get the following result.
+\begin{result}
+For any two blades $A,B\in\G$, we have
+\begin{equation*}
+G(A)\cup G(B)\subseteq G(A\wedge B).
+\end{equation*}
+\end{result}
+Here we see that the outer product gives the direct representation
+of a geometry that is at least the union of the geometries directly
+represented by the blades taken in the product.  Unlike the intersection
+result given earlier, however, here we cannot come to any certain conclusion
+about what is being represented, even if we know exactly what
+geometries are being represented by the operands of the operation.
+To resolve this, we'll find a relationship between the geometries
+generated through the use of the intersection operation and the geometries
+generated through the use of the union-like operation.
+
+\section{Generating Geometry}
+
+We will now give an explicit formula for $p(x)$, but first we must
+embed $\R^n$ in $\G$.  We do this by replacing $\R^n$
+with an $n$-dimensional Euclidean vector space $\V^n$, and
+make the geometric algebra generated by this vector space
+a sub-algebra of $\G$.  Specifically, if $\{e_k\}_{k=1}^n$ is
+any set of $n$ basis vectors for $\V^n$, then the set of
+basis vectors for a vector space $\V$ generating $\G$
+will be given by $\{\nvao,\nvai\}\cup\{e_k\}_{k=1}^n$.
+Here, $\nvao$ and $\nvai$ are refered to as the null vectors
+at the origin and infinity, respectively.
+\begin{definition}
+For any vector $v\in\V$, if $v\cdot v=0$, we call $v$ a null vector.
+\end{definition}
+The null vectors $\nvao$ and $\nvai$ obey the relationship
+$\nvai\cdot\nvao=-1$.  Furthermore, for
+all vectors $v\in\V^n$, we define $v\cdot\nvao=0$ and $v\cdot\nvai=0$.
+
+Having precisely defined our geometric algebra $\G$, we define
+$p:\V^n\to\G$ as follows.
+\begin{equation*}
+p(x) = \nvao + x + \frac{1}{2}x^2\nvai
+\end{equation*}
+It is now not hard to show that for any $x\in\V^n$, the vector $p(x)$
+both directly and dually represents the Euclidean point $x$.  We leave
+this as an exercise
+for the reader, as well as showing that for any scalar $r>0$, that
+$p(x)-\frac{1}{2}r^2\nvai$ dually represents an $n$-dimensional hyper-sphere
+at $x$ with radius $r$.  The reader should also convince themselves that a
+vector of the form $v+(x\cdot v)\nvai$ dually represents an $(n-1)$-dimensional
+hyper-plane containing the
+point $x$ and being orthogonal to the unit-normal $v\in\V^n$.
+
+Now having blades that represent the spheres and planes in the highest possible
+dimensions of interest in $n$-dimensional Euclidean space, let us now apply
+the intersection result of the previous section to generate as many round
+and flat geometries as we can.  Doing so, we see that we can generate
+hyper-spheres and hyper-planes of dimensions $0$ through $n-1$ as
+outer products of vectors.  For $n=3$, the following table summerizes
+the geometries we find and the grades of the blades dually representing them.
+\begin{equation*}
+\begin{array}{ccccccc}
+\mbox{Grade} & \vline & \mbox{Degenerate Dual Round} & \vline & \mbox{Dual Round} & \vline & \mbox{Dual Flat} \\
+\hline
+1 & \vline & \mbox{Point} & \vline & \mbox{Sphere} & \vline & \mbox{Plane} \\
+2 & \vline & \mbox{Tangent-Point} & \vline & \mbox{Circle} & \vline & \mbox{Line} \\
+3 & \vline & \mbox{Tangent-Point} & \vline & \mbox{Point-Pair} & \vline & \mbox{Flat-Point}
+\end{array}
+\end{equation*}
+There is nothing more or less that characterizes a flat-point in comparison
+to a regular point, which may be thought of as a round-point, also being
+a degenerate sphere (a sphere of radius zero).  Flat-points are called flat,
+because they're the first entry in the list of flat geometries in order of
+increasing dimension.  (Flat-point, line, plane, hyper-plane, etc.)
+
+At first glance, the point-pair may seem out-of-place, but it is simply
+the 1-dimensional analog of a sphere or circle.  It has a center and
+a radius, but only two points.
+
+The dual tangent point of grade 2 is a degenerate
+circle, and the dual tangent point of grade 3 is a degenerate point-pair.
+These occur when we intersect a plane with one point of a round,
+which is why they're called tangent points.
+
+The question of what other geometric representations we may discover in the conformal model
+will be left open for now as we continue on, content with what we have
+found so far.  Let us now turn our attention to the method of generating
+geometries using the union-like method of the previous section.  What we'll
+find is that we can generate the above geometries using this method.
+We start with a definition.
+\begin{definition}
+For all $m\geq 0$, we say that the $m+2$ points $\{x_k\}_{k=1}^{m+2}\subset\V^n$
+are co-$m$-hyper-planar under the following circumstances.
+\begin{equation*}
+\begin{array}{l}
+\mbox{For $m=0$, the points are identical.} \\
+\mbox{For $m=1$, the points are co-linear.} \\
+\mbox{For $m=2$, the points are co-planar.} \\
+\mbox{For $m=3$, the points are co-hyper-planar.} \\
+\mbox{etc.}
+\end{array}
+\end{equation*}
+Here, $m$ corresponds to the dimension of the flat upon which all $m+2$
+points lie.
+\end{definition}
+We then need the following theorem.
+\begin{theorem}\label{thm_fit_round}
+For any set of $m\geq 2$ points $\{x_k\}_{k=1}^m\subset\V^n$, if these
+$m$ points are non-co-$(m-2)$-hyper-planar, then the set of $m$ vectors in $\{p(x_k)\}_{k=1}^m$
+are linearly independent.
+\end{theorem}
+\begin{proof}
+This is proved in lemma $\eqref{lma_cor_non_hyper_planar_lin_indep}$.
+\end{proof}
+Using this theorem, it is now not hard to show that blades directly representative
+of non-degenerate rounds of the conformal model have factorizations in
+terms of vectors representative of points.  To see this, let $B\in\G$ be
+a blade directly representative of an $m$-dimensional round, where $m>0$.  Now convince yourself
+that $m+1$ points can be found on the surface of this round that are also
+non-co-$(m-1)$-hyper-planar.  The vectors representative of these
+points are therefore linearly independent (by theorem $\eqref{thm_fit_round}$) and
+in the vector space represented by $B$ (by definition $\eqref{def_direct_rep}$).
+All that remains then, to show that $B$ is a scalar multiple of the outer product
+of these vectors, is that the grade of $B$ is $m+1$.  Knowing that the round in question
+here is $m$-dimensional, we see that $B^*$ is of grade $n-m+1$.  (We learned this from our
+study of intersecting dual geometries.)
+The grade of $B$ is therefore $n+2-(n-m+1)=m+1$.
+
+For the case $m=0$, notice that the 0-dimensional round is the degenerate $n$-dimensional round
+or point.  A factorization is trivially known as a vector representative of the point.
+
+We now see that we can build up the rounds of the conformal model using
+the outer product of vectors representative of points.  In fact, we now see
+that it may be more accurate to think of this as a fitting operation instead of
+a union-like operation.  Observe that the conformal model not only easily and
+naturally solves the problem of fitting an $m$-dimensional hyper-sphere
+to a set of $m+1$ points, but also allows us to think of the blade directly
+representative of that sphere in terms of any appropriate factorization
+of vectors representative of points on that sphere.  We
+can choose any $m+1$ points on the sphere to be in the outer product, provided they uniquely
+determine the sphere.  We'll see examples of how this idea is
+useful when we later solve certain problems using the conformal model.
+
+Of course, not all sets of $m+2$ points determine
+an $m$-dimensional hyper-sphere.  In the cases where these points don't determine a sphere, what do
+we get?  To answer this question, we need to start with another definition.
+%Well, we already know that if the $m+1$ points are co-$(m-1)$-hyper-spherical,
+%then the outer product of the vectors directly representative of those points must be zero.
+\begin{definition}
+For all $m\geq 0$, we say that the $m+2$ points $\{x_k\}_{k=1}^{m+2}\subset\V^n$
+are co-$m$-hyper-spherical under the following circumstances.
+\begin{equation*}
+\begin{array}{l}
+\mbox{For $m=0$, the points are identical.} \\
+\mbox{For $m=1$, the points are co-point-pair.} \\
+\mbox{For $m=2$, the points are co-circular.} \\
+\mbox{For $m=3$, the points are co-spherical.} \\
+\mbox{For $m=4$, the points are co-hyper-spherical.} \\
+\mbox{etc.}
+\end{array}
+\end{equation*}
+Here, $m$ corresponds to the dimension of the non-degenerate round upon
+which all $m+2$ points lie.
+\end{definition}
+
+With this definition in place, consider $B\in\G$ as a blade directly representative
+of an $m$-dimensional flat, where $m>0$.  Now convince yourself that $m+2$ points can
+be found on the surface of this flat that are non-co-$(m-1)$-hyper-planar
+and non-co-$m$-hyper-spherical.  By the first of these two conditions,
+we know that there exists a subset of size $m+1$ of the $m+2$ points that
+determines an $m$-dimensional hyper-sphere in the $m$-dimensional hyper-plane.
+The second of these two conditions insures that the outer product
+of the blade directly representative of this $m$-dimensional round
+with the vector representative of the remaining point of the $m+2$
+points is non-zero.  It follows that the vectors representative
+of the $m+2$ points form a linearly independent set.  Then since
+these points are on the hyper-plane, all that remains to be shown
+to see that the outer product of the vectors representative of these
+points is a scalar multiple of $B$ is to show that the grade of $B$ is $m+2$.
+Knowing that the flat in question here is $m$-dimensional, we see that $B^*$
+is of grade $n-m$.  (Again, we learned this from our study of intersecting
+dual geometries.)  The grade of $B$ is therefore $n+2-(n-m)=m+2$.
+
+For the case $m=0$, the case of flat-points, this argument doesn't work since clearly
+one cannot find two unique points on a point.  Fortunately, a bit of work will show
+that a flat point is directly represented by a 2-blade of the form $B=\lambda(i+xi\wedge\nvai)I$,
+which simplifies to $B=\lambda(1-x\wedge\nvai)\nvao\wedge\nvai$.  (Here, $i$ is
+the unit psuedo-scalar of the geometric algebra genearted by $V^n$ and $I$ is
+the unit psuedo-scalar of $\G$.)  It follows that
+$\nvai\in B$.  Then since we can clearly find a vector representative of a point
+that is on the flat-point, we see that $B$ factors as a scalar multiple of the outer
+product of this vector and $\nvai$.  (Note that no vector representative of a point
+is a scalar multiple of $\nvai$.)
+
+Interestingly, what we've learned so far is that all geometries,
+with the exception of flat points, can be written as outer products
+of vectors representative of points.  Our next result, however, will
+show that we can represent direct flat geometries in what might be
+considered a more convenient way.
+\begin{theorem}\label{thm_round_to_flat}
+If a blade $B\in\G$ directly represents an $m$-dimensional round,
+then $B\wedge\nvai$ directly represents the $m$-dimensional flat
+containing this $m$-dimensional round.
+\end{theorem}
+\begin{proof}
+This is proved in lemma $\eqref{lma_sphere_to_plane}$.
+\end{proof}
+
+\section{Solving for Geometry}
+
+Knowing how geometries of the conformal model factor in terms of vectors
+representative of points leads us to one of the reaons why the conformal model
+is a powerful analytical tool in geometry.  Specifically, if we're given two blades $A,B\in\G$ that
+we know are both directly representative of the same non-point geometry, then we can easily show
+that $A$ is a scalar multiple of $B$.  Let us state this formally with a theorem.
+\begin{theorem}\label{thm_same_geos}
+For any two blades $A,B\in\G$, if $G(A)=G(B)$ and these are not singletons,
+then there exists a scalar $\lambda\in\R$ such that $A=\lambda B$.
+\end{theorem}
+\begin{proof}
+With the exception of points and flat-points,
+if $A$ and $B$ both directly represent the same geometry,
+then any factorization of $A$ in terms of vectors representative of points will
+also be, up to scale, a factorization of $B$.
+\end{proof}
+This is a powerful result, because the formulation
+of $A$ may have been made one way, while the formulation of $B$, another, and now
+we have found a way to relate the two formulations.  For example,
+we might formulate $A$ as the intersection between two spheres.  Our result then tells us
+that we can interpret $A$ as we would write the geometry represented by $A$ in a
+canonical form $B$.  After composing $A$, we can decompose it as we would $B$.
+
+Right away we can use theorem $\eqref{thm_same_geos}$ to come up with an important result.
+\begin{theorem}\label{thm_flat_xor_round}
+A blade $B\in\G$ directly represents a flat geometry if and only if
+$B\wedge\nvai=0$.
+\end{theorem}
+\begin{proof}
+By the previous section and theorem $\eqref{thm_round_to_flat}$, if the blade $B$ directly represents a round,
+then $B\wedge\nvai$ represents a flat.  But also by the previous section, we know that the
+flat directly represented by $B\wedge\nvai$ can also be directly represented by an outer
+product of vectors representative of points on the flat.  But by theorem $\eqref{thm_same_geos}$, these blades
+are scalar multiples of one another.  Therefore, in any case, the outer product of $\nvai$
+and a factorization of this flat must be zero.
+
+Prove other direction here.
+\end{proof}
+Notice that this theorem can also be stated as follows.  A blade $B\in\G$
+directly represents a round geometry if and only if $B\wedge\nvai\neq 0$.
+This is because every geometry is either round or flat.
+
+Another useful feature of the conformal model comes from the way it lets
+us think about doing operations at a high level.  We needed only descend to
+the lower levels of thinking to develop the model.  Once developed, what we can do now is illustrated
+by the following example.  Suppose we're given a dual circle $A$ and
+a point $B$, and we want to find the dual sphere $C$ fitting these two geometries.
+Well, we can think of $A^*$ as any three points determining the circle.
+Combining this in the outer product with $C$, we then see that we
+get what may be four points that determine the desired sphere.
+Finally, we can come to the conclusion that $C=(A^*\wedge B)^*=A\cdot B$,
+which is a nice result!  Our answer is simply the inner product of the two blades
+representing the geometries in question.  Furthermore, the blade $C$ gives
+us useful information in all situations.  If $C=0$, then $B$ was on $A$.
+If $C\wedge\nvai=0$, then the sphere is really a plane, because its
+centered at infinity with radius infinity.  In the remaining case, $C$ is
+a finite sphere.
+
+\section{Transforming Geometry}
+
+Address transformations by versors here.
+
+Versors transform the blades representative of geometries in the conformal model,
+and so versrors represent transformations.
+
+\subsection{Uniform Scaling}
+
+\subsection{Rotations}
+
+\subsection{Translations}
+
+\subsection{Toroidal Rotations}
+
+\subsection{Transversions}
+
+\subsection{Hyperbolic Scaling}
+
+\section{Geometries as Transformers}
+
+Interesting things happen when we use geometries as we would versors
+to transform other geometries.  Address this here.
+
+\section{Catalog of Dual Representations}
+
+For reference, this section catalogs canonical dual representations of the geometries in the
+conformal model of 3-dimensional space.  In each sub-section, the blade $B\in\G$ is
+assumed to represent the geometry in question.  In addition to the composition
+of each geometry's dual representation, a sequence of steps
+are also provided that show how one can decompose this representation
+into the variables that characterize the geometry.
+
+\subsection{Points}
+
+Points (round points) are characterized by a Euclidean point $x\in\V^n$ and
+a non-zero scalar (weight) $\lambda\in\R$.
+\begin{equation*}
+B = \lambda\left(\nvao + x + \frac{1}{2}x^2\nvai\right)
+\end{equation*}
+We may decompose this as follows.
+\begin{align*}
+\lambda &= -\nvai\cdot B \\
+v &= \nvao\wedge\nvai\cdot\frac{B}{\lambda}\wedge\nvao\wedge\nvai
+\end{align*}
+
+\subsection{Spheres}
+
+Spheres are characterized by a Euclidean point (center) $x\in\V^n$, a
+non-zero radius $r\in\R$ and a non-zero scalar (weight) $\lambda\in\R$.
+\begin{equation*}
+B = \lambda\left(\nvao + x + \frac{1}{2}(x^2\pm r^2)\nvai\right)
+\end{equation*}
+(Say something about imaginary spheres.)
+We may decompose this as follows.
+\begin{align*}
+\lambda &= -\nvai\cdot B \\
+x &= \nvao\wedge\nvai\cdot\frac{B}{\lambda}\wedge\nvao\wedge\nvai \\
+r^2 &= x^2 + 2\nvao\cdot\frac{B}{\lambda}
+\end{align*}
+
+\subsection{Planes}
+
+Planes are characterized by a Euclidean point (center, if you will) $x\in\V^n$,
+a unit-normal $v\in\V^n$ and a non-zero scalar (weight) $\lambda\in\R$.
+\begin{equation*}
+B = \lambda(v + (x\cdot v)\nvai)
+\end{equation*}
+If $T=1-\frac{1}{2}x\nvai$, we may also formulate $B$ as $Tv\tilde{T}$.
+We may decompose $B$ as follows.
+\begin{align*}
+v &= \nvao\cdot\frac{B}{\lambda}\wedge\nvai \\
+x &= -v\left(\nvao\cdot\frac{B}{\lambda}\right)
+\end{align*}
+Notice here that any original weight, normal and position used in
+the composition of $B$ are not recoverable in the decomposition of $B$.
+Here, $x$ will be the point on the plane closest to the origin.
+
+\subsection{Circles}
+
+Circles are characterized by a Euclidean point (center) $x\in\V^n$,
+a unit-normal $v\in\V^n$, a non-zero radius $r\in\R$ and a non-zero scalar (weight) $\lambda\in\R$.
+\begin{equation*}
+B = \lambda(v+(x\cdot v)\nvai)\wedge\left(\nvao+x+\frac{1}{2}(x^2\pm r^2)\nvai\right)
+\end{equation*}
+(Say something about imaginary circles.)  We may decompose this as follows.
+\begin{align*}
+v &= \nvao\wedge\nvai\cdot\frac{B}{\lambda}\wedge\nvai \\
+x &= v\left(\nvao\wedge\nvai\cdot\frac{B}{\lambda}\wedge\nvao\nvai\right) \\
+r^2 &= x^2 - 2v\left((x\cdot v)x-\nvao\wedge\nvai\cdot\nvao\wedge \frac{B}{\lambda}\right)
+\end{align*}
+
+\subsection{Lines}
+
+Lines are characterized by a Euclidean point (center, if you will) $x\in\V^n$,
+a unit-normal $v\in\V^n$ and a non-zero scalar (weight) $\lambda\in\R$.
+\begin{equation*}
+B = \lambda\left(vi - \left(x\cdot vi\right)\wedge\nvai\right)
+\end{equation*}
+We may decompose this as follows.
+\begin{align*}
+v &= \left(\nvao\cdot\frac{B}{\lambda}\wedge\nvai\right)i \\
+x &= -v\left(\nvao\cdot\frac{B}{\lambda}\right)i
+\end{align*}
+
+\subsection{Point-Pairs}
+
+Point-pairs are characterized by a Euclidean point (center) $x\in\V^n$,
+a unit-normal $v\in\V^n$, a non-zero radius $r\in\R$ and a non-zero scalar (weight) $\lambda\in\R$.
+\begin{equation*}
+B = \lambda(vi-(x\cdot vi)\wedge\nvai)\wedge\left(\nvao+x+\frac{1}{2}(x^2\pm r^2)\nvai\right)
+\end{equation*}
+(Say something about imaginary point-pairs.)  We may decompose this as follows.
+\begin{align*}
+v &= -\left(\nvao\wedge\nvai\cdot\frac{B}{\lambda}\wedge\nvai\right)i \\
+x &= -v\left(\nvao\wedge\nvai\cdot\frac{B}{\lambda}\wedge\nvao\nvai\right)i \\
+r^2 &= -x^2+2v\left((x\cdot v)v+\left(\nvao\wedge\nvai\cdot\nvao\wedge\frac{B}{\lambda}\right)i\right)
+\end{align*}
+
+\subsection{Flat Points}
+
+Flat-points are characterized by a Euclidean point $x\in\V^n$ and a non-zero
+scalar (weight) $\lambda\in\R$.
+\begin{equation*}
+B = \lambda(i+xi\wedge\nvai)
+\end{equation*}
+We may decompose this as follows.
+\begin{align*}
+\lambda &= -(B\wedge\nvai)i \\
+x &= \left(\nvao\cdot\frac{B}{\lambda}\right)i
+\end{align*}
+
+\subsection{Tangent Points}
+
+A tangent-point is characterized by a Euclidean point $x\in\V^n$, a unit-normal $v\in\V^n$
+and a non-zero scalar (weight) $\lambda\in\R$.  Dual canonical forms of tangent points for
+grades 2 and 3 are given by the dual canonical forms of circles and point-pairs, respectively,
+with a radius $r$ of zero.  For example, given any $r>0$, simplyfing the following equation recovers
+the dual form of a tangent point for grade 2.
+\begin{equation*}
+B = \lambda(v+(x\cdot v)\nvai)\wedge\left(\nvao+x-rv+\frac{1}{2}((x-rv)^2-r^2)\nvai\right),
+\end{equation*}
+The reader will notice that $r$ cancels itself out.  The decomposition steps for tangent
+points are the same as those given for circles and point-pairs.  The recovered radius
+will be zero in the case of tangent points.
+
+\subsection{Free Blades}
+
+Address free-blades here.
+
+\section{Catalog of Transformations}
+
+\subsection{Scale-Rotate-Translation Transformations}
+
+Such a transformation is characterized by a Euclidean translation vector $t\in\V^n$, a unit-axis $a\in\V^n$,
+an angle $\theta\in\R$ and a scalar $\lambda\in\R$.
+\begin{equation*}
+V = \lambda\left(1-\frac{1}{2}t\nvai\right)\left(\cos\frac{\theta}{2}-ai\sin\frac{\theta}{2}\right),
+\end{equation*}
+Notice that $V$ here is not a blade.  It is an even versor.  If the blade $B\in\G$ represents
+a geometry, (directyl or dually), the transformation of $B$ by $V$ is given by $VBV^{-1}$,
+in the case that we wish to the apply the rotation first, then the translation.  The application
+of the scale may be thought of as happening before or after the rotation, but not hafter the translation.
+We may decompose this type of transformation as follows.
+\begin{align*}
+\lambda^2 &= VV^{\sim} \\
+R &= -\nvao\cdot\frac{V}{\lambda}\wedge\nvai \\
+T &= \frac{V}{\lambda}R^{\sim} \\
+\theta &= 2\cos^{-1}\left\langle R\right\rangle_0 \\
+a &= \frac{1}{\sin(\theta/2)}\left\langle R\right\rangle_2 i \\
+t &= 2\nvao\cdot(1-T)
+\end{align*}
+(Say something about the polar decomposition of $V$.)
+
+\section{Supporting Lemmas}
+
+So as not to detract from the main discussions of this document above, the following
+lemmas support the fine details needed to prove some of the main results above.
+(There may be a lot of mistakes here that need cleaning up.)
+
+\begin{lemma}\label{lma_vec_blade_inner_zero}
+If $A\in\G$ is a non-zero blade and $v\in\V$ is a vector such that $v\cdot A=0$, then
+for all vectors $w\in\V$ such that $w\wedge A=0$, we have $v\cdot w=0$.
+\end{lemma}
+\begin{proof}
+We give a proof by induction.  The case when $A$ is a vector is easy to see.
+Suppose the lemma holds for blades $A$ of grade $m-1$.  We will then show that the
+lemma holds for blades $A$ of grade $m$.  Let $\{a_k\}_{k=1}^m$ be a set of $m$
+vectors such that $A=\bigwedge_{k=1}^m a_k$.  Let $w$ be a vector such that
+$w\wedge A=0$.  It follows that $w$ is a linear combination of the vectors in $\{a_k\}_{k=1}^m$.
+Let $v$ be a vector such that $v\cdot A=0$.
+\begin{equation*}
+0 = v\cdot A = v\cdot \bigwedge_{k=1}^m a_k
+ = \left(v\cdot\bigwedge_{k=1}^{m-1} a_k\right)\wedge b_m + (-1)^m(v\cdot b_m)\bigwedge_{k=1}^{m-1} b_k
+\end{equation*}
+From this we see that if $v\cdot A=0$, then $v\cdot\bigwedge_{k=1}^{m-1} a_k=0$ and $v\cdot a_m=0$.
+Now, by inductive hypothesis, it follows that for all integers $k\in[1,m-1]$, we have $v\cdot a_k=0$.
+Now since $w$ is a linear combination of the vectors in $\{a_k\}_{k=1}^m$, we see that $v\cdot w=0$.
+\end{proof}
+
+\begin{lemma}\label{lma_intersect}
+Given any $v\in\V$ and any two blades $A,B\in\G$ such that $A\wedge B\neq 0$,
+it follows that
+\begin{equation*}
+\mbox{$v\cdot A=0$ and $v\cdot B=0 \iff v\cdot(A\wedge B)=0$.}
+\end{equation*}
+\end{lemma}
+\begin{proof}
+Let $\{a_k\}_{k=1}^i$ be a set of $i$ vectors such that $A=\bigwedge_{k=1}^i a_k$.
+Similarly, let $\{b_k\}_{k=1}^i$ be a set of $j$ vectors such that
+$B=\bigwedge_{k=1}^j b_k$.  Then, using lemma $\eqref{lma_vec_blade_inner_zero}$ in both
+directions of the proof, we have
+$v\cdot A=0$ and $v\cdot B=0$ if and only if for all integers $k\in[1,i]$,
+we have $v\cdot a_k=0$, and for all integers $k\in[1,j]$, we have $v\cdot b_k=0$, which,
+in turn, is true if and only if $v\cdot(A\wedge B)=0$.  Notice that one direction of this
+proof fails if $A\wedge B=0$.
+\end{proof}
+
+\begin{lemma}\label{lma_mm3_imp_mm2}
+For any integer $m>2$, if a set of $m$ position vectors $\{v_k\}_{k=1}^m$
+taken from $\V^n$ is co-$(m-3)$-hyper-planer, then this set of position vectors is
+also co-$(m-2)$-hyper-planar.
+\end{lemma}
+\begin{proof}
+Clearly for any $(m-3)$-dimensional hyper-plane there exists an $(m-2)$-dimensional
+hyper-plane containing it.
+\end{proof}
+
+\begin{lemma}\label{lma_non_co_hyper_planar_imp_diff_set_lin_indep}
+If a set of position vectors $\{v_k\}_{k=1}^m$ are non-co-$(m-2)$-hyper-planar,
+then for any integer $w\in[1,m]$, the set of $m-1$ vectors $\{v_w-v_k\}_{k=1,k\neq w}^m$
+is a linearly independent set of vectors.
+\end{lemma}
+\begin{proof}
+We will prove the contrapositive.  If the set of $m-1$ vectors $\{v_w-v_k\}_{k=1,k\neq w}^m$
+are linearly dependent, then the $(m-1)$-dimensional hyper-volume of the $(m-1)$-dimensional
+parallel-piped determined by the $m-1$ vectors in $\{v_w-v_k\}_{k=1,k\neq w}^m$ is zero.
+Then, at most, this flattened paralle-piped has $(m-1)$-dimensional hyper-area, which is
+$(m-2)$-dimensional hyper-volume.  We can now see that if all directional vectors in
+$\{v_w-v_k\}_{k=1,k\neq w}^m$ are confined to an $(m-2)$-dimensional hyper-plane, then,
+as position vectors, the vectors in $\{v_k\}_{k=1}^m$ must all be co-$(m-2)$-hyper-planar.
+Notice that if our flattened
+parallel-piped has only volume in lower dimensions, or no volume in any dimension,
+then our lemma here still goes through by lemma $\eqref{lma_mm3_imp_mm2}$.
+\end{proof}
+
+\begin{lemma}\label{lma_lin_combo_hyper_planar}
+Let $m$ be an integer such that $m\geq 2$.
+Then, if $\{\alpha_k\}_{k=1}^m$ is a set of $m$ scalars, not all zero, taken from $\R$,
+and $\{v_k\}_{k=1}^m$ is a set of $m$ vectors taken from $\V^n$, such that
+\begin{equation*}
+\mbox{$0=\sum_{k=1}^m\alpha_k$ and $0=\sum_{k=1}^m\alpha_k v_k$,}
+\end{equation*}
+then the set of $m$ position vectors $\{v_k\}_{k=1}^m$ are co-$(m-2)$-hyper-planar.
+\end{lemma}
+\begin{proof}
+Let us first make the observation that if for all integers $k\in[1,m]$, we have
+$\alpha_k=0$, then we can come to no conclusion about the vectors in $\{v_k\}_{k=1}^m$.
+Therefore, we must require that the scalars in $\{\alpha_k\}_{k=1}^m$ are not
+all zero.
+
+We now make the observation that if there exists an integer $i\in[1,m]$ such that
+$\alpha_i\neq 0$, then there must exist an integer $j\in[1,m]$, where $i\neq j$, such
+that $\alpha_j\neq 0$ also.
+So without loss of generality, let $i=m$ so that $1\leq j<m$.
+It now follows that the sum
+\begin{equation*}
+0 = \sum_{k=1}^{m-1}\alpha_k v_k - \left(\sum_{k=1}^{m-1}\alpha_k\right)v_m
+ = \sum_{k=1}^{m-1}\alpha_k(v_k-v_m)
+\end{equation*}
+is a non-trivial linear combination of the vectors in $\{v_k-v_m\}_{k=1}^{m-1}$.
+It then follows that $\{v_m-v_k\}_{k=1}^{m-1}$ is a linearly dependent set of vectors.
+Therefore, by the contrapositive of lemma $\eqref{lma_non_co_hyper_planar_imp_diff_set_lin_indep}$,
+we see the set of $m$ position vectors $\{v_k\}_{k=1}^m$ are co-$(m-2)$-hyper-planar,
+which is what we wanted to show.
+\end{proof}
+
+\begin{lemma}\label{lma_inf_lin_combo_hyper_planar}
+Given a set of $m$ position vectors $\{v_k\}_{k=1}^m$ taken from $\V^n$,
+if there exists a scalar $\lambda\in\R$ and a set of $m$ scalars
+$\{\alpha_k\}_{k=1}^m$, not all zero, taken from $\R$ such that
+\begin{equation*}
+\lambda\nvai = \sum_{k=1}^m\alpha_k p(v_k),
+\end{equation*}
+then the set of $m$ position vectors in $\{v_k\}_{k=1}^m$ are co-$(m-2)$-hyper-planar.
+\end{lemma}
+\begin{proof}
+By equating parts, it is easy to see that
+\begin{equation*}
+\mbox{$0 = \sum_{k=1}^m\alpha_k$ and $0=\sum_{k=1}^m\alpha_k v_k$.}
+\end{equation*}
+Our theorem now follows directly from lemma $\eqref{lma_lin_combo_hyper_planar}$.
+\end{proof}
+
+\begin{lemma}\label{lma_cor_non_hyper_planar_lin_indep}
+If a given set of $m$ position vectors $\{v_k\}_{k=1}^m$ taken from $\V^n$
+are non-co-$(m-2)$-hyper-planar, then the set of vectors $\{p(v_k)\}_{k=1}^m$
+are linearly independent.
+\end{lemma}
+\begin{proof}
+By the contrapositive of lemma $\eqref{lma_inf_lin_combo_hyper_planar}$,
+there does not exist any scalar $\lambda\in\R$ nor set of scalars
+$\{\alpha_k\}_{k=1}^m$, not all zero, such that
+\begin{equation*}
+\lambda\nvai = \sum_{k=1}^m\alpha_k p(v_k).
+\end{equation*}
+This is therefore also true when $\lambda=0$.
+\end{proof}
+
+\begin{lemma}\label{lma_sphere_to_plane}
+Let $A\in\G$ be an $m$-blade that is directly representive of an
+$(m-1)$-dimensional hyper-sphere of radius $r>0$.
+Then the $(m+1)$-blade $A\wedge\nvai$ is directly representative
+of the $(m-1)$-dimensional hyper-plane containing the
+hyper-sphere represented by $A$.
+\end{lemma}
+\begin{proof}
+By result $\eqref{}$, there exists a
+scalar $\lambda\in\R$ and a set of $m$ vectors $\{p(v_k)\}_{k=1}^m$,
+such that $A = \lambda\bigwedge_{k=1}^m p(v_k)$.
+Now since the position vectors $\{v_k\}_{k=1}^m$ are non-co-$(m-2)$-hyper-planar,
+we see that $\nvai$ is not any non-trivial linear combination of the
+$m$ vectors $\{p(v_k)\}_{k=1}^m$ by lemma $\eqref{lma_inf_lin_combo_hyper_planar}$,
+and therefore $A\wedge\nvai\neq 0$.
+
+Now consider the set of all
+vectors $v\in\V^n$ such that $p(v)\wedge A\wedge\nvai=0$.
+This implies that if $p(v)\wedge A\neq 0$, then there
+exists a set of $m+1$ scalars $\{\alpha_k\}_{k=1}^{m+1}$, not all zero,
+such that
+\begin{equation*}
+\nvai = \sum_{k=1}^m \alpha_k p(v_k) + \alpha_{m+1}p(v).
+\end{equation*}
+If such a non-trivial linear combination does not exist, then $p(v)\wedge A=0$,
+and so $v$ is on the hyper-sphere, which is in the desired hyper-plane.
+Therefore, what we need to show is that the remainder of the hyper-plane
+is given by the set of all position vectors $v\in\V^n$ for which this non-trivial linear
+combination does exist.  This follows directly from lemma $\eqref{lma_inf_lin_combo_hyper_planar}$.
+\end{proof}
+
+\bibliographystyle{plain}
+\bibliography{CGAIntro}
+
+\end{document}
+
+% How does meet and join perform operations on geometry in the conformal model?

@@ -1,0 +1,17 @@
+/*
+ * This script shows how you can fit a line to a point-pair.
+ */
+do
+(
+	wipe_env(),
+	make_pt = "no + v + 0.5*(v . v)*ni",
+
+	bind_pointpair( ppr ),
+	pt_a = do( v = -3*e0 - 3*e1 - 3*e2, #make_pt ),
+	pt_b = do( v = 3*e0 + 3*e1 + 3*e2, #make_pt ),
+	ppr = -( pt_a ^ pt_b )*I,
+	
+	bind_line( lin ),
+	formula_constraint( "lin = ppr . ni" ),
+	geo_color( lin, 0, 1, 0 ),
+)

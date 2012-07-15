@@ -1,0 +1,7 @@
+/*
+ * This script demonstrates how translation versors
+ * transform euclidean vectors into planes.
+ */
+do
+(
+)

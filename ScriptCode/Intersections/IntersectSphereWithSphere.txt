@@ -1,0 +1,32 @@
+/*
+ * This script intersects one sphere with another.
+ * Their intersection is a real circle when they
+ * actually intersect, an imaginary circle when they
+ * don't actually intersect.
+ */
+do(
+	wipe_env(),
+
+	place_obj = "do(
+		t = x*e0 + y*e1 + z*e2,
+		T = 1 - 0.5*t*ni,
+		obj = T*obj*T~
+	)",
+	
+	sph0_r = 4,
+	sph0 = no - 0.5*( sph0_r*sph0_r )*ni,
+	sph0 = do( x=3, y=1, z=4, obj=sph0, #place_obj ),
+	
+	sph1_r = 5,
+	sph1 = no - 0.5*( sph1_r*sph1_r )*ni,
+	sph1 = do( x=-2, y=0, z=2, obj=sph1, #place_obj ),
+	
+	bind_sphere( sph0, sph1 ),
+	bind_circle( cir ),
+	
+	geo_color( sph0, 1, 0, 0 ),
+	geo_color( sph1, 0, 1, 0 ),
+	geo_color( cir, 1, 1, 0 ),
+	
+	formula_constraint( "cir = sph0^sph1" ),
+)

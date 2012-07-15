@@ -1,0 +1,25 @@
+/*
+ * This script shows how we can fit a sphere
+ * to a pair of point-pairs.
+ */
+do
+(
+	wipe_env(),
+
+	make_pt = "no + v + 0.5*(v . v)*ni",
+	pt0 = do( v = -3*e0 + 4*e1 + 3*e2, #make_pt ),
+	pt1 = do( v = 3*e0 + 4*e1 + 3*e2, #make_pt ),
+	pt2 = do( v = 3*e0 + 4*e1 + -3*e2, #make_pt ),
+	pt3 = do( v = -3*e0 - 4*e1 + -3*e2, #make_pt ),
+	
+	ppr0 = ( pt0 ^ pt1 )*I,
+	ppr1 = ( pt2 ^ pt3 )*I,
+	bind_pointpair( ppr0, ppr1 ),
+	
+	bind_sphere( sph ),
+	
+	/*
+	 * Does this simplify?
+	 */
+	formula_constraint( "sph = ((ppr0*I)^(ppr1*I))*I" ),
+)

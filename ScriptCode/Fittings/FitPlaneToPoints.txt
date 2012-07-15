@@ -1,0 +1,18 @@
+/*
+ * This script shows how you can fit a plane
+ * to 3 non-colinear points.
+ */
+do
+(
+	wipe_env(),
+	make_pt = "no + v + 0.5*(v . v)*ni",
+
+	pt_a = do( v = -3*e0 - 3*e1 - 3*e2, #make_pt ),
+	pt_b = do( v = 3*e0 + 3*e1 + 3*e2, #make_pt ),
+	pt_c = do( v = 3*e0 + 3*e1, #make_pt ),
+	bind_point( pt_a, pt_b, pt_c ),
+	
+	bind_plane( pln ),
+	formula_constraint( "pln = ( pt_a ^ pt_b ^ pt_c ^ ni )*I" ),
+	geo_color( pln, 1, 0, 0 ),
+)

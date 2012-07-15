@@ -1,0 +1,9 @@
+/*
+ * Intersect here 3 unique spheres.
+ * When there is no true intersection
+ * between all 3 spheres, we get an
+ * imginary point-pair.
+ */
+do
+(
+)

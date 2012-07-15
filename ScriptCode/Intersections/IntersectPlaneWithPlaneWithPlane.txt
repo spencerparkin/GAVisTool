@@ -1,0 +1,7 @@
+/*
+ * Show here the intersection between 3 pair-wise
+ * non-parallel planes.
+ */
+do
+(
+)
