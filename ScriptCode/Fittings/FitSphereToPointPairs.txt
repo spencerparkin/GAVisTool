@@ -14,9 +14,9 @@ do
 	
 	ppr0 = ( pt0 ^ pt1 )*I,
 	ppr1 = ( pt2 ^ pt3 )*I,
-	bind_pointpair( ppr0, ppr1 ),
+	bind_dual_pointpair( ppr0, ppr1 ),
 	
-	bind_sphere( sph ),
+	bind_dual_sphere( sph ),
 	
 	/*
 	 * Does this simplify?

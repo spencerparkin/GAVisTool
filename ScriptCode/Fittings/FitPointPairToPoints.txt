@@ -3,7 +3,7 @@
  */
 do(
 	wipe_env(),
-	bind_point( p0, p1 ),
+	bind_dual_point( p0, p1 ),
 	
 	place_obj = "do(
 		t = x*e0 + y*e1 + z*e2,
@@ -14,7 +14,7 @@ do(
 	p0 = do( x=-3, y=-5, z=6, obj=p0, #place_obj ),
 	p1 = do( x=-5, y=3, z=8, obj=p1, #place_obj ),
 	
-	bind_pointpair( ppr ),
+	bind_dual_pointpair( ppr ),
 	formula_constraint( "ppr = ( p0^p1 )*-I" ),
 	
 	geo_color( p0, 1, 0, 0 ),

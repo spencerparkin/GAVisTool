@@ -13,20 +13,20 @@ do
 	lin_n = e0 + e1 + e2,
 	lin_n = lin_n / sqrt( lin_n . lin_n ),
 	lin = lin_n*i - ( lin_pt . ( lin_n*i ) )*ni,
-	bind_line( lin ),
+	bind_dual_line( lin ),
 	geo_color( lin, 1, 0, 0 ),
 	
 	/*
 	 * Create a sphere that will run along the spine of the tube.
 	 */
-	bind_sphere( sph ),
+	bind_dual_sphere( sph ),
 	geo_color( lin, 0, 1, 0 ),
 	
 	/*
 	 * Create a point that will be on the tube if and only if it
 	 * is on the sphere that runs along the spine of the tube.
 	 */
-	bind_point( pt ),
+	bind_dual_point( pt ),
 	geo_color( pt, 1, 0, 1 ),
 	
 	/*

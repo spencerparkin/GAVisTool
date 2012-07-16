@@ -21,8 +21,8 @@ do(
 	sph1 = no - 0.5*( sph1_r*sph1_r )*ni,
 	sph1 = do( x=-2, y=0, z=2, obj=sph1, #place_obj ),
 	
-	bind_sphere( sph0, sph1 ),
-	bind_circle( cir ),
+	bind_dual_sphere( sph0, sph1 ),
+	bind_dual_circle( cir ),
 	
 	geo_color( sph0, 1, 0, 0 ),
 	geo_color( sph1, 0, 1, 0 ),

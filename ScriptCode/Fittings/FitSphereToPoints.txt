@@ -10,7 +10,7 @@ do(
 	/*
 	 * Create the points.
 	 */
-	bind_point( p0, p1, p2, p3 ),
+	bind_dual_point( p0, p1, p2, p3 ),
 	
 	/*
 	 * Create a function that can place a conformal geometry.
@@ -33,7 +33,7 @@ do(
 	 * Calculate and create the sphere that fits the points.
 	 */
 	sph = ( p0^p1^p2^p3 )*-I,
-	bind_sphere( sph ),
+	bind_dual_sphere( sph ),
 	
 	/*
 	 * Give all the geometries their own color.

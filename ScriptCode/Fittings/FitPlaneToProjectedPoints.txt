@@ -15,7 +15,7 @@ do
 		obj = T*obj*T~,
 	)",
 	
-	bind_point( p0, p1, p2, p3 ),
+	bind_dual_point( p0, p1, p2, p3 ),
 	geo_color( p0, 1, 0, 0 ),
 	geo_color( p1, 1, 0, 0 ),
 	geo_color( p2, 1, 0, 0 ),
@@ -30,7 +30,7 @@ do
 	plane_norm = e1,
 	bind_virtual( plane_pos, plane_norm ),
 	
-	bind_point( p0_proj, p1_proj, p2_proj, p3_proj ),
+	bind_dual_point( p0_proj, p1_proj, p2_proj, p3_proj ),
 	
 	/*
 	 * There is most likely a much smarter way to do
@@ -49,13 +49,13 @@ do
 	formula_constraint( "p2_proj = do( pt = p2, #proj_func )" ),
 	formula_constraint( "p3_proj = do( pt = p3, #proj_func )" ),
 	
-	bind_dual_plane( pln ),
+	bind_plane( pln ),
 	formula_constraint( "pln = p0_proj^p1_proj^p2_proj^p3_proj" ),
 	
 	/*
 	 * It's best to view this with the skinny geometry mode.
 	 */
-	bind_dual_circle( cir0, cir1, cir2, cir3 ),
+	bind_circle( cir0, cir1, cir2, cir3 ),
 	formula_constraint( "cir0 = p1_proj^p2_proj^p3_proj" ),
 	formula_constraint( "cir1 = p0_proj^p2_proj^p3_proj" ),
 	formula_constraint( "cir2 = p0_proj^p1_proj^p3_proj" ),

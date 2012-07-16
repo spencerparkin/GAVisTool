@@ -7,14 +7,14 @@ do
 	wipe_env(),
 	make_pt = "no + v + 0.5*(v . v)*ni",
 
-	bind_pointpair( ppr ),
+	bind_dual_pointpair( ppr ),
 	pt_a = do( v = -3*e0 - 3*e1 - 3*e2, #make_pt ),
 	pt_b = do( v = 3*e0 + 3*e1 + 3*e2, #make_pt ),
 	ppr = -( pt_a ^ pt_b )*I,
 	
 	pt = do( v = 3*e0 + 3*e1, #make_pt ),
-	bind_point( pt ),
+	bind_dual_point( pt ),
 	
-	bind_circle( cir ),
+	bind_dual_circle( cir ),
 	formula_constraint( "cir = ppr . pt" ),
 )
