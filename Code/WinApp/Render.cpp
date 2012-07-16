@@ -726,8 +726,8 @@ void GAVisToolRender::InstanceGeometry( const VectorMath::CoordFrame& coordFrame
 		VectorMath::TransformNormal( triangle->triangleNormals.normal[1], coordFrame, geometry.triangleArray[ index ].triangleNormals.normal[1] );
 		VectorMath::TransformNormal( triangle->triangleNormals.normal[2], coordFrame, geometry.triangleArray[ index ].triangleNormals.normal[2] );
 
+		// This normal does not need to be transformed, because it is being calculated in world space.
 		VectorMath::CalcNormal( triangle->triangle, triangle->normal, true );
-		VectorMath::TransformNormal( triangle->normal, coordFrame, triangle->normal );
 
 		VectorMath::MakePlane( triangle->triangle, triangle->trianglePlane );
 	}
