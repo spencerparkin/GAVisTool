@@ -297,8 +297,8 @@ void GAVisToolRender::PrimitiveCache::Draw( GAVisToolRender& render )
 {
 	// Draw the points seperately from the lines and triangles.
 	// I'm not sure yet if I want to put them into the BSP tree.
-	glPointSize( 10.f );
 	glBegin( GL_POINTS );
+	glPointSize( 10.f );
 	for( Point* point = ( Point* )pointList.LeftMost(); point; point = ( Point* )point->Right() )
 		point->Draw( render.GetDoLighting() );
 	glEnd();
@@ -607,8 +607,8 @@ void GAVisToolRender::Line::Reset( void )
 //=============================================================================
 void GAVisToolRender::Line::Draw( bool doLighting )
 {
-	glLineWidth( 2.f );
 	glBegin( GL_LINES );
+	glLineWidth( 2.f );
 
 	Color( doLighting, false );
 
