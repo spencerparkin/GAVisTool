@@ -165,7 +165,7 @@ void GAVisToolCanvas::DrawCoordinateAxes( void )
 
 	// Make these a different color so that we can
 	// differentiate between the negative and positive axes.
-	render.Color( 1.f, 1.f, 1.f, 1.f );
+	render.Color( 0.5f, 0.5f, 0.5f, 1.f );
 	DrawVector( origin, negXaxis, ratio );
 	DrawVector( origin, negYaxis, ratio );
 	DrawVector( origin, negZaxis, ratio );
