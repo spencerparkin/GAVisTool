@@ -249,7 +249,7 @@ private:
 		Point( void );
 		virtual ~Point( void );
 
-		void Draw( bool doLighting );
+		void Draw( bool doLighting, VectorMath::CoordFrame& cameraFrame );
 
 		virtual void CalcCenter( VectorMath::Vector& center );
 
@@ -294,7 +294,6 @@ private:
 
 	PrimitiveCache* activePrimitiveCache;
 
-	// Do we need to put points in here too?
 	class BspNode
 	{
 	public:

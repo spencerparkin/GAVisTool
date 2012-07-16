@@ -297,11 +297,16 @@ void GAVisToolRender::PrimitiveCache::Draw( GAVisToolRender& render )
 {
 	// Draw the points seperately from the lines and triangles.
 	// I'm not sure yet if I want to put them into the BSP tree.
-	glBegin( GL_POINTS );
-	glPointSize( 10.f );
-	for( Point* point = ( Point* )pointList.LeftMost(); point; point = ( Point* )point->Right() )
-		point->Draw( render.GetDoLighting() );
-	glEnd();
+	// Probably not, because they really should always be drawn
+	// as fully opaque dots, in which case, we just draw them before
+	// everything else anyway.
+	if( pointList.Count() > 0 )
+	{
+		VectorMath::CoordFrame cameraFrame;
+		wxGetApp().canvasFrame->canvas->camera.CameraFrame( cameraFrame );
+		for( Point* point = ( Point* )pointList.LeftMost(); point; point = ( Point* )point->Right() )
+			point->Draw( render.GetDoLighting(), cameraFrame );
+	}
 
 	// Now go draw all the lines and triangles.
 	if( optimizedForAlphaSorting )
@@ -637,12 +642,32 @@ GAVisToolRender::Point::Point( void )
 }
 
 //=============================================================================
-void GAVisToolRender::Point::Draw( bool doLighting )
+// We draw points as triangle fans, mainly because OpenGL selection
+// does not work with GL_POINTS very well for some reason that I am
+// too retarded to figure out.
+void GAVisToolRender::Point::Draw( bool doLighting, VectorMath::CoordFrame& cameraFrame )
 {
 	Color( doLighting, false );
 
+	glBegin( GL_TRIANGLE_FAN );
+
 	glNormal3f( normal.x, normal.y, normal.z );
 	glVertex3f( vertex.x, vertex.y, vertex.z );
+
+	double dotRadius = 0.4;
+	int segmentCount = 10;
+	for( int segment = 0; segment <= segmentCount; segment++ )
+	{
+		double angle = 2.0 * PI * double( segment ) / double( segmentCount );
+		VectorMath::Vector circleVertex;
+		VectorMath::Set( circleVertex, dotRadius * cos( angle ), dotRadius * sin( angle ), 0.0 );
+		VectorMath::Transform( circleVertex, cameraFrame, circleVertex );
+		VectorMath::Add( circleVertex, circleVertex, vertex );
+		glNormal3f( normal.x, normal.y, normal.z );
+		glVertex3f( circleVertex.x, circleVertex.y, circleVertex.z );
+	}
+
+	glEnd();
 }
 
 //=============================================================================
@@ -730,6 +755,7 @@ void GAVisToolRender::DrawPoint( const VectorMath::Vector& pos, const VectorMath
 
 	VectorMath::Copy( point->color, currentColor );
 	point->alpha = currentAlpha;
+	point->highlightMethod = currentHighlightMethod;
 
 	VectorMath::Copy( point->vertex, pos );
 	VectorMath::Normalize( point->normal, normal );
@@ -747,6 +773,7 @@ void GAVisToolRender::DrawTriangle( const VectorMath::Triangle& triangleGeometry
 
 	VectorMath::Copy( triangle->color, currentColor );
 	triangle->alpha = currentAlpha;
+	triangle->highlightMethod = currentHighlightMethod;
 
 	VectorMath::CopyTriangle( triangle->triangle, triangleGeometry );
 	VectorMath::CalcNormal( triangleGeometry, triangle->normal, true );
