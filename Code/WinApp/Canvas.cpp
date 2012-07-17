@@ -310,6 +310,8 @@ void GAVisToolCanvas::OnMouseMove( wxMouseEvent& event )
 //=========================================================================================
 void GAVisToolCanvas::OnMouseLeftDown( wxMouseEvent& event )
 {
+	SetFocus();
+
 	mousePos = event.GetPosition();
 }
 
@@ -321,6 +323,8 @@ void GAVisToolCanvas::OnMouseLeftUp( wxMouseEvent& event )
 //=========================================================================================
 void GAVisToolCanvas::OnMouseRightDown( wxMouseEvent& event )
 {
+	SetFocus();
+
 	mousePos = event.GetPosition();
 	PerformSelection();
 	RedrawNeeded( true );
