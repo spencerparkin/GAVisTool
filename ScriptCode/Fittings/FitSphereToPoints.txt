@@ -32,8 +32,8 @@ do(
 	/*
 	 * Calculate and create the sphere that fits the points.
 	 */
-	sph = ( p0^p1^p2^p3 )*-I,
 	bind_dual_sphere( sph ),
+	formula_constraint( "sph = ( p0^p1^p2^p3 )*-I" ),
 	
 	/*
 	 * Give all the geometries their own color.
