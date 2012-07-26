@@ -100,6 +100,8 @@ GeometricAlgebraEnvironment::GeometricAlgebraEnvironment( void )
 		vector = new GeometricAlgebra::Vector_e1();
 	else if( 0 == strcmp( variableName, "e2" ) )
 		vector = new GeometricAlgebra::Vector_e2();
+	else if( 0 == strcmp( variableName, "e3" ) )
+		vector = new GeometricAlgebra::Vector_e3();
 	else if( 0 == strcmp( variableName, "no" ) )
 		vector = new GeometricAlgebra::Vector_no();
 	else if( 0 == strcmp( variableName, "ni" ) )

@@ -68,6 +68,20 @@ public:
 };
 
 //=========================================================================================
+class GeometricAlgebra::Vector_e3 : public Vector
+{
+public:
+
+	Vector_e3( void );
+	virtual ~Vector_e3( void );
+
+	virtual Item* MakeCopy( void ) const override;
+	virtual double InnerProduct( const Vector& right ) const override;
+	virtual const char* Name( void ) const override;
+	virtual const char* LatexName( void ) const override;
+};
+
+//=========================================================================================
 class GeometricAlgebra::Vector_no : public Vector
 {
 public:
