@@ -43,7 +43,15 @@ following equation.
 \begin{equation*}
 R\left(\sum_{k=1}^n (a\cdot e_k)e_k\right)\tilde{R} = \sum_{k=1}^n (a\cdot e_k)e_{k+n}
 \end{equation*}
-Here, $a$ is any vector taken from $\A$.
+Here, $a$ is any vector taken from $\A$ and $Ra\tilde{R}$ is in $\B$.
+
+Unfortunately, we cannot employ the same technique we have used here in the
+formulation of $R$ to formulate an element $E$ such that for any vector $a\in\A$,
+the element $E$ takes $a$ to any given basis as $EaE^{-1}$.  Whether there
+is such an element in a geometric algebra will be left as an open question for now,
+but what will be said here is that clearly $E$ cannot be a rotor, because rotors
+are angle preserving.  We want to be able to perform change of basis transformations
+between basis sets that are not necessarily rotations of one another.
 
 Defining the function $f:\A\to\B$ as $f(a)=Ra\tilde{R}$, we see that $f$ is an
 outermorephism between $\A$ and $\B$.  Now let $\{m_k\}_{k=1}^n$ be any
@@ -71,6 +79,13 @@ however.  The inner product is not an invertible product and $M$ does
 not have an inverse with respect to the geometric product.  This means
 that when we go to solve the problem of finding the bivector $M'$ such
 that $F^{-1}(a) = M'\cdot f(a)$, geometric algebra offers no obvious
-way to solve for $M'$.
+way to solve for $M'$.  Never-the-less, we will make do with what we have here.
+
+Taking a lesson from linear algebra, we will define $\det(M)$ as
+\begin{equation*}
+\det(M) = \bigwedge_{k=1}^n F(e_k)\cdot i_{\A},
+\end{equation*}
+where $i_{\A}$ is the unit psuedo-scalar of $\G(\A)$.  Similarly, we will
+define $i_{\B}$ as the unit psuedo-scalar of $\G(\B)$.
 
 \end{document}
