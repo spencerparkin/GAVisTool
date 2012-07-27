@@ -1,0 +1,76 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\title{Change Of Basis Transformations\\In\\Geometric Algebra}
+\author{Spencer T. Parkin}
+
+\newcommand{\G}{\mathbb{G}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\B}{\mathbb{B}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{identity}{Identity}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{result}{Result}[section]
+
+\begin{document}
+\maketitle
+
+Let $\V^{2n}$ denote a $2n$-dimensional Euclidean vector space, and
+$\A$ denote any $n$-dimensional Euclidean vector sub-space of $\V^{2n}$.
+Let $\B$ denote the complement of $\A$ with respect to $\V^{2n}$.
+Let $\{e_k\}_{k=1}^n$ be a set of $n$ Euclidean vectors
+forming an orthonormal basis for $\A$.  Let $\{e_{k+n}\}_{k=1}^n$
+be a set of $n$ Euclidean vectors forming an orthonormal basis for $\B$.
+We will work in the geometric algebra $\G(\V^{2n})$.
+
+Defining the function $r$ as the rotor $r(a,b)=\frac{\sqrt{2}}{2}(1-a\wedge b)$, where $a$ and
+$b$ are vectors, we see that
+\begin{equation*}
+R = \prod_{k=1}^n r(e_k,e_{k+n})
+\end{equation*}
+is a unit-rotor rotating the blade $\bigwedge_{k=1}^n e_k$ into $\bigwedge_{k=1}^n e_{k+n}$, or vice-versa.
+More to the point, $R$ also effectly performs a change of basis transformation of any
+vector taken from $\A$ to its counter-part in $\B$, or vice-versa.  This is illustrated in the
+following equation.
+\begin{equation*}
+R\left(\sum_{k=1}^n (a\cdot e_k)e_k\right)\tilde{R} = \sum_{k=1}^n (a\cdot e_k)e_{k+n}
+\end{equation*}
+Here, $a$ is any vector taken from $\A$.
+
+Defining the function $f:\A\to\B$ as $f(a)=Ra\tilde{R}$, we see that $f$ is an
+outermorephism between $\A$ and $\B$.  Now let $\{m_k\}_{k=1}^n$ be any
+set of $n$ linearly independent vectors taken from $\A$ and let $M$ be the
+bivector
+\begin{equation*}
+M = \sum_{k=1}^n e_{k+n}\wedge m_k.
+\end{equation*}
+It then follows that the function $F:\A\to\A$ defined as
+\begin{equation*}
+F(a) = f(a)\cdot M
+\end{equation*}
+performs any change of basis transformation.  This includes those
+that perform shear and non-uniform scale transformations.  To be more specific,
+the vector $a\in\A$ written as
+\begin{equation*}
+a = \sum_{k=1}^n (a\cdot e_k)e_k
+\end{equation*}
+is transformed to
+\begin{equation*}
+F(a) = \sum_{k=1}^n (a\cdot e_k)m_k.
+\end{equation*}
+There are a few problems with $F$,
+however.  The inner product is not an invertible product and $M$ does
+not have an inverse with respect to the geometric product.  This means
+that when we go to solve the problem of finding the bivector $M'$ such
+that $F^{-1}(a) = M'\cdot f(a)$, geometric algebra offers no obvious
+way to solve for $M'$.
+
+\end{document}
