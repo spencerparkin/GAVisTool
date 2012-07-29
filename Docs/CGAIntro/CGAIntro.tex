@@ -82,7 +82,6 @@ For any vector $v\in\G$ and any two blades $A,B\in\G$,
 if $A\wedge B\neq 0$, then $v\cdot A=0$ and $v\cdot B=0$ if and only if $v\cdot A\wedge B=0$.
 \end{theorem}
 \begin{proof}
-This is proven in lemma $\eqref{lma_intersect}$.
 \end{proof}
 We can apply theorem $\eqref{thm_intersect}$ to get the following result.
 \begin{result}
@@ -213,7 +212,6 @@ $m$ points are non-co-$(m-2)$-hyper-planar, then the set of $m$ vectors in $\{p(
 are linearly independent.
 \end{theorem}
 \begin{proof}
-This is proved in lemma $\eqref{lma_cor_non_hyper_planar_lin_indep}$.
 \end{proof}
 Using this theorem, it is now not hard to show that blades directly representative
 of non-degenerate rounds of the conformal model have factorizations in
@@ -306,7 +304,6 @@ then $B\wedge\nvai$ directly represents the $m$-dimensional flat
 containing this $m$-dimensional round.
 \end{theorem}
 \begin{proof}
-This is proved in lemma $\eqref{lma_sphere_to_plane}$.
 \end{proof}
 
 \section{Solving for Geometry}
@@ -541,172 +538,6 @@ a &= \frac{1}{\sin(\theta/2)}\left\langle R\right\rangle_2 i \\
 t &= 2\nvao\cdot(1-T)
 \end{align*}
 (Say something about the polar decomposition of $V$.)
-
-\section{Supporting Lemmas}
-
-So as not to detract from the main discussions of this document above, the following
-lemmas support the fine details needed to prove some of the main results above.
-(There may be a lot of mistakes here that need cleaning up.)
-
-\begin{lemma}\label{lma_vec_blade_inner_zero}
-If $A\in\G$ is a non-zero blade and $v\in\V$ is a vector such that $v\cdot A=0$, then
-for all vectors $w\in\V$ such that $w\wedge A=0$, we have $v\cdot w=0$.
-\end{lemma}
-\begin{proof}
-We give a proof by induction.  The case when $A$ is a vector is easy to see.
-Suppose the lemma holds for blades $A$ of grade $m-1$.  We will then show that the
-lemma holds for blades $A$ of grade $m$.  Let $\{a_k\}_{k=1}^m$ be a set of $m$
-vectors such that $A=\bigwedge_{k=1}^m a_k$.  Let $w$ be a vector such that
-$w\wedge A=0$.  It follows that $w$ is a linear combination of the vectors in $\{a_k\}_{k=1}^m$.
-Let $v$ be a vector such that $v\cdot A=0$.
-\begin{equation*}
-0 = v\cdot A = v\cdot \bigwedge_{k=1}^m a_k
- = \left(v\cdot\bigwedge_{k=1}^{m-1} a_k\right)\wedge b_m + (-1)^m(v\cdot b_m)\bigwedge_{k=1}^{m-1} b_k
-\end{equation*}
-From this we see that if $v\cdot A=0$, then $v\cdot\bigwedge_{k=1}^{m-1} a_k=0$ and $v\cdot a_m=0$.
-Now, by inductive hypothesis, it follows that for all integers $k\in[1,m-1]$, we have $v\cdot a_k=0$.
-Now since $w$ is a linear combination of the vectors in $\{a_k\}_{k=1}^m$, we see that $v\cdot w=0$.
-\end{proof}
-
-\begin{lemma}\label{lma_intersect}
-Given any $v\in\V$ and any two blades $A,B\in\G$ such that $A\wedge B\neq 0$,
-it follows that
-\begin{equation*}
-\mbox{$v\cdot A=0$ and $v\cdot B=0 \iff v\cdot(A\wedge B)=0$.}
-\end{equation*}
-\end{lemma}
-\begin{proof}
-Let $\{a_k\}_{k=1}^i$ be a set of $i$ vectors such that $A=\bigwedge_{k=1}^i a_k$.
-Similarly, let $\{b_k\}_{k=1}^i$ be a set of $j$ vectors such that
-$B=\bigwedge_{k=1}^j b_k$.  Then, using lemma $\eqref{lma_vec_blade_inner_zero}$ in both
-directions of the proof, we have
-$v\cdot A=0$ and $v\cdot B=0$ if and only if for all integers $k\in[1,i]$,
-we have $v\cdot a_k=0$, and for all integers $k\in[1,j]$, we have $v\cdot b_k=0$, which,
-in turn, is true if and only if $v\cdot(A\wedge B)=0$.  Notice that one direction of this
-proof fails if $A\wedge B=0$.
-\end{proof}
-
-\begin{lemma}\label{lma_mm3_imp_mm2}
-For any integer $m>2$, if a set of $m$ position vectors $\{v_k\}_{k=1}^m$
-taken from $\V^n$ is co-$(m-3)$-hyper-planer, then this set of position vectors is
-also co-$(m-2)$-hyper-planar.
-\end{lemma}
-\begin{proof}
-Clearly for any $(m-3)$-dimensional hyper-plane there exists an $(m-2)$-dimensional
-hyper-plane containing it.
-\end{proof}
-
-\begin{lemma}\label{lma_non_co_hyper_planar_imp_diff_set_lin_indep}
-If a set of position vectors $\{v_k\}_{k=1}^m$ are non-co-$(m-2)$-hyper-planar,
-then for any integer $w\in[1,m]$, the set of $m-1$ vectors $\{v_w-v_k\}_{k=1,k\neq w}^m$
-is a linearly independent set of vectors.
-\end{lemma}
-\begin{proof}
-We will prove the contrapositive.  If the set of $m-1$ vectors $\{v_w-v_k\}_{k=1,k\neq w}^m$
-are linearly dependent, then the $(m-1)$-dimensional hyper-volume of the $(m-1)$-dimensional
-parallel-piped determined by the $m-1$ vectors in $\{v_w-v_k\}_{k=1,k\neq w}^m$ is zero.
-Then, at most, this flattened paralle-piped has $(m-1)$-dimensional hyper-area, which is
-$(m-2)$-dimensional hyper-volume.  We can now see that if all directional vectors in
-$\{v_w-v_k\}_{k=1,k\neq w}^m$ are confined to an $(m-2)$-dimensional hyper-plane, then,
-as position vectors, the vectors in $\{v_k\}_{k=1}^m$ must all be co-$(m-2)$-hyper-planar.
-Notice that if our flattened
-parallel-piped has only volume in lower dimensions, or no volume in any dimension,
-then our lemma here still goes through by lemma $\eqref{lma_mm3_imp_mm2}$.
-\end{proof}
-
-\begin{lemma}\label{lma_lin_combo_hyper_planar}
-Let $m$ be an integer such that $m\geq 2$.
-Then, if $\{\alpha_k\}_{k=1}^m$ is a set of $m$ scalars, not all zero, taken from $\R$,
-and $\{v_k\}_{k=1}^m$ is a set of $m$ vectors taken from $\V^n$, such that
-\begin{equation*}
-\mbox{$0=\sum_{k=1}^m\alpha_k$ and $0=\sum_{k=1}^m\alpha_k v_k$,}
-\end{equation*}
-then the set of $m$ position vectors $\{v_k\}_{k=1}^m$ are co-$(m-2)$-hyper-planar.
-\end{lemma}
-\begin{proof}
-Let us first make the observation that if for all integers $k\in[1,m]$, we have
-$\alpha_k=0$, then we can come to no conclusion about the vectors in $\{v_k\}_{k=1}^m$.
-Therefore, we must require that the scalars in $\{\alpha_k\}_{k=1}^m$ are not
-all zero.
-
-We now make the observation that if there exists an integer $i\in[1,m]$ such that
-$\alpha_i\neq 0$, then there must exist an integer $j\in[1,m]$, where $i\neq j$, such
-that $\alpha_j\neq 0$ also.
-So without loss of generality, let $i=m$ so that $1\leq j<m$.
-It now follows that the sum
-\begin{equation*}
-0 = \sum_{k=1}^{m-1}\alpha_k v_k - \left(\sum_{k=1}^{m-1}\alpha_k\right)v_m
- = \sum_{k=1}^{m-1}\alpha_k(v_k-v_m)
-\end{equation*}
-is a non-trivial linear combination of the vectors in $\{v_k-v_m\}_{k=1}^{m-1}$.
-It then follows that $\{v_m-v_k\}_{k=1}^{m-1}$ is a linearly dependent set of vectors.
-Therefore, by the contrapositive of lemma $\eqref{lma_non_co_hyper_planar_imp_diff_set_lin_indep}$,
-we see the set of $m$ position vectors $\{v_k\}_{k=1}^m$ are co-$(m-2)$-hyper-planar,
-which is what we wanted to show.
-\end{proof}
-
-\begin{lemma}\label{lma_inf_lin_combo_hyper_planar}
-Given a set of $m$ position vectors $\{v_k\}_{k=1}^m$ taken from $\V^n$,
-if there exists a scalar $\lambda\in\R$ and a set of $m$ scalars
-$\{\alpha_k\}_{k=1}^m$, not all zero, taken from $\R$ such that
-\begin{equation*}
-\lambda\nvai = \sum_{k=1}^m\alpha_k p(v_k),
-\end{equation*}
-then the set of $m$ position vectors in $\{v_k\}_{k=1}^m$ are co-$(m-2)$-hyper-planar.
-\end{lemma}
-\begin{proof}
-By equating parts, it is easy to see that
-\begin{equation*}
-\mbox{$0 = \sum_{k=1}^m\alpha_k$ and $0=\sum_{k=1}^m\alpha_k v_k$.}
-\end{equation*}
-Our theorem now follows directly from lemma $\eqref{lma_lin_combo_hyper_planar}$.
-\end{proof}
-
-\begin{lemma}\label{lma_cor_non_hyper_planar_lin_indep}
-If a given set of $m$ position vectors $\{v_k\}_{k=1}^m$ taken from $\V^n$
-are non-co-$(m-2)$-hyper-planar, then the set of vectors $\{p(v_k)\}_{k=1}^m$
-are linearly independent.
-\end{lemma}
-\begin{proof}
-By the contrapositive of lemma $\eqref{lma_inf_lin_combo_hyper_planar}$,
-there does not exist any scalar $\lambda\in\R$ nor set of scalars
-$\{\alpha_k\}_{k=1}^m$, not all zero, such that
-\begin{equation*}
-\lambda\nvai = \sum_{k=1}^m\alpha_k p(v_k).
-\end{equation*}
-This is therefore also true when $\lambda=0$.
-\end{proof}
-
-\begin{lemma}\label{lma_sphere_to_plane}
-Let $A\in\G$ be an $m$-blade that is directly representive of an
-$(m-1)$-dimensional hyper-sphere of radius $r>0$.
-Then the $(m+1)$-blade $A\wedge\nvai$ is directly representative
-of the $(m-1)$-dimensional hyper-plane containing the
-hyper-sphere represented by $A$.
-\end{lemma}
-\begin{proof}
-By result $\eqref{}$, there exists a
-scalar $\lambda\in\R$ and a set of $m$ vectors $\{p(v_k)\}_{k=1}^m$,
-such that $A = \lambda\bigwedge_{k=1}^m p(v_k)$.
-Now since the position vectors $\{v_k\}_{k=1}^m$ are non-co-$(m-2)$-hyper-planar,
-we see that $\nvai$ is not any non-trivial linear combination of the
-$m$ vectors $\{p(v_k)\}_{k=1}^m$ by lemma $\eqref{lma_inf_lin_combo_hyper_planar}$,
-and therefore $A\wedge\nvai\neq 0$.
-
-Now consider the set of all
-vectors $v\in\V^n$ such that $p(v)\wedge A\wedge\nvai=0$.
-This implies that if $p(v)\wedge A\neq 0$, then there
-exists a set of $m+1$ scalars $\{\alpha_k\}_{k=1}^{m+1}$, not all zero,
-such that
-\begin{equation*}
-\nvai = \sum_{k=1}^m \alpha_k p(v_k) + \alpha_{m+1}p(v).
-\end{equation*}
-If such a non-trivial linear combination does not exist, then $p(v)\wedge A=0$,
-and so $v$ is on the hyper-sphere, which is in the desired hyper-plane.
-Therefore, what we need to show is that the remainder of the hyper-plane
-is given by the set of all position vectors $v\in\V^n$ for which this non-trivial linear
-combination does exist.  This follows directly from lemma $\eqref{lma_inf_lin_combo_hyper_planar}$.
-\end{proof}
 
 \bibliographystyle{plain}
 \bibliography{CGAIntro}
