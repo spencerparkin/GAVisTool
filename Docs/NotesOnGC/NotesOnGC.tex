@@ -35,19 +35,22 @@ he's saying.
 \section{Outermorphism}
 
 Let $f:\A\to\B$ be a linear transformation from the vector space $\A$
-to the vector space $\B$.  In the context of geometric algebra, if $f$
-preserves the outer product, (or if we extend $f$ to do so), then $f$
-is what we call an outermorphism.  A linear transformation $f$ that is
-also an outermorphism will be denoted by $\ub{f}$.
-
-It follows that since $\ub{f}$ preserves the outer product
-that it also preserves grade.  That is, for any $k$-blade $A\in\G(\A)$,
-the blade $\ub{f}(A)\in\G(\B)$ is also a $k$-blade.  Letting $A=\bigwedge_{i=1}^k a_k$ with
+to the vector space $\B$.  Every such transformation $f$ can be
+extended to what we call an outermorphism $\ub{f}$ if for all
+vectors $a\in\A$, we have $\ub{f}(a)=f(a)$ and for all blades $A\in\G(\A)$,
+we define $\ub{f}$ for $A$ as preserving the outer product.
+Notice that by preserving the outer product, this does not necessarily
+mean that $\ub{f}$ preserves grade.
+For any $k$-blade $A\in\G(\A)$, letting $A=\bigwedge_{i=1}^k a_k$ with
 each $a_k\in\A$, we may write
 \begin{equation*}
 \ub{f}(A)=\ub{f}\left(\bigwedge_{i=1}^k a_k\right) = \bigwedge_{i=1}^k\ub{f}(a_k),
 \end{equation*}
-which is clearly a $k$-blade.  Of particular interest is how $\ub{f}$ maps the
+yet while $A\neq 0$, we may have $\ub{f}(A)=0$, showing that while $\{a_i\}_{k=1}^k$
+is a linearly independent set, $\{\ub{f}(a_i)\}_{i=1}^n$ is not.  As we become clear
+later on, if $\ub{f}$ was always grade preserving, then $\ub{f}^{-1}$ must exist.
+
+Of particular interest is how $\ub{f}$ maps the
 unit psuedo-scalar of $\G(\A)$, which we'll denote by $I_{\A}$.  Clearly this
 will be some scalar multiple of the unit psuedo-scalar of $\G(\B)$, which we'll
 denote by $I_{\B}$.  We define this scalar multiple as the determinant of $\ub{f}$
