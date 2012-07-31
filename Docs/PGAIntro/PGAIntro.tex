@@ -1,0 +1,80 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\title{An Introduction To\\Projective Geometry\\Using\\Geometric Algebra}
+\author{Spencer T. Parkin}
+
+\newcommand{\G}{\mathbb{G}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\nvao}{o}
+\newcommand{\nvai}{\infty}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{identity}{Identity}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{result}{Result}[section]
+
+\begin{document}
+\maketitle
+
+This paper is my attempt to build up the subject of projective
+geometry using geometric algebra in my own words.  I do not
+claim originality to any result in this paper.  If nothing else, this
+paper simply represents a formal compilation of my notes on the
+subject.  I have mainly used \cite{hestenes91} and \cite{dorst07}
+for research in the preparation of this paper.
+
+I began my study of projective geometry using geometric algebra
+after having already put much effort into understanding the
+conformal model of geometric algebra.  I may therefore make reference
+to concepts in the conformal model as we go along, and so I assume
+a small familiarity with that model on the part of the reader, though I
+would not consider a full undersatnding of that model a prerequisite.
+
+\section{Representing Geometry}
+
+Like the conformal model, we may think of geometries as subsets of the
+set of all points in some $n$-dimensional Euclidean space, which we'll
+denote by $\V^n$.  This also denotes an $n$-dimensional Euclidean vector space
+as we adopt here the standard correlation between vectors in such a vector space
+with points in an $n$-dimensional Euclidean space.
+
+Points sets, of course, do not lend themselves easily to goemetric analysis.  So,
+like the conformal model, we represent them using blades in a geometric algebra.
+Why we use blades will become apparent after we define how a blade represents
+a point set, because then it will become clear how the meet and join operations
+of blades will allow us to do some interesting geometric operations, just as we
+can in the conformal model.
+
+For $n$-dimensional projective geometry, we use a geometric algebra generated
+by an $(n+1)$-dimesnional Euclidean vector space.  If $\{e_k\}_{k=0}^{n-1}$ is any set of orthonormal basis
+vectors spanning $\V^n$, let $\{e_k\}_{k=0}^n$ be a set of
+orthonormal basis vectors spanning $\V^{n+1}$, which we'll use to generate our
+geometric algebra $\G(\V^{n+1})$.
+
+In projective geometry we can represent points, lines, planes, hyper-planes, and so on to higher dimensions.
+Certainly results in geometry involving all of these types of geometric 
+primitives can be found by simply using $\V^n$ alone, but what we'll see is that the extra dimension
+in $\V^{n+1}$ will facilitate some amazingly useful constructions in $\G(\V^{n+1})$ that
+make the finding of such results much easier than it would be otherwise.  Indeed, in
+\cite{hestenes91}, it is shown how geometric algebra easily and naturally explains many
+fundamental theorems in projective geometry.
+It is my guess that interpretations of how these constructions work based on $(n+1)$-dimensional
+projections into $n$-dimensional space are at least partially to blame for the title of the
+subject being projective geometry.
+
+Without further delay, we begin with a function $p:\V^n\to\V^{n+1}$ that defines
+a mapping from points in our Euclidean space with vectors in our geometric algebra.
+Blah blah blah...
+
+\bibliographystyle{plain}
+\bibliography{PGAIntro}
+
+\end{document}
