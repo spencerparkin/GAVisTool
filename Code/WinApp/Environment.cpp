@@ -20,6 +20,7 @@
 #include "Geometries/FlatGeometry.h"
 #include "Geometries/TransformGeometry.h"
 #include "Geometries/PositionVectorGeometry.h"
+#include "Geometries/ProjectiveGeometry.h"
 #include "Interfaces/ScalarInterface.h"
 #include "VirtualBindTarget.h"
 #include "wxAll.h"
@@ -94,6 +95,12 @@ GAVisToolEnvironment::GAVisToolEnvironment( void )
 		return new GAVisToolDumpInfoFunctionEvaluator();
 	else if( 0 == strcmp( functionName, "wipe_env" ) )
 		return new GAVisToolWipeEnvFunctionEvaluator();
+	else if( 0 == strcmp( functionName, "bind_proj_point" ) )
+		return new GAVisToolBindFunctionEvaluator( &ProjectivePoint::Create, GAVisToolBindTarget::DOESNT_MATTER );
+	else if( 0 == strcmp( functionName, "bind_proj_line" ) )
+		return new GAVisToolBindFunctionEvaluator( &ProjectiveLine::Create, GAVisToolBindTarget::DOESNT_MATTER );
+	else if( 0 == strcmp( functionName, "bind_proj_plane" ) )
+		return new GAVisToolBindFunctionEvaluator( &ProjectivePlane::Create, GAVisToolBindTarget::DOESNT_MATTER );
 
 	return GeometricAlgebraEnvironment::CreateFunction( functionName );
 }

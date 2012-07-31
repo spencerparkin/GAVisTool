@@ -408,6 +408,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\Code\WinApp\Geometries\ProjectiveGeometry.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Code\WinApp\Geometries\ProjectiveGeometry.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\Code\WinApp\Geometries\RoundGeometry.cpp"
 					>
 				</File>
