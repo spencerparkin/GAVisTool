@@ -3,6 +3,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
+%\usepackage{biblatex}
 
 \title{An Introduction To\\Projective Geometry\\Using\\Geometric Algebra}
 \author{Spencer T. Parkin}
@@ -28,7 +29,7 @@ This paper is my attempt to build up the subject of projective
 geometry using geometric algebra in my own words.  I do not
 claim originality to any result in this paper.  If nothing else, this
 paper simply represents a formal compilation of my notes on the
-subject.  I have mainly used \cite{hestenes91} and \cite{dorst07}
+subject.  I have mainly used \cite{hestenes91}, \cite{birchfield98} and \cite{dorst07}
 for research in the preparation of this paper.
 
 I began my study of projective geometry using geometric algebra
@@ -84,39 +85,57 @@ We define $p$ simply as
 \begin{equation*}
 p(x) = x + e_3.
 \end{equation*}
-Having done so, it is easy to see that for any vector $a\in\V^n$, that $p(a)$
-represents the point $a$.  Now here's where it gets interesting.  Let $\{a_k\}_{k=0}^{m-1}$
+Having done so, it is easy to see that for any vector $b\in\V^n$, that $p(b)$
+represents the point $b$.  Now here's where it gets interesting.  Let $\{b_k\}_{k=0}^{m-1}$
 be any set of $m$ points taken from $\V^n$ such that they are non-co-$(m-1)$-hyper-planar.
 That is, if $m=2$, the 2 points are distinct; if $m=3$, the 3 points are non-co-linear; if
 $m=4$, the 4 points are non-co-planar; if $m=5$, the points are non-co-hyper-planar, and so on.
-We will now show that if $m\leq n+1$, then the blade $A=\bigwedge_{k=0}^{m-1}p(a_k)$ represents an
+We will now show that if $m\leq n+1$, then the blade $B=\bigwedge_{k=0}^{m-1}p(b_k)$ represents an
 $(m-1)$-dimensional hyper-plane.
 
-The case $m=n+1$ is trivial.  In that case, $A$ is a psuedo-scalar of $\G(\V^{n+1})$, and
-so for all points $x\in\V^n$, we have $p(x)\wedge A=0$, showing that $A$ represents
-an $n$-dimensional hyper-plane.  Let us now consider all $1<m<n+1$.  It is not hard to
-show that we can rewrite the equation $p(x)\wedge A=0$ as
-\begin{equation}\label{equ_hyper_plane}
-x\wedge a_0\wedge\bigwedge_{k=1}^{m-1}(a_k-a_0) + (x-a_0)\wedge\left(\bigwedge_{k=1}^{m-1}(a_k-a_0)\right)\wedge e_n = 0
+The case $m=n+1$ is trivial.  In that case, $B$ is a psuedo-scalar of $\G(\V^{n+1})$, and
+so for all points $x\in\V^n$, we have $p(x)\wedge B=0$, showing that $B$ represents
+an $n$-dimensional hyper-plane.  Let us now consider all $1<m<n+1$.  We start by
+putting $B$ in a form that exposes its two primary characteristics.
+\begin{equation}\label{equ_plane_canonical_form}
+B = p(b_0)\wedge A = b_0\wedge A + e_n\wedge A
 \end{equation}
-From this we see two conditions that must be satisifed in that the first and second terms
-must be zero.  The first term being zero is a necessary yet insufficient condition that $x$
-be on the $(m-1)$-dimensional hyper-plane.  The second term being zero, however, is a
-necessary and sufficient condition that $x$ be on the $(m-1)$-dimensional hyper-plane.
-
-In equation $\eqref{equ_hyper_plane}$, we can think of $a_0$ as being the center
-of the hyper-plane, if you will.  For each integer $k\in[1,m-1]$, we can think of
-the vectors $a_k-a_0$ as vectors in the hyper-plane.  Clearly for $x$ to be on
-the hyper-plane, we need the vector $x-a_0$ to be in the hyper-plane.
-
-A way to write $A$ such that we can decompose it into its characteristic parts
-would be
+Here we have arbitrarily chosen $a_0$ to represent what we'll call the center of the hyper-plane, if you will.
+(Any point on a plane may be thought of as its center.  Let's just choose one.)  The blade $A$ here
+represents the attitude of the hyper-plane, and is given by
 \begin{equation*}
-A = a_0\wedge\bigwedge_{k=1}^{m-1}(a_k-a_0) + \left(\bigwedge_{k=1}^{m-1}(a_k-a_0)\right)\wedge e_n.
+A = \bigwedge_{k=1}^{m-1}(b_k-b_0).
 \end{equation*}
-From this we see the composition of $A$ in terms of two characteristics.  The first
-is a center, if you will, $a_0$, and the second an $(m-1)$-blade $\bigwedge_{k=1}^{m-1}(a_k-a_0)$ determining
-the attitude of the $(m-1)$-dimensional hyper-plane.
+Examining now the equation $p(x)\wedge B=0$, we see that this reduces to
+\begin{equation*}
+x\wedge a_0\wedge A + e_n\wedge (x-a_0)\wedge A = 0,
+\end{equation*}
+showing that for $x$ to be part of the geometry represented by $A$, there are two
+conditions that need to be met.  The first is that $x\wedge a_0\wedge A=0$, which is
+a necessary yet insufficient condition that $x$ be on the hyper-plane.  The second,
+however, that $(x-a_0)\wedge A=0$, is both a necessary and sufficient condition
+that $x$ be on the $(m-1)$-dimensional hyper-plane.  And there we have it!
+
+Looking back at the canonical form of a hyper-plane in this model,
+equation $\eqref{equ_plane_canonical_form}$ shows how we might decompose
+a given hyper-plane into its constituent characteristics.  Of course, given
+a blade $B$, we couldn't hope to recover the original center and attitude
+used to compose it, but we can find a center and the original attitude up to scale.
+An attidue can be found as $A=e_n\cdot B$.  Then, interestingly, we can find
+the center on the plane closest to the origin by requiring $b_0\cdot A=0$.
+It follows that
+\begin{equation*}
+b_0 = (e_n\cdot(e_n\wedge B))\frac{\tilde{A}}{|A|^2}.
+\end{equation*}
+
+We have now exhausted the geometric primitives of the projective geometry model
+of geometric algebra.  What remains to is to explore what types of operations we
+can perform on these geometries, what results we can derive in this model, and
+however else we can find the model useful in the subject of geometry.
+
+\section{Intersecting Geometry}
+
+Explore that here...
 
 % decompose to get characteristic parts.  center closest to origin found.  attitude recoverable
 
