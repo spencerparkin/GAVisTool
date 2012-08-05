@@ -135,7 +135,12 @@ typename Utilities::Map< EntryType >::TableEntry* Utilities::Map< EntryType >::L
 	while( tableEntry )
 	{
 		if( tableEntry->hash == hash )
-			break;
+		{
+			// My hash function isn't very good.  Further qualify
+			// the match by making sure that the entry names match.
+			if( 0 == strcmp( tableEntry->entryName, entryName ) )
+				break;
+		}
 		tableEntry = ( TableEntry* )tableEntry->Right();
 	}
 
