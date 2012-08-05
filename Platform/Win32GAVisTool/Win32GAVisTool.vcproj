@@ -501,6 +501,10 @@
 			Name="ScriptCode"
 			>
 			<File
+				RelativePath="..\..\ScriptCode\FunPicture.txt"
+				>
+			</File>
+			<File
 				RelativePath="..\..\ScriptCode\RobotArm.txt"
 				>
 			</File>
