@@ -17,7 +17,7 @@
 GAVisToolRender::GAVisToolRender( void ) :
 			selectionPrimitiveCache( 1024, 1024, 128, 0 ),
 			noAlphaBlendingPrimitiveCache( 1024 * 8, 1024, 128, 0 ),
-			alphaBlendingPrimitiveCache( 1024 * 16, 1024 * 4, 128, 1024 * 8 )
+			alphaBlendingPrimitiveCache( 1024 * 64, 1024 * 16, 256, 1024 * 16 )
 {
 	SetRenderMode( RENDER_MODE_NO_ALPHA_SORTING );
 	userResolution = RES_MEDIUM;
