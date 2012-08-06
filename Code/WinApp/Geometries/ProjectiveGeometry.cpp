@@ -177,16 +177,18 @@ ProjectiveLine::ProjectiveLine( BindType bindType ) : GAVisToolGeometry( bindTyp
 {
 	VectorMath::Zero( center );
 	VectorMath::Set( unitNormal, 0.0, 0.0, 1.0 );
+	weight = 1.0;
 
 	CalcLib::Calculator calculator( "geoalg" );
 
 	char decompositionCode[ 512 ];
 	sprintf_s( decompositionCode, sizeof( decompositionCode ),
 		"do("
-		"n = lin . e3,"
+		"n = e3 . lin,"
 		"w = sqrt( n . n ),"
 		"n = n / w,"
-		"c = n*( e3 . ( lin^e3 ) ),"
+		"lin = lin / w,"
+		"c = ( e3 . ( e3^lin ) )*n,"
 		"x = c . e0,"
 		"y = c . e1,"
 		"z = c . e2,"
@@ -203,7 +205,7 @@ ProjectiveLine::ProjectiveLine( BindType bindType ) : GAVisToolGeometry( bindTyp
 		"do("
 		"c = x*e0 + y*e1 + z*e2,"
 		"n = nx*e0 + nz*e1 + nz*e2,"
-		"lin = n^c + n^e3,"
+		"lin = w*(c + e3)^n,"
 		")"
 	);
 	compositionEvaluator = calculator.CompileEvaluator( compositionCode );
@@ -361,6 +363,39 @@ ProjectivePlane::ProjectivePlane( BindType bindType ) : GAVisToolGeometry( bindT
 {
 	VectorMath::Zero( center );
 	VectorMath::Set( unitNormal, 0.0, 0.0, 1.0 );
+	weight = 1.0;
+
+	CalcLib::Calculator calculator( "geoalg" );
+
+	char decompositionCode[ 512 ];
+	sprintf_s( decompositionCode, sizeof( decompositionCode ),
+		"do("
+		"n = ( e3 . pln )*I,"
+		"w = sqrt( n . n ),"
+		"n = n / w,"
+		"pln = pln / w,"
+		"c = ( e3 . ( e3^pln ) )*( e0^e1^e2 )*n,"
+		"x = c . e0,"
+		"y = c . e1,"
+		"z = c . e2,"
+		"nx = n . e0,"
+		"ny = n . e1,"
+		"nz = n . e2,"
+		")"
+	);
+	decompositionEvaluator = calculator.CompileEvaluator( decompositionCode );
+	wxASSERT( decompositionEvaluator != 0 );
+
+	char compositionCode[ 512 ];
+	sprintf_s( compositionCode, sizeof( compositionCode ),
+		"do("
+		"c = x*e0 + y*e1 + z*e2,"
+		"n = nx*e0 + nz*e1 + nz*e2,"
+		"pln = w*(c + e3)^( -n*( e0^e1^e2 ) ),"
+		")"
+	);
+	compositionEvaluator = calculator.CompileEvaluator( compositionCode );
+	wxASSERT( compositionEvaluator != 0 );
 }
 
 //=========================================================================================
@@ -377,26 +412,99 @@ ProjectivePlane::ProjectivePlane( BindType bindType ) : GAVisToolGeometry( bindT
 //=========================================================================================
 /*virtual*/ void ProjectivePlane::DecomposeFrom( const GeometricAlgebra::SumOfBlades& element )
 {
+	CalcLib::GeometricAlgebraEnvironment gaEnv;
+
+	CalcLib::Number* number = gaEnv.CreateNumber();
+	CalcLib::MultivectorNumber* multivector = ( CalcLib::MultivectorNumber* )number;
+
+	multivector->AssignFrom( element, gaEnv );
+	gaEnv.StoreVariable( "pln", *number );
+
+	decompositionEvaluator->EvaluateResult( *number, gaEnv );
+
+	gaEnv.LookupVariable( "w", *number );
+	multivector->AssignTo( weight, gaEnv );
+	gaEnv.LookupVariable( "x", *number );
+	multivector->AssignTo( center.x, gaEnv );
+	gaEnv.LookupVariable( "y", *number );
+	multivector->AssignTo( center.y, gaEnv );
+	gaEnv.LookupVariable( "z", *number );
+	multivector->AssignTo( center.z, gaEnv );
+	gaEnv.LookupVariable( "nx", *number );
+	multivector->AssignTo( unitNormal.x, gaEnv );
+	gaEnv.LookupVariable( "ny", *number );
+	multivector->AssignTo( unitNormal.y, gaEnv );
+	gaEnv.LookupVariable( "nz", *number );
+	multivector->AssignTo( unitNormal.z, gaEnv );
+
+	delete number;
 }
 
 //=========================================================================================
 /*virtual*/ void ProjectivePlane::ComposeTo( GeometricAlgebra::SumOfBlades& element ) const
 {
+	CalcLib::GeometricAlgebraEnvironment gaEnv;
+
+	CalcLib::Number* number = gaEnv.CreateNumber();
+	CalcLib::MultivectorNumber* multivector = ( CalcLib::MultivectorNumber* )number;
+
+	number->AssignFrom( weight, gaEnv );
+	gaEnv.StoreVariable( "w", *number );
+	number->AssignFrom( center.x, gaEnv );
+	gaEnv.StoreVariable( "x", *number );
+	number->AssignFrom( center.y, gaEnv );
+	gaEnv.StoreVariable( "y", *number );
+	number->AssignFrom( center.z, gaEnv );
+	gaEnv.StoreVariable( "z", *number );
+	number->AssignFrom( unitNormal.x, gaEnv );
+	gaEnv.StoreVariable( "nx", *number );
+	number->AssignFrom( unitNormal.y, gaEnv );
+	gaEnv.StoreVariable( "ny", *number );
+	number->AssignFrom( unitNormal.z, gaEnv );
+	gaEnv.StoreVariable( "nz", *number );
+
+	compositionEvaluator->EvaluateResult( *number, gaEnv );
+
+	gaEnv.LookupVariable( "pln", *number );
+	multivector->AssignTo( element, gaEnv );
+
+	delete number;
 }
 
 //=========================================================================================
 /*virtual*/ void ProjectivePlane::DumpInfo( char* printBuffer, int printBufferSize ) const
 {
+	sprintf_s( printBuffer, printBufferSize,
+			"The variable \"%s\" is being interpreted as a projective plane.\n"
+			"Weight: %f\n"
+			"Position: < %f, %f, %f >\n"
+			"Normal: < %f, %f, %f >\n",
+			name,
+			weight,
+			center.x, center.y, center.z,
+			unitNormal.x, unitNormal.y, unitNormal.z );
 }
 
 //=========================================================================================
 /*virtual*/ void ProjectivePlane::AddInventoryTreeItem( wxTreeCtrl* treeCtrl, wxTreeItemId parentItem ) const
 {
+	wxString itemName = wxString::Format( wxT( "Proj-Plane: %s" ), name );
+	treeCtrl->AppendItem( parentItem, itemName, -1, -1, new GAVisToolInventoryTree::Data( id ) );
 }
 
 //=========================================================================================
 /*virtual*/ void ProjectivePlane::Draw( GAVisToolRender& render, bool selected )
 {
+	if( selected )
+		render.Highlight( GAVisToolRender::NORMAL_HIGHLIGHTING );
+	else
+		render.Highlight( GAVisToolRender::NO_HIGHLIGHTING );
+	render.Color( color, alpha );
+
+	render.DrawDisk( center, unitNormal, 15.0 );
+
+	if( render.GetRenderMode() != GAVisToolRender::RENDER_MODE_SELECTION )
+		render.DrawVector( center, unitNormal, GAVisToolRender::RES_LOW );
 }
 
 //=========================================================================================
