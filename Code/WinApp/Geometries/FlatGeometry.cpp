@@ -518,11 +518,6 @@ ConformalPlane::ConformalPlane( BindType bindType ) : GAVisToolGeometry( bindTyp
 		render.Highlight( GAVisToolRender::NO_HIGHLIGHTING );
 	render.Color( color, alpha );
 
-	VectorMath::CoordFrame coordFrame;
-	VectorMath::Copy( coordFrame.zAxis, unitNormal );
-	VectorMath::Orthogonal( coordFrame.yAxis, coordFrame.zAxis );
-	VectorMath::Cross( coordFrame.xAxis, coordFrame.yAxis, coordFrame.zAxis );
-
 	render.DrawDisk( center, unitNormal, 15.0 );
 
 	if( render.GetRenderMode() != GAVisToolRender::RENDER_MODE_SELECTION )
