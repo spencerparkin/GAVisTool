@@ -79,6 +79,7 @@ private:
 
 	VectorMath::Vector center;
 	VectorMath::Vector unitNormal;
+	double weight;
 };
 
 //=========================================================================================
@@ -113,6 +114,7 @@ private:
 
 	VectorMath::Vector center;
 	VectorMath::Vector unitNormal;
+	double weight;
 };
 
 // ProjectiveGeometry.h

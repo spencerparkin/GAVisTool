@@ -122,7 +122,7 @@ ProjectivePoint::ProjectivePoint( BindType bindType ) : GAVisToolGeometry( bindT
 //=========================================================================================
 /*virtual*/ void ProjectivePoint::AddInventoryTreeItem( wxTreeCtrl* treeCtrl, wxTreeItemId parentItem ) const
 {
-	wxString itemName = wxString::Format( wxT( "Proj. Point: %s" ), name );
+	wxString itemName = wxString::Format( wxT( "Proj-Point: %s" ), name );
 	treeCtrl->AppendItem( parentItem, itemName, -1, -1, new GAVisToolInventoryTree::Data( id ) );
 }
 
@@ -202,8 +202,8 @@ ProjectiveLine::ProjectiveLine( BindType bindType ) : GAVisToolGeometry( bindTyp
 	sprintf_s( compositionCode, sizeof( compositionCode ),
 		"do("
 		"c = x*e0 + y*e1 + z*e2,"
-		"n = nx*e0 + nz*e1 + nz*e,2"
-		"lin = n^c + n^e3,",
+		"n = nx*e0 + nz*e1 + nz*e2,"
+		"lin = n^c + n^e3,"
 		")"
 	);
 	compositionEvaluator = calculator.CompileEvaluator( compositionCode );
@@ -224,26 +224,103 @@ ProjectiveLine::ProjectiveLine( BindType bindType ) : GAVisToolGeometry( bindTyp
 //=========================================================================================
 /*virtual*/ void ProjectiveLine::DecomposeFrom( const GeometricAlgebra::SumOfBlades& element )
 {
+	CalcLib::GeometricAlgebraEnvironment gaEnv;
+
+	CalcLib::Number* number = gaEnv.CreateNumber();
+	CalcLib::MultivectorNumber* multivector = ( CalcLib::MultivectorNumber* )number;
+
+	multivector->AssignFrom( element, gaEnv );
+	gaEnv.StoreVariable( "lin", *number );
+
+	decompositionEvaluator->EvaluateResult( *number, gaEnv );
+
+	gaEnv.LookupVariable( "w", *number );
+	multivector->AssignTo( weight, gaEnv );
+	gaEnv.LookupVariable( "x", *number );
+	multivector->AssignTo( center.x, gaEnv );
+	gaEnv.LookupVariable( "y", *number );
+	multivector->AssignTo( center.y, gaEnv );
+	gaEnv.LookupVariable( "z", *number );
+	multivector->AssignTo( center.z, gaEnv );
+	gaEnv.LookupVariable( "nx", *number );
+	multivector->AssignTo( unitNormal.x, gaEnv );
+	gaEnv.LookupVariable( "ny", *number );
+	multivector->AssignTo( unitNormal.y, gaEnv );
+	gaEnv.LookupVariable( "nz", *number );
+	multivector->AssignTo( unitNormal.z, gaEnv );
+
+	delete number;
 }
 
 //=========================================================================================
 /*virtual*/ void ProjectiveLine::ComposeTo( GeometricAlgebra::SumOfBlades& element ) const
 {
+	CalcLib::GeometricAlgebraEnvironment gaEnv;
+
+	CalcLib::Number* number = gaEnv.CreateNumber();
+	CalcLib::MultivectorNumber* multivector = ( CalcLib::MultivectorNumber* )number;
+
+	number->AssignFrom( weight, gaEnv );
+	gaEnv.StoreVariable( "w", *number );
+	number->AssignFrom( center.x, gaEnv );
+	gaEnv.StoreVariable( "x", *number );
+	number->AssignFrom( center.y, gaEnv );
+	gaEnv.StoreVariable( "y", *number );
+	number->AssignFrom( center.z, gaEnv );
+	gaEnv.StoreVariable( "z", *number );
+	number->AssignFrom( unitNormal.x, gaEnv );
+	gaEnv.StoreVariable( "nx", *number );
+	number->AssignFrom( unitNormal.y, gaEnv );
+	gaEnv.StoreVariable( "ny", *number );
+	number->AssignFrom( unitNormal.z, gaEnv );
+	gaEnv.StoreVariable( "nz", *number );
+
+	compositionEvaluator->EvaluateResult( *number, gaEnv );
+
+	gaEnv.LookupVariable( "lin", *number );
+	multivector->AssignTo( element, gaEnv );
+
+	delete number;
 }
 
 //=========================================================================================
 /*virtual*/ void ProjectiveLine::DumpInfo( char* printBuffer, int printBufferSize ) const
 {
+	sprintf_s( printBuffer, printBufferSize,
+			"The variable \"%s\" is being interpreted as a projective line.\n"
+			"Weight: %f\n"
+			"Position: < %f, %f, %f >\n"
+			"Normal: < %f, %f, %f >\n",
+			name,
+			weight,
+			center.x, center.y, center.z,
+			unitNormal.x, unitNormal.y, unitNormal.z );
 }
 
 //=========================================================================================
 /*virtual*/ void ProjectiveLine::AddInventoryTreeItem( wxTreeCtrl* treeCtrl, wxTreeItemId parentItem ) const
 {
+	wxString itemName = wxString::Format( wxT( "Proj-Line: %s" ), name );
+	treeCtrl->AppendItem( parentItem, itemName, -1, -1, new GAVisToolInventoryTree::Data( id ) );
 }
 
 //=========================================================================================
 /*virtual*/ void ProjectiveLine::Draw( GAVisToolRender& render, bool selected )
 {
+	if( selected )
+		render.Highlight( GAVisToolRender::NORMAL_HIGHLIGHTING );
+	else
+		render.Highlight( GAVisToolRender::NO_HIGHLIGHTING );
+	render.Color( color, alpha );
+
+	VectorMath::Vector point0, point1;
+	VectorMath::Vector vec;
+	VectorMath::Scale( vec, unitNormal, -20.0 );
+	VectorMath::Add( point0, center, vec );
+	VectorMath::Scale( vec, vec, -1.0 );
+	VectorMath::Add( point1, center, vec );
+
+	render.DrawTube( point0, point1, 0.1f, GAVisToolRender::RES_LOW );
 }
 
 //=========================================================================================

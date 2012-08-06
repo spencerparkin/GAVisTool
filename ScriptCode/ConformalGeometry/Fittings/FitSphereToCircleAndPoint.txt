@@ -1,0 +1,26 @@
+/*
+ * This script demonstrates how one might
+ * fit a sphere to a circle and point.
+ * Notice that as the circle radius goes
+ * to zero, it turns into a tangent point,
+ * showing what sphere we get when we combine
+ * a tangent point and a normal point in this way.
+ */
+do
+(
+	wipe_env(),
+	
+	bind_dual_circle( cir ),
+	bind_dual_point( pt ),
+	v = -3*e0 - 3*e1 - 3*e2,
+	pt = no + v + 0.5*(v . v)*ni,
+	
+	bind_dual_sphere( sph ),
+	geo_color( sph, 1, 0, 0 ),
+	
+	/*
+	 * Notice that this is the simplification
+	 * of "sph = ((cir*I)^pt)*I".
+	 */
+	formula_constraint( "sph = cir . pt" ),
+)

@@ -1,0 +1,21 @@
+/*
+ * Construct a fun picture to use on the title page of a talk on GA.
+ */
+do
+(
+	wipe_env(),
+	
+	bind_dual_sphere( s0, s1, s2 ),
+	geo_color( s0, 1, 0, 0 ),
+	geo_color( s1, 0, 1, 0 ),
+	geo_color( s2, 0, 0, 1 ),
+	
+	bind_dual_circle( c0, c1, c2 ),
+	geo_color( c0, 1, 0, 0 ),
+	geo_color( c1, 0, 1, 0 ),
+	geo_color( c2, 0, 0, 1 ),
+	
+	formula_constraint( "c0 = s1^s2" ),
+	formula_constraint( "c1 = s2^s0" ),
+	formula_constraint( "c2 = s0^s1" ),
+)
