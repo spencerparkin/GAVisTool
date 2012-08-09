@@ -204,7 +204,7 @@ ProjectiveLine::ProjectiveLine( BindType bindType ) : GAVisToolGeometry( bindTyp
 	sprintf_s( compositionCode, sizeof( compositionCode ),
 		"do("
 		"c = x*e0 + y*e1 + z*e2,"
-		"n = nx*e0 + nz*e1 + nz*e2,"
+		"n = nx*e0 + ny*e1 + nz*e2,"
 		"lin = w*(c + e3)^n,"
 		")"
 	);
@@ -390,7 +390,7 @@ ProjectivePlane::ProjectivePlane( BindType bindType ) : GAVisToolGeometry( bindT
 	sprintf_s( compositionCode, sizeof( compositionCode ),
 		"do("
 		"c = x*e0 + y*e1 + z*e2,"
-		"n = nx*e0 + nz*e1 + nz*e2,"
+		"n = nx*e0 + ny*e1 + nz*e2,"
 		"pln = w*(c + e3)^( -n*( e0^e1^e2 ) ),"
 		")"
 	);
