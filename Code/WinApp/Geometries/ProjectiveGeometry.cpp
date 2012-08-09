@@ -370,7 +370,7 @@ ProjectivePlane::ProjectivePlane( BindType bindType ) : GAVisToolGeometry( bindT
 	char decompositionCode[ 512 ];
 	sprintf_s( decompositionCode, sizeof( decompositionCode ),
 		"do("
-		"n = ( e3 . pln )*I,"
+		"n = ( e3 . pln )*( e0^e1^e2 ),"
 		"w = sqrt( n . n ),"
 		"n = n / w,"
 		"pln = pln / w,"
