@@ -1,0 +1,17 @@
+/*
+ * Make a line from a point and a direction.
+ */
+do
+(
+	wipe_env(),
+
+	n = e0 + e1,
+	pt = e3,
+	
+	bind_proj_point( pt ),
+	bind_virtual( n ),
+	
+	bind_proj_line( lin ),
+	
+	formula_constraint( "lin = pt^n" ),
+)

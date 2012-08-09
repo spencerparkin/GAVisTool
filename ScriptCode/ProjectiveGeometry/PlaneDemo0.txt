@@ -1,0 +1,16 @@
+/*
+ * Make a plane from 3 points.
+ */
+do
+(
+	wipe_env(),
+
+	pt0 = e0 + e1 + e3,
+	pt1 = e0 - e1 + e3,
+	pt2 = 2*e0 + e1 + e3,
+	
+	bind_proj_point( pt0, pt1, pt2 ),
+	bind_proj_plane( pln ),
+		
+	formula_constraint( "pln = pt0^pt1^pt2" ),
+)

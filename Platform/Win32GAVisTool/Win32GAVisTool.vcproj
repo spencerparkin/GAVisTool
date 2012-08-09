@@ -504,7 +504,23 @@
 				Name="ProjectiveGeometry"
 				>
 				<File
-					RelativePath="..\..\ScriptCode\ProjectiveGeometry\Line.txt"
+					RelativePath="..\..\ScriptCode\ProjectiveGeometry\LineDemo0.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ScriptCode\ProjectiveGeometry\LineDemo1.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ScriptCode\ProjectiveGeometry\PlaneDemo0.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ScriptCode\ProjectiveGeometry\PlaneDemo1.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ScriptCode\ProjectiveGeometry\PlaneDemo2.txt"
 					>
 				</File>
 			</Filter>

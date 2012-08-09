@@ -1,0 +1,19 @@
+/*
+ * Make a line from two unique points.
+ */
+do
+(
+	wipe_env(),
+
+	p0 = -0.50*e0 + 3.24*e1 - 1.27*e2 + e3,
+	p1 = -1.46*e0 - 0.95*e1 + 4.96*e2 + e3,
+		
+	bind_proj_line( lin ),
+	geo_color( lin, 1, 0, 0 ),
+		
+	bind_proj_point( p0, p1 ),
+	geo_color( p0, 0, 1, 0 ),
+	geo_color( p1, 0, 0, 1 ),
+	
+	formula_constraint( "lin = p0^p1" ),
+)

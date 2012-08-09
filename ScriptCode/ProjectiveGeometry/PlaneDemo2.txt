@@ -1,0 +1,17 @@
+/*
+ * Make a plane from a point and a blade.
+ */
+do
+(
+	/* Let the attitude of the plane be that of the XY-plane. */
+	blade = e0^e1,
+	
+	/* Put the plane at the origin to start with. */
+	pt = e3,
+	
+	bind_proj_point( pt ),
+	bind_virtual( blade ),
+	
+	bind_proj_plane( pln ),
+	formula_constraint( "pln = pt^blade" ),
+)

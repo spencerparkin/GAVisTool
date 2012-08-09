@@ -1,0 +1,14 @@
+/*
+ * Make a plane from a point and a line.
+ */
+do
+(
+	pt = e0 + e3,
+	lin = e3^e1,
+	
+	bind_proj_line( lin ),
+	bind_proj_point( pt ),
+	
+	bind_proj_plane( pln ),
+	formula_constraint( "pln = lin^pt" ),
+)
