@@ -10,6 +10,8 @@
 \newcommand{\G}{\mathbb{G}}
 \newcommand{\V}{\mathbb{V}}
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\B}{\mathbb{B}}
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{definition}{Definition}[section]
@@ -20,16 +22,6 @@
 
 \begin{document}
 \maketitle
-
-\section{What Is This Paper?}
-
-This paper reads like an introductory treatment of geometric calculus, and was
-written that way intentially, but it is really just a formal compilation of my notes
-on the subject.
-The idea is that an exposition of this subject helps to solidify one's understanding
-of it, and helps one organize his thoughts on it.  Often a good test of one's understanding
-of a subject is one's ability to expound it.  And I like to write.  And I'm a nerd.
-Let's move on.
 
 \section{The Limit}
 
@@ -58,7 +50,7 @@ Of particular interest to us will be a class of functions known as linear functi
 the study of which is known as linear algebra, and therefore a sub-topic of geometric calculus.
 Linear functions are defined on linear spaces, most often referred to as vector spaces,
 suggesting to the mind a geometric interpretation of the elements of such spaces.
-Indeed, vector spaces play an obvious role in the development of geometric algebra.
+Indeed, vector spaces play a fundamental role in the development of geometric algebra.
 
 Before jumping into limit processes, it makes sense for us to first treat the subject
 of linear algebra as we'll find many examples of linear functions in the broader
@@ -66,11 +58,79 @@ subject of geometric calculus.
 
 \section{Linear Algebra}
 
-Though this needs some proof, I believe that there will be no loss in generality if
-we restrict ourselves here to the study of linear functions mapping to and from the
-same vector space.  Doing this will simplify much of the notation to follow.
+We begin with a formal definition of a linear function.
 \begin{definition}
-Define linear a function here.
+Let $\A$ and $\B$ denote any two vector spaces, not necessariliy unique, arbitrarily defined
+over the field of real numbers $\R$.  Then a
+linear function $f$ is a mapping from $\A$ to $\B$ that preserves both scalar-vector multiplication
+and vector addition.  That is, for any scalar $\lambda\in\R$ and any two vectors $x,y\in\A$,
+we have $f(\lambda x)=\lambda f(x)$ and $f(x+y)=f(x)+f(y)$.
 \end{definition}
+Given such a definition, it is natural to begin by seeing how much we can learn about
+such functions without looking at any one particular example.  Recall that if $\A$ is
+an $m$-dimensional vector space, then there exists at most a set of $m$ linearly
+independent vectors $\{a_i\}_{k=1}^m\subset\A$ that form a basis for $\A$.
+Letting $x = \sum_{i=1}^m x_ia_i$, where each $x_i\in\R$, we see that
+\begin{equation*}
+f(x) = \sum_{i=1}^m x_i f(a_i),
+\end{equation*}
+showing that $f$ is entirely determined by how it transforms any set of basis
+vectors for $\A$.  This has immediate implications for the existance of $f^{-1}$
+when we recall the definition of a non-invertible function.
+\begin{definition}
+A function $f:\A\to\B$ is non-invertible if for any given element $b\in f(\A)$,
+there exists at least two unique elements $x,y\in\A$ such that $f(x)=b$ and $f(y)=b$.
+\end{definition}
+This definition illustrates the non-invertibility of $f$ by the ambiguity we face in the construction
+of $f^{-1}$ when we consider how to map $f^{-1}(b)$.  Does this map to $x$ or $y$?
+
+Consider now the set $\{f(a_i)\}_{i=1}^m\subset\B$ and suppose for the moment that
+it is linearly dependent.  Then, without loss of generality, we can write $f(a_m)$
+as $f(a_m)=\sum_{i=1}^{m-1}\lambda_i f(a_i)$, where each $\lambda_i\in\R$.
+Now let $x_m=0$ and let $y\in\A$ be $y=\sum_{i=1}^m y_i a_i$, where $y_m\neq 0$,
+and for all $i<m$, we have $y_i=x_i-\lambda_i y_m$.  Clearly $x\neq y$, and we see that
+\begin{align*}
+f(x) &= \sum_{i=1}^{m-1} x_if(a_i)
+ = \sum_{i=1}^{m-1}(y_i+\lambda_i y_m)f(a_i) \\
+ &= \sum_{i=1}^{m-1}y_i f(a_i) + y_m\sum_{i=1}^{m-1}\lambda_i f(a_i)
+ = \sum_{i=1}^{m-1}y_i f(a_i) + y_m f(a_m)
+ = f(y),
+\end{align*}
+showing that $f$ is non-invertible.
+
+Considering now the set $\{f(a_i)\}_{i=1}^m\subset\B$ to be linearly independent, we
+see that...
+
+ It follows that $f$ is invertible if and only if $f$ preserves linear independence
+in the sense that if $\{a_i\}_{i=1}^m$ is a linearly independent set, then so is $\{f(a_i)\}_{i=1}^n$.
+
+Now knowing when $f^{-1}$ exists, how do we find $f^{-1}$?  Interestingly, geometric
+algebra gives us a means to answering this question.  We begin with the definition
+of an outermorphism.
+\begin{definition}
+A function $f:\A\to\B$ is an outermorphism if it is linear and perserves the outer product.  That is,
+$f$ is a linear function, and for any two vectors $x,y\in\A$, we have $f(x\wedge y)=f(x)\wedge f(y)$.
+\end{definition}
+Every linear function can be extended to an outermorphism if it does not already possess the
+defining characteristics of such a function.  (This may need some proof.)  As an extention of a linear function, an
+outermorphism preserves the original linear function so that if we find the inverse of
+an outermorphism, then we have also found the inverse of the original linear function.
+
+Taking the zero element of any geometric algebra as being without grade, we see already
+that an outermorphism $f$ is invertible if and only if it preserves the grade of blades.  Indeed,
+if $f$ is invertible, then it must map $I_{\A}$ to some non-zero scalar multiple of $I_{\B}$,
+where each of these denote the unit psuedo-scalars of $\G(\A)$ and $\G(\B)$, respectively.
+In fact, this scalar multiple has special significance, and we define it to be the determinant
+of the outermorphism.
+\begin{equation*}
+f(I_{\A}) = (\det f)I_{\B}
+\end{equation*}
+Clearly $f$ is invertible if and only if $\det f\neq 0$, but we chose this scalar in particular
+because of the role it will play in the formulation of the $f^{-1}$.
+\begin{definition}
+The adjoint of an outermorphism $f$ is an outermorphism $g$ with the property that
+for any two vectors $x,y\in\A$, we have $x\cdot f(y)=g(x)\cdot y$.
+\end{definition}
+How do we know that this exists?
 
 \end{document}
