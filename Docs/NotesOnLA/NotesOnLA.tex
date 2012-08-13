@@ -24,8 +24,6 @@
 \maketitle
 
 This paper is a formal compilation of all my notes on linear algebra.
-As such, the reader may find places where I express uncertanty
-over certain concepts or in consideration of certain questions.
 
 Linear algebra is the study of linear functions defined on linear spaces.
 Linear spaces are more often refered to as vector spaces, suggesting
@@ -68,13 +66,15 @@ Equation $\eqref{equ_linear_transform}$ also brings to bair immediate
 implications on the invertibility of $f$.  That is, we have enough to
 prove at this point that $f$ is invertible if and only if $f$ preserves
 linear independence in the sense that if $\{e_i\}_{i=1}^n$ is a
-linearly independent set, then so is $\{f(e_i)\}_{i=1}^n$.
+linearly independent set, then so is $\{f(e_i)\}_{i=1}^n$.  Many graphics
+transformations can be easily formulated this way.
 
 Recall that one direction of the statement $x=y\iff f(x)=f(y)$ is the
 requirement of a well defined function, while the other direction is optional,
-and is the condition upon which $f^{-1}$ exists.  Clearly, if there
-exist distinct vectors $x,y\in\V^n$ such that $f(x)=f(y)$, then no
-function purporting to be $f^{-1}$ is well defined.
+and is the condition upon which $f^{-1}$ exists.  Specifically, if there
+exist distinct vectors $x,y\in\V^n$ such that $f(x)=f(y)$, then
+$f^{-1}$ does not exist.  If $z=f(x)=f(y)$, then do we let $f^{-1}(z)=x$
+or $f^{-1}(z)=y$?
 
 Suppose for the moment that the set $\{f(e_i)\}_{i=1}^n$ is linearly dependent.
 Then, without loss of generality, we can write $f(e_n)$
@@ -100,7 +100,7 @@ because we must have for all integers $i\in[1,n]$, $x_i=y_i$ on the grounds
 that $\{f(e_i)\}_{i=1}^n$ is a linearly independent set.
 
 Having now established the conditions upon which $f^{-1}$ exists, let's quickly
-prove the uniqueness of $f^{-1}$.  Suppose the function $g$ and $h$ are
+prove the uniqueness of $f^{-1}$.  Suppose the functions $g$ and $h$ are
 distinct inverses of $f$.  By distinct, this must mean that there exists $y\in f(\V^n)$
 such that $g(y)\neq h(y)$.  Let $x\in\V^n$ be such that $f(x)=y$.  We then
 have $x=g(f(x))=g(y)\neq h(y)=h(f(x))=x$, which is a contradiction.
@@ -108,7 +108,13 @@ Inverses of functions in general are therefore unique.
 
 We have now satisfied the basic questions of existance and uniqueness
 for inverses of linear functions.  Given a linear function $f$, what we
-would now hope is that of having a means of finding $f^{-1}$.
+would now hope to be able to do is find $f^{-1}$.
 This is where geometric algebra comes in.
+\begin{definition}
+A linear function $f$ is also called an outermorphism if it preserves
+the outer product.  That is, for any two vectors $x,y\in\V^n$,
+we have $f(x\wedge y)=f(x)\wedge f(y)$.
+\end{definition}
+
 
 \end{document}
