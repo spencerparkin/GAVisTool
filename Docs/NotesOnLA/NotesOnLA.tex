@@ -3,6 +3,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
+\usepackage{accents}
 
 \title{Notes On Linear Algebra}
 \author{Spencer T. Parkin}
@@ -12,6 +13,8 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\A}{\mathbb{A}}
 \newcommand{\B}{\mathbb{B}}
+\newcommand{\uf}{\underaccent{\bar}{f}}
+\newcommand{\of}{\bar{f}}
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{definition}{Definition}[section]
@@ -24,6 +27,13 @@
 \maketitle
 
 This paper is a formal compilation of all my notes on linear algebra.
+It proceeds as a treatment of linear algebra guided by the material
+given in the reference section, but here I go into greater detail so as
+to understand more fully what is being communicated in those sources.
+The paper $\cite{hestenes91}$ is studied in particular.
+\nocite{macdonald12}
+
+\section{Enter Linear Functions}
 
 Linear algebra is the study of linear functions defined on linear spaces.
 Linear spaces are more often refered to as vector spaces, suggesting
@@ -61,6 +71,8 @@ that every linear function is a change of basis transformation.  That is, the
 set of coordinates $\{x_i\}_{i=1}^n$ for a vector $x$ are preserved while
 the set of basis vectors $\{e_i\}_{i=1}^n$ are replaced with a new set
 of vectors $\{f(e_i)\}_{i=1}^n$.
+
+\section{Existance and Uniqueness of Linear Function Inverses}
 
 Equation $\eqref{equ_linear_transform}$ also brings to bair immediate
 implications on the invertibility of $f$.  That is, we have enough to
@@ -106,15 +118,118 @@ such that $g(y)\neq h(y)$.  Let $x\in\V^n$ be such that $f(x)=y$.  We then
 have $x=g(f(x))=g(y)\neq h(y)=h(f(x))=x$, which is a contradiction.
 Inverses of functions in general are therefore unique.
 
-We have now satisfied the basic questions of existance and uniqueness
+\section{Enter Outermorphic Functions}
+
+To this point we have satisfied the basic questions of existance and uniqueness
 for inverses of linear functions.  Given a linear function $f$, what we
 would now hope to be able to do is find $f^{-1}$.
-This is where geometric algebra comes in.
+This is where geometric algebra comes into play.
 \begin{definition}
-A linear function $f$ is also called an outermorphism if it preserves
+A function $f$ is called an outermorphism if it preserves
 the outer product.  That is, for any two vectors $x,y\in\V^n$,
 we have $f(x\wedge y)=f(x)\wedge f(y)$.
 \end{definition}
+Every linear function $f$ can be extended to an outermorphism which
+we denote by $\uf$.  If $f$ does not already possess the defining
+characteristic of an outermorphism, (i.e., $f\neq\uf$), then it can be
+extended to an outermorphism by simply defining
+\begin{equation*}
+\uf(B) = \bigwedge_{i=1}^s f(b_i),
+\end{equation*}
+where $B$ is the $s$-blade $\bigwedge_{i=1}^s b_i$.  Clearly this extension of $f$ preserves the
+original function and is therefore both linear and outermorphic.  Furthermore, if
+we find $\uf^{-1}$, then we have also found $f^{-1}$.
 
+Taking zero as being a blade of any grade, it is clear that outermorphic functions are
+grade preserving.  From what we already know so far, it is clear that if a linear outermorphism
+also preserves non-zero blades as non-zero blades, then it must be invertible.
+
+\section{The Adjoint Outermorphism}
+
+Given a linear function $f$, of particular
+interest to us will be the function $\of$ implicity defined as
+\begin{equation*}
+x\cdot f(y) = \of(x)\cdot y,
+\end{equation*}
+where $x,y\in\V^n$.  I believe we call this the adjoint of $f$.
+An explicit definition of $\of$ is therefore given by
+\begin{equation*}
+\of(x) = \sum_{i=1}^n (\of(x)\cdot e_i)e_i = \sum_{i=1}^n (x\cdot f(e_i))e_i.
+\end{equation*}
+As one can check, this is clearly a linear function.  The extension of this
+function to an outermorphism, which we'll also denote by $\of$, is what
+I believe we call the adjoint outermorphism of $f$.  An interesting reformulation
+of the $\of$ is given by
+\begin{align*}
+\of(x) &= \sum_{i=1}^n e_i(x\cdot f(e_i)) \\
+ &= \sum_{i=1}^n e_i(x\cdot\partial_i f(y)) \\
+ &= \sum_{i=1}^n e_i\partial_i(x\cdot f(y)) \\
+ &= \nabla_y(x\cdot f(y)),
+\end{align*}
+where here we must be careful to note that $\nabla_y$ denotes the gradient of its operand
+with respect to $y$, not the directional derivative of its operand in the direction $y$.
+
+We will now proceed to uncover important an property of the outermorphic extenstion
+of $f$ and its adjoint outermorphism.  Letting $B$ be the $s$-blade $\bigwedge_{i=1}^s b_i$,
+we see that
+\begin{align*}
+x\cdot \uf(B) &= -\sum_{i=1}^s(-1)^i(x\cdot\uf(b_i))\bigwedge_{j=1,j\neq i}^s\uf(b_j) \\
+ &= -\sum_{i=1}^s(-1)^i(\of(x)\cdot b_i)\bigwedge_{j=1,j\neq i}^s\uf(b_j) \\
+ &= \uf\left(-\sum_{i=1}^s(-1)^i(\of(x)\cdot b_i)\bigwedge_{j=1,j\neq i}^s b_j\right) \\
+ &= \uf(\of(x)\cdot B).
+\end{align*}
+Now let $A$ be the $r$-blade $\bigwedge_{i=1}^r a_i$, where $r\leq s$, and recall
+that
+\begin{equation}\label{equ_dot_recursive}
+A\cdot B = \left(\bigwedge_{i=1}^{r-1} a_i\right)\cdot(a_r\cdot B).
+\end{equation}
+By repeated application of this identity, we get
+\begin{equation*}
+A\cdot B = a_1\cdot\dots\cdot a_r\cdot B,
+\end{equation*}
+where here it is understood that the inner product is meant to be right-to-left associative.
+Similarly, we may write
+\begin{equation*}
+A\cdot\uf(B) = \left(\bigwedge_{i=1}^{r-1}a_i\right)\cdot\uf(\of(a_r)\cdot B),
+\end{equation*}
+and again repeatedly apply the identity $\eqref{equ_dot_recursive}$ recursively
+to obtain
+\begin{equation*}
+A\cdot\uf(B) = \uf(\of(a_1)\cdot\dots\cdot\of(a_r)\cdot B) = \uf(\of(A)\cdot B),
+\end{equation*}
+where again the inner product here is understood to be right-to-left associative.
+
+\section{The Inverse Outermorphism}
+
+We're now ready to find the inverse of an outermorphism.  We begin by making the
+observation that
+\begin{equation*}
+\lambda AI = A\uf(I) = \uf(\of(A)I),
+\end{equation*}
+where here $\lambda\in\R$ and $I$ is the unit psuedo-scalar of $\G(\V^n)$.
+In fact, we define $\det f=\lambda = \uf(I)I^{-1}$.  It follows that
+\begin{equation*}
+(\det f)\uf^{-1}(AI) = \of(A)I.
+\end{equation*}
+Solving $\uf^{-1}(A)$, we get
+\begin{equation*}
+\uf^{-1}(A) = \frac{\of(AI^{-1})I}{\det f} = \frac{\of(AI)I}{\det f}(-1)^{n(n-1)/2} = \frac{\of(AI)I^{-1}}{\det f}.
+\end{equation*}
+When $A\in\V^n$, this gives us the inverse function $f^{-1}$!  That is, for all $x\in\V^n$,
+we have
+\begin{equation}\label{equ_inverse_formula}
+f^{-1}(x) = \frac{\of(xI)I^{-1}}{\det f}.
+\end{equation}
+It can be shown that $f^{-1}$ is outermorphic.
+
+Do that here.
+
+The implication of this is that the inverse of the outermorphic
+extension of $f$ is the outermorphic extension of the inverse of $f$.
+
+\section{An Application of Linear Function Inverses}
+
+\bibliographystyle{plain}
+\bibliography{NotesOnLA}
 
 \end{document}
