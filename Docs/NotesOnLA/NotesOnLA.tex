@@ -195,7 +195,7 @@ A\cdot B = a_1\cdot\dots\cdot a_r\cdot B,
 where here it is understood that the inner product is meant to be right-to-left associative.
 Similarly, we may write
 \begin{equation*}
-A\cdot\uf(B) = \left(\bigwedge_{i=1}^{r-1}a_i\right)\cdot\uf(\of(a_r)\cdot B),
+A\cdot\uf(B) = \left(\bigwedge_{i=1}^{r-1}\of(a_i)\right)\cdot\uf(\of(a_r)\cdot B),
 \end{equation*}
 and again repeatedly apply the identity $\eqref{equ_dot_recursive}$ recursively
 to obtain
@@ -231,7 +231,23 @@ not repeat it here.
 The implication of this is that the inverse of the outermorphic
 extension of $f$ is the outermorphic extension of the inverse of $f$.
 
-\section{An Application of Linear Function Inverses}
+\section{A Small Comparison To Matrix Algebra}
+
+It is common to represent an invertible linear transformation as a set of basis vectors $\{a_i\}_{i=1}^n$ of $\V^n$.
+Matrices, for example, represent linear transformations this way, the basis vectors taking up the rows or
+columns of the matrix, and matrix multiplication is, by definition, a
+change of basis transformation.  Using what we now know about linear algebra, we see that
+the set of basis vectors $\{f^{-1}(e_i)\}_{i=1}^n$ must represent the inverse change of basis transformation
+where $f(x)=\sum_{i=1}^n (x\cdot e_i)a_i$.  Using equation $\eqref{equ_inverse_formula}$, we can find
+a formula for $f^{-1}(e_i)$.
+Attempting to do so, we get
+\begin{equation*}
+f^{-1}(e_i) = \frac{-(-1)^i}{\det f}\left(\bigwedge_{j=1,j\neq i}^n\sum_{k=1}^n (e_j\cdot a_k)e_k\right)I^{-1}.
+\end{equation*}
+Admittedly, this isn't as reduced as I would like to see it, but it is interesting to me none-the-less.  Geometric algebra
+has given us a formula for the inverse basis in terms of the original basis.
+
+\section{Eigen Blades}
 
 \bibliographystyle{plain}
 \bibliography{NotesOnLA}
