@@ -26,12 +26,14 @@
 \begin{document}
 \maketitle
 
+\begin{abstract}
 This paper is a formal compilation of all my notes on linear algebra.
 It proceeds as a treatment of linear algebra guided by the material
-given in the reference section, but here I go into greater detail so as
+given in the reference section, but here in some places I go into greater detail so as
 to understand more fully what is being communicated in those sources.
 The paper $\cite{hestenes91}$ is studied in particular.
 \nocite{macdonald12}
+\end{abstract}
 
 \section{Enter Linear Functions}
 
@@ -154,9 +156,12 @@ x\cdot f(y) = \of(x)\cdot y,
 where $x,y\in\V^n$.  I believe we call this the adjoint of $f$.
 An explicit definition of $\of$ is therefore given by
 \begin{equation*}
-\of(x) = \sum_{i=1}^n (\of(x)\cdot e_i)e_i = \sum_{i=1}^n (x\cdot f(e_i))e_i.
+\of(x) = \sum_{i=1}^n (\of(x)\cdot e_i)e_i = \sum_{i=1}^n (x\cdot f(e_i))e_i,
 \end{equation*}
-As one can check, this is clearly a linear function.  The extension of this
+which deserves careful comparison to equation $\eqref{equ_linear_transform}$.
+Can we relate the concept of reciprical basis here?
+
+As one can check, $\of$ is clearly a linear function.  The extension of this
 function to an outermorphism, which we'll also denote by $\of$, is what
 I believe we call the adjoint outermorphism of $f$.  An interesting reformulation
 of the $\of$ is given by
@@ -169,7 +174,7 @@ of the $\of$ is given by
 where here we must be careful to note that $\nabla_y$ denotes the gradient of its operand
 with respect to $y$, not the directional derivative of its operand in the direction $y$.
 
-We will now proceed to uncover important an property of the outermorphic extenstion
+We will now proceed to uncover an important property of the outermorphic extenstion
 of $f$ and its adjoint outermorphism.  Letting $B$ be the $s$-blade $\bigwedge_{i=1}^s b_i$,
 we see that
 \begin{align*}
@@ -221,9 +226,8 @@ we have
 f^{-1}(x) = \frac{\of(xI)I^{-1}}{\det f}.
 \end{equation}
 It can be shown that $f^{-1}$ is outermorphic.
-
-Do that here.
-
+A proof of this is given in $\cite{hestenes91}$ which siffices me, so I will
+not repeat it here.
 The implication of this is that the inverse of the outermorphic
 extension of $f$ is the outermorphic extension of the inverse of $f$.
 
