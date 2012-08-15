@@ -26,14 +26,13 @@
 \begin{document}
 \maketitle
 
-\begin{abstract}
 This paper is a formal compilation of all my notes on linear algebra.
 It proceeds as a treatment of linear algebra guided by the material
 given in the reference section, but here in some places I go into greater detail so as
 to understand more fully what is being communicated in those sources.
 The paper $\cite{hestenes91}$ is studied in particular.
 \nocite{macdonald12}
-\end{abstract}
+\nocite{hestenes85}
 
 \section{Enter Linear Functions}
 
@@ -138,7 +137,12 @@ extended to an outermorphism by simply defining
 \begin{equation*}
 \uf(B) = \bigwedge_{i=1}^s f(b_i),
 \end{equation*}
-where $B$ is the $s$-blade $\bigwedge_{i=1}^s b_i$.  Clearly this extension of $f$ preserves the
+where $B$ is the $s$-blade $\bigwedge_{i=1}^s b_i$, and by defining for all
+scalars $\beta\in\R$, $\uf(\beta)=\beta$.  (If somehow $f$ preserved the outer
+product for some grades, but not all, our extension to $\uf$ could be selective
+by grade.  In $\cite{hestenes91}$ it is claimed that every linear function $f$ has a unique
+extension to $\uf$.  This needs further justification in my mind.)
+Clearly this extension of $f$ preserves the
 original function and is therefore both linear and outermorphic.  Furthermore, if
 we find $\uf^{-1}$, then we have also found $f^{-1}$.
 
@@ -231,11 +235,11 @@ not repeat it here.
 The implication of this is that the inverse of the outermorphic
 extension of $f$ is the outermorphic extension of the inverse of $f$.
 
-\section{A Small Comparison To Matrix Algebra}
+\section{An Application Of Linear Function Inverses}
 
 It is common to represent an invertible linear transformation as a set of basis vectors $\{a_i\}_{i=1}^n$ of $\V^n$.
 Matrices, for example, represent linear transformations this way, the basis vectors taking up the rows or
-columns of the matrix, and matrix multiplication is, by definition, a
+columns of a matrix, and matrix multiplication is, by definition, a
 change of basis transformation.  Using what we now know about linear algebra, we see that
 the set of basis vectors $\{f^{-1}(e_i)\}_{i=1}^n$ must represent the inverse change of basis transformation
 where $f(x)=\sum_{i=1}^n (x\cdot e_i)a_i$.  Using equation $\eqref{equ_inverse_formula}$, we can find
@@ -248,6 +252,39 @@ Admittedly, this isn't as reduced as I would like to see it, but it is interesti
 has given us a formula for the inverse basis in terms of the original basis.
 
 \section{Eigen Blades}
+
+Geometric algebra naturally generalizes the idea of eigen vectors to eigen blades.  We have already
+seen one example of this.  The unit psuedo-scalar $I$ is an eigen blade of $\uf$ with eigen value $\det f$,
+provided $\uf$ is invertible.  This is because eigen values must be non-zero by definition.
+\begin{definition}
+A blade $B\in\G(\V^n)$ is an eigen blade of an outermorphism $\uf$ if there exists a non-zero scalar $\lambda\in\R$
+such that $\uf(B)=\lambda B$.  We call $\lambda$ the eigen value of the eigen balde $B$.
+\end{definition}
+If we allowed zero to be an eigen value, then only non-zero eigen blades with zero eigen values
+would arrise in non-invertible outermorphisms.  This is because we must have $\uf(0)=0$.
+
+Interestingly, we can show that if $B$ is an eigen blade of $\uf$, and $\uf$ is invertible, then $B$ also represents
+an invarient sub-space of $\uf$.  Indeed, for any vector $b\in B$, which is to say that $b\wedge B=0$, we have
+\begin{equation*}
+0 = \uf(b\wedge B) = f(b)\wedge\uf(B) = f(b)\wedge \lambda B,
+\end{equation*}
+showing that $f(b)\in B$.  We can now conclude that if $\B$ denotes the sub-space represented
+by $B$, then the image $\uf(\B)\subseteq \B$.  Now since $\uf$ is invertible, we must have $\uf(\B)=\B$.
+To see this, let $B$ be the $m$-blade $\bigwedge_{i=1}^m b_i$.  Then for all $b_i\in B$, we
+must have $f(b_i)\in B$, and we know that $\{f(b_i)\}_{i=1}^m$ is a linearly independent set.
+
+Letting $\det\uf=\det f$, it makes sense to consider $\det\of$.  In fact, we find that
+\begin{align*}
+\det\of &= \uf(\det\of) = \uf(\of(I) I^{-1}) = \uf(\of(I)(-1)^{n(n-1)/2}I) \\
+ &= \uf(\of((-1)^{n(n-1)/2}I) I) = \uf(\of(I^{-1}) I) = I^{-1}\uf(I) = \det\uf.
+\end{align*}
+On the subject of eigen blades, $\cite{hestenes85}$ refers to eigen blades of $\of$ as right eigen blades.
+Similarly, we may call eigen blades of $\uf$ as left eigen blades.  A blade that is eigen in both senses
+is called a proper eigen blade.  Clearly if $\uf$ is invertible, then $I$ is a proper eigen blade.
+
+There is much more to learn about eigen blades, such as the idea of factoring them into
+eigen blades that have no eigen blade factors.  Perhaps I'll study this when I'm more capable
+of following the disucssion in $\cite{hestenes85}$.
 
 \bibliographystyle{plain}
 \bibliography{NotesOnLA}
