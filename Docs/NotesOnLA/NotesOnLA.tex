@@ -264,12 +264,12 @@ If we allowed zero to be an eigen value, then only non-zero eigen blades with ze
 would arrise in non-invertible outermorphisms.  This is because we must have $\uf(0)=0$.
 
 Interestingly, we can show that if $B$ is an eigen blade of $\uf$, and $\uf$ is invertible, then $B$ also represents
-an invarient sub-space of $\uf$.  Indeed, for any vector $b\in B$, which is to say that $b\wedge B=0$, we have
+an invarient sub-space of $f$.  Indeed, for any vector $b\in B$, which is to say that $b\wedge B=0$, we have
 \begin{equation*}
 0 = \uf(b\wedge B) = f(b)\wedge\uf(B) = f(b)\wedge \lambda B,
 \end{equation*}
-showing that $f(b)\in B$.  We can now conclude that if $\B$ denotes the sub-space represented
-by $B$, then the image $\uf(\B)\subseteq \B$.  Now since $\uf$ is invertible, we must have $\uf(\B)=\B$.
+showing that $f(b)\in B$ since $\lambda\neq 0$.  We can now conclude that if $\B$ denotes the sub-space represented
+by $B$, then the image $f(\B)\subseteq \B$.  Now since $\uf$ is invertible, we must have $f(\B)=\B$.
 To see this, let $B$ be the $m$-blade $\bigwedge_{i=1}^m b_i$.  Then for all $b_i\in B$, we
 must have $f(b_i)\in B$, and we know that $\{f(b_i)\}_{i=1}^m$ is a linearly independent set.
 
@@ -280,7 +280,7 @@ Letting $\det\uf=\det f$, it makes sense to consider $\det\of$.  In fact, we fin
 \end{align*}
 On the subject of eigen blades, $\cite{hestenes85}$ refers to eigen blades of $\of$ as right eigen blades.
 Similarly, we may call eigen blades of $\uf$ as left eigen blades.  A blade that is eigen in both senses
-is called a proper eigen blade.  Clearly if $\uf$ is invertible, then $I$ is a proper eigen blade.
+is called a proper eigen blade.  Clearly $\uf$ is invertible if and only if $I$ is a proper eigen blade.
 
 There is much more to learn about eigen blades, such as the idea of factoring them into
 eigen blades that have no eigen blade factors.  Perhaps I'll study this when I'm more capable
