@@ -10,6 +10,7 @@
 
 \newcommand{\G}{\mathbb{G}}
 \newcommand{\V}{\mathbb{V}}
+\newcommand{\W}{\mathbb{W}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\A}{\mathbb{A}}
 \newcommand{\B}{\mathbb{B}}
@@ -46,12 +47,17 @@ Holding the definitions of a vector space and linear independence as
 already known, we begin with a formal definition of a linear function.
 We arbitrarily define all vector spaces over the field of real numbers $\R$.
 \begin{definition}
-A function $f:\A\to\B$ is a mapping from a vector space $\A$ to
-a vector space $\B$ with the property of preserving both scalar-vector
+A function $f:\V\to\W$ is a mapping from a vector space $\V$ to
+a vector space $\W$ with the property of preserving both scalar-vector
 multiplication and vector addition.  That is, for any scalar $\lambda\in\R$,
 and any two vectors $x,y\in\A$, we have $f(\lambda x)=\lambda f(x)$ and
 $f(x+y)=f(x)+f(y)$.
 \end{definition}
+(Notice that the field of real numbers $\R$ is also a linear space.  Later on
+we'll study linear functions from $\V^n$ to $\R$.  It might be interesting
+to study which sets of blades form linear spaces.
+Remember that all $k$-blades are $k$-vectors, but not all $k$-vectors are $k$-blades.)
+
 It is not enitrely clear to me how much, if any, loss in generality we incur
 by restricting our study of such functions to those that map to and from
 the same vector space.  Nevertheless, since this is the class of linear
@@ -162,8 +168,8 @@ An explicit definition of $\of$ is therefore given by
 \begin{equation*}
 \of(x) = \sum_{i=1}^n (\of(x)\cdot e_i)e_i = \sum_{i=1}^n (x\cdot f(e_i))e_i,
 \end{equation*}
-which deserves careful comparison to equation $\eqref{equ_linear_transform}$.
-Can we relate the concept of reciprical basis here?
+which deserves careful comparison to equation $\eqref{equ_linear_transform}$.  Interestingly,
+$f(e_i)$ and $e_i$ are simply swapped between these two equations.
 
 As one can check, $\of$ is clearly a linear function.  The extension of this
 function to an outermorphism, which we'll also denote by $\of$, is what
@@ -286,9 +292,30 @@ There is much more to learn about eigen blades, such as the idea of factoring th
 eigen blades that have no eigen blade factors.  Perhaps I'll study this when I'm more capable
 of following the disucssion in $\cite{hestenes85}$.
 
+\section{Dual Basis}
+
+% Research reciprocal basis.  What is it?  How does it fit into everything already studied?
+
+Associated with any basis of $\V^n$ is another basis of $\V^n$ refered to as its dual basis,
+or sometimes called reciprocal basis.
+\begin{definition}
+Given any set of basis vectors $\{b_i\}_{i=1}^n$ of $\V^n$, a set of $n$ vectors
+$\{\bar{b}_i\}_{i=1}^n$ is called its dual basis if for all $i\neq j$, we
+have $b_i\cdot\bar{b}_j=0$, and for all $i=j$, we have $b_i\cdot\bar{b}_j=1$.
+\end{definition}
+This can't be right.  Any basis is its own dual basis under this definition.
+
+\section{Dual Vector Spaces}
+
+As mentioned before, a vector space is just a linear space.  We don't have to interpret the
+elements of such spaces as geometry (as vectors).  Of note is a linear space consisting of
+linear functions.  This works by defining vector addition and scalar-vector multiplication as
+simply function addition and scalar-function multiplication.
+
 \bibliographystyle{plain}
 \bibliography{NotesOnLA}
 
-% Also ref David C. Lay and the GA for CS book.
+% Add ref for David C. Lay and the GA for CS book.
+% Add ref for wiki entry on dual vector spaces
 
 \end{document}
