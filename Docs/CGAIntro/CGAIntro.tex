@@ -392,14 +392,129 @@ a finite sphere.
 
 \section{Transforming Geometry}
 
-If we understand how conformal points transform by versors, then
-we understand how all conformal geometries transform, because the
-double-sided transformation law of versors is an outermorphism!!
+Here we study the transformations of conformal geometries
+by versors.  Let us therefore give a formal definition of such
+elements.
+\begin{definition}
+Given any set of $m$ invertible vectors $\{v_k\}_{k=1}^m\subset\G(\V)$,
+the element
+\begin{equation*}
+V = \prod_{k=1}^m v_k
+\end{equation*}
+is called a versor.
+If $m$ is odd, we call $V$ an odd versor; if even, an even versor.
+I will refer to $m$ as the grade of the versor $V$.
+\end{definition}
+It follows that versors are invertible by definition.  Clearly $V^{-1}=\tilde{V}/|V|$,
+where $|V|=\prod_{k=1}^m |v_k|$.  It is also easy to see that versors
+form their own group under the geometric product.  With versors as representative
+of transformations, this property allows us to easily concatinate transformations.
+As we'll come to find out, we can represent any conformal transformation with
+a versor.  This is where the conformal model gets its name.
 
-Address transformations by versors here.
+We will now proceed to lay some ground work
+for a very import result that will help us decipher the action of versors on elements
+representative of conformal geometries.
 
-Versors transform the blades representative of geometries in the conformal model,
-and so versrors represent transformations.
+\begin{lemma}\label{lma_vector_invariance}
+For any vector $a\in\V$, we have $VaV^{-1}\in\V$.
+\end{lemma}
+\begin{proof}
+Notice that we need only show that for any vector $v\in\V$, we have $vav^{-1}=vav/|v|\in\V$.
+By the equation
+\begin{equation*}
+vav = v(a\cdot v + a\wedge v) = (a\cdot v)v + v\cdot(a\wedge v)  = 2(a\cdot v)v - |v|^2a,
+\end{equation*}
+clearly this is the case.
+\end{proof}
+\begin{lemma}\label{lma_inner_prod_preserve}
+Given any two vectors $a,b\in\V$, we have $VaV^{-1}\cdot VbV^{-1}=a\cdot b$.
+\end{lemma}
+It suffices to show that $\langle V(a\wedge b)V^{-1}\rangle_0=0$, since
+\begin{equation*}
+VaV^{-1}\cdot VbV^{-1} = \langle VabV^{-1}\rangle_0 = a\cdot b + \langle V(a\wedge b)V^{-1}\rangle_0.
+\end{equation*}
+\begin{proof}
+A proof by induction is given.  Consider first $\langle v(a\wedge b)v^{-1}\rangle_0$, where $v\in\V$.
+By direct evaluation, we get
+\begin{equation*}
+\langle v(a\wedge b)v^{-1}\rangle_0 = \frac{1}{|v|}
+\left|\begin{array}{cc} n\cdot a & n\cdot a\\ n\cdot b & n\cdot b\end{array}\right| = 0.
+\end{equation*}
+Suppose now that for a fixed integer $k$, the versor $V$
+of grade $k$ satisfies the lemma.  We must show that $\langle vV(a\wedge b)V^{-1}v^{-1}\rangle_0$ is zero.
+To that end, it is not hard to see that
+\begin{equation*}
+\langle vV(a\wedge b)V^{-1}v^{-1}\rangle_0 =
+\langle v\langle V(a\wedge b)V^{-1}\rangle_0 v^{-1}\rangle_0 +
+\langle v\langle V(a\wedge b)V^{-1}\rangle_2 v^{-1}\rangle_0.
+\end{equation*}
+Clearly $\langle v\langle V(a\wedge b)V^{-1}\rangle_0 v^{-1}\rangle_0$ is zero by our inductive hypothesis.
+That $\langle v\langle V(a\wedge b)V^{-1}\rangle_2 v^{-1}\rangle_0$ is zero follows directly from
+the work we did to show that $\langle v(a\wedge b)v^{-1}\rangle_0$ is zero.
+\end{proof}
+We're now ready to prove a theorem that we'll use to proof something very interesting
+about versor transformations in the conformal model.
+\begin{theorem}\label{thm_outer_prod_preserve}
+Given any $m$-blade $B=\bigwedge_{k=1}^m b_k$, we have
+\begin{equation*}
+VBV^{-1} = \bigwedge_{k=1}^m Vb_iV^{-1}.
+\end{equation*}
+\end{theorem}
+\begin{proof}
+Our proof of this theorem will rely upon the following.  If we find that $B=f(b_1,\dots,b_m)$,
+where $f$ is any expression in the vector variables $b_1$ through $b_m$, then
+clearly
+\begin{equation*}
+f(Vb_1V^{-1},\dots,Vb_mV^{-1})=\bigwedge_{k=1}^m Vb_iV^{-1}
+\end{equation*}
+by lemma $\eqref{lma_vector_invariance}$.
+All that would remain, then, is to show that
+\begin{equation*}
+VBV^{-1}=f(Vb_1V^{-1},\dots,Vb_mV^{-1}),
+\end{equation*}
+and the theorem goes through.
+
+We procede now by strong induction.  Clearly the theorem holds for the case $m=1$.
+Suppose now that for a fixed integer $m>2$, that the theorem holds for each case less
+than $m$.  A partial expansion of $VBV^{-1}$ gives us
+\begin{equation*}
+VBV^{-1} = V(b_1\wedge\dots\wedge b_{k-1})b_kV^{-1} - (-1)^{k-1}V(a_k\cdot a_1\wedge\dots\wedge a_{k-1})V^{-1}.
+\end{equation*}
+We will consider each part of the right-hand side seperately.  For the first part, we have
+\begin{align*}
+V(b_1\wedge\dots\wedge b_{k-1})b_kV^{-1} &=
+V(b_1\wedge\dots\wedge b_{i-1})V^{-1}Vb_kV^{-1} \\
+&= \left(\bigwedge_{i=1}^{k-1}Vb_iV^{-1}\right)Vb_kV^{-1},
+\end{align*}
+by our inductive hypothesis.  For the second part, we have
+\begin{align*}
+ & (-1)^k V(a_k\cdot a_1\wedge\dots\wedge a_{k-1})V^{-1} \\
+ =& -(-1)^k V\left(\sum_{i=1}^{k-1}(-1)^i (a_k\cdot a_i)\bigwedge_{j=1,j\neq i}^{k-1} a_j\right)V^{-1} \\
+ =& -(-1)^k\sum_{i=1}^{k-1}(-1)^i (a_k\cdot a_i)V\left(\bigwedge_{j=1,j\neq i}^{k-1} a_j \right)V^{-1} \\
+ =& -(-1)^k\sum_{i=1}^{k-1}(-1)^i(Va_kV^{-1}\cdot Va_kV^{-1})\bigwedge_{j=1,j\neq i}^{k-1} Va_jV^{-1},
+\end{align*}
+by lemma $\eqref{lma_inner_prod_preserve}$ and our inductive hypothesis.
+Having now sandwitched all vectors between $V$ and $V^{-1}$, our proof by
+induction is complete.
+\end{proof}
+What theorem $\eqref{thm_outer_prod_preserve}$ tells us is that the function
+$f(B)=VBV^{-1}$ is an outermorphism.  It then follows that if we understand
+how $V$ transforms a conformal point, then we
+also understand how $V$ transforms any directly represented conformal geometry by virtue of
+choosing any factorization for that geometry in terms of conformal points!  This is an
+extraordinary property of the conformal model.
+
+Of course, there are a few more details to work out here.  As we now know,
+all but the flat point geometry can be expressed directly as an outer product
+of round points.  So we'll want to consider the action of $V$ on $\nvai$.
+We'll also want to consider the action of $V$ on a blade dually representive
+of a conformal geometry.
+
+%Address transformations by versors here.
+
+%Versors transform the blades representative of geometries in the conformal model,
+%and so versrors represent transformations.
 
 \subsection{Uniform Scaling}
 
