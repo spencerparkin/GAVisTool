@@ -33,7 +33,7 @@ ConformalFlatPoint::ConformalFlatPoint( BindType bindType ) : GAVisToolGeometry(
 		"y = scalar_part( v, e1 ),"
 		"z = scalar_part( v, e2 )"
 		")",
-		( bindType == NORMAL_FORM, "fp = fp*I,", "" )
+		( bindType == NORMAL_FORM ? "fp = fp*I," : "" )
 	);
 	decompositionEvaluator = calculator.CompileEvaluator( decompositionCode );
 	wxASSERT( decompositionEvaluator != 0 );
@@ -42,9 +42,9 @@ ConformalFlatPoint::ConformalFlatPoint( BindType bindType ) : GAVisToolGeometry(
 	sprintf_s( compositionCode, sizeof( compositionCode ),
 		"do("
 		"v = x*e0 + y*e1 + z*e2,"
-		"fp = w*( i + ( v*i )^ni )*%s"
+		"fp = w*( i + ( v*i )^ni )%s"
 		")",
-		( bindType == NORMAL_FORM, "*-I", "" )
+		( bindType == NORMAL_FORM ? "*-I" : "" )
 	);
 	compositionEvaluator = calculator.CompileEvaluator( compositionCode );
 	wxASSERT( compositionEvaluator != 0 );
