@@ -82,8 +82,18 @@ For any vector $v\in\G$ and any two blades $A,B\in\G$,
 if $A\wedge B\neq 0$, then $v\cdot A=0$ and $v\cdot B=0$ if and only if $v\cdot A\wedge B=0$.
 \end{theorem}
 \begin{proof}
-Put proof here.
+If $A\wedge B\neq 0$, then $A\wedge B$ represents the union of the vector sub-spaces
+represented by $A$ and $B$.  Stating the next part of the theorem another way, we can
+say that $v\wedge AI=0$ and $v\wedge BI=0$ if and only if $v\wedge (A\wedge B)I=0$,
+which is also to say that $v\not\in A$ and $v\not\in B$ if and only if $v\not\in A\wedge B$.
 \end{proof}
+If $A\wedge B=0$, then the calculation of the union of the vector sub-spaces represented by
+$A$ and $B$ is a bit more involved, but is a more general formula for what we call the join
+of $A$ and $B$.  The meet operation gives us the blade representative of the interesection
+of the represented vector sub-spaces. The more general meet and join
+operations may have their uses in the conformal model, but here we will stick to the
+simpler case of the join operation for now.
+
 We can apply theorem $\eqref{thm_intersect}$ to get the following result.
 \begin{result}\label{rslt_intersect}
 For any two blades $A,B\in\G$ such that $A\wedge B\neq 0$, we have
@@ -100,9 +110,14 @@ if $v\wedge A=0$ or $v\wedge B=0$, then $v\wedge A\wedge B=0$.
 \end{theorem}
 \begin{proof}
 If $A\wedge B=0$, then we're done.  If $A\wedge B\neq 0$ and $v\in A$ or $v\in B$,
-then $v\in A\cup B$, which is to say that $v$ is in the union of vector sub-spaces
+then $v\in A\wedge B$, which is to say that $v$ is in the union of the vector sub-spaces
 represented by $A$ and $B$.
 \end{proof}
+To see why the converse of theorem $\eqref{thm_union_and_more}$ does not generally hold,
+realize that if $v\in A\wedge B$, then $v$ is contained within a vector sub-space of
+$A\wedge B$ that might non-trivially overlap both $A$ and $B$, showing that $v\not\in A$ and
+$v\not\in B$.
+
 Applying theorem $\eqref{thm_union_and_more}$, we get the following result.
 \begin{result}\label{rslt_union_and_more}
 For any two blades $A,B\in\G$, we have
@@ -504,8 +519,9 @@ $f(B)=VBV^{-1}$ is an outermorphism.  Applying this theorem, we get the followin
 important result.
 \begin{result}\label{rslt_versor_action_on_geos}
 Given a versor $V$, if we understand the transformation $Vp(x)V^{-1}$ for
-any point $x\in\V^n$, then we we understand the transformation $VBV^{-1}$,
-where $B$ is any blade directly or dually representative of any geometry.
+any point $x\in\V^n$, then we understand the transformation $VBV^{-1}$,
+where $B$ is any blade directly or dually representative of any geometry, with
+the only exception being that of flat points.
 \end{result}
 \begin{proof}
 In the previous section we showed that, with the exception of flat points,
@@ -513,10 +529,8 @@ all geometries directly represented by a blade $B$ may be written
 as the outer product of vectors representative of points.  For all of
 these geometries, our result goes through directly by theorem $\eqref{thm_outer_prod_preserve}$.
 
-Considering a flat point $p(x)\wedge\nvai$, we need only show that $\nvai$ is,
-up to scale, invarient under any versor transformation.
-
-To show now that the theorem goes through for blades dually representative of geometries,
+To show now that the theorem goes through for blades dually representative of geometries, (with again,
+the exception of flat-points),
 we need only show the commutativity of grade $k$ versors with the unit-psuedo scalar $I$ of $\G$.
 For any vector $v\in\V$, it is not hard to show that $vI=(-1)^nIv$.  It follows that $VI=(-1)^{nk}IV$.
 We then see that
@@ -528,7 +542,12 @@ representative of geometries with those dually representative of such geometries
 \end{proof}
 This is a fantastic result!  We now not only have a way of formulating a desired
 transformation, but we also know that such a formulation, once formulated, will
-apply to any geometry of the conformal model, no matter the representation!
+apply to almost all geometry in the conformal model, no matter the representation!
+
+Flat points are an interesting exception to the idea presented in result $\eqref{rslt_versor_action_on_geos}$.
+An example of why flat points are such an exception is given in section
+$\eqref{sec_spherical_reflections}$ below.
+
 We procede now to develop the versor transformations of the conformal model.
 
 \subsection{Reflections}
@@ -601,7 +620,7 @@ has a polar decomposition of $\exp(-ai\theta/2)$.
 
 % Does our form here have a polar decomposition?
 
-\subsection{Spherical Reflections}
+\subsection{Spherical Reflections}\label{sec_spherical_reflections}
 
 Let $c\in\V^n$ be the center of a sphere, and $a\in\V^n$ be a point
 exterior to the sphere.  Then the point $b\in\V^n$ along the line
@@ -625,6 +644,9 @@ representative of spheres perform, as versors in a versor transformation, spheri
 Applying result $\eqref{rslt_versor_action_on_geos}$, we find that $s$, when
 acting upon a blade directly representative of a line, gives us the blade directly
 representative of the circle that is the reflection of that line in the sphere.
+
+Address the spherical reflections of flat points here.  The reflection of a direct flat point
+in a dual sphere is, surprisingly, a dual circle!
 
 \subsection{Transversion}
 
@@ -799,19 +821,13 @@ t &= 2\nvao\cdot(1-T)
 
 \section{Concluding Remarks}
 
-Throughout this paper we did not always give the weight of a
-conformal geometry much thought.  If we were to go back and examine
-what weights come out of certain operations between homogenized geometries,
-then we would probably discover that those weights have interesting
-and valuable geometric significance to the operations at hand.
-
-Indeed, this introduction has only just scratched the surface of
+This introduction has only just begun to scratched the surface of
 what kinds of geometry we can do with the conformal model, and
 any model like it that uses a homogenous blade representation scheme,
 such as the model for projective geometry.  It is reasonable to ask
 what other models of geometry there might be that use different
 types of geometric algebras.  Instead of going in search of a model
-with specific features, we might as well choose a geometric aglebra,
+with specific features, we might as well choose a geometric algebra,
 and then ask what models of geometry that algebra gives us.
 
 \bibliographystyle{plain}
