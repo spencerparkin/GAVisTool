@@ -453,7 +453,7 @@ Clearly $\langle v\langle V(a\wedge b)V^{-1}\rangle_0 v^{-1}\rangle_0$ is zero b
 That $\langle v\langle V(a\wedge b)V^{-1}\rangle_2 v^{-1}\rangle_0$ is zero follows directly from
 the work we did to show that $\langle v(a\wedge b)v^{-1}\rangle_0$ is zero.
 \end{proof}
-We're now ready to prove a theorem that we'll use to proof something very interesting
+We're now ready to prove a theorem that we'll use to prove something very interesting
 about versor transformations in the conformal model.
 \begin{theorem}\label{thm_outer_prod_preserve}
 Given any $m$-blade $B=\bigwedge_{k=1}^m b_k$, we have
@@ -476,6 +476,7 @@ VBV^{-1}=f(Vb_1V^{-1},\dots,Vb_mV^{-1}),
 and the theorem goes through.
 
 We procede now by strong induction.  Clearly the theorem holds for the case $m=1$.
+The case $m=2$ is not much harder to prove.
 Suppose now that for a fixed integer $m>2$, that the theorem holds for each case less
 than $m$.  A partial expansion of $VBV^{-1}$ gives us
 \begin{equation*}
@@ -499,56 +500,163 @@ Having now sandwitched all vectors between $V$ and $V^{-1}$, our proof by
 induction is complete.
 \end{proof}
 What theorem $\eqref{thm_outer_prod_preserve}$ tells us is that the function
-$f(B)=VBV^{-1}$ is an outermorphism.  It then follows that if we understand
-how $V$ transforms a conformal point, then we
-also understand how $V$ transforms any directly represented conformal geometry by virtue of
-choosing any factorization for that geometry in terms of conformal points!  This is an
-extraordinary property of the conformal model.
+$f(B)=VBV^{-1}$ is an outermorphism.  Applying this theorem, we get the following
+important result.
+\begin{result}\label{rslt_versor_action_on_geos}
+Given a versor $V$, if we understand the transformation $Vp(x)V^{-1}$ for
+any point $x\in\V^n$, then we we understand the transformation $VBV^{-1}$,
+where $B$ is any blade directly or dually representative of any geometry.
+\end{result}
+\begin{proof}
+In the previous section we showed that, with the exception of flat points,
+all geometries directly represented by a blade $B$ may be written
+as the outer product of vectors representative of points.  For all of
+these geometries, our result goes through directly by theorem $\eqref{thm_outer_prod_preserve}$.
 
-Of course, there are a few more details to work out here.  As we now know,
-all but the flat point geometry can be expressed directly as an outer product
-of round points.  So we'll want to consider the action of $V$ on $\nvai$.
-We'll also want to consider the action of $V$ on a blade dually representive
-of a conformal geometry.
+Considering a flat point $p(x)\wedge\nvai$, we need only show that $\nvai$ is,
+up to scale, invarient under any versor transformation.
 
-%Address transformations by versors here.
+To show now that the theorem goes through for blades dually representative of geometries,
+we need only show the commutativity of grade $k$ versors with the unit-psuedo scalar $I$ of $\G$.
+For any vector $v\in\V$, it is not hard to show that $vI=(-1)^nIv$.  It follows that $VI=(-1)^{nk}IV$.
+We then see that
+\begin{equation*}
+VBV^{-1} = -VBV^{-1}I^2 = -(-1)^{nk}VBIV^{-1}I,
+\end{equation*}
+which relates what we already know about the action of versors on blades directly
+representative of geometries with those dually representative of such geometries.
+\end{proof}
+This is a fantastic result!  We now not only have a way of formulating a desired
+transformation, but we also know that such a formulation, once formulated, will
+apply to any geometry of the conformal model, no matter the representation!
+We procede now to develop the versor transformations of the conformal model.
 
-%Versors transform the blades representative of geometries in the conformal model,
-%and so versrors represent transformations.
+\subsection{Reflections}
+
+Interestingly, what we find in the conformal model is that a vector
+not only represents a piece of geometry, but, as a versor, also represents
+a transformation involving that geometry.  Specifically, a plane represents
+reflections about that plane, and a sphere represents a reflection about that
+sphere!
+
+Reflections turn out to be a very fundamental type of transformation, because
+other transformations, such as rotations and translations, can be described
+in terms of reflections about well chosen geometries.  For example, two
+successive reflections about two well chosen planes gives us either a rotation
+or a translation.  (Interestingly, this shows that the rotation and translation
+transformations are not as disimilar as we might have first thought them to be!)
+
+Another type of reflection is performed about a sphere.  That is, a point
+interior to a sphere is reflected out of it, while points exterior to the sphere
+are reflected into it.  The question then comes up: if two successive
+reflections about two well chosen planes gives us the rotation or
+translation transformations, what does two successive reflections about
+two well chosen spheres give us?  We will get to the bottom of this question later on.
+
+\subsection{Planar Reflections}
+
+Given a plane centered at $c\in\V^n$ with unit-length normal $v\in\V^n$,
+here we consider the action of the vector dually representative of this plane
+as a versor on a vector representative of a point.  That is, for $\pi=v+(v\cdot c)\nvai$,
+what do we get in the evaluation of $\pi p(x)\pi^{-1}$?  Expanding this out, we get
+$\pi p(x)\pi^{-1} = -p(y)$, where $y=x-2(v\cdot (x-c))v$.  Drawing a picture
+will convince you that $y$ is the reflection of $x$ about the plane!  In the next
+two sections, let's go put this action to use.
+
+\subsection{Translations}
+
+Reflecting a point about two parallel planes produces a translation.
+The distance traveled is twice the distance between the two planes.
+Let $v\in\V^n$ be a unit-normal shared by the two planes, let
+$c\in\V^n$ be the position of the first plane, and $t\in\V^n$
+be a vector representative of the desired amount of translation.
+We assume that $v\wedge t=0$.
+The versor representative of the translation is then given by
+\begin{equation*}
+(v+(v\cdot(c+t/2))\nvai)(v+(v\cdot c)\nvai) = 1 - (t/2)\nvai.
+\end{equation*}
+Notice that our result here is independent of the position of the
+first plane, but only dependent upon their relative position.
+Of course, also notice that $v$ goes away as $t$ is all that
+is needed to characterize the translation transformation.
+
+% Give polar decomposition?
+
+\subsection{Rotations}
+
+Suppose now that the two planes we reflect about are
+non-parallel.  In this case we get a rotation.  Let $c\in\V^n$
+be a common point among the two planes, and let $v_0,v_1\in\V^n$
+be their unit-normals, respectively.  Not being parallel planes,
+we have $v_0\wedge v_1\neq 0$.  We can then let $a\in\V^n$
+be a unit-length vector representing the axis of rotation, and
+let $\theta\in\R$ be the angle of rotation.  Doing so, we see
+that $v_0\wedge v_1=-ai\sin\theta/2$.  The versor that
+represents a rotation about the point $c$ is then given by
+\begin{equation*}
+(v_0+(v_0\cdot c)\nvai)(v_1+(v_1\cdot c)\nvai) = \cos\theta/2 - (a+(a\wedge c)\nvai)i\sin\theta/2.
+\end{equation*}
+Letting $c=0$, we get the well-known rotor in Euclidean geometric algebras which
+has a polar decomposition of $\exp(-ai\theta/2)$.
+
+% Does our form here have a polar decomposition?
+
+\subsection{Spherical Reflections}
+
+Let $c\in\V^n$ be the center of a sphere, and $a\in\V^n$ be a point
+exterior to the sphere.  Then the point $b\in\V^n$ along the line
+from $c$ to $a$ given in the following figure is what we refer to
+as the reflection of $a$ in the sphere.
+
+Put figure here.
+
+We let $r\in\R$ be the radius of this sphere.  Using the law of similar
+triangles, it is not hard to show that $b = (1-\lambda)c + \lambda a$,
+where
+\begin{equation*}
+\lambda = \left(\frac{r}{|c-a|}\right)^2,
+\end{equation*}
+the square of a common ratio between respective sides of the
+similar triangles in the figure above.
+Interestingly, letting $s=p(c)-\frac{1}{2}r^2$, we find that
+$sp(a)s^{-1} = -\lambda p(b)$, showing that vectors dually
+representative of spheres perform, as versors in a versor transformation, spherical reflections!
+
+Applying result $\eqref{rslt_versor_action_on_geos}$, we find that $s$, when
+acting upon a blade directly representative of a line, gives us the blade directly
+representative of the circle that is the reflection of that line in the sphere.
+
+\subsection{Transversion}
+
+Is this two successive reflections about two well chosen spheres?
 
 \subsection{Uniform Scaling}
 
 The only geometric objects affected by uniform scaling are non-degenerate rounds.
 
-\subsection{Rotations}
+% What about these?
+%\subsection{Inversions}
+%\subsection{Toroidal Rotations}
+%\subsection{Transversions}
+%\subsection{Hyperbolic Scaling}
+% rejections?
 
-Two well chosen reflections about two planes make a rotation.
+\subsection{Other Transformations}
 
-\subsection{Translations}
+What other transformations are there?
 
-Two well chosen reflections about two planes make a translation.
-
-\subsection{Inversions}
-
-\subsection{Toroidal Rotations}
-
-\subsection{Transversions}
-
-\subsection{Hyperbolic Scaling}
-
-\section{Geometries as Transformers}
-
-Interesting things happen when we use geometries as we would versors
-to transform other geometries.  Address this here.
-
-\section{Catalog of Dual Representations}
+\section{Catalog of Dual Representations and Versor Transformations}
 
 For reference, this section catalogs canonical dual representations of the geometries in the
-conformal model of 3-dimensional space.  In each sub-section, the blade $B\in\G$ is
-assumed to represent the geometry in question.  In addition to the composition
+conformal model of 3-dimensional space, as well as common transformations represented
+by versors.  In each sub-section about dual geometric representations, the blade $B\in\G$ is
+assumed to represent the geometry in question, while in sub-sections about
+versor transformations, the versor $V\in\G$ represents the transformation in question.
+In addition to the composition
 of each geometry's dual representation, a sequence of steps
 are also provided that show how one can decompose this representation
-into the variables that characterize the geometry.
+into the variables that characterize the geometry.  A similar set of composition
+and decomposition steps are provided for the versor transformations.
 
 \subsection{Points}
 
@@ -668,37 +776,43 @@ will be zero in the case of tangent points.
 
 Address free-blades here.
 
-\section{Catalog of Transformations}
-
-\subsection{Scale-Rotate-Translation Transformations}
+\subsection{Rotate-Translate Transformations}
 
 Such a transformation is characterized by a Euclidean translation vector $t\in\V^n$, a unit-axis $a\in\V^n$,
-an angle $\theta\in\R$ and a scalar $\lambda\in\R$.
+an angle $\theta\in\R$ and a scalar (weight) $\lambda\in\R$.
 \begin{equation*}
 V = \lambda\left(1-\frac{1}{2}t\nvai\right)\left(\cos\frac{\theta}{2}-ai\sin\frac{\theta}{2}\right),
 \end{equation*}
 Notice that $V$ here is not a blade.  It is an even versor.  If the blade $B\in\G$ represents
 a geometry, (directyl or dually), the transformation of $B$ by $V$ is given by $VBV^{-1}$,
-in the case that we wish to the apply the rotation first, then the translation.  The application
-of the scale may be thought of as happening before or after the rotation, but not hafter the translation.
+in the case that we wish to the apply the rotation first, then the translation.
 We may decompose this type of transformation as follows.
 \begin{align*}
-\lambda^2 &= VV^{\sim} \\
+\lambda^2 &= V\tilde{V} \\
 R &= -\nvao\cdot\frac{V}{\lambda}\wedge\nvai \\
-T &= \frac{V}{\lambda}R^{\sim} \\
+T &= \frac{V}{\lambda}\tilde{R} \\
 \theta &= 2\cos^{-1}\left\langle R\right\rangle_0 \\
 a &= \frac{1}{\sin(\theta/2)}\left\langle R\right\rangle_2 i \\
 t &= 2\nvao\cdot(1-T)
 \end{align*}
 (Say something about the polar decomposition of $V$.)
 
-\section{Final Thoughts}
+\section{Concluding Remarks}
 
-Throughout this paper we did not give the weight of a
+Throughout this paper we did not always give the weight of a
 conformal geometry much thought.  If we were to go back and examine
-what weights come out of operations between homogenized geometries,
+what weights come out of certain operations between homogenized geometries,
 then we would probably discover that those weights have interesting
 and valuable geometric significance to the operations at hand.
+
+Indeed, this introduction has only just scratched the surface of
+what kinds of geometry we can do with the conformal model, and
+any model like it that uses a homogenous blade representation scheme,
+such as the model for projective geometry.  It is reasonable to ask
+what other models of geometry there might be that use different
+types of geometric algebras.  Instead of going in search of a model
+with specific features, we might as well choose a geometric aglebra,
+and then ask what models of geometry that algebra gives us.
 
 \bibliographystyle{plain}
 \bibliography{CGAIntro}
