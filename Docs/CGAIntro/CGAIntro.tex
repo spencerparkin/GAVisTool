@@ -3,6 +3,8 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{float}
 
 \title{An Introduction To\\Conformal Geometric Algebra}
 \author{Spencer T. Parkin}
@@ -445,11 +447,11 @@ clearly this is the case.
 \begin{lemma}\label{lma_inner_prod_preserve}
 Given any two vectors $a,b\in\V$, we have $VaV^{-1}\cdot VbV^{-1}=a\cdot b$.
 \end{lemma}
+\begin{proof}
 It suffices to show that $\langle V(a\wedge b)V^{-1}\rangle_0=0$, since
 \begin{equation*}
 VaV^{-1}\cdot VbV^{-1} = \langle VabV^{-1}\rangle_0 = a\cdot b + \langle V(a\wedge b)V^{-1}\rangle_0.
 \end{equation*}
-\begin{proof}
 A proof by induction is given.  Consider first $\langle v(a\wedge b)v^{-1}\rangle_0$, where $v\in\V$.
 By direct evaluation, we get
 \begin{equation*}
@@ -542,11 +544,19 @@ representative of geometries with those dually representative of such geometries
 \end{proof}
 This is a fantastic result!  We now not only have a way of formulating a desired
 transformation, but we also know that such a formulation, once formulated, will
-apply to almost all geometry in the conformal model, no matter the representation!
+apply to almost all geometries in the conformal model, no matter the representation!
+This is similar to what we know about linear transformations.  A linear transformation
+is entirely determined by how it transforms a basis of the space.  Therefore, if we
+know how a desired transformation transforms a basis of the space, then we have
+found the desired linear transformation.  Analogously, if we know how a desired
+conformal transformation transforms a point, then we have found the desired
+conformal transformation.  On the other hand, if we know how a given versor
+transforms a point, then we can predict how it will transform any conformal
+geometry, except flat points.
 
-Flat points are an interesting exception to the idea presented in result $\eqref{rslt_versor_action_on_geos}$.
-An example of why flat points are such an exception is given in section
-$\eqref{sec_spherical_reflections}$ below.
+Flat points are an exception to the idea presented in result $\eqref{rslt_versor_action_on_geos}$,
+because a given versor may not always leave $\nvai$ invariant up to scale.
+We'll see an example of this in section $\eqref{sec_spherical_reflections}$ below.
 
 We procede now to develop the versor transformations of the conformal model.
 
@@ -555,15 +565,15 @@ We procede now to develop the versor transformations of the conformal model.
 Interestingly, what we find in the conformal model is that a vector
 not only represents a piece of geometry, but, as a versor, also represents
 a transformation involving that geometry.  Specifically, a plane represents
-reflections about that plane, and a sphere represents a reflection about that
+a reflection about that plane, and a sphere represents a reflection about that
 sphere!
 
 Reflections turn out to be a very fundamental type of transformation, because
-other transformations, such as rotations and translations, can be described
+so many other types of transformations, such as rotations and translations, can be described
 in terms of reflections about well chosen geometries.  For example, two
 successive reflections about two well chosen planes gives us either a rotation
 or a translation.  (Interestingly, this shows that the rotation and translation
-transformations are not as disimilar as we might have first thought them to be!)
+transformations are perhaps not as disimilar as we might have first thought them to be!)
 
 Another type of reflection is performed about a sphere.  That is, a point
 interior to a sphere is reflected out of it, while points exterior to the sphere
@@ -578,24 +588,45 @@ Given a plane centered at $c\in\V^n$ with unit-length normal $v\in\V^n$,
 here we consider the action of the vector dually representative of this plane
 as a versor on a vector representative of a point.  That is, for $\pi=v+(v\cdot c)\nvai$,
 what do we get in the evaluation of $\pi p(x)\pi^{-1}$?  Expanding this out, we get
-$\pi p(x)\pi^{-1} = -p(y)$, where $y=x-2(v\cdot (x-c))v$.  Drawing a picture
-will convince you that $y$ is the reflection of $x$ about the plane!  In the next
-two sections, let's go put this action to use.
+\begin{equation*}
+\pi p(x)\pi^{-1} = -p(y),
+\end{equation*}
+where $y=x-2(v\cdot (x-c))v$.  Drawing a picture
+of this will convince you that $y$ is the reflection of $x$ about the plane!
+
+Interestingly, here we have an example of a versor that leaves $\nvai$
+invariant but for a factor of $-1$.  It follows that
+\begin{equation*}
+\pi(p(x)\wedge\nvai)\pi^{-1} = p(y)\wedge\nvai,
+\end{equation*}
+showing that flat points reflect about planes the same way round points do.
+
+Having covered the case of flat points, we can now apply result $\eqref{rslt_versor_action_on_geos}$
+to find that the versor $\pi$ reflects any conformal geometry about the plane represented by
+$\pi$ as we would imagine.  Even a sphere partially straddling the plane will reflect as we would predict.
 
 \subsection{Translations}
 
-Reflecting a point about two parallel planes produces a translation.
-The distance traveled is twice the distance between the two planes.
-Let $v\in\V^n$ be a unit-normal shared by the two planes, let
+It is not hard to imagine that we can perform a translation
+using a single planar reflection about a well chosen plane.
+The problem with this is that we need a different plane for
+every situation.  Interestingly, however, what we'll find is that
+if we perform two successive reflections about two parallel planes,
+the position of those planes becomes arbitrary, while only the relative
+distance between those planes determines the amount of translation.
+The direction of translation is determined by the attitude of the parallel planes.
+
+Let $v\in\V^n$ be a unit-normal shared by two parllel planes, let
 $c\in\V^n$ be the position of the first plane, and $t\in\V^n$
 be a vector representative of the desired amount of translation.
 We assume that $v\wedge t=0$.
 The versor representative of the translation is then given by
 \begin{equation*}
-(v+(v\cdot(c+t/2))\nvai)(v+(v\cdot c)\nvai) = 1 - (t/2)\nvai.
+(v+(v\cdot(c+\frac{1}{2}t)\nvai)(v+(v\cdot c)\nvai) = 1 - \frac{1}{2}t\nvai.
 \end{equation*}
 Notice that our result here is independent of the position of the
-first plane, but only dependent upon their relative position.
+first plane, but only dependent upon the relative positions of
+the two planes.
 Of course, also notice that $v$ goes away as $t$ is all that
 is needed to characterize the translation transformation.
 
@@ -613,7 +644,7 @@ let $\theta\in\R$ be the angle of rotation.  Doing so, we see
 that $v_0\wedge v_1=-ai\sin\theta/2$.  The versor that
 represents a rotation about the point $c$ is then given by
 \begin{equation*}
-(v_0+(v_0\cdot c)\nvai)(v_1+(v_1\cdot c)\nvai) = \cos\theta/2 - (a+(a\wedge c)\nvai)i\sin\theta/2.
+(v_0+(v_0\cdot c)\nvai)(v_1+(v_1\cdot c)\nvai) = \cos\frac{\theta}{2} - (a+a\wedge c\wedge\nvai)i\sin\frac{\theta}{2}.
 \end{equation*}
 Letting $c=0$, we get the well-known rotor in Euclidean geometric algebras which
 has a polar decomposition of $\exp(-ai\theta/2)$.
@@ -626,46 +657,74 @@ Let $c\in\V^n$ be the center of a sphere, and $a\in\V^n$ be a point
 exterior to the sphere.  Then the point $b\in\V^n$ along the line
 from $c$ to $a$ given in the following figure is what we refer to
 as the reflection of $a$ in the sphere.
-
-Put figure here.
-
-We let $r\in\R$ be the radius of this sphere.  Using the law of similar
+\begin{figure}[H]\label{fig_spherical_reflection}
+\centering
+\includegraphics[scale=0.3]{SphericalReflectionFigure}
+\caption{The reflection of a point about a sphere.}
+\end{figure}
+We let $r\in\R$ be the radius of this sphere.  Using what we know about similar
 triangles, it is not hard to show that $b = (1-\lambda)c + \lambda a$,
 where
 \begin{equation*}
-\lambda = \left(\frac{r}{|c-a|}\right)^2,
+\lambda = \left(\frac{r}{|c-a|}\right)^2 = \left(\frac{|c-b|}{r}\right)^2,
 \end{equation*}
 the square of a common ratio between respective sides of the
 similar triangles in the figure above.
-Interestingly, letting $s=p(c)-\frac{1}{2}r^2$, we find that
-$sp(a)s^{-1} = -\lambda p(b)$, showing that vectors dually
+Interestingly, letting $s=p(c)-\frac{1}{2}r^2\nvai$ be the sphere in the figure, we find that
+\begin{equation*}
+sp(a)s^{-1} = -\lambda p(b),
+\end{equation*}
+showing that vectors dually
 representative of spheres perform, as versors in a versor transformation, spherical reflections!
 
 Applying result $\eqref{rslt_versor_action_on_geos}$, we find that $s$, when
 acting upon a blade directly representative of a line, gives us the blade directly
-representative of the circle that is the reflection of that line in the sphere.
+representative of the circle that is the reflection of that line in the sphere.  Similarly,
+the reflection of a plane in a sphere is a sphere.
 
-Address the spherical reflections of flat points here.  The reflection of a direct flat point
-in a dual sphere is, surprisingly, a dual circle!
-
-\subsection{Transversion}
-
-Is this two successive reflections about two well chosen spheres?
+Of course, result $\eqref{rslt_versor_action_on_geos}$ doesn't tell us anything about
+how $s$ acts on a flat point.  The key, as always, is to see how $s$ acts on $\nvai$.
+Investigating this, we find that
+\begin{equation*}
+s(p(a)\wedge\nvai)s^{-1} = \frac{2}{(c-a)^2}p(b)\wedge p(c),
+\end{equation*}
+showing that $s$ transforms the flat point at $a$ into the pair of points $b$ and $c$.
 
 \subsection{Uniform Scaling}
 
-The only geometric objects affected by uniform scaling are non-degenerate rounds.
+It stands to reason that the only types of geometry in the conformal model
+that would be affected by a uniform scaling transformation would be the
+round geometries.  We might consider flat geometries as already scaled out
+to infinity.  In fact, it is not hard to show that all flats remain invariant under
+such a transformation.  For any set of points determining a flat of dimension
+greater than zero, if they are all scaled away from a common point on the flat, then they
+still determine the same flat, provided the scale is reasonable.
 
-% What about these?
-%\subsection{Inversions}
-%\subsection{Toroidal Rotations}
-%\subsection{Transversions}
-%\subsection{Hyperbolic Scaling}
-% rejections?
+% This is two successive reflections about two spheres sharing the same center.
+
+\subsection{Transversion}
+
+%Is this two successive reflections about two well chosen spheres?
+
+% It is two successive reflections about two spheres that touch one another in a single point.
+
+% Logarithm not yet known?
 
 \subsection{Other Transformations}
 
-What other transformations are there?
+Yet more types of transformations can be constructed in the conformal model
+by combining the above mentioned transformations.  For example, general
+rigid body motions can be formulated by combining the rotation and translation
+versors.  A question should be answered about the set of all possible types
+of transformations and what groups they form under versor concatination, but
+this might be beyond the scope of this paper and, admittedly, the capabilities of the author.
+
+In any case, it should be clear that by combining all types of reflection vector versors, (planar and spherical),
+that we exhaust all possible transformations by versors that we can come up with in the
+conformal model.  We have only begun to discover what types of transformations we
+can do with these basic building blocks.  (There are undoubtadly more combinations to
+consider.)  But we will leave versor transformations for now, content with what we have
+covered thus far as an introduction to the subject.
 
 \section{Catalog of Dual Representations and Versor Transformations}
 
@@ -827,8 +886,12 @@ any model like it that uses a homogenous blade representation scheme,
 such as the model for projective geometry.  It is reasonable to ask
 what other models of geometry there might be that use different
 types of geometric algebras.  Instead of going in search of a model
-with specific features, we might as well choose a geometric algebra,
-and then ask what models of geometry that algebra gives us.
+with specific features, we might as well just choose a geometric algebra,
+and then ask what types of geometry we can do with that algebra under
+various models of geometry.
+
+% Something interesting happens when we interpret something as something it's not.
+% For example, interpret a direct point-pair (grade 2) as a dual circle (grade 2).
 
 \bibliographystyle{plain}
 \bibliography{CGAIntro}
