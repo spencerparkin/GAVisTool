@@ -770,6 +770,30 @@ can do with these basic building blocks.  (There are undoubtadly more combinatio
 consider.)  But we will leave versor transformations for now, content with what we have
 covered thus far as an introduction to the subject.
 
+\section{Inference of Geometry}
+
+Given a blade $B\in\G$, is it possible for us to infer what type of geometry it
+represents, dually or directly?  Our first clue is the grade of $B$.
+We summarize what types of geometries can be represented by the various
+grades in the conformal model of 3-dimensional space with the following table.
+\begin{equation*}
+\begin{array}{ccccc}
+ &  & \mbox{Dual} & & \mbox{Direct} \\
+\hline
+1 & \vline & \mbox{Sphere, Plane, Point} & \vline & \mbox{Point} \\
+2 & \vline & \mbox{Circle, Line} & \vline & \mbox{Point-Pair, Flat-Point} \\
+3 & \vline & \mbox{Point-Pair, Flat-Point} & \vline & \mbox{Circle, Line} \\
+4 & \vline & \mbox{Point} & \vline & \mbox{Sphere, Plane, Point}
+\end{array}
+\end{equation*}
+Given a blade of any of these 4 grades, we can restrict our attention to
+only the grades 1 and 2 by taking the dual of blades of grades 3 and 4.
+
+% Given a vector (and perhaps a blade of grade 4), we can always
+% inver the geometry represented.  But this is not so with grades
+% 2 and 3, because we can re-interpret, for example, a direct
+% point-pair as a dual circle.
+
 \section{Catalog of Dual Representations and Versor Transformations}
 
 For reference, this section catalogs canonical dual representations of the geometries in the
@@ -933,9 +957,6 @@ types of geometric algebras.  Instead of going in search of a model
 with specific features, we might as well just choose a geometric algebra,
 and then ask what types of geometry we can do with that algebra under
 various models of geometry.
-
-% Something interesting happens when we interpret something as something it's not.
-% For example, interpret a direct point-pair (grade 2) as a dual circle (grade 2).
 
 \bibliographystyle{plain}
 \bibliography{CGAIntro}
