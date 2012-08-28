@@ -761,19 +761,19 @@ where
 \end{equation*}
 the square of a common ratio between respective sides of the
 similar triangles in the figure above.
-Interestingly, letting $s=p(c)-\frac{1}{2}r^2\nvai$ be the sphere in the figure, we find that
+Interestingly, letting $\sigma=p(c)-\frac{1}{2}r^2\nvai$ be the sphere in the figure, we find that
 \begin{equation*}
-sp(a)s^{-1} = -\lambda p(b),
+\sigma p(a)\sigma^{-1} = -\lambda p(b),
 \end{equation*}
 showing that vectors dually
 representative of spheres perform, as versors in a versor transformation, spherical reflections!
 As one would expect, a double spherical reflection about the same sphere leaves a point
 invarient.  This is because we also find that
 \begin{equation*}
-sp(b)s^{-1} = -\frac{1}{\lambda}p(a).
+\sigma p(b)\sigma^{-1} = -\frac{1}{\lambda}p(a).
 \end{equation*}
 
-Applying result $\eqref{rslt_versor_action_on_geos}$, we find that $s$, when
+Applying result $\eqref{rslt_versor_action_on_geos}$, we find that $\sigma$, when
 acting upon a blade directly representative of a line, gives us the blade directly
 representative of the circle that is the reflection of that line in the sphere.
 The following figure illustrates this.
@@ -781,23 +781,62 @@ The following figure illustrates this.
 \centering
 \includegraphics[scale=0.3]{ReflectionOfLineInSphereFigure}
 \caption{The reflection of a line in a sphere.}
+\label{fig_sph_ref_of_line}
 \end{figure}
 Similarly, the reflection of a plane in a sphere is a sphere.
 
 Of course, result $\eqref{rslt_versor_action_on_geos}$ doesn't tell us anything about
-how $s$ acts on a flat point.  The key, as always, is to see how the versor, (in this case $s$), acts on $\nvai$.
+how $\sigma$ acts on a flat point.  The key, as always, is to see how the versor, (in this case $\sigma$), acts on $\nvai$.
 Investigating this, we find that
 \begin{equation*}
-s(p(a)\wedge\nvai)s^{-1} = \frac{2}{(c-a)^2}p(b)\wedge p(c),
+\sigma(p(a)\wedge\nvai)\sigma^{-1} = \frac{2}{(c-a)^2}p(b)\wedge p(c),
 \end{equation*}
-showing that $s$ transforms the flat point at $a$ into the pair of points $b$ and $c$.
+showing that $\sigma$ transforms the flat point at $a$ into the pair of points $b$ and $c$.
+This is because the spherical reflection of a sphere's center is, up to scale, $\nvai$ and vice-versa.
+Specifically, we have
+\begin{equation*}
+\mbox{$\sigma p(c)\sigma^{-1}=-\frac{1}{2}r^2\nvai$ and $\sigma\nvai\sigma^{-1}=\frac{-2}{r^2}p(c)$.}
+\end{equation*}
 
-Another noteworhty observation here about spherical reflections is that
-of what happens when we reflect a point about a degenerate sphere.
-That is, reflect a point about a point.  Interestingly, what we find is that
-all points engaged in such a reflection are brought to the point to be
-reflected about.  They're all collapsed into a single point.  It follows that
-such a spherical reflection would send all but point geometries to zero.
+It is important to notice here that spherical reflections, unlike planar reflections, do
+not preserve geometric type.  As we saw in figure \ref{fig_sph_ref_of_line},
+the spherical reflection of a line became a sphere, a different type of geometry than
+what we started with.  Indeed, as we just saw, the spherical reflection of a sphere's
+center in itself is a multiple of $\nvai$ which, by definition, both dually and directly represents
+the empty point-set geometry or the geometry of nothing.
+(Some authors refer to $\nvai$ as the point at
+infinity.  This idea may come from observing the point $\sigma p(x)\sigma^{-1}$ as $x$
+approaches $c$.  But as the direction from which $x$ approaches $c$ is significant to me,
+and ideas like a point at infinity seem too ill-defined and poorly addressed, I prefer to think of $\nvai$
+as I have just described it.  Engagine the imagination, however, I can see how the notion of
+a point at infinity is useful and interesting.)  The non-preservation of geometric type means that we'll need
+to take greater care in deciphering transformations involving spherical reflections.
+
+Before moving on, we should not forget to
+consider the spherical reflection of a point in a degenerate sphere.  This
+type of reflection simply can't be taken, because in this case $\sigma^{-1}$ does not exist.
+
+Lastly, we cannot continue with a treatment of transformations involving spherical
+reflections until we come to a conclusion about an important question that comes up
+right away in the development of spherical reflections.  Observing that all flats have
+a spherical reflection as some type of geometry in the conformal, (a round), can the same be
+said of all rounds?  The answer is not entirely obvious.  The reason is because the set
+of all possible rounds about a sphere is not represented by the set of all spherical
+reflections of flats in that sphere.  For example, every circle that is the spherical
+reflection of a line in a sphere exists in the plane determined by that line and
+the center of the sphere.  Surely there are circles that don't meet this description
+for any line.
+In other words, not all circles, with respect to a given sphere, are the reflection
+of some line about that sphere.
+
+% take a line to a circle, then that same circle back through the spherical reflection.  is it a line or a circle?
+
+% is there a bug in my program?  i reflect a line through a sphere to get a circle, then
+% reflect that back out and interpret the result as a circle instead of a line.  the circle
+% has geometric significance to the situation, but i cannot explain the math.
+
+% the first discrepincey arrises after reflecting the line in the sphere.
+% the resulting circle does not have the same value as the reflection result
 
 \subsection{Diolations}
 
