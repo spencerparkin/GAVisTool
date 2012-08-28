@@ -909,27 +909,31 @@ of geometry, such as infinitely long cylinders, right-circular canonical surface
 and ellipsoids.  But using geometric functions we can represent these new types
 of geometries.
 
-We have to be careful, however, because there is no direct equivilant
+Where we run into trouble with geometric functions, however, is in the
+performance of geometric analysis.  Geometric functions that are
+canonical forms, while easily lending themselves to the decomposition
+of the represented geometry into its characteristic parts, cannot
+always be used to decispher the result of a geometric operation.
+In other words, there is no direct equivilant
 of theorem $\eqref{thm_same_geos}$ for geometric functions.
 Indeed, for any two geometric functions $g_1$ and $g_2$, if $G(g_1)=G(g_2)$,
 we cannot conclude that there exists a scalar $\lambda\in\R$ such that for all
-$x\in\V^n$, we have $g_1(x)=\lambda g_2(x)$.  To illustrate how this
-must change our thinking, consider the following geometric analysis.
-Let the geometric function $g_1$ represent a desired geometry in canonical
-form which therefore lends itself to a method of decomposition, and let the geometric function $g_2$ represent a geometry that
-is the result of a geometric operation for which we know that $G(g_1)=G(g_2)$.
-Then, unlike what we were are able to do in traditional conformal geometry, we cannot
-proceed to decompose $g_2$ as we would $g_1$, because theorem $\eqref{thm_same_geos}$
-does not apply.  Instead, the main difficulty in our task of performing geometric analysis
-was that of showing $G(g_1)=G(g_2)$, or in other words, that for any point $x\in\V^n$, that $p(x)\in g_1(x)$
-if and only if $p(x)\in g_2(x)$.  Once shown, we can simply decompose $g_1$ to discover
-the geometric characteristics of the geometry represented by $g_2$.
+$x\in\V^n$, we have $g_1(x)=\lambda g_2(x)$.
+This may not mean, however, that canonical forms are no longer useful to us.
+Suppose that $g_1$ takes on a canonical form while $g_2$ is the result of
+some geometric operation that is representative of the type of geometry that $g_1$
+can represent.  We then know that for some instance of $g_1$,
+we have for all $x\in\V^n$, $p(x)\in g_1(x)$ if and only if $p(x)\in g_2(x)$.
+In this sense, they are the same function, even if $g_1$ is not a scalar multiple of $g_2$.
+How exactly this can be useful remains to be seen.
 
-Admittedly, this is a bit contrary to the vision most people have about
+Admittedly, the idea of geometric functions is somewhat contrary to the vision most people have about
 a geometric algebra.  The holy grail, so to speak, of a geometric algebra
 is the idea that for any geometry we could think of, there exists an element
 in the algebra representative of that geometry, and all possible geometric
-operations are closed in the algebra.  Perhaps we need a better geometric algebra
+operations are available and closed in the algebra.  Furthermore, any question
+about a given geometry should be answerable through some easy calculation
+in the algebra.  Perhaps we need a better geometric algebra
 and even a new type of model implemented in that algebra, but until then,
 let's continue with a development of geometric functions and the discovery
 of what we might be able to do with them.
