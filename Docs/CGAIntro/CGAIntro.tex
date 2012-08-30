@@ -29,19 +29,13 @@
 Conformal geometric algebra is a model of
 geometry implemented in the language of geometric algebra.
 This document is my attempt to rigorously build the
-conformal model from the ground up.
+conformal model from the ground up, as well as to explore
+important questions in the model and even consider a functional
+extension of the model.
 It is only assumed that the reader is familiar with geometric algebra.
 I used the books $\cite{dorst07}$ and $\cite{hestenes87}$
 to learn geometric algebra and the conformal model.
 I recommend them for further study.
-
-A note about my efforts in precision in this paper is warrented before we begin.
-Where most other authors attempt to avoid pedanticism on this subject, I may
-be in danger of entering in upon such a form of writing, because
-I do not wish to incur any expense of confusion that I find too often in other writings
-on this subject.  So that being said, if the reader can bare with me in these instances, (and I believe
-it will be much easier to do so for anyone such as myself who is not always adept
-at or tolerant of interpreting the informal statements of some technical writers), then we can move forward.
 
 \section{Representing Geometry}
 
@@ -881,7 +875,7 @@ only the grades 1 and 2 by taking the dual of blades of grades 3 and 4.
 % 2 and 3, because we can re-interpret, for example, a direct
 % point-pair as a dual circle.
 
-\section{Non-homogenized Geometry}
+\section{Non-Homogenized Geometry}
 
 A vector $v\in\V$ dually representative of an $n$-dimensional hyper-sphere
 is homogenized whenever $\nvai\cdot v=-1$, which implies that $v^2=r^2$.
@@ -911,8 +905,9 @@ So the answer to this question depends upon the geometric operation.
 Since we don't have time here to consider every possible geometric
 operation,\footnote{We also don't have time to consider the question of how
 many possible geometric operations there are, and what they are.  It stands to
-reason that every possible blade-valued function of blades taken from $\G$ must produce
-a result of geometric significance in relation to the blades given to the function.}
+reason, however, that every possible blade-valued function of blades taken from $\G$ must produce
+a result of geometric significance in relation to the blades given to the function.  Indeed, there
+may even become a usefulness somehow of grouping geometries using multivectors are representatives.}
 here we will choose one that may be fundamental
 to the conformal model.  Given a blade $B\in\G$ dually representative
 of some geometry, and a point $x\in\V^n$, we know that $p(x)\cdot B=0$
@@ -922,11 +917,39 @@ and how might we interpret the geometric significance of the scalar needed to
 homogenize this blade?  No doubt, if $B\in\V$, the scalar $p(x)\cdot B$ will
 have some sort of geometric significance.
 
-% address flats first.
+Suppose first that $B$ dually represents a flat geometry.  Then writing
+$B=\bigwedge_{k=1}^m\pi_m$ as the outer product of $m\leq n$
+vectors $\{\pi_k\}_{k=1}^m$, each homogenized and dually
+representative of an $(n-1)$-dimensional hyper-plane, it is possible to see
+that we can, without loss of generality, assume\footnote{This assumption
+is easy to prove for $n\leq 3$ by purely geometric arguments, but not entirely obvious for $n>3$,
+in which cases an algebraic proof may be in order.}
+that exactly
+$m-1$ of these vectors are representative of a plane containing the point $x$.
+It follows that for some integer $k\in[1,m]$, we have
+\begin{equation*}
+p(x)\cdot B = (-1)^k (p(x)\cdot \pi_k)\bigwedge_{i=1,i\neq k}^m \pi_k.
+\end{equation*}
+The geometry being dually represented here is now clear, as well as the change in handedness
+and soon, the geometric significance of the homogenization scalar $p(x)\cdot\pi_k$.
+So what does this scalar represent?  Letting $v\in\V^n$ be a unit-length vector
+normal to the plane $\pi_k$, and letting $\alpha\in\R$ be a scalar such that
+$x-\alpha n$ is a point on this plane, we find that
+\begin{equation*}
+p(x)\cdot\pi_k = p(x)\cdot(n+(n\cdot(x-\alpha n))\nvai) = \alpha.
+\end{equation*}
+And what is $\alpha$?  It's the shortest or orthogonal distance
+of $x$ to the plane $\pi_k$!
 
-% every round is the outer product of an $n$-dimensional dual round with
-% a specific $m<=n$ dimensional dual flat.  if x is in the plane, the problem
-% is easy.  if x is not, the problem is a bit harder.
+Suppose now that $B$ dually represents a round geometry.  Then,
+if $B$ dually represents an $(m<n)$-dimensional sphere,
+then there exists $n-m$ vectors $\{\pi_k\}_{k=1}^{m-n}$
+each dually representative of an $(n-1)$-dimensional hyper-plane, such that
+$B=\sigma\wedge A$, where $A=\bigwedge_{k=1}^{m-n}\pi_k$ and
+$\sigma$ is dually representative of an $n$-dimensional hyper-sphere.
+We can then assume, again, without loss of generality, that
+exactly $n-m-1$ of the vectors in $\{\pi_k\}_{k=1}^{m-n}$
+are representative of planes containing $x$.  Blah...
 
 \section{More Geometry}
 
