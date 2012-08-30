@@ -72,11 +72,14 @@ bool MultivectorMathFunctionEvaluator::EvaluateScalarArguments( double**& scalar
 //=========================================================================================
 void MultivectorMathFunctionEvaluator::DeleteScalarArguments( double**& scalarNumberArray, int numberArraySize )
 {
-	for( int index = 0; index < numberArraySize; index++ )
-		if( scalarNumberArray[ index ] )
-			delete scalarNumberArray[ index ];
-	delete[] scalarNumberArray;
-	scalarNumberArray = 0;
+	if( scalarNumberArray )
+	{
+		for( int index = 0; index < numberArraySize; index++ )
+			if( scalarNumberArray[ index ] )
+				delete scalarNumberArray[ index ];
+		delete[] scalarNumberArray;
+		scalarNumberArray = 0;
+	}
 }
 
 //=========================================================================================
