@@ -35,6 +35,14 @@ I used the books $\cite{dorst07}$ and $\cite{hestenes87}$
 to learn geometric algebra and the conformal model.
 I recommend them for further study.
 
+A note about my efforts in precision in this paper is warrented before we begin.
+Where most other authors attempt to avoid pedanticism on this subject, I may
+be in danger of entering in upon such a form of writing, because
+I do not wish to incur any expense of confusion that I find too often in other writings
+on this subject.  So that being said, if the reader can bare with me, (and I believe
+it will be much easier to do so for anyone such as myself who is not always adept
+at interpreting the informal statements of technical writers), then we can move forward.
+
 \section{Representing Geometry}
 
 We begin by defining how geometries are represented in the model.
@@ -799,8 +807,9 @@ the empty point-set geometry or the geometry of nothing.\footnote{Some authors r
 infinity.  This idea may come from observing the point $\sigma p(x)\sigma^{-1}$ as $x$
 approaches $c$.  But as the direction from which $x$ approaches $c$ is significant to me,
 and ideas like a point at infinity seem too ill-defined and poorly addressed, I prefer to think of $\nvai$
-as I have just described it.  Engagine the imagination, however, I can see how the notion of
-a point at infinity is useful, interesting and makes intuitive sense.}  The non-preservation of geometric type means that we'll need
+as I have just described it.  It is important to realize that the language of all proofs given in this
+paper depend upon the fact that $\nvai$ is, by definition, not representative of a point in $\V^n$.}
+The non-preservation of geometric type means that we'll need
 to take greater care in deciphering transformations involving spherical reflections.
 
 So far we have only considered the spherical reflections of flat geometries, and it is
@@ -871,6 +880,35 @@ only the grades 1 and 2 by taking the dual of blades of grades 3 and 4.
 % inver the geometry represented.  But this is not so with grades
 % 2 and 3, because we can re-interpret, for example, a direct
 % point-pair as a dual circle.
+
+\section{Non-homogenized Geometry}
+
+A vector $v\in\V$ dually representative of an $n$-dimensional hyper-sphere
+is homogenized whenever $\nvai\cdot v=-1$, which implies that $v^2=r^2$.
+(Note that the converse is not true.)
+If $v\in\V$ is dually representative
+of an $(n-1)$-dimensional hyper-plane, then $v$ is homogenized whenever
+$\nvao\wedge\nvai\cdot v\wedge\nvai$ is a unit-length vector in $\V^n$,
+which implies that $v^2=1$.  (In this case the converse does hold.)
+Now since all rounds and flats can be constructed as outer products of
+such vectors, we can see that any geometry dually represented by such
+a product is homogenized whenever every vector in any factorization of that blade
+is homogenized.
+
+We now pose the following question.  What geometric significance does
+the scalar $\lambda\in\R$ hold with respect to the geometry dually represented by a blade $B\in\G$
+when $\lambda^{-1} B$ is the homogenization of $B$, and $B$ was formulated as a
+dual of an outer product of homogenized vectors representative of points?  That is,
+for a set of $m$ points $\{x_k\}_{k=1}^m$, we have
+\begin{equation*}
+B = \pm\left(\bigwedge_{k=1}^m p(x_k)\right)I.
+\end{equation*}
+After choosing a sign for the dual, (multiply by $-I$ or $+I$), the sign of $\lambda$
+has significance as well.  We will answer the question posed here for
+$n$-dimensional hyper-spheres and $(n-1)$-dimensional hyper-planes, and then
+answer the question in general.  Of course, we know that flat points are not
+applicable here as they cannot be written as the dual of an outer product of
+round point representatives.
 
 \section{More Geometry}
 
