@@ -663,7 +663,7 @@ reflections about two well chosen planes gives us the rotation or
 translation transformations, what does two successive reflections about
 two well chosen spheres give us?  We will get to the bottom of this question later on.
 
-\subsection{Planar Reflections}
+\subsection{Planar Reflections}\label{sec_planar_reflections}
 
 Given a plane centered at $c\in\V^n$ with unit-length normal $v\in\V^n$,
 here we consider the action of the vector dually representative of this plane
@@ -891,24 +891,42 @@ of an $(n-1)$-dimensional hyper-plane, then $v$ is homogenized whenever
 $\nvao\wedge\nvai\cdot v\wedge\nvai$ is a unit-length vector in $\V^n$,
 which implies that $v^2=1$.  (In this case the converse does hold.)
 Now since all rounds and flats can be constructed as outer products of
-such vectors, we can see that any geometry dually represented by such
-a product is homogenized whenever every vector in any factorization of that blade
-is homogenized.
+such vectors, we can, up to handedness, define a blade dually representative
+of any geometry as homogenized when each vector in any factorization
+of that blade is homogenized.  The handedness of the blade will depend
+on the order in which we take the vectors in the outer product.
 
-We now pose the following question.  What geometric significance does
-the scalar $\lambda\in\R$ hold with respect to the geometry dually represented by a blade $B\in\G$
-when $\lambda^{-1} B$ is the homogenization of $B$, and $B$ was formulated as a
-dual of an outer product of homogenized vectors representative of points?  That is,
-for a set of $m$ points $\{x_k\}_{k=1}^m$, we have
-\begin{equation*}
-B = \pm\left(\bigwedge_{k=1}^m p(x_k)\right)I.
-\end{equation*}
-After choosing a sign for the dual, (multiply by $-I$ or $+I$), the sign of $\lambda$
-has significance as well.  We will answer the question posed here for
-$n$-dimensional hyper-spheres and $(n-1)$-dimensional hyper-planes, and then
-answer the question in general.  Of course, we know that flat points are not
-applicable here as they cannot be written as the dual of an outer product of
-round point representatives.
+The general question we're concerned with in this section is as follows.
+If a given blade $B\in\G$ that is the result of some geometric operation is
+non-homogeneized, then what is the geometric significance of the scalar
+$\lambda\in\R$ such that $\lambda^{-1}B$ is the homogenization of $B$?
+As we have already seen in section $\eqref{sec_spherical_reflections}$,
+spherical reflections of homogenized sphere representatives require homogenization
+by a scalar that is geometrically significant to all involved in the transformation.
+We can even see that this transformation negates handedness in this case.
+In section $\eqref{sec_planar_reflections}$, we saw that planar reflections
+of flat points preserve handedness.
+
+So the answer to this question depends upon the geometric operation.
+Since we don't have time here to consider every possible geometric
+operation,\footnote{We also don't have time to consider the question of how
+many possible geometric operations there are, and what they are.  It stands to
+reason that every possible blade-valued function of blades taken from $\G$ must produce
+a result of geometric significance in relation to the blades given to the function.}
+here we will choose one that may be fundamental
+to the conformal model.  Given a blade $B\in\G$ dually representative
+of some geometry, and a point $x\in\V^n$, we know that $p(x)\cdot B=0$
+if and only if $x$ is a part of the geometry represented by $B$.  However,
+when $p(x)\cdot B\neq 0$, what geometry does the resulting blade represent dually,
+and how might we interpret the geometric significance of the scalar needed to
+homogenize this blade?  No doubt, if $B\in\V$, the scalar $p(x)\cdot B$ will
+have some sort of geometric significance.
+
+% address flats first.
+
+% every round is the outer product of an $n$-dimensional dual round with
+% a specific $m<=n$ dimensional dual flat.  if x is in the plane, the problem
+% is easy.  if x is not, the problem is a bit harder.
 
 \section{More Geometry}
 
