@@ -891,7 +891,7 @@ of all points
 \begin{equation*}
 G^*(g) = \{x\in\V^n|p(x)\in g^*(x)\}.
 \end{equation*}
-Here, $g^*(x)$ refers to either of the two function $\pm g(x)I$.
+Here, $g^*(x)$ refers to either of the two functions $\pm g(x)I$.
 We refer to $g$ as a geometric function.
 \end{definition}
 From this definition it is clear that all geometric primitives of the conformal model
@@ -903,17 +903,18 @@ of space $\V^n$.
 One of the motivations behind geometric functions comes from a method
 of derivation for the dual forms of the sphere and plane primitives of
 the conformal model.  After writing a vector equation equated to zero,
-one can see how $p(x)$ factors out of this equation in terms of the inner product.  This, however, cannot
-be done for all vector equations, such as those that represent other types
-of geometry, such as infinitely long cylinders, right-circular canonical surfaces
-and ellipsoids.  But using geometric functions we can represent these new types
-of geometries.
+one can see how $p(x)$ factors out of this equation in terms of the inner product.
+However, for such vector equations whose solution sets are infinitly long cylinders,
+right-circular conical surfaces or ellipsoids, the function $p(x)$ factors out of such
+equations leaving a non-constant blade.  Embracing the result, we begin a
+development of geometric functions.
 
 Where we run into trouble with geometric functions, however, is in the
 performance of geometric analysis.  Geometric functions that are
 canonical forms, while easily lending themselves to the decomposition
 of the represented geometry into its characteristic parts, cannot
-always be used to decispher the result of a geometric operation.
+be used to decispher the result of a geometric operation in the way
+to which we are accustomed in the traditional model.
 In other words, there is no direct equivilant
 of theorem $\eqref{thm_same_geos}$ for geometric functions.
 Indeed, for any two geometric functions $g_1$ and $g_2$, if $G(g_1)=G(g_2)$,
@@ -925,18 +926,44 @@ some geometric operation that is representative of the type of geometry that $g_
 can represent.  We then know that for some instance of $g_1$,
 we have for all $x\in\V^n$, $p(x)\in g_1(x)$ if and only if $p(x)\in g_2(x)$.
 In this sense, they are the same function, even if $g_1$ is not a scalar multiple of $g_2$.
-How exactly this can be useful remains to be seen.
+How exactly this can be useful, however, remains to be seen.
 
 Admittedly, the idea of geometric functions is somewhat contrary to the vision most people have about
 a geometric algebra.  The holy grail, so to speak, of a geometric algebra
 is the idea that for any geometry we could think of, there exists an element
 in the algebra representative of that geometry, and all possible geometric
 operations are available and closed in the algebra.  Furthermore, any question
-about a given geometry should be answerable through some easy calculation
+about a given geometry should be answerable through some kind of calculation
 in the algebra.  Perhaps we need a better geometric algebra
 and even a new type of model implemented in that algebra, but until then,
 let's continue with a development of geometric functions and the discovery
 of what we might be able to do with them.
+
+Our first specimen is important geometry.
+It is the general conical surface as illustrated in the following figure.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{GeneralConicalSurfaceFigure}
+\caption{The general conical surface centered at a point $e$ and touching a sphere centered at $c$ with radius $r$.
+The point $x$ is on the surface.}
+\end{figure}
+
+The geometric function dually representative of this surface is given by
+\begin{equation*}
+S(x) = p\left(\frac{c-s(x)e}{1-s(x)}\right)-\frac{1}{2}\left(\frac{r}{1-s(x)}\right)^2\nvai,
+\end{equation*}
+where $s(x)$ is defined as
+\begin{equation*}
+s(x) = \frac{(x-e)\cdot(x-c)}{(x-e)^2}.
+\end{equation*}
+Replacing $e$ with $e+\lambda v$, where $\lambda\in\R$ and $v\in\V^n$ is a unit-length vector,
+we see that
+\begin{equation*}
+\lim_{\lambda\to\infty} S(x) = p(c-[(x-c)\cdot v]v)-\frac{1}{2}r^2\nvai,
+\end{equation*}
+which is what we would expect as the geometric function dually representing an infinite cylinder
+of radius $r$.  The spine of the cylinder runs through the point $c$ and the is parallel
+to the vector $v$.
 
 % give example of theorem thm_same_geos not holding.
 % give example of generalized canonical surface
