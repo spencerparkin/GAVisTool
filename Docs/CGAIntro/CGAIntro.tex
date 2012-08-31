@@ -870,10 +870,19 @@ grades in the conformal model of 3-dimensional space with the following table.
 Given a blade of any of these 4 grades, we can restrict our attention to
 only the grades 1 and 2 by taking the dual of blades of grades 3 and 4.
 
-% Given a vector (and perhaps a blade of grade 4), we can always
-% inver the geometry represented.  But this is not so with grades
-% 2 and 3, because we can re-interpret, for example, a direct
-% point-pair as a dual circle.
+So let's consider all vectors.  A distinguishing characteristic between
+points and spheres is simply that vectors representative of the former are null while those
+of the latter are not.  Right away this is something we can use to decispher
+a given vector.  Recalling that any multiple of $\nvai$ is, strictly speaking, not a point, it
+is not hard to see that all other null vectors must be points.  The remaining non-null
+vectors are divided between the $n$-dimensional spheres and $(n-1)$-dimensional
+hyper-planes.  How might we distinguish between these?
+
+Considering now all 2-blades, an interesting result comes up.  We will
+show that 2-blades dually representative of circles are indistinguishable
+from 2-blades directly representative of point-pairs.  Indeed, we may
+reinterpret one as the other, and get a result of geometric significance
+to what we originally had.
 
 \section{Non-Homogenized Geometry}
 
@@ -899,57 +908,59 @@ spherical reflections of homogenized sphere representatives require homogenizati
 by a scalar that is geometrically significant to all involved in the transformation.
 We can even see that this transformation negates handedness in this case.
 In section $\eqref{sec_planar_reflections}$, we saw that planar reflections
-of flat points preserve handedness.
+of flat points preserve handedness, but not the handedness of round points.
 
 So the answer to this question depends upon the geometric operation.
 Since we don't have time here to consider every possible geometric
-operation,\footnote{We also don't have time to consider the question of how
-many possible geometric operations there are, and what they are.  It stands to
-reason, however, that every possible blade-valued function of blades taken from $\G$ must produce
-a result of geometric significance in relation to the blades given to the function.  Indeed, there
-may even become a usefulness somehow of grouping geometries using multivectors are representatives.}
-here we will choose one that may be fundamental
-to the conformal model.  Given a blade $B\in\G$ dually representative
+operation of significance,\footnote{Notice that every geometric operation
+of significance is simply every operation possible in $\G$, because every operation
+produces a result of geometric significance to the operands taken in that operation.
+Could we hope to map out all such operations and their meanings?}
+here we will choose one that is fundamental
+to the conformal model.\footnote{It is also an operation that may at
+first appear new, but is simply another form of an operation with which we
+are already familiar.}
+Given a blade $B\in\G$ dually representative
 of some geometry, and a point $x\in\V^n$, we know that $p(x)\cdot B=0$
 if and only if $x$ is a part of the geometry represented by $B$.  However,
 when $p(x)\cdot B\neq 0$, what geometry does the resulting blade represent dually,
 and how might we interpret the geometric significance of the scalar needed to
 homogenize this blade?  No doubt, if $B\in\V$, the scalar $p(x)\cdot B$ will
-have some sort of geometric significance.
+have some sort of geometric significance itself.
 
-Suppose first that $B$ dually represents a flat geometry.  Then writing
-$B=\bigwedge_{k=1}^m\pi_m$ as the outer product of $m\leq n$
-vectors $\{\pi_k\}_{k=1}^m$, each homogenized and dually
-representative of an $(n-1)$-dimensional hyper-plane, it is possible to see
-that we can, without loss of generality, assume\footnote{This assumption
-is easy to prove for $n\leq 3$ by purely geometric arguments, but not entirely obvious for $n>3$,
-in which cases an algebraic proof may be in order.}
-that exactly
-$m-1$ of these vectors are representative of a plane containing the point $x$.
-It follows that for some integer $k\in[1,m]$, we have
+Suppose first that $B$ dually represents an $(m<n)$-dimensional
+hyper-plane.  It then follows by result $\eqref{rslt_intersect_grades}$
+that there exists a set of $n-m$ vectors $\{\pi_k\}_{k=1}^{n-m}$
+such that $B=\bigwedge_{k=1}^{n-m}\pi_k$, where for each integer
+$k\in[1,n-m]$, $\pi_k$ is a homogenized vector representative
+of an $n$-dimensional hyper-plane.  Then, without loss of generality,
+we can assume that exactly $n-m-1$ of these vectors are representative
+of a hyper-plane containing the point $x$.
+It follows that for some integer $k\in[1,n-m]$, we have
 \begin{equation*}
-p(x)\cdot B = (-1)^k (p(x)\cdot \pi_k)\bigwedge_{i=1,i\neq k}^m \pi_k.
+p(x)\cdot B = (-1)^k (p(x)\cdot \pi_k)\bigwedge_{i=1,i\neq k}^{n-m} \pi_k.
 \end{equation*}
-The geometry being dually represented here is now clear, as well as the change in handedness
-and soon, the geometric significance of the homogenization scalar $p(x)\cdot\pi_k$.
-So what does this scalar represent?  Letting $v\in\V^n$ be a unit-length vector
-normal to the plane $\pi_k$, and letting $\alpha\in\R$ be a scalar such that
-$x-\alpha n$ is a point on this plane, we find that
+We see
+now that the geometry being dually represented here is an
+$(m+1)$-dimensional hyper-plane containing $x$ and
+the hyper-plane represented by $B$.\footnote{Notice that this really isn't a new result.
+Simply realize that $p(x)\cdot B = (p(x)\wedge BI)I$.}
+This result also reveals the possible
+change in handedness inherent in this type of geometric operation.  All that remains now is to determine
+the geometric significance of the homogenization scalar $p(x)\cdot\pi_k$.
+Letting $v\in\V^n$ be a unit-length vector
+normal to the hyper-plane $\pi_k$, and letting $\alpha\in\R$ be a scalar such that
+$x-\alpha n$ is a point on this hyper-plane, we find that
 \begin{equation*}
 p(x)\cdot\pi_k = p(x)\cdot(n+(n\cdot(x-\alpha n))\nvai) = \alpha.
 \end{equation*}
-And what is $\alpha$?  It's the shortest or orthogonal distance
-of $x$ to the plane $\pi_k$!
+Here, $|\alpha|$ is the shortest or orthogonal distance
+of $x$ to the hyper-plane represented by $\pi_k$, which is also the shortest distance
+from $x$ to the hyper-plane represented by $B$.
 
-Suppose now that $B$ dually represents a round geometry.  Then,
-if $B$ dually represents an $(m<n)$-dimensional sphere,
-then there exists $n-m$ vectors $\{\pi_k\}_{k=1}^{m-n}$
-each dually representative of an $(n-1)$-dimensional hyper-plane, such that
-$B=\sigma\wedge A$, where $A=\bigwedge_{k=1}^{m-n}\pi_k$ and
-$\sigma$ is dually representative of an $n$-dimensional hyper-sphere.
-We can then assume, again, without loss of generality, that
-exactly $n-m-1$ of the vectors in $\{\pi_k\}_{k=1}^{m-n}$
-are representative of planes containing $x$.  Blah...
+Suppose now that $B$ dually represents an $(m\leq n)$-dimensional
+hyper-sphere.  It then follows by result $\eqref{rslt_intersect_grades}$
+that...
 
 \section{More Geometry}
 
