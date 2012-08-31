@@ -963,7 +963,7 @@ we can assume that exactly $n-m-1$ of these vectors are representative
 of a hyper-plane containing the point $x$.
 It follows that for some integer $k\in[1,n-m]$, we have
 \begin{equation*}
-p(x)\cdot B = (-1)^k (p(x)\cdot \pi_k)\bigwedge_{i=1,i\neq k}^{n-m} \pi_k.
+p(x)\cdot B = -(-1)^k (p(x)\cdot \pi_k)\bigwedge_{i=1,i\neq k}^{n-m} \pi_k.
 \end{equation*}
 We see now that the geometry being dually represented here is an
 $(m+1)$-dimensional hyper-plane containing $x$ and
@@ -998,21 +998,34 @@ p(x)\cdot B = (p(x)\cdot\sigma)\pi,
 \end{equation*}
 which is an interesting result, because now we have a hyper-plane instead of a hyper-sphere.
 The homogenization scalar is then given by
-\begin{equation*}
-p(x)\cdot\sigma = \frac{1}{2}(r^2-(x-c)^2).
-\end{equation*}
+\begin{equation}\label{equ_point_dot_sphere}
+p(x)\cdot\sigma = \frac{1}{2}(r^2-(x-c)^2),
+\end{equation}
+which is somewhat analagous to our earlier result, but is not quite the shortest
+distance between $x$ and the round represented by $B$.  This isn't too surprising,
+since calculating such a distance is not so trivial anyway.
 
 In the second case, we can invoke result $\eqref{rslt_intersect_grades}$ to
 see that there must exist $n-m+1$ vectors $\{\sigma_k\}_{k=1}^{n-m+1}$
 such that $B=\bigwedge_{k=1}^{n-m+1}\sigma_k$, where for each
 integer $k\in[1,n-m+1]$, $\sigma_k$ is a homogenized vector representative
-of an $n$-dimensional hyper-plane.  Then, without loss of generality,
+of an $n$-dimensional hyper-sphere.  Then, without loss of generality,
 we can assume that exactly $n-m$ of these vectors are representative
-of a hyper-sphere containing the piont $x$.  It follows that for some integer $k\in[1,n-m+1]$,
+of a hyper-sphere containing the point $x$.  It follows that for some integer $k\in[1,n-m+1]$,
 we have
 \begin{equation*}
-p(x)\cdot B = (-1)^k(p(x)\cdot\sigma_k)\bigwedge_{i=1,i\neq k}^{n-m+1}\sigma_k.
+p(x)\cdot B = -(-1)^k(p(x)\cdot\sigma_k)\bigwedge_{i=1,i\neq k}^{n-m+1}\sigma_k.
 \end{equation*}
+We see now that the geometry being dually represented here is an $(m+1)$-dimensional
+hyper-sphere containing $x$ and the hyper-sphere represented by $B$.  Again,
+this result reveals the possible change in handedness inherent in this type of geometric operation.
+All that remains now is to determine the geometric significance of the homogenization
+scalar $p(x)\cdot\sigma_k$.  Choosing a center $c$ and radius $r$ for the sphere
+represented by $\sigma_k$, we get the result in equation $\eqref{equ_point_dot_sphere}$,
+but notice that we have a slightly different context here.  Here, $c$ is not necessary
+the center of the hyper-sphere represented by $B$.  The point $c$ is probably
+almost anywhere along a line orthogonal to the $m$-dimensional hyper-plane
+determined by $B$.
 
 \section{More Geometry}
 
