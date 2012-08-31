@@ -851,16 +851,12 @@ can do with these basic building blocks.  (There are undoubtadly more combinatio
 consider.)  But we will leave versor transformations for now, content with what we have
 covered thus far as an introduction to the subject.
 
-\section{Imaginary Geometry}
-
-How do we build up imaginary rounds?
-
 \section{Inference of Geometry}
 
 Given a blade $B\in\G$, is it possible for us to infer what type of geometry it
 represents, dually or directly?  Our first clue is the grade of $B$.
-We summarize what types of geometries can be represented by the various
-grades in the conformal model of 3-dimensional space with the following table.
+For example, we summarize what types of geometries that can be represented by the various
+grades in the conformal model of 3-dimensional space in the following table.
 \begin{equation*}
 \begin{array}{ccccc}
  &  & \mbox{Dual} & & \mbox{Direct} \\
@@ -871,43 +867,78 @@ grades in the conformal model of 3-dimensional space with the following table.
 4 & \vline & \mbox{Point} & \vline & \mbox{Sphere, Plane, Point}
 \end{array}
 \end{equation*}
-Given a blade of any of these 4 grades, we can restrict our attention to
+Given a blade of any of these 4 grades, one could restrict their attention to
 only the grades 1 and 2 by taking the dual of blades of grades 3 and 4.
-
-So let's consider all vectors.  A distinguishing characteristic between
-points and spheres is simply that vectors representative of the former are null while those
-of the latter are not.  Right away this is something we can use to decispher
-a given vector.  Recalling that any multiple of $\nvai$ is, strictly speaking, not a point, it
-is not hard to see that all other null vectors must be points.  The remaining non-null
-vectors are divided between the $n$-dimensional spheres and $(n-1)$-dimensional
-hyper-planes.  How might we distinguish between these?
-
-Considering now all 2-blades, an interesting result comes up.  It can be
-shown that 2-blades dually representative of imaginary circles are indistinguishable
-from 2-blades directly representative of real point-pairs.  Indeed, we may
-reinterpret one as the other, and get a geometrically significant result.
-Specifically, the following identity holds.
+In any case, we will not give a full and conprehensive treatment of
+geometric inference here, but we will give an important result on this subject
+which also puts focus on a type of geometry that, until now, we have
+mentioned, but not given any significant attention.  
+The type of geometry I speak of here is the imaginary kind.
+Specifically, what is meant by this is any round represented by
+a blade $B\in\G$ of the form
 \begin{equation*}
-2r(p(c)-\frac{1}{2}r^2\nvai)\wedge(n+(c\cdot n)\nvai) = p(c-rn)\wedge(c+rn),
+B = \sigma\wedge A,
 \end{equation*}
-where $c\in\V^n$ is the center of both the circle and the point-pair, $r\in\R$ is the radius
-of both, and $n\in\V^n$ is the unit-length normal of both.  Realizing that
-normalized translation versors preserve handedness, a good approach to
-proving this identity is to rewrite it as
+where the blade $A\in\G$ is dually representative of a hyper-plane containing
+a point $c\in\V^n$, and $\sigma$ is given by
 \begin{equation*}
-T[2r(p(0)-\frac{1}{2}r^2\nvai)\wedge n]\tilde{T} = T(p(-rn)\wedge p(rn))\tilde{T},
+\sigma = p(c) + \frac{1}{2}r^2\nvai,
 \end{equation*}
-where $T=1-\frac{1}{2}c\nvai$.  This identity is easier to prove.
+where $r\in\R$ is non-zero.  Notice that $\sigma$ here does not dually
+represent an $n$-dimensional hyper-sphere.  In fact, and strictly speaking,
+like $\nvai$, it represents the empty-set geometry or the geometry of nothing.
+That is, there is no point $x\in\V^n$ such that $p(x)\cdot\sigma = 0$.  We say
+that $B$ is dually representative of an imaginary round.
 
-Similarly, real dual circles are indistinguishable from imaginary direct
-point-pairs.  Show that here...
+We now give the promised result and go on to prove it.
+\begin{result}
+If $m<n$, then a blade $B\in\G$ directly representative of an $m$-dimensional real hyper-sphere
+is also dually representative of an $(n-m)$-dimensional imaginary hyper-sphere.
+\end{result}
+\begin{proof}
+Our first task is to show that two such types of geometry can be represented by
+a blade of the same grade.  Given our description of imaginary rounds above,
+it is not hard to see that result $\eqref{rslt_intersect_grades}$ also applies to imaginary rounds.
+An imaginary $(n-m)$-dimensional round is therefore dually represented by a blade
+of grade $n-(n-m)+1=m+1$.  Applying this result again, a real $m$-dimensional round
+is directly represented by a blade of grade $n+2-(n-m+1)=m+1$.
 
-What we've now shown is that for a given 2-blade, if we've ruled out all
-possibilities except for the circle and point-pair, then we're out of luck.
-The blade could be interpreted as either one.
+We procede now to give a proof by induction.  We start with the case $m=n-1$.
+This case is proved by the following identity, which the reader can check.\footnote{
+Multiply the left side of the identity by the unit translation versor $T=1+\frac{1}{2}c\wedge\nvai$ and the right
+side by $\tilde{T}$.  This makes proving the identity easier.}
+\begin{equation*}
+2r(p(c)+\frac{1}{2}r^2\nvai)\wedge(n+(c\cdot n)\nvai) = p(c-rn)\wedge p(c+rn).
+\end{equation*}
+Here, $n\in\V^n$ is a unit-length vector.
 
-We're now left to consider lines and flat points.  No 2-blade representative
-of a flat point can be mistaken as representing a line.  Show why...
+For the inductive step, let $\sigma_i$ dually represent the imaginary round,
+and let $\sigma_r$ directly represent the real round.  Then without loss of generality,
+we may center each of these at the origin.  Now notice that for a given unit-length
+vector $n\in\V^n$, we have $rn\wedge\sigma_i\neq 0$ whenever $rn\wedge\sigma_r\neq 0$
+since $\sigma_i$ is a scalar multiple of $\sigma_r$ by our inductive hypothesis.
+It is then easy to see that $rn\wedge\sigma_i$, if non-zero,
+is dually representative of an imaginary sphere of one lower dimension.  Then, if
+it can be shown that $rn\wedge\sigma_r=p(rn)\wedge\sigma_r$, then this blade is directly representative
+of a real sphere of one higher dimension, and our proof is complete.  To that end,
+write $\sigma_r$ as $(\sigma\wedge\pi)I$, where $\sigma$ is a vector dually representative
+of an $n$-dimensional hyper-sphere centered at the origin with radius $r$, and
+$\pi$ is a vector dually representative of a hyper-plane containing the origin.
+So we have $p(0)\cdot\pi=\nvao\cdot\pi=0$.  Also notice that $\nvai\cdot\pi=0$
+by theorem $\eqref{thm_flat_xor_round}$, and that $p(rn)\cdot\sigma=0=rn\cdot\sigma$.  We then have
+\begin{align*}
+p(rn)\wedge\sigma_r &= p(rn)\wedge(\sigma\wedge\pi)I \\
+ &= (p(rn)\cdot(\sigma\wedge\pi))I \\
+ &= ((p(rn)\cdot\sigma)\pi - (p(rn)\cdot\pi)\sigma)I \\
+ &= ((rn\cdot\sigma)\pi - (rn\cdot\pi)\sigma)I \\
+ &= rn\wedge\sigma.
+\end{align*}
+\end{proof}
+Returning now to the subject of geometric inference, our result here tells us that
+we can decipher a blade that we know is representative of a round, provided we're
+not interested in the imaginary variety.  If we were, then given such a blade,
+we could not distinguish it between a blade directly representative of a real sphere
+or a blade dually representative of an imaginary sphere.
 
 \section{Non-Homogenized Geometry}
 
