@@ -908,30 +908,30 @@ This case is proved by the following identity, which the reader can check.\footn
 Multiply the left side of the identity by the unit translation versor $T=1+\frac{1}{2}c\wedge\nvai$ and the right
 side by $\tilde{T}$.  This makes proving the identity easier.}
 \begin{equation*}
-2r(p(c)+\frac{1}{2}r^2\nvai)\wedge(n+(c\cdot n)\nvai) = p(c-rn)\wedge p(c+rn).
+2r(p(c)+\frac{1}{2}r^2\nvai)\wedge(v+(c\cdot v)\nvai) = p(c-rv)\wedge p(c+rv).
 \end{equation*}
-Here, $n\in\V^n$ is a unit-length vector.
+Here, $v\in\V^n$ is a unit-length vector.
 
 For the inductive step, let $\sigma_i$ dually represent the imaginary round,
 and let $\sigma_r$ directly represent the real round.  Then without loss of generality,
 we may center each of these at the origin.  Now notice that for a given unit-length
-vector $n\in\V^n$, we have $rn\wedge\sigma_i\neq 0$ whenever $rn\wedge\sigma_r\neq 0$
-since $\sigma_i$ is a scalar multiple of $\sigma_r$ by our inductive hypothesis.
-It is then easy to see that $rn\wedge\sigma_i$, if non-zero,
+vector $v\in\V^n$, we have $rn\wedge\sigma_i\neq 0$ whenever $rv\wedge\sigma_r\neq 0$
+since $\sigma_i$ is a scalar multiple of $\sigma_r$ which is our inductive hypothesis.
+It is then easy to see that $rv\wedge\sigma_i$, if non-zero,
 is dually representative of an imaginary sphere of one lower dimension.  Then, if
-it can be shown that $rn\wedge\sigma_r=p(rn)\wedge\sigma_r$, then this blade is directly representative
+it can be shown that $rv\wedge\sigma_r=p(rv)\wedge\sigma_r$, then this blade is directly representative
 of a real sphere of one higher dimension, and our proof is complete.  To that end,
 write $\sigma_r$ as $(\sigma\wedge\pi)I$, where $\sigma$ is a vector dually representative
 of an $n$-dimensional hyper-sphere centered at the origin with radius $r$, and
 $\pi$ is a vector dually representative of a hyper-plane containing the origin.
 So we have $p(0)\cdot\pi=\nvao\cdot\pi=0$.  Also notice that $\nvai\cdot\pi=0$
-by theorem $\eqref{thm_flat_xor_round}$, and that $p(rn)\cdot\sigma=0=rn\cdot\sigma$.  We then have
+by theorem $\eqref{thm_flat_xor_round}$, and that $p(rv)\cdot\sigma=0=rv\cdot\sigma$.  We then have
 \begin{align*}
-p(rn)\wedge\sigma_r &= p(rn)\wedge(\sigma\wedge\pi)I \\
- &= (p(rn)\cdot(\sigma\wedge\pi))I \\
- &= ((p(rn)\cdot\sigma)\pi - (p(rn)\cdot\pi)\sigma)I \\
- &= ((rn\cdot\sigma)\pi - (rn\cdot\pi)\sigma)I \\
- &= rn\wedge\sigma.
+p(rv)\wedge\sigma_r &= p(rv)\wedge(\sigma\wedge\pi)I \\
+ &= (p(rv)\cdot(\sigma\wedge\pi))I \\
+ &= ((p(rv)\cdot\sigma)\pi - (p(rv)\cdot\pi)\sigma)I \\
+ &= ((rv\cdot\sigma)\pi - (rv\cdot\pi)\sigma)I \\
+ &= rv\wedge\sigma_r.
 \end{align*}
 \end{proof}
 Returning now to the subject of geometric inference, our result here tells us that
@@ -1007,9 +1007,9 @@ change in handedness inherent in this type of geometric operation.  All that rem
 the geometric significance of the homogenization scalar $p(x)\cdot\pi_k$.
 Letting $v\in\V^n$ be a unit-length vector
 normal to the hyper-plane $\pi_k$, and letting $\alpha\in\R$ be a scalar such that
-$x-\alpha n$ is a point on this hyper-plane, we find that
+$x-\alpha v$ is a point on this hyper-plane, we find that
 \begin{equation*}
-p(x)\cdot\pi_k = p(x)\cdot(n+(n\cdot(x-\alpha n))\nvai) = \alpha.
+p(x)\cdot\pi_k = p(x)\cdot(v+(v\cdot(x-\alpha v))\nvai) = \alpha.
 \end{equation*}
 Here, $|\alpha|$ is the shortest or orthogonal distance
 of $x$ to the hyper-plane represented by $\pi_k$, which is also the shortest distance
