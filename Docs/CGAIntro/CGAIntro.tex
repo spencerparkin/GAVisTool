@@ -953,8 +953,8 @@ and how might we interpret the geometric significance of the scalar needed to
 homogenize this blade?  No doubt, if $B\in\V$, the scalar $p(x)\cdot B$ will
 have some sort of geometric significance itself.
 
-Suppose first that $B$ dually represents an $(m<n)$-dimensional
-hyper-plane.  It then follows by result $\eqref{rslt_intersect_grades}$
+Suppose first that $B$ dually represents an $m$-dimensional
+hyper-plane with $m<n$.  It then follows by result $\eqref{rslt_intersect_grades}$
 that there exists a set of $n-m$ vectors $\{\pi_k\}_{k=1}^{n-m}$
 such that $B=\bigwedge_{k=1}^{n-m}\pi_k$, where for each integer
 $k\in[1,n-m]$, $\pi_k$ is a homogenized vector representative
@@ -965,8 +965,7 @@ It follows that for some integer $k\in[1,n-m]$, we have
 \begin{equation*}
 p(x)\cdot B = (-1)^k (p(x)\cdot \pi_k)\bigwedge_{i=1,i\neq k}^{n-m} \pi_k.
 \end{equation*}
-We see
-now that the geometry being dually represented here is an
+We see now that the geometry being dually represented here is an
 $(m+1)$-dimensional hyper-plane containing $x$ and
 the hyper-plane represented by $B$.\footnote{Notice that this really isn't a new result.
 Simply realize that $p(x)\cdot B = (p(x)\wedge BI)I$.  Furthermore, this shows that
@@ -985,9 +984,35 @@ Here, $|\alpha|$ is the shortest or orthogonal distance
 of $x$ to the hyper-plane represented by $\pi_k$, which is also the shortest distance
 from $x$ to the hyper-plane represented by $B$.
 
-Suppose now that $B$ dually represents an $(m\leq n)$-dimensional
-hyper-sphere.  It then follows by result $\eqref{rslt_intersect_grades}$
-that...
+Suppose now that $B$ dually represents an $m$-dimensional
+hyper-sphere with $m\neq n$.  We break the problem into
+two cases.  In the first case, $x$ is in the $m$-dimensional
+hyper-plane determined by $B$, and in the second case,
+$x$ is not in this hyper-plane.  In the first case, $\pi\in\V$
+be a vector dually representative of this $m$-dimensional
+hyper-plane such that $B=\sigma\wedge\pi$, where $\sigma\in\V$
+dually represents an $n$-dimensional hyper-sphere with center $c\in\V^n$
+and radius $r\in\R$.  It follows that
+\begin{equation*}
+p(x)\cdot B = (p(x)\cdot\sigma)\pi,
+\end{equation*}
+which is an interesting result, because now we have a hyper-plane instead of a hyper-sphere.
+The homogenization scalar is then given by
+\begin{equation*}
+p(x)\cdot\sigma = \frac{1}{2}(r^2-(x-c)^2).
+\end{equation*}
+
+In the second case, we can invoke result $\eqref{rslt_intersect_grades}$ to
+see that there must exist $n-m+1$ vectors $\{\sigma_k\}_{k=1}^{n-m+1}$
+such that $B=\bigwedge_{k=1}^{n-m+1}\sigma_k$, where for each
+integer $k\in[1,n-m+1]$, $\sigma_k$ is a homogenized vector representative
+of an $n$-dimensional hyper-plane.  Then, without loss of generality,
+we can assume that exactly $n-m$ of these vectors are representative
+of a hyper-sphere containing the piont $x$.  It follows that for some integer $k\in[1,n-m+1]$,
+we have
+\begin{equation*}
+p(x)\cdot B = (-1)^k(p(x)\cdot\sigma_k)\bigwedge_{i=1,i\neq k}^{n-m+1}\sigma_k.
+\end{equation*}
 
 \section{More Geometry}
 
