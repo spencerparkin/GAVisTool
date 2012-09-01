@@ -655,7 +655,27 @@ interior to a sphere is reflected out of it, while points exterior to the sphere
 are reflected into it.  The question then comes up: if two successive
 reflections about two well chosen planes gives us the rotation or
 translation transformations, what does two successive reflections about
-two well chosen spheres give us?  We will get to the bottom of this question later on.
+two well chosen spheres give us?  We will get to the bottom of this question soon enough.
+
+Before we begin, however, it is worth mentioning a useful technique that we may
+on occation employ in the study of versor transformations.  When each vector
+composing a given versor represents a piece of geometry, and they all share
+a common point of interest, (sometimes a common center), there is no loss
+in generality to restrict our attention to the case when this common point
+is the origin, and this often simplifies the calculations.
+The reason is, (as we'll find out in section $\eqref{sec_translation_versors}$),
+that there exists a translation versor $T\in\G$ such that if the versor $V\in\G$ in question
+is given by
+\begin{equation*}
+V = \prod_{k=1}^m v_k,
+\end{equation*}
+for the $m$ vectors in $\{v_k\}_{k=1}^m$, then this transformation can be translated
+to occur anywhere we want by
+\begin{equation*}
+TVT^{-1} = \prod_{k=1}^m Tv_kT^{-1}.
+\end{equation*}
+Remember, each vector $v_k$ composing the transformation versor $V$ represents a geometry
+that we are free to act upon by any other transformation versor.
 
 \subsection{Planar Reflections}\label{sec_planar_reflections}
 
@@ -686,7 +706,7 @@ The following figure illustrates the reflection of a circle about a plane.
 \caption{The reflection of a circle about a plane.  The plane is shown here on edge.}
 \end{figure}
 
-\subsection{Translations}
+\subsection{Translations}\label{sec_translation_versors}
 
 It is not hard to imagine that we can perform a translation
 using a single planar reflection about a well chosen plane.
