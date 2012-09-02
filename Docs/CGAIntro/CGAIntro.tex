@@ -635,7 +635,7 @@ We'll see an example of this in section $\eqref{sec_spherical_reflections}$ belo
 
 We procede now to develop the versor transformations of the conformal model.
 
-\subsection{Reflections}
+\subsection{Reflections}\label{sec_reflections}
 
 Interestingly, what we find in the conformal model is that a vector
 not only represents a piece of geometry, but, as a versor, also represents
@@ -844,9 +844,32 @@ type of reflection simply can't be taken, because in this case $\sigma^{-1}$ doe
 
 \subsection{Diolations}
 
-% This is two successive reflections about two spheres sharing the same center.
+Diolations occur as two successive spherical reflections about two concentric
+spheres.  This best analogy for this, I believe, is that of what we did to formulate
+translations as two success planar reflections about two distinct and parallel planes.
+As with that case, here, when we consider the three basic cases of where I point can lie
+with the three partitions of space created by the two spheres, we can convince ourselves
+that the double spherical reflections product a diolation in each case.
+
+Here we will take the approach mentioned in section $\eqref{sec_reflections}$,
+and restrict our attention, without loss of generality, to diolations that occur at the
+origin.  The two spheres dually represented by $\sigma_0$ and $\sigma_1$, therefore,
+will be placed at the origin, and we will give them $r_0,r_1\in\R$ as their respective radii.
+We then find that
+\begin{equation}\label{equ_diolation}
+r_0^{-4}\sigma_1\sigma_0 p(x)\sigma_0\sigma_1 = p\left(\frac{r_1^2}{r_0^2}x\right),
+\end{equation}
+which makes it very clear what the action of the versor $\sigma_1\sigma_0$ does
+to any conformal geometry!\footnote{The verification of equation $\eqref{equ_diolation}$
+by hand proved to be too error-prone for me, so here I resorted to the use of a computer
+algebra system.  Such systems often prove quite useful in the exploration of geometric algebras.}
+We can also see how the diolation changes when
+we consider the two cases $r_0<r_1$ and $r_0>r_1$.
 
 \subsection{Transversions}
+
+Transversions are, in my opinion, most certainly the odd duck in the family of basic
+transformation versors of the conformal model.
 
 %Is this two successive reflections about two well chosen spheres?
 
@@ -861,12 +884,15 @@ by combining the above mentioned transformations.  For example, general
 rigid body motions can be formulated by combining the rotation and translation
 versors.  Questions should be answered about the set of all possible types
 of transformations, what groups they form under versor concatination, what
-their exponential forms are, and if the their logarithms can be taken, but
+their exponential forms are, and if their logarithms can be taken, but
 this is beyond the scope of this paper and, admittedly, the present capabilities of the author.
 
 In any case, it should be clear that by combining all types of reflection vector versors, (planar and spherical),
 that we exhaust all possible transformations by versors that we can come up with in the
-conformal model.  We have only begun to discover what types of transformations we
+conformal model.  (Notice too that we didn't consider spherical reflections in an imaginary sphere.)
+A more therough treatment of versor transformation in the conformal model can be found in
+\cite{dorst07}.
+We have only begun to discover what types of transformations we
 can do with these basic building blocks.  (There are undoubtadly more combinations to
 consider.)  But we will leave versor transformations for now, content with what we have
 covered thus far as an introduction to the subject.
