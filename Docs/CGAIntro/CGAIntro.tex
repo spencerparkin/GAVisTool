@@ -849,7 +849,7 @@ spheres.  This best analogy for this, I believe, is that of what we did to formu
 translations as two success planar reflections about two distinct and parallel planes.
 As with that case, here, when we consider the three basic cases of where I point can lie
 with the three partitions of space created by the two spheres, we can convince ourselves
-that the double spherical reflections product a diolation in each case.
+that the double spherical reflections produce a diolation in each case.
 
 Here we will take the approach mentioned in section $\eqref{sec_reflections}$,
 and restrict our attention, without loss of generality, to diolations that occur at the
@@ -868,14 +868,48 @@ we consider the two cases $r_0<r_1$ and $r_0>r_1$.
 
 \subsection{Transversions}
 
-Transversions are, in my opinion, most certainly the odd duck in the family of basic
-transformation versors of the conformal model.
+% points of invariance help out.
 
-%Is this two successive reflections about two well chosen spheres?
+Transversions are most certainly the odd duck in the family of basic
+transformation versors of the conformal model.  And I wouldn't really
+describe them as basic.  Admittedly, I have no idea how to even visualize
+the effect of a transversion on a single point.  A transversion is two
+sucessive reflections about two spheres of the same radius that share a single point
+of contact.  (By having the same radius, notice that we cannot let one sphere
+invelop the other.)
+Letting $V=\sigma_1\sigma_0$, where $\sigma_0=\nvao+c$
+and $\sigma_1=\nvao-c$, $c\in\V^n$ being the center of one of the two spheres
+with $-c$ being the center of the other sphere, we get
+\begin{equation*}
+\frac{Vp(x)\tilde{V}}{c^4(1+4\frac{x^2}{c^2}-4\frac{c\cdot x}{c^2})}
+= p\left(\frac{x-2x^2 c^{-1}}{1+4\frac{x^2}{c^2}-4\frac{c\cdot x}{c^2}}\right).
+\end{equation*}
+Your guess is as good as mine!  If there are people out there who can visualize
+transversions, I am certainly not yet one of them.  Until then, it is interesting
+to try and reason where a point will end up, given a starting position in one
+of three places: inside the sphere represented by $\sigma_0$, inside the
+sphere represented by $\sigma_1$, and anywhere external to these two spheres.
+The only case of certainty is the former, in which case all points end up internal
+to the sphere represented by $\sigma_1$.
 
-% It is two successive reflections about two spheres that touch one another in a single point.
+Unfortunately, not easily being able to visualize what happens to a single point
+under this type of transformation, we cannot give any easy geometric argument
+about how a transverion transforms any one of the geometric types of the conformal model.
+It might be useful to create a computer expiriment that can decipher the results of
+transversions.
 
-% Logarithm not yet known?
+If, however, we can show that a transversion may be formulated by a different
+sequence of basic reflections that are easier to visualize, we might have more success
+in understanding such transformations.  Letting $\sigma=\nvao-\frac{1}{2}t^2\nvai$,
+and $T=1-\frac{1}{2}t\nvai$, we find that
+\begin{equation*}
+\sigma_0\sigma_1 = \sigma T\sigma, (math-wrong)
+\end{equation*}
+where $c=-\frac{1}{2}t$, showing that a transversion may also be described as
+a spherical reflection, followed by a translation, followed by a spherical reflection
+in the same sphere.  Admittedly, I'm no closer to an ability to visualize the transversion
+of basic shapes in the conformal model than before, but this sequence of reflections
+appears to me to be more promising in future research.
 
 \subsection{Other Transformations}
 
@@ -1213,13 +1247,14 @@ with specific features, we might as well just choose a geometric algebra,
 and then ask what types of geometry we can do with that algebra under
 various models of geometry.
 
-It is also a wonder what we might be able to learn by making use
-of results and theorems from topology and abstract algebra.
-Algebraic geometry has applied these subjects to the study of geometry,
-and there appear to be interesting similarities between algebraic geometry
-and conformal geometric algebra in their initial developments, but
-the subjects seem to quickly diverge, algebraic geometry becoming
-the more complicated of the two.
+It should also be observed, I believe, that there are similarities in the
+development of the conformal model with that of algebraic geometry.
+It is my guess that algebraic geometry is more general in its
+ability to answer geometric questions and in its breadth of geometric representation.
+Could the concepts of geometric algebra be brought to bare in answering the questions of algebraic
+geometry?  Is there a reformulation of algebraic geometry in terms of geometric algebra?
+Would this expand and enrich the subject?  I do not know.  All I really do know is
+that doing geometry with conformal geometric algebra is a lot of fun!
 
 % Zariski topology?
 % can we figure out what CGA's version of an affine variety is?
