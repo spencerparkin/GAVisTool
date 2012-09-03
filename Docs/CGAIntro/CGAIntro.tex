@@ -756,6 +756,10 @@ has a polar decomposition of $\exp(-ai\theta/2)$.
 
 % Does our form here have a polar decomposition?
 
+% prove that lines and flat-points generalize planar reflections to
+% hyper-planes of lower dimension.  can we do something similar
+% with spherical reflections?  when are two spheres orthogonal?
+
 \subsection{Spherical Reflections}\label{sec_spherical_reflections}
 
 Let $c\in\V^n$ be the center of a sphere, and $a\in\V^n$ be a point
@@ -870,10 +874,8 @@ we consider the two cases $r_0<r_1$ and $r_0>r_1$.
 
 % points of invariance help out.
 
-Transversions are most certainly the odd duck in the family of basic
-transformation versors of the conformal model.  And I wouldn't really
-describe them as basic.  Admittedly, I have no idea how to even visualize
-the effect of a transversion on a single point.  A transversion is two
+Transversions are the strange duck in the family of basic
+transformation versors of the conformal model.  A transversion is two
 sucessive reflections about two spheres of the same radius that share a single point
 of contact.  (By having the same radius, notice that we cannot let one sphere
 invelop the other.)
@@ -882,23 +884,18 @@ and $\sigma_1=\nvao-c$, $c\in\V^n$ being the center of one of the two spheres
 with $-c$ being the center of the other sphere, we get
 \begin{equation*}
 \frac{Vp(x)\tilde{V}}{c^4(1+4\frac{x^2}{c^2}-4\frac{c\cdot x}{c^2})}
-= p\left(\frac{x-2x^2 c^{-1}}{1+4\frac{x^2}{c^2}-4\frac{c\cdot x}{c^2}}\right).
+= p\left(\frac{x-2\frac{x^2}{c^2}c}{1+4\frac{x^2}{c^2}-4\frac{c\cdot x}{c^2}}\right).
 \end{equation*}
-Your guess is as good as mine!  If there are people out there who can visualize
-transversions, I am certainly not yet one of them.  Until then, it is interesting
-to try and reason where a point will end up, given a starting position in one
-of three places: inside the sphere represented by $\sigma_0$, inside the
-sphere represented by $\sigma_1$, and anywhere external to these two spheres.
-The only case of certainty is the former, in which case all points end up internal
-to the sphere represented by $\sigma_1$.
+From this it may not be entirely clear how transversions act
+on points, (it is certainly not obvious to me), and therefore it may be even less clear how such transformations
+act on geometries of the conformal model.  For example, we can reason
+that, under a transversion, a plane must transform into a plane.  It is
+first spherically reflected into the sphere represented by $\sigma_0$
+as a sphere, then spherical reflected into the sphere represented by $\sigma_1$
+as a plane.  But can we visualize in all cases the spacial relationship between
+the initial plane and the final plane?
 
-Unfortunately, not easily being able to visualize what happens to a single point
-under this type of transformation, we cannot give any easy geometric argument
-about how a transverion transforms any one of the geometric types of the conformal model.
-It might be useful to create a computer expiriment that can decipher the results of
-transversions.
-
-If, however, we can show that a transversion may be formulated by a different
+If, however, we can show that a transversion may be described by a different
 sequence of basic reflections that are easier to visualize, we might have more success
 in understanding such transformations.  Letting $\sigma=\nvao-\frac{1}{2}t^2\nvai$,
 and $T=1-\frac{1}{2}t\nvai$, we find that
