@@ -725,9 +725,9 @@ Let $v\in\V^n$ be a unit-normal shared by two parllel planes, let
 $c\in\V^n$ be the position of the first plane, and $t\in\V^n$
 be a vector representative of the desired amount of translation.
 We assume that $v\wedge t=0$.
-The versor representative of the translation is then given by
+The versor $T$ representative of the translation is then given by
 \begin{equation*}
-(v+(v\cdot(c+\frac{1}{2}t)\nvai)(v+(v\cdot c)\nvai) = 1 - \frac{1}{2}t\nvai.
+T = (v+(v\cdot(c+\frac{1}{2}t)\nvai)(v+(v\cdot c)\nvai) = 1 - \frac{1}{2}t\nvai.
 \end{equation*}
 Notice that our result here is independent of the position of the
 first plane, but only dependent upon the relative positions of
@@ -754,11 +754,20 @@ represents a rotation about the point $c$ is then given by
 Letting $c=0$, we get the well-known rotor in Euclidean geometric algebras which
 has a polar decomposition of $\exp(-ai\theta/2)$.
 
-% Does our form here have a polar decomposition?
-
-% prove that lines and flat-points generalize planar reflections to
-% hyper-planes of lower dimension.  can we do something similar
-% with spherical reflections?  when are two spheres orthogonal?
+Interestingly, rotations give us a way to generalize planar reflections
+to reflections about hyper-planes of any dimension.  Notice that
+a rotation of $\pi$ radians is a reflection about an $(n-2)$-dimensional
+hyper-plane.  When $\theta=\pi$, the geometric product of the
+vectors dually representative of the two planes may become an outer product,
+the norms of the two planes having become orthogonal.  Then since
+any $(n-2)$-dimensional hyper-plane dual representative can be factored as the
+outer product of vectors dually representative of orthogonal planes,
+all 2-blades dually representing $(n-2)$-dimensional hyper-planes, as versors,
+are also representative of reflections about such a hyper-plane.
+Indeed, it is not hard to see how this idea generalizes, and we can
+conclude that any blade dually representative of an $m$-dimensional
+hyper-plane also represents, as a versor, a reflection about that
+hyper-plane.
 
 \subsection{Spherical Reflections}\label{sec_spherical_reflections}
 
@@ -874,7 +883,7 @@ we consider the two cases $r_0<r_1$ and $r_0>r_1$.
 
 % points of invariance help out.
 
-Transversions are the strange duck in the family of basic
+Transversions are the strange duck in the family of fundamental
 transformation versors of the conformal model.  A transversion is two
 sucessive reflections about two spheres of the same radius that share a single point
 of contact.  (By having the same radius, notice that we cannot let one sphere
@@ -895,18 +904,34 @@ as a sphere, then spherical reflected into the sphere represented by $\sigma_1$
 as a plane.  But can we visualize in all cases the spacial relationship between
 the initial plane and the final plane?
 
-If, however, we can show that a transversion may be described by a different
-sequence of basic reflections that are easier to visualize, we might have more success
-in understanding such transformations.  Letting $\sigma=\nvao-\frac{1}{2}t^2\nvai$,
-and $T=1-\frac{1}{2}t\nvai$, we find that
+Of course, a great technique for dealing with certain difficult problems is sometimes
+to transform them into another equivilant problem.  For example, if a direct proof seems hard to find,
+sometimes considering the contrapositive more easily leads to a proof.  In the case
+of transversions, it can be shown that our description of a transversion is equivilant
+to a different sequence of reflections.  Specifically, a transversion can also be described
+as a spherical reflection, followed by a translation, followed by a spherical reflection
+in the same sphere.  Notice that both reflection sequences have a single
+point of invariance.  For the original transversion description, this point is the
+point of contact between the two spheres.  For the new transversion description,
+it is the center of the sphere in which we twice reflect.  Showing that the two
+reflection sequences are equivilant, we'll therefore place a sphere represented
+by the vector $\sigma$ at the origin.  Then, giving the sphere radius $|c|$,
+and letting $T=1-c\wedge\nvai$ be the translation versor for the transversion, (notice that the translation
+vector here is $2c$), we then find that
 \begin{equation*}
-\sigma_0\sigma_1 = \sigma T\sigma, (math-wrong)
+\sigma T\sigma = -\sigma_1\sigma_0.
 \end{equation*}
-where $c=-\frac{1}{2}t$, showing that a transversion may also be described as
-a spherical reflection, followed by a translation, followed by a spherical reflection
-in the same sphere.  Admittedly, I'm no closer to an ability to visualize the transversion
-of basic shapes in the conformal model than before, but this sequence of reflections
-appears to me to be more promising in future research.
+The difference in sign doesn't matter, since when the versor is used, it cancels itself
+out.\footnote{Not that it is the case here, but if one of two transformations preserved
+handedness while the other did not, we could still substitute one for the other as a replacement
+in our study of the overall transformation.}
+
+Does this bring us any closer to understanding transversions?  Well, while this alternative
+construction of transversions may or may not be more intuitive, it makes sense to me
+that an intermediate translation between two spherical reflections may be a useful idea.
+Without the translation, the spherical reflections leave a geometry invariant.  Translating
+the reflected geometry before it's reflected back out of the sphere may have its applications
+in certain problems of geometry and may lead to some interesting results.
 
 \subsection{Other Transformations}
 
@@ -1244,7 +1269,21 @@ with specific features, we might as well just choose a geometric algebra,
 and then ask what types of geometry we can do with that algebra under
 various models of geometry.
 
-It should also be observed, I believe, that there are similarities in the
+One of the main features of this paper has been the idea in my mind
+that the conformal model is just pure Euclidean geometry, and while
+it is implemented in a non-Euclidean geometric algebra, there is no
+need to give proofs with geometric arguments that require the reader
+to visualize projective space.  In fact, I will go so far as to say that
+I have never liked the terms null vector at infinity and null vector at
+the origin.  To me, the only difference between these two vectors, which are algebraicly identitical,
+is how we use them in the model, and I wouldn't mind calling them null vector zero
+and null vector one.  In my mind, the model simply uses the algebraic properties
+of the underlying non-Euclidean geometric algebra, (lemmas, theorems, results, etc.), as a logical tool for
+solving problems in Euclidean geometry.  I have never tried too hard to visualize the vectors in the geometric
+algebra $\G(\V)$, but only the vectors and blades in the geometric algebra $\G(\V^n)$.
+I hope that this paper shows that it may not always be entirely necessary to do so.
+
+It should also be observed, I believe, that there are note worthy similarities in the
 development of the conformal model with that of algebraic geometry.
 It is my guess that algebraic geometry is more general in its
 ability to answer geometric questions and in its breadth of geometric representation.
