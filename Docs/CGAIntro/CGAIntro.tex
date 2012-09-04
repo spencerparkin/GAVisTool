@@ -1278,7 +1278,17 @@ g(x)=\left(p((x\cdot v)v)-\frac{1}{2}r^2\nvai\right)\wedge w,
 where $w\in\V^n$ is a unit-length vector.  When $w\cdot v=0$,
 we get a double-line, and when $w\wedge v=0$, we get
 yet another dual representation of a circle as we saw before.  In any other case
-we get an ellipse.  Can we recover the characteristics of this ellipse from
+we get an ellipse as illustrated in the following figure.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.3]{CirclesForEllipseFigure}
+\caption{For each circle shown here, the circle is represented by $g(x)$ where $x$ is the point on that circle.
+($w$ was chosen so that $v\cdot w\approx\cos 1$.)
+If you put a rubber-band around the circles, you can an approximation of an ellipse.  The more circles we have,
+the better this approximation.}
+\label{fig_circles_of_ellipse}
+\end{figure}
+Can we recover the characteristics of this ellipse from
 the function $g$?  Well,
 \begin{equation*}
 w=\nvao\wedge\nvai\cdot g(x)\wedge\nvai.
@@ -1287,7 +1297,7 @@ If we then let
 \begin{equation*}
 h(x)=\nvao\wedge\nvai\cdot g(x)\wedge\nvao\wedge\nvai=(x\cdot v)v\wedge w,
 \end{equation*}
-then we see that $w-\nabla h(x)=(v\cdot w)v$, in which case we can normalize
+we then see that $w-\nabla h(x)=(v\cdot w)v$, in which case we can normalize
 this vector to recover $v$ up to sign.  We can then recover $r$ as
 \begin{equation*}
 r = \sqrt{1-2w(\nvao\wedge\nvai\cdot\nvao\wedge g(v))}.
@@ -1295,12 +1305,31 @@ r = \sqrt{1-2w(\nvao\wedge\nvai\cdot\nvao\wedge g(v))}.
 Our decomposition is complete.  We can then calculate the larger
 diameter of the ellipse as $r(v\cdot w)^{-1}$, the smaller
 diameter being $r$, but what good is the function $g$ if we can't
-use it to somehow draw the ellipse?
+use it to somehow draw the ellipse?  Interestingly, this turns out to be a very
+easy and natural thing to do.  Simply notice that the set
+\begin{equation*}
+\{g(\lambda v)\wedge(v+\lambda\nvai) | \lambda\in[-\alpha,\alpha]\},
+\end{equation*}
+where $\alpha=\sqrt{r^2(1-(v\cdot w)^{-2})}$, is the set of all blades representative
+of point-pairs on the ellipse!  From this we can easily extrapolate all points on the ellipse.
+The following figure illustrates a sequence of point-pairs on the same ellipse
+shown in figure \ref{fig_circles_of_ellipse}, this time on a different attitude.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.3]{PointPairsForEllipseFigure}
+\caption{The dotted out-line of an ellipse made by a sequence of point-pairs.
+Here, each point-pair is given the same color as the point $\lambda v$
+used in the function $g(x)\wedge(v+(v\cdot x)\nvai)$ used to generate that point-pair.}
+\label{fig_circles_of_ellipse}
+\end{figure}
 
-% give example of theorem thm_same_geos not holding.
-% give example of generalized canonical surface
-
-% can geometric calculus help us out?
+From this idea a computer algorithm could be easily created that can
+draw these types of ellipses, and so it would seem that there may
+be some utility in our current extension of the model.  What I would like to see,
+however, is some sort of interesting and fundemental theorem get solved
+through the use of geometric functions, or to see some sort of
+equivilant to theorem $\eqref{thm_same_geos}$, but this will have
+to wait for another paper.
 
 \section{Concluding Remarks}
 
@@ -1323,12 +1352,11 @@ I have never liked the terms null vector at infinity and null vector at
 the origin.  To me, the only difference between these two vectors, which are algebraicly identitical,
 is how we use them in the model, and I wouldn't mind calling them null vector zero
 and null vector one.  In my mind, the model simply uses the algebraic properties
-of the underlying non-Euclidean geometric algebra, (lemmas, theorems, results, etc.), as a logical tool for
+of the underlying non-Euclidean geometric algebra, (lemmas, theorems, results, etc.), as logical tools for
 solving problems in Euclidean geometry.  I have never tried too hard to visualize the vectors in the geometric
 algebra $\G(\V)$, but only the vectors and blades in the geometric algebra $\G(\V^n)$.
-I hope that this paper shows that it may not always be entirely necessary to do so.
 
-It should also be observed, I believe, that there are note worthy similarities in the
+It should also be observed, I believe, that there are note-worthy similarities in the
 development of the conformal model with that of algebraic geometry.
 It is my guess that algebraic geometry is more general in its
 ability to answer geometric questions and in its breadth of geometric representation.
