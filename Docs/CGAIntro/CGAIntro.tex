@@ -26,7 +26,7 @@
 \begin{document}
 \maketitle
 
-Conformal geometric algebra is a model of
+Conformal geometric algebra (CGA) is a model of
 geometry implemented in the language of geometric algebra.
 This document is my attempt to rigorously build the
 conformal model from the ground up, as well as to explore
@@ -36,6 +36,15 @@ It is only assumed that the reader is familiar with geometric algebra.
 The books $\cite{dorst07}$ and $\cite{hestenes87}$ were
 used most by the author in the preparation of this document.
 I recommend them for further study.
+
+All 3-dimensional figures given in this paper were generated
+by a piece of prototype software developed by the author named GAVisTool,
+but the reader should be made aware
+of better tools for studying CGA such as GAViewer
+and CLUCalc, both of which can be easily be found on the internet.
+
+\nocite{zaharia02}
+\nocite{hildenbrand05}
 
 \section{Representing Geometry}
 
@@ -915,14 +924,14 @@ point of invariance.  For the original transversion description, this point is t
 point of contact between the two spheres.  For the new transversion description,
 it is the center of the sphere in which we twice reflect.  Showing that the two
 reflection sequences are equivilant, we'll therefore place a sphere represented
-by the vector $\sigma$ at the origin.  Then, giving the sphere radius $|c|$,
+by the vector $\sigma$ at the origin.  Then, giving the sphere a radius of $|c|$,
 and letting $T=1-c\wedge\nvai$ be the translation versor for the transversion, (notice that the translation
 vector here is $2c$), we then find that
 \begin{equation*}
 \sigma T\sigma = -\sigma_1\sigma_0.
 \end{equation*}
 The difference in sign doesn't matter, since when the versor is used, it cancels itself
-out.\footnote{Not that it is the case here, but if one of two transformations preserved
+out.\footnote{Not that it is the case here, but even if one of the two transformations preserved
 handedness while the other did not, we could still substitute one for the other as a replacement
 in our study of the overall transformation.}
 
@@ -1017,9 +1026,9 @@ Here, $v\in\V^n$ is a unit-length vector.
 For the inductive step, let $\sigma_i$ dually represent the imaginary round,
 and let $\sigma_r$ directly represent the real round.  Then without loss of generality,
 we may center each of these at the origin.  Now notice that for a given unit-length
-vector $v\in\V^n$, we have $rn\wedge\sigma_i\neq 0$ whenever $rv\wedge\sigma_r\neq 0$
+vector $v\in\V^n$, we have $rv\wedge\sigma_i\neq 0$ whenever $rv\wedge\sigma_r\neq 0$
 since $\sigma_i$ is a scalar multiple of $\sigma_r$ which is our inductive hypothesis.
-It is then easy to see that $rv\wedge\sigma_i$, if non-zero,
+It is then easy to see that $r(v+(0\cdot v)\nvai)\wedge\sigma_i=rv\wedge\sigma_i$, if non-zero,
 is dually representative of an imaginary sphere of one lower dimension.  Then, if
 it can be shown that $rv\wedge\sigma_r=p(rv)\wedge\sigma_r$, then this blade is directly representative
 of a real sphere of one higher dimension, and our proof is complete.  To that end,
@@ -1027,7 +1036,8 @@ write $\sigma_r$ as $(\sigma\wedge\pi)I$, where $\sigma$ is a vector dually repr
 of an $n$-dimensional hyper-sphere centered at the origin with radius $r$, and
 $\pi$ is a vector dually representative of a hyper-plane containing the origin.
 So we have $p(0)\cdot\pi=\nvao\cdot\pi=0$.  Also notice that $\nvai\cdot\pi=0$
-by theorem $\eqref{thm_flat_xor_round}$, and that $p(rv)\cdot\sigma=0=rv\cdot\sigma$.  We then have
+by theorem $\eqref{thm_flat_xor_round}$, and that $p(rv)\cdot\sigma=0=rv\cdot\sigma$, since
+the point represented by $p(rv)$ is on the sphere represented by $\sigma$ which is at the origin.  We then have
 \begin{align*}
 p(rv)\wedge\sigma_r &= p(rv)\wedge(\sigma\wedge\pi)I \\
  &= (p(rv)\cdot(\sigma\wedge\pi))I \\
@@ -1035,6 +1045,8 @@ p(rv)\wedge\sigma_r &= p(rv)\wedge(\sigma\wedge\pi)I \\
  &= ((rv\cdot\sigma)\pi - (rv\cdot\pi)\sigma)I \\
  &= rv\wedge\sigma_r.
 \end{align*}
+Of course, this induction must terminate, because there is no imaginary sphere
+of zero dimension.
 \end{proof}
 Returning now to the subject of geometric inference, our result here tells us that
 we can decipher a blade that we know is representative of a round, provided we're
@@ -1075,9 +1087,7 @@ of significance is simply every operation possible in $\G$, because every operat
 produces a result of geometric significance to the operands taken in that operation.
 Could we hope to map out all such operations and their meanings?}
 here we will choose one that is fundamental
-to the conformal model.\footnote{It is also an operation that may at
-first appear new, but is simply another form of an operation with which we
-are already familiar.}
+to the conformal model.
 Given a blade $B\in\G$ dually representative
 of some geometry, and a point $x\in\V^n$, we know that $p(x)\cdot B=0$
 if and only if $x$ is a part of the geometry represented by $B$.  However,
@@ -1101,9 +1111,11 @@ p(x)\cdot B = -(-1)^k (p(x)\cdot \pi_k)\bigwedge_{i=1,i\neq k}^{n-m} \pi_k.
 We see now that the geometry being dually represented here is an
 $(m+1)$-dimensional hyper-plane containing $x$ and
 the hyper-plane represented by $B$.\footnote{Notice that this really isn't a new result.
-Simply realize that $p(x)\cdot B = (p(x)\wedge BI)I$.  Furthermore, this shows that
-homogeneous forms are not unique for blades of grades greater than one, because $(p(x)\wedge BI)I$ is in homogeneous
-form while $p(x)\cdot B$ is in need of homogenization.  This blade therefore has more than one homogenous form.}
+Simply realize that $p(x)\cdot B = (p(x)\wedge BI)I$.}
+%-- This may not be true, on second thought.
+%  Furthermore, this shows that
+%homogeneous forms are not unique for blades of grades greater than one, because $(p(x)\wedge BI)I$ is in homogeneous
+%form while $p(x)\cdot B$ is in need of homogenization.  This blade therefore has more than one homogenous form.}
 This result also reveals the possible
 change in handedness inherent in this type of geometric operation.  All that remains now is to determine
 the geometric significance of the homogenization scalar $p(x)\cdot\pi_k$.
@@ -1209,12 +1221,11 @@ Indeed, for any two geometric functions $g_1$ and $g_2$, if $G(g_1)=G(g_2)$,
 we cannot conclude that there exists a scalar $\lambda\in\R$ such that for all
 $x\in\V^n$, we have $g_1(x)=\lambda g_2(x)$.
 This may not mean, however, that canonical forms are no longer useful to us.
-Suppose that $g_1$ takes on a canonical form while $g_2$ is the result of
-some geometric operation that is representative of the type of geometry that $g_1$
-can represent.  We then know that for some instance of $g_1$,
-we have for all $x\in\V^n$, $p(x)\in g_1(x)$ if and only if $p(x)\in g_2(x)$.
-In this sense, they are the same function, even if $g_1$ is not a scalar multiple of $g_2$.
-How exactly this can be useful, however, remains to be seen.
+If we really can show, given two geometric functions $g_1$ and $g_2$,
+that for all $x\in\V^n$, we have $p(x)\in g_1(x)$ if and only if $p(x)\in g_2(x)$,
+and if one of these, say $g_1$, is in a canonical form, then we can use that form to decompose
+the represented geometry into its characteristics parts, and then rightly attribute these
+characteristics to the geometry represented by $g_2$ as well as $g_1$.
 
 Admittedly, the idea of geometric functions is somewhat contrary to the vision most people have about
 a geometric algebra.  The holy grail, so to speak, of a geometric algebra
@@ -1245,12 +1256,46 @@ s(x) = \frac{(x-e)\cdot(x-c)}{(x-e)^2}.
 \end{equation*}
 Replacing $e$ with $e+\lambda v$, where $\lambda\in\R$ and $v\in\V^n$ is a unit-length vector,
 we see that
-\begin{equation*}
+\begin{equation}\label{equ_cylinder}
 \lim_{\lambda\to\infty} S(x) = p(c-[(x-c)\cdot v]v)-\frac{1}{2}r^2\nvai,
-\end{equation*}
+\end{equation}
 which is what we would expect as the geometric function dually representing an infinite cylinder
 of radius $r$.  The spine of the cylinder runs through the point $c$ and the is parallel
 to the vector $v$.
+
+Using equation $\eqref{equ_cylinder}$ we can get our first good counter-example
+of theorem $\eqref{thm_same_geos}$.  Placing a cylinder at the origin, we
+see that $(p((x\cdot v)v)-\frac{1}{2}r^2\nvai)\wedge v$ in the variable
+$x$ must represent a circle at the origin with radius $r$, but it is not the constant blade
+$(p(0)-\frac{1}{2}r^2\nvai)\wedge v$ with which we are familiar as traditionally representing
+such a circle.
+
+In the hopes, however, that there may be some merit to geometric functions, let's
+consider the geometric function
+\begin{equation*}
+g(x)=\left(p((x\cdot v)v)-\frac{1}{2}r^2\nvai\right)\wedge w,
+\end{equation*}
+where $w\in\V^n$ is a unit-length vector.  When $w\cdot v=0$,
+we get a double-line, and when $w\wedge v=0$, we get
+yet another dual representation of a circle as we saw before.  In any other case
+we get an ellipse.  Can we recover the characteristics of this ellipse from
+the function $g$?  Well,
+\begin{equation*}
+w=\nvao\wedge\nvai\cdot g(x)\wedge\nvai.
+\end{equation*}
+If we then let
+\begin{equation*}
+h(x)=\nvao\wedge\nvai\cdot g(x)\wedge\nvao\wedge\nvai=(x\cdot v)v\wedge w,
+\end{equation*}
+then we see that $w-\nabla h(x)=(v\cdot w)v$, in which case we can normalize
+this vector to recover $v$ up to sign.  We can then recover $r$ as
+\begin{equation*}
+r = \sqrt{1-2w(\nvao\wedge\nvai\cdot\nvao\wedge g(v))}.
+\end{equation*}
+Our decomposition is complete.  We can then calculate the larger
+diameter of the ellipse as $r(v\cdot w)^{-1}$, the smaller
+diameter being $r$, but what good is the function $g$ if we can't
+use it to somehow draw the ellipse?
 
 % give example of theorem thm_same_geos not holding.
 % give example of generalized canonical surface
@@ -1292,11 +1337,7 @@ geometry?  Is there a reformulation of algebraic geometry in terms of geometric 
 Would this expand and enrich the subject?  I do not know.  All I really do know is
 that doing geometry with conformal geometric algebra is a lot of fun!
 
-% Zariski topology?
-% can we figure out what CGA's version of an affine variety is?
-% Graduate Texsts in Mathematics, Algebraic Geometry, Robin Hartshorne
-
-% More references are needed for this paper to be credible.
+\pagebreak
 \bibliographystyle{plain}
 \bibliography{CGAIntro}
 
