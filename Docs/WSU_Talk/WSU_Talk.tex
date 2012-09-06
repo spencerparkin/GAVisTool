@@ -1,0 +1,441 @@
+\documentclass{beamer}
+\mode<presentation>
+\usetheme{Warsaw}
+\usecolortheme{lily}
+
+\title{An Intro to CGA}
+\subtitle{Conformal Geometric Algebra}
+\author{Spencer T. Parkin}
+\institute{Avalanche Software}
+
+\newcommand{\G}{\mathbb{G}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\nvao}{o}
+\newcommand{\nvai}{\infty}
+
+\begin{document}
+
+\frame{\titlepage}
+
+%\begin{frame}
+%\frametitle{Outline}
+%\tableofcontents
+%\end{frame}
+
+% Throughout the talk, it is important to question the applicability
+% of a result based upon whether the GA is Euclidean or not.
+
+%\section{Understanding Geometric Algebra}
+
+\begin{frame}
+\frametitle{The Outer Product}
+Let $\V^n$ be a vector space of dimension $n$.
+\pause
+\begin{definition}
+The product $\bigwedge_{k=1}^m v_k$ is what we call a non-zero $m$-blade if and only if
+$\{v_k\}_{k=1}^m\subset\V^n$ is a linearly independent set.
+\end{definition}
+\pause
+\begin{definition}
+Letting $\{w_k\}_{k=1}^m$ be the Gram-Schmidt orthonormalization of $\{v_k\}_{k=1}^m$,
+we have
+\begin{equation*}
+\bigwedge_{k=1}^m v_k = \det\left[
+\begin{array}{ccc}
+v_1\cdot e_1 & \dots & v_1\cdot e_m \\
+\vdots & \ddots & \vdots \\
+v_m\cdot e_1 & \dots & v_m\cdot e_m
+\end{array}
+\right]\bigwedge_{k=1}^m w_k,
+\end{equation*}
+where $\{e_k\}_{k=1}^m$ is any orthonormal basis for the $m$-dimensional
+vector sub-space represented by this blade.
+\end{definition}
+\end{frame}
+%============================================================
+% Notes for slide:
+% Clearly we must have m <= n.
+% The outer product is associative and anti-commutative and left/right distributive over addition.
+% An (m+1)-dimentional person sees an m-dimentional blade as flat.
+% Blade factorizations are not unique!
+%============================================================
+
+\begin{frame}
+\frametitle{Visualizing Euclidean Blades}
+An $m$-blade is characterized by...\pause
+\begin{itemize}
+\item Its \alert{attitude},\pause
+\item Its $m$-dimensional \alert{hyper-volume},\pause
+\item Its \alert{handedness}.
+\end{itemize}
+\end{frame}
+%============================================================
+% Notes for slide:
+% Handedness is a characteristic manifested in the comparison of two blades, or the sign of the determinant.
+% The absolute value of the determinant is an $m$-dimensional hyper-volume.
+% Non-Euclidean blades are outer products involving non-Euclidean vectors.  Can we visualize them?
+%============================================================
+
+\begin{frame}
+\frametitle{Generating all Elements of a Geometric Algebra}
+Let $\{e_k\}_{k=1}^n$ be any set of basis vectors for $\V^n$.\pause
+
+The general element (multivector) is then any linear combination of (\alert{in red})...\pause
+\begin{itemize}
+\item $\binom{n}{0}$ ways to choose \alert{1} as a 0-blade,\pause
+\item $\binom{n}{1}$ ways to choose \alert{$e_i$} as a 1-blade,\pause
+\item $\binom{n}{2}$ ways to choose \alert{$e_i\wedge e_j$} as a 2-blade,\pause
+\item ...and so on...\pause
+\item $\binom{n}{n}$ ways to choose \alert{$I$} as an $n$-blade.\pause
+\end{itemize}
+The geometric algebra $\G(\V^n)$ is of dimension $2^n$.
+\end{frame}
+%============================================================
+% Notes for slide:
+% Here, "I" is the unit psuedo-scalar.
+%============================================================
+
+\begin{frame}
+\frametitle{Adding Blades Together}
+\begin{definition}
+For any $E\in\G(\V^n)$, we let $\langle E\rangle_k$ denote the grade $k$ part of $E$,
+and so we may write $E = \sum_{k=0}^n\langle E\rangle_k$.
+\end{definition}\pause
+The element $\langle E\rangle_k$ is called a $k$-vector.\pause
+
+All $k$-blades are $k$-vectors, but not all $k$-vectors are $k$-blades!\pause
+\begin{example}
+The following 2-vector cannot be written as a 2-blade.
+\begin{equation*}
+e_1\wedge e_2 + e_3\wedge e_4
+\end{equation*}
+\end{example}
+\end{frame}
+%============================================================
+% Notes for slide:
+% The first example comes only when we go above 3-dimensinal space.
+%============================================================
+
+% talk about join and meet after talking about the inner product
+
+\begin{frame}
+\frametitle{The Inner Product}
+\begin{definition}
+In a Euclidean geometric algebra, we define for all integers $i$ and $j$,
+\begin{equation*}
+e_i\cdot e_j = \delta_{ij},
+\end{equation*}
+where here, $\delta_{ij}$ is the Kronecker delta.
+\end{definition}
+\begin{definition}
+If for any vector $v\in\V^n$, we have $v\cdot v=0$, we call $v$ a
+null vector.
+\end{definition}
+\end{frame}
+%============================================================
+% Notes for slide:
+% How we define the inner product of basis vectors is the signature of our geometric algebra.
+%============================================================
+
+\begin{frame}
+\frametitle{The Inner Product (Continued)}
+\begin{definition}
+For any vector $v\in\V^n$ and any $m$-blade $B\in\G(\V^n)$, we define
+\begin{equation*}
+v\cdot B = -\sum_{i=1}^m (-1)^i (v\cdot b_i)\bigwedge_{j=1,j\neq i}^m b_j,
+\end{equation*}
+where $B = \bigwedge_{k=1}^m b_k$.  We also define
+\begin{equation*}
+B\cdot v = -(-1)^n v\cdot B.
+\end{equation*}
+\end{definition}
+\end{frame}
+%============================================================
+% Notes for slide:
+% Notice that the inner product is grade lowering while the outer product is grade raising.
+% There is a recursive definition which looks nicer, but it is worth memorizing this formula.
+%============================================================
+
+\begin{frame}
+\frametitle{The Inner Product (Continued)}
+\begin{example}
+Consider $v\cdot B$, where $B$ is a 2-blade.  WLOG, choose $a,b\in\V^n$ such that
+$B=a\wedge b$, $a\cdot b=0$, $|b|=1$ and $v\cdot b=0$.  We then have
+\begin{equation*}
+v\cdot B = (v\cdot a)b - (v\cdot b)a = |B|\frac{v\cdot a}{|a|}b.
+\end{equation*}
+\end{example}
+\end{frame}
+%============================================================
+% Notes for slide:
+% Here, the result is the part of B with the dimension of the orthogonal projection of v down onto it removed.
+% With the outer product, we're adding dimension.  With the inner product, we're removing them.
+%============================================================
+
+\begin{frame}
+\frametitle{The Inner Product (Continued)}
+\begin{definition}
+For any two blades $A,B\in\G(\V^n)$ of grades $i$ and $j$, respectively, we define
+\begin{equation*}
+A\cdot B = \left\{
+\begin{array}{ll}
+a_1\cdot\dots\cdot a_i\cdot B & \mbox{if $i\leq j$, (R to L assoc.)} \\
+A\cdot b_1\cdot\dots\cdot b_j & \mbox{if $i\geq j$, (L to R assoc.)}
+\end{array}
+\right.
+\end{equation*}
+where $A=\bigwedge_{k=1}^i a_k$ and $B=\bigwedge_{k=1}^j b_j$.
+\end{definition}
+\end{frame}
+%============================================================
+% Notes for slide:
+% We also define the inner product as left and right distributive over addition.
+%============================================================
+
+\begin{frame}
+\frametitle{The Geometric Product}
+\begin{definition}
+For any vector $v\in\V^n$ and any $m$-blade $B\in\G(\V^n)$, we define
+\begin{equation*}
+vB = v\cdot B + v\wedge B,
+\end{equation*}
+and similarly, $Bv = B\cdot v + B\wedge v$.
+\end{definition}
+\begin{example}
+For any two vectors $a,b\in\V^n$, we have
+\begin{equation*}
+ab = a\cdot b + a\wedge b = |a||b|\cos\theta + B|a||b|\sin\theta = |a||b|\exp(\theta B),
+\end{equation*}
+where $B = \frac{a\wedge b}{|a\wedge b|}$.
+\end{example}
+\end{frame}
+%============================================================
+% Notes for slide:
+% The geometric product is an invertible product!
+% It can be shown that the square of a unit 2-blade is -1.
+%============================================================
+
+\begin{frame}
+\frametitle{The Geometric Product (Continued)}
+\begin{example}
+It can be shown that
+\begin{equation*}
+v\cdot B = \frac{1}{2}(vB - (-1)^m Bv),
+\end{equation*}
+and
+\begin{equation*}
+v\wedge B = \frac{1}{2}(vB + (-1)^m Bv).
+\end{equation*}
+\end{example}
+\end{frame}
+
+% Show the inverse of a blade here WRT the GP.
+%\begin{frame}
+%\frametitle{The Geometric Product (Continued)}
+%\begin{lemma}
+%
+%\end{lemma}
+%\end{frame}
+
+\begin{frame}
+\frametitle{The Geometric Product (Continued)}
+\begin{definition}
+For any set of $m$ vectors $\{v_k\}_{k=1}^m\subset\V^n$, a product
+\begin{equation*}
+\prod_{k=1}^m v_k
+\end{equation*}
+is called a versor if for all integers $k$, $v_k^{-1}$ exists.
+\end{definition}
+If there exists an integer $k$ such that $v_k^{-1}$ does not exist, I call it a pseudo versor.
+\begin{lemma}
+In a \alert{Euclidean} geometric algebra, any blade can be written as a versor
+by the Gram-Schmidt orthogonalization process.
+\end{lemma}
+\end{frame}
+
+\begin{frame}
+\frametitle{The Geometric Product (Continued)}
+\begin{example}
+For any two multivectors $A,B\in\G(\V^n)$, we have
+\begin{equation*}
+AB = f^{-1}(f(A)f(B)),
+\end{equation*}
+where $f$ is a function mapping a multivector to its multi-psuedo-versor form.
+\end{example}
+\begin{lemma}
+The Gram-Schimdt process cannot always be used on blades taken from
+a \alert{non-Euclidean} geometric algebra!
+\end{lemma}
+\begin{proof}
+Consider $a\wedge b$.  If $a\cdot b\neq 0$ and $a,b$ are null, then there does not exist a
+scalar $\lambda$ such that $a\cdot(b+\lambda a)=0$ or $(a+\lambda b)\cdot b=0$.
+\end{proof}
+\end{frame}
+%============================================================
+% Notes for slide:
+% The function f here is just the identity function, but what this does is
+% illustrate how you can take multivectors in the geometric product.
+% This algorithm is only necessary in non-Euclidean geometric algebras!
+% In Euclidean GAs, we can use the Gram-Schmidt process.
+%============================================================
+
+\begin{frame}
+\frametitle{Blade to Multi-Psuedo-Versor Form}
+Let $B\in\G(\V^n)$ be a blade of grade $m>1$ where $B=\bigwedge_{k=1}^m b_k$.
+We then have
+\begin{align*}
+f(B) &= B = b_1 B^{(1)} - b_1\cdot B^{(1)} \\
+& = b_1 f(B^{(1)}) - \sum_{k=2}^m(-1)^i (b_1\cdot b_i)f(B^{(1)(i)}),
+\end{align*}
+where $B^{(i)}$ is notation for the $(m-1)$-blade $\bigwedge_{k=1,k\neq i}^m b_k$.
+\begin{example}
+For the blade $a\wedge b$, we have $f(a\wedge b)=a\wedge b=ab-a\cdot b$.
+\end{example}
+\end{frame}
+
+\begin{frame}
+\frametitle{Psuedo-Versor to Multivector Form}
+Let $V\in\G(\V^n)$ be a versor of size $m>1$ where $V=\prod_{k=1}^m v_k$.
+We then have
+\begin{align*}
+ & f^{-1}(V) = V = v_1\sum_{k=0}^m\langle V^{(1)}\rangle_k = \\
+ & \langle f^{-1}(V^{(1)})\rangle_0 v_1+\sum_{k=2}^m\left(
+v_1\wedge\langle f^{-1}(V^{(1)})\rangle_k + v_1\cdot\langle f^{-1}(V^{(1)})\rangle_k\right),
+\end{align*}
+where $V^{(i)}$ is notation for the $(m-1)$-sized psuedo-versor $\prod_{k=1,k\neq i}^m v_k$.
+\begin{example}
+For the versor $ab$, we have $f(ab)=ab=a\cdot b+a\wedge b$.
+\end{example}
+\end{frame}
+
+\begin{frame}
+\frametitle{The Geometric Product (Again)}
+\begin{example}
+For any two blades $A,B\in\G(\V^n)$ of grades $i$ and $j$, respectively, it
+can be shown that
+\begin{equation*}
+A\cdot B = \langle AB\rangle_{|i-j|},
+\end{equation*}
+and
+\begin{equation*}
+A\wedge B = \langle AB\rangle_{i+j}.
+\end{equation*}
+\end{example}
+\end{frame}
+
+\begin{frame}
+\frametitle{The Reverse}
+\begin{definition}
+For any $m$-sized versor $V\in\G(\V^n)$ where $V=\prod_{k=1}^m v_k$,
+we define
+\begin{equation*}
+\tilde{V} = \prod_{k=1}^m v_{m-k+1}.
+\end{equation*}
+\end{definition}
+We can extend this definition to any multivector if we let
+the reverse operator distribute over addition.
+\begin{definition}
+For any multivector $E\in\G(\V^n)$, we may write
+\begin{equation*}
+\tilde{E} = f^{-1}(\tilde{f}(E)).
+\end{equation*}
+\end{definition}
+\end{frame}
+
+\begin{frame}
+\frametitle{The Inverse}
+\begin{lemma}
+For any $m$-sized versor $V\in\G(\V^n)$ where $V=\prod_{k=1}^m v_k$, we have
+\begin{equation*}
+V^{-1} = \left(\prod_{k=1}^m |v_k|\right)^{-1}\tilde{V}.
+\end{equation*}
+\end{lemma}
+\begin{lemma}
+For any \alert{Euclidean} $m$-blade $B\in\G(\V^n)$ where $B=\bigwedge_{k=1}^m b_k$, we have
+\begin{equation*}
+B^{-1} = (-1)^{n(n-1)}\tilde{B}.
+\end{equation*}
+\end{lemma}
+\begin{example}
+If $v\in\V^n$ is a null vector, then $v^{-1}$ does not exist.
+\end{example}
+\end{frame}
+%============================================================
+% Notes for slide:
+% Euclidean blades can always be written as versors using Gram-Schmidt.
+% Not all non-Euclidean blades have an inverse WRT the GP.
+% Finding the inverse of a general multivector is equivalant to solving a system of linear equations.
+%============================================================
+
+\begin{frame}
+\frametitle{Conjugation by Versors}
+\begin{lemma}
+Conjugation by versors is outermorphic.  That is, for any versor $V=\prod_{k=1}^i v_k$,
+and any blade $B=\bigwedge_{k=1}^j b_k$, we have
+\begin{equation*}
+VBV^{-1} = \bigwedge_{k=1}^j Vb_kV^{-1}.
+\end{equation*}
+\end{lemma}
+The proof of this is not too hard to get, but too big to put here.
+\begin{example}
+A given rotor $R\in\G(\V^n)$ is a versor that rotates points $v\in\V^n$
+by versor conjugation.  It therefore rotates blades as well!
+\end{example}
+\end{frame}
+
+%\section{The Generalized Model}
+
+\begin{frame}
+\frametitle{How Blades Can Represent Geometry}
+Let $\V^n$ denote a \alert{Euclidean} vector space.
+
+Let $\V$ denote any other vector space.
+
+Let $p:\V^n\to\G(\V)$ be a blade-valued function of points.
+\begin{definition}
+Given any blade $B\in\G(\V)$, we say that $B$ \alert{directly} represents
+the geometry that consists of all points
+\begin{equation*}
+G(B) = \{x\in\V^n|p(x)\in B\}.
+\end{equation*}
+\end{definition}
+\begin{definition}
+Given any blade $B\in\G(\V)$, we say that $B$ \alert{dually} represents
+the geometry that consistent of all points
+\begin{equation*}
+G^*(B) = \{x\in\V^n|p(x)\in B^*\}.
+\end{equation*}
+\end{definition}
+\end{frame}
+%============================================================
+% Notes for slide:
+% Here, a vector is in the vector sub-space represented by a blade iff their outer product is zero.
+% Here, * takes a dual, which is multiplying by +/-I.
+% A vector is in the vector sub-space represented by a blade's dual iff their inner product is zero.
+%============================================================
+
+% Put in slides that explain union-like ops and intersection ops.
+
+\begin{frame}
+\frametitle{Finally, The Conformal Model}
+Let $\V^n$ be a vector-subpace of $\V$.
+
+If $\{e_k\}_{k=1}^n$ is any basis for $\V^n$, let $\{e_k\}_{k=1}^n\cup\{\nvao,\nvai\}$
+be a basis for $\V^n$.
+\begin{definition}
+For any vector $v\in\V^n$, we define $v\cdot\nvao=v\cdot\nvai=0$.  We
+define $\nvao\cdot\nvai=\nvai\cdot\nvao=-1$.  Each of $\nvao$ and $\nvai$
+are defined as null.
+\end{definition}
+\begin{definition}
+We define $p:\V^n\to\G(\V)$ as
+\begin{equation*}
+p(x) = \nvao + x + \frac{1}{2}x^2\nvai.
+\end{equation*}
+\end{definition}
+What we can now discover about this model of geometry is almost endless!
+\end{frame}
+
+\end{document}
