@@ -24,6 +24,16 @@
 %\tableofcontents
 %\end{frame}
 
+\begin{frame}
+\begin{quotation}
+The extraordinary generality and simplicity of projective geometry led
+the English mathematician Cayley to exclaim: 'Projective Geometry is all of geometry'.
+\end{quotation}
+Source: "Geometric Algebra with Applications in Science and Engineering" by Corrochano \& Sobczyk
+\end{frame}
+% This was an over simplification.
+% Out of such simplicity, we get a lot of results!
+
 % Throughout the talk, it is important to question the applicability
 % of a result based upon whether the GA is Euclidean or not.
 
@@ -149,7 +159,7 @@ v\cdot B = -\sum_{i=1}^m (-1)^i (v\cdot b_i)\bigwedge_{j=1,j\neq i}^m b_j,
 \end{equation*}
 where $B = \bigwedge_{k=1}^m b_k$.  We also define
 \begin{equation*}
-B\cdot v = -(-1)^n v\cdot B.
+B\cdot v = -(-1)^m v\cdot B.
 \end{equation*}
 \end{definition}
 \end{frame}
@@ -157,10 +167,18 @@ B\cdot v = -(-1)^n v\cdot B.
 % Notes for slide:
 % Notice that the inner product is grade lowering while the outer product is grade raising.
 % There is a recursive definition which looks nicer, but it is worth memorizing this formula.
+% Though not obvious, this is a blade.
 %============================================================
 
 \begin{frame}
 \frametitle{The Inner Product (Continued)}
+\begin{lemma}
+For any $v\in\V^n$ and any blade $B\in\G(\V^n)$, we have
+\begin{align*}
+v\wedge B &= v_{\perp}\wedge B \\
+v\cdot B &= v_{\parallel}\cdot B.
+\end{align*}
+\end{lemma}
 \begin{example}
 Consider $v\cdot B$, where $B$ is a 2-blade.  WLOG, choose $a,b\in\V^n$ such that
 $B=a\wedge b$, $a\cdot b=0$, $|b|=1$ and $v\cdot b=0$.  We then have
@@ -173,6 +191,7 @@ v\cdot B = (v\cdot a)b - (v\cdot b)a = |B|\frac{v\cdot a}{|a|}b.
 % Notes for slide:
 % Here, the result is the part of B with the dimension of the orthogonal projection of v down onto it removed.
 % With the outer product, we're adding dimension.  With the inner product, we're removing them.
+% The lemma illustrates refection and projection.
 %============================================================
 
 \begin{frame}
@@ -214,6 +233,7 @@ where $B = \frac{a\wedge b}{|a\wedge b|}$.
 \end{frame}
 %============================================================
 % Notes for slide:
+% Sometimes the GP is defined first, then all other products in terms of it.
 % The geometric product is an invertible product!
 % It can be shown that the square of a unit 2-blade is -1.
 %============================================================
@@ -261,9 +281,9 @@ by the Gram-Schmidt orthogonalization process.
 \begin{example}
 For any two multivectors $A,B\in\G(\V^n)$, we have
 \begin{equation*}
-AB = \phi^{-1}(\phi(A)f(B)),
+AB = \phi^{-1}(\phi(A)\phi(B)),
 \end{equation*}
-where $f$ is a function mapping a multivector to its multi-psuedo-versor form.
+where $\phi$ is an algebraic transformation mapping a multivector to its multi-psuedo-versor form.
 \end{example}
 \begin{lemma}
 The Gram-Schimdt process cannot always be used on blades taken from
@@ -288,7 +308,7 @@ Let $B\in\G(\V^n)$ be a blade of grade $m>1$ where $B=\bigwedge_{k=1}^m b_k$.
 We then have
 \begin{align*}
 \phi(B) &= B = b_1 B^{(1)} - b_1\cdot B^{(1)} \\
-& = b_1 \phi(B^{(1)}) - \sum_{k=2}^m(-1)^i (b_1\cdot b_i)\phi(B^{(1)(i)}),
+& = b_1 \phi(B^{(1)}) - \sum_{i=2}^m(-1)^i (b_1\cdot b_i)\phi(B^{(1)(i)}),
 \end{align*}
 where $B^{(i)}$ is notation for the $(m-1)$-blade $\bigwedge_{k=1,k\neq i}^m b_k$.
 \begin{example}
@@ -356,7 +376,7 @@ V^{-1} = \left(\prod_{k=1}^m |v_k|\right)^{-1}\tilde{V}.
 \begin{lemma}
 For any \alert{Euclidean} $m$-blade $B\in\G(\V^n)$ where $B=\bigwedge_{k=1}^m b_k$, we have
 \begin{equation*}
-B^{-1} = (-1)^{m(m-1)}\frac{\tilde{B}}{|B|}.
+B^{-1} = (-1)^{m(m-1)/2}\frac{\tilde{B}}{|B|}.
 \end{equation*}
 \end{lemma}
 \begin{example}
@@ -507,6 +527,127 @@ p(x) = \nvao + x + \frac{1}{2}x^2\nvai.
 \end{equation*}
 \end{definition}
 What we can now discover about this model of geometry is almost endless!
+\end{frame}
+
+\begin{frame}
+\frametitle{Vectors In The Conformal Model}
+\begin{lemma}
+For any $x\in\V^n$ and any scalar $r>0$, the vector
+\begin{equation*}
+p(x) - \frac{1}{2}r^2\nvai
+\end{equation*}
+dually represents an $n$-dimensional hyper-sphere.
+\end{lemma}
+\begin{lemma}
+For any $x\in\V^n$ and any unit-length vector $v\in\V^n$, the vector
+\begin{equation*}
+v + (x\cdot v)\nvai
+\end{equation*}
+dually represents an $(n-1)$-dimensional hyper-plane.
+\end{lemma}
+\end{frame}
+
+\begin{frame}
+\frametitle{Generating All Rounds And Flats}
+\begin{lemma}
+Let $\{\sigma_k\}_{k=1}^m$ be a sequence of \alert{dual} $n$-dimensional hyper-spheres.
+Then
+\begin{equation*}
+\bigwedge_{k=1}^m\sigma_k
+\end{equation*}
+may be a \alert{dual} $(n-m+1)$-dimensional hyper-sphere.
+\end{lemma}
+\begin{lemma}
+Let $\{\pi_k\}_{k=1}^m$ be a sequence of \alert{dual} $(n-1)$-dimensional hyper-planes.
+Then
+\begin{equation*}
+\bigwedge_{k=1}^m\pi_k
+\end{equation*}
+may be a \alert{dual} $(n-m)$-dimensional hyper-plane.
+\end{lemma}
+\end{frame}
+
+\begin{frame}
+\frametitle{General Term For Coplanar}
+\begin{definition}
+A set of $m+2$ points $\{x_k\}_{k=1}^{m+2}$ are \alert{co-$m$-hyper-planar} if...
+\begin{equation*}
+\begin{array}{l}
+\mbox{For $m=0$, the points are identical,} \\
+\mbox{For $m=1$, the points are collinear,} \\
+\mbox{For $m=2$, the points are coplanar,} \\
+\mbox{For $m=3$, the points are co-hyper-planar,} \\
+\mbox{etc...}
+\end{array}
+\end{equation*}
+\end{definition}
+\begin{lemma}
+If $m+1$ points $\{x_k\}_{k=1}^{m+1}\subset\V^n$ are non-co-$(m-1)$-hyper-planar,
+then $\{p(x_k)\}_{k=1}^{m+1}$ is a linearly independent set.
+\end{lemma}
+\end{frame}
+
+\begin{frame}
+\frametitle{Fitting Rounds To Points}
+\begin{lemma}
+For $m+1$ points $\{x_k\}_{k=1}^{m+1}$ on an $m$-dimensional hyper-sphere that are non-co-$(m-1)$-hyper-planar,
+the blade
+\begin{equation*}
+\bigwedge_{k=1}^{m+1} p(x_k)
+\end{equation*}
+\alert{directly} represents the $m$-dimensional hyper-sphere.
+\end{lemma}
+\begin{proof}
+Let the $(n-m+1)$-blade $B$ \alert{dually} represent the sphere.  Then for all $k$, we have
+$p(x_k)\in B^*$
+and $\mbox{grade}(B^*)=n+2-(n-m+1)=m+1$.  Lastly, $\{p(x_k)\}_{k=1}^{m+1}$ is a linearly
+independent set.
+\end{proof}
+\end{frame}
+
+\begin{frame}
+\frametitle{Fitting Flats To Points}
+\begin{lemma}
+For $m+2$ points $\{x_k\}_{k=1}^{m+2}$ on an $m$-dimensional hyper-plane that
+are \alert{(1)} non-co-$(m-1)$-hyper-planar and \alert{(2)} non-co-$m$-hyper-spherical, the blade
+\begin{equation*}
+\bigwedge_{k=1}^{m+2} p(x_k)
+\end{equation*}
+\alert{directly} represents the $m$-dimensional hyper-plane.
+\end{lemma}
+\begin{proof}
+Let the $(n-m)$-blade $B$ \alert{dually} represent the plane.  By \alert{(1)} and \alert{(2)},
+$\{p(x_k)\}_{k=1}^{m+2}$ is linearly independent.  Then $\mbox{grade}(B^*)=n+2-(n-m)=m+2$.
+\end{proof}
+\end{frame}
+% It's important to note that this does not work for flat points!!!
+
+\begin{frame}
+\frametitle{Fitting Flats To Points (Continued)}
+\begin{lemma}
+For $m+1$ points $\{x_k\}_{k=1}^{m+1}$ on an $m$-dimensional hyper-plane that
+are non-co-$(m-1)$-hyper-planar, the blade
+\begin{equation*}
+\nvai\wedge\bigwedge_{k=1}^{m+1} p(x_k)
+\end{equation*}
+\alert{directly} represents the $m$-dimensional hyper-plane.
+\end{lemma}
+\end{frame}
+
+\begin{frame}
+\frametitle{Conformal Transformations}
+\begin{lemma}
+Let $V\in\G(\V)$ be a versor.
+Let the $m$-blade $B\in\G(\V)$ directly represent any
+geometry of the conformal model, (except a flat point).  Then
+the transformation
+\begin{equation*}
+VBV^{-1} = \bigwedge_{k=1}^m Vp(x_k)V^{-1}
+\end{equation*}
+is understood if $Vp(x_k)V^{-1}$ is understood.
+\end{lemma}
+Compare this idea to linear transformations determined
+by a basis of a vector space.
 \end{frame}
 
 \end{document}
