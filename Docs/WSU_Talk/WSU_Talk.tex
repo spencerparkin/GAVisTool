@@ -56,13 +56,19 @@ Imagine an \alert{infinite} $m$-dimensional hyper-plane.
 Think of $B$ as a \alert{finite} $m$-dimensional hyper-plane.
 
 \alert{Non-Euclidean} blades require more imagination!
+
+Our geometric arguments will not require us to visualize the homogeneous representation space.
 \end{frame}
 %====================================
 % The word blade suggests something flat.
 %====================================
 
 \begin{frame}
-\frametitle{Building Intuition About Blades}
+\frametitle{Building Intuition About Euclidean Blades}
+Let $v_{\parallel}$ denote the orthogonal \alert{projection} of $v$ down onto $B$.
+
+Let $v_{\perp}=v-v_{\parallel}$ denote the orthogonal \alert{rejection} of $v$ from $B$.
+
 For any vector $v\in\V^n$, we have
 \begin{align*}
 v\wedge B &= (v_{\parallel} + v_{\perp})\wedge B = v_{\perp}\wedge B, \\
@@ -88,7 +94,7 @@ For any $v\in\V^n$, we say that
 \end{equation*}
 \end{definition}
 \begin{definition}
-If $v\not\in B$, then $v\in B^*$, which represents the complement $\V^n-\mbox{span}\{b_k\}_{k=1}^m$.
+If $v\not\in B$, then $v\in B^*$, which represents the complement $(\V^n-\mbox{span}\{b_k\}_{k=1}^m)\cup\{0\}$.
 \end{definition}
 \end{frame}
 %====================================
@@ -215,6 +221,32 @@ is a versor if and only if for all $k$, the vector $v_k^{-1}$ exists.
 %====================================
 
 \begin{frame}
+\frametitle{The Inverse And The Reverse Of Versors}
+\begin{definition}
+Given the versor $V=v_1\dots v_m$, we define
+\begin{equation*}
+\tilde{V} = \prod_{k=1}^m v_{m-k+1}.
+\end{equation*}
+\end{definition}
+The inverse $V^{-1}$ of $V$ is therefore given by
+\begin{equation*}
+V^{-1} = \frac{\tilde{V}}{V\tilde{V}}.
+\end{equation*}
+\end{frame}
+
+\begin{frame}
+\frametitle{The Versor Group}
+Versors form a group under the geometric product.
+\begin{proof}
+\alert{Associativity} follows from the associativity of the geometric product.
+
+The scalar $1$ is the \alert{identity} versor.
+
+For every versor $V$, there exists an \alert{inverse} $V^{-1}$ such that $VV^{-1}=1$.
+\end{proof}
+\end{frame}
+
+\begin{frame}
 \frametitle{Properties Of Versors}
 Conjugation by versors is \alert{outermorphic}!
 
@@ -242,7 +274,7 @@ of geometry as versors conjugated with blades representative of geometry.
 \end{frame}
 
 \begin{frame}
-\frametitle{The Conformal Model}
+\frametitle{The Specifics Of The Conformal Model}
 Replace $\R^n$ with $\V^n$.
 
 Embed $\V^n$ in $\V^{n+2}$ as a Euclidean vector sub-space.
@@ -256,6 +288,7 @@ Define $p:\V^n\to\G(\V^{n+2})$ as
 p(x) = \nvao + x + \frac{1}{2}x^2\nvai.
 \end{equation*}
 \end{definition}
+Having \alert{invented} this specific model, what we are now able to \alert{discover} about it is almost endless!
 \end{frame}
 %====================================
 % There is motivation behind this definition, but we will
@@ -268,5 +301,9 @@ p(x) = \nvao + x + \frac{1}{2}x^2\nvai.
 %\end{frame}
 
 % With p(x) defined as it is, we get an important lemma...
+
+% compare outermorphic property of versors to linear transformations
+% being determined by how they transform basis.  versors are determined
+% in CGA by how they transform points.
 
 \end{document}
