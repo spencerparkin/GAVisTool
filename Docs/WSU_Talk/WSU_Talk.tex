@@ -14,460 +14,147 @@
 \newcommand{\B}{\mathbb{B}}
 \newcommand{\nvao}{o}
 \newcommand{\nvai}{\infty}
+\newcommand{\grade}{\mbox{grade}}
 
 \begin{document}
 
 \frame{\titlepage}
 
-%\begin{frame}
-%\frametitle{Outline}
-%\tableofcontents
-%\end{frame}
-
 \begin{frame}
-\begin{quotation}
-The extraordinary generality and simplicity of projective geometry led
-the English mathematician Cayley to exclaim: 'Projective Geometry is all of geometry'.
-\end{quotation}
-Source: "Geometric Algebra with Applications in Science and Engineering" by Corrochano \& Sobczyk
+\frametitle{Presentation Outline}
+In this presentation, we will...
+\begin{itemize}
+\item Introduce concepts from GA only as necessary,
+\item Introduce the generalized homogeneous model of geometry over GA,
+\item Define the specific conformal model of GA,
+\item Find the forms for all geometric primitives of the CGA model,
+\item Discuss the fundamental transformations of CGA.
+\end{itemize}
 \end{frame}
-% This was an over simplification.
-% Out of such simplicity, we get a lot of results!
-
-% Throughout the talk, it is important to question the applicability
-% of a result based upon whether the GA is Euclidean or not.
-
-%\section{Understanding Geometric Algebra}
 
 \begin{frame}
-\frametitle{The Outer Product}
-Let $\V^n$ be a vector space of dimension $n$.
-\pause
+\frametitle{Blades}
+Let $\V^n$ denote an $n$-dimensional vector space.
+
+Let $\{b_k\}_{k=1}^m$ be a set of $m$ vectors taken from $\V^n$.
 \begin{definition}
-The product $\bigwedge_{k=1}^m v_k$ is what we call a non-zero $m$-blade if and only if
-$\{v_k\}_{k=1}^m\subset\V^n$ is a linearly independent set.
-\end{definition}
-\pause
-\begin{definition}
-Letting $\{w_k\}_{k=1}^m$ be the Gram-Schmidt orthonormalization of $\{v_k\}_{k=1}^m$,
-we have
+We say the blade $B$, given by
 \begin{equation*}
-\bigwedge_{k=1}^m v_k = \det\left[
-\begin{array}{ccc}
-v_1\cdot e_1 & \dots & v_1\cdot e_m \\
-\vdots & \ddots & \vdots \\
-v_m\cdot e_1 & \dots & v_m\cdot e_m
-\end{array}
-\right]\bigwedge_{k=1}^m w_k,
+B = \bigwedge_{k=1}^m b_k = b_1\wedge\dots\wedge b_m,
 \end{equation*}
-where $\{e_k\}_{k=1}^m$ is any orthonormal basis for the $m$-dimensional
-vector sub-space represented by this blade.
+is a non-zero $m$-blade if and only if $\{b_k\}_{k=1}^m$
+is a linearly independent set of vectors.
 \end{definition}
 \end{frame}
-%============================================================
-% Notes for slide:
-% Clearly we must have m <= n.
-% The outer product is associative and anti-commutative and left/right distributive over addition.
-% An (m+1)-dimentional person sees an m-dimentional blade as flat.
-% Blade factorizations are not unique!
-%============================================================
+%====================================
+%====================================
 
 \begin{frame}
 \frametitle{Visualizing Euclidean Blades}
-An $m$-blade is characterized by...\pause
-\begin{itemize}
-\item Its \alert{attitude},\pause
-\item Its $m$-dimensional \alert{hyper-volume},\pause
-\item Its \alert{handedness}.
-\end{itemize}
+Imagine an \alert{infinite} $m$-dimensional hyper-plane.
+
+Think of $B$ as a \alert{finite} $m$-dimensional hyper-plane.
+
+\alert{Non-Euclidean} blades require more imagination!
 \end{frame}
-%============================================================
-% Notes for slide:
-% Handedness is a characteristic manifested in the comparison of two blades, or the sign of the determinant.
-% The absolute value of the determinant is an $m$-dimensional hyper-volume.
-% Non-Euclidean blades are outer products involving non-Euclidean vectors.  Can we visualize them?
-%============================================================
+%====================================
+% The word blade suggests something flat.
+%====================================
 
 \begin{frame}
-\frametitle{Generating all Elements of a Geometric Algebra}
-Let $\{e_k\}_{k=1}^n$ be any set of basis vectors for $\V^n$.\pause
-
-The general element (multivector) is then any linear combination of (\alert{in red})...\pause
-\begin{itemize}
-\item $\binom{n}{0}$ ways to choose \alert{1} as a 0-blade,\pause
-\item $\binom{n}{1}$ ways to choose \alert{$e_i$} as a 1-blade,\pause
-\item $\binom{n}{2}$ ways to choose \alert{$e_i\wedge e_j$} as a 2-blade,\pause
-\item $\binom{n}{3}$ ways to choose \alert{$e_i\wedge e_j\wedge e_k$} as a 3-blade,\pause
-\item ...and so on...\pause
-\item $\binom{n}{n}$ ways to choose \alert{$I=e_1\wedge\dots\wedge e_n$} as an $n$-blade.\pause
-\end{itemize}
-The geometric algebra $\G(\V^n)$ is of dimension $2^n$.
-\end{frame}
-%============================================================
-% Notes for slide:
-% Here, "I" is the unit psuedo-scalar.
-%============================================================
-
-\begin{frame}
-\frametitle{Adding Blades Together}
-\begin{definition}
-For any $E\in\G(\V^n)$, we let $\langle E\rangle_k$ denote the grade $k$ part of $E$,
-and so we may write $E = \sum_{k=0}^n\langle E\rangle_k$.
-\end{definition}\pause
-The element $\langle E\rangle_k$ is called a $k$-vector.\pause
-
-All $k$-blades are $k$-vectors, but not all $k$-vectors are $k$-blades!\pause
-\begin{example}
-The following 2-vector cannot be written as a 2-blade.
-\begin{equation*}
-e_1\wedge e_2 + e_3\wedge e_4
-\end{equation*}
-\end{example}
-\end{frame}
-%============================================================
-% Notes for slide:
-% The first example comes only when we go above 3-dimensinal space.
-%============================================================
-
-% talk about join and meet after talking about the inner product
-
-\begin{frame}
-\frametitle{The Inner Product}
-\begin{definition}
-In a Euclidean geometric algebra, we define for all integers $i$ and $j$,
-\begin{equation*}
-e_i\cdot e_j = \delta_{ij},
-\end{equation*}
-where here, $\delta_{ij}$ is the Kronecker delta.
-\end{definition}
-\begin{definition}
-If for any vector $v\in\V^n$, we have $v\cdot v=0$, we call $v$ a
-null vector.
-\end{definition}
-\end{frame}
-%============================================================
-% Notes for slide:
-% How we define the inner product of basis vectors is the signature of our geometric algebra.
-%============================================================
-
-\begin{frame}
-\frametitle{The Inner Product (Continued)}
-\begin{definition}
-For any vector $v\in\V^n$ and any $m$-blade $B\in\G(\V^n)$, we define
-\begin{equation*}
-v\cdot B = -\sum_{i=1}^m (-1)^i (v\cdot b_i)\bigwedge_{j=1,j\neq i}^m b_j,
-\end{equation*}
-where $B = \bigwedge_{k=1}^m b_k$.  We also define
-\begin{equation*}
-B\cdot v = -(-1)^m v\cdot B.
-\end{equation*}
-\end{definition}
-\end{frame}
-%============================================================
-% Notes for slide:
-% Notice that the inner product is grade lowering while the outer product is grade raising.
-% There is a recursive definition which looks nicer, but it is worth memorizing this formula.
-% Though not obvious, this is a blade.
-%============================================================
-
-\begin{frame}
-\frametitle{The Inner Product (Continued)}
-\begin{lemma}
-For any $v\in\V^n$ and any blade $B\in\G(\V^n)$, we have
+\frametitle{Building Intuition About Blades}
+For any vector $v\in\V^n$, we have
 \begin{align*}
-v\wedge B &= v_{\perp}\wedge B \\
-v\cdot B &= v_{\parallel}\cdot B.
+v\wedge B &= (v_{\parallel} + v_{\perp})\wedge B = v_{\perp}\wedge B, \\
+v\cdot B &= (v_{\parallel} + v_{\perp})\cdot B = v_{\parallel}\cdot B.
 \end{align*}
-\end{lemma}
-\begin{example}
-Consider $v\cdot B$, where $B$ is a 2-blade.  WLOG, choose $a,b\in\V^n$ such that
-$B=a\wedge b$, $a\cdot b=0$, $|b|=1$ and $v\cdot b=0$.  We then have
-\begin{equation*}
-v\cdot B = (v\cdot a)b - (v\cdot b)a = |B|\frac{v\cdot a}{|a|}b.
-\end{equation*}
-\end{example}
+\begin{align*}
+\grade(v\wedge B) &= \grade(B) + 1 \\
+\grade(v\cdot B) &= \grade(B) - 1
+\end{align*}
 \end{frame}
-%============================================================
-% Notes for slide:
-% Here, the result is the part of B with the dimension of the orthogonal projection of v down onto it removed.
-% With the outer product, we're adding dimension.  With the inner product, we're removing them.
-% The lemma illustrates refection and projection.
-%============================================================
+%====================================
+% Explain the orthogonal projection and rejection.
+% The outer product builds up dimension, while the inner product removes it.
+%====================================
 
 \begin{frame}
-\frametitle{The Inner Product (Continued)}
+\frametitle{Blades May Represent Vector Sub-Spaces}
+Recall that $B = b_1\wedge\dots\wedge b_m$.
 \begin{definition}
-For any two blades $A,B\in\G(\V^n)$ of grades $i$ and $j$, respectively, we define
+For any $v\in\V^n$, we say that
 \begin{equation*}
-A\cdot B = \left\{
-\begin{array}{ll}
-a_1\cdot\dots\cdot a_i\cdot B & \mbox{if $i\leq j$, (R to L assoc.)} \\
-A\cdot b_1\cdot\dots\cdot b_j & \mbox{if $i\geq j$, (L to R assoc.)}
-\end{array}
-\right.
+\mbox{$v\in B$ if and only if $v\in\mbox{span}\{b_k\}_{k=1}^m$}.
 \end{equation*}
-where $A=\bigwedge_{k=1}^i a_k$ and $B=\bigwedge_{k=1}^j b_j$.
+\end{definition}
+\begin{definition}
+If $v\not\in B$, then $v\in B^*$, which represents the complement $\V^n-\mbox{span}\{b_k\}_{k=1}^m$.
 \end{definition}
 \end{frame}
-%============================================================
-% Notes for slide:
-% We also define the inner product as left and right distributive over addition.
-%============================================================
+%====================================
+% No need to use unit psuedo-scalar in this presentation; we will use this notation.
+%====================================
 
 \begin{frame}
-\frametitle{The Geometric Product}
-\begin{definition}
-For any vector $v\in\V^n$ and any $m$-blade $B\in\G(\V^n)$, we define
-\begin{equation*}
-vB = v\cdot B + v\wedge B,
-\end{equation*}
-and similarly, $Bv = B\cdot v + B\wedge v$.
-\end{definition}
-\begin{example}
-For any two vectors $a,b\in\V^n$, we have
-\begin{equation*}
-ab = a\cdot b + a\wedge b = |a||b|\cos\theta + B|a||b|\sin\theta = |a||b|\exp(\theta B),
-\end{equation*}
-where $B = \frac{a\wedge b}{|a\wedge b|}$.
-\end{example}
-\end{frame}
-%============================================================
-% Notes for slide:
-% Sometimes the GP is defined first, then all other products in terms of it.
-% The geometric product is an invertible product!
-% It can be shown that the square of a unit 2-blade is -1.
-%============================================================
-
-\begin{frame}
-\frametitle{The Geometric Product (Continued)}
-\begin{example}
-It can be shown that
-\begin{equation*}
-v\cdot B = \frac{1}{2}(vB - (-1)^m Bv),
-\end{equation*}
-and
-\begin{equation*}
-v\wedge B = \frac{1}{2}(vB + (-1)^m Bv).
-\end{equation*}
-\end{example}
-\end{frame}
-
-% Show the inverse of a blade here WRT the GP.
-%\begin{frame}
-%\frametitle{The Geometric Product (Continued)}
-%\begin{lemma}
-%
-%\end{lemma}
-%\end{frame}
-
-\begin{frame}
-\frametitle{The Geometric Product (Continued)}
-\begin{definition}
-For any set of $m$ vectors $\{v_k\}_{k=1}^m\subset\V^n$, a product
-\begin{equation*}
-\prod_{k=1}^m v_k
-\end{equation*}
-is called a versor if for all integers $k$, $v_k^{-1}$ exists.
-\end{definition}
-If there exists an integer $k$ such that $v_k^{-1}$ does not exist, I call it a pseudo versor.
-\begin{lemma}
-In a \alert{Euclidean} geometric algebra, any blade can be written as a versor
-by the Gram-Schmidt orthogonalization process.
-\end{lemma}
-\end{frame}
-
-\begin{frame}
-\frametitle{The Geometric Product (Continued)}
-\begin{example}
-For any two multivectors $A,B\in\G(\V^n)$, we have
-\begin{equation*}
-AB = \phi^{-1}(\phi(A)\phi(B)),
-\end{equation*}
-where $\phi$ is an algebraic transformation mapping a multivector to its multi-psuedo-versor form.
-\end{example}
-\begin{lemma}
-The Gram-Schimdt process cannot always be used on blades taken from
-a \alert{non-Euclidean} geometric algebra!
-\end{lemma}
+\frametitle{Membership in Vector Spaces and Dual Vector Spaces}
+If $B\neq 0$, then $v\in B$ if and only if $v\wedge B=0$.
 \begin{proof}
-Consider $a\wedge b$.  If $a\cdot b\neq 0$ and $a,b$ are null, then there does not exist a
-scalar $\lambda$ such that $a\cdot(b+\lambda a)=0$ or $(a+\lambda b)\cdot b=0$.
+The set $\{b_k\}_{k=1}^m$ is linearly independent while the set $\{v\}\cup\{b_k\}_{k=1}^m$ is linearly dependent.
+\end{proof}
+If $B\neq 0$, then $v\in B^*$ if and only if $v\cdot B=0$.
+\begin{proof}
+Notice that $0=v\cdot B=(v\wedge B^*)^*$ if and only if $v\wedge B^*=0$.
 \end{proof}
 \end{frame}
-%============================================================
-% Notes for slide:
-% The function f here is just the identity function, but what this does is
-% illustrate how you can take multivectors in the geometric product.
-% This algorithm is only necessary in non-Euclidean geometric algebras!
-% In Euclidean GAs, we can use the Gram-Schmidt process.
-%============================================================
+%====================================
+%====================================
 
+% when the time comes, use V^{n+2} to denote the rep space
 \begin{frame}
-\frametitle{Blade to Multi-Psuedo-Versor Form}
-Let $B\in\G(\V^n)$ be a blade of grade $m>1$ where $B=\bigwedge_{k=1}^m b_k$.
-We then have
-\begin{align*}
-\phi(B) &= B = b_1 B^{(1)} - b_1\cdot B^{(1)} \\
-& = b_1 \phi(B^{(1)}) - \sum_{i=2}^m(-1)^i (b_1\cdot b_i)\phi(B^{(1)(i)}),
-\end{align*}
-where $B^{(i)}$ is notation for the $(m-1)$-blade $\bigwedge_{k=1,k\neq i}^m b_k$.
-\begin{example}
-For the blade $a\wedge b$, we have $\phi(a\wedge b)=ab-a\cdot b$.
-\end{example}
-\end{frame}
-
-\begin{frame}
-\frametitle{Psuedo-Versor to Multivector Form}
-Let $V\in\G(\V^n)$ be a versor of size $m>1$ where $V=\prod_{k=1}^m v_k$.
-We then have
-\begin{align*}
- & \phi^{-1}(V) = V = v_1\sum_{k=0}^m\langle V^{(1)}\rangle_k = \\
- & \langle \phi^{-1}(V^{(1)})\rangle_0 v_1+\sum_{k=2}^m\left(
-v_1\wedge\langle \phi^{-1}(V^{(1)})\rangle_k + v_1\cdot\langle \phi^{-1}(V^{(1)})\rangle_k\right),
-\end{align*}
-where $V^{(i)}$ is notation for the $(m-1)$-sized psuedo-versor $\prod_{k=1,k\neq i}^m v_k$.
-\begin{example}
-For the versor $ab$, we have $\phi^{-1}(ab)=a\cdot b+a\wedge b$.
-\end{example}
-\end{frame}
-
-\begin{frame}
-\frametitle{The Geometric Product (Again)}
-\begin{lemma}
-For any two blades $A,B\in\G(\V^n)$ of grades $i$ and $j$, respectively, it
-can be shown that
-\begin{equation*}
-A\cdot B = \langle AB\rangle_{|i-j|},
-\end{equation*}
-and
-\begin{equation*}
-A\wedge B = \langle AB\rangle_{i+j}.
-\end{equation*}
-\end{lemma}
-\end{frame}
-
-\begin{frame}
-\frametitle{The Reverse}
+\frametitle{Blades May Represent Geometries}
+Let $\R^n$ denote $n$-dimensional Euclidean space.
+Let $p:\R^n\to\G(\V^n)$ be a vector-valued function of a Euclidean point.
 \begin{definition}
-For any $m$-sized versor $V\in\G(\V^n)$ where $V=\prod_{k=1}^m v_k$,
-we define
+We say that $B$ \alert{directly} represents a geometry as the
+set of all points
 \begin{equation*}
-\tilde{V} = \prod_{k=1}^m v_{m-k+1}.
+G(B) = \{x\in\R^n|p(x)\in B\}.
 \end{equation*}
 \end{definition}
-We can extend this definition to any multivector if we let
-the reverse operator distribute over addition.
 \begin{definition}
-For any multivector $E\in\G(\V^n)$, we may write
+We say that $B$ \alert{dually} represents a geometry as the
+set of all points
 \begin{equation*}
-\tilde{E} = \phi^{-1}(\tilde{\phi}(E)).
+G^*(B) = \{x\in\R^n|p(x)\in B^*\}.
 \end{equation*}
 \end{definition}
 \end{frame}
 
 \begin{frame}
-\frametitle{The Inverse}
-\begin{lemma}
-For any $m$-sized versor $V\in\G(\V^n)$ where $V=\prod_{k=1}^m v_k$, we have
+\frametitle{We Can Combine Geometries}
+For any two blades $A,B\in\G(\V^n)$ such that $A\wedge B\neq 0$, we have
 \begin{equation*}
-V^{-1} = \left(\prod_{k=1}^m |v_k|\right)^{-1}\tilde{V}.
+G(A)\cup G(B)\subseteq G(A\wedge B).
 \end{equation*}
-\end{lemma}
-\begin{lemma}
-For any \alert{Euclidean} $m$-blade $B\in\G(\V^n)$ where $B=\bigwedge_{k=1}^m b_k$, we have
-\begin{equation*}
-B^{-1} = (-1)^{m(m-1)/2}\frac{\tilde{B}}{|B|}.
-\end{equation*}
-\end{lemma}
-\begin{example}
-If $v\in\V^n$ is a null vector, then $v^{-1}$ does not exist.
-\end{example}
-\end{frame}
-%============================================================
-% Notes for slide:
-% Euclidean blades can always be written as versors using Gram-Schmidt.
-% Not all non-Euclidean blades have an inverse WRT the GP.
-% Finding the inverse of a general multivector is equivalant to solving a system of linear equations.
-%============================================================
-
-\begin{frame}
-\frametitle{Conjugation by Versors}
-\begin{lemma}
-Conjugation by versors is outermorphic.  That is, for any versor $V=\prod_{k=1}^i v_k$,
-and any blade $B=\bigwedge_{k=1}^j b_k$, we have
-\begin{equation*}
-VBV^{-1} = \bigwedge_{k=1}^j Vb_kV^{-1}.
-\end{equation*}
-\end{lemma}
-The proof of this is not too hard to get, but too big to put here.
-\begin{example}
-A given rotor $R\in\G(\V^n)$ is a versor that rotates points $v\in\V^n$
-by versor conjugation.  It therefore rotates blades as well!
-\end{example}
-\end{frame}
-
-\begin{frame}
-\frametitle{Blades Can Represent Vector Spaces}
-\begin{definition}
-For any vector $v\in\V^n$ and any $m$-blade $B\in\G(\V^n)$ where $B=\bigwedge_{k=1}^m b_k$, we
-say that
-\begin{equation*}
-\mbox{$v\in B$ if and only if $v\in\mbox{span}\{b_k\}_{k=1}^m$}
-\end{equation*}
-\end{definition}
-\begin{lemma}
-We have $v\in B$ if and only if $v\wedge B=0$.
-\end{lemma}
-\begin{lemma}
-We have $v\in B^*$ if and only if $v\cdot B=0$.
-\end{lemma}
 \begin{proof}
-Notice that $0=v\cdot B = (v\wedge BI)I$ if and only if $v\wedge BI=0$.
+\begin{align*}
+ & \mbox{$p(x)\in A$ or $p(x)\in B$} \\
+\implies & \mbox{$p(x)\in A\wedge B$}
+\end{align*}
 \end{proof}
+Let $C\subseteq A\wedge B$ represent the smallest vector sub-space such that $p(x)\in C$.
+Then we might have $C\not\subseteq A$ and $C\not\subseteq B$.
 \end{frame}
-%============================================================
-% Notes for slide:
-% Notice the linear independent of vectors forming B and then the linear dependence
-% of vectors forming v^B.  This shows that v is in the vec sub-space represented by B.
-% Vector spaces are now elements of calculation!
-% Mention the meet and join.
-%============================================================
-
-%\section{The Generalized Model}
+%====================================
+% The outer product of two blades, if non-zero, gives us at least
+% direct representation of the geometry that is the union of the
+% geometries directly represented by the blades taken in that product.
+%====================================
 
 \begin{frame}
-\frametitle{How Blades Can Represent Geometry}
-Let $\V^n$ denote a \alert{Euclidean} vector space.
-
-Let $\V$ denote any other vector space.
-
-Let $p:\V^n\to\G(\V)$ be a blade-valued function of points.
-\begin{definition}
-Given any blade $B\in\G(\V)$, we say that $B$ \alert{directly} represents
-the geometry that consists of all points
-\begin{equation*}
-G(B) = \{x\in\V^n|p(x)\in B\}.
-\end{equation*}
-\end{definition}
-\begin{definition}
-Given any blade $B\in\G(\V)$, we say that $B$ \alert{dually} represents
-the geometry that consistent of all points
-\begin{equation*}
-G^*(B) = \{x\in\V^n|p(x)\in B^*\}.
-\end{equation*}
-\end{definition}
-\end{frame}
-%============================================================
-% Notes for slide:
-% Here, a vector is in the vector sub-space represented by a blade iff their outer product is zero.
-% Here, * takes a dual, which is multiplying by +/-I.
-% A vector is in the vector sub-space represented by a blade's dual iff their inner product is zero.
-%============================================================
-
-\begin{frame}
-\frametitle{Intersecting Geometries}
+\frametitle{We Can Intersect Geometries}
 \begin{lemma}
-For any two blades $A,B\in\G(\V)$ such that $A\wedge B\neq 0$,
+For any two blades $A,B\in\G(\V^n)$ such that $A\wedge B\neq 0$,
 we have
 \begin{equation*}
 G^*(A)\cap G^*(B)=G^*(A\wedge B).
@@ -482,172 +169,104 @@ G^*(A)\cap G^*(B)=G^*(A\wedge B).
 \end{align*}
 \end{proof}
 \end{frame}
+%====================================
+% The outer product of two blades, if non-zero, gives us the
+% dual representation of the geometry that is the intersection of the
+% geometries dually represented by the blades taken in that product.
+%====================================
 
 \begin{frame}
-\frametitle{Combining Geometries}
-\begin{lemma}
-For any two blades $A,B\in\G(\V)$ such that $A\wedge B\neq 0$, we have
-\begin{equation*}
-G(A)\cup G(B)\subseteq G(A\wedge B).
-\end{equation*}
-\end{lemma}
-\begin{proof}
-\begin{align*}
- & \mbox{$p(x)\in A$ or $p(x)\in B$} \\
-\implies & \mbox{$p(x)\in A\wedge B$}
-\end{align*}
-\end{proof}
-Let $C\subset A\wedge B$ represent the smallest vector sub-space such that $p(x)\in C$.
-Then we might have $C\not\subset A$ and $C\not\subset B$.
+\frametitle{The Homogeneous Nature Of The Model}
+For any non-zero scalar $\lambda$, we have $G(B)=G(\lambda B)$.
+
+For any blade $B$, there is a scalar $\lambda$ such that $\lambda B$ is a homogenized form.
+
+If $B$ is the result of some geometric operations, then such a $\lambda$ has geometric signficance
+WRT to that operation.
 \end{frame}
-%============================================================
-% Notes for slide:
-% Even if A^B is zero, it works out because of the way we define a vector as being "in" a blade.
-% The converse does not hold, because the vec sub-space of smallest dimension containing
-% p(x) may non-trivially overlap both A and B.
-%============================================================
-
-% Put in slides that explain union-like ops and intersection ops.
 
 \begin{frame}
-\frametitle{Finally, The Conformal Model}
-Let $\V^n$ be a vector-subpace of $\V$.
-
-If $\{e_k\}_{k=1}^n$ is any basis for $\V^n$, let $\{e_k\}_{k=1}^n\cup\{\nvao,\nvai\}$
-be a basis for $\V^n$.
+\frametitle{The Geometric Product}
 \begin{definition}
-For any vector $v\in\V^n$, we define $v\cdot\nvao=v\cdot\nvai=0$.  We
-define $\nvao\cdot\nvai=\nvai\cdot\nvao=-1$.  Each of $\nvao$ and $\nvai$
-are defined as null.
+For any vector $v\in\V^n$ and any blade $B\in\G(\V^n)$, we define
+\begin{equation*}
+vB = v\cdot B + v\wedge B.
+\end{equation*}
 \end{definition}
+\end{frame}
+%====================================
+% Something should be mentioned about how fundamental
+% this product is to GA.
+%====================================
+
+\begin{frame}
+\frametitle{Versors}
+Let $\{v_k\}_{k=1}^m$ be any set of $m$ vectors.
 \begin{definition}
-We define $p:\V^n\to\G(\V)$ as
+We say the element $V\in\G(\V^n)$, given by
+\begin{equation*}
+V = \prod_{k=1}^m v_k,
+\end{equation*}
+is a versor if and only if for all $k$, the vector $v_k^{-1}$ exists.
+\end{definition}
+\end{frame}
+%====================================
+% Versors are invertible by definition.
+%====================================
+
+\begin{frame}
+\frametitle{Properties Of Versors}
+Conjugation by versors is \alert{outermorphic}!
+
+Recall that $B=b_1\wedge\dots\wedge b_m$.
+We then have
+\begin{equation*}
+VBV^{-1} = \bigwedge_{k=1}^m Vb_kV^{-1}.
+\end{equation*}
+
+Conjugation by versors is \alert{grade preserving}!
+
+For any vector $v\in\V^n$, we have $VvV^{-1}\in\V^n$,
+therefore, we have $\grade(B)=\grade(VBV^{-1})$.
+
+\end{frame}
+%====================================
+% The proof isn't too hard, but much to long for a slide,
+% and would detract from the rest of this presentation.
+%====================================
+
+\begin{frame}
+\frametitle{Versors May Represent Transformations}
+It follows that versors may be used to represent transformations
+of geometry as versors conjugated with blades representative of geometry.
+\end{frame}
+
+\begin{frame}
+\frametitle{The Conformal Model}
+Replace $\R^n$ with $\V^n$.
+
+Embed $\V^n$ in $\V^{n+2}$ as a Euclidean vector sub-space.
+
+Let $\nvao,\nvai\in\V^{n+2}$ be vectors such that $\nvao\cdot\nvao=\nvai\cdot\nvai=0$
+and $\nvao\cdot\nvai=\nvai\cdot\nvao=-1$ and for all $v\in\V^n$, we have $v\cdot\nvao=v\cdot\nvai=0$.
+
+\begin{definition}
+Define $p:\V^n\to\G(\V^{n+2})$ as
 \begin{equation*}
 p(x) = \nvao + x + \frac{1}{2}x^2\nvai.
 \end{equation*}
 \end{definition}
-What we can now discover about this model of geometry is almost endless!
 \end{frame}
+%====================================
+% There is motivation behind this definition, but we will
+% skip it so as not to detract from proof of the more general
+% usage of the model...that's not put right.
+%====================================
 
-\begin{frame}
-\frametitle{Vectors In The Conformal Model}
-\begin{lemma}
-For any $x\in\V^n$ and any scalar $r>0$, the vector
-\begin{equation*}
-p(x) - \frac{1}{2}r^2\nvai
-\end{equation*}
-dually represents an $n$-dimensional hyper-sphere.
-\end{lemma}
-\begin{lemma}
-For any $x\in\V^n$ and any unit-length vector $v\in\V^n$, the vector
-\begin{equation*}
-v + (x\cdot v)\nvai
-\end{equation*}
-dually represents an $(n-1)$-dimensional hyper-plane.
-\end{lemma}
-\end{frame}
+%\begin{frame}
+% Give n-d spheres and (n-1)-d planes here.
+%\end{frame}
 
-\begin{frame}
-\frametitle{Generating All Rounds And Flats}
-\begin{lemma}
-Let $\{\sigma_k\}_{k=1}^m$ be a sequence of \alert{dual} $n$-dimensional hyper-spheres.
-Then
-\begin{equation*}
-\bigwedge_{k=1}^m\sigma_k
-\end{equation*}
-may be a \alert{dual} $(n-m+1)$-dimensional hyper-sphere.
-\end{lemma}
-\begin{lemma}
-Let $\{\pi_k\}_{k=1}^m$ be a sequence of \alert{dual} $(n-1)$-dimensional hyper-planes.
-Then
-\begin{equation*}
-\bigwedge_{k=1}^m\pi_k
-\end{equation*}
-may be a \alert{dual} $(n-m)$-dimensional hyper-plane.
-\end{lemma}
-\end{frame}
-
-\begin{frame}
-\frametitle{General Term For Coplanar}
-\begin{definition}
-A set of $m+2$ points $\{x_k\}_{k=1}^{m+2}$ are \alert{co-$m$-hyper-planar} if...
-\begin{equation*}
-\begin{array}{l}
-\mbox{For $m=0$, the points are identical,} \\
-\mbox{For $m=1$, the points are collinear,} \\
-\mbox{For $m=2$, the points are coplanar,} \\
-\mbox{For $m=3$, the points are co-hyper-planar,} \\
-\mbox{etc...}
-\end{array}
-\end{equation*}
-\end{definition}
-\begin{lemma}
-If $m+1$ points $\{x_k\}_{k=1}^{m+1}\subset\V^n$ are non-co-$(m-1)$-hyper-planar,
-then $\{p(x_k)\}_{k=1}^{m+1}$ is a linearly independent set.
-\end{lemma}
-\end{frame}
-
-\begin{frame}
-\frametitle{Fitting Rounds To Points}
-\begin{lemma}
-For $m+1$ points $\{x_k\}_{k=1}^{m+1}$ on an $m$-dimensional hyper-sphere that are non-co-$(m-1)$-hyper-planar,
-the blade
-\begin{equation*}
-\bigwedge_{k=1}^{m+1} p(x_k)
-\end{equation*}
-\alert{directly} represents the $m$-dimensional hyper-sphere.
-\end{lemma}
-\begin{proof}
-Let the $(n-m+1)$-blade $B$ \alert{dually} represent the sphere.  Then for all $k$, we have
-$p(x_k)\in B^*$
-and $\mbox{grade}(B^*)=n+2-(n-m+1)=m+1$.  Lastly, $\{p(x_k)\}_{k=1}^{m+1}$ is a linearly
-independent set.
-\end{proof}
-\end{frame}
-
-\begin{frame}
-\frametitle{Fitting Flats To Points}
-\begin{lemma}
-For $m+2$ points $\{x_k\}_{k=1}^{m+2}$ on an $m$-dimensional hyper-plane that
-are \alert{(1)} non-co-$(m-1)$-hyper-planar and \alert{(2)} non-co-$m$-hyper-spherical, the blade
-\begin{equation*}
-\bigwedge_{k=1}^{m+2} p(x_k)
-\end{equation*}
-\alert{directly} represents the $m$-dimensional hyper-plane.
-\end{lemma}
-\begin{proof}
-Let the $(n-m)$-blade $B$ \alert{dually} represent the plane.  By \alert{(1)} and \alert{(2)},
-$\{p(x_k)\}_{k=1}^{m+2}$ is linearly independent.  Then $\mbox{grade}(B^*)=n+2-(n-m)=m+2$.
-\end{proof}
-\end{frame}
-% It's important to note that this does not work for flat points!!!
-
-\begin{frame}
-\frametitle{Fitting Flats To Points (Continued)}
-\begin{lemma}
-For $m+1$ points $\{x_k\}_{k=1}^{m+1}$ on an $m$-dimensional hyper-plane that
-are non-co-$(m-1)$-hyper-planar, the blade
-\begin{equation*}
-\nvai\wedge\bigwedge_{k=1}^{m+1} p(x_k)
-\end{equation*}
-\alert{directly} represents the $m$-dimensional hyper-plane.
-\end{lemma}
-\end{frame}
-
-\begin{frame}
-\frametitle{Conformal Transformations}
-\begin{lemma}
-Let $V\in\G(\V)$ be a versor.
-Let the $m$-blade $B\in\G(\V)$ directly represent any
-geometry of the conformal model, (except a flat point).  Then
-the transformation
-\begin{equation*}
-VBV^{-1} = \bigwedge_{k=1}^m Vp(x_k)V^{-1}
-\end{equation*}
-is understood if $Vp(x_k)V^{-1}$ is understood.
-\end{lemma}
-Compare this idea to linear transformations determined
-by a basis of a vector space.
-\end{frame}
+% With p(x) defined as it is, we get an important lemma...
 
 \end{document}
