@@ -27,7 +27,7 @@ In this presentation, we will...
 \item Introduce concepts from GA only as necessary,
 \item Introduce the generalized homogeneous model of geometry over GA,
 \item Define the specific conformal model of GA,
-\item Find the forms for all geometric primitives of the CGA model,
+\item Find forms for all geometric primitives of the CGA model,
 \item Discuss the fundamental transformations of CGA.
 \end{itemize}
 \end{frame}
@@ -45,6 +45,7 @@ B = \bigwedge_{k=1}^m b_k = b_1\wedge\dots\wedge b_m,
 is a non-zero $m$-blade if and only if $\{b_k\}_{k=1}^m$
 is a linearly independent set of vectors.
 \end{definition}
+Clearly, if $B\neq 0$, then we must have $m\leq n$.
 \end{frame}
 %====================================
 %====================================
@@ -201,6 +202,7 @@ vB = v\cdot B + v\wedge B.
 \end{definition}
 \end{frame}
 %====================================
+% We just use juxtaposition for this product.
 % Something should be mentioned about how fundamental
 % this product is to GA.
 %====================================
@@ -242,7 +244,7 @@ Versors form a group under the geometric product.
 
 The scalar $1$ is the \alert{identity} versor.
 
-For every versor $V$, there exists an \alert{inverse} $V^{-1}$ such that $VV^{-1}=1$.
+For every versor $V$, there exists an \alert{inverse} $V^{-1}$ such that $VV^{-1}=V^{-1}V=1$.
 \end{proof}
 \end{frame}
 
@@ -271,6 +273,8 @@ therefore, we have $\grade(B)=\grade(VBV^{-1})$.
 \frametitle{Versors May Represent Transformations}
 It follows that versors may be used to represent transformations
 of geometry as versors conjugated with blades representative of geometry.
+
+Given $G(B)$, it will be interesting to investigate $G(VBV^{-1})$.
 \end{frame}
 
 \begin{frame}
@@ -296,14 +300,297 @@ Having \alert{invented} this specific model, what we are now able to \alert{disc
 % usage of the model...that's not put right.
 %====================================
 
-%\begin{frame}
-% Give n-d spheres and (n-1)-d planes here.
-%\end{frame}
+\begin{frame}
+\frametitle{Points in $n$-dimensional Space}
+For any $c\in\V^n$, the vector $p(c)$ both \alert{dually} and \alert{directly} represents the point $c$ in space.
 
-% With p(x) defined as it is, we get an important lemma...
+That is, $G(p(c)) = G^*(p(c)) = \{c\}$.
+\end{frame}
 
-% compare outermorphic property of versors to linear transformations
-% being determined by how they transform basis.  versors are determined
-% in CGA by how they transform points.
+\begin{frame}
+\frametitle{$n$-dimensional \alert{Dual} Hyper-Spheres}
+The function $p(x)$ factors out of the equation
+\begin{equation*}
+(x-c)^2 - r^2 = 0
+\end{equation*}
+as the alternative equation
+\begin{equation*}
+p(x)\cdot\left(p(c) - \frac{1}{2}r^2\nvai\right) = 0.
+\end{equation*}
+Points are degenerate spheres, or spheres with radius zero.
+
+We may refer to $p(c)$ as a \alert{round} point.
+\end{frame}
+%====================================
+% Note that we will restrict our attention for now to real spheres,
+% but imaginary spheres do have there place.
+%====================================
+
+\begin{frame}
+\frametitle{Generating All \alert{Dual Rounds} Of CGA}
+Let $\{\sigma_k\}_{k=1}^m$ be $m$ spheres of dimension $n$ having a \alert{non-empty} and
+\alert{non-degenerate} intersection.
+Then the blade $B$, given by
+\begin{equation*}
+B = \bigwedge_{k=1}^m\sigma_k,
+\end{equation*}
+\alert{dually} represents an $(n-m+1)$-dimensional hyper-sphere.
+
+$\alert{Rounds}$ with zero radius give us \alert{tangent} points!
+\end{frame}
+%====================================
+% Be sure to mention the connection between dimension and grade here.
+% We will ignore tangent points for now to keep things simple.
+%====================================
+
+\begin{frame}
+\frametitle{All Rounds Of CGA For 3-dimensional Space}
+\begin{figure}
+\centering
+\includegraphics[scale=0.2]{Rounds}
+\caption{3 Rounds, 3 Circles and 1 Point-Pair}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{$(n-1)$-dimensional \alert{Dual} Hyper-Planes}
+The function $p(x)$ factors out of the equation
+\begin{equation*}
+(x-c)\cdot v = 0
+\end{equation*}
+as the alternative equation
+\begin{equation*}
+p(x)\cdot\left(v+(c\cdot v)\nvai\right) = 0.
+\end{equation*}
+\end{frame}
+
+\begin{frame}
+\frametitle{Generating All \alert{Dual Flats} Of CGA}
+Let $\{\pi_k\}_{k=1}^m$ be $m$ planes of dimension $n-1$ having a \alert{non-empty} and
+\alert{non-degenerate} intersection.
+Then the blade $B$, given by
+\begin{equation*}
+B = \bigwedge_{k=1}^m\pi_k,
+\end{equation*}
+\alert{dually} represents an $(n-m)$-dimensional hyper-plane.
+
+\alert{Flats} at infinity are \alert{free blades}.
+\end{frame}
+%====================================
+% By non degenerate, here we mean that no two planes are parallel, and therefore
+% also not the same plane.
+% We will ignore free blades here to keep things simple.
+% Again, be sure to mention the connection between dimension and grade here.
+%====================================
+
+\begin{frame}
+\frametitle{All Flats Of CGA For 3-dimensional Space}
+\begin{figure}
+\centering
+\includegraphics[scale=0.2]{Flats}
+\caption{3 Planes, 3 Lines, 1 Flat-Point}
+\end{figure}
+\end{frame}
+%====================================
+% Flat points are going to be an exception in a few cases.
+% Flat points play an interesting role in CGA, complementary to round points.
+%====================================
+
+\begin{frame}
+\frametitle{A Generalization Of Coplanarity}
+\begin{definition}
+For $m\geq 0$, a set of $m+2$ points $\{x_k\}_{k=1}^{m+2}\subset\V^n$ are \alert{co-$m$-hyper-planar} if...
+\begin{equation*}
+\begin{array}{l}
+\mbox{For $m=0$, the points are identical,} \\
+\mbox{For $m=1$, the points are collinear,} \\
+\mbox{For $m=2$, the points are coplanar,} \\
+\mbox{For $m=3$, the points are co-hyper-planar,} \\
+\mbox{etc...}
+\end{array}
+\end{equation*}
+\end{definition}
+\end{frame}
+
+\begin{frame}
+\frametitle{A Condition For Linear Independents Of Points}
+\begin{lemma}
+For $m\geq 1$, if $m+1$ points $\{x_k\}_{k=1}^{m+1}\subset\V^n$ are non-co-$(m-1)$-hyper-planar,
+then $\{p(x_k)\}_{k=1}^{m+1}$ is a linearly independent set.
+\end{lemma}
+The proof is not hard, but too big for this slide.
+\end{frame}
+
+\begin{frame}
+\frametitle{Generating All \alert{Direct Rounds} Of CGA}
+Let $m\geq 1$.
+For $m+1$ points $\{x_k\}_{k=1}^{m+1}\subset\V^n$ on an $m$-dimensional
+hyper-sphere that are non-co-$(m-1)$-hyper-planar,
+the blade $B$, given by
+\begin{equation*}
+B = \bigwedge_{k=1}^{m+1} p(x_k)
+\end{equation*}
+\alert{directly} represents the $m$-dimensional hyper-sphere.
+\begin{proof}
+Let the $(n-m+1)$-blade $A$ \alert{dually} represent the $m$-dimensional hyper-sphere determined by the points.
+If $A$ \alert{dually} represents this sphere, then $A^*$ \alert{directly} represents this sphere.
+Therefore, we need to show that there exists $\lambda\in\R$ such that $A^*=\lambda B$.
+For all $k$, we have $p(x_k)\in A^*$ and $p(x_k)\in B$.
+By our lemma, $\{p(x_k)\}_{k=1}^m$ is a linearly independent set.
+Lastly, $\grade(B) = m+1 = n+2-(n-m-1) = n+2-\grade(A) = \grade(A^*)$.
+\end{proof}
+\end{frame}
+%====================================
+% Be sure to emphasize that there is no difference between the two
+% geometries that are a direct round and a dual round of the same dimension.
+% The only difference is in how we're representing them.
+%====================================
+
+\begin{frame}
+\frametitle{A Generalization Of Cospherical}
+\begin{definition}
+For $m\geq 1$, a set of $m+1$ points $\{x_k\}_{k=1}^{m+1}\subset\V^n$ are \alert{co-$m$-hyper-planar} if...
+\begin{equation*}
+\begin{array}{l}
+\mbox{For $m=1$, the points are co-point-pair (distinct),} \\
+\mbox{For $m=2$, the points are co-circular,} \\
+\mbox{For $m=3$, the points are co-spherical,} \\
+\mbox{For $m=4$, the points are co-hyper-spherical,} \\
+\mbox{etc...}
+\end{array}
+\end{equation*}
+\end{definition}
+\end{frame}
+
+\begin{frame}
+\frametitle{Generating \alert{Almost} All \alert{Direct Flats} Of CGA}
+Let $m\geq 1$.
+For $m+2$ points $\{x_k\}_{k=1}^{m+2}\subset\V^n$ on an $m$-dimensional hyper-plane that
+are \alert{(1)} non-co-$(m-1)$-hyper-planar and \alert{(2)} non-co-$m$-hyper-spherical, the blade $B$,
+given by
+\begin{equation*}
+B = \bigwedge_{k=1}^{m+2} p(x_k),
+\end{equation*}
+\alert{directly} represents the $m$-dimensional hyper-plane.
+\begin{proof}
+By \alert{(1)}, there exists the $(n-m)$-blade $A$ \alert{dually} representative of the
+$m$-dimensional hyper-plane.  By \alert{(2)}, $B\neq 0$.  Lastly,
+$\grade(B)=m+2=n+2-(n-m)=n+2-\grade(A)=\grade(A^*)$.
+\end{proof}
+\end{frame}
+%====================================
+% Condition 2 uses what we know about directly rounds!
+% This argument does not work for direct flat points!
+%====================================
+
+\begin{frame}
+\frametitle{Generating All \alert{Direct Flats} Of CGA}
+Let $m\geq 1$.  For $m$ points $\{x_k\}_{k=1}^m\subset\V^n$ on an $m$-dimensional
+hyepr-plane that are non-co-$(m-1)$-hyper-planar, the blade $B$, give by
+\begin{equation*}
+B = \nvai\wedge\bigwedge_{k=1}^{m+1} p(x_k),
+\end{equation*}
+\alert{directly} represents the $m$-dimensional hyper-plane.
+
+The proof, again, is not hard, but can't fit here.
+\end{frame}
+%====================================
+% This is how most people introduce direct flats, but I like
+% the former introduction, for reasons that will be given
+% on the next slide!!!
+%====================================
+
+\begin{frame}
+\frametitle{Transformations Of \alert{Direct} Geometry By Versors}
+Recall the \alert{outermorphic} property of versors!
+
+Then, if the $m$-blade $B$ \alert{directly} represents
+any geometry, (\alert{except a flat point}), then there exists $m$
+points $\{x_k\}_{k=1}^m\subset\V^n$ such that
+\begin{equation*}
+VBV^{-1} = V\left(\bigwedge_{k=1}^m p(x_k)\right)V^{-1} = \bigwedge_{k=1}^m Vp(x_k)V^{-1}.
+\end{equation*}
+If we understand how $V$ transforms $p(x)$ for any $x\in\V^n$, then we can
+predict how $V$ transforms any geometry!
+
+A versor may or may not leave $\nvai$ invariant under conjugation.
+\end{frame}
+%====================================
+% As linear transformations are determined by how they
+% transform a basis, versor transformations in CGA are
+% determined by how they transform points!
+%====================================
+
+\begin{frame}
+\frametitle{Transformations Of \alert{Dual} Geometry By Versors}
+If the $m$-blade $B$ \alert{dually} represents any geometry, then we can write
+\begin{equation*}
+VBV^{-1} = V(B^*)^*V^{-1} = (VB^*V^{-1})^*,
+\end{equation*}
+relating this to what we know about the transformation of $\alert{directly}$ represented geometries.
+\end{frame}
+%====================================
+%====================================
+
+\begin{frame}
+\frametitle{Types Of Transformations By Versors}
+All conformal transformations can be represented by versors!
+The conformal transformations are...
+\begin{itemize}
+\item Translations,
+\item Rotations,
+\item Dilations,
+\item Transversions,
+\end{itemize}
+What else?
+\end{frame}
+%====================================
+% Here we see where the conformal model gets it's name.
+% We can represent all conformal transformations by versors.
+%====================================
+
+\begin{frame}
+\frametitle{Planar Reflections}
+\end{frame}
+
+\begin{frame}
+\frametitle{$m$-dimensional Hyper-Planar Reflections}
+\end{frame}
+
+\begin{frame}
+\frametitle{Translations}
+\end{frame}
+
+\begin{frame}
+\frametitle{Rotations}
+\end{frame}
+
+\begin{frame}
+\frametitle{Spherical Reflections}
+\end{frame}
+
+\begin{frame}
+\frametitle{$m$-dimensional Hyper-Spherical Reflections}
+\end{frame}
+
+\begin{frame}
+\frametitle{Dilations}
+\end{frame}
+
+\begin{frame}
+\frametitle{Transversions}
+\end{frame}
+
+\begin{frame}
+\frametitle{The End}
+Thank you for your time.
+Any questions?
+\end{frame}
+
+% do planar and spherical reflections
+% show that planar and spherical reflections can be generalized to all lower dimensional prims
+
+% We can build geos out of round-points using the outer product.
+% We can build geos out of flat-points using...? versors transforms?
 
 \end{document}
