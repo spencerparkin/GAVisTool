@@ -1,0 +1,47 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{float}
+
+\title{Abstract Algebra Exercises}
+
+\begin{document}
+\maketitle
+
+\section*{Chapter 1}
+
+\subsection*{Exercise 5}
+
+For $n\geq 3$, describe the elements of $D_n$.  How many elements does $D_n$ have?
+
+The group $D_n$, when $n\geq 3$, will have $n$ rotation operations and $n$ reflections operations.
+So the group will have order $2n$.  The group $D_2$ has a 2 rotation and 2 reflection operations that
+are the same, so it must have order 2.  The group $D_1$ has order 1.
+
+\subsection*{Exercise 6}
+
+In $D_n$, explain geometrically why a reflection followed by a reflection must be a rotation.
+
+Rotations preserve the winding order of the $n$-gon, but reflections do not.  An even
+number of reflection will leave the winding order of the $n$-gon invariant.  Then since the
+rotations are the set of all winding preserving operations, two successive reflections
+must be a rotation.
+
+\subsection*{Exercise 7}
+
+In $D_n$, explain geometrically why a rotation followed by a rotation must be a rotation.
+
+Because the set of all rotations in $D_n$ forms its own sub-group.
+
+\subsection*{Exercise 8}
+
+In $D_n$, explain geometrically why a rotation and a reflection taken together in either order must be a reflection.
+
+An odd number of reflections combined with any number of rotations does not preserve winding order.
+The only non-winding-order-preserving operations are the reflections.  So any rotation and
+reflection combination must be a reflection.
+
+\end{document}
