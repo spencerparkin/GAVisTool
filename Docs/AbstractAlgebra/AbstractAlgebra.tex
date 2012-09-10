@@ -6,10 +6,57 @@
 \usepackage{graphicx}
 \usepackage{float}
 
+\newcommand{\lcm}{\mbox{lcm}}
+
 \title{Abstract Algebra Exercises}
+\author{Spencer T. Parkin}
 
 \begin{document}
 \maketitle
+
+These problems are taken from Gallian's, "Contemporary Abstract Algebra."
+
+\section*{Chapter 0}
+
+\subsection*{Exercise 7}
+
+Show that if $a$ and $b$ are positive integers, then $ab=\lcm(a,b)\gcd(a,b)$.
+
+We first make the observation that if $x$ and $y$ are common
+multiples of $a$ and $b$ with $x<y$, then $x|y$.  Therefore,
+if a given integer $q$ is a common multiple $a$ and $b$, we can
+show that it is the least such multiple if there is no integer $k$
+such that $q/k$ is also a common multiple.
+
+Letting $d=\gcd(a,b)$,
+we now make an argument that $\lcm(a,b)=ab/d$ by an examination
+of the prime factorization of $ab/d$.  First, notice that $ab/d$ is a
+common multiple of $a$ and $b$, since we may write $a=da'$ and
+$b=db'$ and see that $ab/d = a'b'd$.  To see that $ab/d$ is the least common multiple
+of $a$ and $b$, we notice that for an integer $k$ such that $k|(ab/d)$, we must
+have $a\nmid(ab/(kd))$ or $b\nmid(ab/(kd))$, because division
+of $ab/d$ by $k$ must remove a non-redundant divisor of $a$ or $b$ appearing in
+the prime factorization of $ab/d$.
+Division of $ab$ by $d$ removes all redundant divisors of $a$ and $b$
+in the prime factorization of $ab$.
+
+This is not a very good proof, but it makes intuitive sense.
+
+\subsection*{Exercise 10}
+
+Let $d=\gcd(a,b)$.  If $a=da'$ and $b=db'$, show that $\gcd(a',b')=1$.
+
+Notice that if $x$ is any common divisor of $a$ and $b$, then $x|d$.
+Therefore, there are no non-trivial divisors of $a/d$ and $b/d$.  That is,
+division by $d$ removes all non-trivial common divisors.
+
+\subsection*{Exercise 13}
+
+Let $n$ and $a$ be positive integers and let $d=\gcd(a,n)$.  Show that the
+equation $ax\mod n=1$ has a solution if and only if $d=1$.
+
+Noticing that $ax\mod n=(a\mod n)x\mod n$, we can assume, without
+loss of generality, that $0<a<n$.  Then...
 
 \section*{Chapter 1}
 
