@@ -22,21 +22,21 @@
 
 \begin{frame}
 \frametitle{Presentation Outline}
-In this presentation, we will...
+In this presentation, we will...\pause
 \begin{itemize}
-\item Introduce concepts from GA only as necessary,
-\item Introduce the generalized homogeneous model of geometry over GA,
-\item Define the specific conformal model of GA,
-\item Find forms for all geometric primitives of the CGA model,
+\item Introduce concepts from GA only as necessary,\pause
+\item Introduce the generalized homogeneous model of geometry over GA,\pause
+\item Define the specific conformal model of GA,\pause
+\item Find forms for all geometric primitives of the CGA model,\pause
 \item Discuss the fundamental transformations of CGA.
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Blades}
-Let $\V^n$ denote an $n$-dimensional vector space.
+Let $\V^n$ denote an $n$-dimensional vector space.\pause
 
-Let $\{b_k\}_{k=1}^m$ be a set of $m$ vectors taken from $\V^n$.
+Let $\{b_k\}_{k=1}^m$ be a set of $m$ vectors taken from $\V^n$.\pause
 \begin{definition}
 We say the blade $B$, given by
 \begin{equation*}
@@ -44,21 +44,21 @@ B = \bigwedge_{k=1}^m b_k = b_1\wedge\dots\wedge b_m,
 \end{equation*}
 is a non-zero $m$-blade if and only if $\{b_k\}_{k=1}^m$
 is a linearly independent set of vectors.
-\end{definition}
-Clearly, if $B\neq 0$, then we must have $m\leq n$.
+\end{definition}\pause
+Clearly, if $B\neq 0$, then we must have $\grade(B)=m\leq n$.
 \end{frame}
 %====================================
 %====================================
 
 \begin{frame}
 \frametitle{Visualizing Euclidean Blades}
-Imagine an \alert{infinite} $m$-dimensional hyper-plane.
+Imagine an \alert{infinite} $m$-dimensional hyper-plane.\pause
 
-Think of $B$ as a \alert{finite} $m$-dimensional hyper-plane.
+Think of $B$ as a \alert{finite} $m$-dimensional hyper-plane.\pause
 
-\alert{Attitude} matters, \alert{position} does not.
+\alert{Attitude} matters, \alert{position} does not.\pause
 
-\alert{Non-Euclidean} blades require more imagination!
+\alert{Non-Euclidean} blades require more imagination!\pause
 
 Our geometric arguments will not require us to visualize the homogeneous representation space.
 \end{frame}
@@ -68,19 +68,21 @@ Our geometric arguments will not require us to visualize the homogeneous represe
 
 \begin{frame}
 \frametitle{Building Intuition About Euclidean Blades}
-Let $v_{\parallel}$ denote the orthogonal \alert{projection} of $v$ down onto $B$.
+Let $v_{\parallel}$ denote the orthogonal \alert{projection} of $v$ down onto $B$.\pause
 
-Let $v_{\perp}=v-v_{\parallel}$ denote the orthogonal \alert{rejection} of $v$ from $B$.
+Let $v_{\perp}=v-v_{\parallel}$ denote the orthogonal \alert{rejection} of $v$ from $B$.\pause
 
 For any vector $v\in\V^n$, we have
 \begin{align*}
 v\wedge B &= (v_{\parallel} + v_{\perp})\wedge B = v_{\perp}\wedge B, \\
 v\cdot B &= (v_{\parallel} + v_{\perp})\cdot B = v_{\parallel}\cdot B.
-\end{align*}
+\end{align*}\pause
 \begin{align*}
 \grade(v\wedge B) &= \grade(B) + 1 \\
 \grade(v\cdot B) &= \grade(B) - 1
-\end{align*}
+\end{align*}\pause
+We may also imagine $v\cdot B=(v\wedge B^*)^*$, where $B^*$ is the \alert{complement}
+of $B$ with respect to $\V^n$.
 \end{frame}
 %====================================
 % Explain the orthogonal projection and rejection.
@@ -89,13 +91,13 @@ v\cdot B &= (v_{\parallel} + v_{\perp})\cdot B = v_{\parallel}\cdot B.
 
 \begin{frame}
 \frametitle{Blades May Represent Vector Sub-Spaces}
-Recall that $B = b_1\wedge\dots\wedge b_m$.
+Recall that $B = b_1\wedge\dots\wedge b_m$.\pause
 \begin{definition}
 For any $v\in\V^n$, we say that
 \begin{equation*}
 \mbox{$v\in B$ if and only if $v\in\mbox{span}\{b_k\}_{k=1}^m$}.
 \end{equation*}
-\end{definition}
+\end{definition}\pause
 \begin{definition}
 If $v\not\in B$, then $v\in B^*$, which represents the complement $(\V^n-\mbox{span}\{b_k\}_{k=1}^m)\cup\{0\}$.
 \end{definition}
@@ -106,38 +108,40 @@ If $v\not\in B$, then $v\in B^*$, which represents the complement $(\V^n-\mbox{s
 
 \begin{frame}
 \frametitle{Membership in Vector Spaces and Dual Vector Spaces}
-If $B\neq 0$, then $v\in B$ if and only if $v\wedge B=0$.
+If $B\neq 0$, then $v\in B$ if and only if $v\wedge B=0$.\pause
 \begin{proof}
 The set $\{b_k\}_{k=1}^m$ is linearly independent while the set $\{v\}\cup\{b_k\}_{k=1}^m$ is linearly dependent.
-\end{proof}
-If $B\neq 0$, then $v\in B^*$ if and only if $v\cdot B=0$.
+\end{proof}\pause
+If $B\neq 0$, then $v\in B^*$ if and only if $v\cdot B=0$.\pause
 \begin{proof}
 Notice that $0=v\cdot B=(v\wedge B^*)^*$ if and only if $v\wedge B^*=0$.
 \end{proof}
 \end{frame}
 %====================================
+% This follows from the zero product property of the geometric product.
 %====================================
 
 % when the time comes, use V^{n+2} to denote the rep space
 \begin{frame}
 \frametitle{Blades May Represent Geometries}
-Let $\R^n$ denote $n$-dimensional Euclidean space.
+Let $\R^n$ denote $n$-dimensional Euclidean space.\pause
 
-Let $p:\R^n\to\G(\V^n)$ be a vector-valued function of a Euclidean point.
+Let $p:\R^n\to\G(\V^n)$ be a vector-valued function of a Euclidean point.\pause
 \begin{definition}
 We say that $B$ \alert{directly} represents a geometry as the
 set of all points
 \begin{equation*}
 G(B) = \{x\in\R^n|p(x)\in B\}.
 \end{equation*}
-\end{definition}
+\end{definition}\pause
 \begin{definition}
 We say that $B$ \alert{dually} represents a geometry as the
 set of all points
 \begin{equation*}
 G^*(B) = \{x\in\R^n|p(x)\in B^*\}.
 \end{equation*}
-\end{definition}
+\end{definition}\pause
+Note that $G(B)=G^*(B^*)$ and $G^*(B)=G(B^*)$.
 \end{frame}
 
 \begin{frame}
@@ -145,13 +149,13 @@ G^*(B) = \{x\in\R^n|p(x)\in B^*\}.
 For any two blades $A,B\in\G(\V^n)$ such that $A\wedge B\neq 0$, we have
 \begin{equation*}
 G(A)\cup G(B)\subseteq G(A\wedge B).
-\end{equation*}
+\end{equation*}\pause
 \begin{proof}
 \begin{align*}
  & \mbox{$p(x)\in A$ or $p(x)\in B$} \\
 \implies & \mbox{$p(x)\in A\wedge B$}
 \end{align*}
-\end{proof}
+\end{proof}\pause
 Let $C\subseteq A\wedge B$ represent the smallest vector sub-space such that $p(x)\in C$.
 Then we might have $C\not\subseteq A$ and $C\not\subseteq B$.
 \end{frame}
@@ -159,17 +163,17 @@ Then we might have $C\not\subseteq A$ and $C\not\subseteq B$.
 % The outer product of two blades, if non-zero, gives us at least
 % direct representation of the geometry that is the union of the
 % geometries directly represented by the blades taken in that product.
+% This result sucks in that it doesn't tell us exactly what the combination
+% of geometries is, but this won't be a problem with our next result.
 %====================================
 
 \begin{frame}
 \frametitle{We Can Intersect Geometries}
-\begin{lemma}
 For any two blades $A,B\in\G(\V^n)$ such that $A\wedge B\neq 0$,
 we have
 \begin{equation*}
 G^*(A)\cap G^*(B)=G^*(A\wedge B).
-\end{equation*}
-\end{lemma}
+\end{equation*}\pause
 \begin{proof}
 \begin{align*}
  & \mbox{$p(x)\in A^*$ and $p(x)\in B^*$} \\
@@ -187,11 +191,11 @@ G^*(A)\cap G^*(B)=G^*(A\wedge B).
 
 \begin{frame}
 \frametitle{The Homogeneous Nature Of The Model}
-For any non-zero scalar $\lambda$, we have $G(B)=G(\lambda B)$.
+For any non-zero scalar $\lambda$, we have $G(B)=G(\lambda B)$.\pause
 
-For any blade $B$, there is a scalar $\lambda$ such that $\lambda B$ is a homogenized form.
+For any blade $B$, there is a scalar $\lambda$ such that $\lambda B$ is a homogenized form.\pause
 
-If $B$ is the result of some geometric operations, then such a $\lambda$ has geometric signficance
+If $B$ is the result of some geometric operation, then such a $\lambda$ has geometric signficance
 WRT to that operation.
 \end{frame}
 
@@ -212,14 +216,15 @@ vB = v\cdot B + v\wedge B.
 
 \begin{frame}
 \frametitle{Versors}
-Let $\{v_k\}_{k=1}^m$ be any set of $m$ vectors.
+Let $\{v_k\}_{k=1}^m$ be any set of $m$ vectors.\pause
 \begin{definition}
 We say the element $V\in\G(\V^n)$, given by
 \begin{equation*}
 V = \prod_{k=1}^m v_k,
 \end{equation*}
 is a versor if and only if for all $k$, the vector $v_k^{-1}$ exists.
-\end{definition}
+\end{definition}\pause
+Notice that $v^{-1}=v/\sqrt{v^2}=v/|v|$.
 \end{frame}
 %====================================
 % Versors are invertible by definition.
@@ -232,7 +237,7 @@ Given the versor $V=v_1\dots v_m$, we define
 \begin{equation*}
 \tilde{V} = \prod_{k=1}^m v_{m-k+1}.
 \end{equation*}
-\end{definition}
+\end{definition}\pause
 The inverse $V^{-1}$ of $V$ is therefore given by
 \begin{equation*}
 V^{-1} = \frac{\tilde{V}}{V\tilde{V}}.
@@ -241,7 +246,7 @@ V^{-1} = \frac{\tilde{V}}{V\tilde{V}}.
 
 \begin{frame}
 \frametitle{The Versor Group}
-Versors form a group under the geometric product.
+Versors form a group under the geometric product.\pause
 \begin{proof}
 \alert{Associativity} follows from the associativity of the geometric product.
 
@@ -253,15 +258,15 @@ For every versor $V$, there exists an \alert{inverse} $V^{-1}$ such that $VV^{-1
 
 \begin{frame}
 \frametitle{Properties Of Versors}
-Conjugation by versors is \alert{outermorphic}!
+Conjugation by versors is \alert{outermorphic}!\pause
 
 Recall that $B=b_1\wedge\dots\wedge b_m$.
 We then have
 \begin{equation*}
 VBV^{-1} = \bigwedge_{k=1}^m Vb_kV^{-1}.
-\end{equation*}
+\end{equation*}\pause
 
-Conjugation by versors is \alert{grade preserving}!
+Conjugation by versors is \alert{grade preserving}!\pause
 
 For any vector $v\in\V^n$, we have $VvV^{-1}\in\V^n$,
 therefore, we have $\grade(B)=\grade(VBV^{-1})$.
@@ -275,26 +280,26 @@ therefore, we have $\grade(B)=\grade(VBV^{-1})$.
 \begin{frame}
 \frametitle{Versors May Represent Transformations}
 It follows that versors may be used to represent transformations
-of geometry as versors conjugated with blades representative of geometry.
+of geometry as versors conjugated with blades representative of geometry.\pause
 
 Given $G(B)$, it will be interesting to investigate $G(VBV^{-1})$.
 \end{frame}
 
 \begin{frame}
 \frametitle{The Specifics Of The Conformal Model}
-Replace $\R^n$ with $\V^n$.
+Replace $\R^n$ with $\V^n$.\pause
 
-Embed $\V^n$ in $\V^{n+2}$ as a Euclidean vector sub-space.
+Embed $\V^n$ in $\V^{n+2}$ as a \alert{Euclidean} vector sub-space of a \alert{non-Euclidean} vector space.\pause
 
 Let $\nvao,\nvai\in\V^{n+2}$ be vectors such that $\nvao\cdot\nvao=\nvai\cdot\nvai=0$
-and $\nvao\cdot\nvai=\nvai\cdot\nvao=-1$ and for all $v\in\V^n$, we have $v\cdot\nvao=v\cdot\nvai=0$.
+and $\nvao\cdot\nvai=\nvai\cdot\nvao=-1$ and for all $v\in\V^n$, we have $v\cdot\nvao=v\cdot\nvai=0$.\pause
 
 \begin{definition}
 Define $p:\V^n\to\G(\V^{n+2})$ as
 \begin{equation*}
 p(x) = \nvao + x + \frac{1}{2}x^2\nvai.
 \end{equation*}
-\end{definition}
+\end{definition}\pause
 Having \alert{invented} this specific model, what we are now able to \alert{discover} about it is almost endless!
 \end{frame}
 %====================================
@@ -305,10 +310,14 @@ Having \alert{invented} this specific model, what we are now able to \alert{disc
 
 \begin{frame}
 \frametitle{Points in $n$-dimensional Space}
-For any $c\in\V^n$, the vector $p(c)$ both \alert{dually} and \alert{directly} represents the point $c$ in space.
+For any $c\in\V^n$, the vector $p(c)$ both \alert{dually} and \alert{directly} represents the point $c$ in space.\pause
 
 That is, $G(p(c)) = G^*(p(c)) = \{c\}$.
 \end{frame}
+%====================================
+% We may sometimes informally revert to p(c) as a point, instead
+% of a vector representative of a point.
+%====================================
 
 \begin{frame}
 \frametitle{$n$-dimensional \alert{Dual} Hyper-Spheres}
@@ -319,8 +328,8 @@ The function $p(x)$ factors out of the equation
 as the alternative equation
 \begin{equation*}
 p(x)\cdot\left(p(c) - \frac{1}{2}r^2\nvai\right) = 0.
-\end{equation*}
-Points are degenerate spheres, or spheres with radius zero.
+\end{equation*}\pause
+Points are degenerate spheres, or spheres with radius zero.\pause
 
 We may refer to $p(c)$ as a \alert{round} point.
 \end{frame}
@@ -332,14 +341,15 @@ We may refer to $p(c)$ as a \alert{round} point.
 \begin{frame}
 \frametitle{Generating All \alert{Dual Rounds} Of CGA}
 Let $\{\sigma_k\}_{k=1}^m$ be $m$ spheres of dimension $n$ having a \alert{non-empty} and
-\alert{non-degenerate} intersection.
+\alert{non-degenerate} intersection.\pause
+
 Then the blade $B$, given by
 \begin{equation*}
 B = \bigwedge_{k=1}^m\sigma_k,
 \end{equation*}
-\alert{dually} represents an $(n-m+1)$-dimensional hyper-sphere.
+\alert{dually} represents an $(n-m+1)$-dimensional hyper-sphere.\pause
 
-$\alert{Rounds}$ with zero radius give us \alert{tangent} points!
+\alert{Rounds} with zero radius give us \alert{tangent} points!
 \end{frame}
 %====================================
 % Be sure to mention the connection between dimension and grade here.
@@ -370,20 +380,24 @@ p(x)\cdot\left(v+(c\cdot v)\nvai\right) = 0.
 \begin{frame}
 \frametitle{Generating All \alert{Dual Flats} Of CGA}
 Let $\{\pi_k\}_{k=1}^m$ be $m$ planes of dimension $n-1$ having a \alert{non-empty} and
-\alert{non-degenerate} intersection.
+\alert{non-degenerate} intersection.\pause
+
 Then the blade $B$, given by
 \begin{equation*}
 B = \bigwedge_{k=1}^m\pi_k,
 \end{equation*}
-\alert{dually} represents an $(n-m)$-dimensional hyper-plane.
+\alert{dually} represents an $(n-m)$-dimensional hyper-plane.\pause
 
-\alert{Flats} at infinity are \alert{free blades}.
+\alert{Flats} at infinity are \alert{free blades}.\pause
+
+$0$-dimensional \alert{flats} are called \alert{flat points}.
 \end{frame}
 %====================================
 % By non degenerate, here we mean that no two planes are parallel, and therefore
 % also not the same plane.
 % We will ignore free blades here to keep things simple.
 % Again, be sure to mention the connection between dimension and grade here.
+% There is nothing more or less that characterizes a flat point from a round point.
 %====================================
 
 \begin{frame}
@@ -420,7 +434,7 @@ For $m\geq 0$, a set of $m+2$ points $\{x_k\}_{k=1}^{m+2}\subset\V^n$ are \alert
 \begin{lemma}
 For $m\geq 1$, if $m+1$ points $\{x_k\}_{k=1}^{m+1}\subset\V^n$ are non-co-$(m-1)$-hyper-planar,
 then $\{p(x_k)\}_{k=1}^{m+1}$ is a linearly independent set.
-\end{lemma}
+\end{lemma}\pause
 The proof is not hard, but too big for this slide.
 \end{frame}
 
@@ -433,20 +447,21 @@ the blade $B$, given by
 \begin{equation*}
 B = \bigwedge_{k=1}^{m+1} p(x_k)
 \end{equation*}
-\alert{directly} represents the $m$-dimensional hyper-sphere.
+\alert{directly} represents the $m$-dimensional hyper-sphere.\pause
 \begin{proof}
 Let the $(n-m+1)$-blade $A$ \alert{dually} represent the $m$-dimensional hyper-sphere determined by the points.
 If $A$ \alert{dually} represents this sphere, then $A^*$ \alert{directly} represents this sphere.
 Therefore, we need to show that there exists $\lambda\in\R$ such that $A^*=\lambda B$.
 For all $k$, we have $p(x_k)\in A^*$ and $p(x_k)\in B$.
 By our lemma, $\{p(x_k)\}_{k=1}^m$ is a linearly independent set.
-Lastly, $\grade(B) = m+1 = n+2-(n-m-1) = n+2-\grade(A) = \grade(A^*)$.
+Lastly, $\grade(B) = m+1 = n+2-(n-m+1) = n+2-\grade(A) = \grade(A^*)$.
 \end{proof}
 \end{frame}
 %====================================
 % Be sure to emphasize that there is no difference between the two
 % geometries that are a direct round and a dual round of the same dimension.
 % The only difference is in how we're representing them.
+% Be enthusiastic here!  This is a neat result!
 %====================================
 
 \begin{frame}
@@ -474,7 +489,7 @@ given by
 \begin{equation*}
 B = \bigwedge_{k=1}^{m+2} p(x_k),
 \end{equation*}
-\alert{directly} represents the $m$-dimensional hyper-plane.
+\alert{directly} represents the $m$-dimensional hyper-plane.\pause
 \begin{proof}
 By \alert{(1)}, there exists the $(n-m)$-blade $A$ \alert{dually} representative of the
 $m$-dimensional hyper-plane.  By \alert{(2)}, $B\neq 0$.  Lastly,
@@ -488,12 +503,12 @@ $\grade(B)=m+2=n+2-(n-m)=n+2-\grade(A)=\grade(A^*)$.
 
 \begin{frame}
 \frametitle{Generating All \alert{Direct Flats} Of CGA}
-Let $m\geq 1$.  For $m$ points $\{x_k\}_{k=1}^m\subset\V^n$ on an $m$-dimensional
+Let $m\geq 0$.  For $m+1$ points $\{x_k\}_{k=1}^{m+1}\subset\V^n$ on an $m$-dimensional
 hyepr-plane that are non-co-$(m-1)$-hyper-planar, the blade $B$, give by
 \begin{equation*}
 B = \nvai\wedge\bigwedge_{k=1}^{m+1} p(x_k),
 \end{equation*}
-\alert{directly} represents the $m$-dimensional hyper-plane.
+\alert{directly} represents the $m$-dimensional hyper-plane.\pause
 
 The proof, again, is not hard, but can't fit here.
 \end{frame}
@@ -503,16 +518,16 @@ The proof, again, is not hard, but can't fit here.
 \begin{frame}
 \frametitle{Quiz Time!}
 \alert{Question}: Given a \alert{dual} line $L$ and a point $P$ not on $L$,
-how do I find the \alert{dual} plane $N$ containing $L$ and $P$?
+how do I find the \alert{dual} plane $N$ containing $L$ and $P$?\pause
 
-\alert{Answer}: $N = (P\wedge L^*)^* = P\cdot L$.
+\alert{Answer}: $N = (P\wedge L^*)^* = P\cdot L$.\pause
 
 \alert{Question}: Given a \alert{dual} circle $C$ and a point $P$ not on $C$ or on
-the plane determined by $C$, how do I find the \alert{dual} sphere $S$ containing $C$ and $P$?
+the plane determined by $C$, how do I find the \alert{dual} sphere $S$ containing $C$ and $P$?\pause
 
-\alert{Answer}: $S = (P\wedge C^*)^* = P\cdot C$.
+\alert{Answer}: $S = (P\wedge C^*)^* = P\cdot C$.\pause
 
-\alert{Question}: Let $S$ be a \alert{dual} sphere that intersects a \alert{dual} plane $N$ in more than one point, and let $P$ be a point on $S$ but not on $N$.  Then, if $P'$ is the reflection of $P$ about $N$, what is the \alert{dual} sphere reflection $S'$ of $S$ about $N$?
+\alert{Question}: Let $S$ be a \alert{dual} sphere that intersects a \alert{dual} plane $N$ in more than one point, and let $P$ be a point on $S$ but not on $N$.  Then, if $P'$ is the reflection of $P$ about $N$, what is the \alert{dual} sphere reflection $S'$ of $S$ about $N$?\pause
 
 \alert{Answer}: $S' = (P'\wedge(S\wedge N)^*)^* = P'\cdot(S\wedge N) = (P'\cdot S)N - (P'\cdot N)S$.
 \end{frame}
@@ -521,14 +536,14 @@ the plane determined by $C$, how do I find the \alert{dual} sphere $S$ containin
 \frametitle{The Fun Just Doesn't Stop!}
 \alert{Question}: Let $S$ \alert{dually} represent the planet Saturn and let the $R$ \alert{directly} represent
 one of Saturn's rings.  If this ring fell out of orbit, let the \alert{direct} circle $F$ on the surface of $S$ approximate
-the debris field.  What is $F$?
+the debris field.  What is $F$?\pause
 
-\alert{Answer}: $F = (S\wedge (R\wedge\nvai)^*)^* = S\cdot (R\wedge\nvai) = (S\cdot R)\nvai - (S\cdot\nvai)R$.
+\alert{Answer}: $F = (S\wedge (R\wedge\nvai)^*)^* = S\cdot (R\wedge\nvai) = (S\cdot R)\nvai - (S\cdot\nvai)R$.\pause
 
 \alert{Question}: Let $\{N_k\}_{k=0}^3$ be 4 \alert{dual} planes forming the sides of
 a non-degenerate tetrahedron, and let $S$ be a \alert{dual} sphere containing all
 4 vertices of the tetrahedron.  If all planes are known, how do we find $S$?
-If $S$ is known and all planes save one, how do we find the remaining plane?
+If $S$ is known and all planes save one, how do we find the remaining plane?\pause
 
 \alert{Answer}: Not very pretty!
 
@@ -536,16 +551,16 @@ If $S$ is known and all planes save one, how do we find the remaining plane?
 
 \begin{frame}
 \frametitle{Transformations Of \alert{Direct} Geometry By Versors}
-Recall the \alert{outermorphic} property of versors!
+Recall the \alert{outermorphic} property of versors!\pause
 
 Then, if the $m$-blade $B$ \alert{directly} represents
 any geometry, (\alert{except a flat point}), then there exists $m$
 points $\{x_k\}_{k=1}^m\subset\V^n$ such that
 \begin{equation*}
 VBV^{-1} = V\left(\bigwedge_{k=1}^m p(x_k)\right)V^{-1} = \bigwedge_{k=1}^m Vp(x_k)V^{-1}.
-\end{equation*}
-If we understand how $V$ transforms $p(x)$ for any $x\in\V^n$, then we can
-predict how $V$ transforms any geometry!
+\end{equation*}\pause
+Therefore, if we understand how $V$ transforms $p(x)$ for any $x\in\V^n$, then we can
+predict how $V$ transforms any geometry, (\alert{except flat points})!\pause
 
 A versor may or may not leave $\nvai$ invariant under conjugation.
 \end{frame}
@@ -585,18 +600,19 @@ Some of these include...
 
 \begin{frame}
 \frametitle{Surprise!}
-\alert{Blades} representative of geometry are also \alert{versors} representative of transformations!
+\alert{Blades} representative of geometry are also \alert{versors} representative of transformations!\pause
 \begin{itemize}
-\item \alert{Planar reflections} are represented by a dual planes!
-\item \alert{Spherical reflections} are represented by dual spheres!
-\item \alert{Translations} \& \alert{Rotations} are two successive planar reflections in well chosen planes.
-\item \alert{Dilations} \& \alert{Transversions} are two successive spherical reflections in well chosen spheres.
+\item \alert{Planar reflections} are represented by a dual planes!\pause
+\item \alert{Spherical reflections} are represented by dual spheres!\pause
+\item \alert{Translations} \& \alert{Rotations} are two successive planar reflections in well chosen planes.\pause
+\item \alert{Dilations} \& \alert{Transversions} are two successive spherical reflections in well chosen spheres.\pause
 \end{itemize}
-\alert{Corollary}: We can use versors to transform transformations!
+\alert{Corollary}: We can use versors to transform transformations!\pause
 
 \alert{Note}: Points are null, (non-invertible), and therefore, planar and spherical reflections \alert{generate} the versor group of all transformations.
 \end{frame}
 %====================================
+% Here's another place to be enthusiastic!
 % We can do reflections about hyper-planes of any dimension.
 % We can do reflections about hyper-spheres of any dimension.
 % Transforming a transform allows us to study a transformation
