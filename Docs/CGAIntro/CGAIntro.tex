@@ -1336,12 +1336,62 @@ used in the function $g(x)\wedge(v+(v\cdot x)\nvai)$ used to generate that point
 \end{figure}
 
 From this idea a computer algorithm could be easily created that can
-draw these types of ellipses, and so it would seem that there may
-be some utility in our current extension of the model.  What I would like to see,
-however, is some sort of interesting and fundamental theorem get solved
-through the use of geometric functions, or to see some sort of
-equivalent to theorem $\eqref{thm_same_geos}$, but this will have
-to wait for another paper.
+draw these types of ellipses.
+
+\subsection*{Reflections With Geometric Functions}
+
+Geometric functions are just mappings from points to blades
+representative of traditional conformal geometries.  Furthermore,
+it is not hard to show that all such blades can be rewritten as versors.
+The actions of those versors is well understood by the study of reflections
+given earlier.  It then seems natural to ask at this point if reflections about
+geometries represented by geometric functions can be accomplished.
+In an attempt to answer that question,
+it seems reasonable to me that we would define the reflection of a
+traditional conformal geometry, (one represented by a constant geometric function),
+in a geometry represented by non-constant geometric functions as follows.
+\begin{definition}
+Let $B\in\G$ be dually representative of any conformal geometry,
+and let $g:\V^n\to\G$ be a dual geometric function.  Then the geometry
+that is the reflection of the geometry represented by $B$ in the
+geometry represented by $g$ is given by the set
+\begin{equation*}
+\{x\in\V^n|\mbox{$\exists y\in\V^n$ such that $p(y)\in B^*$ and $g(y)p(y)g^{-1}(y)=p(x)$}\}.
+\end{equation*}
+\end{definition}
+Thinking about the infinite cylinder given in the previous section, this appears to
+make sense.  What we can now show is that if a geometric function has what
+we'll call the reflective property, then it is easy to find the geometric function
+that represents the reflection of a traditional conformal geometry in a geometry
+represented by a geometric function.
+\begin{definition}
+We say that a geometric function $g$ has the reflective property if for
+any $y\in\V^n$, $g(y)=g(x)$, where $x\in\V^n$ and $p(x)=g(y)p(y)g^{-1}(y)$.
+\end{definition}
+\begin{result}
+Let $g:\V^n\to\G$ be a dual geometric function possessing the reflective property,
+and let $B$ be a blade dually representative of any conformal geometry.  Then
+the geometric function $r:\V^n\to\G$ given by
+\begin{equation*}
+r(x) = g(x)Bg^{-1}(x)
+\end{equation*}
+is dually representative of the reflection of the geometry represented by $B$ about 
+the geometry represented by $g$.
+\end{result}
+\begin{proof}
+Let $y\in\V^n$ be any point such that $p(y)\cdot B=0$.  Let $x\in\V^n$
+be the point where $p(x)=g(y)p(y)g^{-1}(y)$.  We then have
+\begin{align*}
+p(x)\cdot r(x) &= [g(y)p(y)g^{-1}(y)]\cdot [g(x)Bg^{-1}(x)] \\
+ &= [g(x)p(y)g^{-1}(x)]\cdot[g(x)Bg^{-1}(x)] \\
+ &= g(x)[p(y)\cdot B]g^{-1}(x) = 0,
+\end{align*}
+by the reflective property of $g$ and a lemma I need to come up with.
+Suppose now that $x$ is a point such that $p(x)\cdot r(x)=0$.
+Let $y$ be the point such that $p(x)=g(y)p(y)g^{-1}(y)$.
+It then follows that $g(x)[p(y)\cdot B]g^{-1}(x)=0$, which
+implies that $p(y)\cdot B=0$.
+\end{proof}
 
 \section{Concluding Remarks}
 
