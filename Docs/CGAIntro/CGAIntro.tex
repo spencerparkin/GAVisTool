@@ -775,21 +775,6 @@ represents a rotation about the point $c$ is then given by
 Letting $c=0$, we get the well-known rotor in Euclidean geometric algebras which
 has a polar decomposition of $\exp(-ai\theta/2)$.
 
-Interestingly, rotations give us a way to generalize planar reflections
-to reflections about hyper-planes of any dimension.  Notice that
-a rotation of $\pi$ radians is a reflection about an $(n-2)$-dimensional
-hyper-plane.  When $\theta=\pi$, the geometric product of the
-vectors dually representative of the two planes may become an outer product,
-the norms of the two planes having become orthogonal.  Then since
-any $(n-2)$-dimensional hyper-plane dual representative can be factored as the
-outer product of vectors dually representative of orthogonal planes,
-all 2-blades dually representing $(n-2)$-dimensional hyper-planes, as versors,
-are also representative of reflections about such a hyper-plane.
-Indeed, it is not hard to see how this idea generalizes, and we can
-conclude that any blade dually representative of an $m$-dimensional
-hyper-plane also represents, as a versor, a reflection about that
-hyper-plane.
-
 \subsection{Spherical Reflections}\label{sec_spherical_reflections}
 
 Let $c\in\V^n$ be the center of a sphere, and $a\in\V^n$ be a point
@@ -977,7 +962,45 @@ can do with these basic building blocks.  (There are undoubtedly many more combi
 consider.)  But we will leave versor transformations for now, content with what we have
 covered thus far as an introduction to the subject.
 
-\section{Inference of Geometry}
+\section{Reflections Are Geometry}
+
+In this section we prove that every blade representative of a conformal geometry
+is also a versor representative of a reflection about that geometry.  The cases
+of the $n$-dimensional hyper-sphere and the $(n-1)$-dimensional hyper-plane
+have already been proven.  Knowing that any flat is an outer product
+of blades dually representative of $(n-1)$-dimensional hyper-planes and
+that any round is an outer product of a blade dually representative of an $n$-dimensional
+hyper-sphere and a blade dually representative of a hyper-plane of the same
+dimension as the round, we need only show here that such blades have factorizations
+in terms of vectors that are pair-wise orthogonal.  We state this formally as a
+result since we will call upon it in later sections.
+\begin{result}\label{rslt_reflections_are_geometry}
+Any blade $B\in\G$ directly or dually representative of a conformal geometry
+is also a versor.  Furthermore, this versor represents a reflection about that geometry.
+\end{result}
+\begin{proof}
+The case of flats is trivial.  Let $c\in\V^n$ be a point on a flat
+characterized by the intersection of $m$ planes of dimension $n$.
+Let $\{v_k\}_{k=1}^m\subset\V^n$ be the set of normal vectors for each of these planes.
+It is clear that such a set can be found such that for all $i\neq j$, we have
+$v_i\cdot v_j=0$.  Then for all $i\neq j$, we have $(v_i+(c\cdot v_i)\nvai)\cdot(v_j+(c\cdot v_j)\nvai)=0$.
+It follows that a blade dually representative of this flat can be written
+as a geomtric product of vectors.
+
+The case of rounds is also trivial.  Let $c$ now be the center of the round
+and $r$ be the radius of the round.  We can then form the round
+as $(p(c)-\frac{1}{2}r^2\nvai)\cdot\pi$, where $\pi$ is a versor dually
+representative of a flat.  Then for any $v\in\V^n$, if $(v+(c\cdot v)\nvai)$ is any vector
+in the composition $\pi$, notice that
+\begin{equation*}
+\left(p(c)-\frac{1}{2}r^2\nvai\right)\cdot(v+(c\cdot v)\nvai)=c\cdot v-c\cdot v = 0.
+\end{equation*}
+We have now proven the result for all dual representatives.  To see that any direct
+representative is also a versor, notice that the dual of any versor is a versor.  (I may
+need to prove this.  Is it true?)
+\end{proof}
+
+\section{Inference Of Geometry}
 
 Given a blade $B\in\G$, is it possible for us to infer what type of geometry it
 represents, dually or directly?  Our first clue is the grade of $B$.
@@ -1338,19 +1361,19 @@ used in the function $g(x)\wedge(v+(v\cdot x)\nvai)$ used to generate that point
 From this idea a computer algorithm could be easily created that can
 draw these types of ellipses.
 
-\subsection*{Reflections With Geometric Functions}
+\subsection{Reflections With Geometric Functions}
 
 Geometric functions are just mappings from points to blades
 representative of traditional conformal geometries.  Furthermore,
-it is not hard to show that all such blades can be rewritten as versors.
-The actions of those versors is well understood by the study of reflections
-given earlier.  It then seems natural to ask at this point if reflections about
+since we know by result $\eqref{rslt_reflections_are_geometry}$
+that all such blades can be rewritten as a versor, the action of
+which is well understood by our recent study of reflections, it then seems natural to ask at this point if reflections about
 geometries represented by geometric functions can be accomplished.
-In an attempt to answer that question,
+In an attempt to answer this question,
 it seems reasonable to me that we would define the reflection of a
 traditional conformal geometry, (one represented by a constant geometric function),
 in a geometry represented by non-constant geometric functions as follows.
-\begin{definition}
+\begin{definition}\label{def_geo_func_reflection}
 Let $B\in\G$ be dually representative of any conformal geometry,
 and let $g:\V^n\to\G$ be a dual geometric function.  Then the geometry
 that is the reflection of the geometry represented by $B$ in the
@@ -1368,7 +1391,7 @@ represented by a geometric function.
 We say that a geometric function $g$ has the reflective property if for
 any $y\in\V^n$, $g(y)=g(x)$, where $x\in\V^n$ and $p(x)=g(y)p(y)g^{-1}(y)$.
 \end{definition}
-\begin{result}
+\begin{result}\label{rslt_geo_func_reflect}
 Let $g:\V^n\to\G$ be a dual geometric function possessing the reflective property,
 and let $B$ be a blade dually representative of any conformal geometry.  Then
 the geometric function $r:\V^n\to\G$ given by
@@ -1392,6 +1415,25 @@ Let $y$ be the point such that $p(x)=g(y)p(y)g^{-1}(y)$.
 It then follows that $g(x)[p(y)\cdot B]g^{-1}(x)=0$, which
 implies that $p(y)\cdot B=0$.
 \end{proof}
+
+It is easy to show that geometric function in equation $\eqref{equ_cylinder}$ has
+the reflective property.  Notice first that for all $x\in\V^n$, that $g(x)$ is dually
+representative of a sphere centered at $y=c+((x-c)\cdot v)v$.  Then realizing that any spherical
+reflection of $x$ in this sphere will move it along a line containing $x$ and $y$,
+we need only show that $g(x)=g(\lambda y+(1-\lambda )x)$ for any $\lambda\in\R$.
+Indeed, as the reader can check, we have
+\begin{equation*}
+c+((\lambda y+(1-\lambda)x-c)\cdot v)v = c+((x-c)\cdot v)v.
+\end{equation*}
+We can now conclude by result $\eqref{rslt_geo_func_reflect}$ that the notion of reflectance given in
+definition $\eqref{def_geo_func_reflection}$ is represented
+by the geometric function $g(x)Bg^{-1}(x)$.  The question now is: given a
+blade $B$ representative of certain geometries, how can we relate this
+geometric function to one in a canonical form?  Without such a relation,
+we can't make much use of our geometric function in terms of deciphering
+the characteristics of the geometry it represents.
+
+Go on...
 
 \section{Concluding Remarks}
 
