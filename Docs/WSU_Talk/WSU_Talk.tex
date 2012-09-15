@@ -21,6 +21,27 @@
 \frame{\titlepage}
 
 \begin{frame}
+\frametitle{What is CGA?}
+\begin{equation*}
+\left\{\begin{array}{c}
+\mbox{Synthetic} \\
+\mbox{geometry}
+\end{array}\right\}
+\Longleftrightarrow
+\left\{\begin{array}{c}
+\mbox{Computational} \\
+\mbox{geometry}
+\end{array}\right\}
+\end{equation*}\pause
+Proofs will often freely mix synthetic and algebraic arguments.\pause
+
+Geometries are elements of computation.\pause
+
+Invented by \alert{David Hestens} in his paper, "Old Wine in New Bottles:
+A new algebraic framework for computational geometry."
+\end{frame}
+
+\begin{frame}
 \frametitle{Presentation Outline}
 In this presentation, we will...\pause
 \begin{itemize}
@@ -67,6 +88,23 @@ Our geometric arguments will not require us to visualize the homogeneous represe
 %====================================
 
 \begin{frame}
+\frametitle{Blades May Represent Vector Sub-Spaces}
+Recall that $B = b_1\wedge\dots\wedge b_m$.\pause
+\begin{definition}
+For any $v\in\V^n$, we say that
+\begin{equation*}
+\mbox{$v\in B$ if and only if $v\in\mbox{span}\{b_k\}_{k=1}^m$}.
+\end{equation*}
+\end{definition}\pause
+\begin{definition}
+If $v\not\in B$, then $v\in B^*$, which represents the complement $(\V^n-\mbox{span}\{b_k\}_{k=1}^m)\cup\{0\}$.
+\end{definition}
+\end{frame}
+%====================================
+% No need to use unit psuedo-scalar in this presentation; we will use this notation.
+%====================================
+
+\begin{frame}
 \frametitle{Building Intuition About Euclidean Blades}
 Let $v_{\parallel}$ denote the orthogonal \alert{projection} of $v$ down onto $B$.\pause
 
@@ -87,23 +125,6 @@ of $B$ with respect to $\V^n$.
 %====================================
 % Explain the orthogonal projection and rejection.
 % The outer product builds up dimension, while the inner product removes it.
-%====================================
-
-\begin{frame}
-\frametitle{Blades May Represent Vector Sub-Spaces}
-Recall that $B = b_1\wedge\dots\wedge b_m$.\pause
-\begin{definition}
-For any $v\in\V^n$, we say that
-\begin{equation*}
-\mbox{$v\in B$ if and only if $v\in\mbox{span}\{b_k\}_{k=1}^m$}.
-\end{equation*}
-\end{definition}\pause
-\begin{definition}
-If $v\not\in B$, then $v\in B^*$, which represents the complement $(\V^n-\mbox{span}\{b_k\}_{k=1}^m)\cup\{0\}$.
-\end{definition}
-\end{frame}
-%====================================
-% No need to use unit psuedo-scalar in this presentation; we will use this notation.
 %====================================
 
 \begin{frame}
