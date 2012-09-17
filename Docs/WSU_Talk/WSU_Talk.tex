@@ -16,6 +16,8 @@
 \newcommand{\nvai}{\infty}
 \newcommand{\grade}{\mbox{grade}}
 
+% linearized conformal transformations?
+
 \begin{document}
 
 \frame{\titlepage}
@@ -36,6 +38,8 @@
 Proofs will often freely mix synthetic and algebraic arguments.\pause
 
 Geometries are elements of computation.\pause
+
+The versor group is a double cover for the group of conformal transformations.\pause
 
 Invented by \alert{David Hestens} in his paper, "Old Wine in New Bottles:
 A new algebraic framework for computational geometry."
@@ -97,7 +101,11 @@ For any $v\in\V^n$, we say that
 \end{equation*}
 \end{definition}\pause
 \begin{definition}
-If $v\not\in B$, then $v\in B^*$, which represents the complement $(\V^n-\mbox{span}\{b_k\}_{k=1}^m)\cup\{0\}$.
+For any $v\in\V^n$, we say that
+\begin{equation*}
+\mbox{$v\not\in B$ if and only if $v\in B^*$,}
+\end{equation*}
+where $B^*$ represents the complement $(\V^n-\mbox{span}\{b_k\}_{k=1}^m)\cup\{0\}$.
 \end{definition}
 \end{frame}
 %====================================
@@ -109,6 +117,8 @@ If $v\not\in B$, then $v\in B^*$, which represents the complement $(\V^n-\mbox{s
 Let $v_{\parallel}$ denote the orthogonal \alert{projection} of $v$ down onto $B$.\pause
 
 Let $v_{\perp}=v-v_{\parallel}$ denote the orthogonal \alert{rejection} of $v$ from $B$.\pause
+
+Notice that $v_{\parallel}\in B$, but $v_{\perp}\not\in B$.\pause
 
 For any vector $v\in\V^n$, we have
 \begin{align*}
@@ -299,14 +309,6 @@ therefore, we have $\grade(B)=\grade(VBV^{-1})$.
 %====================================
 
 \begin{frame}
-\frametitle{Versors May Represent Transformations}
-It follows that versors may be used to represent transformations
-of geometry as versors conjugated with blades representative of geometry.\pause
-
-Given $G(B)$, it will be interesting to investigate $G(VBV^{-1})$.
-\end{frame}
-
-\begin{frame}
 \frametitle{The Specifics Of The Conformal Model}
 Replace $\R^n$ with $\V^n$.\pause
 
@@ -488,17 +490,18 @@ Lastly, $\grade(B) = m+1 = n+2-(n-m+1) = n+2-\grade(A) = \grade(A^*)$.
 \begin{frame}
 \frametitle{A Generalization Of Cospherical}
 \begin{definition}
-For $m\geq 1$, a set of $m+1$ points $\{x_k\}_{k=1}^{m+1}\subset\V^n$ are \alert{co-$m$-hyper-planar} if...
+For $m\geq 1$, a set of $m+1$ points $\{x_k\}_{k=1}^{m+1}\subset\V^n$ are \alert{co-$m$-hyper-spherical} if...
 \begin{equation*}
 \begin{array}{l}
-\mbox{For $m=1$, the points are co-point-pair (distinct),} \\
+\mbox{For $m=1$, the points are co-point-pair,} \\
 \mbox{For $m=2$, the points are co-circular,} \\
 \mbox{For $m=3$, the points are co-spherical,} \\
 \mbox{For $m=4$, the points are co-hyper-spherical,} \\
 \mbox{etc...}
 \end{array}
 \end{equation*}
-\end{definition}
+\end{definition}\pause
+The round in question could be degenerate.
 \end{frame}
 
 \begin{frame}
