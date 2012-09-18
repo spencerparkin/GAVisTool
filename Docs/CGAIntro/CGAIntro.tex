@@ -137,9 +137,10 @@ then $v\in A\wedge B$, which is to say that $v$ is in the union of the vector su
 represented by $A$ and $B$.
 \end{proof}
 To see why the converse of theorem $\eqref{thm_union_and_more}$ does not generally hold,
-realize that if $v\in A\wedge B$, then the vector sub-space of $A\wedge B$ of smallest dimension
-containing $v$ might non-trivially overlap both $A$ and $B$, showing that $v\not\in A$ and
-$v\not\in B$.
+consider the case when $v$ is a linear combination of all vectors making up $A\wedge B$, such
+that no vector is unused.
+Then the vector space represented by $v$ is not a sub-space of that represented by $A$ or $B$,
+showing that $v\not\in A$ and $v\not\in B$.
 
 Applying theorem $\eqref{thm_union_and_more}$, we get the following result.
 \begin{result}\label{rslt_union_and_more}
@@ -251,7 +252,7 @@ geometries using the union-like result $\eqref{rslt_union_and_more}$.  Interesti
 find is that we can generate the above geometries using this method.
 We start with a definition.
 \begin{definition}\label{def_co_hyper_planar}
-For all $m\geq 0$, we say that the $m+2$ points $\{x_k\}_{k=1}^{m+2}\subset\V^n$
+For all $m\geq 0$, we say that a set of points
 are co-$m$-hyper-planar under the following circumstances.
 \begin{equation*}
 \begin{array}{l}
@@ -262,8 +263,7 @@ are co-$m$-hyper-planar under the following circumstances.
 \mbox{etc.}
 \end{array}
 \end{equation*}
-Here, $m$ corresponds to the dimension of the flat upon which all $m+2$
-points lie.
+Here, $m$ corresponds to the dimension of the flat upon which all the points lie.
 \end{definition}
 We then need the following theorem supported by the following lemma.
 \begin{lemma}\label{lma_lin_combo_points_is_inf}
@@ -356,11 +356,11 @@ we get?  To answer this question, we need to start with another definition.
 %Well, we already know that if the $m+1$ points are co-$(m-1)$-hyper-spherical,
 %then the outer product of the vectors directly representative of those points must be zero.
 \begin{definition}\label{def_co_hyper_spherical}
-For all $m\geq 0$, we say that the $m+2$ points $\{x_k\}_{k=1}^{m+2}\subset\V^n$
+For all $m\geq 1$, we say that a set of points
 are co-$m$-hyper-spherical under the following circumstances.
 \begin{equation*}
 \begin{array}{l}
-\mbox{For $m=0$, the points are identical.} \\
+%\mbox{For $m=0$, the points are identical.} \\
 \mbox{For $m=1$, the points are co-point-pair.} \\
 \mbox{For $m=2$, the points are co-circular.} \\
 \mbox{For $m=3$, the points are co-spherical.} \\
@@ -368,7 +368,7 @@ are co-$m$-hyper-spherical under the following circumstances.
 \mbox{etc.}
 \end{array}
 \end{equation*}
-Here, $m$ corresponds to the dimension of the non-degenerate round upon
+Here, $m$ corresponds to the dimension of the round, (which may or may not be degenerate), upon
 which all $m+2$ points lie.
 \end{definition}
 

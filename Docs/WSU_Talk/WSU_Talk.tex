@@ -187,8 +187,7 @@ G(A)\cup G(B)\subseteq G(A\wedge B).
 \implies & \mbox{$p(x)\in A\wedge B$}
 \end{align*}
 \end{proof}\pause
-Let $C\subseteq A\wedge B$ represent the smallest vector sub-space such that $p(x)\in C$.
-Then we might have $C\not\subseteq A$ and $C\not\subseteq B$.
+Why doesn't the converse hold?
 \end{frame}
 %====================================
 % The outer product of two blades, if non-zero, gives us at least
@@ -439,7 +438,7 @@ $0$-dimensional \alert{flats} are called \alert{flat points}.
 \begin{frame}
 \frametitle{A Generalization Of Coplanarity}
 \begin{definition}
-For $m\geq 0$, a set of $m+2$ points $\{x_k\}_{k=1}^{m+2}\subset\V^n$ are \alert{co-$m$-hyper-planar} if...
+For $m\geq 0$, a set of points are \alert{co-$m$-hyper-planar} if...
 \begin{equation*}
 \begin{array}{l}
 \mbox{For $m=0$, the points are identical,} \\
@@ -490,7 +489,7 @@ Lastly, $\grade(B) = m+1 = n+2-(n-m+1) = n+2-\grade(A) = \grade(A^*)$.
 \begin{frame}
 \frametitle{A Generalization Of Cospherical}
 \begin{definition}
-For $m\geq 1$, a set of $m+1$ points $\{x_k\}_{k=1}^{m+1}\subset\V^n$ are \alert{co-$m$-hyper-spherical} if...
+For $m\geq 1$, a set of points are \alert{co-$m$-hyper-spherical} if...
 \begin{equation*}
 \begin{array}{l}
 \mbox{For $m=1$, the points are co-point-pair,} \\
@@ -500,8 +499,7 @@ For $m\geq 1$, a set of $m+1$ points $\{x_k\}_{k=1}^{m+1}\subset\V^n$ are \alert
 \mbox{etc...}
 \end{array}
 \end{equation*}
-\end{definition}\pause
-The round in question could be degenerate.
+\end{definition}
 \end{frame}
 
 \begin{frame}
@@ -585,6 +583,9 @@ VBV^{-1} = V\left(\bigwedge_{k=1}^m p(x_k)\right)V^{-1} = \bigwedge_{k=1}^m Vp(x
 \end{equation*}\pause
 Therefore, if we understand how $V$ transforms $p(x)$ for any $x\in\V^n$, then we can
 predict how $V$ transforms any geometry, (\alert{except flat points})!\pause
+
+If we know how a desired transformation transformas a point, then we have
+found that transformation for any conformal geometry, (\alert{except flats points})!\pause
 
 A versor may or may not leave $\nvai$ invariant under conjugation.
 \end{frame}
