@@ -24,6 +24,7 @@
 
 \begin{frame}
 \frametitle{What is CGA?}
+\pause
 \begin{equation*}
 \left\{\begin{array}{c}
 \mbox{Synthetic} \\
@@ -47,6 +48,7 @@ A new algebraic framework for computational geometry."
 
 \begin{frame}
 \frametitle{Presentation Outline}
+\pause
 In this presentation, we will...\pause
 \begin{itemize}
 \item Introduce concepts from GA only as necessary,\pause
@@ -59,6 +61,7 @@ In this presentation, we will...\pause
 
 \begin{frame}
 \frametitle{Blades}
+\pause
 Let $\V^n$ denote an $n$-dimensional vector space.\pause
 
 Let $\{b_k\}_{k=1}^m$ be a set of $m$ vectors taken from $\V^n$.\pause
@@ -77,6 +80,7 @@ Clearly, if $B\neq 0$, then we must have $\grade(B)=m\leq n$.
 
 \begin{frame}
 \frametitle{Visualizing Euclidean Blades}
+\pause
 Imagine an \alert{infinite} $m$-dimensional hyper-plane.\pause
 
 Think of $B$ as a \alert{finite} $m$-dimensional hyper-plane.\pause
@@ -93,6 +97,7 @@ Our geometric arguments will not require us to visualize the homogeneous represe
 
 \begin{frame}
 \frametitle{Blades May Represent Vector Sub-Spaces}
+\pause
 Recall that $B = b_1\wedge\dots\wedge b_m$.\pause
 \begin{definition}
 For any $v\in\V^n$, we say that
@@ -114,6 +119,7 @@ where $B^*$ represents the complement $(\V^n-\mbox{span}\{b_k\}_{k=1}^m)\cup\{0\
 
 \begin{frame}
 \frametitle{Building Intuition About Euclidean Blades}
+\pause
 Let $v_{\parallel}$ denote the orthogonal \alert{projection} of $v$ down onto $B$.\pause
 
 Let $v_{\perp}=v-v_{\parallel}$ denote the orthogonal \alert{rejection} of $v$ from $B$.\pause
@@ -139,6 +145,7 @@ of $B$ with respect to $\V^n$.
 
 \begin{frame}
 \frametitle{Membership in Vector Spaces and Dual Vector Spaces}
+\pause
 If $B\neq 0$, then $v\in B$ if and only if $v\wedge B=0$.\pause
 \begin{proof}
 The set $\{b_k\}_{k=1}^m$ is linearly independent while the set $\{v\}\cup\{b_k\}_{k=1}^m$ is linearly dependent.
@@ -155,6 +162,7 @@ Notice that $0=v\cdot B=(v\wedge B^*)^*$ if and only if $v\wedge B^*=0$.
 % when the time comes, use V^{n+2} to denote the rep space
 \begin{frame}
 \frametitle{Blades May Represent Geometries}
+\pause
 Let $\R^n$ denote $n$-dimensional Euclidean space.\pause
 
 Let $p:\R^n\to\G(\V^n)$ be a vector-valued function of a Euclidean point.\pause
@@ -177,6 +185,7 @@ Note that $G(B)=G^*(B^*)$ and $G^*(B)=G(B^*)$.
 
 \begin{frame}
 \frametitle{We Can Combine Geometries}
+\pause
 For any two blades $A,B\in\G(\V^n)$ such that $A\wedge B\neq 0$, we have
 \begin{equation*}
 G(A)\cup G(B)\subseteq G(A\wedge B).
@@ -199,6 +208,7 @@ Why doesn't the converse hold?
 
 \begin{frame}
 \frametitle{We Can Intersect Geometries}
+\pause
 For any two blades $A,B\in\G(\V^n)$ such that $A\wedge B\neq 0$,
 we have
 \begin{equation*}
@@ -221,17 +231,22 @@ G^*(A)\cap G^*(B)=G^*(A\wedge B).
 
 \begin{frame}
 \frametitle{Fundamental Construction Methods}
+\pause
 Fundamental construction methods in CGA include...\pause
 \begin{itemize}
 \item \alert{Intersecting} geometry -- $G^*(A\wedge B)$,\pause
 \item \alert{Combining} geometry -- $G(A\wedge B)$,\pause
-\item \alert{Reinterpreting} geometry -- $G(B)$ versus $G^*(B)$
+\item \alert{Reinterpreting} geometry -- $G(B)$ versus $G^*(B)$\pause
 \end{itemize}
 %Meet, join, and plunge should also be studied.
+With a \alert{fixed} geometry, we have \alert{freedom} in representation -- dually or directly represented.\pause
+
+With a \alert{fixed} representation, we have \alert{freedom} in geometry -- dually or directly interpreted.
 \end{frame}
 
 %\begin{frame}
 %\frametitle{Real And Imaginary Geometry}
+%\pause
 %Notice that $G^*(A\wedge B)=\emptyset$ if and only if $G(A\wedge B)\neq\emptyset$.\pause
 %
 %A \alert{direct} \alert{real} round is also a \alert{dual} \alert{imaginary} round
@@ -246,6 +261,7 @@ Fundamental construction methods in CGA include...\pause
 %
 %\begin{frame}
 %\frametitle{Visualization Of Example}
+%\pause
 %\begin{figure}
 %\centering
 %\includegraphics[scale=0.4]{ContourOfCircleFromPoint}
@@ -255,6 +271,7 @@ Fundamental construction methods in CGA include...\pause
 
 \begin{frame}
 \frametitle{The Homogeneous Nature Of The Model}
+\pause
 For any non-zero scalar $\lambda$, we have $G(B)=G(\lambda B)$.\pause
 
 For any blade $B$, there is a scalar $\lambda$ such that $\lambda B$ is a homogenized form.\pause
@@ -265,6 +282,7 @@ WRT to that operation.
 
 \begin{frame}
 \frametitle{The Geometric Product}
+\pause
 \begin{definition}
 For any vector $v\in\V^n$ and any blade $B\in\G(\V^n)$, we define
 \begin{equation*}
@@ -280,6 +298,7 @@ vB = v\cdot B + v\wedge B.
 
 \begin{frame}
 \frametitle{Versors}
+\pause
 Let $\{v_k\}_{k=1}^m$ be any set of $m$ vectors.\pause
 \begin{definition}
 We say the element $V\in\G(\V^n)$, given by
@@ -296,6 +315,7 @@ Notice that $v^{-1}=v/v^2$.
 
 \begin{frame}
 \frametitle{The Inverse And The Reverse Of Versors}
+\pause
 \begin{definition}
 Given the versor $V=v_1\dots v_m$, we define
 \begin{equation*}
@@ -310,6 +330,7 @@ V^{-1} = \frac{\tilde{V}}{V\tilde{V}}.
 
 \begin{frame}
 \frametitle{The Versor Group}
+\pause
 Versors form a group under the geometric product.\pause
 \begin{proof}
 \alert{Associativity} follows from the associativity of the geometric product.
@@ -322,6 +343,7 @@ For every versor $V$, there exists an \alert{inverse} $V^{-1}$ such that $VV^{-1
 
 \begin{frame}
 \frametitle{Properties Of Versors}
+\pause
 Conjugation by versors is \alert{outermorphic}!\pause
 
 Recall that $B=b_1\wedge\dots\wedge b_m$.
@@ -343,6 +365,7 @@ therefore, we have $\grade(B)=\grade(VBV^{-1})$.
 
 \begin{frame}
 \frametitle{The Specifics Of The Conformal Model}
+\pause
 Replace $\R^n$ with $\V^n$.\pause
 
 Embed $\V^n$ in $\V^{n+2}$ as a \alert{Euclidean} vector sub-space of a \alert{non-Euclidean} vector space.\pause
@@ -366,6 +389,7 @@ Having \alert{invented} this specific model, what we are now able to \alert{disc
 
 \begin{frame}
 \frametitle{Points in $n$-dimensional Space}
+\pause
 For any $c\in\V^n$, the vector $p(c)$ both \alert{dually} and \alert{directly} represents the point $c$ in space.\pause
 
 That is, $G(p(c)) = G^*(p(c)) = \{c\}$.
@@ -377,6 +401,7 @@ That is, $G(p(c)) = G^*(p(c)) = \{c\}$.
 
 \begin{frame}
 \frametitle{$n$-dimensional \alert{Dual} Hyper-Spheres}
+\pause
 The function $p(x)$ factors out of the equation
 \begin{equation*}
 (x-c)^2 - r^2 = 0
@@ -396,6 +421,7 @@ We may refer to $p(c)$ as a \alert{round} point.
 
 \begin{frame}
 \frametitle{Generating All \alert{Dual Rounds} Of CGA}
+\pause
 Let $\{\sigma_k\}_{k=1}^m$ be $m$ spheres of dimension $n$ having a \alert{non-empty} and
 \alert{non-degenerate} intersection.\pause
 
@@ -423,6 +449,7 @@ B = \bigwedge_{k=1}^m\sigma_k,
 
 \begin{frame}
 \frametitle{$(n-1)$-dimensional \alert{Dual} Hyper-Planes}
+\pause
 The function $p(x)$ factors out of the equation
 \begin{equation*}
 (x-c)\cdot v = 0
@@ -435,6 +462,7 @@ p(x)\cdot\left(v+(c\cdot v)\nvai\right) = 0.
 
 \begin{frame}
 \frametitle{Generating All \alert{Dual Flats} Of CGA}
+\pause
 Let $\{\pi_k\}_{k=1}^m$ be $m$ planes of dimension $n-1$ having a \alert{non-empty} and
 \alert{non-degenerate} intersection.\pause
 
@@ -471,6 +499,7 @@ $0$-dimensional \alert{flats} are called \alert{flat points}.
 
 \begin{frame}
 \frametitle{A Generalization Of Coplanarity}
+\pause
 \begin{definition}
 For $m\geq 0$, a set of points are \alert{co-$m$-hyper-planar} if...
 \begin{equation*}
@@ -487,6 +516,7 @@ For $m\geq 0$, a set of points are \alert{co-$m$-hyper-planar} if...
 
 \begin{frame}
 \frametitle{A Condition For Linear Independents Of Points}
+\pause
 \begin{lemma}
 For $m\geq 1$, if $m+1$ points $\{x_k\}_{k=1}^{m+1}\subset\V^n$ are non-co-$(m-1)$-hyper-planar,
 then $\{p(x_k)\}_{k=1}^{m+1}$ is a linearly independent set.
@@ -496,6 +526,7 @@ The proof is not hard, but too big for this slide.
 
 \begin{frame}
 \frametitle{Generating All \alert{Direct Rounds} Of CGA}
+\pause
 Let $m\geq 1$.
 For $m+1$ points $\{x_k\}_{k=1}^{m+1}\subset\V^n$ on an $m$-dimensional
 hyper-sphere that are non-co-$(m-1)$-hyper-planar,
@@ -522,6 +553,7 @@ Lastly, $\grade(B) = m+1 = n+2-(n-m+1) = n+2-\grade(A) = \grade(A^*)$.
 
 \begin{frame}
 \frametitle{A Generalization Of Cospherical}
+\pause
 \begin{definition}
 For $m\geq 1$, a set of points are \alert{co-$m$-hyper-spherical} if...
 \begin{equation*}
@@ -538,6 +570,7 @@ For $m\geq 1$, a set of points are \alert{co-$m$-hyper-spherical} if...
 
 \begin{frame}
 \frametitle{Generating \alert{Almost} All \alert{Direct Flats} Of CGA}
+\pause
 Let $m\geq 1$.
 For $m+2$ points $\{x_k\}_{k=1}^{m+2}\subset\V^n$ on an $m$-dimensional hyper-plane that
 are \alert{(1)} non-co-$(m-1)$-hyper-planar and \alert{(2)} non-co-$m$-hyper-spherical, the blade $B$,
@@ -547,9 +580,10 @@ B = \bigwedge_{k=1}^{m+2} p(x_k),
 \end{equation*}
 \alert{directly} represents the $m$-dimensional hyper-plane.\pause
 \begin{proof}
-By \alert{(1)}, there exists the $(n-m)$-blade $A$ \alert{dually} representative of the
-$m$-dimensional hyper-plane.  By \alert{(2)}, $B\neq 0$.  Lastly,
-$\grade(B)=m+2=n+2-(n-m)=n+2-\grade(A)=\grade(A^*)$.
+By \alert{(1)}, and WLOG, $p(x_1)\wedge\dots\wedge p(x_{m+1})$ is a
+\alert{direct} $m$-dimensional round.  By \alert{(2)}, $B\neq 0$.
+Let the $(n-m)$-blade $A$ \alert{dually} represent the $m$-dimensional
+hyper-plane. Then $\grade(B)=m+2=n+2-(n-m)=n+2-\grade(A)=\grade(A^*)$.
 \end{proof}
 \end{frame}
 %====================================
@@ -559,6 +593,7 @@ $\grade(B)=m+2=n+2-(n-m)=n+2-\grade(A)=\grade(A^*)$.
 
 \begin{frame}
 \frametitle{Generating All \alert{Direct Flats} Of CGA}
+\pause
 Let $m\geq 0$.  For $m+1$ points $\{x_k\}_{k=1}^{m+1}\subset\V^n$ on an $m$-dimensional
 hyepr-plane that are non-co-$(m-1)$-hyper-planar, the blade $B$, give by
 \begin{equation*}
@@ -573,6 +608,7 @@ The proof, again, is not hard, but can't fit here.
 
 \begin{frame}
 \frametitle{Quiz Time!}
+\pause
 \alert{Question}: Given a \alert{dual} line $L$ and a point $P$ not on $L$,
 how do I find the \alert{dual} plane $N$ containing $L$ and $P$?\pause
 
@@ -585,23 +621,32 @@ how do I find the \alert{dual} plane $N$ containing $L$ and $P$?\pause
 
 \alert{Question}: Let $S$ be a \alert{dual} sphere that intersects a \alert{dual} plane $N$ in more than one point, and let $P$ be a point on $S$ but not on $N$.  Then, if $P'$ is the reflection of $P$ about $N$, what is the \alert{dual} sphere reflection $S'$ of $S$ about $N$?\pause
 
-\alert{Answer}: $S' = (P'\wedge(S\wedge N)^*)^* = P'\cdot(S\wedge N) = (P'\cdot S)N - (P'\cdot N)S$.
+\alert{Answer}: $S' = (P'\wedge(S\wedge N)^*)^* = P'\cdot(S\wedge N) = (P'\cdot S)N - (P'\cdot N)S$.\pause
+
+\alert{Better Answer}: $S' = NSN^{-1}$.
 \end{frame}
 
 \begin{frame}
 \frametitle{The Fun Just Doesn't Stop!}
+\pause
 \alert{Question}: Let $S$ \alert{dually} represent the planet Saturn and let the $R$ \alert{directly} represent
 one of Saturn's rings.  If this ring fell out of orbit, let the \alert{direct} circle $F$ on the surface of $S$ approximate
 the debris field.  What is $F$?\pause
 
 \alert{Answer}: $F = (S\wedge (R\wedge\nvai)^*)^* = S\cdot (R\wedge\nvai) = (S\cdot R)\nvai - (S\cdot\nvai)R$.\pause
 
-\alert{Question}: Let $\{N_k\}_{k=0}^3$ be 4 \alert{dual} planes forming the sides of
-a non-degenerate tetrahedron, and let $S$ be a \alert{dual} sphere containing all
-4 vertices of the tetrahedron.  If all planes are known, how do we find $S$?
-If $S$ is known and all planes save one, how do we find the remaining plane?\pause
+\alert{Question}: Given a \alert{dual} sphere $S$ and a point $P$ not on $S$, find
+the dual circle $C$ that is the countour $S$ as seen from $P$.\pause
 
-\alert{Answer}: Not very pretty!
+\alert{Answer}: Let $Q = S\wedge(P\wedge\nvai)^*$, then $C = Q^*\wedge S$.
+% An example of re-interpretation.
+
+%\alert{Question}: Let $\{N_k\}_{k=0}^3$ be 4 \alert{dual} planes forming the sides of
+%a non-degenerate tetrahedron, and let $S$ be a \alert{dual} sphere containing all
+%4 vertices of the tetrahedron.  If all planes are known, how do we find $S$?
+%If $S$ is known and all planes save one, how do we find the remaining plane?\pause
+%
+%\alert{Answer}: Not very pretty!
 
 \end{frame}
 
@@ -624,7 +669,17 @@ If $S$ is known and all planes save one, how do we find the remaining plane?\pau
 \end{frame}
 
 \begin{frame}
+\frametitle{Pictures Of Quiz Answers (Continued)}
+\begin{figure}
+\centering
+\includegraphics[scale=0.4]{ContourOfCircleFromPoint}
+\caption{The contour of a circle as seen from a point.}
+\end{figure}
+\end{frame}
+
+\begin{frame}
 \frametitle{Transformations Of \alert{Direct} Geometry By Versors}
+\pause
 Recall the \alert{outermorphic} property of versors!\pause
 
 Then, if the $m$-blade $B$ \alert{directly} represents
@@ -649,6 +704,7 @@ A versor may or may not leave $\nvai$ invariant under conjugation.
 
 \begin{frame}
 \frametitle{Transformations Of \alert{Dual} Geometry By Versors}
+\pause
 If the $m$-blade $B$ \alert{dually} represents any geometry, then we can write
 \begin{equation*}
 VBV^{-1} = V(B^*)^*V^{-1} = (VB^*V^{-1})^*,
@@ -660,6 +716,7 @@ relating this to what we know about the transformation of $\alert{directly}$ rep
 
 \begin{frame}
 \frametitle{Types Of Transformations By Versors}
+\pause
 All conformal transformations can be represented by \alert{versors}!
 
 Some of these include...
@@ -677,6 +734,7 @@ Some of these include...
 
 \begin{frame}
 \frametitle{Surprise!}
+\pause
 \alert{Blades} representative of geometry are also \alert{versors} representative of transformations!\pause
 \begin{itemize}
 \item \alert{Planar reflections} are represented by a dual planes!\pause
@@ -721,7 +779,7 @@ Some of these include...
 \includegraphics[scale=0.3]{SphericalReflectionFigure}
 \caption{How we define spherical reflections.}
 \end{figure}\pause
-It can be shown that $b = c+\lambda(b-a)$, where $\lambda=r^2/(c-a)^2$.
+It can be shown that $b = c+\lambda(a-c)$, where $\lambda=r^2/(a-c)^2$.
 \end{frame}
 
 \begin{frame}
@@ -798,7 +856,7 @@ It can be shown that $b = c+\lambda(b-a)$, where $\lambda=r^2/(c-a)^2$.
 
 \begin{frame}
 \frametitle{The End}
-Thank you for your time.
+\alert{Thank you} for your time.
 Any questions?
 \end{frame}
 
