@@ -183,11 +183,11 @@ ConformalLine::ConformalLine( BindType bindType ) : GAVisToolGeometry( bindType 
 	sprintf_s( decompositionCode, sizeof( decompositionCode ),
 		"do("
 		"%s"
-		"n = ( no . ( lin^ni ) )*i,"
+		"n = grade_part( 1, ( no . ( lin^ni ) )*i ),"
 		"w = sqrt( n . n ),"
 		"n = n / w,"
 		"lin = lin / w,"
-		"v = -n*( no . lin )*i,"
+		"v = grade_part( 1, -n*( no . lin )*i ),"
 		"x = scalar_part( v, e0 ),"
 		"y = scalar_part( v, e1 ),"
 		"z = scalar_part( v, e2 ),"
