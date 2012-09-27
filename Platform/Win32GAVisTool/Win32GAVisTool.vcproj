@@ -416,6 +416,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\Code\WinApp\Geometries\QuadricGeometry.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Code\WinApp\Geometries\QuadricGeometry.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\Code\WinApp\Geometries\RoundGeometry.cpp"
 					>
 				</File>

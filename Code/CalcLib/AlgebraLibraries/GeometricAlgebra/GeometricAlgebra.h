@@ -35,6 +35,10 @@ namespace GeometricAlgebra
 	class Vector_e3;
 	class Vector_no;
 	class Vector_ni;
+	class Vector_e4;
+	class Vector_e5;
+	class Vector_e6;
+	class Vector_e7;
 }
 
 //=========================================================================================
