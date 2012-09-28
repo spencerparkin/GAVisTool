@@ -156,7 +156,10 @@ and $\overline{e}_{i+n+1}=e_i$.  Notice that the over-bar operator
 is an outermorphic function and that we may apply it to any element
 of the geometric algebra $\G(\W^{2(n+1)})$.
 
-We are now ready to give the high-level form of equation \eqref{equ_lowlevel_equation} as
+We are now ready to give the high-level form of equation \eqref{equ_lowlevel_equation}
+as\footnote{Here and throughout this paper, we assume that the outer product takes
+precedence over the inner product.  We also assume that the geometric product takes
+precedence over the inner and outer products.}
 \begin{equation}\label{equ_highlevel_equation}
 0 = p\wedge\overline{p}\cdot B,
 \end{equation}
@@ -170,8 +173,14 @@ of as representative of this quadric.
 
 Realizing that we need to be careful, because the inner product is not associative,
 it is interesting to write equation \eqref{equ_highlevel_equation} in a form
-similar to that of equation \eqref{equ_quadric_matrix_equation}, which
-resembles conjugation of $B$ by $p$.  Doing so, we get $0 = p\cdot B\cdot\overline{p}$.
+similar to that of equation \eqref{equ_quadric_matrix_equation}.  Doing so, we get
+\begin{equation}\label{equ_conjugation_form}
+0 = p\cdot B\cdot\overline{p}.
+\end{equation}
+We can get away with this, because the choice of associativity here only changes
+the sign of the right-hand side, and the sign of the left-hand side clearly doesn't matter.
+Considering $\overline{p}$ a type of conjugate to $p$, we may refer to equation
+\eqref{equ_conjugation_form} as the inner product conjugation of $B$ by $p$.
 
 \section{Using The Quadric Equation}
 
@@ -182,7 +191,7 @@ Notice that in our model we can make a distinction between members of $\V^{n+1}$
 representative of points and those representative of directions.  Specifically, a vector $v\in\V^{n+1}$
 is a direction if and only if $v\cdot e_0=0$.  While we will use an arrow accent to distinguish
 between direction vectors and position vectors, there should be no confusion on the form
-of a vector and what we intend it to represent when we refer to it as a direction or a vector.
+of a vector and what we intend it to represent when we refer to it as a direction or a position.
 Similarly, we will take the liberty of referring to bivectors taken
 from $\G(\V^{2(n+1)})$ as quadrics.  This helps eliminate phrases that would otherwise sound a bit
 too pedantic.
@@ -192,7 +201,7 @@ With all of that said, letting $f:\V^{n+1}\to\R$ be the function defined as
 f(x) = x\wedge\overline{x}\cdot B,
 \end{equation}
 we arrive at our first lemma as follows.
-\begin{lemma}
+\begin{lemma}\label{lma_flat_quadric}
 Given any quadric $B$, if for all direction vectors $\vec{v}\in\V^{n+1}$,
 we have $f(\vec{v})=0$, then $B$ is a linear (flat) quadric.
 \end{lemma}
@@ -207,21 +216,28 @@ derivative of $f$ at $p$ in the direction of $\vec{x}$.  It follows that the tan
 space of any point on the quadric is also in the quadric.  The quadric is therefore
 flat at any point upon its surface.
 \end{proof}
-
-Show that $\nabla_{\vec{x}}f(p)=\vec{x}\cdot\nabla f(p)$.  It would follow that
-$\nabla f(p)$ is normal to the surface of the quadric, right?
-
-How do we find the flat quadric that is tangent to and touching another quadric?
-It might be
+Recaling that for any $x\in\V^{n+1}$, the definition of $\nabla f(x)$ is given by
 \begin{equation}
-(p\cdot\nabla f(p))e_0\overline{e}_0 + e_0\overline{\nabla f(p)}+\overline{e}_0\nabla f(p).
+\nabla f(x) = \sum_{i=0}^n e_i\nabla_{e_i}f(x),
 \end{equation}
+it is not hard to show that for any vector $y\in\V^{n+1}$, we have
+$y\cdot\nabla f(x)=\nabla_y f(x)$.  Seeing that $\vec{x}\cdot\nabla f(p)=\nabla_{\vec{x}}f(p)$
+in the light of Lemma~\ref{lma_flat_quadric},
+it follows that the direction $\vec{v}=e_0\cdot e_0\wedge\nabla f(p)$
+is normal to the surface of the quadric $B$ at $p$.  We can then formulate
+the quadric $A$ that is the plane tangent to $B$ at $p$ as follows.
+\begin{equation}
+A = (p\cdot\vec{v})e_0\overline{e}_0 + e_0\overline{\vec{v}}+\overline{e}_0\vec{v}
+\end{equation}
+
+There are undoubtedly more uses of equation \eqref{equ_highlevel_equation},
+but let us now turn our attention to the construction of certain classes of quadrics.
 
 \section{Quadric 2-Blades}
 
 All quadrics are bivectors, but not all bivectors are 2-blades.  Here
 we study the class of quadrics that are 2-blades.  For any four
-vectors $a,b,c,d\in\V^{n+1}$, such a quadric $B$ has the form
+points $a,b,c,d\in\V^{n+1}$, such a quadric $B$ has the form
 \begin{align}
 B &= (a+\overline{b})\wedge(c+\overline{d})\label{equ_quadric_twoblade} \\
  &= a\wedge c + a\wedge\overline{d} + \overline{b}\wedge c + \overline{b\wedge d}.\label{equ_quadric_twoblade_expanded}
