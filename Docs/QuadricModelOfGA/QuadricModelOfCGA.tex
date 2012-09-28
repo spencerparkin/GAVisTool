@@ -60,7 +60,7 @@
 \author{Spencer T. Parkin}
 \address{}
 \curraddr{}
-\email{spencer.parkin@disney.com}
+\email{spencer.parkin@gmail.com}
 \thanks{}
 
 %    author two information
@@ -196,11 +196,13 @@ Similarly, we will take the liberty of referring to bivectors taken
 from $\G(\V^{2(n+1)})$ as quadrics.  This helps eliminate phrases that would otherwise sound a bit
 too pedantic.
 
-With all of that said, letting $f:\V^{n+1}\to\R$ be the function defined as
+\subsection{Characterizing Flat Quadrics}
+
+Letting $f:\V^{n+1}\to\R$ be the function defined as
 \begin{equation}
 f(x) = x\wedge\overline{x}\cdot B,
 \end{equation}
-we arrive at our first lemma as follows.
+we arrive at our first lemma.
 \begin{lemma}\label{lma_flat_quadric}
 Given any quadric $B$, if for all direction vectors $\vec{v}\in\V^{n+1}$,
 we have $f(\vec{v})=0$, then $B$ is a linear (flat) quadric.
@@ -229,11 +231,9 @@ the quadric $A$ that is the plane tangent to $B$ at $p$ as follows.
 \begin{equation}
 A = (p\cdot\vec{v})e_0\overline{e}_0 + e_0\overline{\vec{v}}+\overline{e}_0\vec{v}
 \end{equation}
+A better way to formulate planes will be found in the next section.
 
-There are undoubtedly more uses of equation \eqref{equ_highlevel_equation},
-but let us now turn our attention to the construction of certain classes of quadrics.
-
-\section{Quadric 2-Blades}
+\subsection{Quadric 2-Blades}
 
 All quadrics are bivectors, but not all bivectors are 2-blades.  Here
 we study the class of quadrics that are 2-blades.  For any four
@@ -243,13 +243,48 @@ B &= (a+\overline{b})\wedge(c+\overline{d})\label{equ_quadric_twoblade} \\
  &= a\wedge c + a\wedge\overline{d} + \overline{b}\wedge c + \overline{b\wedge d}.\label{equ_quadric_twoblade_expanded}
 \end{align}
 It is curious to think what geometric significance the quadric $B$ has in relation
-to these four points.  Whatever the case may be, it clear from equation
-\eqref{equ_quadric_twoblade_expanded} that the quadric $B$ contains the intersection
+to these four points.  Whatever the case may be, it is clear from equation
+\eqref{equ_quadric_twoblade_expanded} that the quadric $B$ contains the intersection, if any,
 of the four quadrics appearing in the sum.  Considering the three forms of 2-blades
 found in the expansion of equation \eqref{equ_quadric_twoblade} to be more
 fundamental, (namely, $a\wedge c$, $\overline{b\wedge d}$ and
 the identical forms $a\wedge\overline{d}$ and $-c\wedge\overline{b}$), we'll
 start with a treatment of each of these forms.
+
+We first notice that the quadrics of the form $a\wedge c$ and $\overline{b\wedge d}$
+trivially represent the quadric of all space.  They therefore contribute nothing
+to the shape of $B$.  The remaining form $a\wedge\overline{d}$, therefore,
+deserves our full attention.  We break this form into two cases, the first being
+the case when $a=d$, and the second when $a\neq d$.
+
+In the first case, a quick application of equation
+\eqref{equ_highlevel_equation} reveals the type of quadric
+represented by $a\wedge\overline{a}$.  Doing so, we see that it represents
+the set of all projective points $p\in\V^{n+1}$ such that
+\begin{equation}
+0=p\wedge\overline{p}\cdot a\wedge\overline{a}=-(p\cdot a)^2,
+\end{equation}
+which holds if and only if $p\cdot a=0$.  In turn, this holds if and only if
+$p\cdot a/(a\cdot e_0)=0$.  Letting $p=e_0+\vec{p}$ and $a=e_0+\vec{a}$,
+our equation becomes
+\begin{equation}
+\vec{p}\cdot\frac{\vec{a}}{|\vec{a}|} = -\frac{1}{|\vec{a}|},
+\end{equation}
+where it is now clear that $a\wedge\overline{a}$ is a plane having
+a unit-normal of $\vec{a}/|\vec{a}|$ and containing the point $e_0-\vec{a}/|\vec{a}|^2$
+as the point on $a\wedge\overline{a}$ closest to the origin.
+
+In the second case, our use of equation \eqref{equ_highlevel_equation} is not nearly as
+revealing at first sight.
+\begin{equation}
+0 = p\wedge\overline{p}\cdot a\wedge\overline{d} = -(p\cdot a)(p\cdot d)
+\end{equation}
+Letting $p=e_0+\vec{p}$, $a=e_0+\vec{a}$ and $d=e_0+\vec{d}$, this
+equation becomes
+\begin{equation}
+-1 = \vec{p}\cdot(\vec{a}+\vec{d})+(\vec{p}\cdot\vec{a})(\vec{p}\cdot\vec{d}).
+\end{equation}
+Can we, without loss of generality, assume that $\vec{a}+\vec{d}=0$?
 
 %    Bibliographies can be prepared with BibTeX using amsplain,
 %    amsalpha, or (for "historical" overviews) natbib style.
