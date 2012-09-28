@@ -43,7 +43,7 @@
 
 \newcommand{\G}{\mathbb{G}}
 \newcommand{\V}{\mathbb{V}}
-\newcommand{\Vb}{\mathbb{\bar{V}}}
+\newcommand{\Vb}{\mathbb{\overline{V}}}
 \newcommand{\W}{\mathbb{W}}
 \newcommand{\R}{\mathbb{R}}
 
@@ -112,14 +112,14 @@ matrix equation
 \alpha_{00} & \alpha_{01} & \dots & \alpha_{0n} \\
 \alpha_{01} & \alpha_{11} & \dots & \alpha_{1n} \\
 \vdots & \vdots & \ddots & \vdots \\
-\alpha_{0n} & \alpha_{2n} & \dots & \alpha_{nn}
+\alpha_{0n} & \alpha_{1n} & \dots & \alpha_{nn}
 \end{array}\right]p^T,
 \end{equation}
 where here we have abused notation by interpreting the vector $p$ taken from $\V^{n+1}$ as
 a row-vector with $p^T$ as the corresponding column-vector.  Written another
-way without abuse of notation, we have
+way without abusing notation, we have
 \begin{equation}\label{equ_lowlevel_equation}
-0 = \sum_{i=0}^3\sum_{j=i}^3\sigma_{ij}\alpha_{ij}(p\cdot e_i)(p\cdot e_j),
+0 = \sum_{i=0}^n\sum_{j=i}^n\sigma_{ij}\alpha_{ij}(p\cdot e_i)(p\cdot e_j),
 \end{equation}
 where $\sigma_{ij}$ is defined as
 \begin{equation}
@@ -141,28 +141,28 @@ generating it.  The vector space $\V^{n+1}$ is therefore a vector
 sub-space of $\W^{2(n+1)}$ and we will let $\Vb^{n+1}$ denote
 the $(n+1)$-dimensional vector sub-space of $\W^{2(n+1)}$ that
 is complement to $\V^{n+1}$.  It is then helpful to introduce the
-notation $\bar{p}$ as the vector in $\Vb^{n+1}$ related to the
+notation $\overline{p}$ as the vector in $\Vb^{n+1}$ related to the
 vector $p\in\V^{n+1}$ by the equation
 \begin{equation}
-\bar{p} = Rp\tilde{R},
+\overline{p} = Rp\tilde{R},
 \end{equation}
 where $R$ is a rotor defined as
 \begin{equation}
 R = 2^{-n/2}\prod_{i=0}^n\left(1-e_ie_{i+n+1}\right).
 \end{equation}
 This idea comes from \cite{DoranHestenes93}, and it is easy to see
-that for any integer $i\in[0,n]$, we have $\bar{e}_i=e_{i+n+1}$
-and $\bar{e}_{i+n+1}=e_i$.  Notice that the over-bar operator
+that for any integer $i\in[0,n]$, we have $\overline{e}_i=e_{i+n+1}$
+and $\overline{e}_{i+n+1}=e_i$.  Notice that the over-bar operator
 is an outermorphic function and that we may apply it to any element
 of the geometric algebra $\G(\W^{2(n+1)})$.
 
 We are now ready to give the high-level form of equation \eqref{equ_lowlevel_equation} as
 \begin{equation}\label{equ_highlevel_equation}
-0 = p\wedge\bar{p}\cdot B,
+0 = p\wedge\overline{p}\cdot B,
 \end{equation}
 where $B\in\G(\W^{2(n+1)})$ is a bivector of the form
 \begin{equation}
-B = -\frac{1}{2}\sum_{i=0}^n\sum_{j=i}^n\alpha_{ij}(e_i\bar{e}_j+(-1)^{\sigma_{ij}}\bar{e}_ie_j).
+B = -\frac{1}{2}\sum_{i=0}^n\sum_{j=i}^n\alpha_{ij}(e_i\overline{e}_j+(-1)^{\sigma_{ij}}\overline{e}_ie_j).
 \end{equation}
 Here, as in the form \eqref{equ_quadric_matrix_equation} where we may think of
 the symmetric matrix as representative of the quadric, the bivector $B$ may also be thought
@@ -171,10 +171,7 @@ of as representative of this quadric.
 Realizing that we need to be careful, because the inner product is not associative,
 it is interesting to write equation \eqref{equ_highlevel_equation} in a form
 similar to that of equation \eqref{equ_quadric_matrix_equation}, which
-resembles conjugation.  Doing so, we get
-\begin{equation}
-0 = p\cdot B\cdot\overline{p}.
-\end{equation}
+resembles conjugation of $B$ by $p$.  Doing so, we get $0 = p\cdot B\cdot\overline{p}$.
 
 \section{Using The Quadric Equation}
 
@@ -186,28 +183,39 @@ representative of points and those representative of directions.  Specifically, 
 is a direction if and only if $v\cdot e_0=0$.  While we will use an arrow accent to distinguish
 between direction vectors and position vectors, there should be no confusion on the form
 of a vector and what we intend it to represent when we refer to it as a direction or a vector.
-Similarly, we will take the liberty of refering to bivectors taken
-from $\G(\V^{2(n+1)})$ as quadrics.  This helps elliminate phrases that would otherwise sound a bit
+Similarly, we will take the liberty of referring to bivectors taken
+from $\G(\V^{2(n+1)})$ as quadrics.  This helps eliminate phrases that would otherwise sound a bit
 too pedantic.
 
 With all of that said, letting $f:\V^{n+1}\to\R$ be the function defined as
 \begin{equation}
-f(x) = x\wedge\bar{x}\cdot B,
+f(x) = x\wedge\overline{x}\cdot B,
 \end{equation}
-we arrive now at our first result given in the following lemma.
+we arrive at our first lemma as follows.
 \begin{lemma}
 Given any quadric $B$, if for all direction vectors $\vec{v}\in\V^{n+1}$,
 we have $f(\vec{v})=0$, then $B$ is a linear (flat) quadric.
 \end{lemma}
 \begin{proof}
-For any point $p\in\V^{n+1}$, we find that
+For any pair of homogenized points $p,x\in\V^{n+1}$, there is a direction $\vec{x}\in\V^{n+1}$
+such that $x=p+\vec{x}$.  We then find that
 \begin{equation}
 f(x) = f(p+\vec{x}) = \nabla_{\vec{x}}f(p),
 \end{equation}
 in the case that $p$ is on $B$, where $\nabla_{\vec{x}}f(p)$ is the directional
 derivative of $f$ at $p$ in the direction of $\vec{x}$.  It follows that the tangent
-space of any point on the quadric is also in the quadric.
+space of any point on the quadric is also in the quadric.  The quadric is therefore
+flat at any point upon its surface.
 \end{proof}
+
+Show that $\nabla_{\vec{x}}f(p)=\vec{x}\cdot\nabla f(p)$.  It would follow that
+$\nabla f(p)$ is normal to the surface of the quadric, right?
+
+How do we find the flat quadric that is tangent to and touching another quadric?
+It might be
+\begin{equation}
+(p\cdot\nabla f(p))e_0\overline{e}_0 + e_0\overline{\nabla f(p)}+\overline{e}_0\nabla f(p).
+\end{equation}
 
 %    Bibliographies can be prepared with BibTeX using amsplain,
 %    amsalpha, or (for "historical" overviews) natbib style.
