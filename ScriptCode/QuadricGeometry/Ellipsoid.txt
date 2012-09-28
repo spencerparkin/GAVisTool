@@ -1,0 +1,14 @@
+/*
+ * Make an ellipsoid.
+ */
+do
+(
+	a00 = 4,
+	a11 = 1,
+	a22 = 1,
+	a33 = 1,
+	
+	B = a00*e0*e4 + a11*e1*e5 + a22*e2*e6 + a33*e3*e7,
+	
+	bind_quadric(B),
+)

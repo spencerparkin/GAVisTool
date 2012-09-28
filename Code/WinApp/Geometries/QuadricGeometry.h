@@ -43,17 +43,29 @@ public:
 private:
 
 	GeometricAlgebra::SumOfBlades element;
+	CalcLib::Evaluator* samplePointTestEvaluator;
+	Utilities::List samplePointCloudData;
+	bool samplePointCloudDataValid;
 
-	// A quadric is not always a convex hull, but we
-	// can still use this object to store the cloud
-	// of points that helps us visualize the quadric.
-	VectorMath::ConvexHull convexHull;
-	bool convexHullValid;
+	void RegeneratePointCloudData( void );
 
-	void RegenerateConvexHull( void );
+	class SamplePointData : public Utilities::List::Item
+	{
+	public:
+		SamplePointData( const VectorMath::Vector& point, double scalar );
+		virtual ~SamplePointData( void );
+
+		virtual Utilities::List::SortComparison SortCompare( const Utilities::List::Item* compareWithItem ) const;
+
+		VectorMath::Vector point;
+		double scalar;
+	};
+
+	SamplePointData* TestSamplePoint( const VectorMath::Vector& samplePoint, CalcLib::GeometricAlgebraEnvironment& gaEnv );
 
 public:
 
+	static bool setupSamplingParameters;
 	static VectorMath::Aabb samplingRegion;
 	static VectorMath::Vector samplingResolution;
 };

@@ -21,6 +21,7 @@
 #include "Geometries/TransformGeometry.h"
 #include "Geometries/PositionVectorGeometry.h"
 #include "Geometries/ProjectiveGeometry.h"
+#include "Geometries/QuadricGeometry.h"
 #include "Interfaces/ScalarInterface.h"
 #include "VirtualBindTarget.h"
 #include "wxAll.h"
@@ -101,6 +102,8 @@ GAVisToolEnvironment::GAVisToolEnvironment( void )
 		return new GAVisToolBindFunctionEvaluator( &ProjectiveLine::Create, GAVisToolBindTarget::DOESNT_MATTER );
 	else if( 0 == strcmp( functionName, "bind_proj_plane" ) )
 		return new GAVisToolBindFunctionEvaluator( &ProjectivePlane::Create, GAVisToolBindTarget::DOESNT_MATTER );
+	else if( 0 == strcmp( functionName, "bind_quadric" ) )
+		return new GAVisToolBindFunctionEvaluator( &QuadricGeometry::Create, GAVisToolBindTarget::DOESNT_MATTER );
 
 	return GeometricAlgebraEnvironment::CreateFunction( functionName );
 }

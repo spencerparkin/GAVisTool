@@ -644,6 +644,14 @@
 					</File>
 				</Filter>
 			</Filter>
+			<Filter
+				Name="QuadricGeometry"
+				>
+				<File
+					RelativePath="..\..\ScriptCode\QuadricGeometry\Ellipsoid.txt"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath=".\icon.ico"
