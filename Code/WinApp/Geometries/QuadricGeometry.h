@@ -12,6 +12,7 @@
 #pragma once
 
 #include "../Geometry.h"
+#include "../VectorMath/Quadric.h"
 #include "../VectorMath/ConvexHull.h"
 
 //=========================================================================================
@@ -42,32 +43,9 @@ public:
 
 private:
 
-	GeometricAlgebra::SumOfBlades element;
-	CalcLib::Evaluator* samplePointTestEvaluator;
-	Utilities::List samplePointCloudData;
-	bool samplePointCloudDataValid;
-
-	void RegeneratePointCloudData( void );
-
-	class SamplePointData : public Utilities::List::Item
-	{
-	public:
-		SamplePointData( const VectorMath::Vector& point, double scalar );
-		virtual ~SamplePointData( void );
-
-		virtual Utilities::List::SortComparison SortCompare( const Utilities::List::Item* compareWithItem ) const;
-
-		VectorMath::Vector point;
-		double scalar;
-	};
-
-	SamplePointData* TestSamplePoint( const VectorMath::Vector& samplePoint, CalcLib::GeometricAlgebraEnvironment& gaEnv );
-
-public:
-
-	static bool setupSamplingParameters;
-	static VectorMath::Aabb samplingRegion;
-	static VectorMath::Vector samplingResolution;
+	VectorMath::Quadric quadric;
+	Utilities::List traceList;
+	bool traceListValid;
 };
 
 // QuadricGeometry.h

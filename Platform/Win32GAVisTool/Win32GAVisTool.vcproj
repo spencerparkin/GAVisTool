@@ -488,6 +488,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\Code\WinApp\VectorMath\Quadric.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Code\WinApp\VectorMath\Quadric.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\Code\WinApp\VectorMath\Triangle.cpp"
 					>
 				</File>

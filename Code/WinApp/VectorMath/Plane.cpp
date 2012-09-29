@@ -27,6 +27,18 @@ void VectorMath::MakePlane( Plane& plane, const Vector& pos, const Vector& vec )
 }
 
 //=============================================================================
+void VectorMath::ProjectOntoPlane( const Plane& plane, Vector& dst, const Vector& src )
+{
+	double orthoDist = ShortestDistanceToPlane( plane, src );
+	Vector delta;
+	if( Plane::SIDE_FRONT == PlaneSide( plane, src ) )
+		Scale( delta, plane.normal, -orthoDist );
+	else
+		Scale( delta, plane.normal, orthoDist );
+	Add( dst, src, delta );
+}
+
+//=============================================================================
 double VectorMath::ShortestDistanceToPlane( const Plane& plane, const Vector& pos )
 {
 	// All solutions v to the plane equation is (v-p).n=0 are points
