@@ -47,9 +47,10 @@ namespace VectorMath
 			bool IsPointOnTrace( const Vector& givenPoint, double epsilon ) const;
 
 			Utilities::List pointList;
+			bool looped;
 		};
 
-		void GenerateTracesAlongAxis( const Vector& axis, double range, double density, Utilities::List& traceList, bool resetList = false );
+		void GenerateTracesAlongAxis( const Vector& axis, double range, double planeCount, const Aabb& aabb, Utilities::List& traceList, bool resetList = false );
 		Trace* CalculateTraceInPlane( const Plane& plane, const Vector& seed, const Aabb& aabb );
 		bool StepTraceInPlane( const Plane& plane, int direction, Vector& point, double traceDelta, double epsilon );
 		bool ConvergePointToSurfaceInPlane( const Plane& plane, Vector& point, double epsilon );

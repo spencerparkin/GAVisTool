@@ -12,6 +12,8 @@
 #include "Surface.h"
 #include "Spline.h"
 
+// TODO: Trace planes cuting a double-cone exactly in half don't compute quite right.
+
 //=============================================================================
 VectorMath::Surface::Surface( void )
 {
@@ -36,6 +38,7 @@ VectorMath::Surface::Point::Point( const VectorMath::Vector& point )
 //=============================================================================
 VectorMath::Surface::Trace::Trace( void )
 {
+	looped = false;
 }
 
 //=============================================================================
@@ -64,7 +67,7 @@ bool VectorMath::Surface::Trace::IsPointOnTrace( const Vector& givenPoint, doubl
 			Copy( linearSpline.controlPoint[0], point->point );
 			Copy( linearSpline.controlPoint[1], nextPoint->point );
 			dist = linearSpline.ShortestDistanceToSpline( givenPoint );
-			if( dist <= epsilon )
+			if( dist != -1.0 && dist <= epsilon )
 				return true;
 
 			// How about testing the point against a curve going through this and the next two points?
@@ -76,7 +79,7 @@ bool VectorMath::Surface::Trace::IsPointOnTrace( const Vector& givenPoint, doubl
 				Copy( quadraticSpline.controlPoint[1], nextPoint->point );
 				Copy( quadraticSpline.controlPoint[2], nextNextPoint->point );
 				dist = quadraticSpline.ShortestDistanceToSpline( givenPoint );
-				if( dist <= epsilon )
+				if( dist != -1.0 && dist <= epsilon )
 					return true;
 			}
 		}
@@ -86,7 +89,7 @@ bool VectorMath::Surface::Trace::IsPointOnTrace( const Vector& givenPoint, doubl
 }
 
 //=============================================================================
-void VectorMath::Surface::GenerateTracesAlongAxis( const Vector& axis, double range, double density, Utilities::List& traceList, bool resetList /*= false*/ )
+void VectorMath::Surface::GenerateTracesAlongAxis( const Vector& axis, double range, double planeCount, const Aabb& aabb, Utilities::List& traceList, bool resetList /*= false*/ )
 {
 	if( resetList )
 		traceList.RemoveAll( true );
@@ -99,22 +102,13 @@ void VectorMath::Surface::GenerateTracesAlongAxis( const Vector& axis, double ra
 	Orthogonal( coordFrame.xAxis, axis );
 	Cross( coordFrame.yAxis, axis, coordFrame.xAxis );
 
-	// All traces will be contained within this AABB.
-	Aabb aabb;
-	Vector zero;
-	Zero( zero );
-	Vector vec;
-	Set( vec, range, range, range );
-	Scale( vec, vec, sqrt( 2.0 ) / 2.0 );
-	MakeAabb( aabb, zero, vec );
-
 	// Generate traces in planes orthogonal to the given axis in the desired range.
 	Vector pos[2];
 	Scale( pos[0], axis, -range / 2.0 );
 	Scale( pos[1], axis, range / 2.0 );
 	double epsilon = 0.001;
-	double dt = 1.0 / density;
-	for( double t = 0.0; t <= 1.0; t += dt )
+	double dt = 1.0 / planeCount;
+	for( double t = dt * 0.5; t <= 1.0; t += dt )
 	{
 		// Build a plane at this point along the axis.
 		Vector planePos;
@@ -122,23 +116,26 @@ void VectorMath::Surface::GenerateTracesAlongAxis( const Vector& axis, double ra
 		Plane plane;
 		MakePlane( plane, planePos, axis );
 
-		// There could be zero, one or two traces in the given plane.
-		// Our job here is to try to find all of them.
+		// There could be zero, one or two traces in the given plane
+		// in the case that our surface is a quadric.  Our job here is
+		// to try to find all of them.
 
 		// Try to get a trace with the following seed.
 		Vector seed;
-		Set( seed, -range / 2.0, -range / 2.0, 0.0 );
+		//Set( seed, -range / 2.0, -range / 2.0, 0.0 );
+		Set( seed, -range / 4.0, -range / 4.0, 0.0 );
 		Transform( seed, coordFrame, seed );
 		Add( seed, seed, planePos );
 		Trace* firstTrace = CalculateTraceInPlane( plane, seed, aabb );
 
 		// Try to get another trace, but don't repeat the first trace, if any.
-		Set( seed, range / 2.0, range / 2.0, 0.0 );
+		//Set( seed, range / 2.0, range / 2.0, 0.0 );
+		Set( seed, range / 4.0, range / 4.0, 0.0 );
 		Transform( seed, coordFrame, seed );
 		Add( seed, seed, planePos );
 		Trace* secondTrace = 0;
 		if( ConvergePointToSurfaceInPlane( plane, seed, epsilon ) )
-			if( !( firstTrace && firstTrace->IsPointOnTrace( seed, 0.2 ) ) )
+			if( !( firstTrace && firstTrace->IsPointOnTrace( seed, 0.1 ) ) )
 				secondTrace = CalculateTraceInPlane( plane, seed, aabb );
 
 		// Add the traces, if any were found.
@@ -153,6 +150,7 @@ void VectorMath::Surface::GenerateTracesAlongAxis( const Vector& axis, double ra
 VectorMath::Surface::Trace* VectorMath::Surface::CalculateTraceInPlane( const Plane& plane, const Vector& seed, const Aabb& aabb )
 {
 	double epsilon = 1e-7;
+	int tracePointLimit = 100;
 	
 	// The initial seed must converge to a point on the surface.
 	Vector point;
@@ -168,30 +166,49 @@ VectorMath::Surface::Trace* VectorMath::Surface::CalculateTraceInPlane( const Pl
 	int direction = 0;
 	while( direction < 2 )
 	{
-		// Add the traced point to the list.  Keep the order of the list
-		// such that it can be used to draw a poly-line of the trace.
-		if( direction == 0 )
-			trace->pointList.InsertRightOf( trace->pointList.RightMost(), new Point( point ) );
-		else
-			trace->pointList.InsertLeftOf( trace->pointList.LeftMost(), new Point( point ) );
+		bool stepMade = false;
 
-		// BUG: We're generating too many points.  The loop detection needs to be fixed.
-		if( trace->pointList.Count() > 10 )
-			break;
+		// Have we exited the box?
+		bool exitedBox = Aabb::IS_OUTSIDE_BOX == AabbSide( aabb, point );
 
-		// Attempt to trace the surface in the desired direction.
-		bool stepMade = StepTraceInPlane( plane, direction, point, traceDelta, epsilon );
-
-		// After each successful step, check to see if we have come full circle.
-		if( stepMade )
+		// If we're in the box, then we can add the point and advance.
+		if( !exitedBox )
 		{
-			// If we run into our own trace, we can always quit the algorithm.
-			if( trace->IsPointOnTrace( point, epsilon ) )
+			// Add the traced point to the list.  Keep the order of the list
+			// such that it can be used to draw a poly-line of the trace.
+			if( direction == 0 )
+				trace->pointList.InsertRightOf( trace->pointList.RightMost(), new Point( point ) );
+			else
+				trace->pointList.InsertLeftOf( trace->pointList.LeftMost(), new Point( point ) );
+
+			// We shouldn't need this limit for our algorithm to always correctly terminate,
+			// but the limit is put in place here to prevent us from creating too many lines
+			// and thereby overloading the render system.
+			if( trace->pointList.Count() >= tracePointLimit )
 				break;
+
+			// Attempt to trace the surface in the desired direction.
+			stepMade = StepTraceInPlane( plane, direction, point, traceDelta, epsilon );
+
+			// After each successful step, check to see if we have come full circle.
+			if( stepMade )
+			{
+				// If we run into our own trace, we can always quit the algorithm,
+				// because we know that we have come full circle.
+				if( trace->IsPointOnTrace( point, 0.1 ) )
+				{
+					// Indicate that the caller should consider the trace a line-loop
+					// in the case that the trace is more than one point.  If it is
+					// just one point, then our trace plane is probably tangent to the surface.
+					if( trace->pointList.Count() > 1 )
+						trace->looped = true;
+					break;
+				}
+			}
 		}
 
 		// Failure to step or exiting the box are grounds for direction change.
-		if( !stepMade || Aabb::IS_OUTSIDE_BOX == AabbSide( aabb, point ) )
+		if( !stepMade || exitedBox )
 		{
 			// Go in the other direction.
 			direction++;
@@ -201,7 +218,7 @@ VectorMath::Surface::Trace* VectorMath::Surface::CalculateTraceInPlane( const Pl
 				Copy( point, seed );
 				ConvergePointToSurfaceInPlane( plane, point, epsilon );
 
-				// Take the initial step now, because we have already added this point on the surface.
+				// Take the initial step now, because we have already considered the initial point on the surface.
 				if( !StepTraceInPlane( plane, direction, point, traceDelta, epsilon ) )
 					break;
 			}
@@ -225,7 +242,8 @@ bool VectorMath::Surface::StepTraceInPlane( const Plane& plane, int direction, V
 
 	// If the delta ended up zero, then we don't know where to move the point.
 	// This could happen, for example, if we were trying to trace a point on
-	// a plane in that plane's plane.
+	// a plane in that plane's plane.  Could this also be the case when we hit
+	// the central vertex of double-cone?
 	double length = Length( delta );
 	if( length <= epsilon )
 		return false;

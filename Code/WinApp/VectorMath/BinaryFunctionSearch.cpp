@@ -10,6 +10,7 @@
  */
 
 #include "BinaryFunctionSearch.h"
+#include <math.h>
 
 //=============================================================================
 VectorMath::BinaryFunctionSearch::BinaryFunctionSearch( Function* function )
@@ -50,7 +51,7 @@ bool VectorMath::BinaryFunctionSearch::FindValue( double& x, double y, double x0
 		else
 			lower_x = mid_x;
 	}
-	while( ( upper_y - lower_y ) > epsilon );
+	while( fabs( y - mid_y ) > epsilon );
 
 	x = mid_x;
 	return true;
