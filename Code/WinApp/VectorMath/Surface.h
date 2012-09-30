@@ -1,4 +1,4 @@
-// Quadric.h
+// Surface.h
 
 /*
  * Copyright (C) 2012 Spencer T. Parkin
@@ -19,12 +19,12 @@
 
 namespace VectorMath
 {
-	class Quadric
+	class Surface
 	{
 	public:
 
-		Quadric( void );
-		virtual ~Quadric( void );
+		Surface( void );
+		virtual ~Surface( void );
 
 		class Point : public Utilities::List::Item
 		{
@@ -35,8 +35,9 @@ namespace VectorMath
 			VectorMath::Vector point;
 		};
 
-		// The trace of a quadric in a plane is the crossection or intersection
-		// of the quadric in that plane.  It may consist of one or two curves.
+		// The trace of a surface in a plane is the crossection or intersection
+		// of the surface in that plane.  It may consist of zero, one or two curves
+		// in the case that it is a quadric.
 		class Trace : public Utilities::List::Item
 		{
 		public:
@@ -51,13 +52,28 @@ namespace VectorMath
 		void GenerateTracesAlongAxis( const Vector& axis, double range, double density, Utilities::List& traceList, bool resetList = false );
 		Trace* CalculateTraceInPlane( const Plane& plane, const Vector& seed, const Aabb& aabb );
 		bool StepTraceInPlane( const Plane& plane, int direction, Vector& point, double traceDelta, double epsilon );
-		bool ConvergePointToQuadricInPlane( const Plane& plane, Vector& point, double epsilon );
+		bool ConvergePointToSurfaceInPlane( const Plane& plane, Vector& point, double epsilon );
 
-		double EvaluateAt( const VectorMath::Vector& point );
-		double EvaluatePartialX( const VectorMath::Vector& point );
-		double EvaluatePartialY( const VectorMath::Vector& point );
-		double EvaluatePartialZ( const VectorMath::Vector& point );
+		virtual double EvaluateAt( const VectorMath::Vector& point ) = 0;
+		virtual double EvaluatePartialX( const VectorMath::Vector& point ) = 0;
+		virtual double EvaluatePartialY( const VectorMath::Vector& point ) = 0;
+		virtual double EvaluatePartialZ( const VectorMath::Vector& point ) = 0;
 		void EvaluateGradientAt( const VectorMath::Vector& point, VectorMath::Vector& gradient );
+
+		
+	};
+
+	class Quadric : public Surface
+	{
+	public:
+
+		Quadric( void );
+		virtual ~Quadric( void );
+
+		virtual double EvaluateAt( const VectorMath::Vector& point );
+		virtual double EvaluatePartialX( const VectorMath::Vector& point );
+		virtual double EvaluatePartialY( const VectorMath::Vector& point );
+		virtual double EvaluatePartialZ( const VectorMath::Vector& point );
 
 		// A quadric is the set of solution in <x,y,z>
 		// to the following equation.
@@ -72,4 +88,4 @@ namespace VectorMath
 	};
 }
 
-// Quadric.h
+// Surface.h

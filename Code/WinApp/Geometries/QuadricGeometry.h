@@ -12,7 +12,7 @@
 #pragma once
 
 #include "../Geometry.h"
-#include "../VectorMath/Quadric.h"
+#include "../VectorMath/Surface.h"
 #include "../VectorMath/ConvexHull.h"
 
 //=========================================================================================

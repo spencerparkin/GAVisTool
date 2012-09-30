@@ -269,4 +269,20 @@ void VectorMath::Reject( Vector& dst, const Vector& src, const Vector& unitVecto
 	Sub( dst, src, dst );
 }
 
+//=============================================================================
+void VectorMath::LinearCombo( Vector& dst, double scalar0, const Vector& src0, double scalar1, const Vector& src1 )
+{
+	dst.x = scalar0 * src0.x + scalar1 * src1.x;
+	dst.y = scalar0 * src0.y + scalar1 * src1.y;
+	dst.z = scalar0 * src0.z + scalar1 * src1.z;
+}
+
+//=============================================================================
+void VectorMath::LinearCombo( Vector& dst, double scalar0, const Vector& src0, double scalar1, const Vector& src1, double scalar2, const Vector& src2 )
+{
+	dst.x = scalar0 * src0.x + scalar1 * src1.x + scalar2 * src2.x;
+	dst.y = scalar0 * src0.y + scalar1 * src1.y + scalar2 * src2.y;
+	dst.z = scalar0 * src0.z + scalar1 * src1.z + scalar2 * src2.z;
+}
+
 // Vector.cpp

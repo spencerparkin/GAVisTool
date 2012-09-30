@@ -41,6 +41,8 @@ namespace VectorMath
 	void RandomVector( Vector& dst, double min, double max );
 	void Project( Vector& dst, const Vector& src, const Vector& unitVector );
 	void Reject( Vector& dst, const Vector& src, const Vector& unitVector );
+	void LinearCombo( Vector& dst, double scalar0, const Vector& src0, double scalar1, const Vector& src1 );
+	void LinearCombo( Vector& dst, double scalar0, const Vector& src0, double scalar1, const Vector& src1, double scalar2, const Vector& src2 );
 }
 
 // Vector.h

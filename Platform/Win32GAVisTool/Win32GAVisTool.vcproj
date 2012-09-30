@@ -464,6 +464,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\Code\WinApp\VectorMath\BinaryFunctionSearch.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Code\WinApp\VectorMath\BinaryFunctionSearch.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\Code\WinApp\VectorMath\ConvexHull.cpp"
 					>
 				</File>
@@ -488,11 +496,19 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\Code\WinApp\VectorMath\Quadric.cpp"
+					RelativePath="..\..\Code\WinApp\VectorMath\Spline.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\Code\WinApp\VectorMath\Quadric.h"
+					RelativePath="..\..\Code\WinApp\VectorMath\Spline.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Code\WinApp\VectorMath\Surface.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Code\WinApp\VectorMath\Surface.h"
 					>
 				</File>
 				<File

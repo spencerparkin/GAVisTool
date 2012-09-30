@@ -1,4 +1,4 @@
-// Quadric.cpp
+// Surface.cpp
 
 /*
  * Copyright (C) 2012 Spencer T. Parkin
@@ -9,65 +9,84 @@
  *
  */
 
-#include "Quadric.h"
+#include "Surface.h"
+#include "Spline.h"
 
 //=============================================================================
-VectorMath::Quadric::Quadric( void )
-{
-	a00 = a01 = a02 = a03 = 0.0;
-	a11 = a12 = a13 = 0.0;
-	a22 = a23 = 0.0;
-	a33 = 0.0;
-}
-
-//=============================================================================
-/*virtual*/ VectorMath::Quadric::~Quadric( void )
+VectorMath::Surface::Surface( void )
 {
 }
 
 //=============================================================================
-VectorMath::Quadric::Point::Point( const VectorMath::Vector& point )
+/*virtual*/ VectorMath::Surface::~Surface( void )
+{
+}
+
+//=============================================================================
+VectorMath::Surface::Point::Point( const VectorMath::Vector& point )
 {
 	VectorMath::Copy( this->point, point );
 }
 
 //=============================================================================
-/*virtual*/ VectorMath::Quadric::Point::~Point( void )
+/*virtual*/ VectorMath::Surface::Point::~Point( void )
 {
 }
 
 //=============================================================================
-VectorMath::Quadric::Trace::Trace( void )
+VectorMath::Surface::Trace::Trace( void )
 {
 }
 
 //=============================================================================
-/*virtual*/ VectorMath::Quadric::Trace::~Trace( void )
+/*virtual*/ VectorMath::Surface::Trace::~Trace( void )
 {
 	pointList.RemoveAll( true );
 }
 
 //=============================================================================
-bool VectorMath::Quadric::Trace::IsPointOnTrace( const Vector& givenPoint, double epsilon ) const
+bool VectorMath::Surface::Trace::IsPointOnTrace( const Vector& givenPoint, double epsilon ) const
 {
 	for( const Point* point = ( const Point* )pointList.LeftMost(); point; point = ( const Point* )point->Right() )
 	{
 		// Is the given point within the given distance of this point?
 		Vector delta;
 		Sub( delta, point->point, givenPoint );
-		double length = Length( delta );
-		if( length <= epsilon )
+		double dist = Length( delta );
+		if( dist <= epsilon )
 			return true;
 
 		// Is the given point within the given distance of the line-segment between this point and the next point?
-		//...
+		const Point* nextPoint = ( const Point* )point->Right();
+		if( nextPoint )
+		{
+			LinearSpline linearSpline;
+			Copy( linearSpline.controlPoint[0], point->point );
+			Copy( linearSpline.controlPoint[1], nextPoint->point );
+			dist = linearSpline.ShortestDistanceToSpline( givenPoint );
+			if( dist <= epsilon )
+				return true;
+
+			// How about testing the point against a curve going through this and the next two points?
+			const Point* nextNextPoint = ( const Point* )nextPoint->Right();
+			if( nextNextPoint )
+			{
+				QuadraticSpline quadraticSpline;
+				Copy( quadraticSpline.controlPoint[0], point->point );
+				Copy( quadraticSpline.controlPoint[1], nextPoint->point );
+				Copy( quadraticSpline.controlPoint[2], nextNextPoint->point );
+				dist = quadraticSpline.ShortestDistanceToSpline( givenPoint );
+				if( dist <= epsilon )
+					return true;
+			}
+		}
 	}
 
 	return false;
 }
 
 //=============================================================================
-void VectorMath::Quadric::GenerateTracesAlongAxis( const Vector& axis, double range, double density, Utilities::List& traceList, bool resetList /*= false*/ )
+void VectorMath::Surface::GenerateTracesAlongAxis( const Vector& axis, double range, double density, Utilities::List& traceList, bool resetList /*= false*/ )
 {
 	if( resetList )
 		traceList.RemoveAll( true );
@@ -118,7 +137,7 @@ void VectorMath::Quadric::GenerateTracesAlongAxis( const Vector& axis, double ra
 		Transform( seed, coordFrame, seed );
 		Add( seed, seed, planePos );
 		Trace* secondTrace = 0;
-		if( ConvergePointToQuadricInPlane( plane, seed, epsilon ) )
+		if( ConvergePointToSurfaceInPlane( plane, seed, epsilon ) )
 			if( !( firstTrace && firstTrace->IsPointOnTrace( seed, 0.2 ) ) )
 				secondTrace = CalculateTraceInPlane( plane, seed, aabb );
 
@@ -131,17 +150,17 @@ void VectorMath::Quadric::GenerateTracesAlongAxis( const Vector& axis, double ra
 }
 
 //=============================================================================
-VectorMath::Quadric::Trace* VectorMath::Quadric::CalculateTraceInPlane( const Plane& plane, const Vector& seed, const Aabb& aabb )
+VectorMath::Surface::Trace* VectorMath::Surface::CalculateTraceInPlane( const Plane& plane, const Vector& seed, const Aabb& aabb )
 {
 	double epsilon = 1e-7;
 	
-	// The initial seed must converge to a point on the quadric.
+	// The initial seed must converge to a point on the surface.
 	Vector point;
 	Copy( point, seed );
-	if( !ConvergePointToQuadricInPlane( plane, point, epsilon ) )
+	if( !ConvergePointToSurfaceInPlane( plane, point, epsilon ) )
 		return 0;
 
-	// We have a point on the quadric, so our trace will be non-empty.
+	// We have a point on the surface, so our trace will be non-empty.
 	Trace* trace = new Trace();
 
 	// Begin the tracing process in the first direction.
@@ -160,7 +179,7 @@ VectorMath::Quadric::Trace* VectorMath::Quadric::CalculateTraceInPlane( const Pl
 		if( trace->pointList.Count() > 10 )
 			break;
 
-		// Attempt to trace the quadric in the desired direction.
+		// Attempt to trace the surface in the desired direction.
 		bool stepMade = StepTraceInPlane( plane, direction, point, traceDelta, epsilon );
 
 		// After each successful step, check to see if we have come full circle.
@@ -178,11 +197,11 @@ VectorMath::Quadric::Trace* VectorMath::Quadric::CalculateTraceInPlane( const Pl
 			direction++;
 			if( direction < 2 )
 			{
-				// Reset to our original position on the quadric.
+				// Reset to our original position on the surface.
 				Copy( point, seed );
-				ConvergePointToQuadricInPlane( plane, point, epsilon );
+				ConvergePointToSurfaceInPlane( plane, point, epsilon );
 
-				// Take the initial step now, because we have already added this point on the quadric.
+				// Take the initial step now, because we have already added this point on the surface.
 				if( !StepTraceInPlane( plane, direction, point, traceDelta, epsilon ) )
 					break;
 			}
@@ -194,7 +213,7 @@ VectorMath::Quadric::Trace* VectorMath::Quadric::CalculateTraceInPlane( const Pl
 }
 
 //=============================================================================
-bool VectorMath::Quadric::StepTraceInPlane( const Plane& plane, int direction, Vector& point, double traceDelta, double epsilon )
+bool VectorMath::Surface::StepTraceInPlane( const Plane& plane, int direction, Vector& point, double traceDelta, double epsilon )
 {
 	// Calculate the direction of the translation vector along which we'll move the point in the given plane.
 	Vector gradient, delta;
@@ -218,12 +237,12 @@ bool VectorMath::Quadric::StepTraceInPlane( const Plane& plane, int direction, V
 	Add( point, point, delta );
 
 	// Our step now succeeds if the translated point converges back onto the
-	// quadric, hopefully in a new position on the quadric in the desired direction.
-	return ConvergePointToQuadricInPlane( plane, point, epsilon );
+	// surface, hopefully in a new position on the surface in the desired direction.
+	return ConvergePointToSurfaceInPlane( plane, point, epsilon );
 }
 
 //=============================================================================
-bool VectorMath::Quadric::ConvergePointToQuadricInPlane( const Plane& plane, Vector& point, double epsilon )
+bool VectorMath::Surface::ConvergePointToSurfaceInPlane( const Plane& plane, Vector& point, double epsilon )
 {
 	double deltaLength = 1.0;
 
@@ -235,7 +254,7 @@ bool VectorMath::Quadric::ConvergePointToQuadricInPlane( const Plane& plane, Vec
 		// This is mainly to account for accumulated round-off error.
 		ProjectPointOntoPlane( plane, point, point );
 
-		// Is the point approximately on the quadric?
+		// Is the point approximately on the surface?
 		double value = EvaluateAt( point );
 		if( fabs( value ) <= epsilon )
 			return true;
@@ -280,12 +299,34 @@ bool VectorMath::Quadric::ConvergePointToQuadricInPlane( const Plane& plane, Vec
 	}
 
 	// Failure occures if our algorithm fails to converge the point
-	// onto the quadric in the alotted number of iterations.
+	// onto the surface in the alotted number of iterations.
 	return false;
 }
 
 //=============================================================================
-double VectorMath::Quadric::EvaluateAt( const VectorMath::Vector& point )
+void VectorMath::Surface::EvaluateGradientAt( const VectorMath::Vector& point, VectorMath::Vector& gradient )
+{
+	gradient.x = EvaluatePartialX( point );
+	gradient.y = EvaluatePartialY( point );
+	gradient.z = EvaluatePartialZ( point );
+}
+
+//=============================================================================
+VectorMath::Quadric::Quadric( void )
+{
+	a00 = a01 = a02 = a03 = 0.0;
+	a11 = a12 = a13 = 0.0;
+	a22 = a23 = 0.0;
+	a33 = 0.0;
+}
+
+//=============================================================================
+/*virtual*/ VectorMath::Quadric::~Quadric( void )
+{
+}
+
+//=============================================================================
+/*virtual*/ double VectorMath::Quadric::EvaluateAt( const VectorMath::Vector& point )
 {
 	double x = point.x;
 	double y = point.y;
@@ -294,7 +335,7 @@ double VectorMath::Quadric::EvaluateAt( const VectorMath::Vector& point )
 }
 
 //=============================================================================
-double VectorMath::Quadric::EvaluatePartialX( const VectorMath::Vector& point )
+/*virtual*/ double VectorMath::Quadric::EvaluatePartialX( const VectorMath::Vector& point )
 {
 	double x = point.x;
 	double y = point.y;
@@ -303,7 +344,7 @@ double VectorMath::Quadric::EvaluatePartialX( const VectorMath::Vector& point )
 }
 
 //=============================================================================
-double VectorMath::Quadric::EvaluatePartialY( const VectorMath::Vector& point )
+/*virtual*/ double VectorMath::Quadric::EvaluatePartialY( const VectorMath::Vector& point )
 {
 	double x = point.x;
 	double y = point.y;
@@ -312,7 +353,7 @@ double VectorMath::Quadric::EvaluatePartialY( const VectorMath::Vector& point )
 }
 
 //=============================================================================
-double VectorMath::Quadric::EvaluatePartialZ( const VectorMath::Vector& point )
+/*virtual*/ double VectorMath::Quadric::EvaluatePartialZ( const VectorMath::Vector& point )
 {
 	double x = point.x;
 	double y = point.y;
@@ -320,12 +361,4 @@ double VectorMath::Quadric::EvaluatePartialZ( const VectorMath::Vector& point )
 	return 2.0*( a03 + a13*x + a23*y + a33*z );
 }
 
-//=============================================================================
-void VectorMath::Quadric::EvaluateGradientAt( const VectorMath::Vector& point, VectorMath::Vector& gradient )
-{
-	gradient.x = EvaluatePartialX( point );
-	gradient.y = EvaluatePartialY( point );
-	gradient.z = EvaluatePartialZ( point );
-}
-
-// Quadric.cpp
+// Surface.cpp
