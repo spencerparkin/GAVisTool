@@ -14,7 +14,7 @@
 \documentclass{ecgd-l}
 
 %     If you need symbols beyond the basic set, uncomment this command.
-%\usepackage{amssymb}
+\usepackage{amssymb}
 
 %     If your article includes graphics, uncomment this command.
 %\usepackage{graphicx}
@@ -79,12 +79,17 @@
 
 %    Abstract is required.
 \begin{abstract}
-A great achievement of the conformal model of geometric algebra is that the elements
-of computation are representatives of geometry, and may therefore be thought of as geometry.
-A limitation of the model, however, is its inability to represent all quadric surfaces.
-Set forth in this paper, the quadric model of geometric algebra, while maintaining the idea
-of geometries as elements of computation, overcomes this limitation at the expense of
-added complexity and dimension.
+A great achievement of the conformal model of geometric algebra is the
+realization of geometries as elements of calculation.  What's further astonishing
+is the realization that these same elements simultaneously represent versor transformations
+with geometric significance relative to the represented geometry.
+These features, combined with the outermorphic property of versor conjugation,
+make the conformal model an interesting find, to say the least.  It is then no wonder
+that we would hope to find a similar model capable of representing more than
+just a small subset of the set of all quadric surfaces.  This paper presents a model,
+based upon geometric algebra, that is capable of representing all quadrics, and
+comparable to the conformal model.  While not all of the great features of the conformal
+model are preserved in this new model, we will find that it may have some utility.
 \end{abstract}
 
 \maketitle
@@ -102,22 +107,27 @@ satisfying a matrix equation involving a symmetric matrix.  We will let $\V^{n+1
 $(n+1)$-dimensional vector space and identify vectors in this space with projective
 points of $n$-dimensional space in the usual manner.  That is, letting $\{e_i\}_{i=0}^n$
 be an orthonormal basis for $\V^{n+1}$, we identify the $n$-dimensional point
-represented by any $p\in\V^{n+1}$ as the point $p/(p\cdot e_0)$ in the $e_0=1$ plane.
+represented by any $p\in\V^{n+1}$ as the point $p/(p\cdot e_0)$ in the $e_0=1$ plane,
+provided $p\cdot e_0\neq 0$.
 
 Letting $\{\alpha_{ij}\}\subset\R$ with $0\leq i\leq j\leq n$ be the scalar elements of a symmetric
-matrix, an $n$-dimensional quadric surface is the projective solution set to the
+matrix $M$, an $n$-dimensional quadric surface is the projective solution set to the
 matrix equation
 \begin{equation}\label{equ_quadric_matrix_equation}
-0 = p\left[\begin{array}{cccc}
+0 = pMp^\intercal,
+\end{equation}
+where here we have abused notation by interpreting the vector $p$ taken from $\V^{n+1}$ as
+a row-vector with $p^\intercal$ as the corresponding column-vector, and where $M$ is the
+$(n+1)\times(n+1)$ symmetric matrix given by
+\begin{equation}
+\left[\begin{array}{cccc}
 \alpha_{00} & \alpha_{01} & \dots & \alpha_{0n} \\
 \alpha_{01} & \alpha_{11} & \dots & \alpha_{1n} \\
 \vdots & \vdots & \ddots & \vdots \\
 \alpha_{0n} & \alpha_{1n} & \dots & \alpha_{nn}
-\end{array}\right]p^T,
+\end{array}\right].
 \end{equation}
-where here we have abused notation by interpreting the vector $p$ taken from $\V^{n+1}$ as
-a row-vector with $p^T$ as the corresponding column-vector.  Written another
-way without abusing notation, we have
+Written another way without abusing notation, we have
 \begin{equation}\label{equ_lowlevel_equation}
 0 = \sum_{i=0}^n\sum_{j=i}^n\sigma_{ij}\alpha_{ij}(p\cdot e_i)(p\cdot e_j),
 \end{equation}
@@ -136,7 +146,7 @@ a framework of compuation, may provide a better means of studying quadrics
 using geometric algebra.  We procede now to develop such a form.
 
 Let $\W^{2(n+1)}$ denote a $2(n+1)$-dimensional vector space
-having $\{e_i\}_{i=0}^{2n+1}$ as a set orthonormal basis vectors
+having $\{e_i\}_{i=0}^{2n+1}$ as a set of orthonormal basis vectors
 generating it.  The vector space $\V^{n+1}$ is therefore a vector
 sub-space of $\W^{2(n+1)}$ and we will let $\Vb^{n+1}$ denote
 the $(n+1)$-dimensional vector sub-space of $\W^{2(n+1)}$ that
@@ -153,7 +163,7 @@ R = 2^{-n/2}\prod_{i=0}^n\left(1-e_ie_{i+n+1}\right).
 This idea comes from \cite{DoranHestenes93}, and it is easy to see
 that for any integer $i\in[0,n]$, we have $\overline{e}_i=e_{i+n+1}$
 and $\overline{e}_{i+n+1}=e_i$.  Notice that the over-bar operator
-is an outermorphic function and that we may apply it to any element
+is also an outermorphic function that we may apply to any element
 of the geometric algebra $\G(\W^{2(n+1)})$.
 
 We are now ready to give the high-level form of equation \eqref{equ_lowlevel_equation}
@@ -169,7 +179,7 @@ B = -\frac{1}{2}\sum_{i=0}^n\sum_{j=i}^n\alpha_{ij}(e_i\overline{e}_j+(-1)^{\sig
 \end{equation}
 Here, as in the form \eqref{equ_quadric_matrix_equation} where we may think of
 the symmetric matrix as representative of the quadric, the bivector $B$ may also be thought
-of as representative of this quadric.
+of as a representative of the quadric.
 
 Realizing that we need to be careful, because the inner product is not associative,
 it is interesting to write equation \eqref{equ_highlevel_equation} in a form
@@ -189,7 +199,7 @@ now benefit from the language of geometric algebra in using it to answer questio
 
 Notice that in our model we can make a distinction between members of $\V^{n+1}$ that are
 representative of points and those representative of directions.  Specifically, a vector $v\in\V^{n+1}$
-is a direction if and only if $v\cdot e_0=0$.  While we will use an arrow accent to distinguish
+is a direction if and only if $v\cdot e_0=0$.  Although we will use an arrow accent to distinguish
 between direction vectors and position vectors, there should be no confusion on the form
 of a vector and what we intend it to represent when we refer to it as a direction or a position.
 Similarly, we will take the liberty of referring to bivectors taken
@@ -231,7 +241,9 @@ the quadric $A$ that is the plane tangent to $B$ at $p$ as follows.
 \begin{equation}
 A = (p\cdot\vec{v})e_0\overline{e}_0 + e_0\overline{\vec{v}}+\overline{e}_0\vec{v}
 \end{equation}
-A better way to formulate planes will be found in the next section.
+(Needs verification.)
+An altnerative way to formulate planes that is more in keeping with the
+tradition of the conformal model will be found in the next section.
 
 \subsection{Quadric 2-Blades}
 
@@ -264,9 +276,9 @@ the set of all projective points $p\in\V^{n+1}$ such that
 \begin{equation}
 0=p\wedge\overline{p}\cdot a\wedge\overline{a}=-(p\cdot a)^2,
 \end{equation}
-which holds if and only if $p\cdot a=0$.  In turn, this holds if and only if
-$p\cdot a/(a\cdot e_0)=0$.  Letting $p=e_0+\vec{p}$ and $a=e_0+\vec{a}$,
-our equation becomes
+which holds if and only if $p\cdot a=0$.
+Letting $p=e_0+\vec{p}$ and $a=e_0+\vec{a}$, and dividing through
+by $|\vec{a}|$, our equation becomes
 \begin{equation}
 \vec{p}\cdot\frac{\vec{a}}{|\vec{a}|} = -\frac{1}{|\vec{a}|},
 \end{equation}
@@ -274,17 +286,28 @@ where it is now clear that $a\wedge\overline{a}$ is a plane having
 a unit-normal of $\vec{a}/|\vec{a}|$ and containing the point $e_0-\vec{a}/|\vec{a}|^2$
 as the point on $a\wedge\overline{a}$ closest to the origin.
 
-In the second case, our use of equation \eqref{equ_highlevel_equation} is not nearly as
-revealing at first sight.
+In the second case, our use of equation \eqref{equ_highlevel_equation} barrows
+from what we learned in the first case.
 \begin{equation}
 0 = p\wedge\overline{p}\cdot a\wedge\overline{d} = -(p\cdot a)(p\cdot d)
 \end{equation}
-Letting $p=e_0+\vec{p}$, $a=e_0+\vec{a}$ and $d=e_0+\vec{d}$, this
-equation becomes
-\begin{equation}
--1 = \vec{p}\cdot(\vec{a}+\vec{d})+(\vec{p}\cdot\vec{a})(\vec{p}\cdot\vec{d}).
-\end{equation}
-Can we, without loss of generality, assume that $\vec{a}+\vec{d}=0$?
+Clearly each point in the set of all points satisfying this equation is in
+one of two non-parallel planes.  We can now conclude that all quadric
+2-blades are single or double planes.  Then since all bivectors are sums
+of 2-blades, we can deduce that all quadrics are formed as the sum
+of single and double planes.  Exactly what geometric significance a given
+quadric has in relation to such a sum of geometries remains to be seen.
+
+At this point we are also able to see that there may be a new
+and significant interpretation to equation \eqref{equ_highlevel_equation}
+in the realization that $p\wedge\overline{p}$ is a plane.  Specifically,
+this brings up the question: if $A$ and $B$ are quadrics, what geometric
+relation can we draw between these two quadrics in the case that
+$A\cdot B=0$?  Clearly, we already know that the general
+quadric $B$ is characterized by the set of all planes satisfying
+the condition of this relationship, whatever this relationship may be.
+
+% Formulate a sphere.  Can we do stuff with spheres, points and planes?
 
 %    Bibliographies can be prepared with BibTeX using amsplain,
 %    amsalpha, or (for "historical" overviews) natbib style.
