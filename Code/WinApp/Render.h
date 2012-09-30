@@ -19,6 +19,9 @@
 #include "Calculator/CalcLib.h"
 
 //=============================================================================
+// It would be nice if this renderer was smart enough to recognize fully
+// opaque objects and put them in a sepperate draw bucket that draws
+// before all transparent objects.  Currently, everything is sorted/cut.
 class GAVisToolRender
 {
 public:

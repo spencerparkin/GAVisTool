@@ -43,6 +43,8 @@ public:
 
 private:
 
+	void DrawTrace( VectorMath::Quadric::Trace* trace, GAVisToolRender& render );
+
 	VectorMath::Quadric quadric;
 	Utilities::List traceList;
 	bool traceListValid;

@@ -72,15 +72,22 @@ void VectorMath::Quadric::GenerateTracesAlongAxis( const Vector& axis, double ra
 	if( resetList )
 		traceList.RemoveAll( true );
 
+	// Build a right-handed coordinate frame with the Z-axis being the given axis.
+	// The trace planes will be orthogonal to the given axis or planes parallel to
+	// the XY-plane in this frame.
+	CoordFrame coordFrame;
+	Copy( coordFrame.zAxis, axis );
+	Orthogonal( coordFrame.xAxis, axis );
+	Cross( coordFrame.yAxis, axis, coordFrame.xAxis );
+
 	// All traces will be contained within this AABB.
 	Aabb aabb;
 	Vector zero;
 	Zero( zero );
-	Vector delta;
-	Set( delta, 1.0, 1.0, 1.0 );
-	Normalize( delta, delta );
-	Scale( delta, delta, sqrt( 3.0 / 4.0 ) * range );
-	MakeAabb( aabb, zero, delta );
+	Vector vec;
+	Set( vec, range, range, range );
+	Scale( vec, vec, sqrt( 2.0 ) / 2.0 );
+	MakeAabb( aabb, zero, vec );
 
 	// Generate traces in planes orthogonal to the given axis in the desired range.
 	Vector pos[2];
@@ -95,12 +102,6 @@ void VectorMath::Quadric::GenerateTracesAlongAxis( const Vector& axis, double ra
 		Lerp( planePos, pos[0], pos[1], t );
 		Plane plane;
 		MakePlane( plane, planePos, axis );
-
-		// Build a frame in this plane.
-		CoordFrame coordFrame;
-		Copy( coordFrame.zAxis, axis );
-		Orthogonal( coordFrame.xAxis, axis );
-		Cross( coordFrame.yAxis, axis, coordFrame.xAxis );
 
 		// There could be zero, one or two traces in the given plane.
 		// Our job here is to try to find all of them.
@@ -132,74 +133,154 @@ void VectorMath::Quadric::GenerateTracesAlongAxis( const Vector& axis, double ra
 //=============================================================================
 VectorMath::Quadric::Trace* VectorMath::Quadric::CalculateTraceInPlane( const Plane& plane, const Vector& seed, const Aabb& aabb )
 {
-	double epsilon = 0.01;
+	double epsilon = 1e-7;
+	
+	// The initial seed must converge to a point on the quadric.
 	Vector point;
 	Copy( point, seed );
 	if( !ConvergePointToQuadricInPlane( plane, point, epsilon ) )
 		return 0;
 
+	// We have a point on the quadric, so our trace will be non-empty.
 	Trace* trace = new Trace();
-	double traceDelta = 0.1;
-	int direction = 0;
 
+	// Begin the tracing process in the first direction.
+	double traceDelta = 0.5;		// This needs to be well above our epsilon.
+	int direction = 0;
 	while( direction < 2 )
 	{
+		// Add the traced point to the list.  Keep the order of the list
+		// such that it can be used to draw a poly-line of the trace.
 		if( direction == 0 )
 			trace->pointList.InsertRightOf( trace->pointList.RightMost(), new Point( point ) );
 		else
 			trace->pointList.InsertLeftOf( trace->pointList.LeftMost(), new Point( point ) );
-		if( !StepTraceInPlane( plane, direction, point, traceDelta ) || Aabb::IS_OUTSIDE_BOX == AabbSide( aabb, point ) )
+
+		// BUG: We're generating too many points.  The loop detection needs to be fixed.
+		if( trace->pointList.Count() > 10 )
+			break;
+
+		// Attempt to trace the quadric in the desired direction.
+		bool stepMade = StepTraceInPlane( plane, direction, point, traceDelta, epsilon );
+
+		// After each successful step, check to see if we have come full circle.
+		if( stepMade )
 		{
+			// If we run into our own trace, we can always quit the algorithm.
+			if( trace->IsPointOnTrace( point, epsilon ) )
+				break;
+		}
+
+		// Failure to step or exiting the box are grounds for direction change.
+		if( !stepMade || Aabb::IS_OUTSIDE_BOX == AabbSide( aabb, point ) )
+		{
+			// Go in the other direction.
 			direction++;
 			if( direction < 2 )
 			{
+				// Reset to our original position on the quadric.
 				Copy( point, seed );
 				ConvergePointToQuadricInPlane( plane, point, epsilon );
-				if( !StepTraceInPlane( plane, direction, point, traceDelta ) )
+
+				// Take the initial step now, because we have already added this point on the quadric.
+				if( !StepTraceInPlane( plane, direction, point, traceDelta, epsilon ) )
 					break;
 			}
 		}
 	}
 
+	// Finally, return the trace.
 	return trace;
 }
 
 //=============================================================================
-bool VectorMath::Quadric::StepTraceInPlane( const Plane& plane, int direction, Vector& point, double traceDelta )
+bool VectorMath::Quadric::StepTraceInPlane( const Plane& plane, int direction, Vector& point, double traceDelta, double epsilon )
 {
+	// Calculate the direction of the translation vector along which we'll move the point in the given plane.
 	Vector gradient, delta;
 	EvaluateGradientAt( point, gradient );
 	if( direction == 0 )
 		Cross( delta, gradient, plane.normal );
 	else
 		Cross( delta, plane.normal, gradient );
-	Normalize( delta, delta );
-	Scale( delta, delta, traceDelta );
+
+	// If the delta ended up zero, then we don't know where to move the point.
+	// This could happen, for example, if we were trying to trace a point on
+	// a plane in that plane's plane.
+	double length = Length( delta );
+	if( length <= epsilon )
+		return false;
+
+	// Calculate the amount of desired translation.
+	Scale( delta, delta, traceDelta / length );
+
+	// Apply the translation vector.
 	Add( point, point, delta );
-	double epsilon = 0.001;
+
+	// Our step now succeeds if the translated point converges back onto the
+	// quadric, hopefully in a new position on the quadric in the desired direction.
 	return ConvergePointToQuadricInPlane( plane, point, epsilon );
 }
 
 //=============================================================================
 bool VectorMath::Quadric::ConvergePointToQuadricInPlane( const Plane& plane, Vector& point, double epsilon )
 {
+	double deltaLength = 1.0;
+
+	// Is there a way to prove or disprove that this algorithm converges?
 	int maxIters = 1000;
 	for( int count = 0; count < maxIters; count++ )
 	{
 		// Project the point down onto the plane.
-		ProjectOntoPlane( plane, point, point );
+		// This is mainly to account for accumulated round-off error.
+		ProjectPointOntoPlane( plane, point, point );
 
 		// Is the point approximately on the quadric?
 		double value = EvaluateAt( point );
 		if( fabs( value ) <= epsilon )
 			return true;
 
-		// No, move it toward the quadric.
-		Vector gradient;
+		// No, we need to move the point.
+		// In what direction should we move?
+		Vector gradient, delta;
 		EvaluateGradientAt( point, gradient );
-		Add( point, point, gradient );		// What's the significance of the length of the gradient?!  Figure it out!
+		ProjectVectorOntoPlane( plane, delta, gradient );
+		Normalize( delta, delta );
+		Scale( delta, delta, deltaLength );
+
+		// Move in that direction.
+		Vector movedPoint;
+		bool isValuePositive = value > 0.0;
+		if( isValuePositive )
+			Sub( movedPoint, point, delta );
+		else
+			Add( movedPoint, point, delta );
+
+		// Did we over-shoot our target?
+		double movedValue = EvaluateAt( movedPoint );
+		bool isMovedValuePositive = movedValue > 0.0;
+		if( isMovedValuePositive != isValuePositive )
+		{
+			// Yes, reject the move and half our move amount.
+			deltaLength /= 2.0;
+		}
+		else
+		{
+			// No, accept the move.
+			Copy( point, movedPoint );
+
+			// As a sanity check, did the value improve?
+			if( fabs( movedValue ) >= fabs( value ) )
+			{
+				// Value will not improve in the case that
+				// that there is no trace in the given plane.
+				return false;
+			}
+		}
 	}
 
+	// Failure occures if our algorithm fails to converge the point
+	// onto the quadric in the alotted number of iterations.
 	return false;
 }
 

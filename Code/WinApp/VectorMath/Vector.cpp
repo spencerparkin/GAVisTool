@@ -255,4 +255,18 @@ void VectorMath::RandomVector( Vector& dst, double min, double max )
 	dst.z = RandomNumber( min, max );
 }
 
+//=============================================================================
+void VectorMath::Project( Vector& dst, const Vector& src, const Vector& unitVector )
+{
+	double dot = Dot( src, unitVector );
+	Scale( dst, unitVector, dot );
+}
+
+//=============================================================================
+void VectorMath::Reject( Vector& dst, const Vector& src, const Vector& unitVector )
+{
+	Project( dst, src, unitVector );
+	Sub( dst, src, dst );
+}
+
 // Vector.cpp

@@ -30,7 +30,8 @@ namespace VectorMath
 
 	void CopyPlane( Plane& dst, const Plane& src );
 	double ShortestDistanceToPlane( const Plane& plane, const Vector& pos );
-	void ProjectOntoPlane( const Plane& plane, Vector& dst, const Vector& src );	// This is the orthogonal projection of the given point onto the given plane.
+	void ProjectPointOntoPlane( const Plane& plane, Vector& dst, const Vector& src );	// This is the orthogonal projection of the given point onto the given plane.
+	void ProjectVectorOntoPlane( const Plane& plane, Vector& dst, const Vector& src );	// This is the orthogonal projection of the given vector onto the given plane.  (A rejection of the vector from the norm of the plane.)
 	void MakePlane( Plane& plane, const Vector& pos, const Vector& vec );	// Initialize a plane structure to represent the plane at the given location with the given normal.
 	Plane::Side PlaneSide( const Plane& plane, const Vector& pos, double epsilon = 1e-4 );	// Tell us which side of the plane the given point is on.  The normal of the plane points to its front.
 	void SetPlanePos( Plane& plane, const Vector& pos );	// We assume here that the given plane has already been initialized.

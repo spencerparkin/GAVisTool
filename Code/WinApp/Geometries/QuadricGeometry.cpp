@@ -83,7 +83,32 @@ QuadricGeometry::QuadricGeometry( BindType bindType ) : GAVisToolGeometry( bindT
 		traceListValid = true;
 	}
 
-	// Go render the trace list here...
+	if( selected )
+		render.Highlight( GAVisToolRender::NORMAL_HIGHLIGHTING );
+	else
+		render.Highlight( GAVisToolRender::NO_HIGHLIGHTING );
+
+	render.Color( color, alpha );
+
+	VectorMath::Quadric::Trace* trace = ( VectorMath::Quadric::Trace* )traceList.LeftMost();
+	while( trace )
+	{
+		DrawTrace( trace, render );
+		trace = ( VectorMath::Quadric::Trace* )trace->Right();
+	}
+}
+
+//=========================================================================================
+void QuadricGeometry::DrawTrace( VectorMath::Quadric::Trace* trace, GAVisToolRender& render )
+{
+	VectorMath::Quadric::Point* point = ( VectorMath::Quadric::Point* )trace->pointList.LeftMost();
+	while( point )
+	{
+		VectorMath::Quadric::Point* nextPoint = ( VectorMath::Quadric::Point* )point->Right();
+		if( nextPoint )
+			render.DrawLine( point->point, nextPoint->point );
+		point = nextPoint;
+	}
 }
 
 //=========================================================================================

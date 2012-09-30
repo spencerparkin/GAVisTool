@@ -27,7 +27,7 @@ void VectorMath::MakePlane( Plane& plane, const Vector& pos, const Vector& vec )
 }
 
 //=============================================================================
-void VectorMath::ProjectOntoPlane( const Plane& plane, Vector& dst, const Vector& src )
+void VectorMath::ProjectPointOntoPlane( const Plane& plane, Vector& dst, const Vector& src )
 {
 	double orthoDist = ShortestDistanceToPlane( plane, src );
 	Vector delta;
@@ -36,6 +36,12 @@ void VectorMath::ProjectOntoPlane( const Plane& plane, Vector& dst, const Vector
 	else
 		Scale( delta, plane.normal, orthoDist );
 	Add( dst, src, delta );
+}
+
+//=============================================================================
+void VectorMath::ProjectVectorOntoPlane( const Plane& plane, Vector& dst, const Vector& src )
+{
+	Reject( dst, src, plane.normal );
 }
 
 //=============================================================================

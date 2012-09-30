@@ -39,6 +39,8 @@ namespace VectorMath
 	void Slerp( Vector& dst, const Vector& src0, const Vector& src1, double slerp );
 	double RandomNumber( double min, double max );
 	void RandomVector( Vector& dst, double min, double max );
+	void Project( Vector& dst, const Vector& src, const Vector& unitVector );
+	void Reject( Vector& dst, const Vector& src, const Vector& unitVector );
 }
 
 // Vector.h

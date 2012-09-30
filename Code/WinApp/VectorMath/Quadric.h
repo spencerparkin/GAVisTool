@@ -50,7 +50,7 @@ namespace VectorMath
 
 		void GenerateTracesAlongAxis( const Vector& axis, double range, double density, Utilities::List& traceList, bool resetList = false );
 		Trace* CalculateTraceInPlane( const Plane& plane, const Vector& seed, const Aabb& aabb );
-		bool StepTraceInPlane( const Plane& plane, int direction, Vector& point, double traceDelta );
+		bool StepTraceInPlane( const Plane& plane, int direction, Vector& point, double traceDelta, double epsilon );
 		bool ConvergePointToQuadricInPlane( const Plane& plane, Vector& point, double epsilon );
 
 		double EvaluateAt( const VectorMath::Vector& point );
