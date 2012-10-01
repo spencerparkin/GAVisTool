@@ -79,7 +79,8 @@
 
 %    Abstract is required.
 \begin{abstract}
-Blah.
+Inspired by the conformal model of geometric algebra, a model of geometry is developed in this
+paper capable of representing any quadric surface.
 \end{abstract}
 
 \maketitle
@@ -91,7 +92,7 @@ Blah.
 
 \section{Finding The Quadric Equation}
 
-Taking our que from \cite{WikipediaQuadricEntry}, the $n$-dimensional quadric surfaces
+Taking our cue from \cite{WikipediaQuadricEntry}, the $n$-dimensional quadric surfaces
 may be characterized as the set of all projective points in an $(n+1)$-dimensional homogeneous space
 satisfying a matrix equation involving a symmetric matrix.  We will let $\V^{n+1}$ be an
 $(n+1)$-dimensional vector space and identify vectors in this space with projective
@@ -132,8 +133,8 @@ The form \eqref{equ_quadric_matrix_equation} lends itself to the study
 of quadrics using matrix algebra, while the form \eqref{equ_lowlevel_equation}
 may be thought of as a low-level form of the equation in geometric algebra.
 What we might think of as a high-level form in geometric algebra, coming from
-a framework of compuation, may provide a better means of studying quadrics
-using geometric algebra.  We procede now to develop such a form.
+a framework of computation, may provide a better means of studying quadrics
+using geometric algebra.  We proceed now to develop such a form.
 
 Let $\W^{2(n+1)}$ denote a $2(n+1)$-dimensional vector space
 having $\{e_i\}_{i=0}^{2n+1}$ as a set of orthonormal basis vectors
@@ -202,23 +203,24 @@ Letting $f:\V^{n+1}\to\R$ be the function defined as
 \begin{equation}
 f(x) = x\wedge\overline{x}\cdot B,
 \end{equation}
-we arrive at our first lemma.
+we arrive at our first result.
 \begin{lemma}\label{lma_flat_quadric}
-Given any quadric $B$, if for all direction vectors $\vec{v}\in\V^{n+1}$,
-we have $f(\vec{v})=0$, then $B$ is a linear (flat) quadric.
+Given any quadric $B$, if for all pairs of homogenized points $p,x\in\V^{n+1}$ on $B$
+we have $f(x-p)=0$, then $B$ is a linear (flat) quadric.
 \end{lemma}
 \begin{proof}
 For any pair of homogenized points $p,x\in\V^{n+1}$, there is a direction $\vec{x}\in\V^{n+1}$
 such that $x=p+\vec{x}$.  We then find that
 \begin{equation}
-f(x) = f(p+\vec{x}) = \nabla_{\vec{x}}f(p),
+f(x) = f(p+\vec{x}) = f(p) + \nabla_{\vec{x}}f(p) + f(x-p) = \nabla_{\vec{x}}f(p),
 \end{equation}
 in the case that $p$ is on $B$, where $\nabla_{\vec{x}}f(p)$ is the directional
 derivative of $f$ at $p$ in the direction of $\vec{x}$.  It follows that the tangent
 space of any point on the quadric is also in the quadric.  The quadric is therefore
-flat at any point upon its surface.
+flat at any point upon its surface.  To see this, consider all such pairs of points $p,x$ where
+both are on $B$.  Both are on $B$ and both are in the tangent space of $B$ at $p$.
 \end{proof}
-Recaling that for any $x\in\V^{n+1}$, the definition of $\nabla f(x)$ is given by
+Recalling that for any $x\in\V^{n+1}$, the definition of $\nabla f(x)$ is given by
 \begin{equation}
 \nabla f(x) = \sum_{i=0}^n e_i\nabla_{e_i}f(x),
 \end{equation}
@@ -232,7 +234,7 @@ the quadric $A$ that is the plane tangent to $B$ at $p$ as follows.
 A = (p\cdot\vec{v})e_0\overline{e}_0 + e_0\overline{\vec{v}}+\overline{e}_0\vec{v}
 \end{equation}
 (Needs verification.)
-An altnerative way to formulate planes that is more in keeping with the
+An alternative way to formulate planes that is more in keeping with the
 tradition of the conformal model will be found in the next section.
 
 \subsection{Quadric 2-Blades}
@@ -273,29 +275,30 @@ by $|\vec{a}|$, our equation becomes
 \vec{p}\cdot\frac{\vec{a}}{|\vec{a}|} = -\frac{1}{|\vec{a}|},
 \end{equation}
 where it is now clear that $a\wedge\overline{a}$ is a plane having
-a unit-normal of $\vec{a}/|\vec{a}|$ and containing the point $e_0-\vec{a}/|\vec{a}|^2$
-as the point on $a\wedge\overline{a}$ closest to the origin.
-
-In the second case, our use of equation \eqref{equ_highlevel_equation} barrows
-from what we learned in the first case.
-\begin{equation}
-0 = p\wedge\overline{p}\cdot a\wedge\overline{d} = -(p\cdot a)(p\cdot d)
-\end{equation}
-Clearly each point in the set of all points satisfying this equation is in
-one of two non-parallel planes.  We can now conclude that all quadric
-2-blades are single or double planes.  Then since all bivectors are sums
-of 2-blades, we can deduce that all quadrics are formed as the sum
-of single and double planes.  Exactly what geometric significance a given
-quadric has in relation to such a sum of geometries remains to be seen.
-
-At this point we are also able to see that there may be a new
+a unit-normal of $\vec{a}/|\vec{a}|$ and containing the point $e_0-\vec{a}^{-1}$
+as the point on $a\wedge\overline{a}$ closest to the origin.\footnote{At this point we are able to see that there may be a new
 and significant interpretation to equation \eqref{equ_highlevel_equation}
 in the realization that $p\wedge\overline{p}$ is a plane.  Specifically,
 this brings up the question: if $A$ and $B$ are quadrics, what geometric
 relation can we draw between these two quadrics in the case that
 $A\cdot B=0$?  Clearly, we already know that the general
 quadric $B$ is characterized by the set of all planes satisfying
-the condition of this relationship, whatever this relationship may be.
+the condition of this relationship, whatever this relationship may be.}
+
+In the second case, our use of equation \eqref{equ_highlevel_equation} barrows
+from what we have just learned in the first case.
+\begin{equation}
+0 = p\wedge\overline{p}\cdot a\wedge\overline{d} = -(p\cdot a)(p\cdot d)
+\end{equation}
+Clearly each point in the set of all points satisfying this equation is in
+one of two non-parallel planes.
+
+Returning to the general quadric 2-blade \eqref{equ_quadric_twoblade}, to understand
+this general form, we must come to some undersatnding of what it means to add 2-blades
+representative of a single or double plane.  Let's consider the three cases: adding two single
+planes, adding a single and double plane, and adding two double planes.
+Do that here...
+
 
 % Formulate a sphere.  Can we do stuff with spheres, points and planes?
 
@@ -311,7 +314,27 @@ element of our geometric algebra that is capable of representing
 a quadric.  Indeed, any element of the algebra can represent a quadric,
 because all of the necessary mixing of coordinates is done in the
 $p\wedge\overline{p}$ calculation, while the quadric representative
-$B$ contains nothing more than the coeficients characterizing the quadric.
+$B$, not necessarily a bivector, contains nothing more than the coefficients characterizing the quadric.
+A formal definition of the desired algebraic variety is now warranted.
+\begin{definition}\label{def_quadric_variety}
+For any element $E\in\G(\V^{2(n+1)})$, this element is representative of the
+geometry that is the set of all projective points $p\in\V^{n+1}$ such that
+\begin{equation}
+0=p\wedge\overline{p}\cdot E.
+\end{equation}
+\end{definition}
+From the beginning of this paper we have been using a version of
+Definition~\ref{def_quadric_variety} that is restricted to $E$ being a bivector.  We will now consider
+some cases where $E$ is not a bivector.
+
+\section{Concluding Remarks}
+
+Admittedly, more questions have been brought up than answered in this paper.
+It also appears that while the equation \eqref{equ_highlevel_equation}
+works as an alternative to the matrix equation \eqref{equ_quadric_matrix_equation},
+it may prove to be nothing more than a curious mathematical construction.  If there are
+any new insights to be gained about quadrics using geometric algebra, I have no idea
+if this model can be helpful in that regard.
 
 %    Bibliographies can be prepared with BibTeX using amsplain,
 %    amsalpha, or (for "historical" overviews) natbib style.
