@@ -227,15 +227,8 @@ Recalling that for any $x\in\V^{n+1}$, the definition of $\nabla f(x)$ is given 
 it is not hard to show that for any vector $y\in\V^{n+1}$, we have
 $y\cdot\nabla f(x)=\nabla_y f(x)$.  Seeing that $\vec{x}\cdot\nabla f(p)=\nabla_{\vec{x}}f(p)$
 in the light of Lemma~\ref{lma_flat_quadric},
-it follows that the direction $\vec{v}=e_0\cdot e_0\wedge\nabla f(p)$
-is normal to the surface of the quadric $B$ at $p$.  We can then formulate
-the quadric $A$ that is the plane tangent to $B$ at $p$ as follows.
-\begin{equation}
-A = (p\cdot\vec{v})e_0\overline{e}_0 + e_0\overline{\vec{v}}+\overline{e}_0\vec{v}
-\end{equation}
-(Needs verification.)
-An alternative way to formulate planes that is more in keeping with the
-tradition of the conformal model will be found in the next section.
+it follows that the direction $e_0\cdot e_0\wedge\nabla f(p)$
+is normal to the surface of the quadric $B$ at $p$.
 
 \subsection{Quadric 2-Blades}
 
@@ -269,35 +262,42 @@ the set of all projective points $p\in\V^{n+1}$ such that
 0=p\wedge\overline{p}\cdot a\wedge\overline{a}=-(p\cdot a)^2,
 \end{equation}
 which holds if and only if $p\cdot a=0$.
-Letting $p=e_0+\vec{p}$ and $a=e_0+\vec{a}$, and dividing through
-by $|\vec{a}|$, our equation becomes
+Letting $p=e_0+\vec{p}$ and $a=e_0+\vec{a}$, our equation becomes
 \begin{equation}
-\vec{p}\cdot\frac{\vec{a}}{|\vec{a}|} = -\frac{1}{|\vec{a}|},
+-1 = \vec{p}\cdot\vec{a} = \langle \vec{p}\vec{a}\rangle_0,
 \end{equation}
-where it is now clear that $a\wedge\overline{a}$ is a plane having
-a unit-normal of $\vec{a}/|\vec{a}|$ and containing the point $e_0-\vec{a}^{-1}$
-as the point on $a\wedge\overline{a}$ closest to the origin.\footnote{At this point we are able to see that there may be a new
-and significant interpretation to equation \eqref{equ_highlevel_equation}
-in the realization that $p\wedge\overline{p}$ is a plane.  Specifically,
-this brings up the question: if $A$ and $B$ are quadrics, what geometric
-relation can we draw between these two quadrics in the case that
-$A\cdot B=0$?  Clearly, we already know that the general
-quadric $B$ is characterized by the set of all planes satisfying
-the condition of this relationship, whatever this relationship may be.}
+where it is now clear that $a\wedge\overline{a}$ is the solitary point
+$e_0-\vec{a}^{-1}$ in homogenized form.  What is perhaps unfortunate is
+that this also means that the element $p\wedge\overline{p}$ does not
+represent the projective point $p$ as we might like to think of it
+in the context of equation \eqref{equ_highlevel_equation}.
+That is, while $0=p\wedge\overline{p}\cdot B$ implies that the
+projective point $p$ is on $B$, it does not imply that the point $p\wedge\overline{p}$
+is on $B$ under the definition implied by equation \eqref{equ_highlevel_equation}
+of what $p\wedge\overline{p}$ represents.  We therefore have to be careful with
+our manner of speech when we refer to any element as representing any particular geometry.
+The definition under which that element is representative of a geometry must always be known.
+
+%\footnote{At this point we are able to see that there may be a new
+%and significant interpretation to equation \eqref{equ_highlevel_equation}
+%in the realization that $p\wedge\overline{p}$ is itself a point.  Specifically,
+%this brings up the question: if $A$ and $B$ are quadrics, what geometric
+%relation can we draw between these two quadrics in the case that
+%$A\cdot B=0$?  Clearly, we already know that the general
+%quadric $B$ is characterized by the set of all points satisfying
+%the condition of this relationship, whatever this relationship may be.}
 
 In the second case, our use of equation \eqref{equ_highlevel_equation} barrows
 from what we have just learned in the first case.
 \begin{equation}
 0 = p\wedge\overline{p}\cdot a\wedge\overline{d} = -(p\cdot a)(p\cdot d)
 \end{equation}
-Clearly each point in the set of all points satisfying this equation is in
-one of two non-parallel planes.
+Clearly $a\wedge\overline{d}$ represents the pair of points
+$e_0-\vec{a}^{-1}$ and $e_0-\vec{d}^{-1}$ if we
+let $a=e_0+\vec{a}$ and $d=e_0+\vec{d}$.
 
 Returning to the general quadric 2-blade \eqref{equ_quadric_twoblade}, to understand
-this general form, we must come to some undersatnding of what it means to add 2-blades
-representative of a single or double plane.  Let's consider the three cases: adding two single
-planes, adding a single and double plane, and adding two double planes.
-Do that here...
+this general form, we must come to some understanding of...
 
 
 % Formulate a sphere.  Can we do stuff with spheres, points and planes?
@@ -323,9 +323,25 @@ geometry that is the set of all projective points $p\in\V^{n+1}$ such that
 0=p\wedge\overline{p}\cdot E.
 \end{equation}
 \end{definition}
-From the beginning of this paper we have been using a version of
-Definition~\ref{def_quadric_variety} that is restricted to $E$ being a bivector.  We will now consider
+From the beginning of this paper we have been using the version of
+Definition~\ref{def_quadric_variety} where $E$ is strictly a bivector.  We will now consider
 some cases where $E$ is not a bivector.
+
+The first consideration is naturally that of vectors.  Letting $a,b\in\V^{n+1}$ be any two
+vectors, we see that
+\begin{equation}
+p\wedge\overline{p}\cdot(a+\overline{b}) = (p\cdot b)p - (p\cdot a)\overline{p}.
+\end{equation}
+Recalling that if $p$ is a projective point, then $p\neq 0$, it is clear that $p$ is on $a+\overline{b}$
+if and only if $p\cdot a=0$ and $p\cdot b=0$, which is impossible unless $a=b$.
+Therefore, if $a=b$, we can say that $a+\overline{b}$ is a point.\footnote{Notice that we must be careful here in referring to a
+vector as any geometry.  For example, it is common for us to think of a vector $p\in\V^{n+1}$
+as a projective point, but under Definition~\ref{def_quadric_variety}, $p$ represents the projective
+point $e_0-(e_0\cdot (e_0\wedge p))^{-1}$.}
+
+General trivectors are as formidable an object of study as bivectors themselves.
+Let us therefore consider cases of trivectors that we can relate back to what
+we already know about bivectors.
 
 \section{Concluding Remarks}
 
