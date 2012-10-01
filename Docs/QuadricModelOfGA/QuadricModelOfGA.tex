@@ -234,13 +234,14 @@ is normal to the surface of the quadric $B$ at $p$.
 
 All quadrics are bivectors, but not all bivectors are 2-blades.  Here
 we study the class of quadrics that are 2-blades.  For any four
-points $a,b,c,d\in\V^{n+1}$, such a quadric $B$ has the form
+vectors $a,b,c,d\in\V^{n+1}$, such a quadric $B$ has the form
 \begin{align}
 B &= (a+\overline{b})\wedge(c+\overline{d})\label{equ_quadric_twoblade} \\
  &= a\wedge c + a\wedge\overline{d} + \overline{b}\wedge c + \overline{b\wedge d}.\label{equ_quadric_twoblade_expanded}
 \end{align}
-It is curious to think what geometric significance the quadric $B$ has in relation
-to these four points.  Whatever the case may be, it is clear from equation
+Further restricting the type of bivector studied here,
+it is curious to think what geometric significance the quadric $B$ has in relation
+to these four vectors when assumed to be projective points.  Whatever the case may be, it is clear from equation
 \eqref{equ_quadric_twoblade_expanded} that the quadric $B$ contains the intersection, if any,
 of the four quadrics appearing in the sum.  Considering the three forms of 2-blades
 found in the expansion of equation \eqref{equ_quadric_twoblade} to be more
@@ -254,20 +255,20 @@ to the shape of $B$.  The remaining form $a\wedge\overline{d}$, therefore,
 deserves our full attention.  We break this form into two cases, the first being
 the case when $a=d$, and the second when $a\neq d$.
 
-In the first case, a quick application of equation
-\eqref{equ_highlevel_equation} reveals the type of quadric
+In the first case, an application of equation
+\eqref{equ_highlevel_equation} easily reveals the type of quadric
 represented by $a\wedge\overline{a}$.  Doing so, we see that it represents
 the set of all projective points $p\in\V^{n+1}$ such that
-\begin{equation}
+\begin{equation}\label{equ_point_or_plane_blade}
 0=p\wedge\overline{p}\cdot a\wedge\overline{a}=-(p\cdot a)^2,
 \end{equation}
 which holds if and only if $p\cdot a=0$.
-Letting $p=e_0+\vec{p}$ and $a=e_0+\vec{a}$, our equation becomes
+Letting $p=e_0+\vec{p}$ and $a=e_0+\vec{a}$, equation \eqref{equ_point_or_plane_blade} becomes
 \begin{equation}
 -1 = \vec{p}\cdot\vec{a} = \langle \vec{p}\vec{a}\rangle_0,
 \end{equation}
-where it is now clear that $a\wedge\overline{a}$ is the solitary point
-$e_0-\vec{a}^{-1}$ in homogenized form.  What is perhaps unfortunate is
+where it is clear that $a\wedge\overline{a}$ is the solitary projective point
+$e_0-\vec{a}^{-1}$ in the case that $a$ is a projective point.\footnote{What is perhaps unfortunate is
 that this also means that the element $p\wedge\overline{p}$ does not
 represent the projective point $p$ as we might like to think of it
 in the context of equation \eqref{equ_highlevel_equation}.
@@ -276,7 +277,13 @@ projective point $p$ is on $B$, it does not imply that the point $p\wedge\overli
 is on $B$ under the definition implied by equation \eqref{equ_highlevel_equation}
 of what $p\wedge\overline{p}$ represents.  We therefore have to be careful with
 our manner of speech when we refer to any element as representing any particular geometry.
-The definition under which that element is representative of a geometry must always be known.
+The definition under which that element is representative of a geometry must always be known.}
+In the case that $a$ is a direction, equation \eqref{equ_point_or_plane_blade} becomes
+\begin{equation}
+0 = \vec{p}\cdot\vec{a},
+\end{equation}
+showing that in this case, $a\wedge\overline{a}$ is the plane containing
+the origin and having $\vec{a}$ as a vector normal to its surface.
 
 %\footnote{At this point we are able to see that there may be a new
 %and significant interpretation to equation \eqref{equ_highlevel_equation}
@@ -292,9 +299,9 @@ from what we have just learned in the first case.
 \begin{equation}
 0 = p\wedge\overline{p}\cdot a\wedge\overline{d} = -(p\cdot a)(p\cdot d)
 \end{equation}
-Clearly $a\wedge\overline{d}$ represents the pair of points
-$e_0-\vec{a}^{-1}$ and $e_0-\vec{d}^{-1}$ if we
-let $a=e_0+\vec{a}$ and $d=e_0+\vec{d}$.
+Clearly this represents the union of any combination of a pair geometries where either
+one is a point or a plane containing the origin.  Interestingly, in the case of a
+point-plane pair, the point need not be on the plane.
 
 Returning to the general quadric 2-blade \eqref{equ_quadric_twoblade}, to understand
 this general form, we must come to some understanding of...
@@ -333,8 +340,8 @@ vectors, we see that
 p\wedge\overline{p}\cdot(a+\overline{b}) = (p\cdot b)p - (p\cdot a)\overline{p}.
 \end{equation}
 Recalling that if $p$ is a projective point, then $p\neq 0$, it is clear that $p$ is on $a+\overline{b}$
-if and only if $p\cdot a=0$ and $p\cdot b=0$, which is impossible unless $a=b$.
-Therefore, if $a=b$, we can say that $a+\overline{b}$ is a point.\footnote{Notice that we must be careful here in referring to a
+if and only if $p\cdot a=0$ and $p\cdot b=0$.
+Blah blah.\footnote{Notice that we must be careful here in referring to a
 vector as any geometry.  For example, it is common for us to think of a vector $p\in\V^{n+1}$
 as a projective point, but under Definition~\ref{def_quadric_variety}, $p$ represents the projective
 point $e_0-(e_0\cdot (e_0\wedge p))^{-1}$.}
