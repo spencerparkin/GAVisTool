@@ -165,14 +165,16 @@ precedence over the inner and outer products.}
 0 = p\wedge\overline{p}\cdot B,
 \end{equation}
 where $B\in\G(\W^{2(n+1)})$ is a bivector of the form
-\begin{equation}
+\begin{equation}\label{equ_quadric_bivector_form}
 B = -\frac{1}{2}\sum_{i=0}^n\sum_{j=i}^n\alpha_{ij}(e_i\overline{e}_j+(-1)^{\sigma_{ij}}\overline{e}_ie_j).
 \end{equation}
 Here, as in the form \eqref{equ_quadric_matrix_equation} where we may think of
 the symmetric matrix as representative of the quadric, the bivector $B$ may also be thought
-of as a quadric representative.
+of as a quadric representative.  Of course, some bivectors cannot be written
+in the form of equation \eqref{equ_quadric_bivector_form}, but such bivectors
+clearly still give a quadric when plugged into equation \eqref{equ_highlevel_equation}.
 
-Realizing that we need to be careful, because the inner product is not associative,
+While realizing that we need to be careful, because the inner product is not associative,
 it is interesting to write equation \eqref{equ_highlevel_equation} in a form
 similar to that of equation \eqref{equ_quadric_matrix_equation}.  Doing so, we get
 \begin{equation}\label{equ_conjugation_form}
