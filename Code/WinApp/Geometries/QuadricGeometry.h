@@ -48,6 +48,8 @@ private:
 	VectorMath::Quadric quadric;
 	Utilities::List traceList;
 	bool traceListValid;
+
+	GeometricAlgebra::SumOfBlades element;
 };
 
 // QuadricGeometry.h

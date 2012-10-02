@@ -17,15 +17,37 @@ IMPLEMENT_CALCLIB_CLASS1( QuadricGeometry, GAVisToolGeometry );
 //=========================================================================================
 QuadricGeometry::QuadricGeometry( BindType bindType ) : GAVisToolGeometry( bindType )
 {
-	// Make composition and decomposition code for the quadric...
+	CalcLib::Calculator calculator( "geoalg" );
 
-	// Test code...
-	// a00 + 2*( a01*x + a02*y + a03*z ) +
-	// a11*x^2 + 2*( a12*x*y + a13*x*z ) +
-	// a22*y^2 + 2*( a23*y*z ) +
-	// a33*z^2 = 0
-	quadric.a11 = 1.0;
-	quadric.a02 = 1.0;
+	// ( e0 + x*e1 + y*e2 + z*e3 )^( e4 + x*e5 + y*e6 + z*e7 )
+	// = 1*( e0^e4 )
+	// + x*( e0^e5 + e1^e4 )
+	// + y*( e0^e6 + e2^e4 )
+	// + z*( e0^e7 + e3^e4 )
+	// + x^2*( e1^e5 )
+	// + x*y*( e1^e6 + e2^e5 )
+	// + x*z*( e1^e7 + e3^e5 )
+	// + y^2*( e2^e6 )
+	// + y*z*( e2^e7 + e3^e6 )
+	// + z^2*( e3^e7 )
+
+	char decompositionCode[ 512 ];
+	strcpy_s( decompositionCode, sizeof( decompositionCode ),
+		"do("
+		"a00 = scalar_part( B, e4^e0 ),"
+		"a01 = scalar_part( B, e5^e0 ) + scalar_part( B, e4^e1 ),"
+		"a02 = scalar_part( B, e6^e0 ) + scalar_part( B, e4^e2 ),"
+		"a03 = scalar_part( B, e7^e0 ) + scalar_part( B, e4^e3 ),"
+		"a11 = scalar_part( B, e5^e1 ),"
+		"a12 = scalar_part( B, e6^e1 ) + scalar_part( B, e5^e2 ),"
+		"a13 = scalar_part( B, e7^e1 ) + scalar_part( B, e5^e3 ),"
+		"a22 = scalar_part( B, e6^e2 ),"
+		"a23 = scalar_part( B, e7^e2 ) + scalar_part( B, e6^e3 ),"
+		"a33 = scalar_part( B, e7^e3 ),"
+		")"
+	);
+	decompositionEvaluator = calculator.CompileEvaluator( decompositionCode );
+	wxASSERT( decompositionEvaluator != 0 );
 
 	traceListValid = false;
 }
@@ -44,14 +66,47 @@ QuadricGeometry::QuadricGeometry( BindType bindType ) : GAVisToolGeometry( bindT
 //=========================================================================================
 /*virtual*/ void QuadricGeometry::DecomposeFrom( const GeometricAlgebra::SumOfBlades& element )
 {
-	//...
-
+	this->element.AssignSumOfBlades( element );
 	traceListValid = false;
+
+	CalcLib::GeometricAlgebraEnvironment gaEnv;
+
+	CalcLib::Number* number = gaEnv.CreateNumber();
+	CalcLib::MultivectorNumber* multivector = ( CalcLib::MultivectorNumber* )number;
+
+	multivector->AssignFrom( element, gaEnv );
+	gaEnv.StoreVariable( "B", *number );
+
+	decompositionEvaluator->EvaluateResult( *number, gaEnv );
+
+	gaEnv.LookupVariable( "a00", *number );
+	multivector->AssignTo( quadric.a00, gaEnv );
+	gaEnv.LookupVariable( "a01", *number );
+	multivector->AssignTo( quadric.a01, gaEnv );
+	gaEnv.LookupVariable( "a02", *number );
+	multivector->AssignTo( quadric.a02, gaEnv );
+	gaEnv.LookupVariable( "a03", *number );
+	multivector->AssignTo( quadric.a03, gaEnv );
+	gaEnv.LookupVariable( "a11", *number );
+	multivector->AssignTo( quadric.a11, gaEnv );
+	gaEnv.LookupVariable( "a12", *number );
+	multivector->AssignTo( quadric.a12, gaEnv );
+	gaEnv.LookupVariable( "a13", *number );
+	multivector->AssignTo( quadric.a13, gaEnv );
+	gaEnv.LookupVariable( "a22", *number );
+	multivector->AssignTo( quadric.a22, gaEnv );
+	gaEnv.LookupVariable( "a23", *number );
+	multivector->AssignTo( quadric.a23, gaEnv );
+	gaEnv.LookupVariable( "a33", *number );
+	multivector->AssignTo( quadric.a33, gaEnv );
+
+	delete number;
 }
 
 //=========================================================================================
 /*virtual*/ void QuadricGeometry::ComposeTo( GeometricAlgebra::SumOfBlades& element ) const
 {
+	element.AssignSumOfBlades( this->element );
 }
 
 //=========================================================================================
@@ -83,6 +138,7 @@ QuadricGeometry::QuadricGeometry( BindType bindType ) : GAVisToolGeometry( bindT
 		VectorMath::Set( delta, 5.0, 5.0, 5.0 );
 		VectorMath::Aabb aabb;
 		MakeAabb( aabb, center, delta );
+		traceList.RemoveAll( true );
 		quadric.GenerateTracesAlongAxis( coordFrame.xAxis, range, planeCount, aabb, traceList );
 		quadric.GenerateTracesAlongAxis( coordFrame.yAxis, range, planeCount, aabb, traceList );
 		quadric.GenerateTracesAlongAxis( coordFrame.zAxis, range, planeCount, aabb, traceList );

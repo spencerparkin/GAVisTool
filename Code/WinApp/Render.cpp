@@ -16,7 +16,7 @@
 //=============================================================================
 GAVisToolRender::GAVisToolRender( void ) :
 			selectionPrimitiveCache( 1024, 1024, 128, 0 ),
-			noAlphaBlendingPrimitiveCache( 1024 * 8, 1024, 128, 0 ),
+			noAlphaBlendingPrimitiveCache( 1024 * 8, 1024 * 8, 128, 0 ),
 			alphaBlendingPrimitiveCache( 1024 * 64, 1024 * 16, 256, 1024 * 16 )
 {
 	SetRenderMode( RENDER_MODE_NO_ALPHA_SORTING );
