@@ -1,8 +1,9 @@
 /*
- * Make an ellipsoid.
+ * Make an ellipsoid.  This actually makes a spheroid.
  */
 do
 (
+	/*
 	a00 = -4,
 	a11 = 0.9,
 	a22 = 0.8,
@@ -11,4 +12,33 @@ do
 	B = a00*e0*e4 + a11*e1*e5 + a22*e2*e6 + a33*e3*e7,
 	
 	bind_quadric(B),
+	*/
+	
+	R04 = ( 1 - e0*e4 ) / sqrt(2),
+	R15 = ( 1 - e1*e5 ) / sqrt(2),
+	R26 = ( 1 - e2*e6 ) / sqrt(2),
+	R37 = ( 1 - e3*e7 ) / sqrt(2),
+	
+	R = R04*R15*R26*R37,
+	
+	O = e1*e5 + e2*e6 + e3*e7,
+	A = e0*e4,
+	
+	c = 0,
+	v = 0.5*e1,
+	vb = 0.5*e5,
+	r = 1.5,
+	
+	bind_scalar_iface( r ),
+	bind_virtual( c, v, vb ),
+	formula_constraint( "vb = grade_part( 1, R*v*R~ )" ),
+	
+	/*
+	 * This still doesn't quite work.  Changing c, for example,
+	 * doesn't always translate the spheroid.  Why?
+	 */
+	E = 0,
+	formula_constraint( "E = -O + 2*(1 - c . v)*c^e4 + v^vb - (c*c - (c . v)*(c . v) - r*r)*A" ),
+	
+	bind_quadric(E),
 )
