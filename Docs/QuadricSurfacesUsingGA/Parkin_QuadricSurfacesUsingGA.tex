@@ -150,8 +150,7 @@ which resembles a sort of conjugation of $E$ by $p$.  This may perhaps be a more
 familiar form for readers familiar with the study of quadric surfaces in projective geometry.
 Also notice that we have not required that $E$ be a bivector in Definition~\ref{def_quadric},
 because we may find this condition useful and meaningful for any element of $\G$.  For now,
-however, we will restrict our attention to the case when $E$ is a bivector to help us motivate
-this definition.
+however, we will restrict our attention to the case when $E$ is a bivector.
 
 To see why Definition~\ref{def_quadric} works, simply notice that when $E$ is a bivector, we have
 \begin{equation}\label{equ_homogeneous_polynomial}
@@ -160,18 +159,14 @@ p\wedge\overline{p}\cdot E=\sum_{i=0}^n\sum_{j=i}^n \lambda_{ij}(p\cdot e_i)(p\c
 which we can recognize as a homogeneous polynomial of degree 2 in the vector components of $p$.
 The scalars $\lambda_{ij}$, with $0\leq i\leq j\leq n$, may be formulated in terms of $E$ by
 \begin{equation}\label{equ_quadric_components}
-\lambda_{ij} = -\frac{1}{2}\left(e_i\overline{e_j}+\sigma_{ij}\overline{e_i}e_j\right)\cdot E,
-\end{equation}
-where $\sigma_{ij}$ is the scalar given by
-\begin{equation}
-\sigma_{ij} = \left\{\begin{array}{ll}
-+1 & \mbox{if $i=j$,} \\
--1 & \mbox{if $i\neq j$.}
+\lambda_{ij} = \left\{\begin{array}{ll}
+e_i\overline{e_j}\cdot E & \mbox{if $i=j$,} \\
+\left(e_i\overline{e_j}-\overline{e_i}e_j\right)\cdot E & \mbox{if $i\neq j$.}
 \end{array}\right.
 \end{equation}
 It should be noted that bivectors do not uniquely represent quadric surfaces, not even up to scale.
 This is apparent from equation \eqref{equ_quadric_components} when we see that for $i\neq j$,
-we can freely choose certain components of the bivector so that their sum or difference is $2\lambda_{ij}$.
+we can freely choose certain components of the bivector so that their sum is $-\lambda_{ij}$.
 
 \section{The Construction Of Quadric Surfaces In The Model}
 
@@ -180,29 +175,47 @@ representing a variety of well-known quadric surfaces.  Let us begin with the
 spheroid, a special case of ellipsoid.  Such a surface may be characterized by
 the non-projective point solution set of the equation
 \begin{equation}\label{equ_spheroid}
-0 = ((x-c)\cdot v)^2-r^2
+r^2 = (x-c)^2 - ((x-c)\cdot v)^2
 \end{equation}
 in the non-projective point $x\in\V$, where $c\in\V$ is a non-projective
 point denoting the center of the spheroid, $v\in\V$ is a direction
-vector indicating the direction and amount of bulge in the spheroid, and the scalar $r\in\R$
-is the radius of the spheroid about the axis $v$.  Expanding equation \eqref{equ_spheroid},
-we get
+vector with $0\leq |v|<1$, indicating the direction and amount of bulge in the spheroid, and the scalar $r\in\R$
+is the radius of the spheroid about the axis $v$.  To better see that this
+is indeed a spheroid, consider the two cases $(x-c)\cdot v=0$ and $(x-c)\wedge v=0$.
+In the first case, equation \eqref{equ_spheroid} becomes
 \begin{equation}
-0 = (x\cdot v)^2 - 2(x\cdot v)(c\cdot v) + (c\cdot v)^2-r^2,
+r^2 = (x-c)^2,
 \end{equation}
-from which we can see how $p\wedge\overline{p}$ factors out
-of the equation in terms of the inner product, where $p=e_0+x$
-is a homogenized point.  Doing so, we see that the bivector
+which is clearly a sphere.  In the second case, equation \eqref{equ_spheroid} becomes
+\begin{equation}
+\frac{r^2}{1-v^2} = (x-c)^2,
+\end{equation}
+which is yet another sphere having a larger radius than $r$.
+
+Expanding equation \eqref{equ_spheroid}, we get
+\begin{equation}
+0 = x^2 - 2(1-(c\cdot v))x\cdot c - (x\cdot v)^2 + c^2-(c\cdot v)^2-r^2,
+\end{equation}
+from which it is possible to factor out $p\wedge\overline{p}$
+in terms of the inner product, where $p=e_0+x$
+is a homogenized projective point.  Doing so, we see that the bivector
 $E$ given by
 \begin{equation}\label{equ_spheroid_bivector}
-E = \overline{v}\wedge v-2(c\cdot v)(\overline{e_0}\wedge v)+((c\cdot v)^2-r^2)\overline{e_0}\wedge e_0
+E = -\Omega + 2(1-c\cdot v)c\wedge\overline{e_0} + v\wedge\overline{v} - (c^2-(c\cdot v)^2-r^2)A,
 \end{equation}
-is representative of the spheroid by Definition~\ref{def_quadric}.
+is representative of the spheroid by Definition~\ref{def_quadric}, where the constant
+$\Gamma$ is defined as
+\begin{equation}
+\Omega=\sum_{i=1}^n e_i\overline{e_i},
+\end{equation}
+and $A$ is the constant defined as $A=e_0\overline{e_0}$.  We will find each of these as
+frequently recurring constants in our calculations.
 
-Such forms are useful, not only for composition, but especially decomposition in the cases
+Such forms as that in equation \eqref{equ_spheroid_bivector} are useful, not only
+for composition, but especially decomposition in the cases
 where we have formulated what may, for example, be a spheroid by some other means.
 This gives the model power as an analytical tool.  If we can solve a problem whose solution
-is a bivector representative of a spheroid, then we can use this canonical form to answers
+is a bivector representative of a spheroid, then we can use this canonical form to answer
 questions about that spheroid.  Where is its center?  What is its axis?  What is its radius
 about that axis?  As is often the case in mathematics, decomposition is
 harder than composition.
