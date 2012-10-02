@@ -34,16 +34,16 @@ QuadricGeometry::QuadricGeometry( BindType bindType ) : GAVisToolGeometry( bindT
 	char decompositionCode[ 512 ];
 	strcpy_s( decompositionCode, sizeof( decompositionCode ),
 		"do("
-		"a00 = scalar_part( B, e4^e0 ),"
-		"a01 = scalar_part( B, e5^e0 ) + scalar_part( B, e4^e1 ),"
-		"a02 = scalar_part( B, e6^e0 ) + scalar_part( B, e4^e2 ),"
-		"a03 = scalar_part( B, e7^e0 ) + scalar_part( B, e4^e3 ),"
-		"a11 = scalar_part( B, e5^e1 ),"
-		"a12 = scalar_part( B, e6^e1 ) + scalar_part( B, e5^e2 ),"
-		"a13 = scalar_part( B, e7^e1 ) + scalar_part( B, e5^e3 ),"
-		"a22 = scalar_part( B, e6^e2 ),"
-		"a23 = scalar_part( B, e7^e2 ) + scalar_part( B, e6^e3 ),"
-		"a33 = scalar_part( B, e7^e3 ),"
+		"a00 = scalar_part( B, e0^e4 ),"
+		"a01 = scalar_part( B, e0^e5 ) - scalar_part( B, e4^e1 ),"
+		"a02 = scalar_part( B, e0^e6 ) - scalar_part( B, e4^e2 ),"
+		"a03 = scalar_part( B, e0^e7 ) - scalar_part( B, e4^e3 ),"
+		"a11 = scalar_part( B, e1^e5 ),"
+		"a12 = scalar_part( B, e1^e6 ) - scalar_part( B, e5^e2 ),"
+		"a13 = scalar_part( B, e1^e7 ) - scalar_part( B, e5^e3 ),"
+		"a22 = scalar_part( B, e2^e6 ),"
+		"a23 = scalar_part( B, e2^e7 ) - scalar_part( B, e6^e3 ),"
+		"a33 = scalar_part( B, e3^e7 ),"
 		")"
 	);
 	decompositionEvaluator = calculator.CompileEvaluator( decompositionCode );
