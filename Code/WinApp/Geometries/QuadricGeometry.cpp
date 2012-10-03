@@ -31,18 +31,19 @@ QuadricGeometry::QuadricGeometry( BindType bindType ) : GAVisToolGeometry( bindT
 	// + y*z*( e2^e7 + e3^e6 )
 	// + z^2*( e3^e7 )
 
+	// The 1/2 factors here are needed by the internal low-level quadric representation.
 	char decompositionCode[ 512 ];
 	strcpy_s( decompositionCode, sizeof( decompositionCode ),
 		"do("
 		"a00 = scalar_part( B, e0^e4 ),"
-		"a01 = scalar_part( B, e0^e5 ) - scalar_part( B, e4^e1 ),"
-		"a02 = scalar_part( B, e0^e6 ) - scalar_part( B, e4^e2 ),"
-		"a03 = scalar_part( B, e0^e7 ) - scalar_part( B, e4^e3 ),"
+		"a01 = 0.5*( scalar_part( B, e0^e5 ) - scalar_part( B, e4^e1 ) ),"
+		"a02 = 0.5*( scalar_part( B, e0^e6 ) - scalar_part( B, e4^e2 ) ),"
+		"a03 = 0.5*( scalar_part( B, e0^e7 ) - scalar_part( B, e4^e3 ) ),"
 		"a11 = scalar_part( B, e1^e5 ),"
-		"a12 = scalar_part( B, e1^e6 ) - scalar_part( B, e5^e2 ),"
-		"a13 = scalar_part( B, e1^e7 ) - scalar_part( B, e5^e3 ),"
+		"a12 = 0.5*( scalar_part( B, e1^e6 ) - scalar_part( B, e5^e2 ) ),"
+		"a13 = 0.5*( scalar_part( B, e1^e7 ) - scalar_part( B, e5^e3 ) ),"
 		"a22 = scalar_part( B, e2^e6 ),"
-		"a23 = scalar_part( B, e2^e7 ) - scalar_part( B, e6^e3 ),"
+		"a23 = 0.5*( scalar_part( B, e2^e7 ) - scalar_part( B, e6^e3 ) ),"
 		"a33 = scalar_part( B, e3^e7 ),"
 		")"
 	);
@@ -78,10 +79,6 @@ QuadricGeometry::QuadricGeometry( BindType bindType ) : GAVisToolGeometry( bindT
 	gaEnv.StoreVariable( "B", *number );
 
 	decompositionEvaluator->EvaluateResult( *number, gaEnv );
-
-	// TODO: I believe that there is a bug in the low-level quadric routines.
-	//       To see the bug, compare a sphere at origin of radius 2 with one
-	//       at x=1 with radius 2.  They draw with different radii.  Fix it!
 
 	gaEnv.LookupVariable( "a00", *number );
 	multivector->AssignTo( quadric.a00, gaEnv );
@@ -139,7 +136,7 @@ QuadricGeometry::QuadricGeometry( BindType bindType ) : GAVisToolGeometry( bindT
 		double planeCount = 10.0;
 		VectorMath::Vector center, delta;
 		VectorMath::Zero( center );
-		VectorMath::Set( delta, 5.0, 5.0, 5.0 );
+		VectorMath::Set( delta, 7.0, 7.0, 7.0 );
 		VectorMath::Aabb aabb;
 		MakeAabb( aabb, center, delta );
 		traceList.RemoveAll( true );
