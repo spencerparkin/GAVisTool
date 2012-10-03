@@ -57,7 +57,7 @@
 %    author one information
 % \author[short version for running head]{name for top of paper}
 \author{Spencer T. Parkin}
-\address{102 West 500 South, Salt Lake City, UT  84101}
+\address{102 West 500 South, Salt Lake City, Utah  84101}
 \curraddr{}
 \email{spencer.parkin@disney.com}
 \thanks{}
@@ -183,28 +183,30 @@ vector with $0\leq |v|<1$, indicating the direction and amount of bulge in the s
 is the radius of the spheroid about the axis $v$.  To better see that this
 is indeed a spheroid, consider the two cases $(x-c)\cdot v=0$ and $(x-c)\wedge v=0$.
 In the first case, equation \eqref{equ_spheroid} becomes
-\begin{equation}
+\begin{equation}\label{equ_spheroid_smallest}
 r^2 = (x-c)^2,
 \end{equation}
-which is clearly a sphere.  In the second case, equation \eqref{equ_spheroid} becomes
-\begin{equation}
+which is clearly a sphere at $c$ with radius $r$.  In the second case, equation \eqref{equ_spheroid} becomes
+\begin{equation}\label{equ_spheroid_largest}
 \frac{r^2}{1-v^2} = (x-c)^2,
 \end{equation}
-which is yet another sphere having a larger radius than $r$.
+which is yet another sphere at $c$, this time having a radius larger than $r$.  In neither
+case, we may consider our equation to be an interpolation between equations
+\eqref{equ_spheroid_smallest} and \eqref{equ_spheroid_largest}.
 
 Expanding equation \eqref{equ_spheroid}, we get
 \begin{equation}
-0 = x^2 - 2(1-(c\cdot v))x\cdot c - (x\cdot v)^2 + c^2-(c\cdot v)^2-r^2,
+0 = x^2 - (x\cdot v)^2 + 2x\cdot ((c\cdot v)v - c) + c^2 - (c\cdot v)^2 - r^2,
 \end{equation}
 from which it is possible to factor out $p\wedge\overline{p}$
 in terms of the inner product, where $p=e_0+x$
 is a homogenized projective point.  Doing so, we see that the bivector
 $E$ given by
 \begin{equation}\label{equ_spheroid_bivector}
-E = -\Omega + 2(1-c\cdot v)c\wedge\overline{e_0} + v\wedge\overline{v} - (c^2-(c\cdot v)^2-r^2)A,
+E = -\Omega + v\wedge\overline{v} - 2((c\cdot v)v - c)\wedge\overline{e_0} - (c^2-(c\cdot v)^2-r^2)A,
 \end{equation}
 is representative of the spheroid by Definition~\ref{def_quadric}, where the constant
-$\Gamma$ is defined as
+$\Omega$ is defined as
 \begin{equation}
 \Omega=\sum_{i=1}^n e_i\overline{e_i},
 \end{equation}
