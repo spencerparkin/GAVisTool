@@ -79,6 +79,10 @@ QuadricGeometry::QuadricGeometry( BindType bindType ) : GAVisToolGeometry( bindT
 
 	decompositionEvaluator->EvaluateResult( *number, gaEnv );
 
+	// TODO: I believe that there is a bug in the low-level quadric routines.
+	//       To see the bug, compare a sphere at origin of radius 2 with one
+	//       at x=1 with radius 2.  They draw with different radii.  Fix it!
+
 	gaEnv.LookupVariable( "a00", *number );
 	multivector->AssignTo( quadric.a00, gaEnv );
 	gaEnv.LookupVariable( "a01", *number );
