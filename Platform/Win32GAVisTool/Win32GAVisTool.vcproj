@@ -672,7 +672,7 @@
 				Name="QuadricGeometry"
 				>
 				<File
-					RelativePath="..\..\ScriptCode\QuadricGeometry\Ellipsoid.txt"
+					RelativePath="..\..\ScriptCode\QuadricGeometry\Spheroid.txt"
 					>
 				</File>
 			</Filter>
