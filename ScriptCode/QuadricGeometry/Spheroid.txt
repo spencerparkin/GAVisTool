@@ -25,16 +25,21 @@ do
 	A = e0*e4,
 	
 	c = 0,
-	v = 0.5*e1,
-	vb = 0.5*e5,
+	v = e1,		/* Keep this unit-length. */
+	vb = e5,
 	r = 1.5,
+	l = 1,
 	
 	bind_scalar_iface( r ),
-	bind_virtual( c, v, vb ),
+	bind_virtual( c, v, vb, l ),
 	formula_constraint( "vb = grade_part( 1, R*v*R~ )" ),
 	
+	/*
+	 * Something is still not quite right about this.  Translating c does not
+	 * always translate the surface, but shouldn't it always do that?
+	 */
 	E = 0,
-	formula_constraint( "E = -O + v^vb - 2*((c . v)*v - c)^e4 - (c*c - (c . v)*(c . v) - r*r)*A" ),
+	formula_constraint( "E = -O + l*v^vb + 2*(c + l*(c . v)*v)^e4 - (c*c + l*(c . v)*(c . v) - r*r)*A" ),
 	
 	bind_quadric(E),
 )
