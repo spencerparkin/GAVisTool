@@ -33,12 +33,8 @@ do
 	bind_virtual( c, v, vb ),
 	formula_constraint( "vb = grade_part( 1, R*v*R~ )" ),
 	
-	/*
-	 * This still doesn't quite work.  Changing c, for example,
-	 * doesn't always translate the spheroid.  Why?
-	 */
 	E = 0,
-	formula_constraint( "E = -O + 2*(1 - c . v)*c^e4 + v^vb - (c*c - (c . v)*(c . v) - r*r)*A" ),
+	formula_constraint( "E = -O + v^vb - 2*((c . v)*v - c)^e4 - (c*c - (c . v)*(c . v) - r*r)*A" ),
 	
 	bind_quadric(E),
 )
