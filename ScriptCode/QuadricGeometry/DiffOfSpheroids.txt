@@ -1,0 +1,36 @@
+/*
+ * Explore the difference between two spheroids.
+ */
+do
+(
+	R04 = ( 1 - e0*e4 ) / sqrt(2),
+	R15 = ( 1 - e1*e5 ) / sqrt(2),
+	R26 = ( 1 - e2*e6 ) / sqrt(2),
+	R37 = ( 1 - e3*e7 ) / sqrt(2),
+	
+	R = R04*R15*R26*R37,
+	
+	c0 = 0,
+	v0 = e1,		/* Keep this unit-length. */
+	r0 = 1.5,
+	l0 = 1,
+	
+	c1 = 3*e2,
+	v1 = (e2+e3)/sqrt(2),		/* Keep this unit-length. */
+	r1 = 1.2,
+	l1 = 1,
+	
+	bind_scalar_iface( r0, r1 ),
+	bind_virtual( c0, v0, vb0, l0, c1, v1, vb1, l1 ),
+	formula_constraint( "vb0 = grade_part( 1, R*v0*R~ )" ),
+	formula_constraint( "vb1 = grade_part( 1, R*v1*R~ )" ),
+	
+	S0 = S1 = 0,
+	bind_quadric( S0, S1 ),
+	formula_constraint( "S0 = Omega + l0*v0^vb0 - 2*(c0 + l0*(c0 . v0)*v0)^e4 + (c0*c0 + l0*(c0 . v0)*(c0 . v0) - r0*r0)*Alpha" ),
+	formula_constraint( "S1 = Omega + l1*v1^vb1 - 2*(c1 + l1*(c1 . v1)*v1)^e4 + (c1*c1 + l1*(c1 . v1)*(c1 . v1) - r1*r1)*Alpha" ),
+	
+	S = 0,
+	bind_quadric( S ),
+	formula_constraint( "S = S0 - S1" ),
+)
