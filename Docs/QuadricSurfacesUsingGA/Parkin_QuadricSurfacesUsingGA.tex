@@ -202,19 +202,22 @@ in the non-projective point $x\in\V$, where $c\in\V$ is a non-projective
 point denoting the center of the surface, $v\in\V$ is a unit-length direction
 vector, $r\in\R$ is the radius of the geometry about the axis $v$ at $c$, and
 $\lambda\in\R$ is a scalar indicating the type and extremity of the surface.
-Specifically, if $\lambda<1$, we get a spheroid, if $\lambda=1$, we get
-a circular cylinder, and if $\lambda>1$, we get a circular  hyperboloid.
+Specifically, if $\lambda<-1$, we get a circular hyperboloid of one sheet,
+if $\lambda=-1$, we get a circular cylinder, if $-1<\lambda<0$, we get a stretched
+sphere, if $\lambda=1$, a sphere, and if $\lambda>1$, a squished sphere.  Interestingly,
+when $r=0$ and $\lambda<-1$, we get circular conical surfaces; a right-circular conical
+surface if $\lambda=-2$.
 
 Expanding equation \eqref{equ_spheroid}, we get
 \begin{equation}
-0 = x^2 - \lambda(x\cdot v)^2 - 2x\cdot (c+\lambda(c\cdot v)v) + c^2 + \lambda(c\cdot v)^2 - r^2,
+0 = x^2 + \lambda(x\cdot v)^2 - 2x\cdot (c+\lambda(c\cdot v)v) + c^2 + \lambda(c\cdot v)^2 - r^2,
 \end{equation}
-from which it is possible to factor out $p\wedge\overline{p}$
+from which it is possible to factor out $-p\wedge\overline{p}$
 in terms of the inner product, where $p=e_0+x$
 is a homogenized projective point.  Doing so, we see that the bivector
 $E$ given by
 \begin{equation}\label{equ_spheroid_bivector}
-E = -\Omega + \lambda v\wedge\overline{v} + 2(c+\lambda(c\cdot v)v)\wedge\overline{e_0} - (c^2+\lambda(c\cdot v)^2-r^2)A,
+E = \Omega + \lambda v\wedge\overline{v} - 2(c+\lambda(c\cdot v)v)\wedge\overline{e_0} + (c^2+\lambda(c\cdot v)^2-r^2)A,
 \end{equation}
 is representative of the three surface types by Definition~\ref{def_quadric}, where the constant
 $\Omega$ is defined as
@@ -226,15 +229,49 @@ frequently recurring constants in our calculations.
 
 Such forms as that in equation \eqref{equ_spheroid_bivector} are useful, not only
 for composition, but especially decomposition in the cases
-where we have formulated what may, for example, be a spheroid by some other means.
+where we have formulated what may, for example, be a spheroid by some means
+other than composition.
 This gives the model power as an analytical tool.  If we can solve a problem whose solution
 is a bivector representative of a spheroid, then we can use this canonical form to answer
 questions about that spheroid.  Where is its center?  What is its axis?  What is its radius
-about that axis?  As is often the case in mathematics, decomposition is
-harder than composition.
+about that axis?  As is often the case in mathematics, however, decomposition is
+harder than composition.  A general sequence of decomposition steps for the
+form \eqref{equ_spheroid_bivector} is not obvious, if it exists, but we will
+proceed now to give such a sequence for the case when $E$ is known
+to be a cylinder.  That is, when $\lambda=-1$.
 
-Referring to equation \eqref{equ_spheroid_bivector}, we can deduce...give
-a decomposition of the spheroid once I know the form is correct.  Consider $E^2$.
+The first thing to notice is that the canonical form $E$ in equation \eqref{equ_spheroid_bivector}
+is in a homogenized form, because the coeficient of $\Omega$ is 1.  If our given bivector
+is not already homogenized, then we'll want to divide it through by $-\Omega\cdot E/n$.
+
+We then notice that for $1\leq i<j\leq n$, we have the system of equations
+\begin{equation}
+(v\cdot e_i)(v\cdot e_j) = -e_i\overline{e_j}\cdot E,
+\end{equation}
+from which we can deduce the magnitudes of the components of $v$ and the
+direction of $v$, up to sign.  For example, if $(v\cdot e_i)(v\cdot e_j)>0$,
+then $\mbox{sign}(v\cdot e_i)=\mbox{sign}(v\cdot e_j)$, and so on.
+It is also helpful to notice that for all $i=j$, we have
+\begin{equation}
+(v\cdot e_i)^2 = 1 - e_i\overline{e_j}\cdot E.
+\end{equation}
+It is unfortunate that we had to refer to a basis to obtain $v$; nevertheless,
+it is done.  The rest of the decomposition will proceed with greater satisfaction.
+
+There is no way to recover $c$ for cylinders, which is quite obvious.
+The choice for the point $c$, the center of the cylinder, may be arbitrarily
+chosen as any point along its spine.  This information is lost in composition,
+so we may therefore arbitrarily choose $c=-A\cdot(E\wedge e_0)/2$
+as the cylinder's center, which, incidently, will also be the point on the spine of
+the cylinder closest to the origin.
+
+Lastly, we may find the radius of the cylinder from the simple equation
+\begin{equation}
+r^2 = c^2 + A\cdot E.
+\end{equation}
+
+% Unlike the CGA, this decomposition was not so easy, and we had
+% to resort to refering to a basis, at least in part, to get the composition done.  :(
 
 % note that the canonical form is also a homogenized form.
 
@@ -282,26 +319,53 @@ question of what surface $A+B$ represents.
 
 % Show that the sum of a plane and a sphere is a sphere.
 % Note that the prediction about their interesection was correct.
+% Can we show that the plane and sphere are spherical reflections of one another?
 
 % Note the theorems of CGA that let us do intersections and fittings.
 % Show why we can't apply them here.
 
 % Can we get the conic sections?  We just need to intersect planes with quadrics, right?
 
-It would be nice if our model could also represent the conic sections.
-One way to do this, which, admittedly, is a bit lame, is to introduce
-two new basis vectors $a$ and $b$, thereby quadrupling the dimension
-of our geometric algebra.  Then, given any two bivectors $A,B$ in our
-original $\G$, it would follow that the trivector $T$, given by
-\begin{equation}
-T = a\wedge A + b\wedge B,
-\end{equation}
-represents the intersection of the two quadric surfaces $A$ and $B$ by
-Definition~\ref{def_quadric}.  To see this, simply note that
-\begin{equation}
-p\wedge\overline{p}\cdot T = (p\wedge\overline{p}\cdot A)a + (p\wedge\overline{p}\cdot B)b,
-\end{equation}
-and that $a\wedge b\neq 0$.  This expansion of the model is lame, because...
+% lots of use of one def, no results, proofs, theorem?!
+
+\section{The Consideration Of $m$-Vectors}
+
+Specifically, what is meant is the consideration of $m$-vectors, where $m>2$.
+What we find in this section, unfortunately, is that such vectors
+are unlikely to play an interesting role in the model.  What is immediately
+obvious is that for any such $m$-vector $M$, the $(m-2)$-vector
+$p\wedge\overline{p}\cdot M$, when set to zero, creates a system
+of equations whose solution set is the intersection of all
+geometries represented by each individual equation.  The problem with
+this is that $M$, as an element of $\G$, does not characterize
+this intersection, but only the geometries taken in the intersection.
+It follows that no decomposition $M$ will tell us anything interesting
+about the intersection that is $M$.  One redeeming possibility, however,
+is the idea that such $m$-vectors may be able to generate an
+alternative set of geometries whose intersection is formulated
+as the intersection of a different set of geometries.
+
+% add a figure?
+
+%In any case, let us consider now a trivector $T\in\G$ of the form
+%\begin{equation}
+%T = a\wedge A + b\wedge B,
+%\end{equation}
+%where $a,b\in\V$ are vectors, and $A,B\in\G$ are bivectors.
+%Then if $a$ and $b$ are vectors such that $a\wedge b\neq 0$, and for all $v\in\V$, we have
+%$v\cdot a=v\cdot b=0$, (which is impossible), it would follow
+%that $T$ is the true intersection of the quadrics $A$ and $B$.
+%To see this, we apply Definition~\ref{def_quadric} to get the equation
+%\begin{align}
+%0 = p\wedge\overline{p}\cdot T =&\; \overline{p}\cdot((p\cdot a)A + (p\cdot b)B) \\
+% +&\; p\cdot((\overline{p}\cdot a)A + (\overline{p}\cdot b)B) \\
+% +&\; (p\wedge\overline{p}\cdot A)a + (p\wedge\overline{p}\cdot B)b.
+%\end{align}
+%Considering now various choices of $a$ and $b$ with $a\wedge b\neq 0$,
+%which is a quite reasonable condition, we can imagine that for any projective
+%points $p\in\V$ satisfying this equation in the case that we do have $p\cdot a=p\cdot b=0$,
+%that these points are in the true intersection.  What remains to be seen, then, are
+%the point $p$ on $T$, but not on $A$ nor $B$.
 
 \section{Concluding Remarks}
 
@@ -312,9 +376,12 @@ was, let's say, less than likely.  On the other hand, it is very hard to see
 all ends, and so perhaps there are deep results to be found or new insights
 to be had using this method of studying quadric surfaces.  In any case,
 geometric algebra has proven to be a fundamental, versital and unifying
-language that extends mathematics beyond the real number line.  If not
-using this model, it undoubtadly has its application in the study of quadric
-surfaces using a better framework of calculation.
+language that extends mathematics beyond the real number line.
+
+% blah blah, perhaps there's a better model out there based on GA or something else.
+
+% Another problem is that, unlike CGA, we're not using blades exclusively.
+% if we were, then we wouldn't run into the addition/intersection problem.
 
 %    Bibliographies can be prepared with BibTeX using amsplain,
 %    amsalpha, or (for "historical" overviews) natbib style.
