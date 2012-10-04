@@ -21,9 +21,6 @@ do
 	
 	R = R04*R15*R26*R37,
 	
-	O = e1*e5 + e2*e6 + e3*e7,
-	A = e0*e4,
-	
 	c = 0,
 	v = e1,		/* Keep this unit-length. */
 	vb = e5,
@@ -34,12 +31,8 @@ do
 	bind_virtual( c, v, vb, l ),
 	formula_constraint( "vb = grade_part( 1, R*v*R~ )" ),
 	
-	/*
-	 * Something is still not quite right about this.  Translating c does not
-	 * always translate the surface, but shouldn't it always do that?
-	 */
 	E = 0,
-	formula_constraint( "E = -O + l*v^vb + 2*(c + l*(c . v)*v)^e4 - (c*c + l*(c . v)*(c . v) - r*r)*A" ),
+	formula_constraint( "E = Omega + l*v^vb - 2*(c + l*(c . v)*v)^e4 + (c*c + l*(c . v)*(c . v) - r*r)*Alpha" ),
 	
 	bind_quadric(E),
 )
