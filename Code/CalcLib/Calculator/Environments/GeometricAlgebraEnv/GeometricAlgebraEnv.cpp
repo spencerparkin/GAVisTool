@@ -93,6 +93,7 @@ GeometricAlgebraEnvironment::GeometricAlgebraEnvironment( void )
 	MultivectorNumber* multivectorNumber = 0;
 	GeometricAlgebra::Vector* vector = 0;
 	GeometricAlgebra::Blade* blade = 0;
+	GeometricAlgebra::SumOfBlades* sumOfBlades = 0;
 
 	if( 0 == strcmp( variableName, "e0" ) )
 		vector = new GeometricAlgebra::Vector_e0();
@@ -158,18 +159,50 @@ GeometricAlgebraEnvironment::GeometricAlgebraEnvironment( void )
 		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e1() );
 		blade->AssignBlade( vectorProduct, 1.0 );
 	}
+	else if( 0 == strcmp( variableName, "Omega" ) )
+	{
+		sumOfBlades = new GeometricAlgebra::SumOfBlades();
+
+		Utilities::List vectorProduct;
+
+		GeometricAlgebra::Blade blade_e1e5;
+		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e1() );
+		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e5() );
+		blade_e1e5.AssignBlade( vectorProduct, 1.0 );
+
+		GeometricAlgebra::Blade blade_e2e6;
+		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e2() );
+		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e6() );
+		blade_e2e6.AssignBlade( vectorProduct, 1.0 );
+
+		GeometricAlgebra::Blade blade_e3e7;
+		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e3() );
+		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e7() );
+		blade_e3e7.AssignBlade( vectorProduct, 1.0 );
+
+		sumOfBlades->Accumulate( blade_e1e5 );
+		sumOfBlades->Accumulate( blade_e2e6 );
+		sumOfBlades->Accumulate( blade_e3e7 );
+	}
+	else if( 0 == strcmp( variableName, "Alpha" ) )
+	{
+		blade = new GeometricAlgebra::Blade();
+		Utilities::List vectorProduct;
+		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e0() );
+		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e4() );
+		blade->AssignBlade( vectorProduct, 1.0 );
+	}
 
 	if( vector )
-	{
 		multivectorNumber = new MultivectorNumber( *vector );
-		delete vector;
-	}
-
-	if( blade )
-	{
+	else if( blade )
 		multivectorNumber = new MultivectorNumber( *blade );
-		delete blade;
-	}
+	else if( sumOfBlades )
+		multivectorNumber = new MultivectorNumber( *sumOfBlades );
+
+	delete vector;
+	delete blade;
+	delete sumOfBlades;
 
 	if( multivectorNumber )
 		evaluator = new ConstantEvaluator( multivectorNumber );
