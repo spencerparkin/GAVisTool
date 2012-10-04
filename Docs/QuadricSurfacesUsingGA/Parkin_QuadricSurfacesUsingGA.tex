@@ -57,9 +57,9 @@
 %    author one information
 % \author[short version for running head]{name for top of paper}
 \author{Spencer T. Parkin}
-\address{102 West 500 South, Salt Lake City, Utah  84101}
+\address{2113 S. Claremont Dr., Bountiful, Utah  84010}
 \curraddr{}
-\email{spencer.parkin@disney.com}
+\email{spencer.parkin@gmail.com}
 \thanks{}
 
 %    author two information
@@ -204,7 +204,7 @@ vector, $r\in\R$ is the radius of the geometry about the axis $v$ at $c$, and
 $\lambda\in\R$ is a scalar indicating the type and extremity of the surface.
 Specifically, if $\lambda<-1$, we get a circular hyperboloid of one sheet,
 if $\lambda=-1$, we get a circular cylinder, if $-1<\lambda<0$, we get a stretched
-sphere, if $\lambda=1$, a sphere, and if $\lambda>1$, a squished sphere.  Interestingly,
+sphere, if $\lambda=0$, a sphere, and if $\lambda>0$, a squished sphere.  Interestingly,
 when $r=0$ and $\lambda<-1$, we get circular conical surfaces; a right-circular conical
 surface if $\lambda=-2$.
 
@@ -270,16 +270,25 @@ Lastly, we may find the radius of the cylinder from the simple equation
 r^2 = c^2 + A\cdot E.
 \end{equation}
 
+A generalization of equation \eqref{equ_spheroid} should be mentioned
+before moving on.  It is given by
+\begin{equation}
+0 = -r^2 + (x-c)^2 + \sum_{i=1}^k \lambda_i((x-c)\cdot v_i)^2,
+\end{equation}
+which would probably give us the general set of ellipsoids, provided
+the set of $k$ direction vectors in $\{v_i\}_{i=1}^k$ are
+linearly independent.
+
 % Unlike the CGA, this decomposition was not so easy, and we had
-% to resort to refering to a basis, at least in part, to get the composition done.  :(
+% to resort to referring to a basis, at least in part, to get the composition done.  :(
 
 % note that the canonical form is also a homogenized form.
 
 % lastly, note that a generalization of this form probably exists
 % that warps a sphere in any number of axes.
 
-The following table summerizes a few additional canonical forms.
-\begin{equation}
+The following table summarizes a few additional canonical forms.
+\begin{equation}\label{equ_canonical_forms_table}
 \begin{array}{lcl}
 \mbox{Geometry} & & \mbox{Canonical/Homogenized Form} \\
 \hline
@@ -308,18 +317,59 @@ transformation on almost any conformal geometry.
 
 These are great features!  But what can the model at present do for us?  Well,
 the first observation we must make is that the set of all known quadrics
-is represented by the set of all bivectors in $\G$, underwhich the inner
+is represented by the set of all bivectors in $\G$, under-which the inner
 and outer products are obviously not closed.  Only addition and subtraction
 are closed in this set, and so we're left to wonder what we might be able
 to prove about the addition and subtraction of $n$-dimensional quadric surfaces.
-Letting $A,B\in\G$ be bivectors, it is not hard to see that $A+B$, under
+Letting $B_a,B_b\in\G$ be bivectors, it is not hard to see that $B_a\pm B_b$, under
 Definition~\ref{def_quadric}, must represent at least the intersection, if any,
-of the quadric surfaces $A$ and $B$, but this is not an exact answer to the
-question of what surface $A+B$ represents.
+of the quadric surfaces $B_a$ and $B_b$, but this is not an exact answer to the
+question of what surface $B_a\pm B_b$ represents.
 
-% Show that the sum of a plane and a sphere is a sphere.
-% Note that the prediction about their interesection was correct.
-% Can we show that the plane and sphere are spherical reflections of one another?
+Let's try an example.  Suppose $B_a$ and $B_b$ are both homogenized spheres with
+a real intersection and having
+non-projective centers $c_a,c_b\in\V$, respectively.  Let $r_a,r_b\in\R$
+be the respective radii of $B_a$ and $B_b$.  It then follows from
+table \eqref{equ_canonical_forms_table} that $B_a-B_b$, in homogenized
+form, is given by
+\begin{equation}\label{equ_diff_of_spheres}
+\frac{v}{|v|}\wedge\overline{e_0}-\left(\frac{v}{|v|}\cdot\frac{c_a+c_b+(r_b^2-r_a^2)v^{-1}}{2}\right)A,
+\end{equation}
+where $v$ is the vector $c_a-c_b$, which, again by table \eqref{equ_canonical_forms_table},
+tells us that this is a plane with normal $v$.  A point on the plane is also apparent from
+\eqref{equ_diff_of_spheres}.  Then, knowing that $B_a-B_b$ must contain the intersection of the
+two spheres, we can conclude that this point must be in the plane containing the circle that is
+the intersection of the two spheres, and consequently, $B_a-B_b$ is that plane.  Notice
+that even if the spheres don't intersect, we still get a meaningful result.  A picture of
+$B_a-B_b$ is given in Figure~\ref{fig_diff_of_spheres}.
+
+\begin{figure}
+\includegraphics[scale=0.7]{DiffOfSpheres}
+\caption{The difference of two spheres gives a plane, shown here on edge.  The spheres were rendered as a number of traces in various parallel planes.}
+\label{fig_diff_of_spheres}
+\end{figure}
+
+At first sight, the sum of a sphere and a plane may not seem that interesting.
+However, the sum of a homogenized sphere and a non-homogenized plane is
+interesting, because the result is always a sphere in homogenized form.  The
+scalar amount at which the plane is non-homogenized simply indicates half
+the length along the normal of the plane that the center of the original sphere
+is displaced in the direction of that normal to find a sphere intersecting the
+plane in the same circle as that of the original sphere.
+
+Interestingly, the difference of spheres generalizes to the idea of subtracting
+spheroids.  A picture of this is given in Figure~\ref{fig_diff_of_spheroids}.
+Of course, there is undoubtedly a geometric significance in the difference
+between any two quadric surfaces.
+
+\begin{figure}
+\includegraphics[scale=0.7]{DiffOfSpheroids}
+\caption{The difference of two spheroids gives a hyperbolic paraboloid.  Traces in various planes were used to render the surfaces.}
+\label{fig_diff_of_spheroids}
+\end{figure}
+
+
+% Can we add a plane to an ellipsoid to find the reflection of the plane in the ellipsoid?
 
 % Note the theorems of CGA that let us do intersections and fittings.
 % Show why we can't apply them here.
@@ -328,44 +378,56 @@ question of what surface $A+B$ represents.
 
 % lots of use of one def, no results, proofs, theorem?!
 
-\section{The Consideration Of $m$-Vectors}
+\section{A Brief Consideration Of $m$-Vectors}
 
-Specifically, what is meant is the consideration of $m$-vectors, where $m>2$.
-What we find in this section, unfortunately, is that such vectors
+Specifically, what is meant here is the consideration of $m$-vectors where $m\neq 2$.
+What we find in this section, unfortunately, is that such vectors with $m>2$
 are unlikely to play an interesting role in the model.  What is immediately
 obvious is that for any such $m$-vector $M$, the $(m-2)$-vector
 $p\wedge\overline{p}\cdot M$, when set to zero, creates a system
 of equations whose solution set is the intersection of all
 geometries represented by each individual equation.  The problem with
 this is that $M$, as an element of $\G$, does not characterize
-this intersection, but only the geometries taken in the intersection.
-It follows that no decomposition $M$ will tell us anything interesting
-about the intersection that is $M$.  One redeeming possibility, however,
-is the idea that such $m$-vectors may be able to generate an
-alternative set of geometries whose intersection is formulated
-as the intersection of a different set of geometries.
+this intersection directly, but only indirectly as the characterization
+of each individual geometry taken in the intersection.
+It follows that no decomposition of $M$ is likely to easily reveal any information
+about the intersection that is $M$.  One redeeming idea in all of this, however,
+stems from the common theme found throughout various models of geometry as
+that of simply going from one characterization of some piece of geometry to another.
+While $M$ may not directly characterize the geometry it represents,
+it may offer a characterization alternative to the one used in
+the formulation of $M$.  And sometimes that is what doing geometry is all about
+in models of geometry based in geometric algebra.
 
-% add a figure?
+To illustrate the point, realize that any trivector $T\in\G$ has the form
+\begin{equation}
+T = \sum_{i=1}^k v_i\wedge B_i,
+\end{equation}
+where $\{v_i\}_{i=1}^k\subset\W$ is a set of $k$ vectors and $\{B_i\}_{i=1}^k\subset\G$
+is a set of $k$ bivectors.  Applying Definition~\ref{def_quadric}, we get
+\begin{equation}\label{equ_trivector_geo}
+0 = p\wedge\overline{p}\cdot T =
+p\cdot\sum_{i=1}^k(\overline{p}\cdot v_i)B_i -
+\overline{p}\cdot\sum_{i=1}^k(p\cdot v_i)B_i +
+\sum_{i=1}^k(p\wedge\overline{p}\cdot B_i)v_i.
+\end{equation}
+Now if $\{v_i\}_{i=1}^k$ was a linearly independent set, and for all point $p\in\V$, we had $p\cdot v_i=\overline{p}\cdot v_i=0$
+for any integer $i\in[1,k]$, (which is not possible anyway without expanding the dimension our geometric algebra), then it is clear
+from equation \eqref{equ_trivector_geo} that $T$ represents the intersection of all quadrics in $\{B_i\}_{i=1}^k$.  Now while this
+may be true, $T$ certainly does not characterize the intersection directly, but only indirectly through the characterizations
+of each $B_i$.  This result is therefore useless unless perhaps the formulation of $T$ was made through some means other than that of
+taking the intersection of the $B_i$ quadrics.  But as pointed out, this condition cannot be satisfied in $\G$, so it may, in any case,
+be interesting to formulate trivectors this way, and see what we get.
 
-%In any case, let us consider now a trivector $T\in\G$ of the form
-%\begin{equation}
-%T = a\wedge A + b\wedge B,
-%\end{equation}
-%where $a,b\in\V$ are vectors, and $A,B\in\G$ are bivectors.
-%Then if $a$ and $b$ are vectors such that $a\wedge b\neq 0$, and for all $v\in\V$, we have
-%$v\cdot a=v\cdot b=0$, (which is impossible), it would follow
-%that $T$ is the true intersection of the quadrics $A$ and $B$.
-%To see this, we apply Definition~\ref{def_quadric} to get the equation
-%\begin{align}
-%0 = p\wedge\overline{p}\cdot T =&\; \overline{p}\cdot((p\cdot a)A + (p\cdot b)B) \\
-% +&\; p\cdot((\overline{p}\cdot a)A + (\overline{p}\cdot b)B) \\
-% +&\; (p\wedge\overline{p}\cdot A)a + (p\wedge\overline{p}\cdot B)b.
-%\end{align}
-%Considering now various choices of $a$ and $b$ with $a\wedge b\neq 0$,
-%which is a quite reasonable condition, we can imagine that for any projective
-%points $p\in\V$ satisfying this equation in the case that we do have $p\cdot a=p\cdot b=0$,
-%that these points are in the true intersection.  What remains to be seen, then, are
-%the point $p$ on $T$, but not on $A$ nor $B$.
+As for any vector $v\in\W$, under Definition~\ref{def_quadric} this represents the set of all
+projective points $p$ such that $0=\overline{p}\cdot v$.  Clearly, only those vectors $v$ found
+in the complement of $\V$ with respect to $\W$ will hold any interest for us.
+
+\section{Transformations In The Model}
+
+Explore the idea of applying versors to bivectors here.
+
+% What about transformations?
 
 \section{Concluding Remarks}
 
@@ -375,10 +437,16 @@ the beginning that the potential for great things coming out of this model
 was, let's say, less than likely.  On the other hand, it is very hard to see
 all ends, and so perhaps there are deep results to be found or new insights
 to be had using this method of studying quadric surfaces.  In any case,
-geometric algebra has proven to be a fundamental, versital and unifying
-language that extends mathematics beyond the real number line.
+geometric algebra has proven to be a fundamental, versatile and unifying
+language that perhaps most naturally extends mathematics beyond the real number line.  Perhaps
+there is a much better way to use geometric algebra to study quadric surfaces.
 
-% blah blah, perhaps there's a better model out there based on GA or something else.
+While it has been shown that elements of $\G$ do indeed, under a given
+definition, represent quadric surfaces, there really is nothing more or less
+interesting about adding and subtracting these elements than adding and
+subtracting vector equations whose solution sets represent the quadric surfaces.
+There might not be any advantage in using the elemental form over the
+functional form.
 
 % Another problem is that, unlike CGA, we're not using blades exclusively.
 % if we were, then we wouldn't run into the addition/intersection problem.
