@@ -167,19 +167,26 @@ e_i\overline{e_j}\cdot E & \mbox{if $i=j$,} \\
 It should be noted that bivectors do not uniquely represent quadric surfaces, not even up to scale.
 This is apparent from equation \eqref{equ_quadric_components} when we see that for $i\neq j$,
 we can freely choose certain components of the bivector without changing the represented
-quadric so long as that their sum is still $-\lambda_{ij}$.
+quadric so long as that their sum is still $-\lambda_{ij}$.  The problem this may pose in our model
+comes from a very important result in the conformal model.  In the conformal model, if
+two blades are known to represent the same geometry, then it can be shown that the
+two blades are equal, up to scale.  In our present model, it may take more than just
+homogenization to get a bivector known to represent a certain geometry into a
+known canonical form.
 
-An important difference to point out here between this model and the conformal model is that,
+Another important difference to point out here between our present model and the conformal model is that,
 unlike what we can analogously expect from the point-definition of the conformal model,
 here the 2-blade form $a\wedge\overline{a}$ found in Definition~\ref{def_quadric}, for
-any projective point $a\in\V$, does not represent the projective point $a$ under Definition~\ref{def_quadric}.
+any projective point $a\in\V$ not at origin, does not represent the projective point $a$ under Definition~\ref{def_quadric}.
 In homogenized form, the projective point represented by $a\wedge\overline{a}$ is given by
 \begin{equation}
 e_0 - \left(e_0\cdot\frac{e_0\wedge a}{e_0\cdot a}\right)^{-1},
 \end{equation}
 which is the reflection about the origin of the spherical reflection of the projective point $a$
-about the unit-sphere centered at the origin.  The only point that represents itself
-in the form $a\wedge\overline{a}$ appears to be $e_0$.
+about the unit-sphere centered at the origin.  The projective point $e_0$ at the origin
+simply represents the empty point-set geometry, or the geometry of nothing.  It is also
+easy to see that $a\wedge\overline{a}$ cannot represent itself, because there are no
+null blades in our purely Euclidean geometric algebra $\G$.
 
 \section{The Construction Of Quadric Surfaces In The Model}
 
@@ -229,6 +236,23 @@ harder than composition.
 Referring to equation \eqref{equ_spheroid_bivector}, we can deduce...give
 a decomposition of the spheroid once I know the form is correct.  Consider $E^2$.
 
+% note that the canonical form is also a homogenized form.
+
+% lastly, note that a generalization of this form probably exists
+% that warps a sphere in any number of axes.
+
+The following table summerizes a few additional canonical forms.
+\begin{equation}
+\begin{array}{lcl}
+\mbox{Geometry} & & \mbox{Canonical/Homogenized Form} \\
+\hline
+\mbox{Plane} & \vline & v\wedge\overline{e_0} - (c\cdot v)A \\
+\hline
+\mbox{Sphere} & \vline & \Omega - 2c\wedge\overline{e_0} + (c^2-r^2)A \\
+\hline
+\end{array}
+\end{equation}
+
 \section{Making Use Of The Model}
 
 Admittedly, there is really nothing interesting about this model unless we can
@@ -238,7 +262,7 @@ intersections between geometries in dual form, or point-fitting between
 geometries in direct form.  A good user of the conformal model can even
 make use of dual imaginary intersections by reinterpreting them as real geometries
 in direct form.  The second great feature of the conformal model is the
-surprising fact that all geometries in the conformal model are also versor transformations
+surprising fact that all geometries in the conformal model are also, as versors, conformal transformations
 with geometric significance relative to the simultaneously represented geometry.
 Realizing that all conformal geometries, (with the exception of flat points), have
 a factorization in direct form as an outer product of points, the outermorphic
@@ -256,7 +280,41 @@ Definition~\ref{def_quadric}, must represent at least the intersection, if any,
 of the quadric surfaces $A$ and $B$, but this is not an exact answer to the
 question of what surface $A+B$ represents.
 
-% Can we get the conics?  We just need to intersect planes with quadrics, right?
+% Show that the sum of a plane and a sphere is a sphere.
+% Note that the prediction about their interesection was correct.
+
+% Note the theorems of CGA that let us do intersections and fittings.
+% Show why we can't apply them here.
+
+% Can we get the conic sections?  We just need to intersect planes with quadrics, right?
+
+It would be nice if our model could also represent the conic sections.
+One way to do this, which, admittedly, is a bit lame, is to introduce
+two new basis vectors $a$ and $b$, thereby quadrupling the dimension
+of our geometric algebra.  Then, given any two bivectors $A,B$ in our
+original $\G$, it would follow that the trivector $T$, given by
+\begin{equation}
+T = a\wedge A + b\wedge B,
+\end{equation}
+represents the intersection of the two quadric surfaces $A$ and $B$ by
+Definition~\ref{def_quadric}.  To see this, simply note that
+\begin{equation}
+p\wedge\overline{p}\cdot T = (p\wedge\overline{p}\cdot A)a + (p\wedge\overline{p}\cdot B)b,
+\end{equation}
+and that $a\wedge b\neq 0$.  This expansion of the model is lame, because...
+
+\section{Concluding Remarks}
+
+That $\G$ was not something fancy like a Minkowski space or some other
+type of non-Euclidean geometric algebra was perhaps our first clue from
+the beginning that the potential for great things coming out of this model
+was, let's say, less than likely.  On the other hand, it is very hard to see
+all ends, and so perhaps there are deep results to be found or new insights
+to be had using this method of studying quadric surfaces.  In any case,
+geometric algebra has proven to be a fundamental, versital and unifying
+language that extends mathematics beyond the real number line.  If not
+using this model, it undoubtadly has its application in the study of quadric
+surfaces using a better framework of calculation.
 
 %    Bibliographies can be prepared with BibTeX using amsplain,
 %    amsalpha, or (for "historical" overviews) natbib style.
