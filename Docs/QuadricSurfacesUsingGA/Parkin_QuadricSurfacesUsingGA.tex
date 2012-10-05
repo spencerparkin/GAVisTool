@@ -383,29 +383,9 @@ would be interesting to find out exactly what that is.
 
 % lots of use of one def, no results, proofs, theorem?!
 
-\section{A Brief Consideration Of $m$-Vectors}
+\section{The Consideration Of Trivector Quadrics}
 
-Specifically, what is meant here is the consideration of $m$-vectors where $m\neq 2$.
-What we find in this section, unfortunately, is that such vectors with $m>2$
-are unlikely to play an interesting role in the model.  What is immediately
-obvious is that for any such $m$-vector $M$, the $(m-2)$-vector
-$p\wedge\overline{p}\cdot M$, when set to zero, creates a system
-of equations whose solution set is the intersection of all
-geometries represented by each individual equation.  The problem with
-this is that $M$, as an element of $\G$, does not characterize
-this intersection directly, but only indirectly as the characterization
-of each individual geometry taken in the intersection.
-It follows that no decomposition of $M$ is likely to easily reveal any information
-about the intersection that is $M$.  One redeeming idea in all of this, however,
-stems from a common theme found throughout various models of geometry based in geometric algebra as
-the act of performing geometry being the process of simply going from one characterization of some piece of geometry to another,
-and then viewing that geometry in a different light.
-While $M$ may not directly characterize the geometry it represents,
-it may offer a characterization alternative to the one used in
-the formulation of $M$.  And sometimes that is what doing geometry is all about
-in models of geometry based in geometric algebra.
-
-To illustrate an earlier point, realize that any trivector $T\in\G$ has the form
+Notice that any trivector $T\in\G$ can be written in the form
 \begin{equation}
 T = \sum_{i=1}^k v_i\wedge B_i,
 \end{equation}
@@ -418,22 +398,28 @@ p\cdot\sum_{i=1}^k(\overline{p}\cdot v_i)B_i -
 \sum_{i=1}^k(p\wedge\overline{p}\cdot B_i)v_i.
 \end{equation}
 Now if $\{v_i\}_{i=1}^k$ was a linearly independent set, and for all projective points $p\in\V$, we have $p\cdot v_i=\overline{p}\cdot v_i=0$
-for any integer $i\in[1,k]$, (which is not possible anyway without expanding the dimension our geometric algebra), then it is clear
-from equation \eqref{equ_trivector_geo} that $T$ represents the intersection of all quadrics in $\{B_i\}_{i=1}^k$.  Now while this
-may be true, $T$ certainly does not characterize the intersection directly, but only indirectly through the characterizations
-of each $B_i$.  This result is therefore useless unless perhaps the formulation of $T$ was made through some means other than that of
-taking the intersection of the $B_i$ quadrics.  But as pointed out, this condition cannot be satisfied in $\G$, so it may, in any case,
-be interesting to formulate trivectors this way, and see what we get.
+for any integer $i\in[1,k]$, then it is clear
+from equation \eqref{equ_trivector_geo} that $T$ represents the intersection of all quadrics in $\{B_i\}_{i=1}^k$.
+Unfortunately, it is obviously not possible to satisfy this condition in $\G$ without expanding it.
+Doing so, we might introduce two new basis vectors $b_1$ and $b_2$, thereby finding the trivector
+$T=b_1\wedge B_1+b_2\wedge B_2$ as representative of the intersection of the quadrics $B_1$ and $B_2$.
+This, however, may be undesirable, because $T$ cannot directly characterize the intersection in this form, but
+only indirectly as the characterization of the quadrics $B_1$ and $B_2$ taken in the intersection operation.
+Such indirect characterizations should not be so easily dismissed, however, because a common theme
+in the process of performing geometry in a model based in geometric algebra is the idea of simply transforming
+one characterization or interpretation of a given geometry into another.  If we were able to formulate $T$ through some means
+other than that of the intersection of $B_1$ and $B_2$, then the original characterization, whatever that may
+have been, may be transformed into
+this one, thereby providing a new interpretation of the geometry represented by $T$ as the intersection
+of the two quadrics $B_1$ and $B_2$.
 
-As for any vector $v\in\W$, under Definition~\ref{def_quadric} this represents the set of all
-projective points $p$ such that $0=\overline{p}\cdot v$.  Clearly, only those vectors $v$ found
-in the complement of $\V$ with respect to $\W$ will hold any interest for us.
-
-Realizing that general trivectors may be too difficult at the moment to consider,
-let us now narrow our scope to that of 3-blades.  Doing so, we see that
-what might motivate us to investigate the set of quadrics that are 2-blades, or to find
-a better model where all quadrics are 2-blades, is the following lemma.
-\begin{lemma}
+In any case, we are not going to expand $\G$, because it is already complicated enough as it is, and we
+are far from discovering everything possible in the present model imposed upon it.
+Let's take a step back for a moment, then, and narrow our scope to that of 3-blades.
+Doing so, we see that
+what might motivate us to investigate the set of all quadrics that are 2-blades, (or to find
+a better model where all quadrics are 2-blades), is the following lemma.
+\begin{lemma}\label{lma_three_way_intersect}
 For any given non-zero 3-blade $T\in\G$, given by $T=a\wedge b\wedge c$, the
 geometry represented by this 3-blade under Definition~\ref{def_quadric} is the intersection
 of the 3 quadrics $a\wedge b$, $a\wedge c$ and $b\wedge c$.
@@ -450,23 +436,15 @@ Now realize that since $a\wedge b\wedge c\neq 0$, $\{a,b,c\}$ is a linearly
 independent set, and therefore, $0=p\wedge\overline{p}\cdot T$ if and
 only if $p$ is on $a\wedge b$, $a\wedge c$ and $b\wedge c$.
 \end{proof}
-This, of course, would generalize to blades of higher grade.
+This, of course, would generalize to blades of higher grade.  Regardless, the
+3-way intersection of 3 $n$-dimensional surfaces is probably, in most cases,
+zero or more isolated points, which doesn't seem that interesting.  In any case,
+to make use of Lemma~\ref{lma_three_way_intersect}, we must consider now
+the set of quadrics that are 2-blades.  This deserves its own section.
 
-So why is it hard to represent quadrics with blades?  One possible answer lies
-in the combinatorics of blades versus symmetric matrices.  For $n$-dimensional
-quadric surfaces, the $2$-blades of our algebra $\G$ generates $2(n+1)$
-independent variables as the components of each vector in the blade product.
-Also for $n$-dimensional quadric surfaces, we see that square $(n+1)\times(n+1)$
-symmetric matrices generate $(n + 1)(n+2)/2$ independent variables as the
-elements of such matrices.  So for
-3-dimensional surfaces, our 2-blades generate 8 independent variables, while
-the minimum number needed is 10.  It follows that 2-blades cannot possibly
-represent all quadric surfaces.  On the other hand, for 2-dimensional
-quadric surfaces, (curves), there is a possibility, because in both cases,
-6 independent variables are generated.
-Of course, the 3-way intersection of 3 curves in the plane really doesn't sound that interesting.
-Come to think of it, the 3-way intersection of any $n$-dimensional quadric surfaces
-may not always be interesting either.
+\section{The Consideration Of 2-Blade Quadrics}
+
+\section{The Consideration Of 1-Blade Quadrics}
 
 \section{Transformations In The Model}
 
