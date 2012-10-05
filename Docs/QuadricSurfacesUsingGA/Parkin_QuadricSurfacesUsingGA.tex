@@ -425,6 +425,45 @@ As for any vector $v\in\W$, under Definition~\ref{def_quadric} this represents t
 projective points $p$ such that $0=\overline{p}\cdot v$.  Clearly, only those vectors $v$ found
 in the complement of $\V$ with respect to $\W$ will hold any interest for us.
 
+Realizing that general trivectors may be too difficult at the moment to consider,
+let us now narrow our scope to that of 3-blades.  Doing so, we see that
+what might motivate us to investigate the set of quadrics that are 2-blades, or to find
+a better model where all quadrics are 2-blades, is the following lemma.
+\begin{lemma}
+For any given non-zero 3-blade $T\in\G$, given by $T=a\wedge b\wedge c$, the
+geometry represented by this 3-blade under Definition~\ref{def_quadric} is the intersection
+of the 3 quadrics $a\wedge b$, $a\wedge c$ and $b\wedge c$.
+\end{lemma}
+\begin{proof}
+The proof follows directly from the following identity, which the reader can easily verify.
+\begin{equation}
+p\wedge\overline{p}\cdot a\wedge b\wedge c
+ = (p\wedge\overline{p}\cdot a\wedge b)c
+ - (p\wedge\overline{p}\cdot a\wedge c)b
+ + (p\wedge\overline{p}\cdot b\wedge c)a
+\end{equation}
+Now realize that since $a\wedge b\wedge c\neq 0$, $\{a,b,c\}$ is a linearly
+independent set, and therefore, $0=p\wedge\overline{p}\cdot T$ if and
+only if $p$ is on $a\wedge b$, $a\wedge c$ and $b\wedge c$.
+\end{proof}
+This, of course, would generalize to blades of higher grade.
+
+So why is it hard to represent quadrics with blades?  One possible answer lies
+in the combinatorics of blades versus symmetric matrices.  For $n$-dimensional
+quadric surfaces, the $2$-blades of our algebra $\G$ generates $2(n+1)$
+independent variables as the components of each vector in the blade product.
+Also for $n$-dimensional quadric surfaces, we see that square $(n+1)\times(n+1)$
+symmetric matrices generate $(n + 1)(n+2)/2$ independent variables as the
+elements of such matrices.  So for
+3-dimensional surfaces, our 2-blades generate 8 independent variables, while
+the minimum number needed is 10.  It follows that 2-blades cannot possibly
+represent all quadric surfaces.  On the other hand, for 2-dimensional
+quadric surfaces, (curves), there is a possibility, because in both cases,
+6 independent variables are generated.
+Of course, the 3-way intersection of 3 curves in the plane really doesn't sound that interesting.
+Come to think of it, the 3-way intersection of any $n$-dimensional quadric surfaces
+may not always be interesting either.
+
 \section{Transformations In The Model}
 
 Explore the idea of applying versors to bivectors here.
