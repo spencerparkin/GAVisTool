@@ -1,31 +1,13 @@
-%-----------------------------------------------------------------------
-% Beginning of ecgd-l-template.tex
-%-----------------------------------------------------------------------
-%
-%     This is a topmatter template file for ECGD for use with AMS-LaTeX.
-%
-%     Templates for various common text, math and figure elements are
-%     given following the \end{document} line.
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt]{article}
 
-%     Remove any commented or uncommented macros you do not use.
-
-\documentclass{ecgd-l}
-
-%     If you need symbols beyond the basic set, uncomment this command.
+\usepackage{amsmath}
 \usepackage{amssymb}
-
-%     If your article includes graphics, uncomment this command.
+\usepackage{amsthm}
 \usepackage{graphicx}
+\usepackage{float}
 
-%     If the article includes commutative diagrams, ...
-%\usepackage[cmtip,all]{xy}
-
-
-%     Update the information and uncomment if AMS is not the copyright
-%     holder.
-%\copyrightinfo{2009}{American Mathematical Society}
+\title{A Model For Quadric Surfaces\\Using\\Geometric Algebra}
+\author{Spencer T. Parkin}
 
 \newcommand{\G}{\mathbb{G}}
 \newcommand{\V}{\mathbb{V}}
@@ -34,50 +16,19 @@
 \newcommand{\R}{\mathbb{R}}
 
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
-
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{example}[theorem]{Example}
-\newtheorem{xca}[theorem]{Exercise}
-
-\theoremstyle{remark}
-\newtheorem{remark}[theorem]{Remark}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{identity}{Identity}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{result}{Result}[section]
 
 \numberwithin{equation}{section}
 
-\begin{document}
-
-% \title[short text for running head]{full title}
-\title{A Model For Quadric Surfaces\\Using\\Geometric Algebra}
-
-%    Only \author and \address are required; other information is
-%    optional.  Remove any unused author tags.
-
-%    author one information
-% \author[short version for running head]{name for top of paper}
 \author{Spencer T. Parkin}
-%\address{2113 S. Claremont Dr., Bountiful, Utah  84010}
-%\curraddr{}
-%\email{spencer.parkin@gmail.com}
-%\thanks{}
 
-%    author two information
-%\author{}
-%\address{}
-%\curraddr{}
-%\email{}
-%\thanks{}
+\begin{document}
+\maketitle
 
-% TODO: Figure out how to fill in the subject class.
-%    \subjclass is required.
-%\subjclass[2010]{Primary }
-
-%\date{}
-
-%\dedicatory{}
-
-%    Abstract is required.
 \begin{abstract}
 Inspired by the conformal model of geometric algebra,
 a similar model of geometry is developed for the set
@@ -86,10 +37,6 @@ are found to be representative of quadric surfaces.  Coordinate free canonical f
 of such bivectors are found for common quadric surfaces.  The model is investigated
 for usefulness and compared to the conformal model.
 \end{abstract}
-
-\maketitle
-
-%    Text of article.
 
 \section{The Construction Of The Model}
 
@@ -524,52 +471,3 @@ functional form.
 \bibliography{Parkin_QuadricSurfacesUsingGA}
 
 \end{document}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%    Templates for common elements of a journal article; for additional
-%    information, see the AMS-LaTeX instructions manual, instr-l.pdf,
-%    included in the ECGD author package, and the amsthm user's guide,
-%    linked from http://www.ams.org/tex/amslatex.html .
-
-%    Section headings
-\section{}
-\subsection{}
-
-%    Ordinary theorem and proof
-\begin{theorem}[Optional addition to theorem head]
-% text of theorem
-\end{theorem}
-
-\begin{proof}[Optional replacement proof heading]
-% text of proof
-\end{proof}
-
-%    Figure insertion; default placement is top; if the figure occupies
-%    more than 75% of a page, the [p] option should be specified.
-\begin{figure}
-\includegraphics{filename}
-\caption{text of caption}
-\label{}
-\end{figure}
-
-%    Mathematical displays; for additional information, see the amsmath
-%    user's guide, linked from http://www.ams.org/tex/amslatex.html .
-
-% Numbered equation
-\begin{equation}
-\end{equation}
-
-% Unnumbered equation
-\begin{equation*}
-\end{equation*}
-
-% Aligned equations
-\begin{align}
-  &  \\
-  &
-\end{align}
-
-%-----------------------------------------------------------------------
-% End of ecgd-l-template.tex
-%-----------------------------------------------------------------------
