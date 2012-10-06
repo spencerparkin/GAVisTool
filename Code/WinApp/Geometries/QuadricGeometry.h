@@ -52,4 +52,42 @@ private:
 	GeometricAlgebra::SumOfBlades element;
 };
 
+//=========================================================================================
+// It's important to realize that this class does not interpret
+// a bivector as a quadric surface of one point, which does exist.
+// It represents a projective point that is used in the definition
+// of how bivectors can represent quadric surfaces.
+class QuadricGeometryPoint : public GAVisToolGeometry
+{
+	DECLARE_CALCLIB_CLASS( QuadricGeometryPoint );
+
+public:
+
+	QuadricGeometryPoint( BindType bindType );
+	virtual ~QuadricGeometryPoint( void );
+
+	static GAVisToolBindTarget* Create( BindType bindType );
+
+	virtual void DecomposeFrom( const GeometricAlgebra::SumOfBlades& element ) override;
+	virtual void ComposeTo( GeometricAlgebra::SumOfBlades& element ) const override;
+
+	virtual void DumpInfo( char* printBuffer, int printBufferSize ) const override;
+
+	virtual void AddInventoryTreeItem( wxTreeCtrl* treeCtrl, wxTreeItemId parentItem ) const override;
+
+	virtual void Draw( GAVisToolRender& render, bool selected );
+	virtual void CalcCenter( VectorMath::Vector& center ) const;
+	
+	virtual void Translate( const VectorMath::Vector& delta );
+	virtual void Rotate( const VectorMath::Vector& unitAxis, float angle );
+	virtual void Scale( float scale );
+
+	virtual void NameCenterOffset( VectorMath::Vector& offsetDelta ) override;
+
+private:
+
+	VectorMath::Vector point;
+	double weight;
+};
+
 // QuadricGeometry.h

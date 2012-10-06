@@ -29,6 +29,7 @@ public:
 		DOESNT_MATTER,
 		NORMAL_FORM,
 		DUAL_FORM,
+		ROTATED_FORM,
 	};
 
 	GAVisToolBindTarget( BindType bindType = DOESNT_MATTER );

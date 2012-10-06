@@ -1,0 +1,27 @@
+/*
+ * Explore quadrics that are also blades.
+ */
+do
+(
+	/* (a + b_bar)^(c + d_bar) */
+	
+	a = e0 + 3*e2,
+	b_bar = e4 + 2*e5,
+	c = e0 - 2*e2,
+	d_bar = e4 - 2*e5,
+	
+	p = e0 + $x*e1 + $y*e2 + $z*e3,
+	pb = e4 + $x*e5 + $y*e2 + $z*e3,
+	
+	bind_qpoint( a, c ),
+	bind_rot_qpoint( b_bar, d_bar ),
+	
+	geo_color( a, 1, 0, 0 ),
+	geo_color( b_bar, 0, 1, 0 ),
+	geo_color( c, 0, 0, 1 ),
+	geo_color( d_bar, 1, 0, 1 ),
+	
+	bind_quadric(B),
+	formula_constraint( "B = (a + b_bar)^(c + d_bar)" ),
+	geo_color( B, 1, 0, 0 ),
+)
