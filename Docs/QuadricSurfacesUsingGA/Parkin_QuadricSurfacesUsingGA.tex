@@ -418,14 +418,12 @@ are far from discovering everything possible in the present model imposed upon i
 Let's take a step back for a moment, then, and narrow our scope to that of 3-blades.
 Doing so, we see that
 what might motivate us to investigate the set of all quadrics that are 2-blades, (or to find
-a better model where all quadrics are 2-blades), is the following lemma.
-\begin{lemma}\label{lma_three_way_intersect}
+a better model where all quadrics are 2-blades), is the following result.
+
 For any given non-zero 3-blade $T\in\G$, given by $T=a\wedge b\wedge c$, the
 geometry represented by this 3-blade under Definition~\ref{def_quadric} is the intersection
 of the 3 quadrics $a\wedge b$, $a\wedge c$ and $b\wedge c$.
-\end{lemma}
-\begin{proof}
-The proof follows directly from the following identity, which the reader can easily verify.
+The proof of this follows directly from the following identity, which the reader can easily verify.
 \begin{equation}
 p\wedge\overline{p}\cdot a\wedge b\wedge c
  = (p\wedge\overline{p}\cdot a\wedge b)c
@@ -435,14 +433,106 @@ p\wedge\overline{p}\cdot a\wedge b\wedge c
 Now realize that since $a\wedge b\wedge c\neq 0$, $\{a,b,c\}$ is a linearly
 independent set, and therefore, $0=p\wedge\overline{p}\cdot T$ if and
 only if $p$ is on $a\wedge b$, $a\wedge c$ and $b\wedge c$.
-\end{proof}
+
 This, of course, would generalize to blades of higher grade.  Regardless, the
 3-way intersection of 3 $n$-dimensional surfaces is probably, in most cases,
 zero or more isolated points, which doesn't seem that interesting.  In any case,
-to make use of Lemma~\ref{lma_three_way_intersect}, we must consider now
+to make use of this result, we must consider
 the set of quadrics that are 2-blades.  This deserves its own section.
 
 \section{The Consideration Of 2-Blade Quadrics}
+
+Letting $B\in\G$ be a 2-blade of the form
+\begin{equation}\label{equ_two_blade_quadric}
+B = (a+\overline{b})\wedge(c+\overline{d}) = a\wedge c + a\wedge\overline{d} - c\wedge\overline{b} + \overline{b\wedge d},
+\end{equation}
+where $a,b,c,d\in\V$, our first observation is that $a\wedge c$ and $\overline{b\wedge d}$ contribute nothing
+to the shape of the quadric, because they represent the geometry of all space under
+Definition~\ref{def_quadric}, which is easily verified.  What remains is the difference
+between two quadrics of the form $u\wedge\overline{v}$, where $u,v\in\V$.  It is
+easy to show that a quadric of this form is a double plane.
+\begin{equation}\label{equ_double_plane}
+0 = p\wedge\overline{p}\cdot u\wedge\overline{v} = -(p\cdot v)(p\cdot u)
+\end{equation}
+The projective point solution set of equation \eqref{equ_double_plane} is
+clearly the union of such a set for the equation $0=p\cdot v$ and $0=p\cdot u$,
+both of which are planes.  The plane for $v$ has normal $e_0\cdot e_0\wedge v$,
+and the point $e_0-(v\cdot e_0)(e_0\cdot e_0\wedge v)^{-1}$ as the point on the plane closest to the origin.
+
+Returning to \eqref{equ_two_blade_quadric}, it is clear now that $B$ represents
+the projective point solution set to the equation
+\begin{equation}\label{equ_two_blade_quadric_vector_form}
+0 = \left|\begin{array}{cc} p\cdot a & p\cdot b \\ p\cdot c & p\cdot d \end{array}\right|.
+\end{equation}
+It is not at all immediately obvious as to what type of surface this may be.  What we do know, however, is that it must
+contain the intersection, if any, of the two pairs of planes $a\wedge\overline{d}$ and $c\wedge\overline{d}$.
+In most cases this is a pair of lines, many instances of which can be seen to fit the surface
+given in Figure blah, a last resort in the failure to fully analyze equation \eqref{equ_two_blade_quadric_vector_form},
+which is to turn to computer software as a means of visualizing a sample solution set of the equation.
+
+If, however, the four projective points $a,b,c,d$ are
+coplanar and not collinear, the quadric $B$ becomes easier to analyze.
+To see this, let $a=\alpha(e_0+\vec{a})$, $b=\beta(e_0+\vec{b})$,
+$c=\gamma(e_0+\vec{c})$ and $d=\delta(e_0+\vec{d})$.  Having done so, equation \eqref{equ_two_blade_quadric_vector_form}
+becomes
+\begin{equation}\label{equ_two_blade_quadric_vector_form_expanded}
+\left|\begin{array}{cc}
+\alpha & \beta \\
+\delta & \gamma
+\end{array}\right| =
+\vec{p}\cdot(\vec{a}+\vec{d}-\vec{c}-\vec{b})+
+\left|\begin{array}{cc}
+\vec{p}\cdot\vec{a} & \vec{p}\cdot\vec{b} \\
+\vec{p}\cdot\vec{c} & \vec{p}\cdot\vec{d}
+\end{array}\right|,
+\end{equation}
+where here we've let $p$ be the homogenized projective point $p=e_0+\vec{p}$.
+Then, letting $\Delta b=b-a$, $\Delta c=c-a$ and $\Delta d=d-a$, it is clear that
+\begin{equation}
+\Delta b\wedge\Delta c\wedge\Delta d = 0,
+\end{equation}
+since the four points are coplanar.  Now, since the four points are also non-collinear,
+it follows that there must exists a subset of size three of the four points that are
+non-collinear.\footnote{To see this, consider the contrapositive.  If all subsets
+of size three of the four points were collinear, then the set of four points must
+be collinear.}  We will, without loss of generality, assume that the points $\vec{b}$,
+$\vec{c}$ and $\vec{d}$ are non-collinear.  It then follows that
+\begin{equation}
+0 = \vec{p}\cdot(\Delta b\wedge\Delta c\wedge\Delta d)
+= (\vec{p}\cdot(\Delta b+\Delta c-\Delta d))(c-b)\wedge(d-b),
+\end{equation}
+which implies that $0=\vec{p}\cdot(\Delta b+\Delta c-\Delta d)$, since we
+must have $0\neq (c-b)\wedge(d-b)$ by the non-collinearity of the points
+$\vec{b}$, $\vec{c}$ and $\vec{d}$.  Now realize that we can
+rewrite equation \eqref{equ_two_blade_quadric_vector_form_expanded} as
+\begin{equation}
+\left|\begin{array}{cc}
+\alpha & \beta \\
+\delta & \gamma
+\end{array}\right| =
+(1+\vec{p}\cdot\vec{a})\vec{p}\cdot(\Delta b+\Delta c-\Delta d) + (\vec{p}\cdot\Delta c)(\vec{p}\cdot\Delta b),
+\end{equation}
+which now reduces to
+\begin{equation}
+\left|\begin{array}{cc}
+\alpha & \beta \\
+\delta & \gamma
+\end{array}\right| = (\vec{p}\cdot\Delta c)(\vec{p}\cdot\Delta b).
+\end{equation}
+It is now clear that if the determinant on the left-hand side is zero, (which
+happens when all four points are in homogenized form), then $B$ is yet
+another instance of a double plane.
+
+I have a counter-example, so I must be wrong.  The real conclusion we must
+come to is that the resulting 2-blade, under this condition, must be the
+extrusion of a conic section through the dimension indicated by the
+norm of the plane, which is a fairly exciting result, perhaps.
+
+% The, or at least some, conic sections can be studied in this algebra using
+% four points in a plane.
+
+% Have option in software to do just one trace-plane so that
+% we can give figures of the conic sections.
 
 \section{The Consideration Of 1-Blade Quadrics}
 
