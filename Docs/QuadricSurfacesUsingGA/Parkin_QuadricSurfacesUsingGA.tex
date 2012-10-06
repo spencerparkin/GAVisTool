@@ -57,10 +57,10 @@
 %    author one information
 % \author[short version for running head]{name for top of paper}
 \author{Spencer T. Parkin}
-\address{2113 S. Claremont Dr., Bountiful, Utah  84010}
-\curraddr{}
-\email{spencer.parkin@gmail.com}
-\thanks{}
+%\address{2113 S. Claremont Dr., Bountiful, Utah  84010}
+%\curraddr{}
+%\email{spencer.parkin@gmail.com}
+%\thanks{}
 
 %    author two information
 %\author{}
@@ -71,11 +71,11 @@
 
 % TODO: Figure out how to fill in the subject class.
 %    \subjclass is required.
-\subjclass[2010]{Primary }
+%\subjclass[2010]{Primary }
 
-\date{}
+%\date{}
 
-\dedicatory{}
+%\dedicatory{}
 
 %    Abstract is required.
 \begin{abstract}
@@ -470,69 +470,11 @@ In most cases this is a pair of lines, many instances of which can be seen to fi
 given in Figure blah, a last resort in the failure to fully analyze equation \eqref{equ_two_blade_quadric_vector_form},
 which is to turn to computer software as a means of visualizing a sample solution set of the equation.
 
-If, however, the four projective points $a,b,c,d$ are
-coplanar and not collinear, the quadric $B$ becomes easier to analyze.
-To see this, let $a=\alpha(e_0+\vec{a})$, $b=\beta(e_0+\vec{b})$,
-$c=\gamma(e_0+\vec{c})$ and $d=\delta(e_0+\vec{d})$.  Having done so, equation \eqref{equ_two_blade_quadric_vector_form}
-becomes
-\begin{equation}\label{equ_two_blade_quadric_vector_form_expanded}
-\left|\begin{array}{cc}
-\alpha & \beta \\
-\delta & \gamma
-\end{array}\right| =
-\vec{p}\cdot(\vec{a}+\vec{d}-\vec{c}-\vec{b})+
-\left|\begin{array}{cc}
-\vec{p}\cdot\vec{a} & \vec{p}\cdot\vec{b} \\
-\vec{p}\cdot\vec{c} & \vec{p}\cdot\vec{d}
-\end{array}\right|,
-\end{equation}
-where here we've let $p$ be the homogenized projective point $p=e_0+\vec{p}$.
-Then, letting $\Delta b=b-a$, $\Delta c=c-a$ and $\Delta d=d-a$, it is clear that
-\begin{equation}
-\Delta b\wedge\Delta c\wedge\Delta d = 0,
-\end{equation}
-since the four points are coplanar.  Now, since the four points are also non-collinear,
-it follows that there must exists a subset of size three of the four points that are
-non-collinear.\footnote{To see this, consider the contrapositive.  If all subsets
-of size three of the four points were collinear, then the set of four points must
-be collinear.}  We will, without loss of generality, assume that the points $\vec{b}$,
-$\vec{c}$ and $\vec{d}$ are non-collinear.  It then follows that
-\begin{equation}
-0 = \vec{p}\cdot(\Delta b\wedge\Delta c\wedge\Delta d)
-= (\vec{p}\cdot(\Delta b+\Delta c-\Delta d))(c-b)\wedge(d-b),
-\end{equation}
-which implies that $0=\vec{p}\cdot(\Delta b+\Delta c-\Delta d)$, since we
-must have $0\neq (c-b)\wedge(d-b)$ by the non-collinearity of the points
-$\vec{b}$, $\vec{c}$ and $\vec{d}$.  Now realize that we can
-rewrite equation \eqref{equ_two_blade_quadric_vector_form_expanded} as
-\begin{equation}
-\left|\begin{array}{cc}
-\alpha & \beta \\
-\delta & \gamma
-\end{array}\right| =
-(1+\vec{p}\cdot\vec{a})\vec{p}\cdot(\Delta b+\Delta c-\Delta d) + (\vec{p}\cdot\Delta c)(\vec{p}\cdot\Delta b),
-\end{equation}
-which now reduces to
-\begin{equation}
-\left|\begin{array}{cc}
-\alpha & \beta \\
-\delta & \gamma
-\end{array}\right| = (\vec{p}\cdot\Delta c)(\vec{p}\cdot\Delta b).
-\end{equation}
-It is now clear that if the determinant on the left-hand side is zero, (which
-happens when all four points are in homogenized form), then $B$ is yet
-another instance of a double plane.
+% if the four points are coplanar and that plane goes through the origin
+% and the det is not zero, then the qudric is a conic extruded through
+% the norm of the plane.
 
-I have a counter-example, so I must be wrong.  The real conclusion we must
-come to is that the resulting 2-blade, under this condition, must be the
-extrusion of a conic section through the dimension indicated by the
-norm of the plane, which is a fairly exciting result, perhaps.
-
-% The, or at least some, conic sections can be studied in this algebra using
-% four points in a plane.
-
-% Have option in software to do just one trace-plane so that
-% we can give figures of the conic sections.
+% note that the equation is sensative to non-homogenized points.
 
 \section{The Consideration Of 1-Blade Quadrics}
 
