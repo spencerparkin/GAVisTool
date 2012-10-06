@@ -467,20 +467,30 @@ the projective point solution set to the equation
 It is not at all immediately obvious as to what type of surface this may be.  What we do know, however, is that it must
 contain the intersection, if any, of the two pairs of planes $a\wedge\overline{d}$ and $c\wedge\overline{d}$.
 In most cases this is a pair of lines, many instances of which can be seen to fit the surface
-given in Figure blah, a last resort in the failure to fully analyze equation \eqref{equ_two_blade_quadric_vector_form},
-which is to turn to computer software as a means of visualizing a sample solution set of the equation.
+given in Figure blah.  (Make a figure.)
 
-% if the four points are coplanar and that plane goes through the origin
-% and the det is not zero, then the qudric is a conic extruded through
-% the norm of the plane.
+One immediate observation about equation \eqref{equ_two_blade_quadric_vector_form}
+is that if all points lie in a plane through the origin, then the equation remains
+invariant when $p$ is replaced with $p+v$, where $v\in\V$ is a direction vector
+orthogonal to that plane.  This shows that in this case, $B$ must be the
+extrusion of a conic section through a dimension parallel to the norm of
+the common plane of the four points.  It is not clear whether all conic
+sections can be represented this way, though, because certainly not
+all quadrics can be represented with a 2-blade.  It may, howerver,
+be possible to represent all conic sections with bivectors that are sums
+of blades having the property just mentioned.
 
-% note that the equation is sensative to non-homogenized points.
+Lastly, it should be noted that, unlike equation \eqref{equ_double_plane},
+equation \eqref{equ_two_blade_quadric_vector_form} is sensative to which
+of the four points are homogenized and which are not.  This is something
+we would need to be careful about in any analysis of the equation.
 
-\section{The Consideration Of 1-Blade Quadrics}
+%\section{The Consideration Of 1-Blade Quadrics}
 
 \section{Transformations In The Model}
 
-Explore the idea of applying versors to bivectors here.
+Explore the idea of applying versors to bivectors here.  Can we rotate a quadric?
+How is $R$ affected by a rotation?
 
 % What about transformations?
 
