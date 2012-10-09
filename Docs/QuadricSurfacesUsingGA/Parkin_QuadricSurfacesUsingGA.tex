@@ -210,7 +210,10 @@ it is done.  The rest of the decomposition will proceed with greater satisfactio
 There is no way to recover $c$ for cylinders, which is quite obvious.
 The choice for the point $c$, the center of the cylinder, may be arbitrarily
 chosen as any point along its spine.  This information is lost in composition,
-so we may therefore arbitrarily choose $c=-A\cdot(E\wedge e_0)/2$
+so we may therefore arbitrarily choose
+\begin{equation}
+c=-A\cdot(E\wedge e_0)/2
+\end{equation}
 as the cylinder's center, which, incidentally, will also be the point on the spine of
 the cylinder closest to the origin.
 
@@ -418,7 +421,7 @@ of blades having the property just mentioned.
 Lastly, it should be noted that, unlike equation \eqref{equ_double_plane},
 equation \eqref{equ_two_blade_quadric_vector_form} is sensative to which
 of the four points are homogenized and which are not.  This is something
-we would need to be careful about in any analysis of the equation.
+we would need to carefully consider in any analysis of this equation.
 
 %\section{The Consideration Of 1-Blade Quadrics}
 
@@ -433,9 +436,9 @@ We begin by observing that for any non-projective point $v\in\V$,
 we can easily rotate this point as $Rv\tilde{R}$, where $R$ is
 given by
 \begin{equation}
-R = \cos(\theta/2) - ai\sin(\theta/2),
+R = \cos(\theta/2) - aI\sin(\theta/2),
 \end{equation}
-where $a\in\V$ is a direction vector, and $i=e_1e_2e_3$.  Furthermore,
+where $a\in\V$ is a direction vector, and $I=\prod_{i=1}^n e_i$.  Furthermore,
 for any non-projective point $v\in\V$, notice that
 \begin{equation}
 \overline{v} = R\overline{v}\tilde{R},
@@ -443,23 +446,70 @@ for any non-projective point $v\in\V$, notice that
 showing that the counter-part $\overline{v}$ of $v$ in $\overline{\V}$ remains invarient
 under this rotation.  Of course, we can formulate an equivilant of $R$
 that will rotate $\overline{v}$, and it is simply $\overline{R}$.  Then, seeing
-that $\overline{R}$ leaves $v$ invarient, it follows
-that $V=\overline{R}R$ is a rotor that will rotate the 2-blade
-$v\wedge\overline{v}$ in the desired way.  Now since all quadrics
-are sums of blades of the form $a\wedge\overline{b}$, with $a,b\in\V$,
+that $\overline{R}$ leaves $v$ invariant, it follows
+that $V=R\overline{R}$ is a rotor that will rotate the 2-blade
+$v\wedge\overline{v}$ in the desired way.  Specifically, we have
+\begin{equation}
+V(v\wedge\overline{v})\tilde{V} = Rv\tilde{R}\wedge\overline{Rv\tilde{R}}.
+\end{equation}
+
+Now, for all quadrics
+that are sums of blades of the form $a\wedge\overline{b}$, with $a,b\in\V$,
 and each of $a$ and $b$ being a non-projective position or direction related to the quadric,
-we see that for any quadric $E\in\G$, the rotation $E'$ of this quadric
+we see that for such quadrics $E\in\G$, the rotation $E'$ of this quadric
 about an axis $a\in\V$ by an angle $\theta$, is given by
 \begin{equation}
-E' = VE\tilde{V},
+E' = VE\tilde{V}.
 \end{equation}
-which is a somewhat interesting result.  A picture of a rotated spheroid is
-given in Figure~\ref{fig_rot_spheroid}.
+Interestingly, this formula applies to all quadrics, because it can be shown
+that $V$ leaves $\Omega$ and $A$ invariant under versor conjugation.
+Indeed, a spheroid in the form of equation \eqref{equ_spheroid_bivector}
+can be rotated as illustrated in Figure~\ref{fig_rot_spheroid}.
 \begin{figure}
 \includegraphics[scale=0.7]{RotatedSpheroid}
 \caption{The rotation of a spheroid about the axis $(e_1+e_2+e_3)/\sqrt{3}$ by $\pi$ radians.}
 \label{fig_rot_spheroid}
 \end{figure}
+
+To see that $V$ leaves $A$ invariant, notice that
+\begin{equation}
+VA\tilde{V} = Re_0\tilde{R}\wedge\overline{Re_0\tilde{R}}.
+\end{equation}
+We need only show now that $R$ leaves $e_0$ invariant.  To that end, we see that
+\begin{align}
+Re_0\tilde{R} &= \cos^2\frac{\theta}{2}e_0 + \cos\frac{\theta}{2}\sin\frac{\theta}{2}(e_0 aI - aIe_0) - \sin^2\frac{\theta}{2}aIe_0aI \\
+ &= \cos^2\frac{\theta}{2}e_0 - \sin^2\frac{\theta}{2}(aI)^2 e_0 \\
+ &= \left(\cos^2\frac{\theta}{2}+\sin^2\frac{\theta}{2}\right)e_0 = e_0,
+\end{align}
+since $|a|=1$.  Seeing that $V$ leaves $\Omega$ invariant is a bit trickier.  We first
+observe that
+\begin{equation}\label{equ_versor_acting_on_omega}
+V\Omega\tilde{V} = \sum_{i=1}^n Re_i\tilde{R}\wedge\overline{R e_i\tilde{R}}.
+\end{equation}
+It is important to realize at this point that for all integers $i\in[1,n]$, that $e_i\neq Re_i\tilde{R}$,
+yet $V$ really does leave $\Omega$ invariant.  To see why, we will rewrite $e_i$
+in equation \eqref{equ_versor_acting_on_omega} as
+\begin{equation}
+e_i = \sum_{j=1}^n (e_i\cdot e_j)e_j.
+\end{equation}
+Now realize that
+\begin{equation}
+Re_i\tilde{R} = \sum_{j=1}^n (Re_i\tilde{R}\cdot e_j)e_j.
+\end{equation}
+It then follows that for any integer $i\in[1,n]$, we have
+\begin{equation}
+-e_i\wedge\overline{e_i}\cdot V\Omega\tilde{V} = \sum_{j=1}^n (Re_i\tilde{R}\cdot e_j)^2 = (Re_i\tilde{R})^2 = 1,
+\end{equation}
+showing that the coefficient of $e_i\wedge\overline{e_i}$ in $V\Omega\tilde{V}$ is 1.  Realize that
+the application of a rotor leaves the magnitude of a vector unchanged.  To finish the proof, we
+observe that for all integers $i\neq j$ in $[1,n]$, we have
+\begin{equation}
+-e_i\wedge e_j\cdot V\Omega\tilde{V} = \sum_{k=1}^n (Re_i\tilde{R}\cdot e_k)(Re_j\tilde{R}\cdot e_k)
+= (Re_i\tilde{R})\cdot(Re_j\tilde{R}) = 0,
+\end{equation}
+showing that the coefficient of $e_i\wedge\overline e_j$ in $V\Omega\tilde{V}$ is 0.  Realize that
+the action of a rotor taken with two orthogonal vectors does not change their orthogonal relationship.
+It now follows that $V\Omega\tilde{V}=\Omega$.
 
 \section{Concluding Remarks}
 
