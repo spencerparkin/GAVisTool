@@ -438,7 +438,7 @@ Knowing how geometries of the conformal model factor in terms of vectors
 representative of points leads us to one of the reasons why the conformal model
 is a powerful analytical tool in geometry.  Specifically, if we're given two blades $A,B\in\G$ that
 we know are both directly representative of the same non-single-point geometry, then we can easily show
-that $A$ is a scalar multiple of $B$.  Let us state this formally with a theorem.
+that $A$ is a scalar multiple of $B$.  This deserves to be stated formally as a theorem.
 \begin{theorem}\label{thm_same_geos}
 For any two blades $A,B\in\G$, if $G(A)=G(B)$ and these are not singletons,
 then there exists a scalar $\lambda\in\R$ such that $A=\lambda B$.
@@ -471,7 +471,7 @@ which we can draw just the same.
 \caption{The intersection of two non-intersecting spheres.}
 \end{figure}
 
-Right away we can use theorem $\eqref{thm_same_geos}$ to come up with an important result.
+Right away we can use theorem $\eqref{thm_same_geos}$ to arrive at an important result.
 \begin{theorem}\label{thm_flat_xor_round}
 A blade $B\in\G$ directly represents a flat geometry if and only if
 $B\wedge\nvai=0$.
@@ -480,8 +480,7 @@ $B\wedge\nvai=0$.
 By theorem $\eqref{thm_round_to_flat}$, the only reason we have to believe that $B\wedge\nvai\neq 0$
 is in the case that $B$ is written entirely as the outer product of vectors representative of points.  But by theorem
 $\eqref{thm_same_geos}$, we know that any such factorization of $B$ can
-be rewritten as the outer product of a blade directly representative of a round
-and $\nvai$.
+be rewritten as the outer product of $\nvai$ and a blade directly representative of a round.
 \end{proof}
 Notice that this theorem can also be stated as follows.  A blade $B\in\G$
 directly represents a round geometry if and only if $B\wedge\nvai\neq 0$.
@@ -489,7 +488,7 @@ This is because every geometry is either round or flat.
 
 Another useful feature of the conformal model comes from the way it lets
 us think about doing operations at a high level.  We needed only descend to
-the lower levels of thinking to develop the model.  Once developed, what we can do now is illustrated
+the lower levels of thinking to develop the model.  Once developed, what we can then do may be illustrated
 by the following example.  Suppose we're given a dual circle $A$ and
 a point $B$, and we want to find the dual sphere $C$ fitting these two geometries.
 Well, we can think of $A^*$ as any three points determining the circle.
@@ -984,8 +983,9 @@ characterized by the intersection of $m$ planes of dimension $n$.
 Let $\{v_k\}_{k=1}^m\subset\V^n$ be the set of normal vectors for each of these planes.
 It is clear that such a set can be found such that for all $i\neq j$, we have
 $v_i\cdot v_j=0$.  Then for all $i\neq j$, we have $(v_i+(c\cdot v_i)\nvai)\cdot(v_j+(c\cdot v_j)\nvai)=0$.
+When $i=j$, we get one, showing the invertability of the vector.
 It follows that a blade dually representative of this flat can be written
-as a geomtric product of vectors.
+as a geometric product of invertible vectors.
 
 The case of rounds is also trivial.  Let $c$ now be the center of the round
 and $r$ be the radius of the round.  We can then form the round
@@ -995,7 +995,8 @@ in the composition $\pi$, notice that
 \begin{equation*}
 \left(p(c)-\frac{1}{2}r^2\nvai\right)\cdot(v+(c\cdot v)\nvai)=c\cdot v-c\cdot v = 0.
 \end{equation*}
-We have now proven the result for all dual representatives.  To see that any direct
+Then, seeing that all vectors representative of dual rounds are invertible,
+we have proven our result for all dual representatives.  To see that any direct
 representative is also a versor, notice that the dual of any versor is a versor.  (I may
 need to prove this.  Is it true?)
 \end{proof}
@@ -1053,7 +1054,7 @@ of grade $n-(n-m)+1=m+1$.  Applying this result again, a real $m$-dimensional ro
 is directly represented by a blade of grade $n+2-(n-m+1)=m+1$.
 
 We proceed now to give a proof by induction.  We start with the case $m=n-1$.
-This case is proved by the following identity, which the reader can check.\footnote{
+This case is proven by the following identity, which the reader can check.\footnote{
 Multiply the left side of the identity by the unit translation versor $T=1+\frac{1}{2}c\wedge\nvai$ and the right
 side by $\tilde{T}$.  This makes proving the identity easier.}
 \begin{equation*}
