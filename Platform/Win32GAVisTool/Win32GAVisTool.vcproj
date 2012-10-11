@@ -680,6 +680,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\ScriptCode\QuadricGeometry\DoublePlaneSum.txt"
+					>
+				</File>
+				<File
 					RelativePath="..\..\ScriptCode\QuadricGeometry\Rotate.txt"
 					>
 				</File>
