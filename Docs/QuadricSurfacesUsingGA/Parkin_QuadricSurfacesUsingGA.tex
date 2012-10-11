@@ -121,7 +121,14 @@ comes from a very important result in the conformal model.  In the conformal mod
 two blades are known to represent the same non-trivial geometry in the same way, then it can be shown that the
 two blades are equal, up to scale.  In our present model, it may take more than just
 homogenization to get a bivector known to represent a certain geometry in a
-known canonical form.
+known canonical form.  To account for this during the performance of algebraic manipulations,
+we will introduce the following notation.  We will say that quadrics $E_a$ and $E_b$ are
+equivalent, writing $E_a\equiv E_b$, whenever $E_a$ and $E_b$ represent the same quadric
+under Definition~\ref{def_quadric}.  For example, for any two vectors $u,v\in\V$, we have
+\begin{equation}
+u\wedge\overline{v}\equiv -2u\wedge\overline{v}\equiv u\wedge\overline{v}+v\wedge\overline{u}
+\equiv(u+\overline{v})\wedge(u-\overline{v}).
+\end{equation}
 
 Another important difference to point out here between our present model and the conformal model is that,
 unlike what we can analogously expect from the point-definition of the conformal model,
@@ -240,7 +247,7 @@ The following table summarizes a few additional canonical forms.
 \hline
 \mbox{Geometry} & \mbox{Canonical/Homogenized Form} \\
 \hline
-\mbox{Plane} & v\wedge\overline{e_0} - (c\cdot v)A \\
+\mbox{Plane} & v\wedge\overline{e_0} - (c\cdot v)A,\;|v|=1 \\
 \hline
 \mbox{Sphere} & \Omega - 2c\wedge\overline{e_0} + (c^2-r^2)A \\
 \hline
@@ -248,8 +255,15 @@ The following table summarizes a few additional canonical forms.
 \hline
 \mbox{Line} & \Omega - v\wedge\overline{v} - 2u\wedge\overline{e_0} + u^2A,\;u=c-(c\cdot v)v \\
 \hline
+\mbox{Cylinder} & \Omega - v\wedge\overline{v} - 2u\wedge\overline{e_0} + (u^2-r^2)A,\;u=c-(c\cdot v)v \\
+\hline
+\mbox{Plane-Pair} & ((c_a\cdot v_a)e_0-v_a)\wedge((c_b\cdot v_b)\overline{e_0}-\overline{v_b}) \\
+\hline
 \end{array}
 \end{equation}
+The plain-pair form is discussed below with equation \eqref{equ_double_plane}.  Here,
+in table \eqref{equ_canonical_forms_table}, $c_a,c_b\in\V$ are non-projective points
+on the two planes, and $v_a,v_b\in\V$ are direction vectors normal to each of the two planes.
 
 \section{Making Use Of The Model}
 
@@ -383,9 +397,11 @@ of quadrics that are 2-blades.  This deserves its own section.
 \section{The Consideration Of 2-Blade Quadrics}
 
 Letting $B\in\G$ be a 2-blade of the form
-\begin{equation}\label{equ_two_blade_quadric}
-B = (a+\overline{b})\wedge(c+\overline{d}) = a\wedge c + a\wedge\overline{d} - c\wedge\overline{b} + \overline{b\wedge d},
-\end{equation}
+\begin{align}\label{equ_two_blade_quadric}
+B &= (a+\overline{b})\wedge(c+\overline{d}) \\
+ &= a\wedge c + a\wedge\overline{d} - c\wedge\overline{b} + \overline{b\wedge d} \\
+ &\equiv a\wedge\overline{d} - c\wedge\overline{b},
+\end{align}
 where $a,b,c,d\in\V$, our first observation is that $a\wedge c$ and $\overline{b\wedge d}$ contribute nothing
 to the shape of the quadric, because they represent the geometry of all space under
 Definition~\ref{def_quadric}, which is easily verified.  What remains is the difference
@@ -553,6 +569,9 @@ to be had using this method of studying quadric surfaces.  In any case,
 geometric algebra has proven to be a fundamental, versatile and unifying
 language that perhaps most naturally extends mathematics beyond the real number line.  Perhaps
 there is a much better way to use geometric algebra to study quadric surfaces.
+For example, as the model for projective geometry using geometric algebra may
+be inferior to the conformal model, the model of this paper may be inferior to
+a conformal-like model for quadric surfaces.
 
 \bibliographystyle{amsplain}
 \bibliography{Parkin_QuadricSurfacesUsingGA}
