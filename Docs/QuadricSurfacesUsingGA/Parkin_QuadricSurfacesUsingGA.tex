@@ -140,7 +140,10 @@ null blades in our purely Euclidean geometric algebra $\G$.
 \section{The Construction Of Quadric Surfaces In The Model}
 
 Having constructed our model, we are now ready to find canonical forms of bivectors
-representing a variety of well-known quadric surfaces.  Let us begin with the
+representing a variety of well-known quadric surfaces.  Our approach here will be
+similar to that taken in Section 3 of \cite{Miller87}.
+
+Let us begin with the
 spheroid, (a special case of ellipsoid), the circular cylinder, and the circular hyperboloid
 of one sheet.  We will find that all of these surfaces share the same canonical form,
 because they may all be characterized as the non-projective point solution set of the equation
@@ -242,6 +245,8 @@ The following table summarizes a few additional canonical forms.
 \mbox{Sphere} & \Omega - 2c\wedge\overline{e_0} + (c^2-r^2)A \\
 \hline
 \mbox{Point} & \Omega - 2c\wedge\overline{e_0} + c^2A \\
+\hline
+\mbox{Line} & \Omega - v\wedge\overline{v} - 2u\wedge\overline{e_0} + u^2A,\;u=c-(c\cdot v)v \\
 \hline
 \end{array}
 \end{equation}
@@ -367,11 +372,13 @@ Now realize that since $a\wedge b\wedge c\neq 0$, $\{a,b,c\}$ is a linearly
 independent set, and therefore, $0=p\wedge\overline{p}\cdot T$ if and
 only if $p$ is on $a\wedge b$, $a\wedge c$ and $b\wedge c$.
 
-This, of course, would generalize to blades of higher grade.  Regardless, the
-3-way intersection of 3 $n$-dimensional surfaces, when $n=3$, is in most cases probably
-zero or more isolated points, which doesn't seem that interesting.  In any case,
-to make use of this result, we must consider
-the set of quadrics that are 2-blades.  This deserves its own section.
+This, of course, would generalize to blades of higher grade.  The 3-way intersection
+of quadrics was given a great deal of consideration in \cite{ZhiqiangXu05}.
+This ability to intersect three quadrics, however, is restrictive in at least
+two ways.  First, all three quadrics must be blades.   And secondly, the
+three quadrics must pair-wise share a common vector in their respective factorizations.
+In any case, the result leads us to a consideration
+of quadrics that are 2-blades.  This deserves its own section.
 
 \section{The Consideration Of 2-Blade Quadrics}
 
@@ -400,7 +407,8 @@ the projective point solution set to the equation
 It is not at all immediately obvious as to what type of surface this may be.  What we do know, however, is that it must
 contain the intersection, if any, of the two pairs of planes $a\wedge\overline{d}$ and $c\wedge\overline{d}$.
 In most cases this is a pair of lines, many instances of which can be seen to fit the surface
-given in Figure~\ref{fig_quadric_blade}
+given in Figure~\ref{fig_quadric_blade}.
+
 \begin{figure}
 \includegraphics[scale=0.7]{QuadricBlade}
 \caption{A quadric formed by four points composing a 2-blade.}
@@ -415,15 +423,13 @@ extrusion of a conic section through a dimension parallel to the norm of
 the common plane of the four points.  It is not clear whether all conic
 sections can be represented this way, though, because certainly not
 all quadrics can be represented with a 2-blade.  It may, howerver,
-be possible to represent all conic sections with bivectors that are sums
+be possible to represent all extruded conic sections with bivectors that are sums
 of blades having the property just mentioned.
 
 Lastly, it should be noted that, unlike equation \eqref{equ_double_plane},
 equation \eqref{equ_two_blade_quadric_vector_form} is sensative to which
 of the four points are homogenized and which are not.  This is something
 we would need to carefully consider in any analysis of this equation.
-
-%\section{The Consideration Of 1-Blade Quadrics}
 
 \section{Transformations In The Model}
 
@@ -444,7 +450,8 @@ for any non-projective point $v\in\V$, notice that
 \overline{v} = R\overline{v}\tilde{R},
 \end{equation}
 showing that the counter-part $\overline{v}$ of $v$ in $\overline{\V}$ remains invarient
-under this rotation.  Of course, we can formulate an equivilant of $R$
+under this rotation.  (The proof of this is similar to the proof we'll give
+shortly that $R$ leaves $e_0$ invariant.)  Of course, we can formulate an equivilant of $R$
 that will rotate $\overline{v}$, and it is simply $\overline{R}$.  Then, seeing
 that $\overline{R}$ leaves $v$ invariant, it follows
 that $V=R\overline{R}$ is a rotor that will rotate the 2-blade
@@ -511,7 +518,29 @@ showing that the coefficient of $e_i\wedge\overline e_j$ in $V\Omega\tilde{V}$ i
 the action of a rotor taken with two orthogonal vectors does not change their orthogonal relationship.
 It now follows that $V\Omega\tilde{V}=\Omega$.
 
+One possible application of rotations in the model could be that of showing
+that certain 2-blades are ruled quadric surfaces.\footnote{A ruled
+quadric surface is one that can be described entirely as the union
+of one or more lines.}  For example, it was shown earlier that some 2-blades
+are the sum of plane pairs that intersect in two real lines that must be
+contained in the quadric represented by the 2-blade.  If it could then
+be shown that this 2-blade remains invariant under an infinite set
+of rotations, then it must be a ruled quadric.
+
 \section{Concluding Remarks}
+
+While it has been shown that elements of $\G$ do indeed, under a given
+definition, represent quadric surfaces, there really is nothing more or less
+interesting about adding and subtracting these elements than adding and
+subtracting vector equations whose solution sets represent the quadric surfaces.
+There might not be any advantage in using the elemental form over the
+functional form.  There is some wonder, however, whether the model can
+be helpful in studying what is referred to in \cite{Miller87}
+and \cite{ZhiqiangXu05} as the pencil of two quadrics.
+It would be particularly interesting if our model could provide a nice proof
+that a ruled quadric must exist in the pencil of any two quadrics.
+To begin to answer such a question, we would first need to know
+how to classify ruled quadrics in $\G$, which doesn't appear obvious.
 
 That $\G$ was not something fancy like a Minkowski space or some other
 type of non-Euclidean geometric algebra was perhaps our first clue from
@@ -522,13 +551,6 @@ to be had using this method of studying quadric surfaces.  In any case,
 geometric algebra has proven to be a fundamental, versatile and unifying
 language that perhaps most naturally extends mathematics beyond the real number line.  Perhaps
 there is a much better way to use geometric algebra to study quadric surfaces.
-
-While it has been shown that elements of $\G$ do indeed, under a given
-definition, represent quadric surfaces, there really is nothing more or less
-interesting about adding and subtracting these elements than adding and
-subtracting vector equations whose solution sets represent the quadric surfaces.
-There might not be any advantage in using the elemental form over the
-functional form, except perhaps our rotation result given earlier.
 
 \bibliographystyle{amsplain}
 \bibliography{Parkin_QuadricSurfacesUsingGA}
