@@ -10,6 +10,10 @@ do
 	
 	R = R04*R15*R26*R37,
 	
+	/* These are used for debugging purposes. */
+	p = e0 + $x*e1 + $y*e2 + $z*e3,
+	pb = e4 + $x*e5 + $y*e6 + $z*e7,
+	
 	c = 3*e1,
 	v = e1,		/* Keep this unit-length. */
 	vb = e5,
