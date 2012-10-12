@@ -201,10 +201,23 @@ proceed now to give such a sequence for the case when $E$ is known
 to be a cylinder.  That is, when $\lambda=-1$.
 
 The first thing to notice is that the canonical form $E$ in equation \eqref{equ_spheroid_bivector}
-is in a homogenized form, because the coeficient of $\Omega$ is 1.  If our given bivector
-is not already homogenized, then we'll want to divide it through by $-\Omega\cdot E/n$.
+is in a homogenized form, because the coeficient of $\Omega$ is 1.  Looking at any canonical form,
+if there exists a term in that form with a consistent magnitude, (a magnitude that does not change
+with any instantiation of the form with a given set of parameters), then we can usually find a way
+to homogenize that form.
+For the canonical form \eqref{equ_spheroid_bivector} with $\lambda=-1$, the non-homogenized form
+is given by
+\begin{equation}
+E' = \omega(\Omega - v\wedge\overline{v}-2u\wedge\overline{e_0}+(u^2-r^2)A),
+\end{equation}
+where $u=c-(c\cdot v)v$, $\omega\neq 1$ and $\omega\neq 0$.  To find the homogenized form $E=E'/\omega$,
+it is not hard to show that
+\begin{equation}
+\omega = -\frac{\Omega\cdot E'}{n-1}.
+\end{equation}
+We can then proceed to decompose the canonical form $E$ as follows.
 
-We then notice that for $1\leq i<j\leq n$, we have the system of equations
+Notice that for $1\leq i<j\leq n$, we have the system of equations
 \begin{equation}
 (v\cdot e_i)(v\cdot e_j) = -e_i\overline{e_j}\cdot E,
 \end{equation}
@@ -213,7 +226,7 @@ direction of $v$, up to sign.  For example, if $(v\cdot e_i)(v\cdot e_j)>0$,
 then $\mbox{sign}(v\cdot e_i)=\mbox{sign}(v\cdot e_j)$, and so on.
 It is also helpful to notice that for all $i=j$, we have
 \begin{equation}
-(v\cdot e_i)^2 = -1 - e_i\overline{e_j}\cdot E.
+(v\cdot e_i)^2 + 1 = - e_i\overline{e_j}\cdot E.
 \end{equation}
 It is unfortunate that we had to refer to a basis to obtain $v$; nevertheless,
 it is done.  The rest of the decomposition will proceed with greater satisfaction.
@@ -255,8 +268,6 @@ The following table summarizes a few additional canonical forms.
 \mbox{Point} & \Omega - 2c\wedge\overline{e_0} + c^2A \\
 \hline
 \mbox{Line} & \Omega - v\wedge\overline{v} - 2u\wedge\overline{e_0} + u^2A,\;u=c-(c\cdot v)v \\
-\hline
-\mbox{Cylinder} & \Omega - v\wedge\overline{v} - 2u\wedge\overline{e_0} + (u^2-r^2)A,\;u=c-(c\cdot v)v \\
 \hline
 \mbox{Plane-Pair} & ((c_a\cdot v_a)e_0-v_a)\wedge((c_b\cdot v_b)\overline{e_0}-\overline{v_b}) \\
 \hline
