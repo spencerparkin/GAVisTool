@@ -129,7 +129,12 @@ under Definition~\ref{def_quadric}.  For example, for any two vectors $u,v\in\V$
 u\wedge\overline{v}\equiv -2u\wedge\overline{v}\equiv u\wedge\overline{v}+v\wedge\overline{u}
 \equiv(u+\overline{v})\wedge(u-\overline{v}).
 \end{equation}
-Be aware that if $E=E_a+E_b$ and $E_a\equiv E_c$, then this does not imply that $E\equiv E_b+E_c$.
+Be aware that if $E=E_a+E_b$ and $E_a\equiv E_c$, then this does not imply that $E\equiv E_b+E_c$
+unless it can be shown that for all projective points $p\in\V$, we have
+\begin{equation}
+p\wedge\overline{p}\cdot E_a=p\wedge\overline{p}\cdot E_c.
+\end{equation}
+It is not hard to show that this condition is satisfied if and only if $E_a=E_c$.
 
 Another important difference to point out here between our present model and the conformal model is that,
 unlike what we can analogously expect from the point-definition of the conformal model,
@@ -315,7 +320,8 @@ form, is given by
 \end{equation}
 where $v$ is the vector $c_a-c_b$, which, again by table \eqref{equ_canonical_forms_table},
 tells us that this is a plane with normal $v$.  A point on the plane is also apparent from
-\eqref{equ_diff_of_spheres}.  Then, knowing that $B_a-B_b$ must contain the intersection of the
+\eqref{equ_diff_of_spheres}, namely $(c_a+c_b+(r_b^2-r_a^2)v^{-1})/2$.
+Then, knowing that $B_a-B_b$ must contain the intersection of the
 two spheres, we can conclude that this point must be in the plane containing the circle that is
 the intersection of the two spheres, because $B_a-B_b$ must be the said plane.  Notice
 that even if the spheres don't intersect, we still get a meaningful result.  A picture of
@@ -323,7 +329,9 @@ $B_a-B_b$ is given in Figure~\ref{fig_diff_of_spheres}.
 
 \begin{figure}
 \includegraphics[scale=0.7]{DiffOfSpheres}
-\caption{The difference of two spheres gives a plane, shown here on edge.  The spheres were rendered as a number of traces in various parallel planes.}
+\caption{The difference of two homogenized spheres gives the plane, shown here on edge,
+containing their intersection.  The spheres were rendered as a number of traces in
+various parallel planes.}
 \label{fig_diff_of_spheres}
 \end{figure}
 
@@ -343,7 +351,8 @@ would be interesting to find out exactly what that is.
 
 \begin{figure}
 \includegraphics[scale=0.7]{DiffOfSpheroids}
-\caption{The difference of two spheroids gives a hyperbolic paraboloid.  Traces in various planes were used to render the surfaces.}
+\caption{The difference of two homogenized spheroids gives a hyperbolic paraboloid.
+In this case, the two paraboloids have no real intersection.}
 \label{fig_diff_of_spheroids}
 \end{figure}
 
@@ -556,6 +565,47 @@ It now follows that $V\Omega\tilde{V}=\Omega$.
 % (Which is a bit dumb, since it's an obvious fact that they are.)
 % We might be able to if these two 2-blades are double-planes that
 % intersect in real lines.
+
+\section{Flat Quadrics}
+
+In the conformal model there is a distinction made between flat and round
+geometries.  Interestingly, it can be seen that flats of the conformal model
+are really just rounds taken to an infinite extreme.  For example, a plane
+is simply a sphere centered at infinity with infinite radius.  Such geometries
+of the conformal model have the property that $\infty$ is in the vector
+sub-space of the blade representing the geometry.  We give here a
+condition that we might use in the quadric model to test a given quadric
+for its flatness.
+
+For any given quadric $E\in\G$, let $f:\V\to\R$ be the function
+\begin{equation}
+f(x) = x\wedge\overline{x}\cdot E.
+\end{equation}
+Then, if for all pairs of homogenized projective points $a,b\in\V$
+on $E$ we have
+\begin{equation}
+0=f(a-b),
+\end{equation}
+then $B$ is a flat quadric.  We really
+should be mathematically precise here about what we mean when
+we say that a given quadric is flat.  The reasoning behind this
+condition, however, may suffice as adequate meaning.
+
+Let $x\in\V$ be the direction vector $a-b$, and see that
+\begin{equation}
+0=f(a) = f(b+x) = f(b) + \nabla_x f(b) + f(a-b) = \nabla_x f(b),
+\end{equation}
+where $\nabla_x f(b)$ is the directional derivative of $f$ at $b$.
+It follows that for any $b$ on $E$, the directional derivative of $f$ at $b$ in every
+direction from $b$ to any other point $a$ on $E$ is zero.  Then, seeing that
+$\nabla_x f(b)=x\cdot\nabla f(b)$, and that $\nabla f(b)$, (the gradient of
+$f$ at $b$), is a direction vector orthogonal to the surface of the quadric at $b$,
+it is clear that all other points $a$ on $E$ must be in the tangent space
+of $E$ at $b$.  It follows that $E$ is flat in any neighborhood of a point
+upon its surface.
+
+Admittedly, this condition is harder to prove for any given quadric than
+it is to prove the condition upon which any given geometry of the conformal is flat.
 
 \section{Concluding Remarks}
 
