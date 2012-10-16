@@ -116,7 +116,7 @@ e_i\overline{e_j}\cdot E & \mbox{if $i=j$,} \\
 It should be noted that bivectors do not uniquely represent quadric surfaces, not even up to scale.
 This is apparent from equation \eqref{equ_quadric_components} when we see that for $i\neq j$,
 we can freely choose certain components of the bivector without changing the represented
-quadric so long as that their sum is still $-\lambda_{ij}$.  The problem this may pose in our model
+quadric so long as their sum is still $-\lambda_{ij}$.  The problem this may pose in our model
 comes from a very important result in the conformal model.  In the conformal model, if
 two blades are known to represent the same non-trivial geometry in the same way, then it can be shown that the
 two blades are equal, up to scale.  In our present model, it may take more than just
@@ -427,7 +427,7 @@ where $a,b,c,d\in\V$, our first observation is that $a\wedge c$ and $\overline{b
 to the shape of the quadric, because they represent the geometry of all space under
 Definition~\ref{def_quadric}, which is easily verified.  What remains is the difference
 between two quadrics of the form $u\wedge\overline{v}$, where $u,v\in\V$.  It is
-easy to show that a quadric of this form is a double plane.
+easy to show that a quadric of this form is a plane-pair.
 \begin{equation}\label{equ_double_plane}
 0 = p\wedge\overline{p}\cdot u\wedge\overline{v} = -(p\cdot v)(p\cdot u)
 \end{equation}
@@ -444,7 +444,7 @@ the projective point solution set to the equation
 It is not at all immediately obvious as to what type of surface this may be.
 What we do know, however, is that it must
 contain the intersection, if any, of the two pairs of planes $a\wedge\overline{d}$ and $c\wedge\overline{d}$.
-In most cases this is a pair of lines, many instances of which can be seen to fit the surface
+In most cases this is a pair of lines, many instances of which can be seen to fit the ruled surface
 given in Figure~\ref{fig_quadric_blade}.
 
 \begin{figure}
@@ -482,7 +482,7 @@ given by
 \begin{equation}
 R = \cos(\theta/2) - aI\sin(\theta/2),
 \end{equation}
-where $a\in\V$ is a direction vector, and $I=\prod_{i=1}^n e_i$.  Furthermore,
+where the axis $a\in\V$ is a unit-length direction vector, and $I=\prod_{i=1}^n e_i$.  Furthermore,
 for any non-projective point $v\in\V$, notice that
 \begin{equation}
 \overline{v} = R\overline{v}\tilde{R},
@@ -604,8 +604,11 @@ it is clear that all other points $a$ on $E$ must be in the tangent space
 of $E$ at $b$.  It follows that $E$ is flat in any neighborhood of a point
 upon its surface.
 
-Admittedly, this condition is harder to prove for any given quadric than
-it is to prove the condition upon which any given geometry of the conformal is flat.
+Notice that under this criterion, lines, as they are considered flat in the conformal
+model, are also considered flat under our present model.  To see this, notice that $f(w)=0$ when
+$E$ is the line in table \eqref{equ_canonical_forms_table} and $w$ is any non-zero direction
+vector parallel to the unit-length direction vector $v$.  Notice that cylinders are similarly
+flat in such directions $w$, but clearly not in any other direction.
 
 \section{Concluding Remarks}
 
@@ -631,8 +634,8 @@ to be had using this method of studying quadric surfaces.  In any case,
 geometric algebra has proven to be a fundamental, versatile and unifying
 language that perhaps most naturally extends mathematics beyond the real number line.  Perhaps
 there is a much better way to use geometric algebra to study quadric surfaces.
-For example, as the model for projective geometry using geometric algebra may
-be inferior to the conformal model, the model of this paper may be inferior to
+It is possible that as the model for projective geometry using geometric algebra may
+be inferior to the conformal model, so the model of this paper may be inferior to
 a conformal-like model for quadric surfaces.
 
 \bibliographystyle{amsplain}
