@@ -29,10 +29,10 @@ namespace VectorMath
 		class Point : public Utilities::List::Item
 		{
 		public:
-			Point( const VectorMath::Vector& point );
+			Point( const Vector& point );
 			virtual ~Point( void );
 
-			VectorMath::Vector point;
+			Vector point;
 		};
 
 		// The trace of a surface in a plane is the crossection or intersection
@@ -50,18 +50,37 @@ namespace VectorMath
 			bool looped;
 		};
 
+		// This function traces the manifold in several trace planes.
 		void GenerateTracesAlongAxis( const Vector& axis, double range, double planeCount, const Aabb& aabb, Utilities::List& traceList, bool resetList = false );
 		Trace* CalculateTraceInPlane( const Plane& plane, const Vector& seed, const Aabb& aabb );
 		bool StepTraceInPlane( const Plane& plane, int direction, Vector& point, double traceDelta, double epsilon );
-		bool ConvergePointToSurfaceInPlane( const Plane& plane, Vector& point, double epsilon );
+		bool ConvergePointToSurfaceInPlane( const Plane* plane, Vector& point, double epsilon );
 
+		class ManifoldPoint : public Utilities::List::Item
+		{
+		public:
+
+			ManifoldPoint( const Vector& point );
+			virtual ~ManifoldPoint( void );
+
+			Vector point;
+			enum { MAX_DEGREE = 5 };
+			ManifoldPoint* adjacentPoint[ MAX_DEGREE ];		// These are in CCW order.
+			int degree;
+		};
+
+		// This function skins the manifold using one or more triangular meshes.
+		//void GenerateTriangularMesh(...);
+		bool GenerateManifold( const Aabb& aabb, const Vector& seedPoint, Utilities::List& manifoldPointList );
+		bool MakeManifoldAboutPoint( const Aabb& aabb, ManifoldPoint* centralManifoldPoint, Utilities::List& manifoldPointList, Utilities::List& pointQueue, double epsilon );
+		ManifoldPoint* FindNearestManifoldPoint( const Utilities::List& manifoldPointList, const Vector& point, double& squareDistance );
+
+		// Derived classes implement this interface.
 		virtual double EvaluateAt( const VectorMath::Vector& point ) = 0;
 		virtual double EvaluatePartialX( const VectorMath::Vector& point ) = 0;
 		virtual double EvaluatePartialY( const VectorMath::Vector& point ) = 0;
 		virtual double EvaluatePartialZ( const VectorMath::Vector& point ) = 0;
-		void EvaluateGradientAt( const VectorMath::Vector& point, VectorMath::Vector& gradient );
-
-		
+		virtual void EvaluateGradientAt( const VectorMath::Vector& point, VectorMath::Vector& gradient );
 	};
 
 	class Quadric : public Surface

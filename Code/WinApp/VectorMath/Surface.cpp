@@ -134,7 +134,7 @@ void VectorMath::Surface::GenerateTracesAlongAxis( const Vector& axis, double ra
 		Transform( seed, coordFrame, seed );
 		Add( seed, seed, planePos );
 		Trace* secondTrace = 0;
-		if( ConvergePointToSurfaceInPlane( plane, seed, epsilon ) )
+		if( ConvergePointToSurfaceInPlane( &plane, seed, epsilon ) )
 			if( !( firstTrace && firstTrace->IsPointOnTrace( seed, 0.1 ) ) )
 				secondTrace = CalculateTraceInPlane( plane, seed, aabb );
 
@@ -155,7 +155,7 @@ VectorMath::Surface::Trace* VectorMath::Surface::CalculateTraceInPlane( const Pl
 	// The initial seed must converge to a point on the surface.
 	Vector point;
 	Copy( point, seed );
-	if( !ConvergePointToSurfaceInPlane( plane, point, epsilon ) )
+	if( !ConvergePointToSurfaceInPlane( &plane, point, epsilon ) )
 		return 0;
 
 	// We have a point on the surface, so our trace will be non-empty.
@@ -216,7 +216,7 @@ VectorMath::Surface::Trace* VectorMath::Surface::CalculateTraceInPlane( const Pl
 			{
 				// Reset to our original position on the surface.
 				Copy( point, seed );
-				ConvergePointToSurfaceInPlane( plane, point, epsilon );
+				ConvergePointToSurfaceInPlane( &plane, point, epsilon );
 
 				// Take the initial step now, because we have already considered the initial point on the surface.
 				if( !StepTraceInPlane( plane, direction, point, traceDelta, epsilon ) )
@@ -256,11 +256,11 @@ bool VectorMath::Surface::StepTraceInPlane( const Plane& plane, int direction, V
 
 	// Our step now succeeds if the translated point converges back onto the
 	// surface, hopefully in a new position on the surface in the desired direction.
-	return ConvergePointToSurfaceInPlane( plane, point, epsilon );
+	return ConvergePointToSurfaceInPlane( &plane, point, epsilon );
 }
 
 //=============================================================================
-bool VectorMath::Surface::ConvergePointToSurfaceInPlane( const Plane& plane, Vector& point, double epsilon )
+bool VectorMath::Surface::ConvergePointToSurfaceInPlane( const Plane* plane, Vector& point, double epsilon )
 {
 	double deltaLength = 1.0;
 
@@ -270,7 +270,8 @@ bool VectorMath::Surface::ConvergePointToSurfaceInPlane( const Plane& plane, Vec
 	{
 		// Project the point down onto the plane.
 		// This is mainly to account for accumulated round-off error.
-		ProjectPointOntoPlane( plane, point, point );
+		if( plane )
+			ProjectPointOntoPlane( *plane, point, point );
 
 		// Is the point approximately on the surface?
 		double value = EvaluateAt( point );
@@ -281,7 +282,10 @@ bool VectorMath::Surface::ConvergePointToSurfaceInPlane( const Plane& plane, Vec
 		// In what direction should we move?
 		Vector gradient, delta;
 		EvaluateGradientAt( point, gradient );
-		ProjectVectorOntoPlane( plane, delta, gradient );
+		if( plane )
+			ProjectVectorOntoPlane( *plane, delta, gradient );
+		else
+			Copy( delta, gradient );
 		Normalize( delta, delta );
 		Scale( delta, delta, deltaLength );
 
@@ -309,7 +313,7 @@ bool VectorMath::Surface::ConvergePointToSurfaceInPlane( const Plane& plane, Vec
 			// As a sanity check, did the value improve?
 			if( fabs( movedValue ) >= fabs( value ) )
 			{
-				// Value will not improve in the case that
+				// The value will not improve in the case that
 				// that there is no trace in the given plane.
 				return false;
 			}
@@ -322,7 +326,149 @@ bool VectorMath::Surface::ConvergePointToSurfaceInPlane( const Plane& plane, Vec
 }
 
 //=============================================================================
-void VectorMath::Surface::EvaluateGradientAt( const VectorMath::Vector& point, VectorMath::Vector& gradient )
+VectorMath::Surface::ManifoldPoint::ManifoldPoint( const Vector& point )
+{
+	Copy( this->point, point );
+
+	for( int index = 0; index < MAX_DEGREE; index++ )
+		adjacentPoint[ index ] = 0;
+
+	degree = 0;
+}
+
+//=============================================================================
+/*virtual*/ VectorMath::Surface::ManifoldPoint::~ManifoldPoint( void )
+{
+}
+
+//=============================================================================
+// I don't know if this will ever work.
+bool VectorMath::Surface::GenerateManifold( const Aabb& aabb, const Vector& seedPoint, Utilities::List& manifoldPointList )
+{
+	// Make sure we're starting with a new empty list.
+	manifoldPointList.RemoveAll( true );
+
+	// If the seed point doesn't converge to the surface, then we're done.
+	double epsilon = 1e-6;
+	Vector convergedPoint;
+	Copy( convergedPoint, seedPoint );
+	if( !ConvergePointToSurfaceInPlane( 0, convergedPoint, epsilon ) )
+		return false;
+
+	// Queue the initial point on the surface.
+	Utilities::List pointQueue;
+	pointQueue.InsertRightOf( pointQueue.RightMost(), new ManifoldPoint( convergedPoint ) );
+
+	// Process the queue until it is empty.
+	while( pointQueue.Count() > 0 )
+	{
+		// Grabe the next point off the queue and process it.
+		ManifoldPoint* nextPoint = ( ManifoldPoint* )pointQueue.LeftMost();
+		pointQueue.Remove( nextPoint, false );
+		if( !MakeManifoldAboutPoint( aabb, nextPoint, manifoldPointList, pointQueue, epsilon ) )
+			break;
+	}
+
+	// Remove any points remaining in the queue due to possible early termination.
+	pointQueue.RemoveAll( true );
+	return true;
+}
+
+//=============================================================================
+bool VectorMath::Surface::MakeManifoldAboutPoint( const Aabb& aabb, ManifoldPoint* centralManifoldPoint, Utilities::List& manifoldPointList, Utilities::List& pointQueue, double epsilon )
+{
+	Vector gradient, axis;
+	EvaluateGradientAt( centralManifoldPoint->point, gradient );
+	Normalize( axis, gradient );
+
+	Vector firstPeripheralSurfacePoint;
+	double manifoldRadius = 1.0;
+	double manifoldAngle = 2.0 * PI / double( ManifoldPoint::MAX_DEGREE );
+	double squareDistance = 0.0;
+
+	for( int index = 0; index < ManifoldPoint::MAX_DEGREE; index++ )
+	{
+		ManifoldPoint* manifoldPoint = 0;
+
+		if( !index )
+		{
+			manifoldPoint = FindNearestManifoldPoint( manifoldPointList, centralManifoldPoint->point, squareDistance );
+			if( manifoldPoint && squareDistance <= manifoldRadius * manifoldRadius + epsilon )
+				Copy( firstPeripheralSurfacePoint, manifoldPoint->point );
+			else
+			{
+				Orthogonal( firstPeripheralSurfacePoint, axis );
+				Scale( firstPeripheralSurfacePoint, firstPeripheralSurfacePoint, manifoldRadius );
+				for( int subIndex = 0; subIndex < ManifoldPoint::MAX_DEGREE; subIndex++ )
+				{
+					if( ConvergePointToSurfaceInPlane( 0, firstPeripheralSurfacePoint, epsilon ) )
+					{
+						if( AabbSide( aabb, firstPeripheralSurfacePoint ) != Aabb::IS_OUTSIDE_BOX )
+						{
+							manifoldPoint = new ManifoldPoint( firstPeripheralSurfacePoint );
+							pointQueue.InsertRightOf( pointQueue.RightMost(), manifoldPoint );
+							break;
+						}
+					}
+					double angle = manifoldAngle * double( subIndex );
+					Rotate( firstPeripheralSurfacePoint, firstPeripheralSurfacePoint, axis, angle );
+				}
+			}
+		}
+		else
+		{
+			double angle = manifoldAngle * double( index );
+			Vector rotatedPeripheralSurfacePoint;
+			Rotate( rotatedPeripheralSurfacePoint, firstPeripheralSurfacePoint, axis, angle );
+			if( ConvergePointToSurfaceInPlane( 0, rotatedPeripheralSurfacePoint, epsilon ) )
+			{
+				manifoldPoint = FindNearestManifoldPoint( manifoldPointList, rotatedPeripheralSurfacePoint, squareDistance );
+				if( !manifoldPoint )
+				{
+					if( AabbSide( aabb, rotatedPeripheralSurfacePoint ) != Aabb::IS_OUTSIDE_BOX )
+					{
+						manifoldPoint = new ManifoldPoint( rotatedPeripheralSurfacePoint );
+						pointQueue.InsertRightOf( pointQueue.RightMost(), manifoldPoint );
+					}
+				}
+			}
+		}
+
+		// Null entries are valid.  Such entries mark boundries of the surface due to being cut by the AABB.
+		centralManifoldPoint->adjacentPoint[ index ] = manifoldPoint;
+	}
+
+	// Add the point if it is connected to the manifold.
+	if( centralManifoldPoint->degree > 0 )
+		manifoldPointList.InsertRightOf( manifoldPointList.RightMost(), centralManifoldPoint );
+	else
+		delete centralManifoldPoint;
+
+	return true;
+}
+
+//=============================================================================
+// This is definitely going to be the bottle-neck of the algorithm.  Currently
+// this does a linear search, but it may be worthy trying to speed this up with
+// an algorithm based upon some sort of spacial sorting/partitioning data structure.
+VectorMath::Surface::ManifoldPoint* VectorMath::Surface::FindNearestManifoldPoint( const Utilities::List& manifoldPointList, const Vector& point, double& squareDistance )
+{
+	VectorMath::Surface::ManifoldPoint* foundPoint = 0;
+	squareDistance = -1.0;
+	for( const ManifoldPoint* manifoldPoint = ( const ManifoldPoint* )manifoldPointList.LeftMost(); manifoldPoint; manifoldPoint = ( const ManifoldPoint* )manifoldPoint->Right() )
+	{
+		double thisSquareDistance = Dot( point, manifoldPoint->point );
+		if( thisSquareDistance < squareDistance || squareDistance == -1.0 )
+		{
+			squareDistance = thisSquareDistance;
+			foundPoint = const_cast< ManifoldPoint* >( manifoldPoint );
+		}
+	}
+	return foundPoint;
+}
+
+//=============================================================================
+/*virtual*/ void VectorMath::Surface::EvaluateGradientAt( const VectorMath::Vector& point, VectorMath::Vector& gradient )
 {
 	gradient.x = EvaluatePartialX( point );
 	gradient.y = EvaluatePartialY( point );
