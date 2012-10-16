@@ -438,12 +438,7 @@ bool VectorMath::Surface::MakeManifoldAboutPoint( const Aabb& aabb, ManifoldPoin
 		centralManifoldPoint->adjacentPoint[ index ] = manifoldPoint;
 	}
 
-	// Add the point if it is connected to the manifold.
-	if( centralManifoldPoint->degree > 0 )
-		manifoldPointList.InsertRightOf( manifoldPointList.RightMost(), centralManifoldPoint );
-	else
-		delete centralManifoldPoint;
-
+	manifoldPointList.InsertRightOf( manifoldPointList.RightMost(), centralManifoldPoint );
 	return true;
 }
 
