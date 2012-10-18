@@ -676,6 +676,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\ScriptCode\QuadricGeometry\Debug.txt"
+					>
+				</File>
+				<File
 					RelativePath="..\..\ScriptCode\QuadricGeometry\DiffOfSpheroids.txt"
 					>
 				</File>
