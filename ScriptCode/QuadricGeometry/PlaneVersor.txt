@@ -1,0 +1,37 @@
+/*
+ * Study the plane versor in the quadric model.
+ */
+do
+(
+	s1 = -3,
+	s2 = 2,
+	bind_scalar_iface( s1, s2 ),
+
+	v = ( e1 + e2 + e3 )/sqrt(3),
+	
+	bind_virtual( c1, c2, v ),
+	
+	formula_constraint( "c1 = s1*e2" ),
+	formula_constraint( "c2 = s2*e2" ),
+	
+	bind_quadric( p1, p2 ),
+	
+	formula_constraint( "p1 = v^e4 - (c1 . v)*Alpha" ),
+	formula_constraint( "p2 = v^e4 - (c2 . v)*Alpha" ),
+	
+	bind_virtual( p1_inv, p2_inv ),
+	
+	formula_constraint( "p1_inv = reverse( p1 ) / ( p1 * reverse( p1 ) )" ),
+	formula_constraint( "p2_inv = reverse( p2 ) / ( p2 * reverse( p2 ) )" ),
+	
+	sph_c = -4*e2 - 3*e1 - 3*e3,
+	sph_r = 2.5,
+	
+	bind_virtual( sph_c ),	
+	bind_quadric( sph ),
+	
+	formula_constraint( "sph = Omega - 2*sph_c^e4 + (sph_c*sph_c - sph_r*sph_r)*Alpha" ),
+	
+	bind_quadric( testSph ),
+	formula_constraint( "testSph = p2*p1*sph*p1_inv*p2_inv" ),
+)

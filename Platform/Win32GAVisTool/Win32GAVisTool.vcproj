@@ -684,6 +684,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\ScriptCode\QuadricGeometry\PlaneVersor.txt"
+					>
+				</File>
+				<File
 					RelativePath="..\..\ScriptCode\QuadricGeometry\Rotate.txt"
 					>
 				</File>
