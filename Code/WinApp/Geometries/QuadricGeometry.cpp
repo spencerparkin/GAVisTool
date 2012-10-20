@@ -56,6 +56,7 @@ QuadricGeometry::QuadricGeometry( BindType bindType ) : GAVisToolGeometry( bindT
 //=========================================================================================
 /*virtual*/ QuadricGeometry::~QuadricGeometry( void )
 {
+	traceList.RemoveAll( true );
 }
 
 //=========================================================================================
