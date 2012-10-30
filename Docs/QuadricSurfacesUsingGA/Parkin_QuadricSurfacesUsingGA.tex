@@ -22,6 +22,7 @@
 \newcommand{\Vb}{\mathbb{\overline{V}}}
 \newcommand{\W}{\mathbb{W}}
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\Alpha}{A}
 
 \begin{document}
 
@@ -370,7 +371,18 @@ Interestingly, the difference of spheres generalizes to the idea of subtracting
 spheroids.  A picture of this is given in Figure~\ref{fig_diff_of_spheroids}.
 Of course, there is undoubtedly a geometric significance in the difference
 between any two homogenized quadric surfaces containing $\Omega$.  It
-would be interesting to find out exactly what that is.
+would be interesting to find out exactly what that is.  The sum of such
+elements is also interesting.  For example, in the case of two homogenized
+points, it can be shown that their sum is the imaginary sphere having the
+two points as opposite poles.  Specifically, we have
+\begin{align}
+ & \left(\Omega-2a\wedge\overline{e_0}+a^2\Alpha\right) +
+\left(\Omega-2b\wedge\overline{e_0}+b^2\Alpha\right) \\
+\equiv\;& \Omega-2\left(\frac{a+b}{2}\right)\wedge\overline{e_0} +
+\left(\left(\frac{a+b}{2}\right)^2+\left(\frac{a-b}{2}\right)^2\right)\Alpha,
+\end{align}
+where $a,b\in\V$ are non-projective points, which we can recognize
+from table \eqref{equ_canonical_forms_table} as an imginary sphere.
 
 \begin{figure}
 \includegraphics[scale=0.5]{DiffOfSpheroids}
@@ -583,17 +595,29 @@ showing that the coefficient of $e_i\wedge\overline e_j$ in $V\Omega\tilde{V}$ i
 the action of a rotor taken with two orthogonal vectors does not change their orthogonal relationship.
 It now follows that $V\Omega\tilde{V}=\Omega$.
 
-We could have developed rotations in our model by first having developed reflections.
-Considering reflections for the moment, it is unfortunate that there appears to be no
-way to reflect a quadric about an arbitrary plane.  This would be a greatly sought
-after feature of a better model for quadrics, since from it would come versors
-capable of performing rotations about any axis, and better yet, translations.
-The rigid body motions would follow.  The conformal model supports all of these as well
-as the entire set of conformal transformations, hense the name.
+If there is a versor that translates quadrics in our model, it is not at all obvious.
+Rotations and translations in the conformal model can be developed together in
+a very nice uniform way by first developing the ability to reflect any conformal
+geometry about an arbitrary plane, which is really only about as hard as showing
+that any conformal point can be reflected about such a plane.
+It is easy to see that planes in our present model, as shown
+in table \eqref{equ_canonical_forms_table}, are also versors.  Unlike the conformal
+model, unfortunately, applying such versors to quadrics in our model does not
+produce a reflection about the plane.  This doesn't mean, however, that we can't
+find some way to translate quadrics in our model.
 
-In any case, our rotation result above isn't entirely uninteresting, since given
-a quadric in a traditional form, (a polynomial or matrix form), it is not entirely
-obvious how one might go about rotating the quadric.
+Given a direction vector $t\in\V$ and quadric $E\in\G$, it is not at all hard
+to show that the quadric $E'$, given by
+\begin{equation}\label{equ_translate_quadric}
+E' = E + (\overline{t}\cdot E)\wedge\overline{e_0} + (t\cdot E)\wedge e_0
++ (t\wedge\overline{t}\cdot E)\Alpha,
+\end{equation}
+represents the quadric $E$ translated by the direction vector $t$.  (To see this,
+simply expand $(p-t)\wedge\overline{(p-t)}\cdot E$ and then factor out $p\wedge\overline{p}$.
+Realize that $\overline{t}\cdot E\in\V$ while $t\cdot E\in\overline{V}$.)  Then, recalling
+that $\Alpha=e_0\wedge\overline{e_0}$, the form $E'$ in equation \eqref{equ_translate_quadric}
+begins to resemble what might be the result of a transformation of $E$ by some versor.
+Exactly what versor this might be, however, if it even exists, remains to be seen.
 
 \section{Flat Quadrics}
 
