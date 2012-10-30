@@ -529,8 +529,11 @@ showing that the counter-part $\overline{v}$ of $v$ in $\overline{\V}$ remains i
 under this rotation.  (The proof of this is similar to the proof we'll give
 shortly that $R$ leaves $e_0$ invariant.)  Of course, we can formulate an equivilant of $R$
 that will rotate $\overline{v}$, and it is simply $\overline{R}$.  Then, seeing
-that $\overline{R}$ leaves $v$ invariant, it follows
-that $V=R\overline{R}$ is a rotor that will rotate the 2-blade
+that $\overline{R}$ leaves $v$ invariant, it follows that
+\begin{equation}\label{equ_rotation_versor}
+V=R\overline{R}
+\end{equation}
+is a rotor that will rotate the 2-blade
 $v\wedge\overline{v}$ in a desired way.  Specifically, we have
 \begin{equation}
 V(v\wedge\overline{v})\tilde{V} = Rv\tilde{R}\wedge\overline{Rv\tilde{R}}.
@@ -606,18 +609,29 @@ model, unfortunately, applying such versors to quadrics in our model does not
 produce a reflection about the plane.  This doesn't mean, however, that we can't
 find some way to translate quadrics in our model.
 
-Given a direction vector $t\in\V$ and quadric $E\in\G$, it is not at all hard
+Given a direction vector $t\in\V$ and a quadric $E\in\G$, it is not at all hard
 to show that the quadric $E'$, given by
 \begin{equation}\label{equ_translate_quadric}
-E' = E + (\overline{t}\cdot E)\wedge\overline{e_0} + (t\cdot E)\wedge e_0
-+ (t\wedge\overline{t}\cdot E)\Alpha,
+E' = E + (t\cdot E)\wedge e_0 + (\overline{t}\cdot E)\wedge\overline{e_0}
+- (t\wedge\overline{t}\cdot E)\Alpha,
 \end{equation}
-represents the quadric $E$ translated by the direction vector $t$.  (To see this,
-simply expand $(p-t)\wedge\overline{(p-t)}\cdot E$ and then factor out $p\wedge\overline{p}$.
-Realize that $\overline{t}\cdot E\in\V$ while $t\cdot E\in\overline{V}$.)  Then, recalling
+represents the quadric $E$ translated by the direction vector $t$.  To see this,
+simply expand the equation
+\begin{equation}
+0 = (p-t)\wedge\overline{(p-t)}\cdot E
+\end{equation}
+and then factor out $p\wedge\overline{p}$.
+(It helps to realize that $\overline{t}\cdot E\in\V$ and $t\cdot E\in\overline{\V}$.)
+Then, recalling
 that $\Alpha=e_0\wedge\overline{e_0}$, the form $E'$ in equation \eqref{equ_translate_quadric}
 begins to resemble what might be the result of a transformation of $E$ by some versor.
 Exactly what versor this might be, however, if it even exists, remains to be seen.
+If we could find a translation versor, we could combine such versors with
+those of the form \eqref{equ_rotation_versor} to get the rigid body motions,
+even despite our limitation
+in being able to rotate only about axis going through the oriigin.
+It may not be possible to do this, in which case we must conclude that
+there must be a better model for quadric surfaces.
 
 \section{Flat Quadrics}
 
