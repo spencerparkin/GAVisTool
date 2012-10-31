@@ -699,6 +699,10 @@
 					RelativePath="..\..\ScriptCode\QuadricGeometry\Spheroid.txt"
 					>
 				</File>
+				<File
+					RelativePath="..\..\ScriptCode\QuadricGeometry\Translate.txt"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<File

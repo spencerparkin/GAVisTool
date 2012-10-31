@@ -1,0 +1,42 @@
+/*
+ * Show that a quadric can be translated.
+ */
+do
+(
+	R04 = ( 1 - e0*e4 ) / sqrt(2),
+	R15 = ( 1 - e1*e5 ) / sqrt(2),
+	R26 = ( 1 - e2*e6 ) / sqrt(2),
+	R37 = ( 1 - e3*e7 ) / sqrt(2),
+	
+	R = R04*R15*R26*R37,
+	
+	/* These are used for debugging purposes. */
+	p = e0 + $x*e1 + $y*e2 + $z*e3,
+	pb = e4 + $x*e5 + $y*e6 + $z*e7,
+	
+	c = 3*e1,
+	v = e1,		/* Keep this unit-length. */
+	vb = e5,
+	r = 3.5,
+	l = 3,
+	
+	/*vb = grade_part( 1, R*v*R~ ),*/
+	
+	E = Omega + l*v^vb - 2*(c + l*(c . v)*v)^e4 + (c*c + l*(c . v)*(c . v) - r*r)*Alpha,
+	
+	bind_quadric(E),
+	
+	x = 3,
+	y = 3,
+	z = 3,
+	bind_scalar_iface( x, y, z ),
+	
+	bind_virtual( t, tb ),
+	
+	formula_constraint( "t = x*e1 + y*e2 + z*e3" ),
+	formula_constraint( "tb = x*e5 + y*e6 + z*e7" ),
+	
+	bind_quadric(Et),
+	
+	formula_constraint( "Et = E + (t . E)^e0 + (tb . E)^e4 - ((t^tb) . E)*Alpha" ),
+)
