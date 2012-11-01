@@ -58,14 +58,15 @@ This leads to a direction we may look for a better model of quadric surfaces.
 It is well known that, with the exceptoin of flat points, all geometries of
 the conformal model may be expressed directly as the outer product
 of one or more vectors representative of points.  It then immediately
-follows by the outermorphic property of versor conjugation that the
+follows by the outermorphic property of versor conjugation, (see
+equation \eqref{equ_versor_identity_wedge} below), that the
 action of a versor on a conformal point reveals the action of this versor
 on any point on the surface of a conformal geometry, and therefore
 the conformal geometry itself.  This feature of the conformal model
 facilitates the search for versors performing desired actions, and the
 analysis of what action a given versor performs.  In this paper we
 will find that the quadric model possess its own version of this very feature.
-We'll also find that this feature helps point us in the direction of where
+We'll also find that this feature may help point us in a direction of where
 we might look for a better model of quadric geometry.
 
 The definitions and results of \cite{Parkin12} will be assumed for
@@ -104,8 +105,10 @@ composed as the geometric product of some fixed number of vectors, the proof of 
 =\;& p\cdot (vV)^{-1}bvV.
 \end{align}
 
-In the next section we'll make use of identity \eqref{equ_versor_identity} as well as those of
-\eqref{equ_versor_identity_wedge} and \eqref{equ_versor_identity_dot} to prove the main result.
+In the next section we'll make use of identity \eqref{equ_versor_identity} as well as
+\eqref{equ_versor_identity_wedge} to prove the main result.  The identity
+\eqref{equ_versor_identity_dot} has many use cases while working in $\G$
+of \cite{Parkin12}, but will not be needed to prove the main result.
 
 \section{Relating The Action Of Versors On Quadrics To That Of Points}
 
@@ -143,26 +146,41 @@ represented by the quadric $(V\overline{V})^{-1}EV\overline{V}$,
 provided that $V$ has the property that for all vectors $v\in\V$,
 we have
 \begin{equation}\label{equ_versor_invariant_property}
-\mbox{$v=\overline{V}v\overline{V^{-1}}$ and $\overline{v}=V\overline{v}V^{-1}$,}
+\begin{array}{cl}
+v=\overline{V}v\overline{V^{-1},} \\
+\overline{v}=V\overline{v}V^{-1}, & \mbox{(which follows from $v=\overline{V}v\overline{V^{-1}}$),} \\
+\end{array}
+\end{equation}
+as well as
+\begin{equation}\label{equ_versor_closure_property}
+\begin{array}{cl}
+VvV^{-1}\in\V, \\
+\overline{V}\overline{v}\overline{V^{-1}}\in\overline{\V}, & \mbox{(which follows from $VvV^{-1}\in\V$),}
+\end{array}
 \end{equation}
 which is to say that $V$ leaves vectors in $\overline{\V}$ invariant under versor
-conjugation as $\overline{V}$ leaves vectors in $\V$ invariant under versor conjugation.
+conjugation as $\overline{V}$ leaves vectors in $\V$ invariant under versor conjugation,
+as well as that conjugation of a vector in $\V$ by the versor $V$ is an operation closed in $\V$.
 It will then immediately follow
 that if we understand the action of $V^{-1}$ on a projective point $p$, then
-we understand the action of $V$ on $E$ as $V\overline{V}E(V\overline{V})^{-1}$.
+we understand the action of $V$ on $E$ as
+\begin{equation}
+V\overline{V}E(V\overline{V})^{-1}.
+\end{equation}
 
 The proof is straight forward as it follows from the equality of \eqref{equ_start} with \eqref{equ_finish}.
+{\allowdisplaybreaks
 \begin{align}
  & VpV^{-1}\wedge\overline{VpV^{-1}}\cdot E\label{equ_start} \\
 =\;& \sum_{i=1}^k VpV^{-1}\wedge\overline{VpV^{1}}\cdot a_i\wedge\overline{b_i} \\
-=\;& -\sum_{i=1}^k (VpV^{-1}\cdot a_i)(VpV^{-1}\cdot b_i) & \mbox{by equation \eqref{equ_versor_identity_dot},} \\
-=\;& -\sum_{i=1}^k (p\cdot V^{-1}a_iV)(p\cdot V^{-1}b_iV) & \mbox{by equation \eqref{equ_versor_identity},} \\
-=\;& \sum_{i=1}^k p\wedge\overline{p}\cdot V^{-1}a_iV\wedge\overline{V^{-1}b_iV} &\mbox{by equation \eqref{equ_versor_identity_dot},} \\
+=\;& -\sum_{i=1}^k (VpV^{-1}\cdot a_i)(\overline{VpV^{-1}}\cdot\overline{b_i}) & \mbox{by property \eqref{equ_versor_closure_property},} \\
+=\;& -\sum_{i=1}^k (p\cdot V^{-1}a_iV)(\overline{p}\cdot\overline{V^{-1}b_iV}) & \mbox{by identity \eqref{equ_versor_identity},} \\
+=\;& \sum_{i=1}^k p\wedge\overline{p}\cdot V^{-1}a_iV\wedge\overline{V^{-1}b_iV} &\mbox{by property \eqref{equ_versor_closure_property},} \\
 =\;& \sum_{i=1}^k p\wedge\overline{p}\cdot (V\overline{V})^{-1}a_iV\overline{V}\wedge
 (V\overline{V})^{-1}\overline{b_i}V\overline{V} &\mbox{by property \eqref{equ_versor_invariant_property},} \\
-=\;& \sum_{i=1}^k p\wedge\overline{p}\cdot (V\overline{V})^{-1}(a_i\wedge\overline{b_i})V\overline{V} & \mbox{by equation \eqref{equ_versor_identity_wedge},} \\
+=\;& \sum_{i=1}^k p\wedge\overline{p}\cdot (V\overline{V})^{-1}(a_i\wedge\overline{b_i})V\overline{V} & \mbox{by identity \eqref{equ_versor_identity_wedge},} \\
 =\;& p\wedge\overline{p}\cdot (V\overline{V})^{-1}EV\overline{V}.\label{equ_finish}
-\end{align}
+\end{align}}
 
 The property \eqref{equ_versor_invariant_property} is not unreasonable at all
 since a versor providing any action on a projective point $p\in\V$ must come from $\G(\V)$ anyway,
