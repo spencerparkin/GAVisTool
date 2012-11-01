@@ -92,7 +92,7 @@ VpV^{-1}\cdot b = p\cdot V^{-1}bV
 Let us give a proof of it now.  We will proceed by induction.
 Letting $v\in\W$ be a vector, it is easy to see that
 \begin{equation}\label{equ_induction_start}
-vpv^{-1}\cdot b = \frac{2(v\cdot p)(v\cdot b) - p\cdot b}{v^2} = p\cdot v^{-1}bv.
+vpv^{-1}\cdot b = \frac{2(v\cdot p)(v\cdot b)}{v^2} - p\cdot b = p\cdot v^{-1}bv.
 \end{equation}
 Assuming now that the identity \eqref{equ_versor_identity} holds for a versor
 composed as the geometric product of some fixed number of vectors, the proof of identity
@@ -109,6 +109,8 @@ In the next section we'll make use of identity \eqref{equ_versor_identity} as we
 \eqref{equ_versor_identity_wedge} to prove the main result.  The identity
 \eqref{equ_versor_identity_dot} has many use cases while working in $\G$
 of \cite{Parkin12}, but will not be needed to prove the main result.
+Looking back, however, it is not hard to see that \eqref{equ_versor_identity_dot}
+implies \eqref{equ_versor_identity} in an easier proof than what has just been given.
 
 \section{Relating The Action Of Versors On Quadrics To That Of Points}
 
@@ -172,15 +174,21 @@ The proof is straight forward as it follows from the equality of \eqref{equ_star
 {\allowdisplaybreaks
 \begin{align}
  & VpV^{-1}\wedge\overline{VpV^{-1}}\cdot E\label{equ_start} \\
-=\;& \sum_{i=1}^k VpV^{-1}\wedge\overline{VpV^{1}}\cdot a_i\wedge\overline{b_i} \\
+=\;& \sum_{i=1}^k VpV^{-1}\wedge\overline{VpV^{1}}\cdot a_i\wedge\overline{b_i}\label{equ_second} \\
 =\;& -\sum_{i=1}^k (VpV^{-1}\cdot a_i)(\overline{VpV^{-1}}\cdot\overline{b_i}) & \mbox{by property \eqref{equ_versor_closure_property},} \\
 =\;& -\sum_{i=1}^k (p\cdot V^{-1}a_iV)(\overline{p}\cdot\overline{V^{-1}b_iV}) & \mbox{by identity \eqref{equ_versor_identity},} \\
 =\;& \sum_{i=1}^k p\wedge\overline{p}\cdot V^{-1}a_iV\wedge\overline{V^{-1}b_iV} &\mbox{by property \eqref{equ_versor_closure_property},} \\
 =\;& \sum_{i=1}^k p\wedge\overline{p}\cdot (V\overline{V})^{-1}a_iV\overline{V}\wedge
-(V\overline{V})^{-1}\overline{b_i}V\overline{V} &\mbox{by property \eqref{equ_versor_invariant_property},} \\
+(V\overline{V})^{-1}\overline{b_i}V\overline{V} &\mbox{by property \eqref{equ_versor_invariant_property},}\label{equ_third_to_last} \\
 =\;& \sum_{i=1}^k p\wedge\overline{p}\cdot (V\overline{V})^{-1}(a_i\wedge\overline{b_i})V\overline{V} & \mbox{by identity \eqref{equ_versor_identity_wedge},} \\
 =\;& p\wedge\overline{p}\cdot (V\overline{V})^{-1}EV\overline{V}.\label{equ_finish}
 \end{align}}
+
+Of course, this is just one of perhaps many algebraic routes one could take to prove the
+identity that \eqref{equ_start} is \eqref{equ_finish}.  In fact, it is not hard to see that
+a shorter route can be found from \eqref{equ_second} to \eqref{equ_third_to_last} using only
+\eqref{equ_versor_identity_dot} and \eqref{equ_versor_invariant_property}.  Nevertheless,
+the route shown above illustrates algebraic techniques that are useful as their need is frequently encountered.
 
 The property \eqref{equ_versor_invariant_property} is not unreasonable at all
 since a versor providing any action on a projective point $p\in\V$ must come from $\G(\V)$ anyway,
@@ -204,8 +212,8 @@ representative of points is different than how elements of the form \eqref{equ_q
 represent quadrics by the definition \eqref{equ_quadric_representation}.  One must not
 confuse the two interpretations.  Note that there are elements of the form \eqref{equ_quadric_form}
 representative of points, but, unlike the conformal model, these are not used in definition
-\eqref{equ_quadric_representation}.  That the points of the conformal model can be used
-in the definition of points (making a circular definition) or any other geometry (non-circular) of the conformal model is one of many
+\eqref{equ_quadric_representation}.  That the points of the conformal model appear
+in the definition of any conformal geometry, (which includes conformal points themselves), is one of many
 features contributing to how interesting and pleasing the results of the conformal model are.}
 Experiences to date suggest that there is not much of interest we can do with versors acting
 upon vectors representing points in classical homogenous space.  That is, a projective point $p\in\V$
@@ -213,7 +221,7 @@ of the form
 \begin{equation}\label{equ_proj_point}
 p = \lambda(e_0 + \vec{p}),
 \end{equation}
-where $\vec{p}\in\V$ is a non-projective point or direction vector.  Reflections and therefore rotations
+where $\lambda\in\R$ is a scalar, and $\vec{p}\in\V$ is a non-projective point or direction vector.  Reflections and therefore rotations
 about the origin are one immediately observable type of transformation of interest
 that we can perform on such points of the form \eqref{equ_proj_point} using a versor.
 If there is a versor that reflects such points about
@@ -230,7 +238,6 @@ shown in the main result, if a better form than \eqref{equ_proj_point} can be fo
 allow for more transformations, then
 the quadrics of the form \eqref{equ_quadric_form} will become endowed with the ability
 to be transformed by this larger set of transformations.
-\pagebreak
 
 \bibliographystyle{amsplain}
 \bibliography{Parkin_ATransformationalResultOfTheQuadricModel}
