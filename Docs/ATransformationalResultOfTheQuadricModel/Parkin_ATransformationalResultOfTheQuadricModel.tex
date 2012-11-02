@@ -23,6 +23,8 @@
 \newcommand{\W}{\mathbb{W}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Alpha}{A}
+\newcommand{\nvao}{o}
+\newcommand{\nvai}{\infty}
 
 \begin{document}
 
@@ -198,93 +200,67 @@ for a sign change, as such a change leaves the geometry represented by a bivecto
 
 \section{The Search For A Better Model}
 
-The main result now given, we have a tool that we can use to discover or derive the
-action of a versor upon an element of the form \eqref{equ_quadric_form} representative of some piece of geometry
-by equation \eqref{equ_quadric_representation}.  As noted earlier, \cite{Parkin12} shows that such elements may
-be representative of quadric surfaces; but that there appears to be a limited number of
-versors in $\G$ for desired transformations suggests, among other evidences, that there must
-be a better model based upon geometric algebra, or perhaps some other algebra, that is capable of both representing the
-quadrics and offering a wider array of operations we  can perform on such geometries.
+The main result having now been established, we may harness it as a tool in the search
+for a better model of quadric surfaces.  By this it is meant a model that offers
+more of the desired types of transformations by versors.  One possible approach
+that is motivated by the main result is that of replacing each of $\G(\V)$ and
+$\G(\overline{\V})$ as isomorphic Minkowski sub-algebras of $\G(\W)$.
+The conformal model could then be imposed on each of these sub-algebras.
+Then, ideally, the model we impose on $\G(\W)$ will be able to benefit from
+what we already know about the conformal model.
 
-Where we might start looking for a better model is in a re-examination of how we're using
-vectors to represent points.\footnote{Note that the way spoken of here by which such vectors are
-representative of points is different than how elements of the form \eqref{equ_quadric_form}
-represent quadrics by the definition \eqref{equ_quadric_representation}.  One must not
-confuse the two interpretations.  Note that there are elements of the form \eqref{equ_quadric_form}
-representative of points, but, unlike the conformal model, these are not used in definition
-\eqref{equ_quadric_representation}.  That the points of the conformal model appear
-in the definition of any conformal geometry, (which includes conformal points themselves), is one of many
-features contributing to how interesting and pleasing the results of the conformal model are.}
-Experiences to date suggest that there is not much of interest we can do with versors acting
-upon vectors representing points in classical homogenous space.  That is, a projective point $p\in\V$
-of the form
-\begin{equation}\label{equ_proj_point}
-p = \lambda(e_0 + \vec{p}),
-\end{equation}
-where $\lambda\in\R$ is a non-zero scalar, and $\vec{p}\in\V$ is a non-projective point or direction vector.  Reflections and therefore rotations
-about the origin are one immediately observable type of transformation of interest
-that we can perform on such points of the form \eqref{equ_proj_point} using a versor.
-If there is a versor that reflects such points about
-an arbitrary plane, which would be highly desirable as it would lead to versors
-representing the rigid body motions, it is not obvious.
-
-We'll therefore close with the following question with some consideration attached.
-Assuming that a better model for quadric surfaces still makes use of the form \eqref{equ_quadric_form} and
-the definition \eqref{equ_quadric_representation} in some geometric algebra other than $\G$
-in \cite{Parkin12}, how might we maintain the ability of this form and definition, collectively,
-to allow for the representation of all quadrics while altering the form \eqref{equ_proj_point},
-if possible, to lend itself to a wider variety of transformations by versor conjugation?  As we've
-shown in the main result, if a better form than \eqref{equ_proj_point} can be found to
-allow for more transformations, then
-the quadrics of the form \eqref{equ_quadric_form} will become endowed with the ability
-to be transformed by this larger set of transformations.
-
-To give an example, it is possible to extend $\G$ to a geometric algebra having
-two isomorphic sub-algebras that are Minkowski algebras.  There is more than one way
-to do it.  The motivation for our choice here will be seen in the outcome.
-
-We start by changing the signature of $e_0$ and $e_{n+1}$ to be anti-Euclidean.
-That is, let $-1=e_0\cdot e_0=e_{n+1}\cdot e_{n+1}$.  We then must change
-$S$ as it is defined in \cite{Parkin12} to
+Our first task is to find a versor $S\in\G(\W)$ that, when taken with any
+vector $v\in\V$ as the conjugation of $v$ by $S$, produces in this manner
+an outermorphic isomorphism between the sub-algebras $\G(\V)$ and $\G(\overline{\V})$.
+For any vector $v\in\V$, it has the form
 \begin{equation}
-S=2^{-(n+1)/2}(1+e_0e_{n+1})\prod_{i=1}^n(1-e_ie_{i+n+1}).
+v = \alpha\nvao + x + \beta\nvai,
 \end{equation}
-We have now preserved the property that for all integers $i\in[0,n]$, we have $\overline{e_i}=e_{i+n+1}$
-and $\overline{e_{i+n+1}}=e_i$.  We have also maintained the integrity of equation \eqref{equ_quadric_representation}
-in that it still expands as a homogeneous polynomial of degree 2 in the vector components of $p$ with the coeficients
-being found in $E$.
+where $x$ is an $n$-dimensional Euclidean vector, and each of $\nvao$ and $\nvai$
+are null-vectors having the relationship $-1=\nvao\cdot\nvai$.  We will name the
+counter-parts in $\overline{\V}$ of these vectors as $\overline{\nvao}$ and $\overline{\nvai}$, respectively.
+As usual, for any pair of vectors $a,b\in\V$, we will define $a\cdot\overline{b}=0$.
 
-For any integer $i\in[0,n]$, we now introduce the null-vectors $u_i$ and $v_i$ having
-the relationship $-1=u_i\cdot v_i$.  Then, for any integer $i\in[0,n]$, we have
+Refering to \cite{LiRockwood},
+we can rewrite $v$ in terms of $x$ and a different pair of basis vectors $e_{-}$ and $e_{+}$,
+the first anti-Euclidean and the second Euclidean.  Doing so, $v$ becomes
 \begin{equation}
-e_i = \left\{\begin{array}{ll}
-2^{-1/2}(u_i-v_i) & \mbox{if $e_i$ is Euclidean,} \\
--2^{-1/2}(u_i+v_i) & \mbox{if $e_i$ is anti-Euclidean.}
-\end{array}\right.
+v = \left(\frac{1}{2}\alpha + \beta\right)e_{-} + x + \left(\beta - \frac{1}{2}\alpha\right)e_{+}.
 \end{equation}
-The form \eqref{equ_proj_point} can now be changed to
+A versor $S$ with the desired property named above is now easily found as
 \begin{equation}
-p = \lambda(u_0 - \sqrt{2}v + v_0).
+S = 2^{-(n+2)/2}(1+e_{-}\overline{e_{-}})(1-e_{+}\overline{e_{+}})\prod_{i=1}^n(1-e_ie_{i+n}),
 \end{equation}
+where here we have chosen to name the counter parts in $\overline{\V}$ of $e_{-}$ and $e_{+}$
+as $\overline{e_{-}}$ and $\overline{e_{+}}$, respectively.
 
+It now follows by the main result of this paper that if a bivector $E\in\G(\W)$
+is of the form \eqref{equ_quadric_form}, then the geometry represented
+by $E$ using equation \eqref{equ_quadric_representation}, where $p\in\V$ is a conformal point,
+may be properly transformed by any transformation supported by the conformal model.
+The question that then remains is: does there exist such a bivector $E$ that,
+under this new model, is representative of an $n$-dimensional quadric surface?
+Well, to find out, begin by noticing that a homogenized conformal point $p\in\V$ is of the form
+\begin{equation}
+p = \alpha e_{-} + x + \beta e_{+},
+\end{equation}
+where $\alpha=\frac{1}{2}(x^2+1)$ and $\beta=(\frac{1}{2}x^2-1)$.
+Right away we now see what may be a problem with equation \eqref{equ_quadric_representation}.
+There does not exist a 2-blade $a_i\wedge\overline{b_i}$ in the sum of $E$ giving
+us a constant term in the resulting polynomial equation.  That is, there does not
+exist such a 2-blade $a_i\wedge\overline{b_i}$ and a scalar $\lambda$ such that for
+all $n$-dimensional Euclidean vectors $x$, we have
+\begin{equation}
+\lambda=p\wedge\overline{p}\cdot a_i\wedge\overline{b_i},
+\end{equation}
+a value that remains invarient despite any change in $x$.  This suggests that
+it may not be possible to represent quadric surfaces in the newly proposed model.
 
-%also transform it into a Minkowski algebra without breaking the quadric model.  This is done
-%using ideas taken from \cite{LiRockwood}.  The observation is simply that we may let
-%\begin{equation}
-%e_0 = \frac{1}{\sqrt{2}}(e_a-e_b),
-%\end{equation}
-%where $e_a$ and $e_b$ are null-vectors having the relationship $-1=e_a\cdot e_b$.
-%The form of a point in our homogeneous space could then become
-%\begin{equation}\label{equ_other_point_form}
-%p = \lambda\left(e_a+\sqrt{2}v-e_b\right).
-%\end{equation}
-%Whether this form or any other form lends itself to a larger set of desired transformations, however,
-%remains to be seen.  What is certain is that if we tinker with the signature of $\G$, we must revisit
-%all developements of the quadric model to either verify that they still hold or to modify them appropriately.
-%
-%Additionally, one hazard of the form \eqref{equ_other_point_form} to be aware of is that with the introduction
-%of the basis vectors $e_a$ and $e_b$ replacing the basis vector $e_0$, not all vectors represent
-%a point in space.  How do we come to terms with this new-found inconsistency in our model?  I do not know.
+Though this effort has failed, there must surely be a model for quadric surfaces
+that is as nice as the conformal model.  Whether any of \cite{Parkin12} or
+this paper is anywhere near close to finding the answer remains highly questionable.
+
+% Use a computer algebra system to find a sample polynomial equation.
 
 \bibliographystyle{amsplain}
 \bibliography{Parkin_ATransformationalResultOfTheQuadricModel}
