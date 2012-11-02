@@ -196,7 +196,7 @@ and by so doing, naturally leaves vectors in $\overline{\V}$ untouched, up to sc
 In fact, the condition of \eqref{equ_versor_invariant_property} may be relaxed to allow
 for a sign change, as such a change leaves the geometry represented by a bivector invariant.
 
-\section{Concluding Remarks}
+\section{The Search For A Better Model}
 
 The main result now given, we have a tool that we can use to discover or derive the
 action of a versor upon an element of the form \eqref{equ_quadric_form} representative of some piece of geometry
@@ -221,14 +221,14 @@ of the form
 \begin{equation}\label{equ_proj_point}
 p = \lambda(e_0 + \vec{p}),
 \end{equation}
-where $\lambda\in\R$ is a scalar, and $\vec{p}\in\V$ is a non-projective point or direction vector.  Reflections and therefore rotations
+where $\lambda\in\R$ is a non-zero scalar, and $\vec{p}\in\V$ is a non-projective point or direction vector.  Reflections and therefore rotations
 about the origin are one immediately observable type of transformation of interest
 that we can perform on such points of the form \eqref{equ_proj_point} using a versor.
 If there is a versor that reflects such points about
 an arbitrary plane, which would be highly desirable as it would lead to versors
 representing the rigid body motions, it is not obvious.
 
-We'll therefore close with the following question.
+We'll therefore close with the following question with some consideration attached.
 Assuming that a better model for quadric surfaces still makes use of the form \eqref{equ_quadric_form} and
 the definition \eqref{equ_quadric_representation} in some geometric algebra other than $\G$
 in \cite{Parkin12}, how might we maintain the ability of this form and definition, collectively,
@@ -238,6 +238,53 @@ shown in the main result, if a better form than \eqref{equ_proj_point} can be fo
 allow for more transformations, then
 the quadrics of the form \eqref{equ_quadric_form} will become endowed with the ability
 to be transformed by this larger set of transformations.
+
+To give an example, it is possible to extend $\G$ to a geometric algebra having
+two isomorphic sub-algebras that are Minkowski algebras.  There is more than one way
+to do it.  The motivation for our choice here will be seen in the outcome.
+
+We start by changing the signature of $e_0$ and $e_{n+1}$ to be anti-Euclidean.
+That is, let $-1=e_0\cdot e_0=e_{n+1}\cdot e_{n+1}$.  We then must change
+$S$ as it is defined in \cite{Parkin12} to
+\begin{equation}
+S=2^{-(n+1)/2}(1+e_0e_{n+1})\prod_{i=1}^n(1-e_ie_{i+n+1}).
+\end{equation}
+We have now preserved the property that for all integers $i\in[0,n]$, we have $\overline{e_i}=e_{i+n+1}$
+and $\overline{e_{i+n+1}}=e_i$.  We have also maintained the integrity of equation \eqref{equ_quadric_representation}
+in that it still expands as a homogeneous polynomial of degree 2 in the vector components of $p$ with the coeficients
+being found in $E$.
+
+For any integer $i\in[0,n]$, we now introduce the null-vectors $u_i$ and $v_i$ having
+the relationship $-1=u_i\cdot v_i$.  Then, for any integer $i\in[0,n]$, we have
+\begin{equation}
+e_i = \left\{\begin{array}{ll}
+2^{-1/2}(u_i-v_i) & \mbox{if $e_i$ is Euclidean,} \\
+-2^{-1/2}(u_i+v_i) & \mbox{if $e_i$ is anti-Euclidean.}
+\end{array}\right.
+\end{equation}
+The form \eqref{equ_proj_point} can now be changed to
+\begin{equation}
+p = \lambda(u_0 - \sqrt{2}v + v_0).
+\end{equation}
+
+
+%also transform it into a Minkowski algebra without breaking the quadric model.  This is done
+%using ideas taken from \cite{LiRockwood}.  The observation is simply that we may let
+%\begin{equation}
+%e_0 = \frac{1}{\sqrt{2}}(e_a-e_b),
+%\end{equation}
+%where $e_a$ and $e_b$ are null-vectors having the relationship $-1=e_a\cdot e_b$.
+%The form of a point in our homogeneous space could then become
+%\begin{equation}\label{equ_other_point_form}
+%p = \lambda\left(e_a+\sqrt{2}v-e_b\right).
+%\end{equation}
+%Whether this form or any other form lends itself to a larger set of desired transformations, however,
+%remains to be seen.  What is certain is that if we tinker with the signature of $\G$, we must revisit
+%all developements of the quadric model to either verify that they still hold or to modify them appropriately.
+%
+%Additionally, one hazard of the form \eqref{equ_other_point_form} to be aware of is that with the introduction
+%of the basis vectors $e_a$ and $e_b$ replacing the basis vector $e_0$, not all vectors represent
+%a point in space.  How do we come to terms with this new-found inconsistency in our model?  I do not know.
 
 \bibliographystyle{amsplain}
 \bibliography{Parkin_ATransformationalResultOfTheQuadricModel}
