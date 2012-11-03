@@ -63,7 +63,7 @@ to quadric surfaces to the set of all conformal transformations.
 
 We assume here from the beginning that the reader is familiar with
 all definitions and results set forth in \cite{Parkin12} as this paper
-will make use of that material without recounting any of it.
+will make use of that material without recounting it.
 That said, we begin with an extension of $\G$ to the geometric
 algebra $\G^*$.  We will let $\G$ be a proper sub-algebra of $\G^*$
 by adding the following four basis vectors.
@@ -71,15 +71,18 @@ by adding the following four basis vectors.
 \begin{array}{ll}
 \nvao & \mbox{The null-vector at the origin.} \\
 \nvai & \mbox{The null-vector at infinity.} \\
-\nvaob & \mbox{The counter-part of $\nvao$.} \\
-\nvaib & \mbox{The counter-part of $\nvai$.}
+\nvaob & \mbox{The conjugate of $\nvao$.} \\
+\nvaib & \mbox{The conjugate of $\nvai$.}
 \end{array}
 \end{equation}
-Recall that the counter-part of any vector $v\in\V$ is the vector $\overline{v}\in\overline{\V}$,
+Recall that the conjugate\footnote{What we have referred to here
+as the conjugate of $v$ was referred to in \cite{Parkin12} as the counter-part of $v$.
+The term conjugate is more appropriate.}
+of any vector $v\in\V$ is the vector $\overline{v}\in\overline{\V}$,
 and vice-versa.  At the moment, however, the over-bar notation used in table \eqref{equ_null_basis_vecs}
 is nothing more than notation.  In \cite{Parkin12}, the over-bar notation refers to the application
 of an outermorphic function.  We will see shortly that we can overload this notation to
-refer to an extension of this outermorphic function.
+also refer to an extension of this outermorphic function.
 
 The following is an inner product table for the basis vectors in table \eqref{equ_null_basis_vecs}.
 \begin{equation}
@@ -94,15 +97,15 @@ The following is an inner product table for the basis vectors in table \eqref{eq
 \end{equation}
 
 We will let $\V^*$ contain $\V$ as a proper vector-subspace, adding to it the
-basis vectors $\nvao$ and $\nvai$.  Similarly, we will let $\overline{\V^*}$ contain
+basis vectors $\nvao$ and $\nvai$.  Similarly, we will let $\overline{\V}^*$ contain
 $\overline{\V}$ as a proper vector-space, adding to it the basis vectors $\overline{\nvao}$
 and $\overline{\nvai}$.  We will let $\W^*$ denote the smallest vector space containing
-$\V^*$ and $\overline{\V*}$ as vector sub-spaces.
-For all vector $v\in\W$, (not $v\in\W^*$), we will define $0=v\cdot b$, where
+$\V^*$ and $\overline{\V}^*$ as vector sub-spaces.
+For all vectors $v\in\W$, (not $v\in\W^*$), we will define $0=v\cdot b$, where
 $b$ is any basis vector in table \eqref{equ_null_basis_vecs}.
 
 What we have now with $\G^*$ is simply a geometric algebra containing
-two isomorphic Minkownski sub-algebras $\G(\V^*)$ and $\G(\overline{\V^*})$.
+two isomorphic Minkownski sub-algebras $\G(\V^*)$ and $\G(\overline{\V}^*)$.
 To preserve the use of the over-bar notation in our extended model, we will want to develop it
 as an outermorphic isomorphism between these two sub-algebras.  To that end, we will
 find it useful to refer to \cite{LiRockwood} in defining the following vectors.
@@ -113,7 +116,7 @@ find it useful to refer to \cite{LiRockwood} in defining the following vectors.
 As the reader can check, $\eminus$ is a unit-length anti-Euclidean vector, (having an inner-product
 square of $-1$), while $\eplus$ is a unit-length Euclidean vector.  We will define
 $\eminusb$ and $\eplusb$ similarly with $\nvaob$ and $\nvaib$.  We can now
-define, for any element $E\in\G^*$, the element $\overline{E}$ as
+define, for any element $E\in\G^*$, the element $\overline{E}$ conjugate to $E$ as
 \begin{equation}
 \overline{E} = S^*E\tilde{S^*},
 \end{equation}
@@ -122,14 +125,14 @@ where $S^*$ is defined in terms of $S$ as
 S^* = \frac{1}{2}(1+\eminus\eminusb)(1-\eplus\eplusb)S.
 \end{equation}
 It now follows that for any vector $v\in\V^*$, the vector $\overline{v}$ is the
-counter-part of $v$ in $\overline{V^*}$.
+conjugate of $v$ in $\overline{V^*}$.
 
 We now introduce the conformal mapping $P:\V\to\V^*$ as
 \begin{equation}
 P(p) = \nvao + p + \frac{1}{2}p^2\nvai,
 \end{equation}
 and then realize that for any bivector $E\in\G$ representative of an $n$-dimensional
-quadric surface in our original model, we have
+quadric surface by our original model, we have
 \begin{equation}
 P(p)\wedge\overline{P(p)}\cdot E = p\wedge\overline{p}\cdot E
 \end{equation}
@@ -181,15 +184,16 @@ if we, for convenience, consider only the case $k=1$, and write $E$ as simply th
 E = a\wedge\overline{b},
 \end{equation}
 where $a,b\in\V$.  Having done this, it is easy to establish that the quadric represented by $E'$
-is the very quadric represented in equation \eqref{equ_quadric_transformed} by the following chain equalities.
+is the very quadric represented in equation \eqref{equ_quadric_transformed} by the equality of
+\eqref{equ_start} with \eqref{equ_finish}.
 \begin{align}
- & V^{-1}P(p)V\wedge\overline{V^{-1}P(p)V}\cdot a\wedge\overline{b} \\
+ & V^{-1}P(p)V\wedge\overline{V^{-1}P(p)V}\cdot a\wedge\overline{b}\label{equ_start} \\
 =\;& -(V^{-1}P(p)V\cdot a)(V^{-1}P(p)V\cdot b) \\
 =\;& (P(p)\cdot VaV^{-1})(P(p)\cdot VbV^{-1}) \\
 =\;& P(p)\wedge\overline{P(p)}\cdot VaV^{-1}\wedge\overline{VbV^{-1}}\label{equ_before_versor_invariance} \\
 =\;& P(p)\wedge\overline{P(p)}\cdot
 V\overline{V}a(V\overline{V})^{-1}\wedge V\overline{Vb}(V\overline{V})^{-1}\label{equ_after_versor_invariance} \\
-=\;& P(p)\wedge\overline{P(p)}\cdot V\overline{V}(a\wedge\overline{b})(V\overline{V})^{-1}
+=\;& P(p)\wedge\overline{P(p)}\cdot V\overline{V}(a\wedge\overline{b})(V\overline{V})^{-1}\label{equ_finish}
 \end{align}
 
 To see the step from \eqref{equ_before_versor_invariance} to \eqref{equ_after_versor_invariance},
@@ -201,17 +205,18 @@ because only zero or two sign changes, if any, will happen, a cancelation occuri
 Of course, the requirement that $V$ keep $e_0$ invariant under versor conjugation is only necessary
 if we wish to easily visualize the newly transformed point $V^{-1}P(p)V$ in Euclidean space.
 Removing this constraint, a versor $V$ transforms points in homogeneous space, the results
-of which are harder to visualize, but which may provide us with the ability to project the quadrics
-onto planes.
+of which are harder to visualize, but which may provide us with the ability to project the quadrics.
 
-The biggest gap that remains, however, between our extended model and
-the conformal model is the lack of conformal operations such as intersecting geometries, fiting geometries
+\section{Concluding Remarks}
+
+The biggest gap that seems to remain between our extended model and
+the conformal model is the lack of conformal operations such as intersecting geometries, fitting geometries
 to a set of points, and so on.  It isn't too surprising that that these features do not
 naturally present themselves, however, because the quadrics are not closed under
 the intersection operation, and there may not be a unique quadric fitting a given set
 of points in a certain way.  In any case, the jury is still out on what the
 best model for quadrics is, but until a better model comes along, this one appears
-to show promise.
+to show some promise.
 
 \bibliographystyle{amsplain}
 \bibliography{Parkin_AnExtensionOfTheQuadricModel}
