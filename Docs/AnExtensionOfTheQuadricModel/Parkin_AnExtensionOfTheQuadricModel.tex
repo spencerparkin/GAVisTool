@@ -29,8 +29,8 @@
 \newcommand{\nvaib}{\overline{\infty}}
 \newcommand{\eminus}{e_{-}}
 \newcommand{\eplus}{e_{+}}
-\newcommand{\eminusb}{\overline{e_{-}}}
-\newcommand{\eplusb}{\overline{e_{+}}}
+\newcommand{\eminusb}{\overline{e}_{-}}
+\newcommand{\eplusb}{\overline{e}_{+}}
 
 \begin{document}
 
@@ -71,15 +71,17 @@ by adding the following four basis vectors.
 \begin{array}{ll}
 \nvao & \mbox{The null-vector at the origin.} \\
 \nvai & \mbox{The null-vector at infinity.} \\
-\nvaob & \mbox{The conjugate of $\nvao$.} \\
-\nvaib & \mbox{The conjugate of $\nvai$.}
+\nvaob & \mbox{The friend of $\nvao$.} \\
+\nvaib & \mbox{The friend of $\nvai$.}
 \end{array}
 \end{equation}
-Recall that the conjugate\footnote{What we have referred to here
-as the conjugate of $v$ was referred to in \cite{Parkin12} as the counter-part of $v$.
-The term conjugate is more appropriate.}
-of any vector $v\in\V$ is the vector $\overline{v}\in\overline{\V}$,
-and vice-versa.  At the moment, however, the over-bar notation used in table \eqref{equ_null_basis_vecs}
+What was referred to in \cite{Parkin12} as the counter-part of a vector will be referred
+to here in this paper as the friend of a vector.  In group theory terms, the vectors
+$\nvao$ and $\nvaob$ are conjugates of one another, which is always a mutual
+relationship.  Friendship, however, as it will be defined shortly, and as we'll find,
+is not always such a relationship.
+
+At the moment, the over-bar notation used in table \eqref{equ_null_basis_vecs}
 is nothing more than notation.  In \cite{Parkin12}, the over-bar notation refers to the application
 of an outermorphic function.  We will see shortly that we can overload this notation to
 also refer to an extension of this outermorphic function.
@@ -116,7 +118,7 @@ find it useful to refer to \cite{LiRockwood} in defining the following vectors.
 As the reader can check, $\eminus$ is a unit-length anti-Euclidean vector, (having an inner-product
 square of $-1$), while $\eplus$ is a unit-length Euclidean vector.  We will define
 $\eminusb$ and $\eplusb$ similarly with $\nvaob$ and $\nvaib$.  We can now
-define, for any element $E\in\G^*$, the element $\overline{E}$ conjugate to $E$ as
+define, for any element $E\in\G^*$, the friend $\overline{E}$ of $E$ as
 \begin{equation}
 \overline{E} = S^*E\tilde{S^*},
 \end{equation}
@@ -125,14 +127,25 @@ where $S^*$ is defined in terms of $S$ as
 S^* = \frac{1}{2}(1+\eminus\eminusb)(1-\eplus\eplusb)S.
 \end{equation}
 It now follows that for any vector $v\in\V^*$, the vector $\overline{v}$ is the
-conjugate of $v$ in $\overline{V^*}$.
+friend of $v$ in $\overline{V}^*$.  Similarly, for any vector $v\in\overline{\V}^*$,
+the vector $\overline{v}$ as the friend of $v$ in $\V^*$.
+We must be careful, however, because it does not now follow, as it did in our
+original model, that the friend of $v\in\V^*$ in $\overline{\V}^*$ is also the
+friend of $v$, and vice-versa.
+This is because $\nvao$ is not the friend
+of $\nvaob$, nor is $\nvai$ the friend of $\nvaib$.  Rather, $-\nvao$
+is the friend of $\nvaob$, and $-\nvai$ is the friend of $\nvaib$.
+In the extended model, friendship is not always a mutual relationship as it
+was in the original model.
+This will not present a problem for us, however, if we only use the over-bar
+function in one direction; from $\V^*$ to $\overline{\V}^*$.
 
 We now introduce the conformal mapping $P:\V\to\V^*$ as
 \begin{equation}
 P(p) = \nvao + p + \frac{1}{2}p^2\nvai,
 \end{equation}
 and then realize that for any bivector $E\in\G$ representative of an $n$-dimensional
-quadric surface by our original model, we have
+quadric surface by our original model, that we have
 \begin{equation}
 P(p)\wedge\overline{P(p)}\cdot E = p\wedge\overline{p}\cdot E
 \end{equation}
@@ -151,10 +164,11 @@ P(p)\wedge\overline{P(p)}
  &= (\alpha\eminus + \beta\eplus)\wedge\overline{(\alpha\eminus + \beta\eplus)}\label{equ_e_with_e} \\
  &+  (\alpha\eminus + \beta\eplus)\wedge\overline{p}\label{equ_e_with_p} \\
  &+ p\wedge\overline{(\alpha\eminus + \beta\eplus)}\label{equ_p_with_e} \\
- &+ p\wedge\overline{p}.
+ &+ p\wedge\overline{p}.\label{equ_p_with_p}
 \end{align}
 It is now easy to see that $E$, when taken in the inner product with
-each of \eqref{equ_e_with_e}, \eqref{equ_e_with_p} and \eqref{equ_p_with_e}, vanishes to zero.
+each of \eqref{equ_e_with_e}, \eqref{equ_e_with_p} and \eqref{equ_p_with_e}, vanishes to zero,
+leaving just \eqref{equ_p_with_p}.
 
 \section{Transformations Of The Extended Model}
 
