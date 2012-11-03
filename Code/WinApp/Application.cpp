@@ -227,7 +227,7 @@ bool GAVisToolApp::ProcessConsoleInput( const wxString& consoleInput, wxString& 
 	
 	// Generate the math output as a function of the math input.
 	const char* mathExpression = consoleInput;
-	char resultBuffer[ 1024 ];
+	char resultBuffer[ PRINT_BUFFER_SIZE_LARGE ];
 	bool success = calculator->Calculate( mathExpression, resultBuffer, sizeof( resultBuffer ), generateLatexOutput );
 
 	// If something went wront, generate an error report.
