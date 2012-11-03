@@ -1,0 +1,34 @@
+/*
+ * Can we reflect quadrics about planes in the extended quadric model?
+ */
+do
+(
+	/* Create a spheroid. */
+	c = 3*e1 + 2*e2 + 2*e3,
+	v = e1,		/* Keep this unit-length. */
+	vb = e1b,	/* Must be the bar of v. */
+	r = 3.5,
+	L = 1,
+	E = Omega + L*v^vb - 2*(c + L*(c . v)*v)^e0b + (c*c + L*(c . v)*(c . v) - r*r)*Alpha,
+	bind_quadric(E),
+	geo_color(E,1,0,0),
+	
+	/* Create a plane. */
+	pln_c = 2*(e1+e2),
+	pln_cb = 2*(e1b+e2b),	/* Make bar function? */
+	norm = (e1+e2+e3)/sqrt(3),
+	normb = (e1b+e2b+e3b)/sqrt(3),
+	pln = norm + (pln_c.norm)*ni,
+	plnb = normb + (pln_cb.normb)*nib,
+	bind_dual_plane(pln),
+	geo_color(pln,1,0,1),
+	
+	/* Create the reflected spheroid. */
+	/*V = pln*plnb,*/
+	V = norm*normb,
+	Vinv = V~,
+	E_reflected = V*E*Vinv,
+	bind_quadric(E_reflected),
+	
+	/* It failed.  Why? */
+)
