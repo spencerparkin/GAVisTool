@@ -1,0 +1,23 @@
+/*
+ * Test friendship in the quadric model.
+ */
+do
+(
+	S04 = ( 1 - e0*e4 ) / sqrt(2),
+	S15 = ( 1 - e1*e5 ) / sqrt(2),
+	S26 = ( 1 - e2*e6 ) / sqrt(2),
+	S37 = ( 1 - e3*e7 ) / sqrt(2),
+	S = S04*S15*S26*S37,
+	
+	p = e0 + $x*e1 + $y*e2 + $z*e3,
+	pb = e0c + $x*e1c + $y*e2c + $z*e7,
+
+	em = 0.5*ni + no,
+	ep = 0.5*ni - no,
+	emc = 0.5*nic + noc,
+	epc = 0.5*nic - noc,
+	
+	S_prime = 0.5*(1 + em*emc)*(1 - ep*epc),
+	
+	
+)

@@ -676,6 +676,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\ScriptCode\QuadricGeometry\Conjugacy.txt"
+					>
+				</File>
+				<File
 					RelativePath="..\..\ScriptCode\QuadricGeometry\Debug.txt"
 					>
 				</File>
