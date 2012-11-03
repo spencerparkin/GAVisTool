@@ -203,7 +203,8 @@ char* Tokenizer::CreateTokenString( const char*& parsePosition, TokenConsumption
 
 	// Scan the token.  Calculate the length of it.
 	int length = 0;
-	while( CanConsumeCharacter( parsePosition[ length ], length, tokenConsumption ) )
+	char initialCharacter = parsePosition[0];
+	while( CanConsumeCharacter( parsePosition[ length ], length, initialCharacter, tokenConsumption ) )
 		length++;
 
 	// In this case, don't capture the quotes.
@@ -229,7 +230,7 @@ char* Tokenizer::CreateTokenString( const char*& parsePosition, TokenConsumption
 }
 
 //=========================================================================================
-bool Tokenizer::CanConsumeCharacter( char character, int consumptionCount, TokenConsumption tokenConsumption )
+bool Tokenizer::CanConsumeCharacter( char character, int consumptionCount, char initialCharacter, TokenConsumption tokenConsumption )
 {
 	if( character == '\0' )
 		return false;
@@ -250,7 +251,9 @@ bool Tokenizer::CanConsumeCharacter( char character, int consumptionCount, Token
 		{
 			if( isdigit( character ) || isalpha( character ) )
 				return true;
-			if( character == '.' || character == '_' )
+			if( character == '_' )
+				return true;
+			if( isdigit( initialCharacter ) && character == '.' )
 				return true;
 			if( character == '$' )
 				return true;

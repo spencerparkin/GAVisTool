@@ -66,7 +66,7 @@ private:
 	Token* ConsumeToken( const char*& parsePosition );
 	bool IsOperatorToken( const char* parsePosition );
 	char* CreateTokenString( const char*& parsePosition, TokenConsumption tokenConsumption );
-	bool CanConsumeCharacter( char character, int consumptionCount, TokenConsumption tokenConsumption );
+	bool CanConsumeCharacter( char character, int consumptionCount, char initialCharacter, TokenConsumption tokenConsumption );
 };
 
 // Tokenizer.h
