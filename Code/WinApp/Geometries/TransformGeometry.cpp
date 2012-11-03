@@ -38,12 +38,12 @@ ConformalTransformGeometry::ConformalTransformGeometry( BindType bindType ) : GA
 		"a = if( sin_half_theta == 0, e0, grade_part( 2, R )*i / sin_half_theta ),"
 		"theta = 2*half_theta,"
 		"t = 2*( no . ( 1 - T ) ),"
-		"ax = scalar_part( a, e0 ),"
-		"ay = scalar_part( a, e1 ),"
-		"az = scalar_part( a, e2 ),"
-		"tx = scalar_part( t, e0 ),"
-		"ty = scalar_part( t, e1 ),"
-		"tz = scalar_part( t, e2 )"
+		"ax = scalar_part( a, e1 ),"
+		"ay = scalar_part( a, e2 ),"
+		"az = scalar_part( a, e3 ),"
+		"tx = scalar_part( t, e1 ),"
+		"ty = scalar_part( t, e2 ),"
+		"tz = scalar_part( t, e3 )"
 		")"
 	);
 	decompositionEvaluator = calculator.CompileEvaluator( decompositionCode );
@@ -52,8 +52,8 @@ ConformalTransformGeometry::ConformalTransformGeometry( BindType bindType ) : GA
 	char compositionCode[ 512 ];
 	sprintf_s( compositionCode, sizeof( compositionCode ),
 		"do("
-		"a = ax*e0 + ay*e1 + az*e2,"
-		"t = tx*e0 + ty*e1 + tz*e2,"
+		"a = ax*e1 + ay*e2 + az*e3,"
+		"t = tx*e1 + ty*e2 + tz*e3,"
 		"half_theta = 0.5*theta,"
 		"V = w*( 1 - 0.5*t*ni )*( cos( half_theta ) - a*i*sin( half_theta ) )"
 		")"

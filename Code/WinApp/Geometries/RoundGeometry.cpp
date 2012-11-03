@@ -28,9 +28,9 @@ ConformalPoint::ConformalPoint( BindType bindType ) : GAVisToolGeometry( bindTyp
 		"%s"
 		"w = scalar_part( pt, no ),"
 		"pt = pt / w,"
-		"x = scalar_part( pt, e0 ),"
-		"y = scalar_part( pt, e1 ),"
-		"z = scalar_part( pt, e2 )"
+		"x = scalar_part( pt, e1 ),"
+		"y = scalar_part( pt, e2 ),"
+		"z = scalar_part( pt, e3 )"
 		")",
 		( bindType == NORMAL_FORM ? "pt = pt*I," : "" )
 	);
@@ -40,7 +40,7 @@ ConformalPoint::ConformalPoint( BindType bindType ) : GAVisToolGeometry( bindTyp
 	char compositionCode[ 512 ];
 	sprintf_s( compositionCode, sizeof( compositionCode ),
 		"do("
-		"v = x*e0 + y*e1 + z*e2,"
+		"v = x*e1 + y*e2 + z*e3,"
 		"pt = w*(no + v + 0.5*(v . v)*ni)%s"
 		")",
 		( bindType == NORMAL_FORM ? "*-I" : "" )
@@ -204,9 +204,9 @@ ConformalSphere::ConformalSphere( BindType bindType ) : GAVisToolGeometry( bindT
 		"%s"
 		"w = scalar_part( sph, no ),"
 		"sph = sph / w,"
-		"x = scalar_part( sph, e0 ),"
-		"y = scalar_part( sph, e1 ),"
-		"z = scalar_part( sph, e2 ),"
+		"x = scalar_part( sph, e1 ),"
+		"y = scalar_part( sph, e2 ),"
+		"z = scalar_part( sph, e3 ),"
 		"v = ( sph^no^ni ).( no^ni ),"
 		"r2 = 2*( sph^no^i )*I + v . v,"
 		"r = sqrt( abs( r2 ) )"
@@ -219,7 +219,7 @@ ConformalSphere::ConformalSphere( BindType bindType ) : GAVisToolGeometry( bindT
 	char compositionCode[ 512 ];
 	sprintf_s( compositionCode, sizeof( compositionCode ),
 		"do("
-		"v = x*e0 + y*e1 + z*e2,"
+		"v = x*e1 + y*e2 + z*e3,"
 		"sph = w*( no + v + 0.5*(v*v - scale*r*r)*ni )%s"
 		")",
 		( bindType == NORMAL_FORM ? "*-I" : "" )
@@ -434,12 +434,12 @@ ConformalCircle::ConformalCircle( BindType bindType ) : GAVisToolGeometry( bindT
 		"v = grade_part( 1, n*( ( no^ni ) . ( cir^( no*ni ) ) ) ),"
 		"r2 = grade_part( 0, v . v - 2*n*( ( v . n )*v - ( no^ni ) . ( no^cir ) ) ),"
 		"r = sqrt( abs( r2 ) ),"
-		"x = scalar_part( v, e0 ),"
-		"y = scalar_part( v, e1 ),"
-		"z = scalar_part( v, e2 ),"
-		"nx = scalar_part( n, e0 ),"
-		"ny = scalar_part( n, e1 ),"
-		"nz = scalar_part( n, e2 )"
+		"x = scalar_part( v, e1 ),"
+		"y = scalar_part( v, e2 ),"
+		"z = scalar_part( v, e3 ),"
+		"nx = scalar_part( n, e1 ),"
+		"ny = scalar_part( n, e2 ),"
+		"nz = scalar_part( n, e3 )"
 		")",
 		( bindType == NORMAL_FORM ? "cir = cir*I," : "" )
 	);
@@ -449,8 +449,8 @@ ConformalCircle::ConformalCircle( BindType bindType ) : GAVisToolGeometry( bindT
 	char compositionCode[ 512 ];
 	sprintf_s( compositionCode, sizeof( compositionCode ),
 		"do("
-		"n = nx*e0 + ny*e1 + nz*e2,"
-		"v = x*e0 + y*e1 + z*e2,"
+		"n = nx*e1 + ny*e2 + nz*e3,"
+		"v = x*e1 + y*e2 + z*e3,"
 		"cir = w*( ( n + ( v . n )*ni )^( no + v + 0.5*( v . v - scale*r*r )*ni ) )%s"
 		")",
 		( bindType == NORMAL_FORM ? "*-I" : "" )
@@ -649,12 +649,12 @@ ConformalPointPair::ConformalPointPair( BindType bindType ) : GAVisToolGeometry(
 		"r2 = -v . v + 2*n*( ( v . n )*v + ( ( no^ni ) . ( no^ppr ) )*i ),"
 		"r2 = grade_part( 0, r2 ),"		// Kill any round-off error.
 		"r = sqrt( abs( r2 ) ),"
-		"x = scalar_part( v, e0 ),"
-		"y = scalar_part( v, e1 ),"
-		"z = scalar_part( v, e2 ),"
-		"nx = scalar_part( n, e0 ),"
-		"ny = scalar_part( n, e1 ),"
-		"nz = scalar_part( n, e2 )"
+		"x = scalar_part( v, e1 ),"
+		"y = scalar_part( v, e2 ),"
+		"z = scalar_part( v, e3 ),"
+		"nx = scalar_part( n, e1 ),"
+		"ny = scalar_part( n, e2 ),"
+		"nz = scalar_part( n, e3 )"
 		")",
 		( bindType == NORMAL_FORM ? "ppr = ppr*I," : "" )
 	);
@@ -664,8 +664,8 @@ ConformalPointPair::ConformalPointPair( BindType bindType ) : GAVisToolGeometry(
 	char compositionCode[ 512 ];
 	sprintf_s( compositionCode, sizeof( compositionCode ),
 		"do("
-		"n = nx*e0 + ny*e1 + nz*e2,"
-		"v = x*e0 + y*e1 + z*e2,"
+		"n = nx*e1 + ny*e2 + nz*e3,"
+		"v = x*e1 + y*e2 + z*e3,"
 		"ppr = w*( ( n*i - ( v . ( n*i ) )*ni ) ^ ( no + v + 0.5*( v*v - scale*r*r )*ni ) )%s"
 		")",
 		( bindType == NORMAL_FORM ? "*-I" : "" )

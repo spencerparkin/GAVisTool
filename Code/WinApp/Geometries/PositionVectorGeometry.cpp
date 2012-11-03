@@ -24,9 +24,9 @@ PositionVector::PositionVector( BindType bindType ) : GAVisToolGeometry( bindTyp
 	char decompositionCode[ 512 ];
 	sprintf_s( decompositionCode, sizeof( decompositionCode ),
 		"do("
-		"x = scalar_part( v, e0 ),"
-		"y = scalar_part( v, e1 ),"
-		"z = scalar_part( v, e2 ),"
+		"x = scalar_part( v, e1 ),"
+		"y = scalar_part( v, e2 ),"
+		"z = scalar_part( v, e3 ),"
 		")"
 	);
 	decompositionEvaluator = calculator.CompileEvaluator( decompositionCode );
@@ -34,7 +34,7 @@ PositionVector::PositionVector( BindType bindType ) : GAVisToolGeometry( bindTyp
 
 	char compositionCode[ 512 ];
 	sprintf_s( compositionCode, sizeof( compositionCode ),
-		"v = x*e0 + y*e1 + z*e2"
+		"v = x*e1 + y*e2 + z*e3"
 	);
 	compositionEvaluator = calculator.CompileEvaluator( compositionCode );
 	wxASSERT( compositionEvaluator != 0 );

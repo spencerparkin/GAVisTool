@@ -25,11 +25,11 @@ ProjectivePoint::ProjectivePoint( BindType bindType ) : GAVisToolGeometry( bindT
 	char decompositionCode[ 512 ];
 	sprintf_s( decompositionCode, sizeof( decompositionCode ),
 		"do("
-		"w = pt . e3,"
+		"w = pt . e0,"
 		"pt = pt / w,"
-		"x = scalar_part( pt, e0 ),"
-		"y = scalar_part( pt, e1 ),"
-		"z = scalar_part( pt, e2 ),"
+		"x = scalar_part( pt, e1 ),"
+		"y = scalar_part( pt, e2 ),"
+		"z = scalar_part( pt, e3 ),"
 		")"
 	);
 	decompositionEvaluator = calculator.CompileEvaluator( decompositionCode );
@@ -38,8 +38,8 @@ ProjectivePoint::ProjectivePoint( BindType bindType ) : GAVisToolGeometry( bindT
 	char compositionCode[ 512 ];
 	sprintf_s( compositionCode, sizeof( compositionCode ),
 		"do("
-		"c = x*e0 + y*e1 + z*e2,"
-		"pt = w*(c + e3),"
+		"c = x*e1 + y*e2 + z*e3,"
+		"pt = w*(c + e0),"
 		")"
 	);
 	compositionEvaluator = calculator.CompileEvaluator( compositionCode );
@@ -184,17 +184,17 @@ ProjectiveLine::ProjectiveLine( BindType bindType ) : GAVisToolGeometry( bindTyp
 	char decompositionCode[ 512 ];
 	sprintf_s( decompositionCode, sizeof( decompositionCode ),
 		"do("
-		"n = e3 . lin,"
+		"n = e0 . lin,"
 		"w = sqrt( n . n ),"
 		"n = n / w,"
 		"lin = lin / w,"
-		"c = ( e3 . ( e3^lin ) )*n,"
-		"x = scalar_part( c, e0 ),"
-		"y = scalar_part( c, e1 ),"
-		"z = scalar_part( c, e2 ),"
-		"nx = scalar_part( n, e0 ),"
-		"ny = scalar_part( n, e1 ),"
-		"nz = scalar_part( n, e2 ),"
+		"c = ( e0 . ( e0^lin ) )*n,"
+		"x = scalar_part( c, e1 ),"
+		"y = scalar_part( c, e2 ),"
+		"z = scalar_part( c, e3 ),"
+		"nx = scalar_part( n, e1 ),"
+		"ny = scalar_part( n, e2 ),"
+		"nz = scalar_part( n, e3 ),"
 		")"
 	);
 	decompositionEvaluator = calculator.CompileEvaluator( decompositionCode );
@@ -203,9 +203,9 @@ ProjectiveLine::ProjectiveLine( BindType bindType ) : GAVisToolGeometry( bindTyp
 	char compositionCode[ 512 ];
 	sprintf_s( compositionCode, sizeof( compositionCode ),
 		"do("
-		"c = x*e0 + y*e1 + z*e2,"
-		"n = nx*e0 + ny*e1 + nz*e2,"
-		"lin = w*(c + e3)^n,"
+		"c = x*e1 + y*e2 + z*e3,"
+		"n = nx*e1 + ny*e2 + nz*e3,"
+		"lin = w*(c + e0)^n,"
 		")"
 	);
 	compositionEvaluator = calculator.CompileEvaluator( compositionCode );
@@ -370,17 +370,17 @@ ProjectivePlane::ProjectivePlane( BindType bindType ) : GAVisToolGeometry( bindT
 	char decompositionCode[ 512 ];
 	sprintf_s( decompositionCode, sizeof( decompositionCode ),
 		"do("
-		"n = ( e3 . pln )*( e0^e1^e2 ),"
+		"n = ( e0 . pln )*( e1^e2^e3 ),"
 		"w = sqrt( n . n ),"
 		"n = n / w,"
 		"pln = pln / w,"
-		"c = ( e3 . ( e3^pln ) )*( e0^e1^e2 )*n,"
-		"x = scalar_part( c, e0 ),"
-		"y = scalar_part( c, e1 ),"
-		"z = scalar_part( c, e2 ),"
-		"nx = scalar_part( n, e0 ),"
-		"ny = scalar_part( n, e1 ),"
-		"nz = scalar_part( n, e2 ),"
+		"c = ( e0 . ( e0^pln ) )*( e1^e2^e3 )*n,"
+		"x = scalar_part( c, e1 ),"
+		"y = scalar_part( c, e2 ),"
+		"z = scalar_part( c, e3 ),"
+		"nx = scalar_part( n, e1 ),"
+		"ny = scalar_part( n, e2 ),"
+		"nz = scalar_part( n, e3 ),"
 		")"
 	);
 	decompositionEvaluator = calculator.CompileEvaluator( decompositionCode );
@@ -389,9 +389,9 @@ ProjectivePlane::ProjectivePlane( BindType bindType ) : GAVisToolGeometry( bindT
 	char compositionCode[ 512 ];
 	sprintf_s( compositionCode, sizeof( compositionCode ),
 		"do("
-		"c = x*e0 + y*e1 + z*e2,"
-		"n = nx*e0 + ny*e1 + nz*e2,"
-		"pln = w*(c + e3)^( -n*( e0^e1^e2 ) ),"
+		"c = x*e1 + y*e2 + z*e3,"
+		"n = nx*e1 + ny*e2 + nz*e3,"
+		"pln = w*(c + e0)^( -n*( e1^e2^e3 ) ),"
 		")"
 	);
 	compositionEvaluator = calculator.CompileEvaluator( compositionCode );

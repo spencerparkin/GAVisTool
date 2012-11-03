@@ -29,9 +29,9 @@ ConformalFlatPoint::ConformalFlatPoint( BindType bindType ) : GAVisToolGeometry(
 		"w = -( fp^ni )*i,"
 		"fp = fp / w,"
 		"v = ( no . fp )*i,"
-		"x = scalar_part( v, e0 ),"
-		"y = scalar_part( v, e1 ),"
-		"z = scalar_part( v, e2 )"
+		"x = scalar_part( v, e1 ),"
+		"y = scalar_part( v, e2 ),"
+		"z = scalar_part( v, e3 )"
 		")",
 		( bindType == NORMAL_FORM ? "fp = fp*I," : "" )
 	);
@@ -41,7 +41,7 @@ ConformalFlatPoint::ConformalFlatPoint( BindType bindType ) : GAVisToolGeometry(
 	char compositionCode[ 512 ];
 	sprintf_s( compositionCode, sizeof( compositionCode ),
 		"do("
-		"v = x*e0 + y*e1 + z*e2,"
+		"v = x*e1 + y*e2 + z*e3,"
 		"fp = w*( i + ( v*i )^ni )%s"
 		")",
 		( bindType == NORMAL_FORM ? "*-I" : "" )
@@ -188,12 +188,12 @@ ConformalLine::ConformalLine( BindType bindType ) : GAVisToolGeometry( bindType 
 		"n = n / w,"
 		"lin = lin / w,"
 		"v = grade_part( 1, -n*( no . lin )*i ),"
-		"x = scalar_part( v, e0 ),"
-		"y = scalar_part( v, e1 ),"
-		"z = scalar_part( v, e2 ),"
-		"nx = scalar_part( n, e0 ),"
-		"ny = scalar_part( n, e1 ),"
-		"nz = scalar_part( n, e2 )"
+		"x = scalar_part( v, e1 ),"
+		"y = scalar_part( v, e2 ),"
+		"z = scalar_part( v, e3 ),"
+		"nx = scalar_part( n, e1 ),"
+		"ny = scalar_part( n, e2 ),"
+		"nz = scalar_part( n, e3 )"
 		")",
 		( bindType == NORMAL_FORM ? "lin = lin*I," : "" )
 	);
@@ -203,8 +203,8 @@ ConformalLine::ConformalLine( BindType bindType ) : GAVisToolGeometry( bindType 
 	char compositionCode[ 512 ];
 	sprintf_s( compositionCode, sizeof( compositionCode ),
 		"do("
-		"v = x*e0 + y*e1 + z*e2,"
-		"n = nx*e0 + ny*e1 + nz*e2,"
+		"v = x*e1 + y*e2 + z*e3,"
+		"n = nx*e1 + ny*e2 + nz*e3,"
 		"lin = w*( n*i - ( v . ( n*i ) )^ni )%s"
 		")",
 		( bindType == NORMAL_FORM ? "*-I" : "" )
@@ -389,12 +389,12 @@ ConformalPlane::ConformalPlane( BindType bindType ) : GAVisToolGeometry( bindTyp
 		"n = n / w,"
 		"pln = pln / w,"
 		"v = -n*( no . pln ),"
-		"x = scalar_part( v, e0 ),"
-		"y = scalar_part( v, e1 ),"
-		"z = scalar_part( v, e2 ),"
-		"nx = scalar_part( n, e0 ),"
-		"ny = scalar_part( n, e1 ),"
-		"nz = scalar_part( n, e2 )"
+		"x = scalar_part( v, e1 ),"
+		"y = scalar_part( v, e2 ),"
+		"z = scalar_part( v, e3 ),"
+		"nx = scalar_part( n, e1 ),"
+		"ny = scalar_part( n, e2 ),"
+		"nz = scalar_part( n, e3 )"
 		")",
 		( bindType == NORMAL_FORM ? "pln = pln*I," : "" )
 	);
@@ -404,8 +404,8 @@ ConformalPlane::ConformalPlane( BindType bindType ) : GAVisToolGeometry( bindTyp
 	char compositionCode[ 512 ];
 	sprintf_s( compositionCode, sizeof( compositionCode ),
 		"do("
-		"v = x*e0 + y*e1 + z*e2,"
-		"n = nx*e0 + ny*e1 + nz*e2,"
+		"v = x*e1 + y*e2 + z*e3,"
+		"n = nx*e1 + ny*e2 + nz*e3,"
 		"pln = w*( n + ( v . n )*ni )%s"
 		")",
 		( bindType == NORMAL_FORM ? "*-I" : "" )
