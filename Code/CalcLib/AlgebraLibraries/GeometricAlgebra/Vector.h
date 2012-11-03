@@ -110,12 +110,12 @@ public:
 };
 
 //=========================================================================================
-class GeometricAlgebra::Vector_e4 : public Vector
+class GeometricAlgebra::Vector_e0_bar : public Vector
 {
 public:
 
-	Vector_e4( void );
-	virtual ~Vector_e4( void );
+	Vector_e0_bar( void );
+	virtual ~Vector_e0_bar( void );
 
 	virtual Item* MakeCopy( void ) const override;
 	virtual double InnerProduct( const Vector& right ) const override;
@@ -124,12 +124,12 @@ public:
 };
 
 //=========================================================================================
-class GeometricAlgebra::Vector_e5 : public Vector
+class GeometricAlgebra::Vector_e1_bar : public Vector
 {
 public:
 
-	Vector_e5( void );
-	virtual ~Vector_e5( void );
+	Vector_e1_bar( void );
+	virtual ~Vector_e1_bar( void );
 
 	virtual Item* MakeCopy( void ) const override;
 	virtual double InnerProduct( const Vector& right ) const override;
@@ -138,12 +138,12 @@ public:
 };
 
 //=========================================================================================
-class GeometricAlgebra::Vector_e6 : public Vector
+class GeometricAlgebra::Vector_e2_bar : public Vector
 {
 public:
 
-	Vector_e6( void );
-	virtual ~Vector_e6( void );
+	Vector_e2_bar( void );
+	virtual ~Vector_e2_bar( void );
 
 	virtual Item* MakeCopy( void ) const override;
 	virtual double InnerProduct( const Vector& right ) const override;
@@ -152,12 +152,40 @@ public:
 };
 
 //=========================================================================================
-class GeometricAlgebra::Vector_e7 : public Vector
+class GeometricAlgebra::Vector_e3_bar : public Vector
 {
 public:
 
-	Vector_e7( void );
-	virtual ~Vector_e7( void );
+	Vector_e3_bar( void );
+	virtual ~Vector_e3_bar( void );
+
+	virtual Item* MakeCopy( void ) const override;
+	virtual double InnerProduct( const Vector& right ) const override;
+	virtual const char* Name( void ) const override;
+	virtual const char* LatexName( void ) const override;
+};
+
+//=========================================================================================
+class GeometricAlgebra::Vector_no_bar : public Vector
+{
+public:
+
+	Vector_no_bar( void );
+	virtual ~Vector_no_bar( void );
+
+	virtual Item* MakeCopy( void ) const override;
+	virtual double InnerProduct( const Vector& right ) const override;
+	virtual const char* Name( void ) const override;
+	virtual const char* LatexName( void ) const override;
+};
+
+//=========================================================================================
+class GeometricAlgebra::Vector_ni_bar : public Vector
+{
+public:
+
+	Vector_ni_bar( void );
+	virtual ~Vector_ni_bar( void );
 
 	virtual Item* MakeCopy( void ) const override;
 	virtual double InnerProduct( const Vector& right ) const override;

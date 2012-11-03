@@ -35,10 +35,12 @@ namespace GeometricAlgebra
 	class Vector_e3;
 	class Vector_no;
 	class Vector_ni;
-	class Vector_e4;
-	class Vector_e5;
-	class Vector_e6;
-	class Vector_e7;
+	class Vector_e0_bar;
+	class Vector_e1_bar;
+	class Vector_e2_bar;
+	class Vector_e3_bar;
+	class Vector_no_bar;
+	class Vector_ni_bar;
 }
 
 //=========================================================================================

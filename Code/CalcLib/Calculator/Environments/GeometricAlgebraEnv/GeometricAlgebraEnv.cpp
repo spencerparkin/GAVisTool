@@ -103,18 +103,22 @@ GeometricAlgebraEnvironment::GeometricAlgebraEnvironment( void )
 		vector = new GeometricAlgebra::Vector_e2();
 	else if( 0 == strcmp( variableName, "e3" ) )
 		vector = new GeometricAlgebra::Vector_e3();
-	else if( 0 == strcmp( variableName, "e4" ) )
-		vector = new GeometricAlgebra::Vector_e4();
-	else if( 0 == strcmp( variableName, "e5" ) )
-		vector = new GeometricAlgebra::Vector_e5();
-	else if( 0 == strcmp( variableName, "e6" ) )
-		vector = new GeometricAlgebra::Vector_e6();
-	else if( 0 == strcmp( variableName, "e7" ) )
-		vector = new GeometricAlgebra::Vector_e7();
+	else if( 0 == strcmp( variableName, "e0b" ) )
+		vector = new GeometricAlgebra::Vector_e0_bar();
+	else if( 0 == strcmp( variableName, "e1b" ) )
+		vector = new GeometricAlgebra::Vector_e1_bar();
+	else if( 0 == strcmp( variableName, "e2b" ) )
+		vector = new GeometricAlgebra::Vector_e2_bar();
+	else if( 0 == strcmp( variableName, "e3b" ) )
+		vector = new GeometricAlgebra::Vector_e3_bar();
 	else if( 0 == strcmp( variableName, "no" ) )
 		vector = new GeometricAlgebra::Vector_no();
 	else if( 0 == strcmp( variableName, "ni" ) )
 		vector = new GeometricAlgebra::Vector_ni();
+	else if( 0 == strcmp( variableName, "nob" ) )
+		vector = new GeometricAlgebra::Vector_no_bar();
+	else if( 0 == strcmp( variableName, "nib" ) )
+		vector = new GeometricAlgebra::Vector_ni_bar();
 	else if( 0 == strcmp( variableName, "i" ) )
 	{
 		blade = new GeometricAlgebra::Blade();
@@ -167,17 +171,17 @@ GeometricAlgebraEnvironment::GeometricAlgebraEnvironment( void )
 
 		GeometricAlgebra::Blade blade_e1e5;
 		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e1() );
-		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e5() );
+		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e1_bar() );
 		blade_e1e5.AssignBlade( vectorProduct, 1.0 );
 
 		GeometricAlgebra::Blade blade_e2e6;
 		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e2() );
-		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e6() );
+		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e2_bar() );
 		blade_e2e6.AssignBlade( vectorProduct, 1.0 );
 
 		GeometricAlgebra::Blade blade_e3e7;
 		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e3() );
-		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e7() );
+		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e3_bar() );
 		blade_e3e7.AssignBlade( vectorProduct, 1.0 );
 
 		sumOfBlades->Accumulate( blade_e1e5 );
@@ -189,7 +193,7 @@ GeometricAlgebraEnvironment::GeometricAlgebraEnvironment( void )
 		blade = new GeometricAlgebra::Blade();
 		Utilities::List vectorProduct;
 		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e0() );
-		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e4() );
+		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e0_bar() );
 		blade->AssignBlade( vectorProduct, 1.0 );
 	}
 

@@ -264,151 +264,225 @@ Vector_ni::Vector_ni( void )
 }
 
 //=========================================================================================
-Vector_e4::Vector_e4( void )
+Vector_e0_bar::Vector_e0_bar( void )
 {
 }
 
 //=========================================================================================
-/*virtual*/ Vector_e4::~Vector_e4( void )
+/*virtual*/ Vector_e0_bar::~Vector_e0_bar( void )
 {
 }
 
 //=========================================================================================
-/*virtual*/ Utilities::List::Item* Vector_e4::MakeCopy( void ) const
+/*virtual*/ Utilities::List::Item* Vector_e0_bar::MakeCopy( void ) const
 {
-	return new Vector_e4();
+	return new Vector_e0_bar();
 }
 
 //=========================================================================================
-/*virtual*/ double Vector_e4::InnerProduct( const Vector& right ) const
+/*virtual*/ double Vector_e0_bar::InnerProduct( const Vector& right ) const
 {
 	const char* rightName = right.Name();
-	if( 0 == strcmp( rightName, "e4" ) )
+	if( 0 == strcmp( rightName, "e0b" ) )
 		return 1.0;
 	return 0.0;
 }
 
 //=========================================================================================
-/*virtual*/ const char* Vector_e4::Name( void ) const
+/*virtual*/ const char* Vector_e0_bar::Name( void ) const
 {
-	return "e4";
+	return "e0b";
 }
 
 //=========================================================================================
-/*virtual*/ const char* Vector_e4::LatexName( void ) const
+/*virtual*/ const char* Vector_e0_bar::LatexName( void ) const
 {
-	return "e_4";
+	return "\\overline{e}_0";
 }
 
 //=========================================================================================
-Vector_e5::Vector_e5( void )
-{
-}
-
-//=========================================================================================
-/*virtual*/ Vector_e5::~Vector_e5( void )
+Vector_e1_bar::Vector_e1_bar( void )
 {
 }
 
 //=========================================================================================
-/*virtual*/ Utilities::List::Item* Vector_e5::MakeCopy( void ) const
+/*virtual*/ Vector_e1_bar::~Vector_e1_bar( void )
 {
-	return new Vector_e5();
 }
 
 //=========================================================================================
-/*virtual*/ double Vector_e5::InnerProduct( const Vector& right ) const
+/*virtual*/ Utilities::List::Item* Vector_e1_bar::MakeCopy( void ) const
+{
+	return new Vector_e1_bar();
+}
+
+//=========================================================================================
+/*virtual*/ double Vector_e1_bar::InnerProduct( const Vector& right ) const
 {
 	const char* rightName = right.Name();
-	if( 0 == strcmp( rightName, "e5" ) )
+	if( 0 == strcmp( rightName, "e1b" ) )
 		return 1.0;
 	return 0.0;
 }
 
 //=========================================================================================
-/*virtual*/ const char* Vector_e5::Name( void ) const
+/*virtual*/ const char* Vector_e1_bar::Name( void ) const
 {
-	return "e5";
+	return "e1b";
 }
 
 //=========================================================================================
-/*virtual*/ const char* Vector_e5::LatexName( void ) const
+/*virtual*/ const char* Vector_e1_bar::LatexName( void ) const
 {
-	return "e_5";
+	return "\\overline{e}_1";
 }
 
 //=========================================================================================
-Vector_e6::Vector_e6( void )
-{
-}
-
-//=========================================================================================
-/*virtual*/ Vector_e6::~Vector_e6( void )
+Vector_e2_bar::Vector_e2_bar( void )
 {
 }
 
 //=========================================================================================
-/*virtual*/ Utilities::List::Item* Vector_e6::MakeCopy( void ) const
+/*virtual*/ Vector_e2_bar::~Vector_e2_bar( void )
 {
-	return new Vector_e6();
 }
 
 //=========================================================================================
-/*virtual*/ double Vector_e6::InnerProduct( const Vector& right ) const
+/*virtual*/ Utilities::List::Item* Vector_e2_bar::MakeCopy( void ) const
+{
+	return new Vector_e2_bar();
+}
+
+//=========================================================================================
+/*virtual*/ double Vector_e2_bar::InnerProduct( const Vector& right ) const
 {
 	const char* rightName = right.Name();
-	if( 0 == strcmp( rightName, "e6" ) )
+	if( 0 == strcmp( rightName, "e2b" ) )
 		return 1.0;
 	return 0.0;
 }
 
 //=========================================================================================
-/*virtual*/ const char* Vector_e6::Name( void ) const
+/*virtual*/ const char* Vector_e2_bar::Name( void ) const
 {
-	return "e6";
+	return "e2b";
 }
 
 //=========================================================================================
-/*virtual*/ const char* Vector_e6::LatexName( void ) const
+/*virtual*/ const char* Vector_e2_bar::LatexName( void ) const
 {
-	return "e_6";
+	return "\\overline{e}_2";
 }
 
 //=========================================================================================
-Vector_e7::Vector_e7( void )
-{
-}
-
-//=========================================================================================
-/*virtual*/ Vector_e7::~Vector_e7( void )
+Vector_e3_bar::Vector_e3_bar( void )
 {
 }
 
 //=========================================================================================
-/*virtual*/ Utilities::List::Item* Vector_e7::MakeCopy( void ) const
+/*virtual*/ Vector_e3_bar::~Vector_e3_bar( void )
 {
-	return new Vector_e7();
 }
 
 //=========================================================================================
-/*virtual*/ double Vector_e7::InnerProduct( const Vector& right ) const
+/*virtual*/ Utilities::List::Item* Vector_e3_bar::MakeCopy( void ) const
+{
+	return new Vector_e3_bar();
+}
+
+//=========================================================================================
+/*virtual*/ double Vector_e3_bar::InnerProduct( const Vector& right ) const
 {
 	const char* rightName = right.Name();
-	if( 0 == strcmp( rightName, "e7" ) )
+	if( 0 == strcmp( rightName, "e3b" ) )
 		return 1.0;
 	return 0.0;
 }
 
 //=========================================================================================
-/*virtual*/ const char* Vector_e7::Name( void ) const
+/*virtual*/ const char* Vector_e3_bar::Name( void ) const
 {
-	return "e7";
+	return "e3b";
 }
 
 //=========================================================================================
-/*virtual*/ const char* Vector_e7::LatexName( void ) const
+/*virtual*/ const char* Vector_e3_bar::LatexName( void ) const
 {
-	return "e_7";
+	return "\\overline{e}_3";
+}
+
+//=========================================================================================
+Vector_no_bar::Vector_no_bar( void )
+{
+}
+
+//=========================================================================================
+/*virtual*/ Vector_no_bar::~Vector_no_bar( void )
+{
+}
+
+//=========================================================================================
+/*virtual*/ Utilities::List::Item* Vector_no_bar::MakeCopy( void ) const
+{
+	return new Vector_no_bar();
+}
+
+//=========================================================================================
+/*virtual*/ double Vector_no_bar::InnerProduct( const Vector& right ) const
+{
+	const char* rightName = right.Name();
+	if( 0 == strcmp( rightName, "nib" ) )
+		return -1.0;
+	return 0.0;
+}
+
+//=========================================================================================
+/*virtual*/ const char* Vector_no_bar::Name( void ) const
+{
+	return "nob";
+}
+
+//=========================================================================================
+/*virtual*/ const char* Vector_no_bar::LatexName( void ) const
+{
+	return "\\overline{o}";
+}
+
+//=========================================================================================
+Vector_ni_bar::Vector_ni_bar( void )
+{
+}
+
+//=========================================================================================
+/*virtual*/ Vector_ni_bar::~Vector_ni_bar( void )
+{
+}
+
+//=========================================================================================
+/*virtual*/ Utilities::List::Item* Vector_ni_bar::MakeCopy( void ) const
+{
+	return new Vector_ni_bar();
+}
+
+//=========================================================================================
+/*virtual*/ double Vector_ni_bar::InnerProduct( const Vector& right ) const
+{
+	const char* rightName = right.Name();
+	if( 0 == strcmp( rightName, "nob" ) )
+		return -1.0;
+	return 0.0;
+}
+
+//=========================================================================================
+/*virtual*/ const char* Vector_ni_bar::Name( void ) const
+{
+	return "nib";
+}
+
+//=========================================================================================
+/*virtual*/ const char* Vector_ni_bar::LatexName( void ) const
+{
+	return "\\overline{\\infty}";
 }
 
 // Vector.cpp
