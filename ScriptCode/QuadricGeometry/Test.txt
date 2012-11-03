@@ -1,0 +1,46 @@
+/*
+ * Test fundamental properties of the extended quadric model.
+ */
+do
+(
+	em = 0.5*ni + no,
+	ep = 0.5*ni - no,
+	emb = 0.5*nib + nob,
+	epb = 0.5*nib - nob,
+	
+	S0 = ( 1 - e0*e0b ) / sqrt(2),
+	S1 = ( 1 - e1*e1b ) / sqrt(2),
+	S2 = ( 1 - e2*e2b ) / sqrt(2),
+	S3 = ( 1 - e3*e3b ) / sqrt(2),
+	
+	Sm = ( 1 + em*emb ) / sqrt(2),
+	Sp = ( 1 - ep*epb ) / sqrt(2),
+	
+	S_prime = Sm*Sp,
+	S = S0*S1*S2*S3,
+	S_star = S_prime*S,
+	
+	p = e0 + $x*e1 + $y*e2 + $z*e3,
+	pb = e0b + $x*e1b + $y*e2b + $z*e3b,
+	
+	P = no + p + 0.5*(p.p)*ni,
+	Pb = nob + pb + 0.5*(pb.pb)*nib,
+	
+	/* Grade 1 part is taken to kill round-off error. */
+	/*test = grade_part( 1, S_star*pB*S_star~ ),*/
+	
+	E =
+		$A*e0^e0b +
+		$B*e0^e1b +
+		$C*e0^e2b +
+		$D*e0^e3b +
+		$E*e1^e1b +
+		$F*e1^e2b +
+		$G*e1^e3b +
+		$H*e2^e2b +
+		$I*e2^e3b +
+		$J*e3^e3b,
+	
+	test = ( P ^ Pb ) . E,
+	test2 = ( p ^ pb ) . E,
+)

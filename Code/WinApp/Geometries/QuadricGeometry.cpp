@@ -19,32 +19,33 @@ QuadricGeometry::QuadricGeometry( BindType bindType ) : GAVisToolGeometry( bindT
 {
 	CalcLib::Calculator calculator( "geoalg" );
 
-	// ( e0 + x*e1 + y*e2 + z*e3 )^( e4 + x*e5 + y*e6 + z*e7 )
-	// = 1*( e0^e4 )
-	// + x*( e0^e5 + e1^e4 )
-	// + y*( e0^e6 + e2^e4 )
-	// + z*( e0^e7 + e3^e4 )
-	// + x^2*( e1^e5 )
-	// + x*y*( e1^e6 + e2^e5 )
-	// + x*z*( e1^e7 + e3^e5 )
-	// + y^2*( e2^e6 )
-	// + y*z*( e2^e7 + e3^e6 )
-	// + z^2*( e3^e7 )
+	// ( e0 + x*e1 + y*e2 + z*e3 )^( e0b + x*e1b + y*e2b + z*e3b )
+	// = 1*( e0^e0b )
+	// + x*( e0^e1b + e1^e0b )
+	// + y*( e0^e2b + e2^e0b )
+	// + z*( e0^e3b + e3^e0b )
+	// + x^2*( e1^e1b )
+	// + x*y*( e1^e2b + e2^e1b )
+	// + x*z*( e1^e3b + e3^e1b )
+	// + y^2*( e2^e2b )
+	// + y*z*( e2^e3b + e3^e2b )
+	// + z^2*( e3^e3b )
 
 	// The 1/2 factors here are needed by the internal low-level quadric representation.
-	char decompositionCode[ 512 ];
+	// I should probably fix that so that we can kill the 1/2 factor here.
+	char decompositionCode[ 1024 ];
 	strcpy_s( decompositionCode, sizeof( decompositionCode ),
 		"do("
-		"a00 = scalar_part( B, e0^e4 ),"
-		"a01 = 0.5*( scalar_part( B, e0^e5 ) - scalar_part( B, e4^e1 ) ),"
-		"a02 = 0.5*( scalar_part( B, e0^e6 ) - scalar_part( B, e4^e2 ) ),"
-		"a03 = 0.5*( scalar_part( B, e0^e7 ) - scalar_part( B, e4^e3 ) ),"
-		"a11 = scalar_part( B, e1^e5 ),"
-		"a12 = 0.5*( scalar_part( B, e1^e6 ) - scalar_part( B, e5^e2 ) ),"
-		"a13 = 0.5*( scalar_part( B, e1^e7 ) - scalar_part( B, e5^e3 ) ),"
-		"a22 = scalar_part( B, e2^e6 ),"
-		"a23 = 0.5*( scalar_part( B, e2^e7 ) - scalar_part( B, e6^e3 ) ),"
-		"a33 = scalar_part( B, e3^e7 ),"
+		"a00 = scalar_part( B, e0^e0b ),"
+		"a01 = 0.5*( scalar_part( B, e0^e1b ) - scalar_part( B, e0b^e1 ) ),"
+		"a02 = 0.5*( scalar_part( B, e0^e2b ) - scalar_part( B, e0b^e2 ) ),"
+		"a03 = 0.5*( scalar_part( B, e0^e3b ) - scalar_part( B, e0b^e3 ) ),"
+		"a11 = scalar_part( B, e1^e1b ),"
+		"a12 = 0.5*( scalar_part( B, e1^e2b ) - scalar_part( B, e1b^e2 ) ),"
+		"a13 = 0.5*( scalar_part( B, e1^e3b ) - scalar_part( B, e1b^e3 ) ),"
+		"a22 = scalar_part( B, e2^e2b ),"
+		"a23 = 0.5*( scalar_part( B, e2^e3b ) - scalar_part( B, e2b^e3 ) ),"
+		"a33 = scalar_part( B, e3^e3b ),"
 		")"
 	);
 	decompositionEvaluator = calculator.CompileEvaluator( decompositionCode );

@@ -6,12 +6,12 @@ do
 	/* (a + b_bar)^(c + d_bar) */
 	
 	a = e0 + 3*e2,
-	b_bar = e4 + 2*e5,
+	b_bar = e0b + 2*e1b,
 	c = e0 - 2*e2,
-	d_bar = e4 - 2*e5,
+	d_bar = e0b - 2*e1b,
 	
 	p = e0 + $x*e1 + $y*e2 + $z*e3,
-	pb = e4 + $x*e5 + $y*e2 + $z*e3,
+	pb = e0b + $x*e1b + $y*e2 + $z*e3,
 	
 	bind_qpoint( a, c ),
 	bind_rot_qpoint( b_bar, d_bar ),

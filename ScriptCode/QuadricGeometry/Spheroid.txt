@@ -9,25 +9,25 @@ do
 	a22 = 0.8,
 	a33 = 0.7,
 	
-	B = a00*e0*e4 + a11*e1*e5 + a22*e2*e6 + a33*e3*e7,
+	B = a00*e0*e0b + a11*e1*e1b + a22*e2*e2b + a33*e3*e3b,
 	
 	bind_quadric(B),
 	*/
 	
 	/* These are used for debugging purposes. */
 	p = e0 + $x*e1 + $y*e2 + $z*e3,
-	pb = e4 + $x*e5 + $y*e6 + $z*e7,
+	pb = e0b + $x*e1b + $y*e2b + $z*e3b,
 	
-	R04 = ( 1 - e0*e4 ) / sqrt(2),
-	R15 = ( 1 - e1*e5 ) / sqrt(2),
-	R26 = ( 1 - e2*e6 ) / sqrt(2),
-	R37 = ( 1 - e3*e7 ) / sqrt(2),
+	R04 = ( 1 - e0*e0b ) / sqrt(2),
+	R15 = ( 1 - e1*e1b ) / sqrt(2),
+	R26 = ( 1 - e2*e2b ) / sqrt(2),
+	R37 = ( 1 - e3*e3b ) / sqrt(2),
 	
 	R = R04*R15*R26*R37,
 	
 	c = 0,
 	v = e1,		/* Keep this unit-length. */
-	vb = e5,
+	vb = e1b,
 	r = 1.5,
 	l = 1,
 	
@@ -36,7 +36,7 @@ do
 	formula_constraint( "vb = grade_part( 1, R*v*R~ )" ),
 	
 	E = 0,
-	formula_constraint( "E = Omega + l*v^vb - 2*(c + l*(c . v)*v)^e4 + (c*c + l*(c . v)*(c . v) - r*r)*Alpha" ),
+	formula_constraint( "E = Omega + l*v^vb - 2*(c + l*(c . v)*v)^e0b + (c*c + l*(c . v)*(c . v) - r*r)*Alpha" ),
 	
 	bind_quadric(E),
 )
