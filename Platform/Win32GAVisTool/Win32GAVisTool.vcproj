@@ -680,6 +680,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\ScriptCode\QuadricGeometry\DebugPaper.txt"
+					>
+				</File>
+				<File
 					RelativePath="..\..\ScriptCode\QuadricGeometry\DiffOfSpheroids.txt"
 					>
 				</File>
@@ -709,6 +713,10 @@
 				</File>
 				<File
 					RelativePath="..\..\ScriptCode\QuadricGeometry\Translate.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ScriptCode\QuadricGeometry\TranslationByVersor.txt"
 					>
 				</File>
 			</Filter>

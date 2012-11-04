@@ -1,0 +1,24 @@
+/*
+ */
+do
+(
+	c = 2*e2,
+	n = e2,
+	pi = n + (c.n)*ni,
+	
+	cb = 2*e2b,
+	nb = e2b,
+	pib = nb + (cb.nb)*nib,
+	
+	a = e0+e1+e2+e3,
+	b = e0+e1+e2+e3,
+	bb = e0b+e1b+e2b+e3b,
+	
+	p = e0 + 2*e1 + 3*e2 - e3,
+	pb = e0b + 2*e1b + 3*e2b - e3b,
+	
+	P = no + p + 0.5*(p.p)*ni,
+	Pb = nob + pb + 0.5*(pb.pb)*nib,
+	
+	
+)
