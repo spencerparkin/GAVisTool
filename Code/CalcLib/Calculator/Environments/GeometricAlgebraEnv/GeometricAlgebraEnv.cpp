@@ -123,28 +123,28 @@ GeometricAlgebraEnvironment::GeometricAlgebraEnvironment( void )
 	{
 		blade = new GeometricAlgebra::Blade();
 		Utilities::List vectorProduct;
-		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e0() );
 		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e1() );
 		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e2() );
+		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e3() );
 		blade->AssignBlade( vectorProduct, 1.0 );
 	}
 	else if( 0 == strcmp( variableName, "I" ) )
 	{
 		blade = new GeometricAlgebra::Blade();
 		Utilities::List vectorProduct;
-		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e0() );
 		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e1() );
 		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e2() );
+		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e3() );
 		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_ni() );
 		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_no() );
 		blade->AssignBlade( vectorProduct, 1.0 );
 	}
-	else if( 0 == strcmp( variableName, "E0" ) )
+	else if( 0 == strcmp( variableName, "E2" ) )
 	{
 		blade = new GeometricAlgebra::Blade();
 		Utilities::List vectorProduct;
+		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e3() );
 		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e1() );
-		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e2() );
 		blade->AssignBlade( vectorProduct, 1.0 );
 	}
 	else if( 0 == strcmp( variableName, "E1" ) )
@@ -155,12 +155,12 @@ GeometricAlgebraEnvironment::GeometricAlgebraEnvironment( void )
 		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e0() );
 		blade->AssignBlade( vectorProduct, 1.0 );
 	}
-	else if( 0 == strcmp( variableName, "E2" ) )
+	else if( 0 == strcmp( variableName, "E3" ) )
 	{
 		blade = new GeometricAlgebra::Blade();
 		Utilities::List vectorProduct;
-		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e0() );
 		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e1() );
+		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e2() );
 		blade->AssignBlade( vectorProduct, 1.0 );
 	}
 	else if( 0 == strcmp( variableName, "Omega" ) )
