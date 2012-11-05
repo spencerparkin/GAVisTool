@@ -19,11 +19,11 @@ QuadricGeometry::QuadricGeometry( BindType bindType ) : GAVisToolGeometry( bindT
 {
 	CalcLib::Calculator calculator( "geoalg" );
 
-	// ( e0 + x*e1 + y*e2 + z*e3 )^( e0b + x*e1b + y*e2b + z*e3b )
-	// = 1*( e0^e0b )
-	// + x*( e0^e1b + e1^e0b )
-	// + y*( e0^e2b + e2^e0b )
-	// + z*( e0^e3b + e3^e0b )
+	// ( no + x*e1 + y*e2 + z*e3 )^( nob + x*e1b + y*e2b + z*e3b )
+	// = 1*( no^nob )
+	// + x*( no^e1b + e1^nob )
+	// + y*( no^e2b + e2^nob )
+	// + z*( no^e3b + e3^nob )
 	// + x^2*( e1^e1b )
 	// + x*y*( e1^e2b + e2^e1b )
 	// + x*z*( e1^e3b + e3^e1b )
@@ -31,21 +31,21 @@ QuadricGeometry::QuadricGeometry( BindType bindType ) : GAVisToolGeometry( bindT
 	// + y*z*( e2^e3b + e3^e2b )
 	// + z^2*( e3^e3b )
 
-	// The 1/2 factors here are needed by the internal low-level quadric representation.
-	// I should probably fix that so that we can kill the 1/2 factor here.
+	// 0 = A*x^2 + B*y^2 + C*z^2 + D*xy + E*xz + F*yz + G*x + H*y + I*z + J
+
 	char decompositionCode[ 1024 ];
 	strcpy_s( decompositionCode, sizeof( decompositionCode ),
 		"do("
-		"a00 = scalar_part( B, e0^e0b ),"
-		"a01 = 0.5*( scalar_part( B, e0^e1b ) - scalar_part( B, e0b^e1 ) ),"
-		"a02 = 0.5*( scalar_part( B, e0^e2b ) - scalar_part( B, e0b^e2 ) ),"
-		"a03 = 0.5*( scalar_part( B, e0^e3b ) - scalar_part( B, e0b^e3 ) ),"
-		"a11 = scalar_part( B, e1^e1b ),"
-		"a12 = 0.5*( scalar_part( B, e1^e2b ) - scalar_part( B, e1b^e2 ) ),"
-		"a13 = 0.5*( scalar_part( B, e1^e3b ) - scalar_part( B, e1b^e3 ) ),"
-		"a22 = scalar_part( B, e2^e2b ),"
-		"a23 = 0.5*( scalar_part( B, e2^e3b ) - scalar_part( B, e2b^e3 ) ),"
-		"a33 = scalar_part( B, e3^e3b ),"
+		"quadric_A = -scalar_part( quadric, e1^e1b ),"
+		"quadric_B = -scalar_part( quadric, e2^e2b ),"
+		"quadric_C = -scalar_part( quadric, e3^e3b ),"
+		"quadric_D = -( scalar_part( quadric, e1^e2b ) + scalar_part( quadric, e2^e1b ) ),"
+		"quadric_E = -( scalar_part( quadric, e1^e3b ) + scalar_part( quadric, e3^e1b ) ),"
+		"quadric_F = -( scalar_part( quadric, e2^e3b ) + scalar_part( quadric, e3^e2b ) ),"
+		"quadric_G = ( scalar_part( quadric, ni^e1b ) + scalar_part( quadric, e1^nib ) ),"
+		"quadric_H = ( scalar_part( quadric, ni^e2b ) + scalar_part( quadric, e2^nib ) ),"
+		"quadric_I = ( scalar_part( quadric, ni^e3b ) + scalar_part( quadric, e3^nib ) ),"
+		"quadric_J = -scalar_part( quadric, ni^nib ),"
 		")"
 	);
 	decompositionEvaluator = calculator.CompileEvaluator( decompositionCode );
@@ -78,30 +78,30 @@ QuadricGeometry::QuadricGeometry( BindType bindType ) : GAVisToolGeometry( bindT
 	CalcLib::MultivectorNumber* multivector = ( CalcLib::MultivectorNumber* )number;
 
 	multivector->AssignFrom( element, gaEnv );
-	gaEnv.StoreVariable( "B", *number );
+	gaEnv.StoreVariable( "quadric", *number );
 
 	decompositionEvaluator->EvaluateResult( *number, gaEnv );
 
-	gaEnv.LookupVariable( "a00", *number );
-	multivector->AssignTo( quadric.a00, gaEnv );
-	gaEnv.LookupVariable( "a01", *number );
-	multivector->AssignTo( quadric.a01, gaEnv );
-	gaEnv.LookupVariable( "a02", *number );
-	multivector->AssignTo( quadric.a02, gaEnv );
-	gaEnv.LookupVariable( "a03", *number );
-	multivector->AssignTo( quadric.a03, gaEnv );
-	gaEnv.LookupVariable( "a11", *number );
-	multivector->AssignTo( quadric.a11, gaEnv );
-	gaEnv.LookupVariable( "a12", *number );
-	multivector->AssignTo( quadric.a12, gaEnv );
-	gaEnv.LookupVariable( "a13", *number );
-	multivector->AssignTo( quadric.a13, gaEnv );
-	gaEnv.LookupVariable( "a22", *number );
-	multivector->AssignTo( quadric.a22, gaEnv );
-	gaEnv.LookupVariable( "a23", *number );
-	multivector->AssignTo( quadric.a23, gaEnv );
-	gaEnv.LookupVariable( "a33", *number );
-	multivector->AssignTo( quadric.a33, gaEnv );
+	gaEnv.LookupVariable( "quadric_A", *number );
+	multivector->AssignTo( quadric.A, gaEnv );
+	gaEnv.LookupVariable( "quadric_B", *number );
+	multivector->AssignTo( quadric.B, gaEnv );
+	gaEnv.LookupVariable( "quadric_C", *number );
+	multivector->AssignTo( quadric.C, gaEnv );
+	gaEnv.LookupVariable( "quadric_D", *number );
+	multivector->AssignTo( quadric.D, gaEnv );
+	gaEnv.LookupVariable( "quadric_E", *number );
+	multivector->AssignTo( quadric.E, gaEnv );
+	gaEnv.LookupVariable( "quadric_F", *number );
+	multivector->AssignTo( quadric.F, gaEnv );
+	gaEnv.LookupVariable( "quadric_G", *number );
+	multivector->AssignTo( quadric.G, gaEnv );
+	gaEnv.LookupVariable( "quadric_H", *number );
+	multivector->AssignTo( quadric.H, gaEnv );
+	gaEnv.LookupVariable( "quadric_I", *number );
+	multivector->AssignTo( quadric.I, gaEnv );
+	gaEnv.LookupVariable( "quadric_J", *number );
+	multivector->AssignTo( quadric.J, gaEnv );
 
 	delete number;
 }
@@ -200,193 +200,6 @@ void QuadricGeometry::DrawTrace( VectorMath::Quadric::Trace* trace, GAVisToolRen
 //=========================================================================================
 /*virtual*/ void QuadricGeometry::Scale( float scale )
 {
-}
-
-//=========================================================================================
-IMPLEMENT_CALCLIB_CLASS1( QuadricGeometryPoint, GAVisToolGeometry );
-
-//=========================================================================================
-QuadricGeometryPoint::QuadricGeometryPoint( BindType bindType ) : GAVisToolGeometry( bindType )
-{
-	VectorMath::Zero( point );
-	weight = 1.0;
-
-	CalcLib::Calculator calculator( "geoalg" );
-
-	char decompositionCode[ 512 ];
-	decompositionCode[0] = '\0';
-	if( bindType == NORMAL_FORM )
-	{
-		sprintf_s( decompositionCode, sizeof( decompositionCode ),
-			"do("
-			"w = pt . e0,"
-			"pt = pt / w,"
-			"x = scalar_part( pt, e1 ),"
-			"y = scalar_part( pt, e2 ),"
-			"z = scalar_part( pt, e3 ),"
-			")"
-		);
-	}
-	else if( bindType == ROTATED_FORM )
-	{
-		sprintf_s( decompositionCode, sizeof( decompositionCode ),
-			"do("
-			"w = pt . e4,"
-			"pt = pt / w,"
-			"x = scalar_part( pt, e5 ),"
-			"y = scalar_part( pt, e6 ),"
-			"z = scalar_part( pt, e7 ),"
-			")"
-		);
-	}
-	decompositionEvaluator = calculator.CompileEvaluator( decompositionCode );
-	wxASSERT( decompositionEvaluator != 0 );
-
-	char compositionCode[ 512 ];
-	compositionCode[0] = '\0';
-	if( bindType == NORMAL_FORM )
-	{
-		sprintf_s( compositionCode, sizeof( compositionCode ),
-			"do("
-			"c = x*e1 + y*e2 + z*e3,"
-			"pt = w*(e0 + c),"
-			")"
-		);
-	}
-	else if( bindType == ROTATED_FORM )
-	{
-		sprintf_s( compositionCode, sizeof( compositionCode ),
-			"do("
-			"c = x*e5 + y*e6 + z*e7,"
-			"pt = w*(e4 + c),"
-			")"
-		);
-	}
-	compositionEvaluator = calculator.CompileEvaluator( compositionCode );
-	wxASSERT( compositionEvaluator != 0 );
-}
-
-//=========================================================================================
-/*virtual*/ QuadricGeometryPoint::~QuadricGeometryPoint( void )
-{
-}
-
-//=========================================================================================
-/*static*/ GAVisToolBindTarget* QuadricGeometryPoint::Create( BindType bindType )
-{
-	return new QuadricGeometryPoint( bindType );
-}
-
-//=========================================================================================
-/*virtual*/ void QuadricGeometryPoint::DecomposeFrom( const GeometricAlgebra::SumOfBlades& element )
-{
-	CalcLib::GeometricAlgebraEnvironment gaEnv;
-	
-	CalcLib::Number* number = gaEnv.CreateNumber();
-	CalcLib::MultivectorNumber* multivector = number->Cast< CalcLib::MultivectorNumber >();
-
-	multivector->AssignFrom( element, gaEnv );
-	gaEnv.StoreVariable( "pt", *number );
-
-	decompositionEvaluator->EvaluateResult( *number, gaEnv );
-	
-	gaEnv.LookupVariable( "w", *number );
-	multivector->AssignTo( weight, gaEnv );
-	gaEnv.LookupVariable( "x", *number );
-	multivector->AssignTo( point.x, gaEnv );
-	gaEnv.LookupVariable( "y", *number );
-	multivector->AssignTo( point.y, gaEnv );
-	gaEnv.LookupVariable( "z", *number );
-	multivector->AssignTo( point.z, gaEnv );
-
-	delete number;
-}
-
-//=========================================================================================
-/*virtual*/ void QuadricGeometryPoint::ComposeTo( GeometricAlgebra::SumOfBlades& element ) const
-{
-	CalcLib::GeometricAlgebraEnvironment gaEnv;
-
-	CalcLib::Number* number = gaEnv.CreateNumber();
-	CalcLib::MultivectorNumber* multivector = number->Cast< CalcLib::MultivectorNumber >();
-
-	number->AssignFrom( weight, gaEnv );
-	gaEnv.StoreVariable( "w", *number );
-	number->AssignFrom( point.x, gaEnv );
-	gaEnv.StoreVariable( "x", *number );
-	number->AssignFrom( point.y, gaEnv );
-	gaEnv.StoreVariable( "y", *number );
-	number->AssignFrom( point.z, gaEnv );
-	gaEnv.StoreVariable( "z", *number );
-
-	compositionEvaluator->EvaluateResult( *number, gaEnv );
-
-	gaEnv.LookupVariable( "pt", *number );
-	multivector->AssignTo( element, gaEnv );
-
-	delete number;
-}
-
-//=========================================================================================
-/*virtual*/ void QuadricGeometryPoint::DumpInfo( char* printBuffer, int printBufferSize ) const
-{
-	sprintf_s( printBuffer, printBufferSize,
-			"The variable \"%s\" is being interpreted as a projective point for the quadric model.\n"
-			"Weight: %f\n"
-			"Position: < %f, %f, %f >\n",
-			name,
-			weight,
-			point.x, point.y, point.z );
-}
-
-//=========================================================================================
-/*virtual*/ void QuadricGeometryPoint::AddInventoryTreeItem( wxTreeCtrl* treeCtrl, wxTreeItemId parentItem ) const
-{
-	wxString itemName = wxString::Format( wxT( "Quad-Proj-Point: %s" ), name );
-	treeCtrl->AppendItem( parentItem, itemName, -1, -1, new GAVisToolInventoryTree::Data( id ) );
-}
-
-//=========================================================================================
-/*virtual*/ void QuadricGeometryPoint::Draw( GAVisToolRender& render, bool selected )
-{
-	if( selected )
-		render.Highlight( GAVisToolRender::NORMAL_HIGHLIGHTING );
-	else
-		render.Highlight( GAVisToolRender::NO_HIGHLIGHTING );
-	render.Color( color, alpha );
-
-	// Points are small spheres so they should always be drawn at low resolution despite user settings.
-	render.DrawSphere( point, 0.25f, GAVisToolRender::RES_LOW );
-}
-
-//=========================================================================================
-/*virtual*/ void QuadricGeometryPoint::CalcCenter( VectorMath::Vector& center ) const
-{
-	VectorMath::Copy( center, point );
-}
-
-//=========================================================================================
-/*virtual*/ void QuadricGeometryPoint::Translate( const VectorMath::Vector& delta )
-{
-	VectorMath::Add( point, point, delta );
-}
-
-//=========================================================================================
-/*virtual*/ void QuadricGeometryPoint::Rotate( const VectorMath::Vector& unitAxis, float angle )
-{
-	// Projective points don't rotate.
-}
-
-//=========================================================================================
-/*virtual*/ void QuadricGeometryPoint::Scale( float scale )
-{
-	// Projective points don't scale.
-}
-
-//=========================================================================================
-/*virtual*/ void QuadricGeometryPoint::NameCenterOffset( VectorMath::Vector& offsetDelta )
-{
-	VectorMath::Zero( offsetDelta );
 }
 
 // QuadricGeoemtry.cpp

@@ -672,7 +672,7 @@
 				Name="QuadricGeometry"
 				>
 				<File
-					RelativePath="..\..\ScriptCode\QuadricGeometry\Blade.txt"
+					RelativePath="..\..\ScriptCode\QuadricGeometry\Cylinder.txt"
 					>
 				</File>
 				<File
@@ -680,43 +680,11 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\ScriptCode\QuadricGeometry\DebugPaper.txt"
-					>
-				</File>
-				<File
-					RelativePath="..\..\ScriptCode\QuadricGeometry\DiffOfSpheroids.txt"
-					>
-				</File>
-				<File
-					RelativePath="..\..\ScriptCode\QuadricGeometry\DoublePlaneSum.txt"
-					>
-				</File>
-				<File
-					RelativePath="..\..\ScriptCode\QuadricGeometry\PlanarReflection.txt"
-					>
-				</File>
-				<File
-					RelativePath="..\..\ScriptCode\QuadricGeometry\PlaneVersor.txt"
-					>
-				</File>
-				<File
-					RelativePath="..\..\ScriptCode\QuadricGeometry\Rotate.txt"
+					RelativePath="..\..\ScriptCode\QuadricGeometry\Sphere.txt"
 					>
 				</File>
 				<File
 					RelativePath="..\..\ScriptCode\QuadricGeometry\Spheroid.txt"
-					>
-				</File>
-				<File
-					RelativePath="..\..\ScriptCode\QuadricGeometry\Test.txt"
-					>
-				</File>
-				<File
-					RelativePath="..\..\ScriptCode\QuadricGeometry\Translate.txt"
-					>
-				</File>
-				<File
-					RelativePath="..\..\ScriptCode\QuadricGeometry\TranslationByVersor.txt"
 					>
 				</File>
 			</Filter>

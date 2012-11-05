@@ -104,10 +104,6 @@ GAVisToolEnvironment::GAVisToolEnvironment( void )
 		return new GAVisToolBindFunctionEvaluator( &ProjectivePlane::Create, GAVisToolBindTarget::DOESNT_MATTER );
 	else if( 0 == strcmp( functionName, "bind_quadric" ) )
 		return new GAVisToolBindFunctionEvaluator( &QuadricGeometry::Create, GAVisToolBindTarget::DOESNT_MATTER );
-	else if( 0 == strcmp( functionName, "bind_qpoint" ) )
-		return new GAVisToolBindFunctionEvaluator( &QuadricGeometryPoint::Create, GAVisToolBindTarget::NORMAL_FORM );
-	else if( 0 == strcmp( functionName, "bind_rot_qpoint" ) )
-		return new GAVisToolBindFunctionEvaluator( &QuadricGeometryPoint::Create, GAVisToolBindTarget::ROTATED_FORM );
 
 	return GeometricAlgebraEnvironment::CreateFunction( functionName );
 }

@@ -192,8 +192,8 @@ GeometricAlgebraEnvironment::GeometricAlgebraEnvironment( void )
 	{
 		blade = new GeometricAlgebra::Blade();
 		Utilities::List vectorProduct;
-		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e0() );
-		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_e0_bar() );
+		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_ni() );
+		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_ni_bar() );
 		blade->AssignBlade( vectorProduct, 1.0 );
 	}
 

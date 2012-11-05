@@ -473,10 +473,7 @@ VectorMath::Surface::ManifoldPoint* VectorMath::Surface::FindNearestManifoldPoin
 //=============================================================================
 VectorMath::Quadric::Quadric( void )
 {
-	a00 = a01 = a02 = a03 = 0.0;
-	a11 = a12 = a13 = 0.0;
-	a22 = a23 = 0.0;
-	a33 = 0.0;
+	A = B = C = D = E = F = G = H = I = J = 0.0;
 }
 
 //=============================================================================
@@ -487,37 +484,41 @@ VectorMath::Quadric::Quadric( void )
 //=============================================================================
 /*virtual*/ double VectorMath::Quadric::EvaluateAt( const VectorMath::Vector& point )
 {
+	// f(x,y,z) = Ax^2 + By^2 + Cz^2 + Dxy + Exz + Fyz + Gx + Hy + Iz + J
 	double x = point.x;
 	double y = point.y;
 	double z = point.z;
-	return a00 + 2.0*( a01*x + a02*y + a03*z ) + a11*x*x + 2.0*( a12*x*y + a13*x*z ) + a22*y*y + 2.0*( a23*y*z ) + a33*z*z;
+	return A*x*x + B*y*y + C*z*z + D*x*y + E*x*z + F*y*z + G*x + H*y + I*z + J;
 }
 
 //=============================================================================
 /*virtual*/ double VectorMath::Quadric::EvaluatePartialX( const VectorMath::Vector& point )
 {
+	// f_x(x,y,z) = 2Ax + Dy + Ez + G
 	double x = point.x;
 	double y = point.y;
 	double z = point.z;
-	return 2.0*( a01 + a11*x + a12*y + a13*z );
+	return 2.0*A*x + D*y + E*z + G;
 }
 
 //=============================================================================
 /*virtual*/ double VectorMath::Quadric::EvaluatePartialY( const VectorMath::Vector& point )
 {
+	// f_y(x,y,z) = 2By + Dx + Fz + H
 	double x = point.x;
 	double y = point.y;
 	double z = point.z;
-	return 2.0*( a02 + a12*x + a22*y + a23*z );
+	return 2.0*B*y + D*x + F*z + H;
 }
 
 //=============================================================================
 /*virtual*/ double VectorMath::Quadric::EvaluatePartialZ( const VectorMath::Vector& point )
 {
+	// f_z(x,y,z) = 2Cz + Ex + Fy + I
 	double x = point.x;
 	double y = point.y;
 	double z = point.z;
-	return 2.0*( a03 + a13*x + a23*y + a33*z );
+	return 2.0*C*z + E*x + F*y + I;
 }
 
 // Surface.cpp

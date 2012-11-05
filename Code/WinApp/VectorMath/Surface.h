@@ -71,6 +71,7 @@ namespace VectorMath
 
 		// This function skins the manifold using one or more triangular meshes.
 		//void GenerateTriangularMesh(...);
+		// THIS STUFF IS __UNTESTED__ AND WILL PROBABLY NEVER WORK
 		bool GenerateManifold( const Aabb& aabb, const Vector& seedPoint, Utilities::List& manifoldPointList );
 		bool MakeManifoldAboutPoint( const Aabb& aabb, ManifoldPoint* centralManifoldPoint, Utilities::List& manifoldPointList, Utilities::List& pointQueue, double epsilon );
 		ManifoldPoint* FindNearestManifoldPoint( const Utilities::List& manifoldPointList, const Vector& point, double& squareDistance );
@@ -95,16 +96,12 @@ namespace VectorMath
 		virtual double EvaluatePartialY( const VectorMath::Vector& point );
 		virtual double EvaluatePartialZ( const VectorMath::Vector& point );
 
-		// A quadric is the set of solution in <x,y,z>
+		// A quadric is the set of solutions in <x,y,z>
 		// to the following equation.
-		// a00 + 2*( a01*x + a02*y + a03*z ) +
-		// a11*x^2 + 2*( a12*x*y + a13*x*z ) +
-		// a22*y^2 + 2*( a23*y*z ) +
-		// a33*z^2 = 0
-		double a00, a01, a02, a03;
-		double a11, a12, a13;
-		double a22, a23;
-		double a33;
+		//
+		// 0 = Ax^2 + By^2 + Cz^2 + Dxy + Exz + Fyz + Gx + Hy + Iz + J
+		//
+		double A, B, C, D, E, F, G, H, I, J;
 	};
 }
 

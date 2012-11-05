@@ -1,16 +1,8 @@
+/*
+ * Some debug stuff.
+ */
 do
 (
-	/* This can be used to rotate between the isomorphic sub-algebras. */
-	S04 = ( 1 - e0*e4 ) / sqrt(2),
-	S15 = ( 1 - e1*e5 ) / sqrt(2),
-	S26 = ( 1 - e2*e6 ) / sqrt(2),
-	S37 = ( 1 - e3*e7 ) / sqrt(2),
-	S = S04*S15*S26*S37,
-	
-	/* This provides a more numerically stable way to rotate between the isomorphic sub-algebras. */
-	OA = Omega + Alpha,
-
-	/* This can be used to find quadric polynomial equations. */
-	p = e0 + $x*e1 + $y*e2 + $z*e3,
-	pb = e4 + $x*e5 + $y*e6 + $z*e7,
+	p = no + $x*e1 + $y*e2 + $z*e3,
+	pb = nob + $x*e1b + $y*e2b + $z*e3b,
 )
