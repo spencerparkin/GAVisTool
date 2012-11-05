@@ -1,0 +1,22 @@
+/*
+ * Translate a sphere using a translation versor.
+ */
+do
+(
+	/* Create a sphere. */
+	c = 2*e2,
+	r = 2,
+	E = Omega + 2*c^nib + (c.c - r*r)*ni^nib,
+	bind_quadric(E),
+	geo_color(E,1,0,0),
+	
+	/* Create the translation versor. */
+	t = 2*e1,
+	T = 1 - 0.5*t*ni,
+	V = T*bar(T),
+	
+	/* Create the translated sphere. */
+	Et = V*E*V~,
+	bind_quadric(Et),
+	geo_color(Et,0,1,0),
+)

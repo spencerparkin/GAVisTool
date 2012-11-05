@@ -274,6 +274,31 @@ bool Blade::RemoveVector( const char* vectorName )
 }
 
 //=========================================================================================
+bool Blade::Bar( void )
+{
+	Scalar sign;
+	Vector* nextVector = 0;
+	for( Vector* vector = ( Vector* )product.LeftMost(); vector; vector = nextVector )
+	{
+		nextVector = ( Vector* )vector->Right();
+
+		Vector* barVector = vector->MakeBar( sign );
+		if( !barVector )
+			return false;
+
+		scalar = scalar * sign;
+
+		product.Remove( vector, true );
+		if( nextVector )
+			product.InsertLeftOf( nextVector, barVector );
+		else
+			product.InsertRightOf( product.RightMost(), barVector );
+	}
+
+	return true;
+}
+
+//=========================================================================================
 int Blade::Grade( void ) const
 {
 	return product.Count();

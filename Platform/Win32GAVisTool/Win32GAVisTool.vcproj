@@ -671,22 +671,34 @@
 			<Filter
 				Name="QuadricGeometry"
 				>
-				<File
-					RelativePath="..\..\ScriptCode\QuadricGeometry\Cylinder.txt"
+				<Filter
+					Name="Surfaces"
 					>
-				</File>
-				<File
-					RelativePath="..\..\ScriptCode\QuadricGeometry\Debug.txt"
+					<File
+						RelativePath="..\..\ScriptCode\QuadricGeometry\Surfaces\Cylinder.txt"
+						>
+					</File>
+					<File
+						RelativePath="..\..\ScriptCode\QuadricGeometry\Surfaces\Debug.txt"
+						>
+					</File>
+					<File
+						RelativePath="..\..\ScriptCode\QuadricGeometry\Surfaces\Sphere.txt"
+						>
+					</File>
+					<File
+						RelativePath="..\..\ScriptCode\QuadricGeometry\Surfaces\Spheroid.txt"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="Transformations"
 					>
-				</File>
-				<File
-					RelativePath="..\..\ScriptCode\QuadricGeometry\Sphere.txt"
-					>
-				</File>
-				<File
-					RelativePath="..\..\ScriptCode\QuadricGeometry\Spheroid.txt"
-					>
-				</File>
+					<File
+						RelativePath="..\..\ScriptCode\QuadricGeometry\Transformations\Translate.txt"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<File

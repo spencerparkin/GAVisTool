@@ -14,6 +14,7 @@ namespace CalcLib
 	class MultivectorNumber;
 	class GeometricAlgebraEnvironment;
 	class ReverseFunctionEvaluator;
+	class BarFunctionEvaluator;
 	class InverseFunctionEvaluator;
 	class ScalarPartFunctionEvaluator;
 	class GradePartFunctionEvaluator;

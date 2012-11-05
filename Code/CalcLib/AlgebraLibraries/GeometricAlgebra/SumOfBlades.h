@@ -60,6 +60,7 @@ public:
 	
 	bool Scale( const Scalar& scalar );
 	bool Reverse( void );
+	bool Bar( void );
 
 	bool Accumulate( const Blade& blade );
 	bool Accumulate( const SumOfBlades& sumOfBlades );

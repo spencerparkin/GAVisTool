@@ -681,6 +681,16 @@ bool SumOfBlades::Reverse( void )
 }
 
 //=========================================================================================
+bool SumOfBlades::Bar( void )
+{
+	for( Blade* blade = ( Blade* )sum.LeftMost(); blade; blade = ( Blade* )blade->Right() )
+		if( !blade->Bar() )
+			return false;
+
+	return true;
+}
+
+//=========================================================================================
 bool SumOfBlades::Accumulate( const Blade& blade )
 {
 	if( blade.scalar == 0.0 )

@@ -58,6 +58,13 @@ Vector_e0::Vector_e0( void )
 }
 
 //=========================================================================================
+/*virtual*/ Vector* Vector_e0::MakeBar( ScalarAlgebra::Scalar& sign ) const
+{
+	sign = 1.0;
+	return new Vector_e0_bar();
+}
+
+//=========================================================================================
 /*virtual*/ double Vector_e0::InnerProduct( const Vector& right ) const
 {
 	const char* rightName = right.Name();
@@ -92,6 +99,13 @@ Vector_e1::Vector_e1( void )
 /*virtual*/ Utilities::List::Item* Vector_e1::MakeCopy( void ) const
 {
 	return new Vector_e1();
+}
+
+//=========================================================================================
+/*virtual*/ Vector* Vector_e1::MakeBar( ScalarAlgebra::Scalar& sign ) const
+{
+	sign = 1.0;
+	return new Vector_e1_bar();
 }
 
 //=========================================================================================
@@ -132,6 +146,13 @@ Vector_e2::Vector_e2( void )
 }
 
 //=========================================================================================
+/*virtual*/ Vector* Vector_e2::MakeBar( ScalarAlgebra::Scalar& sign ) const
+{
+	sign = 1.0;
+	return new Vector_e2_bar();
+}
+
+//=========================================================================================
 /*virtual*/ double Vector_e2::InnerProduct( const Vector& right ) const
 {
 	const char* rightName = right.Name();
@@ -166,6 +187,13 @@ Vector_e3::Vector_e3( void )
 /*virtual*/ Utilities::List::Item* Vector_e3::MakeCopy( void ) const
 {
 	return new Vector_e3();
+}
+
+//=========================================================================================
+/*virtual*/ Vector* Vector_e3::MakeBar( ScalarAlgebra::Scalar& sign ) const
+{
+	sign = 1.0;
+	return new Vector_e3_bar();
 }
 
 //=========================================================================================
@@ -206,6 +234,13 @@ Vector_no::Vector_no( void )
 }
 
 //=========================================================================================
+/*virtual*/ Vector* Vector_no::MakeBar( ScalarAlgebra::Scalar& sign ) const
+{
+	sign = 1.0;
+	return new Vector_no_bar();
+}
+
+//=========================================================================================
 /*virtual*/ double Vector_no::InnerProduct( const Vector& right ) const
 {
 	const char* rightName = right.Name();
@@ -240,6 +275,13 @@ Vector_ni::Vector_ni( void )
 /*virtual*/ Utilities::List::Item* Vector_ni::MakeCopy( void ) const
 {
 	return new Vector_ni();
+}
+
+//=========================================================================================
+/*virtual*/ Vector* Vector_ni::MakeBar( ScalarAlgebra::Scalar& sign ) const
+{
+	sign = 1.0;
+	return new Vector_ni_bar();
 }
 
 //=========================================================================================
@@ -280,6 +322,13 @@ Vector_e0_bar::Vector_e0_bar( void )
 }
 
 //=========================================================================================
+/*virtual*/ Vector* Vector_e0_bar::MakeBar( ScalarAlgebra::Scalar& sign ) const
+{
+	sign = 1.0;
+	return new Vector_e0();
+}
+
+//=========================================================================================
 /*virtual*/ double Vector_e0_bar::InnerProduct( const Vector& right ) const
 {
 	const char* rightName = right.Name();
@@ -314,6 +363,13 @@ Vector_e1_bar::Vector_e1_bar( void )
 /*virtual*/ Utilities::List::Item* Vector_e1_bar::MakeCopy( void ) const
 {
 	return new Vector_e1_bar();
+}
+
+//=========================================================================================
+/*virtual*/ Vector* Vector_e1_bar::MakeBar( ScalarAlgebra::Scalar& sign ) const
+{
+	sign = 1.0;
+	return new Vector_e1();
 }
 
 //=========================================================================================
@@ -354,6 +410,13 @@ Vector_e2_bar::Vector_e2_bar( void )
 }
 
 //=========================================================================================
+/*virtual*/ Vector* Vector_e2_bar::MakeBar( ScalarAlgebra::Scalar& sign ) const
+{
+	sign = 1.0;
+	return new Vector_e2();
+}
+
+//=========================================================================================
 /*virtual*/ double Vector_e2_bar::InnerProduct( const Vector& right ) const
 {
 	const char* rightName = right.Name();
@@ -388,6 +451,13 @@ Vector_e3_bar::Vector_e3_bar( void )
 /*virtual*/ Utilities::List::Item* Vector_e3_bar::MakeCopy( void ) const
 {
 	return new Vector_e3_bar();
+}
+
+//=========================================================================================
+/*virtual*/ Vector* Vector_e3_bar::MakeBar( ScalarAlgebra::Scalar& sign ) const
+{
+	sign = 1.0;
+	return new Vector_e3();
 }
 
 //=========================================================================================
@@ -428,6 +498,13 @@ Vector_no_bar::Vector_no_bar( void )
 }
 
 //=========================================================================================
+/*virtual*/ Vector* Vector_no_bar::MakeBar( ScalarAlgebra::Scalar& sign ) const
+{
+	sign = -1.0;
+	return new Vector_no();
+}
+
+//=========================================================================================
 /*virtual*/ double Vector_no_bar::InnerProduct( const Vector& right ) const
 {
 	const char* rightName = right.Name();
@@ -462,6 +539,13 @@ Vector_ni_bar::Vector_ni_bar( void )
 /*virtual*/ Utilities::List::Item* Vector_ni_bar::MakeCopy( void ) const
 {
 	return new Vector_ni_bar();
+}
+
+//=========================================================================================
+/*virtual*/ Vector* Vector_ni_bar::MakeBar( ScalarAlgebra::Scalar& sign ) const
+{
+	sign = -1.0;
+	return new Vector_ni();
 }
 
 //=========================================================================================

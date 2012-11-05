@@ -48,6 +48,7 @@ public:
 	virtual bool CompareWith( const Number* number, Comparison& comparison, Environment& environment ) const override;
 
 	bool Reverse( Environment& environment );
+	bool Bar( Environment& environment );
 
 	bool CopyOperandsIfNeeded( const Number* left, const Number* right,
 									const MultivectorNumber*& leftMultivectorNumber,

@@ -392,6 +392,14 @@
 						Name="GeometricAlgebraEnv"
 						>
 						<File
+							RelativePath="..\..\Code\CalcLib\Calculator\Environments\GeometricAlgebraEnv\BarFunc.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\Code\CalcLib\Calculator\Environments\GeometricAlgebraEnv\BarFunc.h"
+							>
+						</File>
+						<File
 							RelativePath="..\..\Code\CalcLib\Calculator\Environments\GeometricAlgebraEnv\GeometricAlgebraEnv.cpp"
 							>
 						</File>

@@ -52,6 +52,8 @@ GeometricAlgebraEnvironment::GeometricAlgebraEnvironment( void )
 
 	if( 0 == strcmp( functionName, "reverse" ) )
 		functionEvaluator = new ReverseFunctionEvaluator();
+	else if( 0 == strcmp( functionName, "bar" ) )
+		functionEvaluator = new BarFunctionEvaluator();
 	else if( 0 == strcmp( functionName, "scalar_part" ) )
 		functionEvaluator = new ScalarPartFunctionEvaluator();
 	else if( 0 == strcmp( functionName, "grade_part" ) )

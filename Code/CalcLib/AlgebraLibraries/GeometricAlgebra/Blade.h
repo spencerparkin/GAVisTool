@@ -43,6 +43,7 @@ public:
 	bool IsLikeTerm( const Blade& blade, Scalar& relativeHandedness ) const;
 	bool Scale( const Scalar& scalar );
 	bool RemoveVector( const char* vectorName );
+	bool Bar( void );
 
 	int Grade( void ) const;
 

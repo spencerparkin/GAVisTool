@@ -451,4 +451,13 @@ bool MultivectorNumber::Reverse( Environment& environment )
 	return true;
 }
 
+//=========================================================================================
+bool MultivectorNumber::Bar( Environment& environment )
+{
+	if( !multivector.Bar() )
+		return false;
+
+	return true;
+}
+
 // MultivectorNumber.cpp

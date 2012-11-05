@@ -147,6 +147,7 @@ namespace CalcLib
 #include "Environments/GeometricAlgebraEnv/GeometricAlgebraEnv.h"
 #include "Environments/GeometricAlgebraEnv/InverseFunc.h"
 #include "Environments/GeometricAlgebraEnv/ReverseFunc.h"
+#include "Environments/GeometricAlgebraEnv/BarFunc.h"
 #include "Environments/GeometricAlgebraEnv/ScalarPartFunc.h"
 #include "Environments/GeometricAlgebraEnv/GradePartFunc.h"
 #include "Environments/GeometricAlgebraEnv/MultivectorMathFunc.h"
