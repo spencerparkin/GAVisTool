@@ -58,7 +58,8 @@ USA}
 \begin{abstract}
 A new model of $n$-dimensional quadric surfaces, based upon geometric algebra, is
 found in which all conformal transformations of the conformal model are supported in the form of versors that
-may be applied to elements of the algebra representative of such surfaces.
+may be applied to elements of the algebra representative of such surfaces.  The model is used
+to find interesting results, such as the spherical reflection of an infinite cylinder in a sphere.
 \end{abstract}
 
 \maketitle
@@ -186,7 +187,7 @@ where $\Omega$ is defined as
 \end{equation}
 Give table of canonical forms here...
 
-\section{Transformations Of The Extended Quadric Model}
+\section{Transformations Supported By The Model}
 
 Here we begin with the following lemma to be used in the main result
 of this paper, which shows that all conformal transformations exist
@@ -202,7 +203,7 @@ a\wedge\overline{b}\cdot V\overline{V}(c\wedge\overline{d})(V\overline{V})^{-1}.
 Give proof here...
 \end{proof}
 The main result, as promised, can now be given as follows.
-\begin{thm}
+\begin{thm}\label{thm_main_result}
 Let $E\in\G(\W)$ be a bivector of the form \eqref{equ_quadric_form}.
 Then, for any versor $V\in\G(\V)$ of the conformal model, the element $E'$, given by
 \begin{equation}
@@ -236,10 +237,14 @@ points under Definition~\ref{def_quadric}.  Lemma~\ref{lma_versor_transfer}
 was employed in the step taken from \eqref{equ_before_step} to \eqref{equ_after_step}.
 \end{proof}
 
-\section{Computational Verification}
+\section{Putting Theory Into Practice}
 
-In this section we present the result of implementing the above
-model with a computer program.
+While Theorem~\ref{thm_main_result} tells us that the quadrics are
+closed under the group of conformal transformations, it is still not
+entirely obvious, given a quadric surface, what the image of this
+surface is under a given conformal transformation.  To explore this,
+software has been written to implement the above quadric model.
+This section exhibits the interesting results.
 
 \bibliographystyle{amsplain}
 \bibliography{Parkin_ABetterModelForQuadricSurfaces}
