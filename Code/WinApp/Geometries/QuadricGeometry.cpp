@@ -135,7 +135,7 @@ QuadricGeometry::QuadricGeometry( BindType bindType ) : GAVisToolGeometry( bindT
 		VectorMath::CoordFrame coordFrame;
 		VectorMath::Identity( coordFrame );
 		double range = 10.0;
-		double planeCount = 10.0;
+		double planeCount = 20.0;
 		VectorMath::Vector center, delta;
 		VectorMath::Zero( center );
 		VectorMath::Set( delta, 7.0, 7.0, 7.0 );

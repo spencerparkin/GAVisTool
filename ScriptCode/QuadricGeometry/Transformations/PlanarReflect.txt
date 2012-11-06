@@ -1,0 +1,26 @@
+/*
+ * Reflect various geometries about a plane.
+ */
+do
+(
+	/* Create the reflection versor. */
+	c = e1+e2,
+	n = (e1+e2+e3)/sqrt(3),
+	pi = n + (c.n)*ni,
+	V = pi*bar(pi),
+	bind_dual_plane(pi),
+	
+	/* Create the geometry. */
+	c = -4*e1,
+	r = 1.5,
+	v = e3,
+	L = -0.5,
+	geo = Omega + L*v^bar(v) - 2*(c+L*(c.v)*v)^nib + (c.c+L*(c.v)*(c.v)-r*r)*ni^nib,
+	bind_quadric(geo),
+	geo_color(geo,1,0,0),
+	
+	/* Create the reflected geometry. */
+	geor = V*geo*V~,
+	bind_quadric(geor),
+	geo_color(geor,0,1,0),
+)

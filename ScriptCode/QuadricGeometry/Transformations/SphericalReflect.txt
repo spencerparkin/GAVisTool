@@ -1,0 +1,34 @@
+/*
+ * Reflect various geometries about a sphere.
+ */
+do
+(
+	/*
+	 * This script does not appear to work.
+	 * Let's try reflecting a plane in a sphere.
+	 * I know that this should be a sphere.
+	 */
+
+	/* Create the reflection versor. */
+	c = 2*e2,
+	r = 2,
+	bind_virtual(c,r,sigma),
+	formula_constraint( "sigma = no + c + 0.5*(c.c - r*r)*ni" ),
+	bind_virtual(V),
+	formula_constraint( "V = sigma*bar(sigma)" ),
+	bind_dual_sphere(sigma),
+	
+	/* Create the geometry. */
+	gc = -4*e1+2*e2,
+	gr = 1.5,
+	gv = e3,
+	L = -0.5,
+	geo = Omega + L*gv^bar(gv) + 2*(gc+L*(gc.gv)*gv)^nib + (gc.gc+L*(gc.gv)*(gc.gv)-gr*gr)*ni^nib,
+	bind_quadric(geo),
+	geo_color(geo,1,0,0),
+	
+	/* Create the reflected geometry. */
+	bind_quadric(geor),
+	formula_constraint( "geor = V*geo*V~" ),
+	geo_color(geor,0,1,0),
+)

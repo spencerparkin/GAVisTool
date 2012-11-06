@@ -695,6 +695,14 @@
 					Name="Transformations"
 					>
 					<File
+						RelativePath="..\..\ScriptCode\QuadricGeometry\Transformations\PlanarReflect.txt"
+						>
+					</File>
+					<File
+						RelativePath="..\..\ScriptCode\QuadricGeometry\Transformations\SphericalReflect.txt"
+						>
+					</File>
+					<File
 						RelativePath="..\..\ScriptCode\QuadricGeometry\Transformations\Translate.txt"
 						>
 					</File>
