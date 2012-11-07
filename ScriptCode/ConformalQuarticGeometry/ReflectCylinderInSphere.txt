@@ -10,15 +10,18 @@ do
 	r = 2,
 	cylinder = Omega - v^bar(v) + 2*c*nib + (c.c - r*r)*ni^nib,
 	bind_quadric(cylinder),
+	geo_color(cylinder,0,1,0),
 	
 	/* Make the sphere. */
 	c = 0,
 	r = 6,
 	sphere = no + c + 0.5*(c.c - r*r)*ni,
 	bind_dual_sphere(sphere),
+	geo_color(sphere,1,0,0,0.2),
 	
 	/* Make the reflection of the cylinder in the sphere. */
 	V = sphere*bar(sphere),
 	reflection = V*cylinder*V~,
 	bind_conformal_quartic(reflection),
+	geo_color(reflection,0,0,1),
 )

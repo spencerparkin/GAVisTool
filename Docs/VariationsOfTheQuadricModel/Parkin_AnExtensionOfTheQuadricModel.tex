@@ -330,7 +330,8 @@ in the case that $E$ is of the form \eqref{equ_quadric_form}.
 
 Putting theory into practice, the author wrote a piece of computer
 software that implements this model.  Giving the program the following
-script as input, the output of the program is given in Figure blah.
+script as input, the output of the program is given in Figure~\ref{fig_reflect_cylinder_in_sphere}.
+{\small
 \begin{verbatim}
 
 /*
@@ -345,24 +346,38 @@ do
   r = 2,
   cylinder = Omega - v^bar(v) + 2*c*nib + (c.c - r*r)*ni^nib,
   bind_quadric(cylinder),
+  geo_color(cylinder,0,1,0),
 	
   /* Make the sphere. */
   c = 0,
   r = 6,
   sphere = no + c + 0.5*(c.c - r*r)*ni,
   bind_dual_sphere(sphere),
+  geo_color(sphere,1,0,0,0.2),
 	
   /* Make the reflection of the cylinder in the sphere. */
   V = sphere*bar(sphere),
   reflection = V*cylinder*V~,
   bind_conformal_quartic(reflection),
+  geo_color(reflection,0,0,1),
 )
 \end{verbatim}
-
+}
+\begin{figure}
+\includegraphics[scale=0.4]{ReflectCylinderInSphere}
+\caption{The blue reflection of a green cylinder in a red sphere.  Traces in various planes were
+used to render the cylinder and reflection surfaces.}
+\label{fig_reflect_cylinder_in_sphere}
+\end{figure}
+The computer program was also able to give the polynomial equation in $x$, $y$
+and $z$ for the reflected surface.  It is as follows.
 \begin{equation}
-x^{4} + 9.6x^{2}y + 2x^{2}y^{2} + 2x^{2}z^{2} +
-9.6y^{3} + 21.6y^{2} + y^{4} + 9.6yz^{2} + 2y^{2}z^{2} + z^{4}
+\begin{split}
+0 =\;& x^{4} + 9.6x^{2}y + 2x^{2}y^{2} + 2x^{2}z^{2} + 9.6y^{3} +\\
+ & 21.6y^{2} + y^{4} + 9.6yz^{2} + 2y^{2}z^{2} + z^{4}
+\end{split}
 \end{equation}
+Geometric algebra proved to be a very useful tool in finding this equation.
 
 \bibliographystyle{amsplain}
 \bibliography{Parkin_AnExtensionOfTheQuadricModel}
