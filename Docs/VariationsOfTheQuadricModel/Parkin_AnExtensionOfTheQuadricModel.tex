@@ -183,7 +183,7 @@ quadrics are the solution set in $\V^e$ of the equation
 in the variable $x$.  (An explanation of the parameters $r$, $c$, $v$ and $\lambda$
 was given in \cite{Parkin12}.)  Then, factoring out $-p\wedge\overline{p}$, we see that
 the element $E\in\G(\W)$, given by
-\begin{equation}
+\begin{equation}\label{equ_canonical_form_of_common_quadric}
 \Omega + \lambda v\overline{v}+2(c+\lambda(c\cdot v)v)\nvaib+
 (c^2+\lambda (c\cdot v)^2-r^2)\nvai\nvaib
 \end{equation}
@@ -319,6 +319,50 @@ given by equation \eqref{equ_transformed_surface}, must, by Definition~\ref{def_
 such elements $E$ in Defintion~\ref{def_surface} is much more involved than
 the form \eqref{equ_quadric_form}.  Nevertheless, it is possible to extract
 a general quartic equation from equation \eqref{equ_surface_variety}.
+
+Notice that under Definition~\ref{def_surface}, canonical forms
+such as \eqref{equ_canonical_form_of_common_quadric} are still valid.
+This is because
+\begin{equation}
+P(p)\wedge\overline{P}(p)\cdot E = (\nvao+p)\wedge\overline{(\nvao+p)}\cdot E
+\end{equation}
+in the case that $E$ is of the form \eqref{equ_quadric_form}.
+
+Putting theory into practice, the author wrote a piece of computer
+software that implements this model.  Giving the program the following
+script as input, the output of the program is given in Figure blah.
+\begin{verbatim}
+
+/*
+ * Calculate the surface that is the
+ * reflection of a cylinder in a sphere.
+ */
+do
+(
+  /* Make the cylinder. */
+  v = e2,
+  c = -8*e1,
+  r = 2,
+  cylinder = Omega - v^bar(v) + 2*c*nib + (c.c - r*r)*ni^nib,
+  bind_quadric(cylinder),
+	
+  /* Make the sphere. */
+  c = 0,
+  r = 6,
+  sphere = no + c + 0.5*(c.c - r*r)*ni,
+  bind_dual_sphere(sphere),
+	
+  /* Make the reflection of the cylinder in the sphere. */
+  V = sphere*bar(sphere),
+  reflection = V*cylinder*V~,
+  bind_conformal_quartic(reflection),
+)
+\end{verbatim}
+
+\begin{equation}
+x^{4} + 9.6x^{2}y + 2x^{2}y^{2} + 2x^{2}z^{2} +
+9.6y^{3} + 21.6y^{2} + y^{4} + 9.6yz^{2} + 2y^{2}z^{2} + z^{4}
+\end{equation}
 
 \bibliographystyle{amsplain}
 \bibliography{Parkin_AnExtensionOfTheQuadricModel}
