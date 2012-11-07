@@ -368,6 +368,14 @@
 				Name="Geometries"
 				>
 				<File
+					RelativePath="..\..\Code\WinApp\Geometries\ConformalQuarticGeometry.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Code\WinApp\Geometries\ConformalQuarticGeometry.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\Code\WinApp\Geometries\FlatGeometry.cpp"
 					>
 				</File>
@@ -429,6 +437,14 @@
 				</File>
 				<File
 					RelativePath="..\..\Code\WinApp\Geometries\RoundGeometry.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Code\WinApp\Geometries\SurfaceGeometry.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Code\WinApp\Geometries\SurfaceGeometry.h"
 					>
 				</File>
 				<File
@@ -707,6 +723,18 @@
 						>
 					</File>
 				</Filter>
+			</Filter>
+			<Filter
+				Name="ConformalQuarticGeometry"
+				>
+				<File
+					RelativePath="..\..\ScriptCode\ConformalQuarticGeometry\GenerateConformalQuarticPolynomial.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ScriptCode\ConformalQuarticGeometry\ReflectCylinderInSphere.txt"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<File

@@ -12,10 +12,10 @@
 #include "QuadricGeometry.h"
 
 //=========================================================================================
-IMPLEMENT_CALCLIB_CLASS1( QuadricGeometry, GAVisToolGeometry );
+IMPLEMENT_CALCLIB_CLASS1( QuadricGeometry, SurfaceGeometry );
 
 //=========================================================================================
-QuadricGeometry::QuadricGeometry( BindType bindType ) : GAVisToolGeometry( bindType )
+QuadricGeometry::QuadricGeometry( BindType bindType ) : SurfaceGeometry( bindType, &quadric )
 {
 	CalcLib::Calculator calculator( "geoalg" );
 
@@ -50,14 +50,11 @@ QuadricGeometry::QuadricGeometry( BindType bindType ) : GAVisToolGeometry( bindT
 	);
 	decompositionEvaluator = calculator.CompileEvaluator( decompositionCode );
 	wxASSERT( decompositionEvaluator != 0 );
-
-	traceListValid = false;
 }
 
 //=========================================================================================
 /*virtual*/ QuadricGeometry::~QuadricGeometry( void )
 {
-	traceList.RemoveAll( true );
 }
 
 //=========================================================================================
@@ -69,8 +66,7 @@ QuadricGeometry::QuadricGeometry( BindType bindType ) : GAVisToolGeometry( bindT
 //=========================================================================================
 /*virtual*/ void QuadricGeometry::DecomposeFrom( const GeometricAlgebra::SumOfBlades& element )
 {
-	this->element.AssignSumOfBlades( element );
-	traceListValid = false;
+	SurfaceGeometry::DecomposeFrom( element );
 
 	CalcLib::GeometricAlgebraEnvironment gaEnv;
 
@@ -107,12 +103,6 @@ QuadricGeometry::QuadricGeometry( BindType bindType ) : GAVisToolGeometry( bindT
 }
 
 //=========================================================================================
-/*virtual*/ void QuadricGeometry::ComposeTo( GeometricAlgebra::SumOfBlades& element ) const
-{
-	element.AssignSumOfBlades( this->element );
-}
-
-//=========================================================================================
 /*virtual*/ void QuadricGeometry::DumpInfo( char* printBuffer, int printBufferSize ) const
 {
 	sprintf_s( printBuffer, printBufferSize, "The variable \"%s\" is being interpreted as a quadric.\n", name );
@@ -123,83 +113,6 @@ QuadricGeometry::QuadricGeometry( BindType bindType ) : GAVisToolGeometry( bindT
 {
 	wxString itemName = wxString::Format( wxT( "Quadric: %s" ), name );
 	treeCtrl->AppendItem( parentItem, itemName, -1, -1, new GAVisToolInventoryTree::Data( id ) );
-}
-
-//=========================================================================================
-/*virtual*/ void QuadricGeometry::Draw( GAVisToolRender& render, bool selected )
-{
-	// If our trace-list is out of date, go up-date it.  Hopefully this won't take too long.
-	if( !traceListValid )
-	{
-		// TODO: We need to deduce the center of the quadric for the AABB setup to be correct.
-		VectorMath::CoordFrame coordFrame;
-		VectorMath::Identity( coordFrame );
-		double range = 10.0;
-		double planeCount = 20.0;
-		VectorMath::Vector center, delta;
-		VectorMath::Zero( center );
-		VectorMath::Set( delta, 7.0, 7.0, 7.0 );
-		VectorMath::Aabb aabb;
-		MakeAabb( aabb, center, delta );
-		traceList.RemoveAll( true );
-		quadric.GenerateTracesAlongAxis( coordFrame.xAxis, range, planeCount, aabb, traceList );
-		quadric.GenerateTracesAlongAxis( coordFrame.yAxis, range, planeCount, aabb, traceList );
-		quadric.GenerateTracesAlongAxis( coordFrame.zAxis, range, planeCount, aabb, traceList );
-		traceListValid = true;
-	}
-
-	if( selected )
-		render.Highlight( GAVisToolRender::NORMAL_HIGHLIGHTING );
-	else
-		render.Highlight( GAVisToolRender::NO_HIGHLIGHTING );
-
-	render.Color( color, alpha );
-
-	VectorMath::Quadric::Trace* trace = ( VectorMath::Quadric::Trace* )traceList.LeftMost();
-	while( trace )
-	{
-		DrawTrace( trace, render );
-		trace = ( VectorMath::Quadric::Trace* )trace->Right();
-	}
-}
-
-//=========================================================================================
-void QuadricGeometry::DrawTrace( VectorMath::Quadric::Trace* trace, GAVisToolRender& render )
-{
-	VectorMath::Quadric::Point* point = 0, *nextPoint = 0;
-	VectorMath::Quadric::Point* firstPoint = ( VectorMath::Quadric::Point* )trace->pointList.LeftMost();
-	for( point = firstPoint; point; point = nextPoint )
-	{
-		nextPoint = ( VectorMath::Quadric::Point* )point->Right();
-		if( nextPoint )
-			render.DrawLine( point->point, nextPoint->point );
-		else if( trace->looped )
-			render.DrawLine( point->point, firstPoint->point );
-	}
-}
-
-//=========================================================================================
-/*virtual*/ void QuadricGeometry::CalcCenter( VectorMath::Vector& center ) const
-{
-	VectorMath::Zero( center );
-}
-
-//=========================================================================================
-/*virtual*/ void QuadricGeometry::Translate( const VectorMath::Vector& delta )
-{
-	// It should be easy to figure out how to translate the quadric.
-	// Rotating it, on the other hand, sounds much harder.  Can GA help at all?
-	// How do you scale a quadric about it's center?
-}
-
-//=========================================================================================
-/*virtual*/ void QuadricGeometry::Rotate( const VectorMath::Vector& unitAxis, float angle )
-{
-}
-
-//=========================================================================================
-/*virtual*/ void QuadricGeometry::Scale( float scale )
-{
 }
 
 // QuadricGeoemtry.cpp

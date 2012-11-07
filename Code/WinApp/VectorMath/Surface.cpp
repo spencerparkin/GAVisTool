@@ -135,7 +135,7 @@ void VectorMath::Surface::GenerateTracesAlongAxis( const Vector& axis, double ra
 		Add( seed, seed, planePos );
 		Trace* secondTrace = 0;
 		if( ConvergePointToSurfaceInPlane( &plane, seed, epsilon ) )
-			if( !( firstTrace && firstTrace->IsPointOnTrace( seed, 0.1 ) ) )
+			if( !( firstTrace && firstTrace->IsPointOnTrace( seed, 0.05 ) ) )
 				secondTrace = CalculateTraceInPlane( plane, seed, aabb );
 
 		// Add the traces, if any were found.
@@ -149,7 +149,7 @@ void VectorMath::Surface::GenerateTracesAlongAxis( const Vector& axis, double ra
 //=============================================================================
 VectorMath::Surface::Trace* VectorMath::Surface::CalculateTraceInPlane( const Plane& plane, const Vector& seed, const Aabb& aabb )
 {
-	double epsilon = 1e-7;
+	double epsilon = 1e-8;
 	int tracePointLimit = 100;
 	
 	// The initial seed must converge to a point on the surface.
@@ -195,7 +195,7 @@ VectorMath::Surface::Trace* VectorMath::Surface::CalculateTraceInPlane( const Pl
 			{
 				// If we run into our own trace, we can always quit the algorithm,
 				// because we know that we have come full circle.
-				if( trace->IsPointOnTrace( point, 0.1 ) )
+				if( trace->IsPointOnTrace( point, 0.05 ) )
 				{
 					// Indicate that the caller should consider the trace a line-loop
 					// in the case that the trace is more than one point.  If it is
@@ -519,6 +519,247 @@ VectorMath::Quadric::Quadric( void )
 	double y = point.y;
 	double z = point.z;
 	return 2.0*C*z + E*x + F*y + I;
+}
+
+//=============================================================================
+VectorMath::ConformalQuartic::ConformalQuartic( void )
+{
+	a_ = b_ = c_ = d_ = 0.0;
+	e_ = f_ = g_ = h_ = 0.0;
+	i_ = j_ = k_ = l_ = 0.0;
+	m_ = n_ = o_ = p_ = 0.0;
+	q_ = r_ = s_ = t_ = 0.0;
+	u_ = v_ = w_ = x_ = 0.0;
+	y_ = 0.0;
+}
+
+//=============================================================================
+/*virtual*/ VectorMath::ConformalQuartic::~ConformalQuartic( void )
+{
+}
+
+//=============================================================================
+/*virtual*/ double VectorMath::ConformalQuartic::EvaluateAt( const VectorMath::Vector& point )
+{
+	double x = point.x;
+	double y = point.y;
+	double z = point.z;
+	double value =
+		-0.25*a_*x*x*x*x +
+		-0.5*a_*x*x*y*y +
+		-0.5*a_*x*x*z*z +
+		-0.25*a_*y*y*y*y +
+		-0.5*a_*y*y*z*z +
+		-0.25*a_*z*z*z*z +
+		0.5*b_*x*x*x +
+		0.5*b_*x*y*y +
+		0.5*b_*x*z*z +
+		0.5*c_*x*x*y +
+		0.5*c_*y*y*y +
+		0.5*c_*y*z*z +
+		0.5*d_*x*x*z +
+		0.5*d_*y*y*z +
+		0.5*d_*z*z*z +
+		-0.5*e_*x*x +
+		-0.5*e_*y*y +
+		-0.5*e_*z*z +
+		0.5*f_*x*x*x +
+		0.5*f_*x*y*y +
+		0.5*f_*x*z*z +
+		-g_*x*x +
+		-h_*x*y +
+		-i_*x*z +
+		j_*x +
+		0.5*k_*x*x*y +
+		0.5*k_*y*y*y +
+		0.5*k_*y*z*z +
+		-l_*x*y +
+		-m_*y*y +
+		-n_*y*z +
+		o_*y +
+		0.5*p_*x*x*z +
+		0.5*p_*y*y*z +
+		0.5*p_*z*z*z +
+		-q_*x*z +
+		-r_*y*z +
+		-s_*z*z +
+		t_*z +
+		-0.5*u_*x*x +
+		-0.5*u_*y*y +
+		-0.5*u_*z*z +
+		v_*x +
+		w_*y +
+		x_*z +
+		-y_;
+	return value;
+}
+
+//=============================================================================
+/*virtual*/ double VectorMath::ConformalQuartic::EvaluatePartialX( const VectorMath::Vector& point )
+{
+	double x = point.x;
+	double y = point.y;
+	double z = point.z;
+	double value =
+		-a_*x*x*x +			// -0.25*a_*x*x*x*x +
+		-a_*x*y*y +			// -0.5*a_*x*x*y*y +
+		-a_*x*z*z +			// -0.5*a_*x*x*z*z +
+		//-0.25*a_*y*y*y*y +
+		//-0.5*a_*y*y*z*z +
+		//-0.25*a_*z*z*z*z +
+		(3.0/2.0)*b_*x*x +	// 0.5*b_*x*x*x +
+		0.5*b_*y*y +		// 0.5*b_*x*y*y +
+		0.5*b_*z*z +		// 0.5*b_*x*z*z +
+		c_*x*y +			// 0.5*c_*x*x*y +
+		//0.5*c_*y*y*y +
+		//0.5*c_*y*z*z +
+		d_*x*z +			// 0.5*d_*x*x*z +
+		//0.5*d_*y*y*z +
+		//0.5*d_*z*z*z +
+		-e_*x +				// -0.5*e_*x*x +
+		//-0.5*e_*y*y +
+		//-0.5*e_*z*z +
+		(3.0/2.0)*f_*x*x +	// 0.5*f_*x*x*x +
+		0.5*f_*y*y +		// 0.5*f_*x*y*y +
+		0.5*f_*z*z +		// 0.5*f_*x*z*z +
+		-2.0*g_*x +			// -g_*x*x +
+		-h_*y +				// -h_*x*y +
+		-i_*z +				// -i_*x*z +
+		j_ +				// j_*x +
+		k_*x*y +			// 0.5*k_*x*x*y +
+		//0.5*k_*y*y*y +
+		//0.5*k_*y*z*z +
+		-l_*y +				// -l_*x*y +
+		//-m_*y*y +
+		//-n_*y*z +
+		//o_*y +
+		p_*x*z +			// 0.5*p_*x*x*z +
+		//0.5*p_*y*y*z +
+		//0.5*p_*z*z*z +
+		-q_*z +				// -q_*x*z +
+		//-r_*y*z +
+		//-s_*z*z +
+		//t_*z +
+		-u_*x +				// -0.5*u_*x*x +
+		//-0.5*u_*y*y +
+		//-0.5*u_*z*z +
+		v_;					// v_*x +
+		//w_*y +
+		//x_*z +
+		//-y_;
+	return value;
+}
+
+//=============================================================================
+/*virtual*/ double VectorMath::ConformalQuartic::EvaluatePartialY( const VectorMath::Vector& point )
+{
+	double x = point.x;
+	double y = point.y;
+	double z = point.z;
+	double value =
+		//-0.25*a_*x*x*x*x +
+		-a_*x*x*y +			// -0.5*a_*x*x*y*y +
+		//-0.5*a_*x*x*z*z +
+		-a_*y*y*y +			// -0.25*a_*y*y*y*y +
+		-a_*y*z*z +			// -0.5*a_*y*y*z*z +
+		//-0.25*a_*z*z*z*z +
+		//0.5*b_*x*x*x +
+		b_*x*y +			// 0.5*b_*x*y*y +
+		//0.5*b_*x*z*z +
+		0.5*c_*x*x +		// 0.5*c_*x*x*y +
+		(3.0/2.0)*c_*y*y +	// 0.5*c_*y*y*y +
+		0.5*c_*z*z +		// 0.5*c_*y*z*z +
+		//0.5*d_*x*x*z +
+		d_*y*z +			// 0.5*d_*y*y*z +
+		//0.5*d_*z*z*z +
+		//-0.5*e_*x*x +
+		-e_*y +				// -0.5*e_*y*y +
+		//-0.5*e_*z*z +
+		//0.5*f_*x*x*x +
+		f_*x*y +			// 0.5*f_*x*y*y +
+		//0.5*f_*x*z*z +
+		//-g_*x*x +
+		-h_*x +				// -h_*x*y +
+		//-i_*x*z +
+		//j_*x +
+		0.5*k_*x*x +		// 0.5*k_*x*x*y +
+		(3.0/2.0)*k_*y*y +	// 0.5*k_*y*y*y +
+		0.5*k_*z*z +		// 0.5*k_*y*z*z +
+		-l_*x +				// -l_*x*y +
+		-2.0*m_*y +			// -m_*y*y +
+		-n_*z +				// -n_*y*z +
+		o_ +				// o_*y +
+		//0.5*p_*x*x*z +
+		p_*y*z +			// 0.5*p_*y*y*z +
+		//0.5*p_*z*z*z +
+		//-q_*x*z +
+		-r_*z +				// -r_*y*z +
+		//-s_*z*z +
+		//t_*z +
+		//-0.5*u_*x*x +
+		-u_*y +				// -0.5*u_*y*y +
+		//-0.5*u_*z*z +
+		//v_*x +
+		w_;					// w_*y +
+		//x_*z +
+		//-y_;
+	return value;
+}
+
+//=============================================================================
+/*virtual*/ double VectorMath::ConformalQuartic::EvaluatePartialZ( const VectorMath::Vector& point )
+{
+	double x = point.x;
+	double y = point.y;
+	double z = point.z;
+	double value =
+		//-0.25*a_*x*x*x*x +
+		//-0.5*a_*x*x*y*y +
+		-a_*x*x*z +			// -0.5*a_*x*x*z*z +
+		//-0.25*a_*y*y*y*y +
+		-a_*y*y*z +			// -0.5*a_*y*y*z*z +
+		-a_*z*z*z +			// -0.25*a_*z*z*z*z +
+		//0.5*b_*x*x*x +
+		//0.5*b_*x*y*y +
+		b_*x*z +			// 0.5*b_*x*z*z +
+		//0.5*c_*x*x*y +
+		//0.5*c_*y*y*y +
+		c_*y*z +			// 0.5*c_*y*z*z +
+		0.5*d_*x*x +		// 0.5*d_*x*x*z +
+		0.5*d_*y*y +		// 0.5*d_*y*y*z +
+		(3.0/2.0)*d_*z*z +	// 0.5*d_*z*z*z +
+		//-0.5*e_*x*x +
+		//-0.5*e_*y*y +
+		-e_*z +				// -0.5*e_*z*z +
+		//0.5*f_*x*x*x +
+		//0.5*f_*x*y*y +
+		f_*x*z +			// 0.5*f_*x*z*z +
+		//-g_*x*x +
+		//-h_*x*y +
+		-i_*x +				// -i_*x*z +
+		//j_*x +
+		//0.5*k_*x*x*y +
+		//0.5*k_*y*y*y +
+		k_*y*z +			// 0.5*k_*y*z*z +
+		//-l_*x*y +
+		//-m_*y*y +
+		-n_*y +				// -n_*y*z +
+		//o_*y +
+		0.5*p_*x*x +		// 0.5*p_*x*x*z +
+		0.5*p_*y*y +		// 0.5*p_*y*y*z +
+		(3.0/2.0)*p_*z*z +	// 0.5*p_*z*z*z +
+		-q_*x +				// -q_*x*z +
+		-r_*y +				// -r_*y*z +
+		-2.0*s_*z +			// -s_*z*z +
+		t_ +				// t_*z +
+		//-0.5*u_*x*x +
+		//-0.5*u_*y*y +
+		-u_*z +				// -0.5*u_*z*z +
+		//v_*x +
+		//w_*y +
+		x_;					// x_*z +
+		//-y_;
+	return value;
 }
 
 // Surface.cpp

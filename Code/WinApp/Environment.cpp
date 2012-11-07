@@ -22,6 +22,7 @@
 #include "Geometries/PositionVectorGeometry.h"
 #include "Geometries/ProjectiveGeometry.h"
 #include "Geometries/QuadricGeometry.h"
+#include "Geometries/ConformalQuarticGeometry.h"
 #include "Interfaces/ScalarInterface.h"
 #include "VirtualBindTarget.h"
 #include "wxAll.h"
@@ -104,6 +105,8 @@ GAVisToolEnvironment::GAVisToolEnvironment( void )
 		return new GAVisToolBindFunctionEvaluator( &ProjectivePlane::Create, GAVisToolBindTarget::DOESNT_MATTER );
 	else if( 0 == strcmp( functionName, "bind_quadric" ) )
 		return new GAVisToolBindFunctionEvaluator( &QuadricGeometry::Create, GAVisToolBindTarget::DOESNT_MATTER );
+	else if( 0 == strcmp( functionName, "bind_conformal_quartic" ) )
+		return new GAVisToolBindFunctionEvaluator( &ConformalQuarticGeometry::Create, GAVisToolBindTarget::DOESNT_MATTER );
 
 	return GeometricAlgebraEnvironment::CreateFunction( functionName );
 }

@@ -103,6 +103,23 @@ namespace VectorMath
 		//
 		double A, B, C, D, E, F, G, H, I, J;
 	};
+
+	class ConformalQuartic : public Surface
+	{
+	public:
+
+		ConformalQuartic( void );
+		virtual ~ConformalQuartic( void );
+
+		virtual double EvaluateAt( const VectorMath::Vector& point );
+		virtual double EvaluatePartialX( const VectorMath::Vector& point );
+		virtual double EvaluatePartialY( const VectorMath::Vector& point );
+		virtual double EvaluatePartialZ( const VectorMath::Vector& point );
+
+		double a_, b_, c_, d_, e_, f_, g_, h_, i_, j_, k_;
+		double l_, m_, n_, o_, p_, q_, r_, s_, t_, u_, v_;
+		double w_, x_, y_;
+	};
 }
 
 // Surface.h

@@ -1,0 +1,92 @@
+/*
+ *
+ */
+do
+(
+	E =
+		$a*no^nob +
+		$b*no^e1b +
+		$c*no^e2b +
+		$d*no^e3b +
+		$e*no^nib +
+		
+		$f*e1^nob +
+		$g*e1^e1b +
+		$h*e1^e2b +
+		$i*e1^e3b +
+		$j*e1^nib +
+		
+		$k*e2^nob +
+		$l*e2^e1b +
+		$m*e2^e2b +
+		$n*e2^e3b +
+		$o*e2^nib +
+		
+		$p*e3^nob +
+		$q*e3^e1b +
+		$r*e3^e2b +
+		$s*e3^e3b +
+		$t*e3^nib +
+		
+		$u*ni^nob +
+		$v*ni^e1b +
+		$w*ni^e2b +
+		$x*ni^e3b +
+		$y*ni^nib,
+
+	p = $x*e1 + $y*e2 + $z*e3,
+	P = no + p + 0.5*(p.p)*ni,
+	
+	poly = (P^bar(P)).E,
+	
+	/*
+	
+	-0.25*a_*x*x*x*x +
+	-0.5*a_*x*x*y*y +
+	-0.5*a_*x*x*z*z +
+	-0.25*a_*y*y*y*y +
+	-0.5*a_*y*y*z*z +
+	-0.25*a_*z*z*z*z +
+	0.5*b_*x*x*x +
+	0.5*b_*x*y*y +
+	0.5*b_*x*z*z +
+	0.5*c_*x*x*y +
+	0.5*c_*y*y*y +
+	0.5*c_*y*z*z +
+	0.5*d_*x*x*z +
+	0.5*d_*y*y*z +
+	0.5*d_*z*z*z +
+	-0.5*e_*x*x +
+	-0.5*e_*y*y +
+	-0.5*e_*z*z +
+	0.5*f_*x*x*x +
+	0.5*f_*x*y*y +
+	0.5*f_*x*z*z +
+	-g_*x*x +
+	-h_*x*y +
+	-i_*x*z +
+	j_*x +
+	0.5*k_*x*x*y +
+	0.5*k_*y*y*y +
+	0.5*k_*y*z*z +
+	-l_*x*y +
+	-m_*y*y +
+	-n_*y*z +
+	o_*y +
+	0.5*p_*x*x*z +
+	0.5*p_*y*y*z +
+	0.5*p_*z*z*z +
+	-q_*x*z +
+	-r_*y*z +
+	-s_*z*z +
+	t_*z +
+	-0.5*u_*x*x +
+	-0.5*u_*y*y +
+	-0.5*u_*z*z +
+	v_*x +
+	w_*y +
+	x_*z +
+	-y_
+	
+	*/
+)
