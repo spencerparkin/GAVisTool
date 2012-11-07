@@ -135,7 +135,7 @@ void VectorMath::Surface::GenerateTracesAlongAxis( const Vector& axis, double ra
 		Add( seed, seed, planePos );
 		Trace* secondTrace = 0;
 		if( ConvergePointToSurfaceInPlane( &plane, seed, epsilon ) )
-			if( !( firstTrace && firstTrace->IsPointOnTrace( seed, 0.05 ) ) )
+			if( !( firstTrace && firstTrace->IsPointOnTrace( seed, 0.005 ) ) )
 				secondTrace = CalculateTraceInPlane( plane, seed, aabb );
 
 		// Add the traces, if any were found.
@@ -195,7 +195,7 @@ VectorMath::Surface::Trace* VectorMath::Surface::CalculateTraceInPlane( const Pl
 			{
 				// If we run into our own trace, we can always quit the algorithm,
 				// because we know that we have come full circle.
-				if( trace->IsPointOnTrace( point, 0.05 ) )
+				if( trace->IsPointOnTrace( point, 0.005 ) )
 				{
 					// Indicate that the caller should consider the trace a line-loop
 					// in the case that the trace is more than one point.  If it is
@@ -262,7 +262,7 @@ bool VectorMath::Surface::StepTraceInPlane( const Plane& plane, int direction, V
 //=============================================================================
 bool VectorMath::Surface::ConvergePointToSurfaceInPlane( const Plane* plane, Vector& point, double epsilon )
 {
-	double deltaLength = 1.0;
+	double deltaLength = 0.5;
 
 	// Is there a way to prove or disprove that this algorithm converges?
 	int maxIters = 1000;
