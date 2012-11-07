@@ -59,13 +59,16 @@ USA}
 An extension of the quadric model set forth in \cite{Parkin12} is
 found in which the rigid body motions of any quadric surface can be performed
 by versor transformations.  Extending the model yet further to include
-cubic and quartic surfaces, we find that it is possible to transform
+specific quartic surfaces, we find that it is possible to transform
 quadric surfaces by any transformation of the conformal model.
 \end{abstract}
 
 \maketitle
 
 \section{Introduction}
+
+% This paper, like most of my papers, alarmingly lacks a great number of cited sources.
+% This is bad.
 
 In the original paper \cite{Parkin12}, a model for quadric surfaces was
 presented based upon the ideas of projective geometry.  What was unfortunate
@@ -192,7 +195,8 @@ where $\Omega$ is defined as
 \begin{equation}
 \Omega = \sum_{i=1}^n e_i\overline{e}_i.
 \end{equation}
-Give table of canonical forms here...
+Canonical forms similar to \eqref{equ_canonical_form_of_common_quadric}
+can be found in \cite{Parkin12} that are easily translated into the extended model.
 
 \section{Transformations Supported By The Model}
 
@@ -292,17 +296,15 @@ Being able to perform planar reflections of any quadric in any plane, it
 now follows that we can find a versor $V\in\G(\W)$ capable of performing
 any rigid body motion applicable to any quadric surface.
 
-%\section{Putting Theory Into Practice}
-
 \section{Extending The Model Yet Further}
 
 Interestingly, if we were not content with the rigid by motions of
-quadrics only, then we really could find what is, for example, the spherical
+quadrics, then we really could find what is, for example, the spherical
 reflection of, say, an infinitely long cylinder in a sphere.  To do this, we change
 Definition~\ref{def_quadric} into the following definition.
 \begin{defn}\label{def_surface}
 For any element $E\in\G(\W)$, we may refer to it as an $n$-dimensional
-surface, quadric, cubic or quartic, as the set of all points $p\in\V^e$ such that
+surface, quadric or quartic, as the set of all points $p\in\V^e$ such that
 \begin{equation}\label{equ_surface_variety}
 0 = P(p)\wedge\overline{P}(p)\cdot E,
 \end{equation}
@@ -320,13 +322,14 @@ such elements $E$ in Defintion~\ref{def_surface} is much more involved than
 the form \eqref{equ_quadric_form}.  Nevertheless, it is possible to extract
 a general quartic equation from equation \eqref{equ_surface_variety}.
 
-Notice that under Definition~\ref{def_surface}, canonical forms
+Now notice that under Definition~\ref{def_surface}, canonical forms
 such as \eqref{equ_canonical_form_of_common_quadric} are still valid.
 This is because
 \begin{equation}
 P(p)\wedge\overline{P}(p)\cdot E = (\nvao+p)\wedge\overline{(\nvao+p)}\cdot E
 \end{equation}
-in the case that $E$ is of the form \eqref{equ_quadric_form}.
+in the case that $E$ is of the form \eqref{equ_quadric_form}.  This allows
+us to use what we already know about quadrics in the old model with the new model.
 
 Putting theory into practice, the author wrote a piece of computer
 software that implements this model.  Giving the program the following
@@ -366,7 +369,8 @@ do
 \begin{figure}
 \includegraphics[scale=0.4]{ReflectCylinderInSphere}
 \caption{The blue reflection of a green cylinder in a red sphere.  Traces in various planes were
-used to render the cylinder and reflection surfaces.}
+used to render the cylinder and reflection surfaces.  Numerical instability in the tracing algorithm
+leads to problems in drawing the part of the reflected surface near the origin.}
 \label{fig_reflect_cylinder_in_sphere}
 \end{figure}
 The computer program was also able to give the polynomial equation in $x$, $y$
@@ -378,6 +382,28 @@ and $z$ for the reflected surface.  It is as follows.
 \end{split}
 \end{equation}
 Geometric algebra proved to be a very useful tool in finding this equation.
+Of course, it would be much nicer if the reflected surface has a canonical
+form as an element in $\G(\W)$.  A parameterization of the surface in terms
+of lengths, vectors and positions seems plausable.
+
+\section{Concluding Remarks}
+
+Though it has been shown that the conformal transformations can be applied
+to quadric surfaces, there is a reluctance to say that the model imposed here upon
+$\G(\W)$ is a better model for quadric surfaces than traditional methods.  Perhaps it is too soon tell.
+There may yet be results to be found in this model that allow us to do more than just
+transform of one surface into another.  For example, a great deal of interesting geometric
+operations are supported by the conformal model that allow you to combine
+geometries in various ways to get different results.
+
+There is also a matter of practicality.  Working directly with polynomial equations
+is too error prone and tedious.  This is where a framework based upon geometric algebra
+has proven exceptionally useful.  Seeing exactly how geometric algebra can be useful,
+however, is the challenge.  Along with all of the canonical forms we can find, these can
+only be made useful in conjunction with theorems and results that we can hopefully
+find in the model for the whole idea of doing geometry with geometric algebra to become feasible
+and worthwhile.
+Hopefully this paper helps, at least in some small part, for us to come closer to this goal.
 
 \bibliographystyle{amsplain}
 \bibliography{Parkin_AnExtensionOfTheQuadricModel}
