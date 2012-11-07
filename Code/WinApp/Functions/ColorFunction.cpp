@@ -113,10 +113,14 @@ GAVisToolColorFunctionEvaluator::GAVisToolColorFunctionEvaluator( void )
 		CalcLib::FunctionArgumentEvaluator* alphaArgumentEvaluator = GetArgument(4);
 		if( alphaArgumentEvaluator )
 		{
-			alphaResult = environment.CreateNumber( redArgumentEvaluator );
+			alphaResult = environment.CreateNumber( alphaArgumentEvaluator );
+			bool alphaSuccess = alphaArgumentEvaluator->EvaluateResult( *alphaResult, environment );
+			if( !alphaSuccess )
+				break;
+
 			CalcLib::MultivectorNumber* alphaMultivectorNumber =( CalcLib::MultivectorNumber* )alphaResult;
 			double alphaMagnitude;
-			bool alphaSuccess = CalculateMagnitudeAndClamp( *alphaMultivectorNumber, alphaMagnitude, environment );
+			alphaSuccess = CalculateMagnitudeAndClamp( *alphaMultivectorNumber, alphaMagnitude, environment );
 			if( !alphaSuccess )
 			{
 				environment.AddError( "Failed to calculate alpha from color argument." );
