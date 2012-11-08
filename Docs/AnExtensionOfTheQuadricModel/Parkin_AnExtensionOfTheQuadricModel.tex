@@ -51,24 +51,23 @@ USA}
 
 \subjclass{Primary 14J70; Secondary 14J29}
 
-\keywords{Quadric Surface, Geometric Algebra, Quadric Model}
+\keywords{Quadric Surface, Quartic Surface, Geometric Algebra, Quadric Model, Conformal Model}
 
 %\dedicatory{To Melinda and Naomi}
 
 \begin{abstract}
 An extension of the quadric model set forth in \cite{Parkin12} is
-found in which the rigid body motions of any quadric surface can be performed
-by versor transformations.  Extending the model yet further to include
-specific quartic surfaces, we find that it is possible to transform
-quadric surfaces by any transformation of the conformal model.
+found in which the rigid body motions are represented by
+versors applicable to any quadric surface.
+Extending the model yet further to include
+a specific form of quartic surface, we find that the versors of
+the conformal model may be used to transform any such surface.
+Results of a computer program implementing this model are presented.
 \end{abstract}
 
 \maketitle
 
 \section{Introduction}
-
-% This paper, like most of my papers, alarmingly lacks a great number of cited sources.
-% This is bad.
 
 In the original paper \cite{Parkin12}, a model for quadric surfaces was
 presented based upon the ideas of projective geometry.  What was unfortunate
@@ -76,23 +75,24 @@ about this model, however, was its lack of support for the rigid body transforma
 predicted in the conclusion of that paper that a better model for quadric
 surfaces may exist that is more like the conformal model of geometric algebra.
 The present paper details what may be such a model.  We'll find that the rigid
-body transformations can be encorporated into the model with a small
-extension of the quadric form.  An additional extension to the quadric form
-will allow us to support the conformal transformations at the expense of
-expanding our model to necessarily include the cubic and quartic surfaces.  Both extensions
+body transformations can be incorporated into the model by using an alternative
+method of encoding the quadric form.  An extension to the quadric form
+will then allow us to support the conformal transformations at the expense of
+expanding our model to necessarily include a specific form of quartic surfaces.  Both extensions
 of the original quadric model will use the same geometric algebra.
 
 \section{The Geometric Algebra}
 
 We begin here with a description of the structure of the geometric algebra upon
 which our model will be imposed.  This
-geometric algebra will contain the following nested vector spaces.
+geometric algebra will contain the following vector spaces.
 \begin{equation}\label{equ_vector_spaces}
 \begin{array}{ll}
 \mbox{Notation} & \mbox{Basis} \\
 \hline
 \V^e & \{e_i\}_{i=1}^n \\
-\V^o & \{\nvao\}\cup\{e_i\}_{i=1}^n \\
+\V^{\nvao} & \{\nvao\}\cup\{e_i\}_{i=1}^n \\
+\V^{\nvai} & \{e_i\}_{i=1}^n\cup\{\nvai\} \\
 \V & \{\nvao\}\cup\{e_i\}_{i=1}^n\cup\{\nvai\}
 \end{array}
 \end{equation}
@@ -151,7 +151,7 @@ This is because $\overline{\nvaob}=-\nvao$ and $\overline{\nvaib}=-\nvai$.
 \section{The Form Of Quadric Surfaces In $\G(\W)$}
 
 We now give a formal definition under which elements $E\in\G(\W)$
-are representative of $n$-dimensional quadric surfaces in the first model.
+are representative of $n$-dimensional quadric surfaces in the extended model.
 \begin{defn}\label{def_quadric}
 Referring to an element $E\in\G(\W)$ as a quadric surface, it is representative of such an $n$-dimensional
 surface as the set of all points $p\in\V^o$ such that
@@ -159,23 +159,29 @@ surface as the set of all points $p\in\V^o$ such that
 0 = p\wedge\overline{p}\cdot E.
 \end{equation}
 \end{defn}
-From this definition it can be seen that the general form of a quadric $E\in\G(\W)$ is given by
+From this definition it can be seen that the general form of a quadric $E\in\G(\W)$ can always
+be reduced to a form given by
 \begin{equation}\label{equ_quadric_form}
-E = \sum_{i=1}^n\sum_{j=1}^n\lambda_{ij}e_i\overline{e}_j+
-\sum_{i=1}^n\lambda_i(e_i\nvaib + \nvai\overline{e}_j)+
-\lambda\nvai\nvaib.
+E = \sum_{i=1}^n\sum_{j=i}^n\lambda_{ij}e_i\overline{e}_j+
+\sum_{i=1}^n\lambda_i e_i\nvaib+
+\lambda\nvai\nvaib,
 \end{equation}
+where each of $\lambda_{ij}$, $\lambda_i$, and $\lambda$ are scalars.
 This is because an element of the form \eqref{equ_quadric_form}, when
 substituted into equation \eqref{equ_quadric_equation}, produces a polynomial
 equation of degree 2 in the vector components of $p-\nvao$.
 Doing so with $p=\nvao+x$, where $x\in\V^e$, we get the equation
 \begin{equation}
-0 = -\sum_{i=1}^n\lambda_{ii}(x\cdot e_i)^2-
-\sum_{i=1}^n\sum_{\substack{j=1\\j\neq i}}^n 2\lambda_{ij}(x\cdot e_i)(x\cdot e_j)+
-\sum_{i=1}^n 2\lambda_i(x\cdot e_i) - \lambda,
+0 = -\sum_{i=1}^n\sum_{j=i}^n\lambda_{ij}(x\cdot e_i)(x\cdot e_j)
++\sum_{i=1}^n\lambda_i(x\cdot e_i) - \lambda,
 \end{equation}
 which we may recognize as the equation for an $n$-dimensional quadric surface.
-Of course, using geometric algebra, it is undesirable and unecessary to think of
+The general form of a quadric $E\in\G(\W)$ is going to be any bivector that is
+the sum of blades of the form $a\wedge\overline{b}$, where $a,b\in\V^{\nvai}$.
+In practice, a computer program might take such a bivector and extract from it
+the coefficients of the quadric polynomial it represents.
+
+Of course, using geometric algebra on paper, it is undesirable and unnecessary to think of
 quadrics in terms of polynomial equations.  A better way to think of quadrics is in terms
 of an element of the algebra whose decomposition
 produces the parameters characterizing the quadric surface.  For example, many common
@@ -257,23 +263,34 @@ generated by the set of all points $p'$ on $E$ by Definition~\ref{def_quadric}
 through equation \eqref{equ_get_rid_ni}.
 \end{thm}
 \begin{proof}
-The proof of this theorem follows from the observation that the desired transformation
-of $E$ by $V$ is given by the set of all points $p\in\V^o$ such that
-\begin{equation}\label{equ_transformed_variety}
-0 = V^{-1}pV\wedge\overline{V^{-1}pV}\cdot E.
+The theorem is proved by showing that the set of all points $p\in\V^\nvao$
+such that
+\begin{equation}\label{equ_wanted_variety}
+0 = p'\wedge p'\cdot E
 \end{equation}
-In the case that $V^{-1}pV\not\in\V^o$, there is no problem, because
-\begin{equation}
-V^{-1}pV\wedge\overline{V^{-1}pV}\cdot E = p'\wedge\overline{p}'\cdot E
+is the very same set of all points $p\in\V^\nvao$ such that
+\begin{equation}\label{equ_derived_variety}
+0 = p\wedge p\cdot E'.
 \end{equation}
-by the fact that $E$ of the form \eqref{equ_quadric_form}.
-Then, applying Lemma~\ref{lma_versor_transfer}, we then see that
-\begin{equation}
-V^{-1}pV\wedge\overline{V^{-1}pV}\cdot E = p\wedge\overline{p}\cdot (V\overline{V})E(V\overline{V})^{-1},
-\end{equation}
-showing that by Definition~\ref{def_quadric}, the element $E'$ is representative of the very same
-algebraic variety given by equation \eqref{equ_transformed_variety}.
+To see that this is the case, notice that
+\begin{align}
+ & (\nvao\cdot V^{-1}pV\wedge\nvai)\wedge\overline{(\nvao\cdot V^{-1}pV\wedge\nvai)}\cdot E \\
+=\;& V^{-1}pV\wedge\overline{V^{-1}pV}\cdot E \\
+=\;& p\wedge\overline{p}\cdot(V\overline{V})E(V\overline{V})^{-1}.
+\end{align}
+The first equality holds by the fact that $E$ is of the form \eqref{equ_quadric_form},
+while the second equality holds by Lemma~\ref{lma_versor_transfer}.
 \end{proof}
+
+The key motivation behind Theorem~\ref{thm_quadric_transform} is
+the observation that the desired transformation of $E$ by $V$ is
+given by the algebraic variety of equation \eqref{equ_wanted_variety}, because
+an understanding of how $V^{-1}$ transforms $p$ gives us an understanding
+of what type of geometry we get from equation \eqref{equ_wanted_variety} in terms of $E$ and $V$.
+The theorem then
+shows that this is also the algebraic variety of equation \eqref{equ_derived_variety}, thereby
+giving us a means to performing desired transformations on elements representative
+of quadric surfaces in $\G(\W)$.
 
 We can now apply Theorem~\ref{thm_quadric_transform} to show
 that the rigid body transformations are supported by our extended model.
@@ -294,7 +311,9 @@ It now follows by Theorem~\ref{thm_quadric_transform} that $\pi$ is a versor
 capable of reflecting any quadric surface about the plane it represents.
 Being able to perform planar reflections of any quadric in any plane, it
 now follows that we can find a versor $V\in\G(\W)$ capable of performing
-any rigid body motion applicable to any quadric surface.
+any rigid body motion applicable to any quadric surface.  The development
+of the rigid body motions, combinations of translations and rotations, by planar reflections,
+is well known, and can be found in section 2.7 of \cite{LiRockwood}.
 
 \section{Extending The Model Yet Further}
 
@@ -314,13 +333,18 @@ P(p) = \nvao + p + \frac{1}{2}p^2\nvai.
 \end{equation}
 \end{defn}
 A version of Theorem~\ref{thm_quadric_transform} is then easily found
-where if $V\in\G(\W)$ is any versor of the conformal model, and if $E$
+such that if $V\in\G(\W)$ is any versor of the conformal model, and if $E$
 is a surface under Definition~\ref{def_surface}, then the element $E'\in\G(\W)$,
 given by equation \eqref{equ_transformed_surface}, must, by Definition~\ref{def_surface},
  be representative of the transformation of $E$ by the versor $V$.  The form for
 such elements $E$ in Defintion~\ref{def_surface} is much more involved than
 the form \eqref{equ_quadric_form}.  Nevertheless, it is possible to extract
-a general quartic equation from equation \eqref{equ_surface_variety}.
+a specific form of quartic polynomial equation in
+the vector components of $p$ from equation \eqref{equ_surface_variety}.
+The result being unsightly, it will not be presented here.  Suffice it to say, a computerized
+algebraic system was used to find the polynomial form.  In any case, it is easy
+to see from equation \eqref{equ_surface_variety} that the degree of the resulting
+polynomial will be 4.
 
 Now notice that under Definition~\ref{def_surface}, canonical forms
 such as \eqref{equ_canonical_form_of_common_quadric} are still valid.
@@ -332,8 +356,11 @@ in the case that $E$ is of the form \eqref{equ_quadric_form}.  This allows
 us to use what we already know about quadrics in the old model with the new model.
 
 Putting theory into practice, the author wrote a piece of computer
-software that implements this model.  Giving the program the following
+software that implements this conformal-like model for the special class of
+quartic surfaces of equation \eqref{equ_surface_variety}.  Giving the program the following
 script as input, the output of the program is given in Figure~\ref{fig_reflect_cylinder_in_sphere}.
+The script is easy for anyone to read, even if they are not familiar with its language.  It is given
+here to illustrate how one might use the model with a computer system.
 {\small
 \begin{verbatim}
 
@@ -373,38 +400,26 @@ used to render the cylinder and reflection surfaces.  Numerical instability in t
 leads to problems in drawing the part of the reflected surface near the origin.}
 \label{fig_reflect_cylinder_in_sphere}
 \end{figure}
-The computer program was also able to give the polynomial equation in $x$, $y$
-and $z$ for the reflected surface.  It is as follows.
+The functions beginning with the word ``bind'' create and bind an entity to the given
+element of the geometric algebra that is responsible for interpreting that element
+as a surface under Definition~\ref{def_surface}.  The computer program can then
+use traditional methods to render the surface from the extracted polynomial equation.
+For example, the polynomial equation in $x$, $y$ and $z$ for the reflected surface presented
+in Figure~\ref{fig_reflect_cylinder_in_sphere} is given by
 \begin{equation}
 \begin{split}
 0 =\;& x^{4} + 9.6x^{2}y + 2x^{2}y^{2} + 2x^{2}z^{2} + 9.6y^{3} +\\
- & 21.6y^{2} + y^{4} + 9.6yz^{2} + 2y^{2}z^{2} + z^{4}
+ & 21.6y^{2} + y^{4} + 9.6yz^{2} + 2y^{2}z^{2} + z^{4}.
 \end{split}
 \end{equation}
-Geometric algebra proved to be a very useful tool in finding this equation.
-Of course, it would be much nicer if the reflected surface has a canonical
-form as an element in $\G(\W)$.  A parameterization of the surface in terms
-of lengths, vectors and positions seems plausable.
+It is interesting how a bit of reasoning in geometric algebra has given us a means
+to finding this polynomial equation.
+Of course, while such equations lend themselves to computer algorithms, they
+are not practical on paper.  This is where the canonical forms of elements become
+useful.  A parameterization of the reflected surface of Figure~\ref{fig_reflect_cylinder_in_sphere} in terms
+of lengths, vectors and positions, however, does not seem obvious, but is plausible and surely exists.
 
-\section{Concluding Remarks}
-
-Though it has been shown that the conformal transformations can be applied
-to quadric surfaces, there is a reluctance to say that the model imposed here upon
-$\G(\W)$ is a better model for quadric surfaces than traditional methods.  Perhaps it is too soon tell.
-There may yet be results to be found in this model that allow us to do more than just
-transform of one surface into another.  For example, a great deal of interesting geometric
-operations are supported by the conformal model that allow you to combine
-geometries in various ways to get different results.
-
-There is also a matter of practicality.  Working directly with polynomial equations
-is too error prone and tedious.  This is where a framework based upon geometric algebra
-has proven exceptionally useful.  Seeing exactly how geometric algebra can be useful,
-however, is the challenge.  Along with all of the canonical forms we can find, these can
-only be made useful in conjunction with theorems and results that we can hopefully
-find in the model for the whole idea of doing geometry with geometric algebra to become feasible
-and worthwhile.
-Hopefully this paper helps, at least in some small part, for us to come closer to this goal.
-
+\nocite{Dorst07}
 \bibliographystyle{amsplain}
 \bibliography{Parkin_AnExtensionOfTheQuadricModel}
 
