@@ -6,7 +6,7 @@ do
 (
 	/* Make the cylinder. */
 	v = e2,
-	c = -8*e1,
+	c = -7*e1,
 	r = 2,
 	cylinder = Omega - v^bar(v) + 2*c*nib + (c.c - r*r)*ni^nib,
 	bind_quadric(cylinder),
