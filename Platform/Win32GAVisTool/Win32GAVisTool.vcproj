@@ -735,6 +735,10 @@
 					RelativePath="..\..\ScriptCode\ConformalQuarticGeometry\ReflectCylinderInSphere.txt"
 					>
 				</File>
+				<File
+					RelativePath="..\..\ScriptCode\ConformalQuarticGeometry\ReflectDoubleConeInSphere.txt"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<File
