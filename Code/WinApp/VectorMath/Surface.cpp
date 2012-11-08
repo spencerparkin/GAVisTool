@@ -262,7 +262,8 @@ bool VectorMath::Surface::StepTraceInPlane( const Plane& plane, int direction, V
 //=============================================================================
 bool VectorMath::Surface::ConvergePointToSurfaceInPlane( const Plane* plane, Vector& point, double epsilon )
 {
-	double deltaLength = 0.5;
+	// This must be small, but bigger than epsilons used to detect trace loops.
+	double deltaLength = 0.1;
 
 	// Is there a way to prove or disprove that this algorithm converges?
 	int maxIters = 1000;
