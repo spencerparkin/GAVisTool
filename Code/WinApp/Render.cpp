@@ -1507,38 +1507,47 @@ void GAVisToolRender::BspNode::DistributeLine(
 		bspTree->lineSplitCount++;
 
 		backLine = lineHeap.AllocateFresh();
-		backLine->CopyBaseData( *line );
-		VectorMath::Copy( backLine->vertex[0], vertex );
+		if( backLine )
+		{
+			backLine->CopyBaseData( *line );
+			VectorMath::Copy( backLine->vertex[0], vertex );
+		}
 
 		frontLine = lineHeap.AllocateFresh();
-		frontLine->CopyBaseData( *line );
-		VectorMath::Copy( frontLine->vertex[0], vertex );
+		if( frontLine )
+		{
+			frontLine->CopyBaseData( *line );
+			VectorMath::Copy( frontLine->vertex[0], vertex );
+		}
 		
-		if( planeSide[0] == VectorMath::Plane::SIDE_BACK )
+		if( frontLine && backLine )
 		{
-			VectorMath::Copy( backLine->vertex[1], line->vertex[0] );
-			VectorMath::Copy( frontLine->vertex[1], line->vertex[1] );
+			if( planeSide[0] == VectorMath::Plane::SIDE_BACK )
+			{
+				VectorMath::Copy( backLine->vertex[1], line->vertex[0] );
+				VectorMath::Copy( frontLine->vertex[1], line->vertex[1] );
+			}
+			else
+			{
+				VectorMath::Copy( backLine->vertex[1], line->vertex[1] );
+				VectorMath::Copy( frontLine->vertex[1], line->vertex[0] );
+			}
+
+			// This was an attempt to compensate for the crappy look
+			// of a line that was split into a sequence of several line segments.
+			/*
+			double deltaLength = 0.02;
+			VectorMath::Vector delta;
+
+			VectorMath::Sub( delta, backLine->vertex[0], backLine->vertex[1] );
+			VectorMath::Scale( delta, delta, deltaLength / VectorMath::Length( delta ) );
+			VectorMath::Add( backLine->vertex[0], backLine->vertex[0], delta );
+
+			VectorMath::Sub( delta, frontLine->vertex[0], frontLine->vertex[1] );
+			VectorMath::Scale( delta, delta, deltaLength / VectorMath::Length( delta ) );
+			VectorMath::Add( frontLine->vertex[0], frontLine->vertex[0], delta );
+			*/
 		}
-		else
-		{
-			VectorMath::Copy( backLine->vertex[1], line->vertex[1] );
-			VectorMath::Copy( frontLine->vertex[1], line->vertex[0] );
-		}
-
-		// This was an attempt to compensate for the crappy look
-		// of a line that was split into a sequence of several line segments.
-		/*
-		double deltaLength = 0.02;
-		VectorMath::Vector delta;
-
-		VectorMath::Sub( delta, backLine->vertex[0], backLine->vertex[1] );
-		VectorMath::Scale( delta, delta, deltaLength / VectorMath::Length( delta ) );
-		VectorMath::Add( backLine->vertex[0], backLine->vertex[0], delta );
-
-		VectorMath::Sub( delta, frontLine->vertex[0], frontLine->vertex[1] );
-		VectorMath::Scale( delta, delta, deltaLength / VectorMath::Length( delta ) );
-		VectorMath::Add( frontLine->vertex[0], frontLine->vertex[0], delta );
-		*/
 	}
 }
 
@@ -1786,7 +1795,7 @@ void GAVisToolRender::BspNode::Insert( Line* line, ObjectHeap< Line >& lineHeap,
 	else
 	{
 		int numLinesBefore = lineList.Count();
-		Line* backLine, *frontLine;
+		Line* backLine = 0, *frontLine = 0;
 		DistributeLine( line, backLine, frontLine, lineHeap, bspTree );
 		int numLinesAfter = lineList.Count();
 
