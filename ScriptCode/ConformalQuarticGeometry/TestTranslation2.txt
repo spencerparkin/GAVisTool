@@ -1,0 +1,52 @@
+do
+(
+	a = 1*no + 2*e1 + 3*e2 + 4*e3 + 5*ni,
+	b = 2*no + 3*e1 + 4*e2 + 5*e3 + 6*ni,
+
+	p = $x*e1 + $y*e2 + $z*e3,
+	P = no + p + 0.5*(p.p)*ni,
+	
+	t = 1*e1 + 2*e2,
+	T = 1 - 0.5*t*ni,
+	V = T*bar(T),
+	
+	/*
+	 * The polynomial test passes, but the two surfaces
+	 * do not look like translations of one another.
+	 * Does this mean that "m1" below is not really the
+	 * translation of the surface?  We need to calculate
+	 * "m2" as f(x-t), and then compare that.  If that
+	 * test passes too, then it could be a problem with
+	 * my internal surface rendering algorithm.
+	 */
+	
+	poly_translated_m1 = ((T~*P*T)^bar(T~*P*T)).( a^bar(b) ),
+	poly_translated_m2 = (P^bar(P)).(V*( a^bar(b) )*V~),
+
+	/* This should be zero, because T doesn't scale anything weird. */
+	/* This test passes. */
+	test = poly_translated_m1 - poly_translated_m2,
+	
+	/* These do not look like translations of one another! */
+	/*E_untranslated = a^bar(b),
+	bind_conformal_quartic(E_untranslated),
+	E_translated = V*(E_untranslated)*V~,
+	bind_conformal_quartic(E_translated),*/
+	
+	x = $x*1 - t.e1,
+	y = $y*1 - t.e2,
+	z = $z*1 - t.e3,
+	poly_translated_m3 =
+		-30 + 27*x + -14*x*x + -0.5*x*x*x*x + 3.5*x*x*x + 3.5*x*y*y + 5*x*x*y +
+		-x*x*y*y + -17*x*y + 6.5*x*x*z + -22*x*z + -x*x*z*z + 3.5*x*z*z +
+		5*y*y*y + 38*y + -0.5*y*y*y*y + -20*y*y + 6.5*y*y*z + -31*y*z + -y*y*z*z +
+		5*y*z*z + 49*z + -28*z*z + -0.5*z*z*z*z + 6.5*z*z*z,
+		
+	test2 = poly_translated_m3 - poly_translated_m2,
+		
+	/*
+	 * All tests pass!
+	 * The problem must be in the surface rendering code.
+	 * Check the surface curve formula with Mathematica.
+	 */
+)

@@ -739,6 +739,14 @@
 					RelativePath="..\..\ScriptCode\ConformalQuarticGeometry\ReflectDoubleConeInSphere.txt"
 					>
 				</File>
+				<File
+					RelativePath="..\..\ScriptCode\ConformalQuarticGeometry\TestTranslation2.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ScriptCode\ConformalQuarticGeometry\TestTranslations.txt"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<File

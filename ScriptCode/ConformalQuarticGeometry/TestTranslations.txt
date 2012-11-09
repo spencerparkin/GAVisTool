@@ -1,0 +1,56 @@
+do
+(
+	E_untranslated =
+	
+		$c0*no^nob +
+		$c1*no^e1b +
+		$c2*no^e2b +
+		$c3*no^e3b +
+		$c4*no^nib +
+		
+		$c5*e1^nob +
+		$c6*e1^e1b +
+		$c7*e1^e2b +
+		$c8*e1^e3b +
+		$c9*e1^nib +
+		
+		$c10*e2^nob +
+		$c11*e2^e1b +
+		$c12*e2^e2b +
+		$c13*e2^e3b +
+		$c14*e2^nib +
+		
+		$c15*e3^nob +
+		$c16*e3^e1b +
+		$c17*e3^e2b +
+		$c18*e3^e3b +
+		$c19*e3^nib +
+		
+		$c20*ni^nob +
+		$c21*ni^e1b +
+		$c22*ni^e2b +
+		$c23*ni^e3b +
+		$c24*ni^nib,
+
+	p = $x*e1 + $y*e2 + $z*e3,
+	P = no + p + 0.5*(p.p)*ni,
+	poly_untranslated = (P^bar(P)).E_untranslated,
+	
+	/* Calculate the translated polynomial using method 1. */
+	
+	t = $tx*e1 + $ty*e2 + $tz*e2,
+	p = p - t,
+	P = no + p + 0.5*(p.p)*ni,
+	poly_translated_m1 = (P^bar(P)).E_untranslated,
+	
+	/* Calculate the translated polynomial using method 2. */
+	
+	p = $x*e1 + $y*e2 + $z*e3,
+	P = no + p + 0.5*(p.p)*ni,
+	T = 1 - 0.5*t*ni,
+	V = T*bar(T),
+	E_translated = V*E_untranslated*V~,
+	poly_translated_m2 = (P^bar(P)).E_translated,
+	
+	/* Are they the same, up to scale? */
+)
