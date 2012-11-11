@@ -89,60 +89,125 @@ bool VectorMath::Surface::Trace::IsPointOnTrace( const Vector& givenPoint, doubl
 }
 
 //=============================================================================
-void VectorMath::Surface::GenerateTracesAlongAxis( const Vector& axis, double range, double planeCount, const Aabb& aabb, Utilities::List& traceList, bool resetList /*= false*/ )
+// Here the user can expect that we'll just append to their given list.
+void VectorMath::Surface::GenerateTracesAlongAxis( const TraceParameters& traceParameters, Utilities::List& traceList )
 {
-	if( resetList )
-		traceList.RemoveAll( true );
-
-	// Build a right-handed coordinate frame with the Z-axis being the given axis.
-	// The trace planes will be orthogonal to the given axis or planes parallel to
-	// the XY-plane in this frame.
-	CoordFrame coordFrame;
-	Copy( coordFrame.zAxis, axis );
-	Orthogonal( coordFrame.xAxis, axis );
-	Cross( coordFrame.yAxis, axis, coordFrame.xAxis );
-
-	// Generate traces in planes orthogonal to the given axis in the desired range.
-	Vector pos[2];
-	Scale( pos[0], axis, -range / 2.0 );
-	Scale( pos[1], axis, range / 2.0 );
-	double epsilon = 0.001;
-	double dt = 1.0 / planeCount;
-	for( double t = dt * 0.5; t <= 1.0; t += dt )
+	// The algorithm is very straight forward.  Go generate all the traces in
+	// all the planes we want along the given axis.
+	Utilities::List traceListInPlane;
+	for( int index = 0; index < traceParameters.planeCount; index++ )
 	{
-		// Build a plane at this point along the axis.
-		Vector planePos;
-		Lerp( planePos, pos[0], pos[1], t );
-		Plane plane;
-		MakePlane( plane, planePos, axis );
+		Plane tracePlane;
+		Vector tracePlaneCenter;
+		CalculateTracePlane( traceParameters, index, tracePlane, tracePlaneCenter );
+		CalculateTracesInPlane( tracePlane, tracePlaneCenter, traceParameters.extent, traceListInPlane );
+		traceListInPlane.EmptyIntoOnRight( traceList );
+	}
+}
 
-		// There could be zero, one or two traces in the given plane
-		// in the case that our surface is a quadric.  Our job here is
-		// to try to find all of them.
+//=============================================================================
+void VectorMath::Surface::GenerateManifoldMeshAlongAxis( const TraceParameters& traceParameters, Utilities::List& triangleList )
+{
+	Utilities::List traceListInPlane[2];
+	int trailingPlane = 1;
+	int leadingPlane = 0;
+	for( int index = 0; index < traceParameters.planeCount; index++ )
+	{
+		// Calculate the traces in the leading plane.  The trailing plane is either
+		// already calculated or we haven't yet calculated a trailing plane trace set.
+		Plane tracePlane;
+		Vector tracePlaneCenter;
+		CalculateTracePlane( traceParameters, index, tracePlane, tracePlaneCenter );
+		CalculateTracesInPlane( tracePlane, tracePlaneCenter, traceParameters.extent, traceListInPlane[ leadingPlane ] );
 
-		// Try to get a trace with the following seed.
+		// If there is a trailing plane, generate a stitch between them.
+		if( index > 0 )
+			StitchTracesTogether( traceListInPlane[ trailingPlane ], traceListInPlane[ leadingPlane ], triangleList );
+
+		// Swap the leading and trailing plane lists.
+		leadingPlane = ( leadingPlane + 1 ) % 2;
+		trailingPlane = ( trailingPlane + 1 ) % 2;
+	}
+}
+
+//=============================================================================
+// Stitching the traces in one plane with an adjacent plane is not an
+// entirely trivial thing to do.  For example, one plane may contain
+// one trace curve while the other plane contains two trace curves.
+// The algorithm would need to deal with closing the hole this may tend to cause.
+void VectorMath::Surface::StitchTracesTogether( Utilities::List& trailingTraceList, Utilities::List& leadingTraceList, Utilities::List& triangleList )
+{
+	
+}
+
+//=============================================================================
+void VectorMath::Surface::CalculateTracePlane( const TraceParameters& traceParameters, int index, Plane& plane, Vector& planeCenter )
+{
+	Vector delta;
+	Scale( delta, traceParameters.axis, traceParameters.range / 2.0 );
+	Vector begin, end;
+	Sub( begin, traceParameters.center, delta );
+	Add( end, traceParameters.center, delta );
+	double lerp = double( index ) / double( traceParameters.planeCount - 1 );
+	Lerp( planeCenter, begin, end, lerp );
+	MakePlane( plane, planeCenter, traceParameters.axis );
+}
+
+//=============================================================================
+// We assume here that the given center is on the given plane.
+void VectorMath::Surface::CalculateTracesInPlane( const Plane& plane, const Vector& center, double extent, Utilities::List& traceList )
+{
+	double epsilon = 1e-8;
+
+	// We do not append to a given list.  If the user wants that behavior,
+	// then they should concatinate/transfer the list we return to their own list.
+	traceList.RemoveAll( true );
+
+	// Build an AABB about the given center that will contain all traces.
+	// Some trace curves extend out to infinity, so we have to stop somewhere.
+	Vector delta;
+	Set( delta, extent, extent, extent );
+	Aabb aabb;
+	MakeAabb( aabb, center, delta );
+
+	// Build a coordinate frame we can use for the given plane.
+	CoordFrame coordFrame;
+	Copy( coordFrame.zAxis, plane.normal );
+	Orthogonal( coordFrame.xAxis, plane.normal );
+	Cross( coordFrame.yAxis, plane.normal, coordFrame.xAxis );
+
+	// The number of possible trace curves in a plane is determined by the degree of
+	// the polynomial equation of the curve.  Also, knowing which seed points to use
+	// is not being done here by any scientific method.  I'm hoping that a circular
+	// spread will help us to likely find all local extrema we need to find.
+	double seedRadius = extent;
+	int seedCount = 4;
+	for( int index = 0; index < seedCount; index++ )
+	{
+		// Calculate the seed point we're going to try this time around.
+		double angle = 2.0 * PI * double( index ) / double( seedCount );
 		Vector seed;
-		//Set( seed, -range / 2.0, -range / 2.0, 0.0 );
-		Set( seed, -range / 4.0, -range / 4.0, 0.0 );
-		Transform( seed, coordFrame, seed );
-		Add( seed, seed, planePos );
-		Trace* firstTrace = CalculateTraceInPlane( plane, seed, aabb );
+		Set( seed, seedRadius * cos( angle ), seedRadius * sin( angle ), 0.0 );
+		Transform( &seed, coordFrame, center, &seed, 1 );
 
-		// Try to get another trace, but don't repeat the first trace, if any.
-		//Set( seed, range / 2.0, range / 2.0, 0.0 );
-		Set( seed, range / 4.0, range / 4.0, 0.0 );
-		Transform( seed, coordFrame, seed );
-		Add( seed, seed, planePos );
-		Trace* secondTrace = 0;
-		if( ConvergePointToSurfaceInPlane( &plane, seed, epsilon ) )
-			if( !( firstTrace && firstTrace->IsPointOnTrace( seed, 0.005 ) ) )
-				secondTrace = CalculateTraceInPlane( plane, seed, aabb );
+		// Does it converge to the surface?  If not, the seed point
+		// fails us, and we should go to the next seed point.
+		if( !ConvergePointToSurfaceInPlane( &plane, seed, epsilon ) )
+			continue;
 
-		// Add the traces, if any were found.
-		if( firstTrace )
-			traceList.InsertRightOf( traceList.RightMost(), firstTrace );
-		if( secondTrace )
-			traceList.InsertRightOf( traceList.RightMost(), secondTrace );
+		// Is the point already on a trace that we have previously calculated?
+		// If so, then we have already done the trace work and should continue
+		// on to the next seed point.
+		Trace* trace = 0;
+		for( trace = ( Trace* )traceList.LeftMost(); trace; trace = ( Trace* )trace->Right() )
+			if( trace->IsPointOnTrace( seed, 5e-3 ) )
+				break;
+		if( trace )
+			continue;
+
+		// Calculate a new trace and add it to the list.
+		trace = CalculateTraceInPlane( plane, seed, aabb );
+		traceList.InsertRightOf( traceList.RightMost(), trace );
 	}
 }
 
@@ -162,7 +227,7 @@ VectorMath::Surface::Trace* VectorMath::Surface::CalculateTraceInPlane( const Pl
 	Trace* trace = new Trace();
 
 	// Begin the tracing process in the first direction.
-	double traceDelta = 0.5;		// This needs to be well above our epsilon.
+	double traceDelta = 0.3;		// This needs to be well above our epsilon.
 	int direction = 0;
 	while( direction < 2 )
 	{
@@ -195,7 +260,10 @@ VectorMath::Surface::Trace* VectorMath::Surface::CalculateTraceInPlane( const Pl
 			{
 				// If we run into our own trace, we can always quit the algorithm,
 				// because we know that we have come full circle.
-				if( trace->IsPointOnTrace( point, 0.005 ) )
+				// This must be smaller than our step delta or we'll falsely
+				// detect a loop and not generate a curve at all.
+				double loopDetectEps = 0.008;
+				if( trace->IsPointOnTrace( point, 0.008 ) )
 				{
 					// Indicate that the caller should consider the trace a line-loop
 					// in the case that the trace is more than one point.  If it is
@@ -324,143 +392,6 @@ bool VectorMath::Surface::ConvergePointToSurfaceInPlane( const Plane* plane, Vec
 	// Failure occures if our algorithm fails to converge the point
 	// onto the surface in the alotted number of iterations.
 	return false;
-}
-
-//=============================================================================
-VectorMath::Surface::ManifoldPoint::ManifoldPoint( const Vector& point )
-{
-	Copy( this->point, point );
-
-	for( int index = 0; index < MAX_DEGREE; index++ )
-		adjacentPoint[ index ] = 0;
-
-	degree = 0;
-}
-
-//=============================================================================
-/*virtual*/ VectorMath::Surface::ManifoldPoint::~ManifoldPoint( void )
-{
-}
-
-//=============================================================================
-// I don't know if this will ever work.
-bool VectorMath::Surface::GenerateManifold( const Aabb& aabb, const Vector& seedPoint, Utilities::List& manifoldPointList )
-{
-	// Make sure we're starting with a new empty list.
-	manifoldPointList.RemoveAll( true );
-
-	// If the seed point doesn't converge to the surface, then we're done.
-	double epsilon = 1e-6;
-	Vector convergedPoint;
-	Copy( convergedPoint, seedPoint );
-	if( !ConvergePointToSurfaceInPlane( 0, convergedPoint, epsilon ) )
-		return false;
-
-	// Queue the initial point on the surface.
-	Utilities::List pointQueue;
-	pointQueue.InsertRightOf( pointQueue.RightMost(), new ManifoldPoint( convergedPoint ) );
-
-	// Process the queue until it is empty.
-	while( pointQueue.Count() > 0 )
-	{
-		// Grabe the next point off the queue and process it.
-		ManifoldPoint* nextPoint = ( ManifoldPoint* )pointQueue.LeftMost();
-		pointQueue.Remove( nextPoint, false );
-		if( !MakeManifoldAboutPoint( aabb, nextPoint, manifoldPointList, pointQueue, epsilon ) )
-			break;
-	}
-
-	// Remove any points remaining in the queue due to possible early termination.
-	pointQueue.RemoveAll( true );
-	return true;
-}
-
-//=============================================================================
-bool VectorMath::Surface::MakeManifoldAboutPoint( const Aabb& aabb, ManifoldPoint* centralManifoldPoint, Utilities::List& manifoldPointList, Utilities::List& pointQueue, double epsilon )
-{
-	Vector gradient, axis;
-	EvaluateGradientAt( centralManifoldPoint->point, gradient );
-	Normalize( axis, gradient );
-
-	Vector firstPeripheralSurfacePoint;
-	double manifoldRadius = 1.0;
-	double manifoldAngle = 2.0 * PI / double( ManifoldPoint::MAX_DEGREE );
-	double squareDistance = 0.0;
-
-	for( int index = 0; index < ManifoldPoint::MAX_DEGREE; index++ )
-	{
-		ManifoldPoint* manifoldPoint = 0;
-
-		if( !index )
-		{
-			manifoldPoint = FindNearestManifoldPoint( manifoldPointList, centralManifoldPoint->point, squareDistance );
-			if( manifoldPoint && squareDistance <= manifoldRadius * manifoldRadius + epsilon )
-				Copy( firstPeripheralSurfacePoint, manifoldPoint->point );
-			else
-			{
-				Orthogonal( firstPeripheralSurfacePoint, axis );
-				Scale( firstPeripheralSurfacePoint, firstPeripheralSurfacePoint, manifoldRadius );
-				for( int subIndex = 0; subIndex < ManifoldPoint::MAX_DEGREE; subIndex++ )
-				{
-					if( ConvergePointToSurfaceInPlane( 0, firstPeripheralSurfacePoint, epsilon ) )
-					{
-						if( AabbSide( aabb, firstPeripheralSurfacePoint ) != Aabb::IS_OUTSIDE_BOX )
-						{
-							manifoldPoint = new ManifoldPoint( firstPeripheralSurfacePoint );
-							pointQueue.InsertRightOf( pointQueue.RightMost(), manifoldPoint );
-							break;
-						}
-					}
-					double angle = manifoldAngle * double( subIndex );
-					Rotate( firstPeripheralSurfacePoint, firstPeripheralSurfacePoint, axis, angle );
-				}
-			}
-		}
-		else
-		{
-			double angle = manifoldAngle * double( index );
-			Vector rotatedPeripheralSurfacePoint;
-			Rotate( rotatedPeripheralSurfacePoint, firstPeripheralSurfacePoint, axis, angle );
-			if( ConvergePointToSurfaceInPlane( 0, rotatedPeripheralSurfacePoint, epsilon ) )
-			{
-				manifoldPoint = FindNearestManifoldPoint( manifoldPointList, rotatedPeripheralSurfacePoint, squareDistance );
-				if( !manifoldPoint )
-				{
-					if( AabbSide( aabb, rotatedPeripheralSurfacePoint ) != Aabb::IS_OUTSIDE_BOX )
-					{
-						manifoldPoint = new ManifoldPoint( rotatedPeripheralSurfacePoint );
-						pointQueue.InsertRightOf( pointQueue.RightMost(), manifoldPoint );
-					}
-				}
-			}
-		}
-
-		// Null entries are valid.  Such entries mark boundries of the surface due to being cut by the AABB.
-		centralManifoldPoint->adjacentPoint[ index ] = manifoldPoint;
-	}
-
-	manifoldPointList.InsertRightOf( manifoldPointList.RightMost(), centralManifoldPoint );
-	return true;
-}
-
-//=============================================================================
-// This is definitely going to be the bottle-neck of the algorithm.  Currently
-// this does a linear search, but it may be worthy trying to speed this up with
-// an algorithm based upon some sort of spacial sorting/partitioning data structure.
-VectorMath::Surface::ManifoldPoint* VectorMath::Surface::FindNearestManifoldPoint( const Utilities::List& manifoldPointList, const Vector& point, double& squareDistance )
-{
-	VectorMath::Surface::ManifoldPoint* foundPoint = 0;
-	squareDistance = -1.0;
-	for( const ManifoldPoint* manifoldPoint = ( const ManifoldPoint* )manifoldPointList.LeftMost(); manifoldPoint; manifoldPoint = ( const ManifoldPoint* )manifoldPoint->Right() )
-	{
-		double thisSquareDistance = Dot( point, manifoldPoint->point );
-		if( thisSquareDistance < squareDistance || squareDistance == -1.0 )
-		{
-			squareDistance = thisSquareDistance;
-			foundPoint = const_cast< ManifoldPoint* >( manifoldPoint );
-		}
-	}
-	return foundPoint;
 }
 
 //=============================================================================

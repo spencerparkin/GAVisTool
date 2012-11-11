@@ -37,6 +37,7 @@ public:
 
 protected:
 
+	void RegenerateTraceList( void );
 	void DrawTrace( VectorMath::Quadric::Trace* trace, GAVisToolRender& render );
 
 	VectorMath::Surface* surface;

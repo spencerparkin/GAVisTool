@@ -41,25 +41,43 @@ SurfaceGeometry::SurfaceGeometry( BindType bindType, VectorMath::Surface* surfac
 }
 
 //=========================================================================================
+void SurfaceGeometry::RegenerateTraceList( void )
+{
+	// Kill the old trace list.
+	traceList.RemoveAll( true );
+
+	VectorMath::Surface::TraceParameters traceParameters;
+
+	// A better center would be that of the surface, if we knew how to calculate that.
+	VectorMath::Zero( traceParameters.center );
+
+	traceParameters.range = 20.0;
+	traceParameters.extent = 10.0;
+	traceParameters.planeCount = 30;
+
+	VectorMath::Vector axis[3];
+	int axisCount = 3;
+	VectorMath::Set( axis[0], 1.0, 0.0, 0.0 );
+	VectorMath::Set( axis[1], 0.0, 1.0, 0.0 );
+	VectorMath::Set( axis[2], 0.0, 0.0, 1.0 );
+
+	// Create the new trace list.
+	for( int index = 0; index < axisCount; index++ )
+	{
+		VectorMath::Copy( traceParameters.axis, axis[ index ] );
+
+		// Append to the trace list all traces along this axis.
+		surface->GenerateTracesAlongAxis( traceParameters, traceList );
+	}
+}
+
+//=========================================================================================
 /*virtual*/ void SurfaceGeometry::Draw( GAVisToolRender& render, bool selected )
 {
 	// If our trace-list is out of date, go up-date it.  Hopefully this won't take too long.
 	if( !traceListValid )
 	{
-		// TODO: We need to deduce the center of the surface for the AABB setup to be correct.
-		VectorMath::CoordFrame coordFrame;
-		VectorMath::Identity( coordFrame );
-		double range = 20.0;
-		double planeCount = 40.0;
-		VectorMath::Vector center, delta;
-		VectorMath::Zero( center );
-		VectorMath::Set( delta, 10.0, 10.0, 10.0 );
-		VectorMath::Aabb aabb;
-		MakeAabb( aabb, center, delta );
-		traceList.RemoveAll( true );
-		surface->GenerateTracesAlongAxis( coordFrame.xAxis, range, planeCount, aabb, traceList );
-		surface->GenerateTracesAlongAxis( coordFrame.yAxis, range, planeCount, aabb, traceList );
-		surface->GenerateTracesAlongAxis( coordFrame.zAxis, range, planeCount, aabb, traceList );
+		RegenerateTraceList();
 		traceListValid = true;
 	}
 
