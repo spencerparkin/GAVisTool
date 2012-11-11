@@ -394,4 +394,50 @@ bool RationalExpression::IsZero( void ) const
 	return false;
 }
 
+//=========================================================================================
+bool RationalExpression::Differentiate( const char* variableName )
+{
+	if( denominator.IsOne() )
+	{
+		Expression diffNumer;
+		if( !diffNumer.AssignDerivative( numerator, variableName ) )
+			return false;
+		if( !numerator.Assign( diffNumer ) )
+			return false;
+	}
+	else
+	{
+		// Do the quotient rule.
+
+		Expression diffNumer, diffDenom;
+		if( !diffNumer.AssignDerivative( numerator, variableName ) )
+			return false;
+		if( !diffDenom.AssignDerivative( denominator, variableName ) )
+			return false;
+
+		Expression firstProd, secondProd;
+		if( !firstProd.AssignProduct( diffNumer, denominator ) )
+			return false;
+		if( !secondProd.AssignProduct( numerator, diffDenom ) )
+			return false;
+		if( !numerator.AssignDifference( firstProd, secondProd ) )
+			return false;
+
+		Expression denomSquared;
+		if( !denomSquared.AssignProduct( denominator, denominator ) )
+			return false;
+		if( !denominator.Assign( denomSquared ) )
+			return false;
+	}
+
+	return true;
+}
+
+//=========================================================================================
+bool RationalExpression::AntiDifferentiate( const char* variableName )
+{
+	// Not implemented yet...maybe never!
+	return false;
+}
+
 // RationalExpression.cpp

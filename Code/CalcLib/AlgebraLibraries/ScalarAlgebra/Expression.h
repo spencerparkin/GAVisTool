@@ -49,6 +49,9 @@ public:
 		virtual ~Term( void );
 
 		bool Print( char* printBuffer, int printBufferSize, PrintPurpose printPurpose ) const;
+		bool Assign( const Term& term );
+		bool AssignZero( void );
+		bool AssignDerivative( const Term& term, const char* variableName );
 		bool AssignProduct( const Term& left, const Term& right );
 		bool AssignQuotient( const Term& dividend, const Term& divisor );
 		bool Sort( void ) const;
@@ -72,6 +75,7 @@ public:
 	bool Assign( const char* scalar );
 	bool Assign( const Term& term );
 	bool Assign( const Expression& expression );
+	bool AssignDerivative( const Expression& expression, const char* variableName );
 	bool AssignSum( const Expression& left, const Expression& right );
 	bool AssignDifference( const Expression& left, const Expression& right );
 	bool AssignProduct( const Expression& left, const Expression& right );

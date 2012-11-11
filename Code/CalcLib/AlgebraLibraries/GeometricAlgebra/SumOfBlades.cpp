@@ -212,6 +212,44 @@ bool SumOfBlades::AssignSumOfVersors( const SumOfPseudoVersors& sumOfPseudoVerso
 }
 
 //=========================================================================================
+bool SumOfBlades::AssignDerivative( const SumOfBlades& sumOfBlades, const char* variableName )
+{
+	if( !AssignZero() )
+		return false;
+	
+	Blade derivative;
+	for( const Blade* blade = ( const Blade* )sumOfBlades.sum.LeftMost(); blade; blade = ( const Blade* )blade->Right() )
+	{
+		if( !derivative.AssignDerivative( *blade, variableName ) )
+			return false;
+
+		if( !Accumulate( derivative ) )
+			return false;
+	}
+
+	return true;
+}
+
+//=========================================================================================
+bool SumOfBlades::AssignAntiDerivative( const SumOfBlades& sumOfBlades, const char* variableName )
+{
+	if( !AssignZero() )
+		return false;
+	
+	Blade derivative;
+	for( const Blade* blade = ( const Blade* )sumOfBlades.sum.LeftMost(); blade; blade = ( const Blade* )blade->Right() )
+	{
+		if( !derivative.AssignAntiDerivative( *blade, variableName ) )
+			return false;
+
+		if( !Accumulate( derivative ) )
+			return false;
+	}
+
+	return true;
+}
+
+//=========================================================================================
 bool SumOfBlades::AssignSum( const SumOfBlades& left, const SumOfBlades& right )
 {
 	if( !AssignZero() )

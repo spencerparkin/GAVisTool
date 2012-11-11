@@ -119,4 +119,16 @@ bool Number::Print( Environment& environment ) const
 	return true;
 }
 
+//=========================================================================================
+/*virtual*/ bool Number::AssignDerivative( const Number* number, const char* variableName, Environment& environment )
+{
+	return false;
+}
+
+//=========================================================================================
+/*virtual*/ bool Number::AssignAntiDerivative( const Number* number, const char* variableName, Environment& environment )
+{
+	return false;
+}
+
 // Number.cpp

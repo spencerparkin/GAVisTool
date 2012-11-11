@@ -57,6 +57,8 @@ public:
 	bool AssignGeometricProduct( const Blade& left, const Blade& right );
 	bool AssignGeometricInverse( const SumOfBlades& sumOfBlades, InverseType inverseType, InverseResult& inverseResult );
 	bool AssignSquareMagnitudeTo( Scalar& squareMagnitude ) const;
+	bool AssignDerivative( const SumOfBlades& sumOfBlades, const char* variableName );
+	bool AssignAntiDerivative( const SumOfBlades& sumOfBlades, const char* variableName );
 	
 	bool Scale( const Scalar& scalar );
 	bool Reverse( void );

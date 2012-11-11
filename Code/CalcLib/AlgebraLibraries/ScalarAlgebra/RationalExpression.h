@@ -33,6 +33,8 @@ public:
 	bool CompareWith( const RationalExpression& rationalExpression ) const;
 	bool Evaluate( RationalExpression& result, const VariableEvaluator& variableEvaluator );
 	bool IsZero( void ) const;
+	bool Differentiate( const char* variableName );
+	bool AntiDifferentiate( const char* variableName );
 
 	const Expression& Numerator( void );
 	const Expression& Denominator( void );

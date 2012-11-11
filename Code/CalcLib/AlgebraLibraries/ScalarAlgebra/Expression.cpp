@@ -66,6 +66,7 @@ Expression::Term::Term( void )
 //=========================================================================================
 /*virtual*/ Expression::Term::~Term( void )
 {
+	AssignZero();
 }
 
 //=========================================================================================
@@ -427,6 +428,67 @@ bool Expression::Assign( const Expression& expression )
 		sumOfTerms.RemoveAll( true );
 		sumOfTerms.ConcatinateCopyOnRight( expression.sumOfTerms );
 	}
+	return true;
+}
+
+//=========================================================================================
+bool Expression::AssignDerivative( const Expression& expression, const char* variableName )
+{
+	if( !AssignZero() )
+		return false;
+
+	Term derivative;
+	for( const Term* term = ( const Term* )expression.sumOfTerms.LeftMost(); term; term = ( const Term* )term->Right() )
+	{
+		if( !derivative.AssignDerivative( *term, variableName ) )
+			return false;
+
+		if( !Accumulate( derivative ) )
+			return false;
+	}
+
+	return true;
+}
+
+//=========================================================================================
+bool Expression::Term::AssignZero( void )
+{
+	coeficient = 0.0;
+	productOfVariables.RemoveAll( true );
+	return true;
+}
+
+//=========================================================================================
+bool Expression::Term::Assign( const Term& term )
+{
+	coeficient = term.coeficient;
+	productOfVariables.RemoveAll( true );
+	productOfVariables.ConcatinateCopyOnRight( term.productOfVariables );
+	return true;
+}
+
+//=========================================================================================
+bool Expression::Term::AssignDerivative( const Term& term, const char* variableName )
+{
+	if( !Assign( term ) )
+		return false;
+
+	Variable variable( variableName, 1 );
+	Variable* foundVariable = const_cast< Variable* >( FindLikeVariable( &variable ) );
+	if( !foundVariable )
+	{
+		if( !AssignZero() )
+			return false;
+	}
+	else
+	{
+		double scalar = foundVariable->exponent;
+		coeficient *= scalar;
+		foundVariable->exponent--;
+		if( foundVariable->exponent == 0 )
+			productOfVariables.Remove( foundVariable, true );
+	}
+
 	return true;
 }
 

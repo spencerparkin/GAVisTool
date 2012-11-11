@@ -443,6 +443,28 @@ bool MultivectorNumber::CopyOperandsIfNeeded( const Number* left, const Number* 
 }
 
 //=========================================================================================
+/*virtual*/ bool MultivectorNumber::AssignDerivative( const Number* number, const char* variableName, Environment& environment )
+{
+	const MultivectorNumber* multivectorNumber = number->Cast< MultivectorNumber >();
+	if( !multivectorNumber )
+		return false;
+	if( !multivector.AssignDerivative( multivectorNumber->multivector, variableName ) )
+		return false;
+	return true;
+}
+
+//=========================================================================================
+/*virtual*/ bool MultivectorNumber::AssignAntiDerivative( const Number* number, const char* variableName, Environment& environment )
+{
+	const MultivectorNumber* multivectorNumber = number->Cast< MultivectorNumber >();
+	if( !multivectorNumber )
+		return false;
+	if( !multivector.AssignAntiDerivative( multivectorNumber->multivector, variableName ) )
+		return false;
+	return true;
+}
+
+//=========================================================================================
 bool MultivectorNumber::Reverse( Environment& environment )
 {
 	if( !multivector.Reverse() )

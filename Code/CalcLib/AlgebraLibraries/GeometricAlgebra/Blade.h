@@ -39,6 +39,8 @@ public:
 	bool AssignBlade( Utilities::List& outerProduct, const Scalar& scalar, bool sortProduct = true );
 	bool AssignOuterProduct( const Blade& left, const Blade& right, bool sortProduct = true );
 	bool AssignSquareMagnitudeTo( Scalar& squareMagnitude ) const;
+	bool AssignDerivative( const Blade& blade, const char* variableName );
+	bool AssignAntiDerivative( const Blade& blade, const char* variableName );
 
 	bool IsLikeTerm( const Blade& blade, Scalar& relativeHandedness ) const;
 	bool Scale( const Scalar& scalar );

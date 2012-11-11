@@ -52,6 +52,9 @@ public:
 	bool Invert( void );
 	bool Negate( void );
 
+	bool Differentiate( const char* variableName );
+	bool AntiDifferentiate( const char* variableName );
+
 	bool Print( char* printBuffer, int printBufferSize, PrintPurpose printPurpose, bool* parenthesisNeeded = 0 ) const;
 
 	ScalarType scalar;

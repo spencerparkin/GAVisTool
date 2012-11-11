@@ -290,6 +290,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\Code\CalcLib\Calculator\Calculus.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Code\CalcLib\Calculator\Calculus.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\Code\CalcLib\Calculator\ClassInfo.cpp"
 					>
 				</File>

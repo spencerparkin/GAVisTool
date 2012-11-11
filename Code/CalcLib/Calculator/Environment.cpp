@@ -109,6 +109,10 @@ Number* Environment::CreateNumber( Evaluator* evaluator )
 		return new LoopFunctionEvaluator( LoopFunctionEvaluator::LOOP_WHILE );
 	if( 0 == strcmp( functionName, "until" ) )
 		return new LoopFunctionEvaluator( LoopFunctionEvaluator::LOOP_UNTIL );
+	if( 0 == strcmp( functionName, "deriv" ) )
+		return new CalculusFunctionEvaluator( CalculusFunctionEvaluator::TAKE_DERIVATIVE );
+	if( 0 == strcmp( functionName, "antideriv" ) )
+		return new CalculusFunctionEvaluator( CalculusFunctionEvaluator::TAKE_ANTI_DERIVATIVE );
 
 	return 0;
 }

@@ -205,6 +205,30 @@ bool Blade::AssignSquareMagnitudeTo( Scalar& squareMagnitude ) const
 }
 
 //=========================================================================================
+bool Blade::AssignDerivative( const Blade& blade, const char* variableName )
+{
+	if( !AssignBlade( blade ) )
+		return false;
+
+	if( !scalar.Differentiate( variableName ) )
+		return false;
+
+	return true;
+}
+
+//=========================================================================================
+bool Blade::AssignAntiDerivative( const Blade& blade, const char* variableName )
+{
+	if( !AssignBlade( blade ) )
+		return false;
+
+	if( !scalar.AntiDifferentiate( variableName ) )
+		return false;
+
+	return true;
+}
+
+//=========================================================================================
 bool Blade::IsLikeTerm( const Blade& blade, Scalar& relativeHandedness ) const
 {
 	if( Grade() != blade.Grade() )

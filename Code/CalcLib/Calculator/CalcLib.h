@@ -91,6 +91,7 @@ namespace CalcLib
 	class DumpVariablesFunctionEvaluator;
 	class DeleteAllVariablesFunctionEvaluator;
 	class TaylorSeriesFunctionEvaluator;
+	class CalculusFunctionEvaluator;
 
 	// Language evaluators:
 	class DoFunctionEvaluator;
@@ -116,6 +117,7 @@ namespace CalcLib
 #include "Function.h"
 #include "Language.h"
 #include "Operator.h"
+#include "Calculus.h"
 
 // Floating point math:
 #include "Environments/FloatingPointMathEnv/FloatingPointMathEnvClasses.h"

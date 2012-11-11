@@ -65,6 +65,8 @@ public:
 	virtual bool IsMultiplicativeIdentity( bool& isMultiplicativeIdentity, Environment& environment ) const = 0;
 	virtual bool CompareWith( const Number* number, Comparison& comparison, Environment& environment ) const;
 	//virtual bool AssignMagnitude( const Number& number ) = 0;
+	virtual bool AssignDerivative( const Number* number, const char* variableName, Environment& environment );
+	virtual bool AssignAntiDerivative( const Number* number, const char* variableName, Environment& environment );
 
 	// Derivatives of this class may choose to implement this interface, but
 	// a default implementation is also provided if not need be overridden.

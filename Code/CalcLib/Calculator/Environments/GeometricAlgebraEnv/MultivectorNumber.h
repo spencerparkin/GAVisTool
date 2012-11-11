@@ -46,6 +46,8 @@ public:
 	virtual bool IsAdditiveIdentity( bool& isAdditiveIdentity, Environment& environment ) const override;
 	virtual bool IsMultiplicativeIdentity( bool& isMultiplicativeIdentity, Environment& environment ) const override;
 	virtual bool CompareWith( const Number* number, Comparison& comparison, Environment& environment ) const override;
+	virtual bool AssignDerivative( const Number* number, const char* variableName, Environment& environment ) override;
+	virtual bool AssignAntiDerivative( const Number* number, const char* variableName, Environment& environment ) override;
 
 	bool Reverse( Environment& environment );
 	bool Bar( Environment& environment );

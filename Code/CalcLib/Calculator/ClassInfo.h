@@ -19,6 +19,8 @@ public:
 	virtual bool IsTypeOf( const char* givenClassName ) const;
 	template< typename ClassType >
 	inline ClassType* Cast( void );
+	template< typename ClassType >
+	inline const ClassType* Cast( void ) const;
 };
 
 //=========================================================================================
@@ -57,6 +59,15 @@ inline ClassType* CalcLib::CalcLibClass::Cast( void )
 	if( !IsTypeOf( ClassType::ClassName() ) )
 		return 0;
 	return( ( ClassType* )this );
+}
+
+//=========================================================================================
+template< typename ClassType >
+inline const ClassType* CalcLib::CalcLibClass::Cast( void ) const
+{
+	if( !IsTypeOf( ClassType::ClassName() ) )
+		return 0;
+	return( ( const ClassType* )this );
 }
 
 //=========================================================================================

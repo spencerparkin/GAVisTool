@@ -210,6 +210,22 @@ bool ScalarAlgebra::TemplatedScalar< double >::Negate( void )
 
 //=========================================================================================
 template<>
+bool ScalarAlgebra::TemplatedScalar< double >::Differentiate( const char* variableName )
+{
+	scalar = 0.0;
+	return true;
+}
+
+//=========================================================================================
+template<>
+bool ScalarAlgebra::TemplatedScalar< double >::AntiDifferentiate( const char* variableName )
+{
+	scalar = 0.0;
+	return false;
+}
+
+//=========================================================================================
+template<>
 bool ScalarAlgebra::TemplatedScalar< double >::Print( char* printBuffer, int printBufferSize, PrintPurpose printPurpose, bool* parenthesisNeeded /*= 0*/ ) const
 {
 	sprintf_s( printBuffer, printBufferSize, "%1.2f", scalar );
@@ -429,6 +445,24 @@ template<>
 bool ScalarAlgebra::TemplatedScalar< ScalarAlgebra::RationalExpression >::Negate( void )
 {
 	if( !scalar.Negate() )
+		return false;
+	return true;
+}
+
+//=========================================================================================
+template<>
+bool ScalarAlgebra::TemplatedScalar< ScalarAlgebra::RationalExpression >::Differentiate( const char* variableName )
+{
+	if( !scalar.Differentiate( variableName ) )
+		return false;
+	return true;
+}
+
+//=========================================================================================
+template<>
+bool ScalarAlgebra::TemplatedScalar< ScalarAlgebra::RationalExpression >::AntiDifferentiate( const char* variableName )
+{
+	if( !scalar.AntiDifferentiate( variableName ) )
 		return false;
 	return true;
 }
