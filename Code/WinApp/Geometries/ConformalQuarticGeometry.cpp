@@ -23,35 +23,35 @@ ConformalQuarticGeometry::ConformalQuarticGeometry( BindType bindType ) : Surfac
 	strcpy_s( decompositionCode, sizeof( decompositionCode ),
 		"do("
 
-		"a_ = scalar_part( quartic, no^nob ),"
-		"b_ = scalar_part( quartic, no^e1b ),"
-		"c_ = scalar_part( quartic, no^e2b ),"
-		"d_ = scalar_part( quartic, no^e3b ),"
-		"e_ = scalar_part( quartic, no^nib ),"
+		"c0 = scalar_part( quartic, no^nob ),"
+		"c1 = scalar_part( quartic, no^e1b ),"
+		"c2 = scalar_part( quartic, no^e2b ),"
+		"c3 = scalar_part( quartic, no^e3b ),"
+		"c4 = scalar_part( quartic, no^nib ),"
 
-		"f_ = scalar_part( quartic, e1^nob ),"
-		"g_ = scalar_part( quartic, e1^e1b ),"
-		"h_ = scalar_part( quartic, e1^e2b ),"
-		"i_ = scalar_part( quartic, e1^e3b ),"
-		"j_ = scalar_part( quartic, e1^nib ),"
+		"c5 = scalar_part( quartic, e1^nob ),"
+		"c6 = scalar_part( quartic, e1^e1b ),"
+		"c7 = scalar_part( quartic, e1^e2b ),"
+		"c8 = scalar_part( quartic, e1^e3b ),"
+		"c9 = scalar_part( quartic, e1^nib ),"
 		
-		"k_ = scalar_part( quartic, e2^nob ),"
-		"l_ = scalar_part( quartic, e2^e1b ),"
-		"m_ = scalar_part( quartic, e2^e2b ),"
-		"n_ = scalar_part( quartic, e2^e3b ),"
-		"o_ = scalar_part( quartic, e2^nib ),"
+		"c10 = scalar_part( quartic, e2^nob ),"
+		"c11 = scalar_part( quartic, e2^e1b ),"
+		"c12 = scalar_part( quartic, e2^e2b ),"
+		"c13 = scalar_part( quartic, e2^e3b ),"
+		"c14 = scalar_part( quartic, e2^nib ),"
 		
-		"p_ = scalar_part( quartic, e3^nob ),"
-		"q_ = scalar_part( quartic, e3^e1b ),"
-		"r_ = scalar_part( quartic, e3^e2b ),"
-		"s_ = scalar_part( quartic, e3^e3b ),"
-		"t_ = scalar_part( quartic, e3^nib ),"
+		"c15 = scalar_part( quartic, e3^nob ),"
+		"c16 = scalar_part( quartic, e3^e1b ),"
+		"c17 = scalar_part( quartic, e3^e2b ),"
+		"c18 = scalar_part( quartic, e3^e3b ),"
+		"c19 = scalar_part( quartic, e3^nib ),"
 		
-		"u_ = scalar_part( quartic, ni^nob ),"
-		"b_ = scalar_part( quartic, ni^e1b ),"
-		"w_ = scalar_part( quartic, ni^e2b ),"
-		"x_ = scalar_part( quartic, ni^e3b ),"
-		"y_ = scalar_part( quartic, ni^nib ),"
+		"c20 = scalar_part( quartic, ni^nob ),"
+		"c21 = scalar_part( quartic, ni^e1b ),"
+		"c22 = scalar_part( quartic, ni^e2b ),"
+		"c23 = scalar_part( quartic, ni^e3b ),"
+		"c24 = scalar_part( quartic, ni^nib ),"
 
 		")"
 	);
@@ -85,56 +85,56 @@ ConformalQuarticGeometry::ConformalQuarticGeometry( BindType bindType ) : Surfac
 
 	decompositionEvaluator->EvaluateResult( *number, gaEnv );
 
-	gaEnv.LookupVariable( "a_", *number );
-	multivector->AssignTo( conformalQuartic.a_, gaEnv );
-	gaEnv.LookupVariable( "b_", *number );
-	multivector->AssignTo( conformalQuartic.b_, gaEnv );
-	gaEnv.LookupVariable( "c_", *number );
-	multivector->AssignTo( conformalQuartic.c_, gaEnv );
-	gaEnv.LookupVariable( "d_", *number );
-	multivector->AssignTo( conformalQuartic.d_, gaEnv );
-	gaEnv.LookupVariable( "e_", *number );
-	multivector->AssignTo( conformalQuartic.e_, gaEnv );
-	gaEnv.LookupVariable( "f_", *number );
-	multivector->AssignTo( conformalQuartic.f_, gaEnv );
-	gaEnv.LookupVariable( "g_", *number );
-	multivector->AssignTo( conformalQuartic.g_, gaEnv );
-	gaEnv.LookupVariable( "h_", *number );
-	multivector->AssignTo( conformalQuartic.h_, gaEnv );
-	gaEnv.LookupVariable( "i_", *number );
-	multivector->AssignTo( conformalQuartic.i_, gaEnv );
-	gaEnv.LookupVariable( "j_", *number );
-	multivector->AssignTo( conformalQuartic.j_, gaEnv );
-	gaEnv.LookupVariable( "k_", *number );
-	multivector->AssignTo( conformalQuartic.k_, gaEnv );
-	gaEnv.LookupVariable( "l_", *number );
-	multivector->AssignTo( conformalQuartic.l_, gaEnv );
-	gaEnv.LookupVariable( "m_", *number );
-	multivector->AssignTo( conformalQuartic.m_, gaEnv );
-	gaEnv.LookupVariable( "n_", *number );
-	multivector->AssignTo( conformalQuartic.n_, gaEnv );
-	gaEnv.LookupVariable( "o_", *number );
-	multivector->AssignTo( conformalQuartic.o_, gaEnv );
-	gaEnv.LookupVariable( "p_", *number );
-	multivector->AssignTo( conformalQuartic.p_, gaEnv );
-	gaEnv.LookupVariable( "q_", *number );
-	multivector->AssignTo( conformalQuartic.q_, gaEnv );
-	gaEnv.LookupVariable( "r_", *number );
-	multivector->AssignTo( conformalQuartic.r_, gaEnv );
-	gaEnv.LookupVariable( "s_", *number );
-	multivector->AssignTo( conformalQuartic.s_, gaEnv );
-	gaEnv.LookupVariable( "t_", *number );
-	multivector->AssignTo( conformalQuartic.t_, gaEnv );
-	gaEnv.LookupVariable( "u_", *number );
-	multivector->AssignTo( conformalQuartic.u_, gaEnv );
-	gaEnv.LookupVariable( "v_", *number );
-	multivector->AssignTo( conformalQuartic.v_, gaEnv );
-	gaEnv.LookupVariable( "w_", *number );
-	multivector->AssignTo( conformalQuartic.w_, gaEnv );
-	gaEnv.LookupVariable( "x_", *number );
-	multivector->AssignTo( conformalQuartic.x_, gaEnv );
-	gaEnv.LookupVariable( "y_", *number );
-	multivector->AssignTo( conformalQuartic.y_, gaEnv );
+	gaEnv.LookupVariable( "c0", *number );
+	multivector->AssignTo( conformalQuartic.c0, gaEnv );
+	gaEnv.LookupVariable( "c1", *number );
+	multivector->AssignTo( conformalQuartic.c1, gaEnv );
+	gaEnv.LookupVariable( "c2", *number );
+	multivector->AssignTo( conformalQuartic.c2, gaEnv );
+	gaEnv.LookupVariable( "c3", *number );
+	multivector->AssignTo( conformalQuartic.c3, gaEnv );
+	gaEnv.LookupVariable( "c4", *number );
+	multivector->AssignTo( conformalQuartic.c4, gaEnv );
+	gaEnv.LookupVariable( "c5", *number );
+	multivector->AssignTo( conformalQuartic.c5, gaEnv );
+	gaEnv.LookupVariable( "c6", *number );
+	multivector->AssignTo( conformalQuartic.c6, gaEnv );
+	gaEnv.LookupVariable( "c7", *number );
+	multivector->AssignTo( conformalQuartic.c7, gaEnv );
+	gaEnv.LookupVariable( "c8", *number );
+	multivector->AssignTo( conformalQuartic.c8, gaEnv );
+	gaEnv.LookupVariable( "c9", *number );
+	multivector->AssignTo( conformalQuartic.c9, gaEnv );
+	gaEnv.LookupVariable( "c10", *number );
+	multivector->AssignTo( conformalQuartic.c10, gaEnv );
+	gaEnv.LookupVariable( "c11", *number );
+	multivector->AssignTo( conformalQuartic.c11, gaEnv );
+	gaEnv.LookupVariable( "c12", *number );
+	multivector->AssignTo( conformalQuartic.c12, gaEnv );
+	gaEnv.LookupVariable( "c13", *number );
+	multivector->AssignTo( conformalQuartic.c13, gaEnv );
+	gaEnv.LookupVariable( "c14", *number );
+	multivector->AssignTo( conformalQuartic.c14, gaEnv );
+	gaEnv.LookupVariable( "c15", *number );
+	multivector->AssignTo( conformalQuartic.c15, gaEnv );
+	gaEnv.LookupVariable( "c16", *number );
+	multivector->AssignTo( conformalQuartic.c16, gaEnv );
+	gaEnv.LookupVariable( "c17", *number );
+	multivector->AssignTo( conformalQuartic.c17, gaEnv );
+	gaEnv.LookupVariable( "c18", *number );
+	multivector->AssignTo( conformalQuartic.c18, gaEnv );
+	gaEnv.LookupVariable( "c19", *number );
+	multivector->AssignTo( conformalQuartic.c19, gaEnv );
+	gaEnv.LookupVariable( "c20", *number );
+	multivector->AssignTo( conformalQuartic.c20, gaEnv );
+	gaEnv.LookupVariable( "c21", *number );
+	multivector->AssignTo( conformalQuartic.c21, gaEnv );
+	gaEnv.LookupVariable( "c22", *number );
+	multivector->AssignTo( conformalQuartic.c22, gaEnv );
+	gaEnv.LookupVariable( "c23", *number );
+	multivector->AssignTo( conformalQuartic.c23, gaEnv );
+	gaEnv.LookupVariable( "c24", *number );
+	multivector->AssignTo( conformalQuartic.c24, gaEnv );
 
 	delete number;
 }

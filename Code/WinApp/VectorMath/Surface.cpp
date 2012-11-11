@@ -525,13 +525,11 @@ VectorMath::Quadric::Quadric( void )
 //=============================================================================
 VectorMath::ConformalQuartic::ConformalQuartic( void )
 {
-	a_ = b_ = c_ = d_ = 0.0;
-	e_ = f_ = g_ = h_ = 0.0;
-	i_ = j_ = k_ = l_ = 0.0;
-	m_ = n_ = o_ = p_ = 0.0;
-	q_ = r_ = s_ = t_ = 0.0;
-	u_ = v_ = w_ = x_ = 0.0;
-	y_ = 0.0;
+	c0 = c1 = c2 = c3 = c4 = 0.0;
+	c5 = c6 = c7 = c8 = c9 = 0.0;
+	c10 = c11 = c12 = c13 = c14 = 0.0;
+	c15 = c16 = c17 = c18 = c19 = 0.0;
+	c20 = c21 = c22 = c23 = c24 = 0.0;
 }
 
 //=============================================================================
@@ -546,52 +544,52 @@ VectorMath::ConformalQuartic::ConformalQuartic( void )
 	double y = point.y;
 	double z = point.z;
 	double value =
-		-0.25*a_*x*x*x*x +
-		-0.5*a_*x*x*y*y +
-		-0.5*a_*x*x*z*z +
-		-0.25*a_*y*y*y*y +
-		-0.5*a_*y*y*z*z +
-		-0.25*a_*z*z*z*z +
-		0.5*b_*x*x*x +
-		0.5*b_*x*y*y +
-		0.5*b_*x*z*z +
-		0.5*c_*x*x*y +
-		0.5*c_*y*y*y +
-		0.5*c_*y*z*z +
-		0.5*d_*x*x*z +
-		0.5*d_*y*y*z +
-		0.5*d_*z*z*z +
-		-0.5*e_*x*x +
-		-0.5*e_*y*y +
-		-0.5*e_*z*z +
-		0.5*f_*x*x*x +
-		0.5*f_*x*y*y +
-		0.5*f_*x*z*z +
-		-g_*x*x +
-		-h_*x*y +
-		-i_*x*z +
-		j_*x +
-		0.5*k_*x*x*y +
-		0.5*k_*y*y*y +
-		0.5*k_*y*z*z +
-		-l_*x*y +
-		-m_*y*y +
-		-n_*y*z +
-		o_*y +
-		0.5*p_*x*x*z +
-		0.5*p_*y*y*z +
-		0.5*p_*z*z*z +
-		-q_*x*z +
-		-r_*y*z +
-		-s_*z*z +
-		t_*z +
-		-0.5*u_*x*x +
-		-0.5*u_*y*y +
-		-0.5*u_*z*z +
-		v_*x +
-		w_*y +
-		x_*z +
-		-y_;
+		-0.25*c0*x*x*x*x +
+		-0.50*c0*x*x*y*y +
+		-0.50*c0*x*x*z*z +
+		-0.25*c0*y*y*y*y +
+		-0.50*c0*y*y*z*z +
+		-0.25*c0*z*z*z*z +
+		0.50*c10*x*x*y +
+		0.50*c10*y*y*y +
+		0.50*c10*y*z*z +
+		-c11*x*y +
+		-c12*y*y +
+		-c13*y*z +
+		c14*y +
+		0.50*c15*x*x*z +
+		0.50*c15*y*y*z +
+		0.50*c15*z*z*z +
+		-c16*x*z +
+		-c17*y*z +
+		-c18*z*z +
+		c19*z +
+		0.50*c1*x*x*x +
+		0.50*c1*x*y*y +
+		0.50*c1*x*z*z +
+		-0.50*c20*x*x +
+		-0.50*c20*y*y +
+		-0.50*c20*z*z +
+		c21*x +
+		c22*y +
+		c23*z +
+		-c24 +
+		0.50*c2*x*x*y +
+		0.50*c2*y*y*y +
+		0.50*c2*y*z*z +
+		0.50*c3*x*x*z +
+		0.50*c3*y*y*z +
+		0.50*c3*z*z*z +
+		-0.50*c4*x*x +
+		-0.50*c4*y*y +
+		-0.50*c4*z*z +
+		0.50*c5*x*x*x +
+		0.50*c5*x*y*y +
+		0.50*c5*x*z*z +
+		-c6*x*x +
+		-c7*x*y +
+		-c8*x*z +
+		c9*x;
 	return value;
 }
 
@@ -602,52 +600,28 @@ VectorMath::ConformalQuartic::ConformalQuartic( void )
 	double y = point.y;
 	double z = point.z;
 	double value =
-		-a_*x*x*x +			// -0.25*a_*x*x*x*x +
-		-a_*x*y*y +			// -0.5*a_*x*x*y*y +
-		-a_*x*z*z +			// -0.5*a_*x*x*z*z +
-		//-0.25*a_*y*y*y*y +
-		//-0.5*a_*y*y*z*z +
-		//-0.25*a_*z*z*z*z +
-		(3.0/2.0)*b_*x*x +	// 0.5*b_*x*x*x +
-		0.5*b_*y*y +		// 0.5*b_*x*y*y +
-		0.5*b_*z*z +		// 0.5*b_*x*z*z +
-		c_*x*y +			// 0.5*c_*x*x*y +
-		//0.5*c_*y*y*y +
-		//0.5*c_*y*z*z +
-		d_*x*z +			// 0.5*d_*x*x*z +
-		//0.5*d_*y*y*z +
-		//0.5*d_*z*z*z +
-		-e_*x +				// -0.5*e_*x*x +
-		//-0.5*e_*y*y +
-		//-0.5*e_*z*z +
-		(3.0/2.0)*f_*x*x +	// 0.5*f_*x*x*x +
-		0.5*f_*y*y +		// 0.5*f_*x*y*y +
-		0.5*f_*z*z +		// 0.5*f_*x*z*z +
-		-2.0*g_*x +			// -g_*x*x +
-		-h_*y +				// -h_*x*y +
-		-i_*z +				// -i_*x*z +
-		j_ +				// j_*x +
-		k_*x*y +			// 0.5*k_*x*x*y +
-		//0.5*k_*y*y*y +
-		//0.5*k_*y*z*z +
-		-l_*y +				// -l_*x*y +
-		//-m_*y*y +
-		//-n_*y*z +
-		//o_*y +
-		p_*x*z +			// 0.5*p_*x*x*z +
-		//0.5*p_*y*y*z +
-		//0.5*p_*z*z*z +
-		-q_*z +				// -q_*x*z +
-		//-r_*y*z +
-		//-s_*z*z +
-		//t_*z +
-		-u_*x +				// -0.5*u_*x*x +
-		//-0.5*u_*y*y +
-		//-0.5*u_*z*z +
-		v_;					// v_*x +
-		//w_*y +
-		//x_*z +
-		//-y_;
+		-c0*x*x*x +
+		-c0*x*y*y +
+		-c0*x*z*z +
+		c10*x*y +
+		-c11*y +
+		c15*x*z +
+		-c16*z +
+		1.50*c1*x*x +
+		0.50*c1*y*y +
+		0.50*c1*z*z +
+		-c20*x +
+		c21 +
+		c2*x*y +
+		c3*x*z +
+		-c4*x +
+		1.50*c5*x*x +
+		0.50*c5*y*y +
+		0.50*c5*z*z +
+		-2.00*c6*x +
+		-c7*y +
+		-c8*z +
+		c9;
 	return value;
 }
 
@@ -658,52 +632,28 @@ VectorMath::ConformalQuartic::ConformalQuartic( void )
 	double y = point.y;
 	double z = point.z;
 	double value =
-		//-0.25*a_*x*x*x*x +
-		-a_*x*x*y +			// -0.5*a_*x*x*y*y +
-		//-0.5*a_*x*x*z*z +
-		-a_*y*y*y +			// -0.25*a_*y*y*y*y +
-		-a_*y*z*z +			// -0.5*a_*y*y*z*z +
-		//-0.25*a_*z*z*z*z +
-		//0.5*b_*x*x*x +
-		b_*x*y +			// 0.5*b_*x*y*y +
-		//0.5*b_*x*z*z +
-		0.5*c_*x*x +		// 0.5*c_*x*x*y +
-		(3.0/2.0)*c_*y*y +	// 0.5*c_*y*y*y +
-		0.5*c_*z*z +		// 0.5*c_*y*z*z +
-		//0.5*d_*x*x*z +
-		d_*y*z +			// 0.5*d_*y*y*z +
-		//0.5*d_*z*z*z +
-		//-0.5*e_*x*x +
-		-e_*y +				// -0.5*e_*y*y +
-		//-0.5*e_*z*z +
-		//0.5*f_*x*x*x +
-		f_*x*y +			// 0.5*f_*x*y*y +
-		//0.5*f_*x*z*z +
-		//-g_*x*x +
-		-h_*x +				// -h_*x*y +
-		//-i_*x*z +
-		//j_*x +
-		0.5*k_*x*x +		// 0.5*k_*x*x*y +
-		(3.0/2.0)*k_*y*y +	// 0.5*k_*y*y*y +
-		0.5*k_*z*z +		// 0.5*k_*y*z*z +
-		-l_*x +				// -l_*x*y +
-		-2.0*m_*y +			// -m_*y*y +
-		-n_*z +				// -n_*y*z +
-		o_ +				// o_*y +
-		//0.5*p_*x*x*z +
-		p_*y*z +			// 0.5*p_*y*y*z +
-		//0.5*p_*z*z*z +
-		//-q_*x*z +
-		-r_*z +				// -r_*y*z +
-		//-s_*z*z +
-		//t_*z +
-		//-0.5*u_*x*x +
-		-u_*y +				// -0.5*u_*y*y +
-		//-0.5*u_*z*z +
-		//v_*x +
-		w_;					// w_*y +
-		//x_*z +
-		//-y_;
+		-c0*x*x*y +
+		-c0*y*y*y +
+		-c0*y*z*z +
+		0.50*c10*x*x +
+		1.50*c10*y*y +
+		0.50*c10*z*z +
+		-c11*x +
+		-2.00*c12*y +
+		-c13*z +
+		c14 +
+		c15*y*z +
+		-c17*z +
+		c1*x*y +
+		-c20*y +
+		c22 +
+		0.50*c2*x*x +
+		1.50*c2*y*y +
+		0.50*c2*z*z +
+		c3*y*z +
+		-c4*y +
+		c5*x*y +
+		-c7*x;
 	return value;
 }
 
@@ -714,52 +664,28 @@ VectorMath::ConformalQuartic::ConformalQuartic( void )
 	double y = point.y;
 	double z = point.z;
 	double value =
-		//-0.25*a_*x*x*x*x +
-		//-0.5*a_*x*x*y*y +
-		-a_*x*x*z +			// -0.5*a_*x*x*z*z +
-		//-0.25*a_*y*y*y*y +
-		-a_*y*y*z +			// -0.5*a_*y*y*z*z +
-		-a_*z*z*z +			// -0.25*a_*z*z*z*z +
-		//0.5*b_*x*x*x +
-		//0.5*b_*x*y*y +
-		b_*x*z +			// 0.5*b_*x*z*z +
-		//0.5*c_*x*x*y +
-		//0.5*c_*y*y*y +
-		c_*y*z +			// 0.5*c_*y*z*z +
-		0.5*d_*x*x +		// 0.5*d_*x*x*z +
-		0.5*d_*y*y +		// 0.5*d_*y*y*z +
-		(3.0/2.0)*d_*z*z +	// 0.5*d_*z*z*z +
-		//-0.5*e_*x*x +
-		//-0.5*e_*y*y +
-		-e_*z +				// -0.5*e_*z*z +
-		//0.5*f_*x*x*x +
-		//0.5*f_*x*y*y +
-		f_*x*z +			// 0.5*f_*x*z*z +
-		//-g_*x*x +
-		//-h_*x*y +
-		-i_*x +				// -i_*x*z +
-		//j_*x +
-		//0.5*k_*x*x*y +
-		//0.5*k_*y*y*y +
-		k_*y*z +			// 0.5*k_*y*z*z +
-		//-l_*x*y +
-		//-m_*y*y +
-		-n_*y +				// -n_*y*z +
-		//o_*y +
-		0.5*p_*x*x +		// 0.5*p_*x*x*z +
-		0.5*p_*y*y +		// 0.5*p_*y*y*z +
-		(3.0/2.0)*p_*z*z +	// 0.5*p_*z*z*z +
-		-q_*x +				// -q_*x*z +
-		-r_*y +				// -r_*y*z +
-		-2.0*s_*z +			// -s_*z*z +
-		t_ +				// t_*z +
-		//-0.5*u_*x*x +
-		//-0.5*u_*y*y +
-		-u_*z +				// -0.5*u_*z*z +
-		//v_*x +
-		//w_*y +
-		x_;					// x_*z +
-		//-y_;
+		-c0*x*x*z +
+		-c0*y*y*z +
+		-c0*z*z*z +
+		c10*y*z +
+		-c13*y +
+		0.50*c15*x*x +
+		0.50*c15*y*y +
+		1.50*c15*z*z +
+		-c16*x +
+		-c17*y +
+		-2.00*c18*z +
+		c19 +
+		c1*x*z +
+		-c20*z +
+		c23 +
+		c2*y*z +
+		0.50*c3*x*x +
+		0.50*c3*y*y +
+		1.50*c3*z*z +
+		-c4*z +
+		c5*x*z +
+		-c8*x;
 	return value;
 }
 
