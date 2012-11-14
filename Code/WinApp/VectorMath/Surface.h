@@ -21,6 +21,8 @@ namespace VectorMath
 {
 	class Surface
 	{
+		friend class ManifoldGenerator;
+
 	public:
 
 		Surface( void );
@@ -59,24 +61,24 @@ namespace VectorMath
 			int planeCount;
 		};
 
-		void GenerateTracesAlongAxis( const TraceParameters& traceParameters, Utilities::List& traceList );
-		void GenerateManifoldMeshAlongAxis( const TraceParameters& traceParameters, Utilities::List& triangleList );
+		void GenerateTracesAlongAxis( const TraceParameters& traceParameters, Utilities::List& traceList ) const;
+		void GenerateManifoldMeshAlongAxis( const TraceParameters& traceParameters, Utilities::List& triangleList ) const;
 		
 		// Derived classes implement this interface.
-		virtual double EvaluateAt( const VectorMath::Vector& point ) = 0;
-		virtual double EvaluatePartialX( const VectorMath::Vector& point ) = 0;
-		virtual double EvaluatePartialY( const VectorMath::Vector& point ) = 0;
-		virtual double EvaluatePartialZ( const VectorMath::Vector& point ) = 0;
-		virtual void EvaluateGradientAt( const VectorMath::Vector& point, VectorMath::Vector& gradient );
+		virtual double EvaluateAt( const VectorMath::Vector& point ) const = 0;
+		virtual double EvaluatePartialX( const VectorMath::Vector& point ) const = 0;
+		virtual double EvaluatePartialY( const VectorMath::Vector& point ) const = 0;
+		virtual double EvaluatePartialZ( const VectorMath::Vector& point ) const = 0;
+		virtual void EvaluateGradientAt( const VectorMath::Vector& point, VectorMath::Vector& gradient ) const;
 
 	private:
 
-		void StitchTracesTogether( Utilities::List& trailingTraceList, Utilities::List& leadingTraceList, Utilities::List& triangleList );
-		void CalculateTracePlane( const TraceParameters& traceParameters, int index, Plane& plane, Vector& planeCenter );
-		void CalculateTracesInPlane( const Plane& plane, const Vector& center, double extent, Utilities::List& traceList );
-		Trace* CalculateTraceInPlane( const Plane& plane, const Vector& seed, const Aabb& aabb );
-		bool StepTraceInPlane( const Plane& plane, int direction, Vector& point, double traceDelta, double epsilon );
-		bool ConvergePointToSurfaceInPlane( const Plane* plane, Vector& point, double epsilon );
+		void StitchTracesTogether( Utilities::List& trailingTraceList, Utilities::List& leadingTraceList, Utilities::List& triangleList ) const;
+		void CalculateTracePlane( const TraceParameters& traceParameters, int index, Plane& plane, Vector& planeCenter ) const;
+		void CalculateTracesInPlane( const Plane& plane, const Vector& center, double extent, Utilities::List& traceList ) const;
+		Trace* CalculateTraceInPlane( const Plane& plane, const Vector& seed, const Aabb& aabb ) const;
+		bool StepTraceInPlane( const Plane& plane, int direction, Vector& point, double traceDelta, double epsilon ) const;
+		bool ConvergePointToSurfaceInPlane( const Plane* plane, Vector& point, double epsilon ) const;
 	};
 
 	class Quadric : public Surface
@@ -86,10 +88,10 @@ namespace VectorMath
 		Quadric( void );
 		virtual ~Quadric( void );
 
-		virtual double EvaluateAt( const VectorMath::Vector& point );
-		virtual double EvaluatePartialX( const VectorMath::Vector& point );
-		virtual double EvaluatePartialY( const VectorMath::Vector& point );
-		virtual double EvaluatePartialZ( const VectorMath::Vector& point );
+		virtual double EvaluateAt( const VectorMath::Vector& point ) const;
+		virtual double EvaluatePartialX( const VectorMath::Vector& point ) const;
+		virtual double EvaluatePartialY( const VectorMath::Vector& point ) const;
+		virtual double EvaluatePartialZ( const VectorMath::Vector& point ) const;
 
 		// A quadric is the set of solutions in <x,y,z>
 		// to the following equation.
@@ -106,10 +108,10 @@ namespace VectorMath
 		ConformalQuartic( void );
 		virtual ~ConformalQuartic( void );
 
-		virtual double EvaluateAt( const VectorMath::Vector& point );
-		virtual double EvaluatePartialX( const VectorMath::Vector& point );
-		virtual double EvaluatePartialY( const VectorMath::Vector& point );
-		virtual double EvaluatePartialZ( const VectorMath::Vector& point );
+		virtual double EvaluateAt( const VectorMath::Vector& point ) const;
+		virtual double EvaluatePartialX( const VectorMath::Vector& point ) const;
+		virtual double EvaluatePartialY( const VectorMath::Vector& point ) const;
+		virtual double EvaluatePartialZ( const VectorMath::Vector& point ) const;
 
 		double c0, c1, c2, c3, c4;
 		double c5, c6, c7, c8, c9;

@@ -90,7 +90,7 @@ bool VectorMath::Surface::Trace::IsPointOnTrace( const Vector& givenPoint, doubl
 
 //=============================================================================
 // Here the user can expect that we'll just append to their given list.
-void VectorMath::Surface::GenerateTracesAlongAxis( const TraceParameters& traceParameters, Utilities::List& traceList )
+void VectorMath::Surface::GenerateTracesAlongAxis( const TraceParameters& traceParameters, Utilities::List& traceList ) const
 {
 	// The algorithm is very straight forward.  Go generate all the traces in
 	// all the planes we want along the given axis.
@@ -106,7 +106,7 @@ void VectorMath::Surface::GenerateTracesAlongAxis( const TraceParameters& traceP
 }
 
 //=============================================================================
-void VectorMath::Surface::GenerateManifoldMeshAlongAxis( const TraceParameters& traceParameters, Utilities::List& triangleList )
+void VectorMath::Surface::GenerateManifoldMeshAlongAxis( const TraceParameters& traceParameters, Utilities::List& triangleList ) const
 {
 	Utilities::List traceListInPlane[2];
 	int trailingPlane = 1;
@@ -135,13 +135,13 @@ void VectorMath::Surface::GenerateManifoldMeshAlongAxis( const TraceParameters& 
 // entirely trivial thing to do.  For example, one plane may contain
 // one trace curve while the other plane contains two trace curves.
 // The algorithm would need to deal with closing the hole this may tend to cause.
-void VectorMath::Surface::StitchTracesTogether( Utilities::List& trailingTraceList, Utilities::List& leadingTraceList, Utilities::List& triangleList )
+void VectorMath::Surface::StitchTracesTogether( Utilities::List& trailingTraceList, Utilities::List& leadingTraceList, Utilities::List& triangleList ) const
 {
 	
 }
 
 //=============================================================================
-void VectorMath::Surface::CalculateTracePlane( const TraceParameters& traceParameters, int index, Plane& plane, Vector& planeCenter )
+void VectorMath::Surface::CalculateTracePlane( const TraceParameters& traceParameters, int index, Plane& plane, Vector& planeCenter ) const
 {
 	Vector delta;
 	Scale( delta, traceParameters.axis, traceParameters.range / 2.0 );
@@ -155,7 +155,7 @@ void VectorMath::Surface::CalculateTracePlane( const TraceParameters& traceParam
 
 //=============================================================================
 // We assume here that the given center is on the given plane.
-void VectorMath::Surface::CalculateTracesInPlane( const Plane& plane, const Vector& center, double extent, Utilities::List& traceList )
+void VectorMath::Surface::CalculateTracesInPlane( const Plane& plane, const Vector& center, double extent, Utilities::List& traceList ) const
 {
 	double epsilon = 1e-8;
 
@@ -212,7 +212,7 @@ void VectorMath::Surface::CalculateTracesInPlane( const Plane& plane, const Vect
 }
 
 //=============================================================================
-VectorMath::Surface::Trace* VectorMath::Surface::CalculateTraceInPlane( const Plane& plane, const Vector& seed, const Aabb& aabb )
+VectorMath::Surface::Trace* VectorMath::Surface::CalculateTraceInPlane( const Plane& plane, const Vector& seed, const Aabb& aabb ) const
 {
 	double epsilon = 1e-8;
 	int tracePointLimit = 100;
@@ -298,7 +298,7 @@ VectorMath::Surface::Trace* VectorMath::Surface::CalculateTraceInPlane( const Pl
 }
 
 //=============================================================================
-bool VectorMath::Surface::StepTraceInPlane( const Plane& plane, int direction, Vector& point, double traceDelta, double epsilon )
+bool VectorMath::Surface::StepTraceInPlane( const Plane& plane, int direction, Vector& point, double traceDelta, double epsilon ) const
 {
 	// Calculate the direction of the translation vector along which we'll move the point in the given plane.
 	Vector gradient, delta;
@@ -328,7 +328,7 @@ bool VectorMath::Surface::StepTraceInPlane( const Plane& plane, int direction, V
 }
 
 //=============================================================================
-bool VectorMath::Surface::ConvergePointToSurfaceInPlane( const Plane* plane, Vector& point, double epsilon )
+bool VectorMath::Surface::ConvergePointToSurfaceInPlane( const Plane* plane, Vector& point, double epsilon ) const
 {
 	// This must be small, but bigger than epsilons used to detect trace loops.
 	double deltaLength = 0.1;
@@ -395,7 +395,7 @@ bool VectorMath::Surface::ConvergePointToSurfaceInPlane( const Plane* plane, Vec
 }
 
 //=============================================================================
-/*virtual*/ void VectorMath::Surface::EvaluateGradientAt( const VectorMath::Vector& point, VectorMath::Vector& gradient )
+/*virtual*/ void VectorMath::Surface::EvaluateGradientAt( const VectorMath::Vector& point, VectorMath::Vector& gradient ) const
 {
 	gradient.x = EvaluatePartialX( point );
 	gradient.y = EvaluatePartialY( point );
@@ -414,7 +414,7 @@ VectorMath::Quadric::Quadric( void )
 }
 
 //=============================================================================
-/*virtual*/ double VectorMath::Quadric::EvaluateAt( const VectorMath::Vector& point )
+/*virtual*/ double VectorMath::Quadric::EvaluateAt( const VectorMath::Vector& point ) const
 {
 	// f(x,y,z) = Ax^2 + By^2 + Cz^2 + Dxy + Exz + Fyz + Gx + Hy + Iz + J
 	double x = point.x;
@@ -424,7 +424,7 @@ VectorMath::Quadric::Quadric( void )
 }
 
 //=============================================================================
-/*virtual*/ double VectorMath::Quadric::EvaluatePartialX( const VectorMath::Vector& point )
+/*virtual*/ double VectorMath::Quadric::EvaluatePartialX( const VectorMath::Vector& point ) const
 {
 	// f_x(x,y,z) = 2Ax + Dy + Ez + G
 	double x = point.x;
@@ -434,7 +434,7 @@ VectorMath::Quadric::Quadric( void )
 }
 
 //=============================================================================
-/*virtual*/ double VectorMath::Quadric::EvaluatePartialY( const VectorMath::Vector& point )
+/*virtual*/ double VectorMath::Quadric::EvaluatePartialY( const VectorMath::Vector& point ) const
 {
 	// f_y(x,y,z) = 2By + Dx + Fz + H
 	double x = point.x;
@@ -444,7 +444,7 @@ VectorMath::Quadric::Quadric( void )
 }
 
 //=============================================================================
-/*virtual*/ double VectorMath::Quadric::EvaluatePartialZ( const VectorMath::Vector& point )
+/*virtual*/ double VectorMath::Quadric::EvaluatePartialZ( const VectorMath::Vector& point ) const
 {
 	// f_z(x,y,z) = 2Cz + Ex + Fy + I
 	double x = point.x;
@@ -469,7 +469,7 @@ VectorMath::ConformalQuartic::ConformalQuartic( void )
 }
 
 //=============================================================================
-/*virtual*/ double VectorMath::ConformalQuartic::EvaluateAt( const VectorMath::Vector& point )
+/*virtual*/ double VectorMath::ConformalQuartic::EvaluateAt( const VectorMath::Vector& point ) const
 {
 	double x = point.x;
 	double y = point.y;
@@ -525,7 +525,7 @@ VectorMath::ConformalQuartic::ConformalQuartic( void )
 }
 
 //=============================================================================
-/*virtual*/ double VectorMath::ConformalQuartic::EvaluatePartialX( const VectorMath::Vector& point )
+/*virtual*/ double VectorMath::ConformalQuartic::EvaluatePartialX( const VectorMath::Vector& point ) const
 {
 	double x = point.x;
 	double y = point.y;
@@ -557,7 +557,7 @@ VectorMath::ConformalQuartic::ConformalQuartic( void )
 }
 
 //=============================================================================
-/*virtual*/ double VectorMath::ConformalQuartic::EvaluatePartialY( const VectorMath::Vector& point )
+/*virtual*/ double VectorMath::ConformalQuartic::EvaluatePartialY( const VectorMath::Vector& point ) const
 {
 	double x = point.x;
 	double y = point.y;
@@ -589,7 +589,7 @@ VectorMath::ConformalQuartic::ConformalQuartic( void )
 }
 
 //=============================================================================
-/*virtual*/ double VectorMath::ConformalQuartic::EvaluatePartialZ( const VectorMath::Vector& point )
+/*virtual*/ double VectorMath::ConformalQuartic::EvaluatePartialZ( const VectorMath::Vector& point ) const
 {
 	double x = point.x;
 	double y = point.y;

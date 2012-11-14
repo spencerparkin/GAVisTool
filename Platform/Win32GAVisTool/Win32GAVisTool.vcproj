@@ -504,6 +504,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\Code\WinApp\VectorMath\ManifoldGenerator.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Code\WinApp\VectorMath\ManifoldGenerator.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\Code\WinApp\VectorMath\Plane.cpp"
 					>
 				</File>
