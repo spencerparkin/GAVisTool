@@ -30,6 +30,17 @@ namespace VectorMath
 		{
 		public:
 			Vector point;
+			enum { MAX_DEGREE = 10, };
+			Vertex* adjacentVertex[MAX_DEGREE];
+			int degree;
+		};
+
+		class Edge : public Utilities::List::Item
+		{
+		public:
+			Vertex* connectedVertex[2];
+			Vertex* opposingVertex[2];
+			Triangle* adjacentTriangle[2];
 		};
 
 		class Triangle : public Utilities::List::Item
@@ -38,36 +49,39 @@ namespace VectorMath
 			Vertex* vertex[3];
 		};
 
-		// The generation of path connected components
-		// will be based upon growth and cell division.
-		// We start as a single triangle (cell), and then
-		// we grow the triangle until it reaches a point
-		// where it needs to be divided in two.  Whenever
-		// a triangle is divided, we choose a vertex of
-		// the triangle with minimal degree in the mesh
-		// to divide the triangle.  If all points have the
-		// same degree, it's best to choose a vertex that
-		// is one that has stopped growing, so that we create
-		// a new points that grows outward from the mesh.  Through the course
-		// of the algorithm, we keep track of which points
-		// are interior to the growing mesh, and which are
-		// on the periphery.  Only those points on the
-		// periphery need grow.  They always grow in a direction
-		// that is away from the average of the adjacent stationary points.
-		// All of this growth is sliding the points of the mesh
-		// along the surface.  The trickiest part will be
-		// stopping growth when the mesh meets itself.
-		// Stopping when we hit the edge of an AABB is trivial.
 		class PathConnectedComponent : public Utilities::List::Item
 		{
 		public:
 			PathConnectedComponent( void );
 			virtual ~PathConnectedComponent( void );
 
-			Utilities::List stationaryPoints;
-			Utilities::List growingPoints;
+			bool IsPointOnSurface( const Vector& point, double epsilon ) const;
+
+			Utilities::List pointList;
 			Utilities::List triangleList;
 		};
+
+		struct GenerationParameters
+		{
+			mutable Vector seed;
+		};
+
+		class PathConnectedComponentGenerator
+		{
+		public:
+			PathConnectedComponentGenerator( void );
+			virtual ~PathConnectedComponentGenerator( void );
+
+			PathConnectedComponent* Generate( const Surface& surface, const GenerationParameters& genParms );
+
+			Utilities::List growingPointList;
+			Utilities::List maturePointList;
+			Utilities::List stuntedPointList;
+			Utilities::List staticEdgeList;
+			Utilities::List dynamicEdgeList;
+		};
+
+		bool Generate( const Surface& surface, const GenerationParameters& genParms );
 
 		Utilities::List componentList;
 	};
