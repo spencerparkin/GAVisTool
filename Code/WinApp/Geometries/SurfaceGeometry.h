@@ -40,6 +40,7 @@ protected:
 
 	void RegenerateSurfaceGeometry( void );
 	void DrawTrace( VectorMath::Quadric::Trace* trace, GAVisToolRender& render );
+	void DrawPathConnectedComponent( VectorMath::SurfaceMesh::PathConnectedComponent* component, GAVisToolRender& render );
 
 	enum RenderAs
 	{
@@ -50,7 +51,7 @@ protected:
 	RenderAs renderAs;
 	VectorMath::Surface* surface;
 	Utilities::List traceList;
-	//...manifold...
+	VectorMath::SurfaceMesh surfaceMesh;
 	bool surfaceGeometryValid;
 
 	GeometricAlgebra::SumOfBlades element;

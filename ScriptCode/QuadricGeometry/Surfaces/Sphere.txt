@@ -4,7 +4,7 @@
 do
 (
 	c = 2*e2,
-	r = 2,
+	r = 5,
 	E = Omega + 2*c^nib + (c.c - r*r)*ni^nib,
 	bind_quadric(E),
 	geo_color(E,1,0,0),

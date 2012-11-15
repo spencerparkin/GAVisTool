@@ -46,7 +46,8 @@ namespace VectorMath
 	void MakePlane( const Triangle& triangle, Plane& plane );
 	void SideCount( const Triangle& triangle, const Plane& plane, SideCountData& sideCountData, double epsilon );
 	bool SplitTriangle( const Triangle& triangle, const TriangleNormals* triangleNormals, const Plane& plane, const SideCountData& sideCountData, Triangle* triangleArray, TriangleNormals* triangleNormalsArray, Plane::Side* sideArray, int& triangleArraySize );
-	bool IsPointInsideTriangle( const Triangle& triangle, const Plane& trianglePlane, const Vector& point );
+	bool IsPointInsideTriangle( const Triangle& triangle, const Plane& trianglePlane, const Vector& point, double epsilon = 1e-4 );
+	bool IsPointInsideTriangle( const Triangle& triangle, const Vector& point, double epsilon = 1e-4 );
 	bool LineSegmentIntersectsTriangle( const Triangle& triangle, const Plane& trianglePlane, const Vector& point0, const Vector& point1, double& lerp );
 	bool TrianglesIntersect( const Triangle& triangle0, const Triangle& triangle1 );
 	void InterpolateNormal( const Vector& vertex, Vector& normal, const Vector& vertex0, const Vector& normal0, const Vector& vertex1, const Vector& normal1 );

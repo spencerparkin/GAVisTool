@@ -73,9 +73,10 @@ void SurfaceGeometry::RegenerateSurfaceGeometry( void )
 			surface->GenerateTracesAlongAxis( traceParameters, traceList );
 		}
 	}
-	else if( renderAs == RENDER_AS_TRIANGLE_MESH )
+//	else if( renderAs == RENDER_AS_TRIANGLE_MESH )
 	{
-		//...
+		VectorMath::SurfaceMesh::GenerationParameters genParms;
+		surfaceMesh.Generate( *surface, genParms );
 	}
 }
 
@@ -105,9 +106,14 @@ void SurfaceGeometry::RegenerateSurfaceGeometry( void )
 			trace = ( VectorMath::Surface::Trace* )trace->Right();
 		}
 	}
-	else if( renderAs == RENDER_AS_TRIANGLE_MESH )
+//	else if( renderAs == RENDER_AS_TRIANGLE_MESH )
 	{
-		//...
+		VectorMath::SurfaceMesh::PathConnectedComponent* component = ( VectorMath::SurfaceMesh::PathConnectedComponent* )surfaceMesh.componentList.LeftMost();
+		while( component )
+		{
+			DrawPathConnectedComponent( component, render );
+			component = ( VectorMath::SurfaceMesh::PathConnectedComponent* )component->Right();
+		}
 	}
 }
 
@@ -123,6 +129,26 @@ void SurfaceGeometry::DrawTrace( VectorMath::Surface::Trace* trace, GAVisToolRen
 			render.DrawLine( point->point, nextPoint->point );
 		else if( trace->looped )
 			render.DrawLine( point->point, firstPoint->point );
+	}
+}
+
+//=========================================================================================
+void SurfaceGeometry::DrawPathConnectedComponent( VectorMath::SurfaceMesh::PathConnectedComponent* component, GAVisToolRender& render )
+{
+	static bool initColor = true;
+	static VectorMath::Vector happyColor;
+	if( initColor )
+		VectorMath::Set( happyColor, 1.0, 0.0, 0.0 );
+
+	for( int index = 0; index < component->triangleListSize; index++ )
+	{
+		happyColor.x = fmod( happyColor.x + 0.7, 1.0 );
+		happyColor.y = fmod( happyColor.y + 0.1, 1.0 );
+		happyColor.z = fmod( happyColor.z + 0.4, 1.0 );
+		render.Color( happyColor, alpha );
+
+		VectorMath::Triangle& triangleGeometry = component->triangleList[ index ];
+		render.DrawTriangle( triangleGeometry );
 	}
 }
 

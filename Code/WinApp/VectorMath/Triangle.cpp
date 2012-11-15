@@ -275,7 +275,7 @@ void VectorMath::InterpolateNormal( const Vector& vertex, Vector& normal,
 // given triangle, (assuming the given triangle is not degenerate, it does
 // determine a plane.)  Also, we assume here that the given plane contains
 // the given triangle!
-bool VectorMath::IsPointInsideTriangle( const Triangle& triangle, const Plane& trianglePlane, const Vector& point )
+bool VectorMath::IsPointInsideTriangle( const Triangle& triangle, const Plane& trianglePlane, const Vector& point, double epsilon /*= 1e-4*/ )
 {
 	// For this algorithm to be correct, the function that makes a plane
 	// out of the triangle must choose the front-side of that plane based
@@ -294,6 +294,14 @@ bool VectorMath::IsPointInsideTriangle( const Triangle& triangle, const Plane& t
 	}
 
 	return true;
+}
+
+//=============================================================================
+bool VectorMath::IsPointInsideTriangle( const Triangle& triangle, const Vector& point, double epsilon /*= 1e-4*/ )
+{
+	Plane trianglePlane;
+	MakePlane( triangle, trianglePlane );
+	return IsPointInsideTriangle( triangle, trianglePlane, point );
 }
 
 //=============================================================================
