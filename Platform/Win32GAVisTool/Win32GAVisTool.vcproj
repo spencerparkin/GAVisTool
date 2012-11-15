@@ -528,14 +528,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\Code\WinApp\VectorMath\SurfaceMesh.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Code\WinApp\VectorMath\SurfaceMesh.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\Code\WinApp\VectorMath\Triangle.cpp"
 					>
 				</File>

@@ -21,8 +21,6 @@ namespace VectorMath
 {
 	class Surface
 	{
-		friend class SurfaceMesh;
-
 	public:
 
 		Surface( void );
@@ -62,7 +60,6 @@ namespace VectorMath
 		};
 
 		void GenerateTracesAlongAxis( const TraceParameters& traceParameters, Utilities::List& traceList ) const;
-		void GenerateManifoldMeshAlongAxis( const TraceParameters& traceParameters, Utilities::List& triangleList ) const;
 		
 		// Derived classes implement this interface.
 		virtual double EvaluateAt( const VectorMath::Vector& point ) const = 0;
@@ -73,7 +70,6 @@ namespace VectorMath
 
 	private:
 
-		void StitchTracesTogether( Utilities::List& trailingTraceList, Utilities::List& leadingTraceList, Utilities::List& triangleList ) const;
 		void CalculateTracePlane( const TraceParameters& traceParameters, int index, Plane& plane, Vector& planeCenter ) const;
 		void CalculateTracesInPlane( const Plane& plane, const Vector& center, double extent, Utilities::List& traceList ) const;
 		Trace* CalculateTraceInPlane( const Plane& plane, const Vector& seed, const Aabb& aabb ) const;

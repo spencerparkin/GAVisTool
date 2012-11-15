@@ -106,40 +106,6 @@ void VectorMath::Surface::GenerateTracesAlongAxis( const TraceParameters& traceP
 }
 
 //=============================================================================
-void VectorMath::Surface::GenerateManifoldMeshAlongAxis( const TraceParameters& traceParameters, Utilities::List& triangleList ) const
-{
-	Utilities::List traceListInPlane[2];
-	int trailingPlane = 1;
-	int leadingPlane = 0;
-	for( int index = 0; index < traceParameters.planeCount; index++ )
-	{
-		// Calculate the traces in the leading plane.  The trailing plane is either
-		// already calculated or we haven't yet calculated a trailing plane trace set.
-		Plane tracePlane;
-		Vector tracePlaneCenter;
-		CalculateTracePlane( traceParameters, index, tracePlane, tracePlaneCenter );
-		CalculateTracesInPlane( tracePlane, tracePlaneCenter, traceParameters.extent, traceListInPlane[ leadingPlane ] );
-
-		// If there is a trailing plane, generate a stitch between them.
-		if( index > 0 )
-			StitchTracesTogether( traceListInPlane[ trailingPlane ], traceListInPlane[ leadingPlane ], triangleList );
-
-		// Swap the leading and trailing plane lists.
-		leadingPlane = ( leadingPlane + 1 ) % 2;
-		trailingPlane = ( trailingPlane + 1 ) % 2;
-	}
-}
-
-//=============================================================================
-// Stitching the traces in one plane with an adjacent plane is not an
-// entirely trivial thing to do.  For example, one plane may contain
-// one trace curve while the other plane contains two trace curves.
-// The algorithm would need to deal with closing the hole this may tend to cause.
-void VectorMath::Surface::StitchTracesTogether( Utilities::List& trailingTraceList, Utilities::List& leadingTraceList, Utilities::List& triangleList ) const
-{
-}
-
-//=============================================================================
 void VectorMath::Surface::CalculateTracePlane( const TraceParameters& traceParameters, int index, Plane& plane, Vector& planeCenter ) const
 {
 	Vector delta;
