@@ -504,6 +504,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\Code\WinApp\VectorMath\GiftWrapper.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\Code\WinApp\VectorMath\Plane.cpp"
 					>
 				</File>
