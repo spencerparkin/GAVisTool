@@ -17,7 +17,8 @@ IMPLEMENT_CALCLIB_CLASS1( SurfaceGeometry, GAVisToolGeometry );
 //=========================================================================================
 SurfaceGeometry::SurfaceGeometry( BindType bindType, VectorMath::Surface* surface ) : GAVisToolGeometry( bindType )
 {
-	traceListValid = false;
+	renderAs = RENDER_AS_SET_OF_TRACES;
+	surfaceGeometryValid = false;
 	this->surface = surface;
 }
 
@@ -31,7 +32,7 @@ SurfaceGeometry::SurfaceGeometry( BindType bindType, VectorMath::Surface* surfac
 /*virtual*/ void SurfaceGeometry::DecomposeFrom( const GeometricAlgebra::SumOfBlades& element )
 {
 	this->element.AssignSumOfBlades( element );
-	traceListValid = false;
+	surfaceGeometryValid = false;
 }
 
 //=========================================================================================
@@ -41,33 +42,40 @@ SurfaceGeometry::SurfaceGeometry( BindType bindType, VectorMath::Surface* surfac
 }
 
 //=========================================================================================
-void SurfaceGeometry::RegenerateTraceList( void )
+void SurfaceGeometry::RegenerateSurfaceGeometry( void )
 {
-	// Kill the old trace list.
-	traceList.RemoveAll( true );
-
-	VectorMath::Surface::TraceParameters traceParameters;
-
-	// A better center would be that of the surface, if we knew how to calculate that.
-	VectorMath::Zero( traceParameters.center );
-
-	traceParameters.range = 20.0;
-	traceParameters.extent = 10.0;
-	traceParameters.planeCount = 30;
-
-	VectorMath::Vector axis[3];
-	int axisCount = 3;
-	VectorMath::Set( axis[0], 1.0, 0.0, 0.0 );
-	VectorMath::Set( axis[1], 0.0, 1.0, 0.0 );
-	VectorMath::Set( axis[2], 0.0, 0.0, 1.0 );
-
-	// Create the new trace list.
-	for( int index = 0; index < axisCount; index++ )
+	if( renderAs == RENDER_AS_SET_OF_TRACES )
 	{
-		VectorMath::Copy( traceParameters.axis, axis[ index ] );
+		// Kill the old trace list.
+		traceList.RemoveAll( true );
 
-		// Append to the trace list all traces along this axis.
-		surface->GenerateTracesAlongAxis( traceParameters, traceList );
+		VectorMath::Surface::TraceParameters traceParameters;
+
+		// A better center would be that of the surface, if we knew how to calculate that.
+		VectorMath::Zero( traceParameters.center );
+
+		traceParameters.range = 20.0;
+		traceParameters.extent = 10.0;
+		traceParameters.planeCount = 30;
+
+		VectorMath::Vector axis[3];
+		int axisCount = 3;
+		VectorMath::Set( axis[0], 1.0, 0.0, 0.0 );
+		VectorMath::Set( axis[1], 0.0, 1.0, 0.0 );
+		VectorMath::Set( axis[2], 0.0, 0.0, 1.0 );
+
+		// Create the new trace list.
+		for( int index = 0; index < axisCount; index++ )
+		{
+			VectorMath::Copy( traceParameters.axis, axis[ index ] );
+
+			// Append to the trace list all traces along this axis.
+			surface->GenerateTracesAlongAxis( traceParameters, traceList );
+		}
+	}
+	else if( renderAs == RENDER_AS_TRIANGLE_MESH )
+	{
+		//...
 	}
 }
 
@@ -75,10 +83,10 @@ void SurfaceGeometry::RegenerateTraceList( void )
 /*virtual*/ void SurfaceGeometry::Draw( GAVisToolRender& render, bool selected )
 {
 	// If our trace-list is out of date, go up-date it.  Hopefully this won't take too long.
-	if( !traceListValid )
+	if( !surfaceGeometryValid )
 	{
-		RegenerateTraceList();
-		traceListValid = true;
+		RegenerateSurfaceGeometry();
+		surfaceGeometryValid = true;
 	}
 
 	if( selected )
@@ -88,11 +96,18 @@ void SurfaceGeometry::RegenerateTraceList( void )
 
 	render.Color( color, alpha );
 
-	VectorMath::Surface::Trace* trace = ( VectorMath::Surface::Trace* )traceList.LeftMost();
-	while( trace )
+	if( renderAs == RENDER_AS_SET_OF_TRACES )
 	{
-		DrawTrace( trace, render );
-		trace = ( VectorMath::Surface::Trace* )trace->Right();
+		VectorMath::Surface::Trace* trace = ( VectorMath::Surface::Trace* )traceList.LeftMost();
+		while( trace )
+		{
+			DrawTrace( trace, render );
+			trace = ( VectorMath::Surface::Trace* )trace->Right();
+		}
+	}
+	else if( renderAs == RENDER_AS_TRIANGLE_MESH )
+	{
+		//...
 	}
 }
 

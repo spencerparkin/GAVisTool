@@ -137,7 +137,6 @@ void VectorMath::Surface::GenerateManifoldMeshAlongAxis( const TraceParameters& 
 // The algorithm would need to deal with closing the hole this may tend to cause.
 void VectorMath::Surface::StitchTracesTogether( Utilities::List& trailingTraceList, Utilities::List& leadingTraceList, Utilities::List& triangleList ) const
 {
-	
 }
 
 //=============================================================================

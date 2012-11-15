@@ -21,7 +21,7 @@ namespace VectorMath
 {
 	class Surface
 	{
-		friend class ManifoldGenerator;
+		friend class SurfaceMesh;
 
 	public:
 

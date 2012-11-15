@@ -14,6 +14,7 @@
 #include "../Geometry.h"
 #include "../VectorMath/Surface.h"
 #include "../VectorMath/ConvexHull.h"
+#include "../VectorMath/SurfaceMesh.h"
 
 //=========================================================================================
 class SurfaceGeometry : public GAVisToolGeometry
@@ -37,12 +38,20 @@ public:
 
 protected:
 
-	void RegenerateTraceList( void );
+	void RegenerateSurfaceGeometry( void );
 	void DrawTrace( VectorMath::Quadric::Trace* trace, GAVisToolRender& render );
 
+	enum RenderAs
+	{
+		RENDER_AS_SET_OF_TRACES,
+		RENDER_AS_TRIANGLE_MESH,
+	};
+
+	RenderAs renderAs;
 	VectorMath::Surface* surface;
 	Utilities::List traceList;
-	bool traceListValid;
+	//...manifold...
+	bool surfaceGeometryValid;
 
 	GeometricAlgebra::SumOfBlades element;
 };
