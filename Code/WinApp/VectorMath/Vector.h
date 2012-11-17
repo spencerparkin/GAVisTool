@@ -30,6 +30,7 @@ namespace VectorMath
 	void AddScale( Vector& dst, const Vector& leftSrc, const Vector& rightSrc, double scalar );
 	double Dot( const Vector& leftSrc, const Vector& rightSrc );
 	void Cross( Vector& dst, const Vector& leftSrc, const Vector& rightSrc );
+	double AngleBetween( const Vector& src0, const Vector& src1 );
 	double Length( const Vector& src );
 	double Distance( const Vector& leftSrc, const Vector& rightSrc );
 	void Scale( Vector& dst, const Vector& src, double scalar );

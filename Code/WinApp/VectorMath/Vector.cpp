@@ -115,6 +115,17 @@ void VectorMath::Cross( Vector& dst, const Vector& leftSrc, const Vector& rightS
 }
 
 //=============================================================================
+double VectorMath::AngleBetween( const Vector& src0, const Vector& src1 )
+{
+	Vector unitSrc[2];
+	Normalize( unitSrc[0], src0 );
+	Normalize( unitSrc[1], src1 );
+	double dot = Dot( unitSrc[0], unitSrc[1] );
+	double angle = acos( dot );
+	return angle;
+}
+
+//=============================================================================
 double VectorMath::Length( const Vector& src )
 {
 	return sqrt( Dot( src, src ) );
