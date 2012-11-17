@@ -255,7 +255,7 @@ We can then proceed to decompose the canonical form $E$ as follows.
 We start by recovering the unit-length direction vector $v$.  This can be
 done as
 \begin{equation}
-v = \sum_{i=1}^n\left(\overline{e_i\wedge e_0\cdot e_0\wedge E}-e_i\right).
+v = \sum_{i=1}^n\left(e_i-\overline{e_i\wedge e_0\cdot e_0\wedge E}\right).
 \end{equation}
 It is unfortunate that we had to refer to a basis to obtain $v$; nevertheless,
 it is done.  The rest of the decomposition will proceed with greater satisfaction.
@@ -362,9 +362,9 @@ various parallel planes.}
 At first sight, the sum of a sphere and a plane may not seem that interesting.
 However, the sum of a homogenized sphere and a non-homogenized plane is
 interesting, because the result is always a sphere in homogenized form.  The
-scalar amount at which the plane is non-homogenized simply indicates half
+scalar amount at which the plane is non-homogenized simply indicates twice
 the length along the normal of the plane that the center of the original sphere
-is displaced in the direction of that normal to find a sphere intersecting the
+is displaced in the opposite direction of that normal to find a sphere intersecting the
 plane in the same circle as that of the original sphere.
 
 Interestingly, the difference of spheres generalizes to the idea of subtracting
@@ -629,7 +629,7 @@ Exactly what versor this might be, however, if it even exists, remains to be see
 If we could find a translation versor, we could combine such versors with
 those of the form \eqref{equ_rotation_versor} to get the rigid body motions,
 even despite our limitation
-in being able to rotate only about axis going through the oriigin.
+in being able to rotate only about axes going through the origin.
 It may not be possible to do this, in which case we must conclude that
 there must be a better model for quadric surfaces.
 
