@@ -300,6 +300,11 @@ bool List::EmptyIntoOnLeft( List& list )
 // Empty this list into the given list.
 bool List::EmptyIntoOnRight( List& list )
 {
+	// This is certainly a slow way to do it.
+	// We could just hook up one node to another
+	// to concatinate the lists, but we have
+	// to iterate over all of the nodes anyway
+	// to update the list ownership pointer.
 	while( count > 0 )
 	{
 		Item* item = leftMost;

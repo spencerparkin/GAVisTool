@@ -277,6 +277,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\Code\WinApp\MathAssert.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Code\WinApp\MathAssert.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\Code\WinApp\ObjectHeap.h"
 				>
 			</File>
@@ -471,6 +479,14 @@
 			<Filter
 				Name="VectorMath"
 				>
+				<File
+					RelativePath="..\..\Code\WinApp\VectorMath\Assert.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Code\WinApp\VectorMath\Assert.h"
+					>
+				</File>
 				<File
 					RelativePath="..\..\Code\WinApp\VectorMath\AxisAlignedBoundingBox.cpp"
 					>

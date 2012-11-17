@@ -10,6 +10,7 @@
  */
 
 #include "GiftWrapper.h"
+#include "Assert.h"
 
 using namespace VectorMath;
 
@@ -114,13 +115,16 @@ GiftWrapper::Hull* GiftWrapper::GenerateHull( void )
 //=============================================================================
 GiftWrapper::Triangle* GiftWrapper::GenerateInitialTriangle( void )
 {
+	// this is tricky if we're given a neighborhood radius.
+
 	return 0;
 }
 
 //=============================================================================
 GiftWrapper::Traingle* GiftWrapper::GenerateNewTriangleFromEdge( Edge* edge )
 {
-	Point* point = edge->PickPointNotOnEdge( pointList );
+	// Float a plane hinging on the given edge to the surface of the hull.
+	Point* point = PickPointNotOnLineOfEdge( edge );
 	VectorMath::Triangle triangleGeometry;
 	MakeTriangle( triangleGeometry, edge->vertex[0]->point, edge->vertex[1]->point, point->point );
 	Plane plane;
@@ -137,15 +141,14 @@ GiftWrapper::Traingle* GiftWrapper::GenerateNewTriangleFromEdge( Edge* edge )
 		DistributePointsAboutPlane( plane, pointList, pointsOnPlane, pointsOnPlaneFront, pointsList );
 	}
 
+	// Among the points on the floated plane, find the one that we'll use to complete the new triangle.
 	Vector edgeNorm, edgeVec;
 	Sub( edgeVec, edge->vertex[1], edge->vertex[0] );
 	Cross( edgeNorm, plane.normal, edgeVec );
 	Point* adjacentPoints[2];
 	Vector adjacentPointVectors[2];
 	FindAdjacentEdgePoints( edge, adjacentPoints, adjacentPointVectors );
-
 	Point* newPoint = 0;
-
 	if( Plane::SIDE_NEITHER == PlaneSide( plane, adjacentPoints[0]->point ) &&
 			AngleBetween( edgeNorm, adjacentPointVectors[0] ) < PI )
 	{
@@ -162,13 +165,12 @@ GiftWrapper::Traingle* GiftWrapper::GenerateNewTriangleFromEdge( Edge* edge )
 		edge->CalcCenter( center );
 		Normalize( edgeNorm, edgeNorm );
 		double maxDistance = 0.0;
-
 		for( Point* point = ( Point* )pointsOnPlane.LeftMost(); point; point = ( Point* )point->Right() )
 		{
 			Vector pointVec;
 			Sub( pointVec, point->point, center );
 			double distance = Dot( pointVec, edgeNorm );
-			if( distance > maxDistance )
+			if( distance > maxDistance && ( neighorhoodRadius == 0.0 || distance <= neighborhoodRadius ) )
 			{
 				maxDistance = distance;
 				newPoint = point;
@@ -176,8 +178,10 @@ GiftWrapper::Traingle* GiftWrapper::GenerateNewTriangleFromEdge( Edge* edge )
 		}
 	}
 
+	// Don't forget to put these points back on our point cloud list.
 	pointsOnPlane.EmptyIntoOnRight( pointList );
 
+	// Create and return the newly found triangle, if any.
 	Triangle* triangle = 0;
 	if( newPoint )
 		triangle = new Triangle( edge[0], edge[1], newPoint );
@@ -232,6 +236,7 @@ void GiftWrapper::FindAdjacentEdgePoints( Edge* edge, Point** adjacentPoints, Ve
 	}
 
 	// If "index" is not 2 at this point, then something is wrong with the algorithm.
+	assert->Condition( index == 2, "FindAdjacentEdgePoints -- Did not find both edges." );
 }
 
 //=============================================================================
@@ -388,10 +393,6 @@ GiftWrapper::Point* GiftWrapper::Edge::OtherPoint( const Point* point ) const
 void GiftWrapper::Edge::CalcCenter( Vector& center )
 {
 	Lerp( center, vertex[0]->point, vertex[1]->point, 0.5 );
-}
-
-Point* GiftWrapper::Edge::PickPointNoOnEdge( Utilities::List& pointList )
-{
 }
 
 // GiftWrapper.cpp
