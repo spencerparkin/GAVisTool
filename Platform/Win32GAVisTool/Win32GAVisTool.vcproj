@@ -544,6 +544,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\Code\WinApp\VectorMath\SurfaceLattice.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Code\WinApp\VectorMath\SurfaceLattice.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\Code\WinApp\VectorMath\Triangle.cpp"
 					>
 				</File>

@@ -21,6 +21,8 @@ namespace VectorMath
 {
 	class Surface
 	{
+		friend class SurfaceLattice;
+
 	public:
 
 		Surface( void );

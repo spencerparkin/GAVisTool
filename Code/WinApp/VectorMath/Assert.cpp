@@ -16,7 +16,7 @@
 
 //=============================================================================
 VectorMath::Assert defaultAssert;
-VectorMath::Assert* assert = &defaultAssert;
+VectorMath::Assert* VectorMath::assert = &defaultAssert;
 
 //=============================================================================
 VectorMath::Assert::Assert( void )
