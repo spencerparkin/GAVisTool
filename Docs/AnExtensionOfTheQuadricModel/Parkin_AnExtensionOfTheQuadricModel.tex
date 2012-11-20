@@ -140,7 +140,7 @@ This definition is non-circular if we let the over-bars in equation \eqref{equ_i
 be purely notation.  The vectors $\eminus$ and $\eplus$, taken from \cite{LiRockwood},
 are defined as
 \begin{align}
-\eminus &= \frac{1}{2}\nvai + \nvao \\
+\eminus &= \frac{1}{2}\nvai + \nvao, \\
 \eplus &= \frac{1}{2}\nvai - \nvao.
 \end{align}
 The vectors $\eminusb$ and $\eplusb$ are defined similarly in terms of $\nvaob$ and $\nvaib$.
@@ -304,10 +304,11 @@ Letting $\pi\in\V$ be a dual plane of the conformal model, given by
 \end{equation}
 where $v\in\V^e$ is a unit-length vector indicating the norm of the plane,
 and where $c\in\V^e$ is a vector representing a point on the plane,
-we see that for any point $p\in\V^o$, we have
+we see that for any homogenized point $p\in\V^o$, we have
 \begin{equation}
--\pi p\pi^{-1} = \nvao+x-2((x-c)\cdot n) + \lambda\nvai,
+-\pi p\pi^{-1} = \nvao+x-2((x-c)\cdot v)v + \lambda\nvai,
 \end{equation}
+where $p=\nvao+x$ with $x\in\V^e$, and
 where the scalar $\lambda\in\R$ is of no consequence.  Letting $V=\pi$,
 the point $p'\in\V^o$ of consequence here is given by equation \eqref{equ_get_rid_ni},
 from which we can recognize an orthogonal reflection about the plane $\pi$.
