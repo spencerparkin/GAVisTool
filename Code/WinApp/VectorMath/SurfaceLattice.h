@@ -48,6 +48,7 @@ namespace VectorMath
 		bool Generate( const Surface& surface, const GenerationParameters& genParms );
 		void DrawAsWireFrame( SurfaceLatticeDrawCallback& drawCallback );
 		void DrawAsTriangleMesh( SurfaceLatticeDrawCallback& drawCallback );
+		void DrawAsDebugLattice( SurfaceLatticeDrawCallback& drawCallback );
 
 	private:
 

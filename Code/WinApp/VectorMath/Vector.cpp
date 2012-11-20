@@ -276,8 +276,9 @@ void VectorMath::Project( Vector& dst, const Vector& src, const Vector& unitVect
 //=============================================================================
 void VectorMath::Reject( Vector& dst, const Vector& src, const Vector& unitVector )
 {
-	Project( dst, src, unitVector );
-	Sub( dst, src, dst );
+	Vector vec;
+	Project( vec, src, unitVector );
+	Sub( dst, src, vec );
 }
 
 //=============================================================================

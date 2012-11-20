@@ -17,7 +17,7 @@ IMPLEMENT_CALCLIB_CLASS1( SurfaceGeometry, GAVisToolGeometry );
 //=========================================================================================
 SurfaceGeometry::SurfaceGeometry( BindType bindType, VectorMath::Surface* surface ) : GAVisToolGeometry( bindType )
 {
-	renderAs = RENDER_AS_SET_OF_TRACES;
+	renderAs = RENDER_AS_WIRE_FRAME_LATTICE;
 	surfaceGeometryValid = false;
 	this->surface = surface;
 }
@@ -73,9 +73,10 @@ void SurfaceGeometry::RegenerateSurfaceGeometry( void )
 			surface->GenerateTracesAlongAxis( traceParameters, traceList );
 		}
 	}
-	else if( renderAs == RENDER_AS_TRIANGLE_MESH )
+	else if( renderAs == RENDER_AS_TRIANGLE_MESH || renderAs == RENDER_AS_WIRE_FRAME_LATTICE )
 	{
-		//...
+		VectorMath::SurfaceLattice::GenerationParameters genParms;
+		lattice.Generate( *surface, genParms );
 	}
 }
 
@@ -105,9 +106,32 @@ void SurfaceGeometry::RegenerateSurfaceGeometry( void )
 			trace = ( VectorMath::Surface::Trace* )trace->Right();
 		}
 	}
-	else if( renderAs == RENDER_AS_TRIANGLE_MESH )
+	else if( renderAs == RENDER_AS_TRIANGLE_MESH || renderAs == RENDER_AS_WIRE_FRAME_LATTICE )
 	{
-		//...
+		class DrawCallback : public VectorMath::SurfaceLatticeDrawCallback
+		{
+		public:
+			virtual void DrawLine( const VectorMath::Vector& vertex0, const VectorMath::Vector& vertex1 )
+			{
+				render->DrawLine( vertex0, vertex1 );
+			}
+
+			virtual void DrawTriangle( const VectorMath::Vector& vertex0, const VectorMath::Vector& vertex1, const VectorMath::Vector& vertex2 )
+			{
+				VectorMath::Triangle triangle;
+				VectorMath::MakeTriangle( triangle, vertex0, vertex1, vertex2 );
+				render->DrawTriangle( triangle );
+			}
+
+			GAVisToolRender* render;
+		};
+
+		DrawCallback drawCallback;
+		drawCallback.render = &render;
+		if( renderAs == RENDER_AS_WIRE_FRAME_LATTICE )
+			lattice.DrawAsWireFrame( drawCallback );
+		else if( renderAs == RENDER_AS_TRIANGLE_MESH )
+			lattice.DrawAsTriangleMesh( drawCallback );
 	}
 }
 

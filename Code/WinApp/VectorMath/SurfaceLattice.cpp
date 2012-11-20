@@ -44,22 +44,29 @@ SurfaceLattice::GenerationParameters::GenerationParameters( void )
 	MakeAabb( aabb, center, delta );
 	Zero( seed );
 	directionCount = 4;
-	maximumIterationCount = 10;		// Small for now...
+	maximumIterationCount = 30;		// Small for now...
 }
 
 //=============================================================================
 bool SurfaceLattice::Generate( const Surface& surface, const GenerationParameters& genParms )
 {
+	bool success = true;
+
 	if( !GenerateLattice( surface, genParms ) )
-		return false;
+		success = false;
 
 	if( !GenerateEdges( genParms ) )
-		return false;
+		success = false;
 
 	if( !GenerateMesh( genParms ) )
-		return false;
+		success = false;
 
-	return true;
+	return success;
+}
+
+//=============================================================================
+void SurfaceLattice::DrawAsDebugLattice( SurfaceLatticeDrawCallback& drawCallback )
+{
 }
 
 //=============================================================================
@@ -121,7 +128,11 @@ bool SurfaceLattice::GenerateLattice( const Surface& surface, const GenerationPa
 	// If our algorithm terminated prematurely, then something went wrong.
 	if( vertexQueue.Count() > 0 )
 	{
-		vertexQueue.RemoveAll( true );
+		// Dump the queue into the explored list.  This allows us
+		// to visualize partially generated lattice results.  We also
+		// must do this or delete all lists, because some explored
+		// vertices may point to unexplored vertices.
+		vertexQueue.EmptyIntoOnRight( vertexList );
 		return false;
 	}
 
@@ -162,6 +173,9 @@ bool SurfaceLattice::ExploreSurface( const Surface& surface, const GenerationPar
 		{
 			adjacentVertex = new Vertex( point, genParms.directionCount );
 			adjacentVertex->CalculateTangentDirections( surface, genParms, &dirData->tangentDir );
+
+			// Enqueue the vertex so that we explore it later.
+			vertexQueue.InsertRightOf( vertexQueue.RightMost(), adjacentVertex );
 		}
 
 		// Connect this given vertex to the newly found or newly generated vertex.
@@ -194,7 +208,7 @@ SurfaceLattice::Vertex* SurfaceLattice::FindNearEnoughVertex( const Vector& poin
 		}
 	}
 
-	if( Distance( nearestVertex->point, point ) <= 0.5 * genParms.latticeWalkLength )
+	if( Distance( nearestVertex->point, point ) <= 0.8 * genParms.latticeWalkLength )
 		return nearestVertex;
 
 	return 0;
@@ -212,14 +226,13 @@ bool SurfaceLattice::GenerateEdges( const GenerationParameters& genParms )
 		for( int dir = 0; dir < vertex->directionCount; dir++ )
 		{
 			Vertex::DirectionData* dirData = &vertex->directionData[ dir ];
-			if( !dirData->edgeMade )
+			if( !dirData->edgeMade && dirData->adjacentVertex )
 			{
 				Edge* edge = new Edge( vertex, dirData->adjacentVertex );
 				edgeList.InsertRightOf( edgeList.RightMost(), edge );
 
 				dirData->edgeMade = true;
 				int oppositeDir = dirData->adjacentVertex->FindDirectionIndex( vertex );
-				assert->Condition( oppositeDir != -1, "The lattice should not contain any directed edges." );
 				if( oppositeDir != -1 )
 					dirData->adjacentVertex->directionData[ oppositeDir ].edgeMade = true;
 			}
@@ -274,16 +287,19 @@ void SurfaceLattice::Vertex::CalculateTangentDirections( const Surface& surface,
 	Vector gradient;
 	surface.EvaluateGradientAt( point, gradient );
 	CoordFrame coordFrame;
-	Scale( coordFrame.zAxis, gradient, -1.0 );
+	Scale( coordFrame.zAxis, gradient, 1.0 );		// Not sure, actualy, how to make sure the z-axis faces the right way.
 	Normalize( coordFrame.zAxis, coordFrame.zAxis );
 	if( !adjacentTangentDir )
 		Orthogonal( coordFrame.xAxis, coordFrame.zAxis );
 	else
-		Reject( coordFrame.xAxis, *adjacentTangentDir, coordFrame.zAxis );
-	Cross( coordFrame.xAxis, coordFrame.zAxis, coordFrame.xAxis );
+	{
+		Scale( coordFrame.xAxis, *adjacentTangentDir, -1.0 );
+		Reject( coordFrame.xAxis, coordFrame.xAxis, coordFrame.zAxis );
+	}
+	Cross( coordFrame.yAxis, coordFrame.zAxis, coordFrame.xAxis );
 	for( int dir = 0; dir < genParms.directionCount; dir++ )
 	{
-		double angle = double( dir ) / double( genParms.directionCount );
+		double angle = 2.0 * PI * double( dir ) / double( genParms.directionCount );
 		Vertex::DirectionData* dirData = &directionData[ dir ];
 		Set( dirData->tangentDir, cos( angle ), sin( angle ), 0.0 );
 		Transform( dirData->tangentDir, coordFrame, dirData->tangentDir );
@@ -303,7 +319,7 @@ int SurfaceLattice::Vertex::FindDirectionIndex( Vertex* adjacentVertex )
 SurfaceLattice::Edge::Edge( Vertex* vertex0, Vertex* vertex1 )
 {
 	vertex[0] = vertex0;
-	vertex[1] = vertex[1];
+	vertex[1] = vertex1;
 }
 
 //=============================================================================
