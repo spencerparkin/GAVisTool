@@ -85,13 +85,12 @@ This means that it is a linear function and that it preserves the outer product.
 use over-bar notation to denote the use of this function.  Doing so, for any
 element $E\in\G$, we define $\overline{E}$ as
 \begin{equation}
-\overline{E} = SE\tilde{S},
+\overline{E} = SES^{-1},
 \end{equation}
 where the rotor $S$ is given by
 \begin{equation}
-S = 2^{-(n+1)/2}\prod_{i=0}^n\left(1-e_ie_{i+n+1}\right),
+S = \prod_{i=0}^n\left(1-e_ie_{i+n+1}\right).
 \end{equation}
-and $\tilde{S}$ denotes the reverse of $S$.
 As the reader can check, for any integer $i\in[0,n]$, we have $\overline{e_i}=e_{i+n+1}$,
 and similarly, $\overline{e_{i+n+1}}=-e_i$.
 The rotor $S$ simply rotates any element taken from the geometric algebra generated
@@ -323,22 +322,26 @@ in direct form.  The second great feature of the conformal model is the
 surprising fact that all geometries in the conformal model are, as versors, also conformal transformations
 with geometric significance relative to the simultaneously represented geometry.
 Then, realizing that all conformal geometries, (with the exception of flat points), have
-a factorization in direct form as an outer product of points, the outermorphic
-property of versor conjugation allows us to predict the action of any versor
-transformation on almost any conformal geometry.
+a factorization in direct form as an outer product of conformal points, the outermorphic
+property of the operation that is the conjugation of elements by versors allows us to predict
+the action of any versor transformation on almost any conformal geometry.
 
-These are great features!  But what can the model at present do for us?  Well,
-the first observation we must make is that the set of all known quadrics
-is represented by the set of all bivectors in $\G$, under-which the inner
-and outer products are obviously not closed.  Only addition and subtraction
-are closed in this set, and so we're left to wonder what we might be able
-to prove about the addition and subtraction of $n$-dimensional quadric surfaces.
+These are great features!  But what can the model at present do for us?
+Well, we begin by making the observation that while the taking of the outer product
+among elements involving those representative of quadric surfaces deserves some consideration, (see
+section \ref{sec_quadric_intersections} below), it makes more sense to start with a consideration of the operations
+closed in the set of all elements in $\G$ from which can always be found a representative of any given quadric surface.
+This is the set of bivectors in $\G$, underwhich the operations of addition and subtraction
+are clearly closed.
+
 Letting $B_a,B_b\in\G$ be bivectors, it is not hard to see that $B_a\pm B_b$, under
 definition \eqref{equ_quadric_condition}, must represent at least the intersection, if any,
-of the quadric surfaces $B_a$ and $B_b$, but this is not an exact answer to the
-question of what surface $B_a\pm B_b$ represents.
+of the quadric surfaces $B_a$ and $B_b$. Tackling the question head on of what $B_a\pm B_b$
+represents generally, however, will not be our apprach here.  Instead, let us consider
+a few specific cases to demonstrate the advantage of working in an algebra with
+elements having canonical forms for common geometric surfaces.
 
-Let's try an example.  Suppose $B_a$ and $B_b$ are both homogenized spheres with
+Suppose $B_a$ and $B_b$ are both homogenized spheres with
 a real intersection and having
 Euclidean centers $c_a,c_b\in\V$, respectively.  Let $r_a,r_b\in\R$
 be the respective radii of $B_a$ and $B_b$.  It then follows from
@@ -364,21 +367,8 @@ various parallel planes.}
 \label{fig_diff_of_spheres}
 \end{figure}
 
-At first sight, the sum of a sphere and a plane may not seem that interesting.
-However, the sum of a homogenized sphere and a non-homogenized plane is
-interesting, because the result is always a sphere in homogenized form.  The
-scalar amount at which the plane is non-homogenized simply indicates twice
-the length along the normal of the plane that the center of the original sphere
-is displaced in the opposite direction of that normal to find a sphere intersecting the
-plane in the same circle as that of the original sphere.
-
-Interestingly, the difference of spheres generalizes to the idea of subtracting
-spheroids.  A picture of this is given in Figure~\ref{fig_diff_of_spheroids}.
-Of course, there is undoubtedly a geometric significance in the difference
-between any two homogenized quadric surfaces containing $\Omega$.  It
-would be interesting to find out exactly what that is.  The sum of such
-elements is also interesting.  For example, in the case of two homogenized
-points, it can be shown that their sum is the imaginary sphere having the
+Consider now the case of two homogenized
+points.  It can be shown that their sum is the imaginary sphere having the
 two points as opposite poles.  Specifically, we have
 \begin{align}
  & \left(\Omega-2a\wedge\overline{e_0}+a^2\Alpha\right) +
@@ -389,14 +379,11 @@ two points as opposite poles.  Specifically, we have
 where $a,b\in\V$ are Euclidean points, which we can recognize
 from table \eqref{equ_canonical_forms_table} as an imginary sphere.
 
-\begin{figure}
-\includegraphics[scale=0.5]{DiffOfSpheroids}
-\caption{The difference of two homogenized spheroids gives a hyperbolic paraboloid.
-In this case, the two paraboloids have no real intersection.}
-\label{fig_diff_of_spheroids}
-\end{figure}
+% What else?
 
-\section{Intersecting Quadric Surfaces}
+% Subtract a line from a point.
+
+\section{Intersecting Quadric Surfaces}\label{sec_quadric_intersections}
 
 % LEVIN, J. A parametric algorithm for drawing pictures of solid objects composed of quadric
 % surfaces. Commun. ACM 19,lO (Oct. 1976).
@@ -410,7 +397,7 @@ and by its applications to drawing solid objects composed of quadric surfaces.  
 and \cite{Miller87}.)  After finding vectors dually representative of planes and spheres,
 the ability to intersect such geometries is one method of the conformal model for generating
 all geometries of that model.  We have seen how the model at present is capable of representing
-planes and spheres, so naturally we would wish to intersect them.
+planes and spheres, so likewise we would wish to intersect them.
 
 Noticing that any trivector $T\in\G$ can be written in the form
 \begin{equation}
@@ -561,7 +548,6 @@ showing that the coefficient of $e_i\wedge\overline e_j$ in $V\Omega\tilde{V}$ i
 the action of a rotor taken with two orthogonal vectors does not change their orthogonal relationship.
 It now follows that $V\Omega\tilde{V}=\Omega$.
 
-If there is a versor that translates quadrics in our model, it is not at all obvious.
 Rotations and translations in the conformal model can be developed together in
 a very nice uniform way by first developing the ability to reflect any conformal
 geometry about an arbitrary plane, which is really only about as hard as showing
@@ -585,58 +571,9 @@ simply expand the equation
 \end{equation}
 and then factor out $p\wedge\overline{p}$.
 (It helps to realize that $\overline{t}\cdot E\in\V$ and $t\cdot E\in\overline{\V}$.)
-Then, recalling
-that $\Alpha=e_0\wedge\overline{e_0}$, the form $E'$ in equation \eqref{equ_translate_quadric}
-begins to resemble what might be the result of a transformation of $E$ by some versor.
-Exactly what versor this might be, however, if it even exists, remains to be seen.
-If we could find a translation versor, we could combine such versors with
-those of the form \eqref{equ_rotation_versor} to get the rigid body motions.
-It may not be possible to do this, in which case we must conclude that
-a better model for quadric surfaces exists.
-
-\section{Flat Quadrics}
-
-In the conformal model there is a distinction made between flat and round
-geometries.  Interestingly, it can be seen that flats of the conformal model
-are really just rounds taken to an infinite extreme.  For example, a plane
-is simply a sphere centered at infinity with infinite radius.  Such geometries
-of the conformal model have the property that $\infty$ is in the vector
-sub-space of the blade representing the geometry.  We give here a
-condition that we might use in the quadric model to test a given quadric
-for its flatness.
-
-For any given quadric $E\in\G$, let $f:\V\to\R$ be the function
-\begin{equation}
-f(x) = x\wedge\overline{x}\cdot E.
-\end{equation}
-Then, if for all pairs of homogenized affine points $a,b\in\V$
-on $E$ we have
-\begin{equation}
-0=f(a-b),
-\end{equation}
-then $B$ is a flat quadric.  We really
-should be mathematically precise here about what we mean when
-we say that a given quadric is flat.  The reasoning behind this
-condition, however, may suffice as adequate meaning.
-
-Let $x\in\V$ be the direction vector $a-b$, and see that
-\begin{equation}
-0=f(a) = f(b+x) = f(b) + \nabla_x f(b) + f(a-b) = \nabla_x f(b),
-\end{equation}
-where $\nabla_x f(b)$ is the directional derivative of $f$ at $b$.
-It follows that for any $b$ on $E$, the directional derivative of $f$ at $b$ in every
-direction from $b$ to any other point $a$ on $E$ is zero.  Then, seeing that
-$\nabla_x f(b)=x\cdot\nabla f(b)$, and that $\nabla f(b)$, (the gradient of
-$f$ at $b$), is a direction vector orthogonal to the surface of the quadric at $b$,
-it is clear that all other points $a$ on $E$ must be in the tangent space
-of $E$ at $b$.  It follows that $E$ is flat in any neighborhood of a point
-upon its surface.
-
-Notice that under this criterion, lines, as they are considered flat in the conformal
-model, are also considered flat under our present model.  To see this, notice that $f(w)=0$ when
-$E$ is the line in table \eqref{equ_canonical_forms_table} and $w$ is any non-zero direction
-vector parallel to the unit-length direction vector $v$.  Notice that cylinders are similarly
-flat in such directions $w$, but clearly not in any other direction.
+That $E'$ is not the result of applying some versor to $E$ is unfortunate, and leaves
+us to conclude that only in a better model do the rigid body motions of quadrics exist
+as versor transformations.
 
 \section{Concluding Remarks}
 
@@ -647,13 +584,8 @@ subtracting vector equations whose solution sets represent the quadric surfaces.
 There might not be any great advantage in using the elemental form over the
 functional form.  There is some wonder, however, whether the model can
 be helpful in studying what is referred to in \cite{Miller87}
-and \cite{ZhiqiangXu05} as the pencil of two quadrics.
-It would be particularly interesting if our model could provide a nice proof
-that a ruled quadric must exist in the pencil of any two quadrics.
-To begin to answer such a question, we would first need to know
-how to classify ruled quadrics in $\G$.  These would appear to be the
-quadrics $E\in\G$ that are flat in at least one direction on every point
-of the surface.
+and \cite{ZhiqiangXu05} as the pencil of two quadrics, which is also essential
+to the study of intersecting quadrics in \cite{Levin76}.
 
 That $\G$ was not something fancy like a Minkowski space or some other
 type of non-Euclidean geometric algebra was perhaps our first clue from
