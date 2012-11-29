@@ -151,8 +151,8 @@ two blades are known to represent the same non-trivial geometry in the same way,
 then it can be shown that the two blades are equal, up to scale.
 In our present model, it may take more than just
 multiplying by a non-zero scalar factor to get a bivector known to represent a certain geometry in a
-known canonical form.  To account for this during the performance of algebraic manipulations on paper,
-it is convenient to use the following notation.  We say that quadrics $E_a$ and $E_b$ are
+known canonical form.  To account for this during the performance of algebraic manipulations,
+we will introduce the following notation.  We will say that quadrics $E_a$ and $E_b$ are
 equivalent, writing $E_a\equiv E_b$, whenever $E_a$ and $E_b$ represent the same quadric
 under definition \eqref{equ_quadric_condition}.  For example, for any two vectors $u,v\in\V$, we have
 \begin{equation}
@@ -184,7 +184,7 @@ null blades in our purely Euclidean geometric algebra $\G$.
 
 Having constructed our model, we are now ready to find canonical forms of bivectors
 representing a variety of well-known quadric surfaces.  Our approach here will be
-similar to that taken in section 3 of \cite{Miller87}.
+similar to that taken in Section 3 of \cite{Miller87}.
 
 Let us begin with the
 spheroid, (a special case of ellipsoid), the circular cylinder, and the circular hyperboloid
@@ -287,11 +287,101 @@ which would probably give us the general set of ellipsoids, provided
 the set of $k$ direction vectors in $\{v_i\}_{i=1}^k$ are
 linearly independent.
 
-In any case, specific canonical forms for circles, lines, planes, plain-pairs,
-and so on, can be found using the more general form \eqref{equ_spheroid_bivector}.  One can
-then add and subtract these forms and then identify the result as an
-instance of some other form.  For example, the difference of two
-spheres is a plane, and the sum of two points is an imaginary sphere.
+The following table summarizes a few additional canonical forms.
+\begin{equation}\label{equ_canonical_forms_table}
+\begin{array}{|l|l|}
+\hline
+\mbox{Geometry} & \mbox{Canonical/Homogenized Form} \\
+\hline
+\mbox{Plane} & v\wedge\overline{e_0} - (c\cdot v)A,\;|v|=1 \\
+\hline
+\mbox{Sphere} & \Omega - 2c\wedge\overline{e_0} + (c^2-r^2)A \\
+\hline
+\mbox{Point} & \Omega - 2c\wedge\overline{e_0} + c^2A \\
+\hline
+\mbox{Line} & \Omega - v\wedge\overline{v} - 2u\wedge\overline{e_0} + u^2A,\;u=c-(c\cdot v)v \\
+\hline
+\mbox{Plane-Pair} & ((c_a\cdot v_a)e_0-v_a)\wedge((c_b\cdot v_b)\overline{e_0}-\overline{v_b}) \\
+\hline
+\end{array}
+\end{equation}
+For the plain-pair form in table \eqref{equ_canonical_forms_table}, $c_a,c_b\in\V$ are Euclidean points
+on the two planes, and $v_a,v_b\in\V$ are direction vectors normal to each of the two planes.
+
+% What about circles and point-pairs of the conformal model?  Are they found in our model?
+
+\section{Making Use Of The Model}
+
+Admittedly, there is really nothing interesting about this model unless we can
+prove that it has some utility.  The conformal model, for example, has at least
+two great features.  The first is the utility of the wedge product in generating
+intersections between geometries in dual form, or point-fitting between
+geometries in direct form.  It is even possible to
+make use of dual imaginary intersections by reinterpreting them as real geometries
+in direct form.  The second great feature of the conformal model is the
+surprising fact that all geometries in the conformal model are, as versors, also conformal transformations
+with geometric significance relative to the simultaneously represented geometry.
+Then, realizing that all conformal geometries, (with the exception of flat points), have
+a factorization in direct form as an outer product of conformal points, the outermorphic
+property of the operation that is the conjugation of elements by versors allows us to predict
+the action of any versor transformation on almost any conformal geometry.
+
+These are great features!  But what can the model at present do for us?
+Well, we begin by making the observation that while the taking of the outer product
+among elements involving those representative of quadric surfaces deserves some consideration, (see
+section \ref{sec_quadric_intersections} below), it makes more sense to start with a consideration of the operations
+closed in the set of all elements in $\G$ from which can always be found a representative of any given quadric surface.
+This is the set of bivectors in $\G$, underwhich the operations of addition and subtraction
+are clearly closed.
+
+Letting $B_a,B_b\in\G$ be bivectors, it is not hard to see that $B_a\pm B_b$, under
+definition \eqref{equ_quadric_condition}, must represent at least the intersection, if any,
+of the quadric surfaces $B_a$ and $B_b$. Tackling the question head on of what $B_a\pm B_b$
+represents generally, however, will not be our apprach here.  Instead, let us consider
+a few specific cases to demonstrate the advantage of working in an algebra with
+elements having canonical forms for common geometric surfaces.
+
+Suppose $B_a$ and $B_b$ are both homogenized spheres with
+a real intersection and having
+Euclidean centers $c_a,c_b\in\V$, respectively.  Let $r_a,r_b\in\R$
+be the respective radii of $B_a$ and $B_b$.  It then follows from
+table \eqref{equ_canonical_forms_table} that $B_a-B_b$, in homogenized
+form, is given by
+\begin{equation}\label{equ_diff_of_spheres}
+\frac{v}{|v|}\wedge\overline{e_0}-\left(\frac{v}{|v|}\cdot\frac{c_a+c_b+(r_b^2-r_a^2)v^{-1}}{2}\right)A,
+\end{equation}
+where $v$ is the vector $c_a-c_b$, which, again by table \eqref{equ_canonical_forms_table},
+tells us that this is a plane with normal $v$.  A point on the plane is also apparent from
+\eqref{equ_diff_of_spheres}, namely $(c_a+c_b+(r_b^2-r_a^2)v^{-1})/2$.
+Then, knowing that $B_a-B_b$ must contain the intersection of the
+two spheres, we can conclude that this point must be in the plane containing the circle that is
+the intersection of the two spheres, because $B_a-B_b$ must be the said plane.  Notice
+that even if the spheres don't intersect, we still get a meaningful result.  A picture of
+$B_a-B_b$ is given in Figure~\ref{fig_diff_of_spheres}.
+
+\begin{figure}
+\includegraphics[scale=0.5]{DiffOfSpheres}
+\caption{The difference of two homogenized spheres gives the plane, shown here on edge,
+containing their intersection.  The spheres were rendered as a number of traces in
+various parallel planes.}
+\label{fig_diff_of_spheres}
+\end{figure}
+
+Consider now the case of two homogenized
+points.  It can be shown that their sum is the imaginary sphere having the
+two points as opposite poles.  Specifically, we have
+\begin{align}
+ & \left(\Omega-2a\wedge\overline{e_0}+a^2\Alpha\right) +
+\left(\Omega-2b\wedge\overline{e_0}+b^2\Alpha\right) \\
+\equiv\;& \Omega-2\left(\frac{a+b}{2}\right)\wedge\overline{e_0} +
+\left(\left(\frac{a+b}{2}\right)^2+\left(\frac{a-b}{2}\right)^2\right)\Alpha,
+\end{align}
+where $a,b\in\V$ are Euclidean points, which we can recognize
+from table \eqref{equ_canonical_forms_table} as an imginary sphere.
+
+% What else?
+
+% Subtract a line from a point.
 
 \section{Intersecting Quadric Surfaces}\label{sec_quadric_intersections}
 
@@ -306,7 +396,7 @@ A desire to do such a thing is motivated by an ability to do it in the conformal
 and by its applications to drawing solid objects composed of quadric surfaces.  (See \cite{Levin76}, \cite{WangGoldmanTu03}
 and \cite{Miller87}.)  After finding vectors dually representative of planes and spheres,
 the ability to intersect such geometries is one method of the conformal model for generating
-all geometries of that model.  It can be seen how the model at present is capable of representing
+all geometries of that model.  We have seen how the model at present is capable of representing
 planes and spheres, so likewise we would wish to intersect them.
 
 Noticing that any trivector $T\in\G$ can be written in the form
@@ -462,10 +552,11 @@ Rotations and translations in the conformal model can be developed together in
 a very nice uniform way by first developing the ability to reflect any conformal
 geometry about an arbitrary plane, which is really only about as hard as showing
 that any conformal point can be reflected about such a plane.
-It is easy to see that planes in our present model are also versors.  Unlike the conformal
-model, however, applying such versors to quadrics in our model does not
-produce a reflection about the plane.  But this doesn't mean that we can't
-find some way to translate quadrics in our model anyway.
+It is easy to see that planes in our present model, as shown
+in table \eqref{equ_canonical_forms_table}, are also versors.  Unlike the conformal
+model, unfortunately, applying such versors to quadrics in our model does not
+produce a reflection about the plane.  This doesn't mean, however, that we can't
+find some way to translate quadrics in our model.
 
 Given a direction vector $t\in\V$ and a quadric $E\in\G$, it is not at all hard
 to show that the quadric $E'$, given by
