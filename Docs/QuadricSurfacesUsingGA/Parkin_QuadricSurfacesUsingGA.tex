@@ -228,7 +228,7 @@ with any instantiation of that form with a given set of parameters), then we can
 to homogenize that form -- the process by which we transform any non-homogenized element $E'$
 known to represent the same quadric as that of a homogenized and canonical form $E$ into $E$.
 For the canonical form \eqref{equ_spheroid_bivector} with $\lambda=-1$, a common\footnote{Recall
-that it may take more than multiplying by a simple scalar factor to homogenize a bivector in $\G$
+that it may take more than simply multiplying by a non-zero scalar factor to homogenize a bivector in $\G$
 as discussed in Section~\ref{sec_ga_construct}.}
 non-homogenized form is given by
 \begin{equation}
@@ -263,6 +263,7 @@ Lastly, we may find the radius of the cylinder from the simple equation
 \begin{equation}
 r^2 = c^2 + A\cdot E.
 \end{equation}
+This completes the decomposition.
 
 A generalization of equation \eqref{equ_spheroid} should be mentioned
 before moving on.  It is given by
@@ -273,7 +274,7 @@ which would probably give us the general set of ellipsoids, provided
 the set of $k$ direction vectors in $\{v_i\}_{i=1}^k$ are
 linearly independent.
 
-In any case, specific canonical forms for circles, lines, planes, plain-pairs,
+In any case, specific canonical forms for spheres, lines, planes, plain-pairs,
 and so on, can be found using the more general form \eqref{equ_spheroid_bivector}.  One can
 then add and subtract these forms and then identify the result as an
 instance of some other form.  For example, the difference of two
@@ -315,7 +316,8 @@ integer $i\in[1,k]$, we have $p\cdot v_i=\overline{p}\cdot v_i=0$.  This last co
 unfortunately, cannot be satisfied in $\G$ as we have defined it, nor does it seem
 practical or reasonable to extend $\G$ in a way that makes the condition possible,
 mainly because the resulting trivector would not appear capable of ever directly characterizing the
-intersection, but only indirectly as the intersection of the quadrics in $\{B_i\}_{i=1}^k$.
+intersection, but only indirectly as a collection of quadrics $\{B_i\}_{i=1}^k$ put in a linear
+combination with the vectors in $\{v_i\}_{i=1}^k$.
 
 %Such a characterization, however, is not entirely undesireable, since the conformal model
 %makes use of the same idea.
@@ -394,7 +396,7 @@ about an axis $a\in\V$ by an angle $\theta$, is given by
 E' = VE\tilde{V}.
 \end{equation}
 Interestingly, this formula applies to all quadrics, because it can be shown
-that $V$ leaves $\Omega$ and $A$ invariant under versor conjugation.
+that $V$ leaves $\Omega$ and $A$ invariant under conjugation by a versor.
 Indeed, a spheroid in the form of equation \eqref{equ_spheroid_bivector}
 can be rotated as illustrated in Figure~\ref{fig_rot_spheroid}.
 \begin{figure}
@@ -432,15 +434,15 @@ It then follows that for any integer $i\in[1,n]$, we have
 \begin{equation}
 -e_i\wedge\overline{e_i}\cdot V\Omega\tilde{V} = \sum_{j=1}^n (Re_i\tilde{R}\cdot e_j)^2 = (Re_i\tilde{R})^2 = 1,
 \end{equation}
-showing that the coefficient of $e_i\wedge\overline{e_i}$ in $V\Omega\tilde{V}$ is 1.  Realize that
-the application of a rotor leaves the magnitude of a vector unchanged.  To finish the proof, we
+showing that the coefficient of $e_i\wedge\overline{e_i}$ in $V\Omega\tilde{V}$ is 1.  Recall that
+the application of a unit-rotor leaves the magnitude of a vector unchanged.  To finish the proof, we
 observe that for all integers $i\neq j$ in $[1,n]$, we have
 \begin{equation}
 -e_i\wedge\overline{e_j}\cdot V\Omega\tilde{V} =
 \sum_{k=1}^n (Re_i\tilde{R}\cdot e_k)(Re_j\tilde{R}\cdot e_k)
 = (Re_i\tilde{R})\cdot(Re_j\tilde{R}) = 0,
 \end{equation}
-showing that the coefficient of $e_i\wedge\overline e_j$ in $V\Omega\tilde{V}$ is 0.  Realize that
+showing that the coefficient of $e_i\wedge\overline e_j$ in $V\Omega\tilde{V}$ is 0.  Recall that
 the action of a rotor taken with two orthogonal vectors does not change their orthogonal relationship.
 It now follows that $V\Omega\tilde{V}=\Omega$.
 
@@ -486,8 +488,8 @@ That $\G$ was not something fancy like a Minkowski space or some other
 type of non-Euclidean geometric algebra was perhaps our first clue from
 the beginning that the potential for great things coming out of this model
 was, let's say, less than likely.  On the other hand, the author of this paper must
-admit that if there are any interesting applications of the presented model for quadric surfaces,
-it is beyond his capacity to discover what those are.  In any case,
+admit that if there are any interesting applications of the now presented model for quadric surfaces,
+it is beyond his capacity to discover what any of those are.  In any case,
 geometric algebra has proven to be a fundamental, versatile and unifying
 language that perhaps most naturally extends mathematics beyond the real number line.  Perhaps
 there is a much better way to use geometric algebra to study quadric surfaces.
