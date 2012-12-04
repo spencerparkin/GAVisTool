@@ -23,6 +23,7 @@
 \newcommand{\W}{\mathbb{W}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\VS}{\mathbb{S}}
+\newcommand{\PS}{\mathbb{P}}
 
 \newcommand{\Alpha}{A}
 %\Omega is already defined
@@ -166,11 +167,41 @@ It then follows that $-2P(x)$ factors out of equation \eqref{equ_common_quadric}
 
 \section{Transformations Of The Model}
 
+Let $\PS$ denote the following set.
+\begin{equation}
+\PS = \{\lambda P(x)|\mbox{$x\in\V^n$ and $\lambda\in\R$}\}.
+\end{equation}
+Now suppose that $V\in\G$ is a versor such that for any $x\in\V^n$,
+we have $V^{-1}P(x)V\in\PS$.  It then follows that if $B$ is a blade
+directly representative of a known geometry, and for all $x\in\V^n$,
+the transformation of $P(x)$ by $V$ as $V^{-1}P(x)V$ is understood,
+then the algebraic variety given as the solution set of the equation
+\begin{equation}\label{equ_transformed_geometry}
+0 = V^{-1}P(x)V\wedge B
+\end{equation}
+in the variable $x$ is also understood.  Multilying equation
+\eqref{equ_transformed_geometry} on the left by $V$ and then on the
+right by $V^{-1}$, the equation becomes
+\begin{equation}
+0 = P(x)\wedge VBV^{-1},
+\end{equation}
+showing that $VBV^{-1}$ is the transformation of $B$ by $V$ in the sense
+that for any point $x\in\V^n$ on $B$, the point $y\in\V^n$ is on $VBV^{-1}$,
+where $y=V^{-1}xV$.
+
+
 % No need to factor any conformal geo as outer prod of conformal points.
 % just show versor transform on conformal point then transfer to direct form blade.
 
 %Show that an understanding of how $P(x)$ transforms gives us an
-%understanding of how direct form blades transform.
+%understanding of how direct form blades transform.  Note that P(x)
+% must transform to another vector that can be written in the form P(x)
+
+% Can we find a versor that moves P(x) into the of all such P(x)?
+% Even so, could we understand what it does to P(x)?
+
+% bivectors of the quadric model could be thought of as vectors
+% in a higher-level geometric algebra.
 
 \bibliographystyle{amsplain}
 \bibliography{Parkin_AnExtensionOfTheConformalModel}
