@@ -13,7 +13,7 @@
 
 #include "../Geometry.h"
 #include "../VectorMath/Surface.h"
-#include "../VectorMath/SurfaceLattice.h"
+#include "../VectorMath/SurfaceMesh.h"
 
 //=========================================================================================
 class SurfaceGeometry : public GAVisToolGeometry
@@ -44,13 +44,12 @@ protected:
 	{
 		RENDER_AS_SET_OF_TRACES,
 		RENDER_AS_TRIANGLE_MESH,
-		RENDER_AS_WIRE_FRAME_LATTICE,
 	};
 
 	RenderAs renderAs;
 	VectorMath::Surface* surface;
 	Utilities::List traceList;
-	VectorMath::SurfaceLattice lattice;
+	VectorMath::SurfaceMesh surfaceMesh;
 	bool surfaceGeometryValid;
 
 	GeometricAlgebra::SumOfBlades element;

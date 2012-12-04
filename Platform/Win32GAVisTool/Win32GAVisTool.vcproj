@@ -544,11 +544,11 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\Code\WinApp\VectorMath\SurfaceLattice.cpp"
+					RelativePath="..\..\Code\WinApp\VectorMath\SurfaceMesh.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\Code\WinApp\VectorMath\SurfaceLattice.h"
+					RelativePath="..\..\Code\WinApp\VectorMath\SurfaceMesh.h"
 					>
 				</File>
 				<File
