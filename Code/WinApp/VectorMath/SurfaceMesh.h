@@ -32,7 +32,9 @@ namespace VectorMath
 			enum { MAX_SEED_POINTS = 4 };
 			Vector seedPoint[ MAX_SEED_POINTS ];
 			int seedPointCount;
+			int maxIterations;
 			double epsilon;
+			double surfaceWalkDistance;
 			Aabb aabb;
 		};
 
@@ -61,6 +63,8 @@ namespace VectorMath
 			Triangle( void );
 			virtual ~Triangle( void );
 
+			bool IsComplete( void ) const;
+
 			// These are the vertices of the triangle.  We hope to maintain a
 			// consistent winding order.
 			VectorMath::Triangle vertices;
@@ -70,6 +74,8 @@ namespace VectorMath
 			// triangle needs to be created or where it needs to be determined that such a
 			// triangle cannot be created due to it being out of bounds.
 			bool edgeComplete[3];
+
+			Triangle* adjacentTriangle[3];
 		};
 
 		void WipeClean( void );
