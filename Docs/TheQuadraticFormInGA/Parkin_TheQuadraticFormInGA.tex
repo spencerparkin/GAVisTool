@@ -231,33 +231,48 @@ that fits the $k$ points, provided the set $\{S(p_i)\}_{i=1}^k$ is linearly
 independent.  Two questions
 arise from this.  First, under what circumstances do the $k$ points generate
 a linearly independent set $\{S(p_i)\}_{i=1}^k$; and secondly, under
-those circumstances, what quadric surface do we get?  (Address this somehow,
-preferably by finding the answers.)
+those circumstances, what quadric surface do we get?  These questions
+are easy to answer in the conformal model of geometric algebra.  Here, however,
+the author is forced to leave them as open questions.  This, of course, does
+not stop us from performing the experiment of trying to fit a quadric surface
+to a given set of points.  Figures \ref{} and \ref{} illustrate the results
+of such an experiment.
 
 From what we have thus far gathered, an $(n+1-k)$-dimensional quadric surface
 would be fit to $(n+1)^2-k$ points if it were at all possible to find such a set
 of points generating a linearly independent set.  Possible or not, it is easy to show that this
 is certainly not the least upper bound on the number of points needed to determine
-such a surface.  To see why, define $S_0:\V^n\to\V^m$ as
+such a surface.  To see why, define $S_{\leq}:\V^n\to\V^m$ as
 \begin{equation}
-S_0(p) = e_{00}+\sum_{i=1}^n(p\cdot e_i)e_{0i} + \sum_{i=1}^n\sum_{j=i+1}^n(p\cdot e_i)(p\cdot e_j)e_{ij}
+S_{\leq}(p) = \sum_{i\leq j}(S(p)\cdot e_{ij})e_{ij},
 \end{equation}
 where $m$ is given by
 \begin{equation}
-m = \binom{n}{0}+\binom{n}{1}+\binom{n}{2},
+m = \binom{n}{0}+2\binom{n}{1}+\binom{n}{2} = \frac{(n+1)(n+2)}{2},
 \end{equation}
 and $\V^m$ is a proper vector sub-space of $\V^{(n+1)^2}$ and spanned
-by the vectors in $\{e_{00}\}\cup\{e_{0i}\}_{i=1}^n\cup\{e_{ij}\}_{i<j}$.
-Using now $I_0$, what we'll use to denote the unit psuedo-scalar of $\G(\V^m)$,
-to transition between dual and direct quadrics\footnote{Notice that quadrics in $\G(\V^m)$
-defined using $S_0$ are still valid quadrics in $\G(\V^{(n+1)^2})$ under the definition
+by the vectors in $\{e_{ij}\}_{i\leq j}$.
+Using now $I_{\leq}$, what we'll use to denote the unit psuedo-scalar of $\G(\V^m)$,
+to transition between dual and direct quadrics,\footnote{Notice that quadrics in $\G(\V^m)$
+defined using $S_{\leq}$ are still valid quadrics in $\G(\V^{(n+1)^2})$ under the definition
 using $S$.  The converse, however, is not true.  In any case, we may think of the
-quadrics in $\G(\V^{(n+1)^2})$ satisfying both definitions as being in a reduced form.},
-and using $S_0$ in place of $S$
+quadrics in $\G(\V^{(n+1)^2})$ satisfying both definitions as being in a reduced form.}
+and using $S_{\leq}$ in place of $S$
 to define dual and direct quadrics by equations \eqref{equ_dual_quadric} and
 \eqref{equ_direct_quadric}, we see that
 an $(n+1-k)$-dimensional quadric surface may be fit to $m-k$ points, from which it
 is more likely that we'll generate a linearly independent set.
+
+A perhaps better approach to studying the ability to fit quadrics to
+points would be the idea of generating a higher dimensional quadric
+from a lower dimensional quadric.  For example, letting $E$ be a $k$-blade, $E$
+represents an $(n+1-k)$-dimensional surface as a direct quadric.  Then,
+if we choose any point $p\in\V^n$ not in $E$ so that $S(p)\wedge E\neq 0$,
+then the quadric $E'=S(p)\wedge E$ must be a direct $(n+2-k)$-dimensional quadric containing
+both $p$ and all the points of $E$.  An example of this idea is given in Figure \ref{}.
+
+% Do a 2D ellipsoid.  then add a point not on the ellipsoid.
+% Do we get a 3D ellipsoid?
 
 % Do it on the computer?  can we show a figure where i've
 % fit points to a quadric?
@@ -266,6 +281,7 @@ is more likely that we'll generate a linearly independent set.
 
 % Compare canonical forms in this section.
 % S(a).S(b) = (a.b)^2
+% Show E then f(E) in the form
 
 If you found the choice of an anti-Euclidean vector
 space in section \eqref{} odd, the reason for this will
