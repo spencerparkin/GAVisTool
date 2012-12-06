@@ -90,7 +90,7 @@ are found and detailed in the following two sections.
 
 Here we let $\Vb^{n+1}$ be an $(n+1)$-dimensional Euclidean vector space
 isomorphic to $\V^{n+1}$, and then define the over-bar notation on elements
-of the geometric algebra $\G(\W)$, with $\W=V^{n+1}\oplus\Vb^{n+1}$, as an
+of the geometric algebra $\G(\W)$, with $\W=\V^{n+1}\oplus\Vb^{n+1}$, as an
 outermorphic isomorphism between $\G(\V^{n+1})$ and $\G(\Vb^{n+1})$.
 That is, for any element $E\in\G(\W)$, we have
 \begin{equation}
@@ -117,7 +117,7 @@ q(v)=S(e_0+v)\cdot E.
 This approach is especially advantageous in the realization that for
 any versor $V\in\G(\V^{n+1})$, we have
 \begin{equation}
-S(V^{-1}pV)\cdot E=S(p)\cdot V\overline{V}E(V\overline{V})^{-1},
+S(V^{-1}pV)\cdot E=S(p)\cdot V\overline{V}E(V\overline{V})^{-1}
 \end{equation}
 by the fact that $S$ has the property
 \begin{equation}
@@ -178,12 +178,12 @@ determined by each $E_i$.
 
 We will refer to $E$ as a dual quadric if we are interpreting it as being representative
 of a quadric surface in terms of the equation
-\begin{equation}
+\begin{equation}\label{equ_dual_quadric}
 0 = S(e_0+v)\cdot E.
 \end{equation}
 Similarly, we will refer to $E$ as a direct quadric if we are interpreting it as being
 representative of such a surface in terms of the equation
-\begin{equation}
+\begin{equation}\label{equ_direct_quadric}
 0 = S(e_0+v)\wedge E.
 \end{equation}
 To see that this is also the previously mentioned affine variety, simply realize that
@@ -193,8 +193,8 @@ To see that this is also the previously mentioned affine variety, simply realize
 where $I$ is the unit-psuedo scalar of $\G(\V^{(n+1)^2})$.
 
 Notice that any single blade $E\in\G(\V^{(n+1)^2})$ is
-simultaneously representative of both a dual and direct quadric, which are not necessarily the
-same peice of the geometry.\footnote{A dual quadric is directly represented by its dual, and
+simultaneously representative of both a dual and direct quadric, which are distinct
+pieces of geometry.\footnote{A dual quadric is directly represented by its dual, and
 a direct quadric is dually represented by its dual.  As a given blade simultaneously
 represents two geometries, (one dually, the other directly), a single given geometry is
 simultaneously represented by two blades, (which are duals of one another).}
@@ -249,9 +249,15 @@ m = \binom{n}{0}+\binom{n}{1}+\binom{n}{2},
 and $\V^m$ is a proper vector sub-space of $\V^{(n+1)^2}$ and spanned
 by the vectors in $\{e_{00}\}\cup\{e_{0i}\}_{i=1}^n\cup\{e_{ij}\}_{i<j}$.
 Using now $I_0$, what we'll use to denote the unit psuedo-scalar of $\G(\V^m)$,
-to transition between dual and direct quadrics, we see that an $(n+1-k)$-dimensional
-quadric surface may be fit to $m-k$ points, from which it is more likely that we'll
-generate a linearly independent set.
+to transition between dual and direct quadrics\footnote{Notice that quadrics in $\G(\V^m)$
+defined using $S_0$ are still valid quadrics in $\G(\V^{(n+1)^2})$ under the definition
+using $S$.  The converse, however, is not true.  In any case, we may think of the
+quadrics in $\G(\V^{(n+1)^2})$ satisfying both definitions as being in a reduced form.},
+and using $S_0$ in place of $S$
+to define dual and direct quadrics by equations \eqref{equ_dual_quadric} and
+\eqref{equ_direct_quadric}, we see that
+an $(n+1-k)$-dimensional quadric surface may be fit to $m-k$ points, from which it
+is more likely that we'll generate a linearly independent set.
 
 % Do it on the computer?  can we show a figure where i've
 % fit points to a quadric?
