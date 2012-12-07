@@ -54,6 +54,8 @@ Blah.
 
 \maketitle
 
+% TODO: Change E to Q?
+
 \section{Finding The Quadratic Form}
 
 Let $\V^n$ be an $n$-dimensional Euclidean vector space, and identify vectors
@@ -342,6 +344,24 @@ E' = \bigwedge_{i=1}^k f^{-1}\left(V\overline{V}f(E_i)(V\overline{V})^{-1}\right
 \end{equation}
 The problem of blade factorization has been given a great deal of treatment in \cite{}.
 
+\section{Intersecting Lines With Quadrics}
+
+Given a homogeneous point $p\in\V^{n+1}$ and a direction vector $v\in\V^n$,
+it can be shown that
+\begin{equation}\label{equ_quadric_line_intersect_quadratic}
+S(p+\lambda v) = S(p)+\lambda v\cdot\nabla S(p)+\lambda^2 S(v),
+\end{equation}
+where $\lambda\in\R$ is a scalar.  Taking equation \eqref{equ_quadric_line_intersect_quadratic} in the
+inner product with a quadric $Q\in\G(\W)$, and then setting this
+product to zero, we get a quadratic equation in $\lambda$ with
+coeficients $S(p)\cdot Q$, $(v\cdot\nabla S(p))\cdot Q$ and $S(v)\cdot Q$.
+In the case that these coeficients are not all zero, the equation can be
+solved to find zero, one or two points intersection.  Otherwise, the quadric
+contains the line through $p$ having direction $v$.
+
+This is an easy way to intersect lines and quadrics, but shouldn't there be
+a way to do this in $\G(\V^{(n+1)^2})$ using the outer product?
+
 \section{Closing Remarks}
 
 It is not hard to see how the methods of this paper might be generalized
@@ -357,6 +377,10 @@ better model in existence for quadric surfaces that doesn't use geometric algebr
 
 % synthetic geometry <--> computational geometry
 
+% Study conjugate points WRT a quadric?
+% ruled surfaces, lines as generators of quadrics?
+% thm: ruled surface in every pencil?
+
 \bibliographystyle{amsplain}
 \bibliography{Parkin_TheQuadraticFormInGA}
 
@@ -366,5 +390,7 @@ better model in existence for quadric surfaces that doesn't use geometric algebr
 % cite your own work on the quadric model
 % cite your own work on the extension/variation of the quadric model
 % maybe cite http://www.montgomerycollege.edu/Departments/planet/planet/Numerical_Relativity/GA-SIG/Conformal%20Geometry%20Papers/Cambridge/Oriented%20Conformal%20Geometric%20Algebra.pdf
+% cite http://en.wikipedia.org/wiki/Quadric_(projective_geometry) for line/quad intersect
+% cite? http://www.encyclopediaofmath.org/index.php/Quadric  (too many internet sources)
 
 \end{document}
