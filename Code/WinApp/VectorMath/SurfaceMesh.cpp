@@ -263,7 +263,9 @@ void SurfaceMesh::CompleteEdgeOfTriangle( Triangle* triangle, const Surface& sur
 		newTriangle->adjacentTriangle[0] = triangle;
 		newTriangle->edgeComplete[0] = true;
 
-		if( adjacentTriangle1
+		if( adjacentTriangle1 )
+		{
+		}
 
 		// We always add newly created triangles to this list.
 		uncompletedTriangleList.InsertRightOf( uncompletedTriangleList.RightMost(), newTriangle );
