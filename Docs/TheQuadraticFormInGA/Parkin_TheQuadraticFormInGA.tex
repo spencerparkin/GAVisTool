@@ -54,7 +54,7 @@ Blah.
 
 \maketitle
 
-\section{Finding The Quadratic Form}
+\section{The Quadratic Form In Vector Algebra}
 
 Let $\V^n$ be an $n$-dimensional Euclidean vector space, and identify vectors
 in this space with points in $n$-dimensional Euclidean space.  That is,
@@ -82,9 +82,14 @@ $B(e_i,e_j)=C_{ij}$.
 In turn, we see that the symmetric billinear form $B$ is determined entirely by how it
 maps a basis of $\V^{n+1}$.
 
-To find the quadratic form $q$ in geometric algebra, it is clear now that one approach
-is to go about looking for the symmetric bilinear form $B$.  Two instances of this form
-are found and detailed in the following two sections.
+While the quadratic function $q$ in equation \eqref{equ_quadratic_form} is useful as is, it is
+worth abandoning the direct use of this function in favor of finding a way to implement it in
+a geometric algebra, because
+such an implementation, depending on how it's done, may allow us to exploit certain
+properties and theorems of that algebra.
+This has already been accomplished with matrix algebra.  See, for example, \cite{}.  The approach taken
+in this paper to finding a useful instance of the quadric form in a geometric algebra will be based on
+a search for the symmetric bilinear form $B$.
 
 \section{The Quadratic Form In $\G(\V^{n+1}\oplus\Vb^{n+1})$}
 
@@ -100,35 +105,33 @@ where the rotor $R$ is given by
 \begin{equation}
 R = \prod_{i=0}^n(1-e_i\overline{e}_i).
 \end{equation}
-Having defined $\G(\W)$, we will now introduce the function $S:\V^{n+1}\to\G(\W)$, given by
+Havine done this, for any pair of vectors $x,y\in\V^{n+1}$, we can now find
+the symmetric bilinear form $B$ in $\G(\W)$ as
+\begin{equation}
+B(x,y) = x\overline{y}\cdot\sum_{i=0}^n\sum_{j=0}^n B(e_i,e_j)e_i\overline{e}_j.
+\end{equation}
+Then, defining the function $S:\V^{n+1}\to\G(\W)$ as
 \begin{equation}
 S(p) = p\overline{p},
 \end{equation}
-and then see that for all vectors $p\in\V^{n+1}$, the symmetric bilinear
-form $B$ occurs in $\G(\W)$ as
-\begin{equation}\label{equ_quadric_transformable}
-B(p,p) = -S(p)\cdot\sum_{i=0}^n\sum_{j=0}^n B(e_i,e_j)e_i\overline{e}_j,
-\end{equation}
-showing that the bivectors $Q\in\G(\W)$ are representative of $n$-dimensional
-quadric surfaces as the set of all vectors $v\in\V^n$ such that $q(v)=0$, where
+we may, for any bivector $Q\in\G(\W)$, write the quadratic form as
 \begin{equation}\label{equ_quadric_form_in_ga}
-q(v)=S(e_0+v)\cdot Q.
+q(v) = S(e_0+v)\cdot Q,
 \end{equation}
+showing that such bivectors $Q$ are representative of $n$-dimensional
+quadric surfaces as the set of all vectors $v\in\V^n$ such that $S(e_0+v)\cdot Q=0$.
+
 This approach is especially advantageous in the realization that for
 any versor $V\in\G(\V^{n+1})$, we have
 \begin{equation}
 S(V^{-1}pV)\cdot Q=S(p)\cdot V\overline{V}Q(V\overline{V})^{-1}
-\end{equation}
-by the fact that $S$ has the property
-\begin{equation}
-S(V^{-1}pV)=(V\overline{V})^{-1}S(p)V\overline{V},
 \end{equation}
 which shows that if we understand how $V$ transforms homogeneous
 points $p\in\V^{n+1}$ as $V^{-1}pV$, then we also understand
 how $V$ transforms quadric surfaces $Q\in\G(\W)$ as $(V\overline{V})Q(V\overline{V})^{-1}$.
 In a variation of this approach that uses the Minkowski geometric algebra $\G(\V^{n+1,1}\oplus\V^{n+1,1})$,
 the versors of the conformal model of geometric algebra may be used to transform quadric surfaces.
-Details of this can be found in \cite{}.
+See \cite{}.
 
 A down-side to this approach, however, is in the fact that we're not using blades
 to represent quadric surfaces in the same way that blades are representive of geometries
@@ -149,20 +152,20 @@ vector space $\V^{(n+1)^2}$.
 We will, however, continue to let $\V^n$ be a proper vector sub-space of $\V^{n+1}$.
 
 Letting $\{e_{ij}\}$ be a set
-of orthonormal basis vectors spanning $\V^{(n+1)^2}$, we reintroduce the
+of orthonormal basis vectors spanning $\V^{(n+1)^2}$, we will now reintroduce the
 function $S:\V^{n+1}\to\V^{(n+1)^2}$ as
 \begin{equation}
 S(p) = p\otimes p,
 \end{equation}
-where $\otimes:\V^{n+1}\times\V^{n+1}\to\V^{(n+1)^2}$ is a commutative,
-bilinear and binary operator, defined as
+where $\otimes:\V^{n+1}\times\V^{n+1}\to\V^{(n+1)^2}$ is a non-commutative
+bilinear operator, defined as
 \begin{equation}
 x\otimes y = \sum_{i=0}^n\sum_{j=0}^n(x\cdot e_i)(y\cdot e_j)e_{ij},
 \end{equation}
-and then find that for all vectors $p\in\V^{n+1}$, the symmetric billinear form
-$B$ in $\G(\V^{(n+1)^2})$ is found as
-\begin{equation}\label{equ_quadric_intersectable}
-B(p,p) = -S(p)\cdot\sum_{i=1}^n\sum_{j=1}^n B(e_i,e_j)e_{ij},
+and then find that for all pairs of vectors $x,y\in\V^{n+1}$, the symmetric
+bilinear form $B$ in $\G(\V^{(n+1)^2})$ is given by
+\begin{equation}
+B(x,y) = -(x\otimes y)\cdot\sum_{i=1}^n\sum_{j=1}^n B(e_i,e_j)e_{ij},
 \end{equation}
 showing that the vectors $Q\in\G(\V^{(n+1)^2})$ are representative
 of $n$-dimensional quadric surfaces as the set of all vectors $v\in\V^n$
@@ -176,7 +179,7 @@ let $Q=Q_1\wedge\dots\wedge Q_k$, and realize that
 0 = S(p)\cdot\bigwedge_{i=1}^k Q_i = \sum_{i=1}^k (S(p)\cdot Q_i)\bigwedge_{j=1,j\neq i}^k Q_j
 \end{equation}
 if and only if for all integers $j\in[1,k]$, we have $S(p)\cdot Q_j=0$.  In other words,
-$Q$ represents the affine variety generated by the set of all quadradic polynomials
+$Q$ represents the affine variety generated by the set of all quadratic polynomials
 determined by each $Q_j$.
 
 We will refer to $Q$ as a dual quadric if we are interpreting it as being representative
@@ -240,7 +243,8 @@ be a versor, and notice that
 which shows that the question of how any versor $V$ acts on any quadric $Q$ reduces
 to the question of how $V$ acts on $S(p)$.  This also reflects the importance of our
 choice in defining $S(p)$ and in choosing the signature of our geometric algebra.
-In any case, with $S(p)$ defined the way it is, we see that for a vector $v\in\V^{(n+1)^2}$,
+In any case, subject to the signature we have chosen for $\G(\V^{(n+1)^2})$,
+and with $S(p)$ defined the way it is, we see that for a vector $v\in\V^{(n+1)^2}$,
 we have
 \begin{equation}
 v^{-1}S(p)v = \sum_{i=1}^n\sum_{j=1}^n(p\cdot e_i)(p\cdot e_j)v^{-1}e_{ij}v.
@@ -272,7 +276,7 @@ of such an experiment.
 From what we have thus far gathered, an $(n+1-k)$-dimensional quadric surface
 would be fit to $(n+1)^2-k$ points if it were at all possible to find such a set
 of points generating a linearly independent set.  Possible or not, it is easy to show that this
-is certainly not the least upper bound on the number of points needed to determine
+is certainly not the least upper bound on the minimum number of points needed to determine
 such a surface.  To see why, define $S_{\leq}:\V^n\to\V^m$ as
 \begin{equation}
 S_{\leq}(p) = \sum_{i\leq j}(S(p)\cdot e_{ij})e_{ij},
@@ -387,6 +391,8 @@ better model in existence for quadric surfaces that doesn't use geometric algebr
 % Study conjugate points WRT a quadric?
 % ruled surfaces, lines as generators of quadrics?
 % thm: ruled surface in every pencil?
+
+% completing the square?
 
 \bibliographystyle{amsplain}
 \bibliography{Parkin_TheQuadraticFormInGA}
