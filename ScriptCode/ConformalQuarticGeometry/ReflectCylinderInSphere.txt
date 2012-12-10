@@ -1,6 +1,6 @@
 /*
  * Calculate the surface that is the
- * reflection of a cylinder in a sphere.
+ * inversion of a cylinder in a sphere.
  */
 do
 (
@@ -21,10 +21,10 @@ do
 	formula_constraint( "sphere = no + sph_c + 0.5*(sph_c.sph_c - sph_r*sph_r)*ni" ),
 	geo_color(sphere,1,0,0,0.2),
 	
-	/* Make the reflection of the cylinder in the sphere. */
+	/* Make the inversion of the cylinder in the sphere. */
 	bind_virtual(V),
 	formula_constraint( "V = sphere*bar(sphere)" ),
-	bind_conformal_quartic(reflection),
-	formula_constraint( "reflection = V*cylinder*V~" ),
-	geo_color(reflection,0,0,1),
+	bind_conformal_quartic(inversion),
+	formula_constraint( "inversion = V*cylinder*V~" ),
+	geo_color(inversion,0,0,1),
 )
