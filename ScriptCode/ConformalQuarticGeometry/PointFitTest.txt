@@ -1,0 +1,103 @@
+/*
+ * Can we fit a conformal quartic to a set of points?
+ */
+do
+(
+	/*
+	 * Make the vertices of the dodecahedron.
+	 */
+	 
+	gr = (1 + sqrt(5))/sqrt(2),
+	
+	p1 =  e1 +  e2 +  e3,
+	p2 =  e1 +  e2 + -e3,
+	p3 =  e1 + -e2 +  e3,
+	p4 =  e1 + -e2 + -e3,
+	p5 = -e1 +  e2 +  e3,
+	p6 = -e1 +  e2 + -e3,
+	p7 = -e1 + -e2 +  e3,
+	p8 = -e1 + -e2 + -e3,
+	
+	p9  =  (1/gr)*e1 +  gr*e2,
+	p10 =  (1/gr)*e1 + -gr*e2,
+	p11 = -(1/gr)*e1 +  gr*e2,
+	p12 = -(1/gr)*e1 + -gr*e2,
+	
+	p13 =  (1/gr)*e2 +  gr*e3,
+	p14 =  (1/gr)*e2 + -gr*e3,
+	p15 = -(1/gr)*e2 +  gr*e3,
+	p16 = -(1/gr)*e2 + -gr*e3,
+
+	p17 =  (1/gr)*e3 +  gr*e1,
+	p18 =  (1/gr)*e3 + -gr*e1,
+	p19 = -(1/gr)*e3 +  gr*e1,
+	p20 = -(1/gr)*e3 + -gr*e1,
+	
+	/*
+	 * Find the direct surface fitting 14 of the 20 points.
+	 */
+	
+	surf_point1  = as_vector( reduce_bivector( point( p1  )^bar( point( p1  ) ) ) ),
+	surf_point2  = as_vector( reduce_bivector( point( p2  )^bar( point( p2  ) ) ) ),
+	surf_point3  = as_vector( reduce_bivector( point( p3  )^bar( point( p3  ) ) ) ),
+	surf_point4  = as_vector( reduce_bivector( point( p4  )^bar( point( p4  ) ) ) ),
+	surf_point5  = as_vector( reduce_bivector( point( p5  )^bar( point( p5  ) ) ) ),
+	surf_point6  = as_vector( reduce_bivector( point( p6  )^bar( point( p6  ) ) ) ),
+	surf_point7  = as_vector( reduce_bivector( point( p7  )^bar( point( p7  ) ) ) ),
+	surf_point8  = as_vector( reduce_bivector( point( p8  )^bar( point( p8  ) ) ) ),
+	surf_point9  = as_vector( reduce_bivector( point( p9  )^bar( point( p9  ) ) ) ),
+	surf_point10 = as_vector( reduce_bivector( point( p10 )^bar( point( p10 ) ) ) ),
+	surf_point11 = as_vector( reduce_bivector( point( p11 )^bar( point( p11 ) ) ) ),
+	surf_point12 = as_vector( reduce_bivector( point( p12 )^bar( point( p12 ) ) ) ),
+	surf_point13 = as_vector( reduce_bivector( point( p13 )^bar( point( p13 ) ) ) ),
+	surf_point14 = as_vector( reduce_bivector( point( p14 )^bar( point( p14 ) ) ) ),
+	
+	direct_surf =
+		surf_point1  ^
+		surf_point2  ^
+		surf_point3  ^
+		surf_point4  ^
+		surf_point5  ^
+		surf_point6  ^
+		surf_point7  ^
+		surf_point8  ^
+		surf_point9  ^
+		surf_point10 ^
+		surf_point11 ^
+		surf_point12 ^
+		surf_point13 ^
+		surf_point14,
+		
+	/*
+	 * Find the dual surface fitting 14 of the 20 points.
+	 */
+	 
+	rI =
+		as_vector( no^nob ) ^
+		as_vector( no^e1b ) ^
+		as_vector( no^e2b ) ^
+		as_vector( no^e3b ) ^
+		as_vector( no^nib ) ^
+		
+		as_vector( e1^e1b ) ^
+		as_vector( e1^e2b ) ^
+		as_vector( e1^e3b ) ^
+		as_vector( e1^nib ) ^
+		
+		as_vector( e2^e2b ) ^
+		as_vector( e2^e3b ) ^
+		as_vector( e2^nib ) ^
+		
+		as_vector( e3^e3b ) ^
+		as_vector( e3^nib ) ^
+		
+		as_vector( ni^nib ),
+		
+	dual_surf = direct_surf * rI,
+	
+	/* Lastly, find the bivector for the fitted surface. */
+	
+	fitted_surf = as_bivector( dual_surf ),
+	
+	bind_conformal_quartic( fitted_surf ),
+)
