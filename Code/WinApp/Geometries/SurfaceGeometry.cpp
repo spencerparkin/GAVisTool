@@ -17,7 +17,7 @@ IMPLEMENT_CALCLIB_CLASS1( SurfaceGeometry, GAVisToolGeometry );
 //=========================================================================================
 SurfaceGeometry::SurfaceGeometry( BindType bindType, VectorMath::Surface* surface ) : GAVisToolGeometry( bindType )
 {
-	renderAs = RENDER_AS_TRIANGLE_MESH;
+	renderAs = RENDER_AS_SET_OF_TRACES;
 	surfaceGeometryValid = false;
 	this->surface = surface;
 }
@@ -75,8 +75,7 @@ void SurfaceGeometry::RegenerateSurfaceGeometry( void )
 	}
 	else if( renderAs == RENDER_AS_TRIANGLE_MESH )
 	{
-		VectorMath::SurfaceMeshGenerator surfaceMeshGenerator;
-		surfaceMeshGenerator.Generate( surfaceMesh, *surface );
+		//...
 	}
 }
 
@@ -108,12 +107,7 @@ void SurfaceGeometry::RegenerateSurfaceGeometry( void )
 	}
 	else if( renderAs == RENDER_AS_TRIANGLE_MESH )
 	{
-		const VectorMath::SurfaceMesh::Triangle* triangle = ( const VectorMath::SurfaceMesh::Triangle* )surfaceMesh.TriangleList().LeftMost();
-		while( triangle )
-		{
-			render.DrawTriangle( triangle->vertices );
-			triangle = ( const VectorMath::SurfaceMesh::Triangle* )triangle->Right();
-		}
+		//...
 	}
 }
 
