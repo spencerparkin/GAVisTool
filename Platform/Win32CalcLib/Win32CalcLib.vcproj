@@ -237,6 +237,14 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\Code\CalcLib\AlgebraLibraries\GeometricAlgebra\CompositeVector.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\Code\CalcLib\AlgebraLibraries\GeometricAlgebra\CompositeVector.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\Code\CalcLib\AlgebraLibraries\GeometricAlgebra\GeometricAlgebra.h"
 						>
 					</File>

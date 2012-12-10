@@ -22,6 +22,7 @@ public:
 	virtual double InnerProduct( const Vector& right ) const = 0;
 	virtual const char* Name( void ) const = 0;
 	virtual const char* LatexName( void ) const = 0;
+	virtual bool IsComposite( void ) const;
 
 	virtual Utilities::List::SortComparison SortCompare( const Item* compareWithItem ) const override;
 };

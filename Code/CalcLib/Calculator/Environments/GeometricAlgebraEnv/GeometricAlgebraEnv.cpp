@@ -198,6 +198,84 @@ GeometricAlgebraEnvironment::GeometricAlgebraEnvironment( void )
 		vectorProduct.InsertRightOf( vectorProduct.RightMost(), new GeometricAlgebra::Vector_ni_bar() );
 		blade->AssignBlade( vectorProduct, 1.0 );
 	}
+	// Composites with e0...
+	else if( 0 == strcmp( variableName, "e0_e0b" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_e0(), new GeometricAlgebra::Vector_e0_bar() );
+	else if( 0 == strcmp( variableName, "e0_e1b" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_e0(), new GeometricAlgebra::Vector_e1_bar() );
+	else if( 0 == strcmp( variableName, "e0_e2b" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_e0(), new GeometricAlgebra::Vector_e2_bar() );
+	else if( 0 == strcmp( variableName, "e0_e3b" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_e0(), new GeometricAlgebra::Vector_e3_bar() );
+	else if( 0 == strcmp( variableName, "e0_nob" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_e0(), new GeometricAlgebra::Vector_no_bar() );
+	else if( 0 == strcmp( variableName, "e0_nib" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_e0(), new GeometricAlgebra::Vector_ni_bar() );
+	// Composites with e1...
+	else if( 0 == strcmp( variableName, "e1_e0b" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_e1(), new GeometricAlgebra::Vector_e0_bar() );
+	else if( 0 == strcmp( variableName, "e1_e1b" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_e1(), new GeometricAlgebra::Vector_e1_bar() );
+	else if( 0 == strcmp( variableName, "e1_e2b" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_e1(), new GeometricAlgebra::Vector_e2_bar() );
+	else if( 0 == strcmp( variableName, "e1_e3b" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_e1(), new GeometricAlgebra::Vector_e3_bar() );
+	else if( 0 == strcmp( variableName, "e1_nob" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_e1(), new GeometricAlgebra::Vector_no_bar() );
+	else if( 0 == strcmp( variableName, "e1_nib" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_e1(), new GeometricAlgebra::Vector_ni_bar() );
+	// Composites with e2...
+	else if( 0 == strcmp( variableName, "e2_e0b" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_e2(), new GeometricAlgebra::Vector_e0_bar() );
+	else if( 0 == strcmp( variableName, "e2_e1b" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_e2(), new GeometricAlgebra::Vector_e1_bar() );
+	else if( 0 == strcmp( variableName, "e2_e2b" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_e2(), new GeometricAlgebra::Vector_e2_bar() );
+	else if( 0 == strcmp( variableName, "e2_e3b" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_e2(), new GeometricAlgebra::Vector_e3_bar() );
+	else if( 0 == strcmp( variableName, "e2_nob" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_e2(), new GeometricAlgebra::Vector_no_bar() );
+	else if( 0 == strcmp( variableName, "e2_nib" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_e2(), new GeometricAlgebra::Vector_ni_bar() );
+	// Composites with e3...
+	else if( 0 == strcmp( variableName, "e3_e0b" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_e3(), new GeometricAlgebra::Vector_e0_bar() );
+	else if( 0 == strcmp( variableName, "e3_e1b" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_e3(), new GeometricAlgebra::Vector_e1_bar() );
+	else if( 0 == strcmp( variableName, "e3_e2b" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_e3(), new GeometricAlgebra::Vector_e2_bar() );
+	else if( 0 == strcmp( variableName, "e3_e3b" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_e3(), new GeometricAlgebra::Vector_e3_bar() );
+	else if( 0 == strcmp( variableName, "e3_nob" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_e3(), new GeometricAlgebra::Vector_no_bar() );
+	else if( 0 == strcmp( variableName, "e3_nib" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_e3(), new GeometricAlgebra::Vector_ni_bar() );
+	// Composites with no...
+	else if( 0 == strcmp( variableName, "no_e0b" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_no(), new GeometricAlgebra::Vector_e0_bar() );
+	else if( 0 == strcmp( variableName, "no_e1b" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_no(), new GeometricAlgebra::Vector_e1_bar() );
+	else if( 0 == strcmp( variableName, "no_e2b" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_no(), new GeometricAlgebra::Vector_e2_bar() );
+	else if( 0 == strcmp( variableName, "no_e3b" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_no(), new GeometricAlgebra::Vector_e3_bar() );
+	else if( 0 == strcmp( variableName, "no_nob" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_no(), new GeometricAlgebra::Vector_no_bar() );
+	else if( 0 == strcmp( variableName, "no_nib" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_no(), new GeometricAlgebra::Vector_ni_bar() );
+	// Composites with ni...
+	else if( 0 == strcmp( variableName, "ni_e0b" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_ni(), new GeometricAlgebra::Vector_e0_bar() );
+	else if( 0 == strcmp( variableName, "ni_e1b" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_ni(), new GeometricAlgebra::Vector_e1_bar() );
+	else if( 0 == strcmp( variableName, "ni_e2b" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_ni(), new GeometricAlgebra::Vector_e2_bar() );
+	else if( 0 == strcmp( variableName, "ni_e3b" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_ni(), new GeometricAlgebra::Vector_e3_bar() );
+	else if( 0 == strcmp( variableName, "ni_nob" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_ni(), new GeometricAlgebra::Vector_no_bar() );
+	else if( 0 == strcmp( variableName, "ni_nib" ) )
+		vector = new GeometricAlgebra::CompositeVector( new GeometricAlgebra::Vector_ni(), new GeometricAlgebra::Vector_ni_bar() );
 
 	if( vector )
 		multivectorNumber = new MultivectorNumber( *vector );

@@ -41,6 +41,8 @@ namespace GeometricAlgebra
 	class Vector_e3_bar;
 	class Vector_no_bar;
 	class Vector_ni_bar;
+
+	class CompositeVector;
 }
 
 //=========================================================================================
@@ -49,5 +51,6 @@ namespace GeometricAlgebra
 #include "PseudoVersor.h"
 #include "SumOfBlades.h"
 #include "SumOfPseudoVersors.h"
+#include "CompositeVector.h"
 
 // GeometricAlgebra.h
