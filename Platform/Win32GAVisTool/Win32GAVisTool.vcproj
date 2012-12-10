@@ -364,6 +364,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\Code\WinApp\Functions\ReduceBivectorFunction.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Code\WinApp\Functions\ReduceBivectorFunction.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\Code\WinApp\Functions\WipeEnvFunction.cpp"
 					>
 				</File>
