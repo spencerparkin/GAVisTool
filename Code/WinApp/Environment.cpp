@@ -17,6 +17,7 @@
 #include "Functions/FormulatedConstraintFunction.h"
 #include "Functions/ReduceBivectorFunction.h"
 #include "Functions/VectorToFromBivectorFunction.h"
+#include "Functions/PointFunction.h"
 #include "Application.h"
 #include "Geometries/RoundGeometry.h"
 #include "Geometries/FlatGeometry.h"
@@ -115,6 +116,8 @@ GAVisToolEnvironment::GAVisToolEnvironment( void )
 		return new GAVisToolVectorToFromBivectorFunctionEvaluator( GAVisToolVectorToFromBivectorFunctionEvaluator::CONVERT_VECTOR_FROM_BIVECTOR );
 	else if( 0 == strcmp( functionName, "as_bivector" ) )
 		return new GAVisToolVectorToFromBivectorFunctionEvaluator( GAVisToolVectorToFromBivectorFunctionEvaluator::CONVERT_VECTOR_TO_BIVECTOR );
+	else if( 0 == strcmp( functionName, "point" ) )
+		return new GAVisToolPointFunctionEvaluator();
 
 	return GeometricAlgebraEnvironment::CreateFunction( functionName );
 }

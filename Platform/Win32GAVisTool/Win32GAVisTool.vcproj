@@ -364,6 +364,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\Code\WinApp\Functions\PointFunction.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Code\WinApp\Functions\PointFunction.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\Code\WinApp\Functions\ReduceBivectorFunction.cpp"
 					>
 				</File>
