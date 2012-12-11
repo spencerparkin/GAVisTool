@@ -4,53 +4,77 @@
 do
 (
 	/*
+	 * Can we find 14 points that generate a linearly independent set?
+	 */
+
+	/*
 	 * Make the vertices of the dodecahedron.
 	 */
 	 
-	gr = (1 + sqrt(5))/sqrt(2),
+	gr = (1 + sqrt(5))/2,
+	scale = 3,
 	
-	p1 =  e1 +  e2 +  e3,
-	p2 =  e1 +  e2 + -e3,
-	p3 =  e1 + -e2 +  e3,
-	p4 =  e1 + -e2 + -e3,
-	p5 = -e1 +  e2 +  e3,
-	p6 = -e1 +  e2 + -e3,
-	p7 = -e1 + -e2 +  e3,
-	p8 = -e1 + -e2 + -e3,
+	p1 = (  e1 +  e2 +  e3 ) * scale,
+	p2 = (  e1 +  e2 + -e3 ) * scale,
+	p3 = (  e1 + -e2 +  e3 ) * scale,
+	p4 = (  e1 + -e2 + -e3 ) * scale,
+	p5 = ( -e1 +  e2 +  e3 ) * scale,
+	p6 = ( -e1 +  e2 + -e3 ) * scale,
+	p7 = ( -e1 + -e2 +  e3 ) * scale,
+	p8 = ( -e1 + -e2 + -e3 ) * scale,
 	
-	p9  =  (1/gr)*e1 +  gr*e2,
-	p10 =  (1/gr)*e1 + -gr*e2,
-	p11 = -(1/gr)*e1 +  gr*e2,
-	p12 = -(1/gr)*e1 + -gr*e2,
+	p9  = (  (1/gr)*e1 +  gr*e2 ) * scale,
+	p10 = (  (1/gr)*e1 + -gr*e2 ) * scale,
+	p11 = ( -(1/gr)*e1 +  gr*e2 ) * scale,
+	p12 = ( -(1/gr)*e1 + -gr*e2 ) * scale,
 	
-	p13 =  (1/gr)*e2 +  gr*e3,
-	p14 =  (1/gr)*e2 + -gr*e3,
-	p15 = -(1/gr)*e2 +  gr*e3,
-	p16 = -(1/gr)*e2 + -gr*e3,
+	p13 = (  (1/gr)*e2 +  gr*e3 ) * scale,
+	p14 = (  (1/gr)*e2 + -gr*e3 ) * scale,
+	p15 = ( -(1/gr)*e2 +  gr*e3 ) * scale,
+	p16 = ( -(1/gr)*e2 + -gr*e3 ) * scale,
 
-	p17 =  (1/gr)*e3 +  gr*e1,
-	p18 =  (1/gr)*e3 + -gr*e1,
-	p19 = -(1/gr)*e3 +  gr*e1,
-	p20 = -(1/gr)*e3 + -gr*e1,
+	p17 = (  (1/gr)*e3 +  gr*e1 ) * scale,
+	p18 = (  (1/gr)*e3 + -gr*e1 ) * scale,
+	p19 = ( -(1/gr)*e3 +  gr*e1 ) * scale,
+	p20 = ( -(1/gr)*e3 + -gr*e1 ) * scale,
+	
+	/*
+	 * Make points out of the first 14 of them.
+	 */
+	
+	cp1  = point( p1  ), bind_dual_point( cp1  ),
+	cp2  = point( p2  ), bind_dual_point( cp2  ),
+	cp3  = point( p3  ), bind_dual_point( cp3  ),
+	cp4  = point( p4  ), bind_dual_point( cp4  ),
+	cp5  = point( p5  ), bind_dual_point( cp5  ),
+	cp6  = point( p6  ), bind_dual_point( cp6  ),
+	cp7  = point( p7  ), bind_dual_point( cp7  ),
+	cp8  = point( p8  ), bind_dual_point( cp8  ),
+	cp9  = point( p9  ), bind_dual_point( cp9  ),
+	cp10 = point( p10 ), bind_dual_point( cp10 ),
+	cp11 = point( p11 ), bind_dual_point( cp11 ),
+	cp12 = point( p12 ), bind_dual_point( cp12 ),
+	cp13 = point( p13 ), bind_dual_point( cp13 ),
+	cp14 = point( p14 ), bind_dual_point( cp14 ),
 	
 	/*
 	 * Find the direct surface fitting 14 of the 20 points.
 	 */
 	
-	surf_point1  = as_vector( reduce_bivector( point( p1  )^bar( point( p1  ) ) ) ),
-	surf_point2  = as_vector( reduce_bivector( point( p2  )^bar( point( p2  ) ) ) ),
-	surf_point3  = as_vector( reduce_bivector( point( p3  )^bar( point( p3  ) ) ) ),
-	surf_point4  = as_vector( reduce_bivector( point( p4  )^bar( point( p4  ) ) ) ),
-	surf_point5  = as_vector( reduce_bivector( point( p5  )^bar( point( p5  ) ) ) ),
-	surf_point6  = as_vector( reduce_bivector( point( p6  )^bar( point( p6  ) ) ) ),
-	surf_point7  = as_vector( reduce_bivector( point( p7  )^bar( point( p7  ) ) ) ),
-	surf_point8  = as_vector( reduce_bivector( point( p8  )^bar( point( p8  ) ) ) ),
-	surf_point9  = as_vector( reduce_bivector( point( p9  )^bar( point( p9  ) ) ) ),
-	surf_point10 = as_vector( reduce_bivector( point( p10 )^bar( point( p10 ) ) ) ),
-	surf_point11 = as_vector( reduce_bivector( point( p11 )^bar( point( p11 ) ) ) ),
-	surf_point12 = as_vector( reduce_bivector( point( p12 )^bar( point( p12 ) ) ) ),
-	surf_point13 = as_vector( reduce_bivector( point( p13 )^bar( point( p13 ) ) ) ),
-	surf_point14 = as_vector( reduce_bivector( point( p14 )^bar( point( p14 ) ) ) ),
+	surf_point1  = as_vector( reduce_bivector( cp1  ^ bar( cp1  ) ) ),
+	surf_point2  = as_vector( reduce_bivector( cp2  ^ bar( cp2  ) ) ),
+	surf_point3  = as_vector( reduce_bivector( cp3  ^ bar( cp3  ) ) ),
+	surf_point4  = as_vector( reduce_bivector( cp4  ^ bar( cp4  ) ) ),
+	surf_point5  = as_vector( reduce_bivector( cp5  ^ bar( cp5  ) ) ),
+	surf_point6  = as_vector( reduce_bivector( cp6  ^ bar( cp6  ) ) ),
+	surf_point7  = as_vector( reduce_bivector( cp7  ^ bar( cp7  ) ) ),
+	surf_point8  = as_vector( reduce_bivector( cp8  ^ bar( cp8  ) ) ),
+	surf_point9  = as_vector( reduce_bivector( cp9  ^ bar( cp9  ) ) ),
+	surf_point10 = as_vector( reduce_bivector( cp10 ^ bar( cp10 ) ) ),
+	surf_point11 = as_vector( reduce_bivector( cp11 ^ bar( cp11 ) ) ),
+	surf_point12 = as_vector( reduce_bivector( cp12 ^ bar( cp12 ) ) ),
+	surf_point13 = as_vector( reduce_bivector( cp13 ^ bar( cp13 ) ) ),
+	surf_point14 = as_vector( reduce_bivector( cp14 ^ bar( cp14 ) ) ),
 	
 	direct_surf =
 		surf_point1  ^
@@ -72,7 +96,7 @@ do
 	 * Find the dual surface fitting 14 of the 20 points.
 	 */
 	 
-	rI =
+	/*rI =
 		as_vector( no^nob ) ^
 		as_vector( no^e1b ) ^
 		as_vector( no^e2b ) ^
@@ -93,11 +117,11 @@ do
 		
 		as_vector( ni^nib ),
 		
-	dual_surf = direct_surf * rI,
+	dual_surf = direct_surf * rI,*/
 	
 	/* Lastly, find the bivector for the fitted surface. */
 	
-	fitted_surf = as_bivector( dual_surf ),
+	/*fitted_surf = as_bivector( dual_surf ),
 	
-	bind_conformal_quartic( fitted_surf ),
+	bind_conformal_quartic( fitted_surf ),*/
 )
