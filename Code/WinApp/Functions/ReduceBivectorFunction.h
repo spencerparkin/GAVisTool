@@ -1,4 +1,4 @@
-// ReduceBivectorFunc.h
+// ReduceBivectorFunction.h
 
 /*
  * Copyright (C) 2012 Spencer T. Parkin
@@ -21,8 +21,8 @@ public:
 	GAVisToolReduceBivectorFunctionEvaluator( void );
 	virtual ~GAVisToolReduceBivectorFunctionEvaluator( void );
 	virtual bool EvaluateResult( CalcLib::Number& result, CalcLib::Environment& environment );
-
+private:
 	CalcLib::Evaluator* reductionEvaluator;
 };
 
-// ReduceBivectorFunc.h
+// ReduceBivectorFunction.h
