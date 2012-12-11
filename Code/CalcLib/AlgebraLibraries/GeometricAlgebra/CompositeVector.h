@@ -32,7 +32,7 @@ private:
 
 	Vector* left, *right;
 	char name[32];
-	char latexName[32];
+	char latexName[128];
 };
 
 // CompositeVector.h

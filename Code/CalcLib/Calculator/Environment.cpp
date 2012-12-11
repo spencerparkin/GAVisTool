@@ -45,7 +45,7 @@ bool Environment::Print( const char* formatString, ... )
 	if( !printBuffer )
 		return false;
 
-	char printMessage[ 1024 ];
+	char printMessage[ 5*1024 ];
 
 	va_list args;
 	va_start( args, formatString );

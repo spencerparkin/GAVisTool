@@ -222,7 +222,7 @@ bool GAVisToolApp::ProcessConsoleInput( const wxString& consoleInput, wxString& 
 
 	// Capture environment output.
 	CalcLib::Environment* environment = calculator->GetEnvironment();
-	char envPrintBuffer[ 1024 ];
+	char envPrintBuffer[ PRINT_BUFFER_SIZE_LARGE ];
 	environment->PrintBuffer( envPrintBuffer, sizeof( envPrintBuffer ) );
 	
 	// Generate the math output as a function of the math input.
