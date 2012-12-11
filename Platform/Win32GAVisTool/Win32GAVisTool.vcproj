@@ -780,11 +780,11 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\ScriptCode\ConformalQuarticGeometry\PointFitTest.txt"
+					RelativePath="..\..\ScriptCode\ConformalQuarticGeometry\InvertCylinderInSphere.txt"
 					>
 				</File>
 				<File
-					RelativePath="..\..\ScriptCode\ConformalQuarticGeometry\ReflectCylinderInSphere.txt"
+					RelativePath="..\..\ScriptCode\ConformalQuarticGeometry\PointFitTest.txt"
 					>
 				</File>
 				<File
