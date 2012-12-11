@@ -16,6 +16,7 @@
 #include "Functions/WipeEnvFunction.h"
 #include "Functions/FormulatedConstraintFunction.h"
 #include "Functions/ReduceBivectorFunction.h"
+#include "Functions/VectorToFromBivectorFunction.h"
 #include "Application.h"
 #include "Geometries/RoundGeometry.h"
 #include "Geometries/FlatGeometry.h"
@@ -110,6 +111,10 @@ GAVisToolEnvironment::GAVisToolEnvironment( void )
 		return new GAVisToolBindFunctionEvaluator( &ConformalQuarticGeometry::Create, GAVisToolBindTarget::DOESNT_MATTER );
 	else if( 0 == strcmp( functionName, "reduce_bivector" ) )
 		return new GAVisToolReduceBivectorFunctionEvaluator();
+	else if( 0 == strcmp( functionName, "as_vector" ) )
+		return new GAVisToolVectorToFromBivectorFunctionEvaluator( GAVisToolVectorToFromBivectorFunctionEvaluator::CONVERT_VECTOR_FROM_BIVECTOR );
+	else if( 0 == strcmp( functionName, "as_bivector" ) )
+		return new GAVisToolVectorToFromBivectorFunctionEvaluator( GAVisToolVectorToFromBivectorFunctionEvaluator::CONVERT_VECTOR_TO_BIVECTOR );
 
 	return GeometricAlgebraEnvironment::CreateFunction( functionName );
 }
