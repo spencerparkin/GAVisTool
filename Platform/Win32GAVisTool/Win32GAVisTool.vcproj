@@ -776,6 +776,10 @@
 				Name="ConformalQuarticGeometry"
 				>
 				<File
+					RelativePath="..\..\ScriptCode\ConformalQuarticGeometry\FitToPointAndIntersection.txt"
+					>
+				</File>
+				<File
 					RelativePath="..\..\ScriptCode\ConformalQuarticGeometry\GenerateConformalQuarticPolynomial.txt"
 					>
 				</File>

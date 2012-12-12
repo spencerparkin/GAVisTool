@@ -1,0 +1,36 @@
+/*
+ * Can we fit a surface to a point and intersection of two quadrics?
+ */
+do
+(
+	/* Make a sphere. */
+	c = 0,
+	r = 3,
+	sphere = Omega + 2*c^nib + (c.c - r*r)*ni^nib,
+	bind_quadric(sphere),
+	geo_color(sphere,1,0,0),
+	
+	/* Make the cylinder. */
+	v = e2,
+	c = 0,		/* This must be kept orthogonal to v. */
+	r = 2,
+	cylinder = Omega - v^bar(v) + 2*c*nib + (c.c - r*r)*ni^nib,
+	bind_quadric(cylinder),
+	geo_color(cylinder,0,1,0),
+	
+	/* Make a point. */
+	c = -4*e1 + 4*e2,
+	point = no + c + 0.5*(c.c)*ni,
+	bind_dual_point(point),
+	dual_point = as_vector(point^bar(point)),
+	
+	/*
+	 * Fit a surface to the point and the intersection
+	 * of the sphere and the cylinder.
+	 */
+	dual_intersection = as_vector(sphere) ^ as_vector(cylinder),
+	dual_surface = dual_point . dual_intersection,
+	surface = as_bivector(dual_surface),
+	bind_quadric(surface),
+	geo_color(surface,0,0,1),
+)
