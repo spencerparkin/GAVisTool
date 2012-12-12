@@ -184,7 +184,7 @@ which we may recognize as the general equation of an $n$-dimensional quadric sur
 In practice, a computer program might take such a bivector of the form \eqref{equ_quadric_form}
 and extract from it the coefficients of the quadric polynomial \eqref{equ_quadric_polynomial_equation} it
 represents.  It could then render the surface using traditional methods, such as those used
-to render the traced surfaces in Figure~\ref{fig_reflect_cylinder_in_sphere} far below.
+to render the traced surfaces in Figure~\ref{fig_invert_cylinder_in_sphere} far below.
 
 Of course, using geometric algebra on paper, it is undesirable and unnecessary to think of
 quadrics in terms of polynomial equations.  A, perhaps, better way to think of quadrics is in terms
@@ -372,7 +372,7 @@ us to use what we already know about quadrics in the new model with its extensio
 Putting theory into practice, the author wrote a piece of computer
 software that implements this conformal-like model for the special class of
 quartic surfaces of equation \eqref{equ_surface_variety}.  Giving the program the following
-script as input, the output of the program is given in Figure~\ref{fig_reflect_cylinder_in_sphere}.
+script as input, the output of the program is given in Figure~\ref{fig_invert_cylinder_in_sphere}.
 The script is easy for anyone to read, even if they are not familiar with its language.  It is given
 here to illustrate how one might use the model with the aide a computer system.
 \begin{samepage}
@@ -410,18 +410,18 @@ do
 }
 \end{samepage}
 \begin{figure}
-\includegraphics[scale=0.4]{ReflectCylinderInSphere}
+\includegraphics[scale=0.4]{InvertCylinderInSphere}
 \caption{The blue inversion of a green cylinder in a red sphere.  Traces in various planes were
 used to render the cylinder and its inversion.}
-\label{fig_reflect_cylinder_in_sphere}
+\label{fig_invert_cylinder_in_sphere}
 \end{figure}
 The functions beginning with the word ``bind'' create and bind an entity to the given
 element of the geometric algebra that is responsible for interpreting that element
 as a surface under Definition~\ref{def_surface} or as a surface under the definition
 given by the conformal model.  The computer program can then
 use traditional methods to render the surface from the extracted polynomial equation.
-For example, the polynomial equation in $x$, $y$ and $z$ for the reflected surface presented
-in Figure~\ref{fig_reflect_cylinder_in_sphere} is given by
+For example, the polynomial equation in $x$, $y$ and $z$ for the inverted surface presented
+in Figure~\ref{fig_invert_cylinder_in_sphere} is given by
 \begin{equation}
 \begin{split}
 0 =\;& 28.8x^{2} + 11.2x^{3} + x^{4} + 11.2xy^{2} + 2x^{2}y^{2} + \\
@@ -514,7 +514,7 @@ The problem of blade factorization was given a great deal of treatment in \cite{
 \section{Fitting Surfaces To Points}
 
 We have already seen that $\G([\B(\W)])$ can be used to represent
-the intersections of surfaces in both direct and dual form, but unlike
+the intersections of surfaces in both direct and dual form, but, unlike
 the conformal model of geometric algebra, it appears that working
 in $\G([\B(\W)])$ is not as practical in the sense that we cannot easily
 find canonical forms for certain types of geometries, much less use
@@ -533,12 +533,13 @@ is a linearly independent set, then the elements $\mathbf{E}\in\G([\B(\W)])$, gi
 \mathbf{E} = \bigwedge_{i=1}^k[P(p_i)\wedge\overline{P}(p_i)],
 \end{equation}
 is directly representative of a surface containing all of these points.  The question
-then remains; under what condition on the set of points in $\{p_i\}_{i=1}^k$
-is the set $\{[P(p_i)\wedge\overline{P}(p_i)]\}_{i=1}^k$ linearly independent,
+then remains: under what condition on the set of points in $\{p_i\}_{i=1}^k$
+is the set $\{[P(p_i)\wedge\overline{P}(p_i)]\}_{i=1}^k$ linearly independent;
 and under these circumstances, what surface do we get with $\mathbf{E}$
-in equation \eqref{equ_point_fit}?  This question is easy to answer in
-the conformal model of geometric algebra, but not so easy here.  No being
-able to find an answer, the author is compelled to leave it as an open question.
+in equation \eqref{equ_point_fit}?  This question, when formulated
+in terms of the conformal model of geometric algebra,  is easy to answer,
+but not so easy to answer here.  Not being
+able to find an answer, the author is compelled to leave it as an open question for the reader.
 
 Another question to consider is that of how many points are needed
 to fit a surface of some dimension.  A $k$-blade $\mathbf{E}\in\G([\B(\W)])$
@@ -553,6 +554,14 @@ to fit the surface.  Seeing that with the more points we have, the less likely
 the set $\{[P(p_i)\wedge\overline{P}(p_i)]\}_{i=1}^k$ is of being linearly independent,
 the reader can now see why
 we have restricted our attention to only the reduced form of surfaces $E\in\G(\W)$.
+
+\begin{figure}
+\includegraphics[scale=0.4]{FitSurfaceToPointAndIntersection}
+\caption{The blue hyperboloid of two sheets was found as the
+surface fitting the red point and the intersection of the red sphere
+with the green cylinder.}
+\label{fig_fit_surf_to_point_and_intersect}
+\end{figure}
 
 \section{Closing Remarks}
 
