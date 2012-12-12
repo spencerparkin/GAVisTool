@@ -28,7 +28,7 @@ namespace Utilities
 #include "ScopeDelete.h"
 
 // TODO: Move these out of the Utilities stuff.
-#define PRINT_BUFFER_SIZE_LARGE		( 1024 * 128 )
-#define PRINT_BUFFER_SIZE_SMALL		( 1024 * 16 )
+#define PRINT_BUFFER_SIZE_LARGE		( 1024 * 16 )
+#define PRINT_BUFFER_SIZE_SMALL		( 1024 * 8 )
 
 // Utilities.h
