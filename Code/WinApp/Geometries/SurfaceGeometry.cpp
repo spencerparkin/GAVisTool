@@ -54,9 +54,9 @@ void SurfaceGeometry::RegenerateSurfaceGeometry( void )
 		// A better center would be that of the surface, if we knew how to calculate that.
 		VectorMath::Zero( traceParameters.center );
 
-		traceParameters.range = 20.0;
-		traceParameters.extent = 10.0;
-		traceParameters.planeCount = 30;
+		traceParameters.range = 15.0;
+		traceParameters.extent = 8.0;
+		traceParameters.planeCount = 14;
 
 		VectorMath::Vector axis[3];
 		int axisCount = 3;
