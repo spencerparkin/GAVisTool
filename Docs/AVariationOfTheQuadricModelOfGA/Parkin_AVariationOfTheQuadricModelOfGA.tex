@@ -58,11 +58,9 @@ A variation of the quadric model set forth in \cite{Parkin12} is
 found in which the rigid body motions are represented by
 versors applicable to any quadric surface.
 Extending this variation of the original model to include
-a specific form of quartic surface, we find that the versors of
-the conformal model are closed under the set of all conformal
-transformations.
+a specific form of quartic surface, we find that these surfaces are
+closed under the application of all conformal transformations.
 Results of a computer program implementing this new model are presented.
-A notion of dual and direct geometry is achieved.
 \end{abstract}
 
 \maketitle
@@ -339,7 +337,7 @@ have done is at least similar to finding an isomorphism between quadratic spaces
 
 \begin{figure}
 \includegraphics[scale=0.4]{InvertCylinderInSphere}
-\caption{The blue inversion of a green cylinder in a red sphere.  Traces in various planes were
+\caption{The inversion of a cylinder in a sphere.  Traces in various planes were
 used to render the cylinder and its inversion.}
 \label{fig_invert_cylinder_in_sphere}
 \end{figure}
@@ -419,6 +417,7 @@ do
     bind_conformal_quartic(inversion),
     geo_color(inversion,0,0,1),
 )
+
 \end{verbatim}
 }
 %\end{samepage}
@@ -495,7 +494,7 @@ not hard to show that if a given blade $\mathbf{B}$ represents a surface
 dually, then its positive or negative dual $\pm\mathbf{BI}$ does so directly,
 and vice versa.\footnote{Note that it is sometimes useful to reinterpret a given
 blade $\mathbf{B}$.  For example, while the dual intersection of two dual
-surfaces may be imaginary, it may become a real surface when interpreted
+surfaces may be imaginary, it may become a different yet real surface when interpreted
 as a direct surface.}
 
 We see now by Definition~\ref{def_dual_surf} that for any surface $E\in\B(\W)$,
@@ -539,7 +538,7 @@ version of this question for the conformal model of geometric algebra is easy
 to answer; but, not being able to find the answer here for our present model,
 the author is compelled to leave it as an open question.
 
-Lastly, given a versor $V\in\G(\W)$, we can see
+Lastly, given a versor $V\in\G(\V)$, we can see
 that for any dual surface $\mathbf{E}\in[\B(\W)]$, if we can find a factorization
 of this $k$-blade, such as $\mathbf{E}=\mathbf{E}_1\wedge\dots\wedge\mathbf{E}_k$,
 then the
