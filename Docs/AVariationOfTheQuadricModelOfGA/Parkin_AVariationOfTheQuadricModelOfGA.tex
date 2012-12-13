@@ -71,7 +71,8 @@ In the original paper \cite{Parkin12}, a model for quadric surfaces was
 presented based upon the ideas of projective geometry.  What was unfortunate
 about this model, however, was its lack of support for the rigid body transformations.  It was
 predicted in the conclusion of that paper that a better model for quadric
-surfaces may exist that is more like the conformal model of geometric algebra.
+surfaces may exist that is more like the conformal model of geometric algebra, here-after
+abbreviated as CGA.
 The present paper details what may be such a model.  We'll find that the rigid
 body transformations can be incorporated into the model by using an alternative
 method of encoding the quadric form.  An extension to this quadric form
@@ -98,7 +99,7 @@ The set of vectors $\{e_i\}_{i=1}^n$ forms an orthonormal set of basis
 vectors for the $n$-dimensional Euclidean vector space $\V^e$, which we'll
 use to represent $n$-dimensional Euclidean space.
 The vectors $\nvao$ and $\nvai$ are the familiar null-vectors representing the
-points at origin and infinity, respectively, taken from the conformal model of geometric algebra.
+points at origin and infinity, respectively, taken from the CGA.
 An inner-product table for these basis vectors is given as follows, where
 $1\leq i<j\leq n$.
 \begin{equation}
@@ -301,7 +302,7 @@ closed in the set of all quadric surfaces.
 We can now apply Theorem~\ref{thm_quadric_transform} to show
 that the rigid body transformations are supported in our new variation
 of the original model.
-Letting $\pi\in\V$ be a dual plane of the conformal model, given by
+Letting $\pi\in\V$ be a dual plane of CGA, given by
 \begin{equation}
 \pi = v+(c\cdot v)\nvai,
 \end{equation}
@@ -323,7 +324,7 @@ any rigid body motion applicable to any quadric surface.  The development
 of the rigid body motions, (combinations of translations and rotations), by planar reflections,
 is well known, and can be found in section 2.7 of \cite{LiRockwood}.
 
-Notice that not all versors of the conformal model are applicable in
+Notice that not all versors of CGA are applicable in
 our variation of the original quadric model.  This is because they fail to
 satisfy the condition for closure that $E'$ be
 of the form \eqref{equ_quadric_form}.
@@ -357,7 +358,7 @@ P(p) = \nvao + p + \frac{1}{2}p^2\nvai.
 \end{equation}
 \end{defn}
 A version of Theorem~\ref{thm_quadric_transform} is then easily found
-such that if $V\in\G(\W)$ is any versor of the conformal model, and if $E$
+such that if $V\in\G(\W)$ is any versor of CGA, and if $E$
 is a surface under Definition~\ref{def_surface}, then the element $E'\in\G(\W)$,
 given by equation \eqref{equ_transformed_surface}, must, by Definition~\ref{def_surface},
  be representative of the desired transformation of $E$ by the versor $V$.  The general
@@ -381,7 +382,7 @@ in the case that $E$ is of the form \eqref{equ_quadric_form}.  This allows
 us to use what we already know about quadrics in the new model with its extension.
 
 Putting theory into practice, the author wrote a piece of computer
-software that implements this conformal-like model for the special class of
+software that implements this CGA-like model for the special class of
 quartic surfaces of equation \eqref{equ_surface_variety}.  Giving the program the following
 script as input, the output of the program is given in Figure~\ref{fig_invert_cylinder_in_sphere}.
 The script is easy for anyone to read, even if they are not familiar with its language.  It is given
@@ -424,7 +425,7 @@ do
 The functions beginning with the word ``bind'' create and bind an entity to the given
 element of the geometric algebra that is responsible for interpreting that element
 as a surface under Definition~\ref{def_surface} or as a surface under the definition
-given by the conformal model.  The computer program can then
+given by CGA.  The computer program can then
 use traditional methods to render the surface from the extracted polynomial equation.
 For example, the polynomial equation in $x$, $y$ and $z$ for the inverted surface presented
 in Figure~\ref{fig_invert_cylinder_in_sphere} is given by
@@ -439,116 +440,68 @@ to finding this polynomial equation.
 Of course, while such equations lend themselves to computer algorithms, they
 are not practical on paper.  This is where the canonical forms of elements might become
 useful; although admittedly, even these forms have proven to be unwieldy
-and impractical for the author, unlike their conterparts in the conformal
-model of geometric algebra.
+and impractical for the author, unlike their counterparts in CGA.
 
-\section{A Companion Algebra $\G([\B(\W)])$ For $\G(\W)$}
+\section{Closing Remarks}
 
-In this section we show that the notions of dual and direct
-geometries found in the conformal model of geometric algebra may
-be likewise achieved in our model for quartic surface by using
-a geometric algebra $\G([\B(\W)])$ in conjunction with $\G(\W)$.
-To help differentiate between the elements of these two geometric
-algebras, we will use a bold-face font for members of $\G([\B(\W)])$.
-
-Let $\B(\W)$ denote the set of all bivectors $B\in\G(\W)$ of
-the form
+The goal from the beginning has been to find a model, similar
+to CGA, for the general set of surfaces up to degree 2,
+not just the specific class of surfaces up to degree 2 that are just the spheres and planes of CGA.
+While this has been accomplished to some extent, one of the greatest deficiencies
+remaining is the ability for the model to represent surfaces of up to the desired degree for
+all dimensions from zero to $n$.
+One possible solution, which is worth mentioning here at closing, is that of utilizing the geometric
+algebra that is generated by the linear space of bivectors in $\G(\W)$.  We could
+define a linear function on this space that maps it to a vector space $\B$.  If $f$ was such
+a function, then for any pair of 2-blades $A,B\in\G(\W)$, we could define
 \begin{equation}
-B = \sum_{i=1}^k a_i\overline{b}_i,
+f(A)\cdot f(B)=A\cdot B.
 \end{equation}
-where each of $\{a_i\}_{i=1}^k$ and $\{b_i\}_{i=1}^k$ is a sequence
-of $k$ vectors taken from $\V$.  We observe now that $\B(\W)$ is
-a linear space, and then seek a geometric algebra generated by this
-space.  To that end, let $[]:\B(\W)\to[\B(\W)]$ be a linear function
-mapping the bivectors of $\B(\W)$ into a vector space we'll denote by $[\B(\W)]$.
-Being a linear function, $[]$ is determined entirely by how it maps a basis
-of $\B(\W)$.  Given any basis of $\B(\W)$, therefore, we let $[]$ map
-this basis to a set of vectors such that for any two blades $A,B\in\B(\W)$, we have
+It would then follow that a vector $v\in\G(\B)$ would be
+representative of a surface as the set of all points $p\in\V^e$ such that
 \begin{equation}
-[A]\cdot[B]=A\cdot B.
+0 = \rho(p)\cdot v,
 \end{equation}
-We can now let $\G([\B(\W)])$ denote the anti-Euclidean geometric algebra
-generated by $[\B(\W)]$, define the function $\rho:\V^e\to[\B(\W)]$ as
+where we define the function $\rho$ as
 \begin{equation}
-\rho(p) = [P(p)\wedge\overline{P}(p)],
+\rho(p) = f(P(p)\overline{P(p)}).
 \end{equation}
-and then give the following two definitions.
-\begin{defn}\label{def_dual_surf}
-For any blade $\mathbf{B}\in\G([\B(\W)])$, if we are refering to it as
-a dual surface, then we are interpreting it as the surface that
-is the set of all points $p\in\V^e$ such that
+The notions of dual and direct surfaces
+would then emerge as they do in CGA.  We could then, using the outer product,
+intersect dual surfaces and combine direct surfaces.  For a given versor $V\in\G(\V)$,
+and a $k$-blade $B\in\G(\B)$, if we could find a vector factorization $v_1\wedge\dots\wedge v_k$
+of $B$, then the transformation $B'$ of $B$ by $V$ would be given by
 \begin{equation}
-0 = \rho(p)\cdot\mathbf{B}.
+B' = \bigwedge_{i=1}^k f(V\overline{V}f^{-1}(v_i)(V\overline{V})^{-1}).
 \end{equation}
-\end{defn}
-\begin{defn}\label{def_direct_surf}
-For any blade $\mathbf{B}\in\G([\B(\W)])$, if we are refering to it as a
-direct surface, then we are interpreting it as the surface that
-is the set of all points $p\in\V^e$ such that
+See \cite{} on the problem of blade factorization.  It is unfortunate that we would
+have to bother finding such a factorization to get a surface transformed.
+
+To illustrate the use of $\G(\B)$, let $s,c\in\G(\B)$ be vectors dually representative
+of a sphere and cylinder, respectively.  Then, for any point $p\in\V^e$, we can find
+the surface containing $p$ and the intersection of $s$ and $c$ as
+\begin{equation}\label{equ_pencil}
+(\rho(p)\wedge(s\wedge c)I)I = \rho(p)\cdot s\wedge c = (\rho(p)\cdot s)c - (\rho(p)\cdot c)s,
+\end{equation}
+where $I$, in practice, might be the unit psuedo-scalar of the geometric algebra
+generated by the vector sub-space of $\B$ given by the set
 \begin{equation}
-0 = \rho(p)\wedge\mathbf{B}.
+\{f(x\overline{y})|x,y\in\V\}.
 \end{equation}
-\end{defn}
-Letting $\mathbf{I}$ denote the unit psuedo-scalar of $\G([\B(\W)])$, it is
-not hard to show that if a given blade $\mathbf{B}$ represents a surface
-dually, then its positive or negative dual $\pm\mathbf{BI}$ does so directly,
-and vice versa.\footnote{Note that it is sometimes useful to reinterpret a given
-blade $\mathbf{B}$.  For example, while the dual intersection of two dual
-surfaces may be imaginary, it may become a different yet real surface when interpreted
-as a direct surface.}
+Even this vector space, which is of dimension $(n+2)^2$, is larger than it needs to be.
+We could suffice with a vector space of dimension $(n+2)(n+3)/2$.
+In any case, it is clear from equation \eqref{equ_pencil} that the algebra
+is simply giving us the desired surface in the pencil of $s$ and $c$.
 
-We see now by Definition~\ref{def_dual_surf} that for any surface $E\in\B(\W)$,
-the vector $[E]$ is its dual surface.  We can now benefit from the geometric
-algebra $\G([\B(\W)])$ in two ways.  First, by realizing that the outer product
-of any two dual surfaces, if non-zero, is a dual surface representative of the intersection
-of the two surfaces taken in that product; and secondly, by realizing that the
-outer product of any two direct surfaces, if non-zero, is a direct surface representative of a
-surface that is at least the union of the surfaces taken in the product.  The proof
-of these facts is well known, and so will not be presented here.
-
-While it is clear what we get in an intersection of two dual surfaces, it is not immediately
-clear what we get in the combination of two direct surfaces.  One way to begin to find out
-may be to study the ability to fit surfaces to points as can be done in the conformal
-model of geometric algebra, because in that model, all geometries, except the
-flat points, can be factored as an outer product of points fitting the geometry, provided
-the points satisfy specific constraints.
-
-Given a set $\{p_i\}_{i=1}^k$, with
-$1\leq k<\mbox{grade}(\mathbf{I})=(n+2)^2$, of $k$ points
-taken from $\V^e$, if the set of vectors $\{\rho(p_i)\}_{i=1}^k$ is linearly
-independent, then the direct surface $\mathbf{B}$, given by
-\begin{equation}\label{equ_fit_points}
-\mathbf{B} = \bigwedge_{i=1}^k\rho(p_i),
-\end{equation}
-must fit the $k$ points.  Assuming planar intersections, a $k$-blade $\mathbf{B}\in\G([\B(\W)])$
-is dually representative
-of a surface of dimension $n-k+1$, and therefore directly representative
-of a surface of dimension $n-((n+2)^2-k)+1$, which brings up the odd
-prospect of geometries with no or negative dimension.  It would seem that
-$k=(n+2)^2-1$ points are needed to fit an $n$-dimensional surface; however,
-it is possible to fit such a surface with just $k=(n+2)(n+3)/2-1$ points if
-we restrict ourselves to the reduced form of surfaces $[\mathbf{E}]^{-1}\in\B(\W)$,
-similar to what we did with equation \eqref{equ_quadric_reduced_form} above.
-
-In any case, the question now remains: under what circumstances of the set $\{p_i\}_{i=1}^k$,
-if any exist, is the set $\{\rho(p_i)\}_{i=1}^k$ linearly independent; and under those
-circumstances,
-what surface $\mathbf{B}$ do we get in equation \eqref{equ_fit_points}?  The
-version of this question for the conformal model of geometric algebra is easy
-to answer; but, not being able to find the answer here for our present model,
-the author is compelled to leave it as an open question.
-
-Lastly, given a versor $V\in\G(\V)$, we can see
-that for any dual surface $\mathbf{E}\in[\B(\W)]$, if we can find a factorization
-of this $k$-blade, such as $\mathbf{E}=\mathbf{E}_1\wedge\dots\wedge\mathbf{E}_k$,
-then the
-transformation $\mathbf{E}'$ of this surface $\mathbf{E}$ by $V$, is given by
-\begin{equation}
-\mathbf{E}' = \bigwedge_{i=1}^k[V\overline{V}[\mathbf{E}_i]^{-1}(V\overline{V})^{-1}].
-\end{equation}
-This illustrates one way that the algebras $\G(\W)$ and $\G([\B(\W)])$ might
-work in concert with one another.  The problem of blade factorization is
-given a great deal of treatment in \cite{}.
+Unlike CGA, however, even in our use of $\G(\B)$, there does not appear
+to be any easy way to perform geometric analysis on given geometries.
+For example, in CGA, a given element can always be decomposed into
+a set of parameters characterizing the geometry by interpreting that
+element in terms of a known canonical form.  (The intersection of two
+spheres may be interpreted as the intersection of a sphere centered on a plane.)
+There does not appear to be any easy equivalent of this idea in $\G(\B)$ in all cases,
+and so we must defer to the literature, such as \cite{} and \cite{}, to learn
+anything interesting about a given dual surface of dimension less than $n$.
 
 \nocite{Dorst07}
 \bibliographystyle{amsplain}
