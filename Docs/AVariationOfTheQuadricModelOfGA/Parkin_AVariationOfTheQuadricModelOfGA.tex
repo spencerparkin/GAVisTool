@@ -99,7 +99,7 @@ The set of vectors $\{e_i\}_{i=1}^n$ forms an orthonormal set of basis
 vectors for the $n$-dimensional Euclidean vector space $\V^e$, which we'll
 use to represent $n$-dimensional Euclidean space.
 The vectors $\nvao$ and $\nvai$ are the familiar null-vectors representing the
-points at origin and infinity, respectively, taken from the CGA.
+points at origin and infinity, respectively, taken from CGA.
 An inner-product table for these basis vectors is given as follows, where
 $1\leq i<j\leq n$.
 \begin{equation}
@@ -118,14 +118,12 @@ above this vector space denote an identical copy of that vector space.  The vect
 space $\W$ will denote the smallest vector space containing each of $\V$ and $\Vb$
 as vector subspaces.  In symbols, one may write
 \begin{equation}
-\G(\W) = \G(\V\oplus\Vb)
+\G(\W) = \G(\V\oplus\Vb).
 \end{equation}
-to illustrate the structure of $\G(\W)$ in terms of its two isomorphic Minkowski
-geometric sub-algebras $\G(\V)$ and $\G(\Vb)$.
 
 We will use over-bar notation to distinguish between vectors taken from $\V$
-with vectors taken from $\Vb$.  Then, so that we may use the over-bar notation,
-in a well defined manner, to distinguish between elements of $\G(\V)$ and $\G(\Vb)$,
+with vectors taken from $\Vb$.  Then, so that we may use the over-bar notation
+in a well defined manner to distinguish between elements of $\G(\V)$ and $\G(\Vb)$,
 we will define it as an outermorphic function that is also an isomorphism between
 $\G(\V)$ and $\G(\Vb)$.  Doing so, we see that for any element $E\in\G(\V)$,
 we may define $\overline{E}\in\G(\Vb)$ as
@@ -191,7 +189,7 @@ to render the traced surfaces in Figure~\ref{fig_invert_cylinder_in_sphere} far 
 
 Of course, using geometric algebra on paper, it might be undesirable and unnecessary to think of
 quadrics in terms of polynomial equations.  A, perhaps, better way to think of quadrics is in terms
-of an element, of a geometric algebra, whose decomposition
+of an element of a geometric algebra whose decomposition
 produces the parameters characterizing the quadric surface.  For example, many common
 quadrics are the solution set in $\V^e$ of the equation
 \begin{equation}
@@ -295,7 +293,7 @@ The theorem then
 shows that this is also the algebraic variety of equation \eqref{equ_derived_variety}, thereby
 giving us a means of performing desired transformations on elements representative
 of quadric surfaces in $\G(\W)$, provided that $V$ is such a versor that $E'$ in
-\eqref{equ_transformed_surface}, like $E$, is also bivector of the form \eqref{equ_quadric_form}.
+\eqref{equ_transformed_surface}, like $E$, is also a bivector of the form \eqref{equ_quadric_form}.
 If this is not the case, then $V\overline{V}$ simply represents a transformation not
 closed in the set of all quadric surfaces.
 
@@ -352,7 +350,7 @@ quartic surface as the set of all points $p\in\V^e$ such that
 \begin{equation}\label{equ_surface_variety}
 0 = P(p)\wedge\overline{P}(p)\cdot E,
 \end{equation}
-where $P:\V^e\to\V$ is the conformal mapping, defined as
+where $P:\V^e\to\V$ is the conformal mapping of CGA, defined in \cite{} as
 \begin{equation}
 P(p) = \nvao + p + \frac{1}{2}p^2\nvai.
 \end{equation}
@@ -398,16 +396,13 @@ here to illustrate how one might use the model with the aide a computer system.
 do
 (
     /* Make the cylinder. */
-    v = e2,
-    c = -7*e1,
-    r = 2,
+    v = e2, c = -7*e1, r = 2,
     cylinder = Omega - v^bar(v) + 2*c*nib + (c.c - r*r)*ni^nib,
     bind_quadric(cylinder),
     geo_color(cylinder,0,1,0),
 	
     /* Make the sphere. */
-    c = 0,
-    r = 6,
+    c = 0, r = 6,
     sphere = no + c + 0.5*(c.c - r*r)*ni,
     bind_dual_sphere(sphere),
     geo_color(sphere,1,0,0,0.2),
@@ -435,18 +430,18 @@ in Figure~\ref{fig_invert_cylinder_in_sphere} is given by
  & 11.2xz^{2} + 2x^{2}z^{2} + y^{4} + 2y^{2}z^{2} + 28.8z^{2} + z^{4}.
 \end{split}
 \end{equation}
-It is interesting how a bit of reasoning in geometric algebra has given us a means
-to finding this polynomial equation.
+It is interesting how a bit of reasoning in geometric algebra has given us such a simple means
+to obtaining this polynomial equation.
 Of course, while such equations lend themselves to computer algorithms, they
 are not practical on paper.  This is where the canonical forms of elements might become
-useful; although admittedly, even these forms have proven to be unwieldy
-and impractical for the author, unlike their counterparts in CGA.
+useful; although, admittedly, even these forms have proven to be unwieldy
+and impractical for the author, unlike their CGA counterparts.
 
 \section{Closing Remarks}
 
 The goal from the beginning has been to find a model, similar
 to CGA, for the general set of surfaces up to degree 2,
-not just the specific class of surfaces up to degree 2 that are just the spheres and planes of CGA.
+not just the specific class of surfaces, up to degree 2, that are just the spheres and planes of CGA.
 While this has been accomplished to some extent, one of the greatest deficiencies
 remaining is the ability for the model to represent surfaces of up to the desired degree for
 all dimensions from zero to $n$.
@@ -475,11 +470,11 @@ of $B$, then the transformation $B'$ of $B$ by $V$ would be given by
 B' = \bigwedge_{i=1}^k f(V\overline{V}f^{-1}(v_i)(V\overline{V})^{-1}).
 \end{equation}
 See \cite{} on the problem of blade factorization.  It is unfortunate that we would
-have to bother finding such a factorization to get a surface transformed.
+have to bother finding such a factorization to transform a surface.
 
 To illustrate the use of $\G(\B)$, let $s,c\in\G(\B)$ be vectors dually representative
 of a sphere and cylinder, respectively.  Then, for any point $p\in\V^e$, we can find
-the surface containing $p$ and the intersection of $s$ and $c$ as
+the dual surface containing $p$ and the intersection of $s$ and $c$ as
 \begin{equation}\label{equ_pencil}
 (\rho(p)\wedge(s\wedge c)I)I = \rho(p)\cdot s\wedge c = (\rho(p)\cdot s)c - (\rho(p)\cdot c)s,
 \end{equation}
