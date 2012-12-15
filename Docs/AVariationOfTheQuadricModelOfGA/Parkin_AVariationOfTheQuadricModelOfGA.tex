@@ -488,20 +488,27 @@ We could suffice with a vector space of dimension $(n+2)(n+3)/2$.
 In any case, it is clear from equation \eqref{equ_pencil} that the algebra
 is simply giving us the desired surface in the pencil of $s$ and $c$.
 
-Unlike CGA, however, even in our use of $\G(\B)$, there does not appear
-to be any easy way to perform geometric analysis on given geometries.
-For example, in CGA, a given element can always be decomposed into
-a set of parameters characterizing the geometry by interpreting that
-element in terms of a known canonical form.  (The intersection of two
-spheres may be interpreted as the intersection of a sphere centered on a plane.)
-There does not appear to be any easy equivalent of this idea in $\G(\B)$ in all cases,
-and so we must defer to the literature, such as \cite{} and \cite{}, to learn
-anything interesting about a given dual surface of dimension less than $n$.
+Lastly, what might be an important observation to make in all of this
+is that geometric algebra may be providing us with a uniform way of looking
+at both surfaces and surface intersection curves.  These appear to be
+treated quite differently in the literature, probably because of a requirement
+to formulate them differently.  For example, while a quadric surface
+may be encoded by a symmetric matrix, we might use a parametric and
+vector-valued function to represent an intersection curve.  Both such geometric objects, however,
+in a geometric algebra, can have the same type of equation and be represented by the
+same type of element.  The type of element $B\in\G(\B)$ is a blade, and the equation is
+\begin{equation}
+0 = \rho(p)\cdot B.
+\end{equation}
+This might be a starting point for
+a unified theory of the study of both surfaces and surface intersection
+curves in any number of dimensions.
 
 \nocite{Dorst07}
 \bibliographystyle{amsplain}
 \bibliography{Parkin_AVariationOfTheQuadricModelOfGA}
 
+% cite Enhancing Levin's method for computing quadric-surface intersections
 % cite http://www.math.ethz.ch/~knus/papers/campinas.pdf -> quad forms determine clifford algebras?
 % cite http://www.maths.ed.ac.uk/~aar/books/dublin.pdf for history of quadratic forms
 % cite wiki entry for algebraic variety?
