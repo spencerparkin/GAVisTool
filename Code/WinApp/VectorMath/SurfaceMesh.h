@@ -28,8 +28,8 @@ namespace VectorMath
 		{
 		public:
 
-			virtual void RenderTriangle( const VectorMath::Triangle& triangle, const Vector& color ) = 0;
-			virtual void RenderEdge( const Vector& vertex0, const Vector& vertex1, const Vector& color ) = 0;
+			virtual void RenderTriangle( const VectorMath::Triangle& triangle, const Vector& color, double alpha ) = 0;
+			virtual void RenderEdge( const Vector& vertex0, const Vector& vertex1, const Vector& color, double alpha ) = 0;
 		};
 
 		//=============================================================================
@@ -52,6 +52,10 @@ namespace VectorMath
 			// will eventually terminate.
 			int maxIterations;
 
+			// This is how far we walk out into the tangent space of an edge
+			// or point to build upon the partially generated mesh.
+			double walkDistance;
+
 			// We try to find all the different components of the mesh by converging
 			// different seed points to the surface of the given surface.  This is
 			// not a very smart way to do it, but until I can think of something better,
@@ -66,7 +70,7 @@ namespace VectorMath
 		{
 		public:
 
-			Vertex( void );
+			Vertex( const Vector& point );
 			virtual ~Vertex( void );
 
 			// Vertices are the positions in space for triangles and edges in the mesh.
@@ -78,7 +82,7 @@ namespace VectorMath
 		{
 		public:
 
-			Triangle( void );
+			Triangle( Vertex* vertex0, Vertex* vertex1, Vertex* vertex2 );
 			virtual ~Triangle( void );
 
 			// The vertices are ordered counter clock-wise.  That is, when you
@@ -95,7 +99,7 @@ namespace VectorMath
 		{
 		public:
 
-			Edge( void );
+			Edge( Vertex* vertex0, Vertex* vertex1, Triangle* triangle );
 			virtual ~Edge( void );
 
 			// As part of a triangle, this edge, from vertex 0 to 1, goes in the
@@ -115,14 +119,22 @@ namespace VectorMath
 		// the surface.
 		class PathConnectedComponent : public Utilities::List::Item
 		{
+			friend class SurfaceMesh;
+
 		public:
 
 			PathConnectedComponent( void );
 			virtual ~PathConnectedComponent( void );
 
 			bool IsPointOnSurface( const Vector& point, double epsilon ) const;
-			bool Generate( const Surface& surface, const Vector& surfacePoint, const GenerationParameters& genParms );
 			void Render( RenderInterface& renderInterface, bool forDebug ) const;
+
+		private:
+
+			void WipeClean( void );
+			bool Generate( const Surface& surface, const Vector& surfacePoint, const GenerationParameters& genParms );
+			bool GenerateInitialTriangle( const Surface& surface, const Vector& surfacePoint, const GenerationParameters& genParms );
+			bool GenerateNewTriangle( const Surface& surface, const GenerationParameters& genParms );
 
 			Utilities::List vertexList;
 			Utilities::List triangleList;

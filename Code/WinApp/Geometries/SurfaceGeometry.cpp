@@ -17,7 +17,7 @@ IMPLEMENT_CALCLIB_CLASS1( SurfaceGeometry, GAVisToolGeometry );
 //=========================================================================================
 SurfaceGeometry::SurfaceGeometry( BindType bindType, VectorMath::Surface* surface ) : GAVisToolGeometry( bindType )
 {
-	renderAs = RENDER_AS_SET_OF_TRACES;
+	renderAs = RENDER_AS_TRIANGLE_MESH;
 	surfaceGeometryValid = false;
 	this->surface = surface;
 }
@@ -117,15 +117,15 @@ void SurfaceGeometry::RegenerateSurfaceGeometry( void )
 				this->render = render;
 			}
 
-			/*virtual*/ void RenderTriangle( const VectorMath::Triangle& triangle, const VectorMath::Vector& color )
+			/*virtual*/ void RenderTriangle( const VectorMath::Triangle& triangle, const VectorMath::Vector& color, double alpha ) override
 			{
-				render->Color( color, 1.0 );
+				render->Color( color, alpha );
 				render->DrawTriangle( triangle );
 			}
 
-			/*virtual*/ void RenderEdge( const VectorMath::Vector& vertex0, const VectorMath::Vector& vertex1, const VectorMath::Vector& color )
+			/*virtual*/ void RenderEdge( const VectorMath::Vector& vertex0, const VectorMath::Vector& vertex1, const VectorMath::Vector& color, double alpha ) override
 			{
-				render->Color( color, 1.0 );
+				render->Color( color, alpha );
 				render->DrawLine( vertex0, vertex1 );
 			}
 
