@@ -85,6 +85,9 @@ namespace VectorMath
 			Triangle( Vertex* vertex0, Vertex* vertex1, Vertex* vertex2 );
 			virtual ~Triangle( void );
 
+			// Assuming we have the given vertex, what index does it reside at?
+			int FindVertexIndex( Vertex* vertex ) const;
+
 			// The vertices are ordered counter clock-wise.  That is, when you
 			// imagine the triangle on paper, the vertices are drawn in that order.
 			Vertex* vertex[3];
@@ -101,6 +104,15 @@ namespace VectorMath
 
 			Edge( Vertex* vertex0, Vertex* vertex1, Triangle* triangle );
 			virtual ~Edge( void );
+
+			// The returned edge plane partitions space so that the space in front
+			// of the plane is the new frontier of the partially generated mesh.
+			void MakeEdgePlane( Plane& edgePlane ) const;
+
+			// Wind through triangles as much as possible in the given direction
+			// to find an adjacent vertex.
+			enum VertexType { CW_VERTEX, CCW_VERTEX };
+			Vertex* FindAdjacentVertex( VertexType vertexType ) const;
 
 			// As part of a triangle, this edge, from vertex 0 to 1, goes in the
 			// counter clock-wise direction.
@@ -135,6 +147,7 @@ namespace VectorMath
 			bool Generate( const Surface& surface, const Vector& surfacePoint, const GenerationParameters& genParms );
 			bool GenerateInitialTriangle( const Surface& surface, const Vector& surfacePoint, const GenerationParameters& genParms );
 			bool GenerateNewTriangle( const Surface& surface, const GenerationParameters& genParms );
+			Edge* FindEdge( Vertex* vertex0, Vertex* vertex1 );
 
 			Utilities::List vertexList;
 			Utilities::List triangleList;

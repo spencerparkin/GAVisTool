@@ -39,7 +39,7 @@ SurfaceMesh::GenerationParameters::GenerationParameters( void )
 	epsilon = 1e-7;
 
 	// Do no more than this many iterations while generating a component of the mesh.
-	maxIterations = 0;
+	maxIterations = 1;
 
 	// This probably needs to be fine tuned for the situation at hand.
 	walkDistance = 1.5;
@@ -171,6 +171,14 @@ bool SurfaceMesh::PathConnectedComponent::GenerateInitialTriangle( const Surface
 	if( !surface.ConvergePointToSurfaceInPlane( 0, triangleVertices.vertex[2], genParms.epsilon ) )
 		return false;
 
+	// Make sure that we're starting in bounds.
+	if( Aabb::IS_OUTSIDE_BOX == AabbSide( genParms.aabb, triangleVertices.vertex[0], genParms.epsilon ) )
+		return false;
+	if( Aabb::IS_OUTSIDE_BOX == AabbSide( genParms.aabb, triangleVertices.vertex[1], genParms.epsilon ) )
+		return false;
+	if( Aabb::IS_OUTSIDE_BOX == AabbSide( genParms.aabb, triangleVertices.vertex[2], genParms.epsilon ) )
+		return false;
+
 	// Add the triangle vertices.
 	Vertex* vertex0 = new Vertex( triangleVertices.vertex[0] );
 	Vertex* vertex1 = new Vertex( triangleVertices.vertex[1] );
@@ -196,9 +204,169 @@ bool SurfaceMesh::PathConnectedComponent::GenerateInitialTriangle( const Surface
 }
 
 //=============================================================================
+// If at all possible, we always want to connect an edge to an existing
+// vertex.  Otherwise, our algorithm could never terminate in the way
+// that we would hope, having completely covered the surface.  The first
+// such vertex we search for is one on an edge adjacent to the edge that
+// we are processing.  The second such vertex we search from is one within
+// the given walk distance of the edge we're processing.  This is so that
+// the mesh can grow into and not over itself.
 bool SurfaceMesh::PathConnectedComponent::GenerateNewTriangle( const Surface& surface, const GenerationParameters& genParms )
 {
+	// If there is no edge to process, then our job is done.
+	Edge* edge = ( Edge* )edgeList.LeftMost();
+	if( !edge )
+		return true;
+
+	// No matter what happens with the edge, we remove it from the list
+	// to indicate that we have considered it and processed it.
+	edgeList.Remove( edge, false );
+	Utilities::ScopeDelete< Edge > scopeDelete( edge );
+
+	// If the entire edge is out of bounds, then we're done.
+	if( Aabb::IS_OUTSIDE_BOX == AabbSide( genParms.aabb, edge->vertex[0]->point, genParms.epsilon ) )
+		return true;
+	if( Aabb::IS_OUTSIDE_BOX == AabbSide( genParms.aabb, edge->vertex[1]->point, genParms.epsilon ) )
+		return true;
+
+	// We first try to find an existing vertex as the CW or CCW vertex WRT this edge.
+	Vertex* newVertex = 0;
+	Vertex* ccwVertex = edge->FindAdjacentVertex( Edge::CCW_VERTEX );
+	Vertex* cwVertex = edge->FindAdjacentVertex( Edge::CW_VERTEX );
+	Plane edgePlane;
+	edge->MakeEdgePlane( edgePlane );
+	if( Plane::SIDE_FRONT == PlaneSide( edgePlane, ccwVertex->point, genParms.epsilon ) )
+		newVertex = ccwVertex;
+	else if( Plane::SIDE_FRONT == PlaneSide( edgePlane, cwVertex->point, genParms.epsilon ) )
+		newVertex = cwVertex;
+	else
+	{
+		// Search the entire edge list.  If the edge we're processing is in the frontier
+		// of an edge we're considering in our search, and one of its vertices is within
+		// the given walk distance, then we can connect with it.
+	}
+
+	// Ultimately, if we couldn't find an existing vertex, we need to create a new one.
+	if( !newVertex )
+	{
+		// Walk into the new frontier.  We fail here if we fail to converge to the surface.
+		Vector point;
+		Lerp( point, edge->vertex[0]->point, edge->vertex[1]->point, 0.5 );
+		AddScale( point, point, edgePlane.normal, genParms.walkDistance );
+		if( !surface.ConvergePointToSurfaceInPlane( 0, point, genParms.epsilon ) )
+			return false;
+
+		// Add the new point to our list.
+		newVertex = new Vertex( point );
+		vertexList.InsertRightOf( vertexList.RightMost(), newVertex );
+	}
+
+	// Create the new triangle.
+	Triangle* triangle = new Triangle( edge->vertex[1], edge->vertex[0], newVertex );
+	triangleList.InsertRightOf( triangleList.RightMost(), triangle );
+	triangle->adjacentTriangle[0] = edge->triangle;
+
+	// We either create a new CCW edge or delete an old one.
+	if( ccwVertex == newVertex )
+	{
+		Edge* adjacentEdge = FindEdge( edge->vertex[0], newVertex );
+		assert->Condition( adjacentEdge != 0, "Should have found adjacent edge!" );
+		triangle->adjacentTriangle[1] = adjacentEdge->triangle;
+		edgeList.Remove( adjacentEdge, true );
+	}
+	else
+	{
+		Edge* adjacentEdge = new Edge( edge->vertex[0], newVertex, triangle );
+		edgeList.InsertRightOf( edgeList.RightMost(), adjacentEdge );
+	}
+	
+	// We either create a new CW edge or delete an old one.
+	if( cwVertex == newVertex )
+	{
+		Edge* adjacentEdge = FindEdge( newVertex, edge->vertex[1] );
+		assert->Condition( adjacentEdge != 0, "Should have found adjacent edge!" );
+		triangle->adjacentTriangle[2] = adjacentEdge->triangle;
+		edgeList.Remove( adjacentEdge, true );
+	}
+	else
+	{
+		Edge* adjacentEdge = new Edge( newVertex, edge->vertex[1], triangle );
+		edgeList.InsertRightOf( edgeList.RightMost(), adjacentEdge );
+	}
+
+	// Return success.
 	return true;
+}
+
+//=============================================================================
+SurfaceMesh::Edge* SurfaceMesh::PathConnectedComponent::FindEdge( Vertex* vertex0, Vertex* vertex1 )
+{
+	Edge* foundEdge = 0;
+	for( Edge* edge = ( Edge* )edgeList.LeftMost(); edge && !foundEdge; edge = ( Edge* )edge->Right() )
+		if( ( edge->vertex[0] == vertex0 && edge->vertex[1] == vertex1 ) || ( edge->vertex[0] == vertex1 || edge->vertex[1] == vertex0 ) )
+			foundEdge = edge;
+	return foundEdge;
+}
+
+//=============================================================================
+void SurfaceMesh::Edge::MakeEdgePlane( Plane& edgePlane ) const
+{
+	Vector edgeVector;
+	Sub( edgeVector, vertex[1]->point, vertex[0]->point );
+	Vector edge01, edge02, triangleNormal;
+	Sub( edge01, triangle->vertex[1]->point, triangle->vertex[0]->point );
+	Sub( edge02, triangle->vertex[2]->point, triangle->vertex[0]->point );
+	Cross( triangleNormal, edge01, edge02 );
+	Vector edgePlaneNormal;
+	Cross( edgePlaneNormal, edgeVector, triangleNormal );
+	MakePlane( edgePlane, vertex[0]->point, edgePlaneNormal );
+}
+
+//=============================================================================
+SurfaceMesh::Vertex* SurfaceMesh::Edge::FindAdjacentVertex( VertexType vertexType ) const
+{
+	// Which vertex are we pivoting about?
+	Vertex* pivotVertex = 0;
+	if( vertexType == CCW_VERTEX )
+		pivotVertex = vertex[0];
+	else if( vertexType == CW_VERTEX )
+		pivotVertex = vertex[1];
+	assert->Condition( pivotVertex != 0, "Null pivot vertex!" );
+
+	// Find the last triangle we can find while winding about that vertex
+	// in the desired direction.
+	Triangle* windingTriangle = triangle;
+	while( true )
+	{
+		int vertexIndex = windingTriangle->FindVertexIndex( pivotVertex );
+		int triangleIndex = -1;
+		if( vertexType == CCW_VERTEX )
+			triangleIndex = ( vertexIndex + 2 ) % 3;
+		else if( vertexType == CW_VERTEX )
+			triangleIndex = vertexIndex;
+		Triangle* adjacentTriangle = windingTriangle->adjacentTriangle[ vertexIndex ];
+		if( !adjacentTriangle )
+			break;
+		windingTriangle = adjacentTriangle;
+	}
+	
+	// Return the correct vertex of the found triangle.
+	int vertexIndex = windingTriangle->FindVertexIndex( pivotVertex );
+	if( vertexType == CCW_VERTEX )
+		vertexIndex = ( vertexIndex + 2 ) % 3;
+	return windingTriangle->vertex[ vertexIndex ];
+}
+
+//=============================================================================
+int SurfaceMesh::Triangle::FindVertexIndex( Vertex* vertex ) const
+{
+	if( vertex == this->vertex[0] )
+		return 0;
+	if( vertex == this->vertex[1] )
+		return 1;
+	if( vertex == this->vertex[2] )
+		return 2;
+	return -1;
 }
 
 //=============================================================================
