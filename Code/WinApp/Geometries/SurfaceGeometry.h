@@ -49,7 +49,7 @@ protected:
 	RenderAs renderAs;
 	VectorMath::Surface* surface;
 	Utilities::List traceList;
-	//VectorMath::SurfaceMesh surfaceMesh;
+	VectorMath::SurfaceMesh surfaceMesh;
 	bool surfaceGeometryValid;
 
 	GeometricAlgebra::SumOfBlades element;

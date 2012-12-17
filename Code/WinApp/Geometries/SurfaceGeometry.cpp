@@ -75,7 +75,8 @@ void SurfaceGeometry::RegenerateSurfaceGeometry( void )
 	}
 	else if( renderAs == RENDER_AS_TRIANGLE_MESH )
 	{
-		//...
+		VectorMath::SurfaceMesh::GenerationParameters genParms;
+		surfaceMesh.Generate( *surface, genParms );
 	}
 }
 
@@ -107,7 +108,32 @@ void SurfaceGeometry::RegenerateSurfaceGeometry( void )
 	}
 	else if( renderAs == RENDER_AS_TRIANGLE_MESH )
 	{
-		//...
+		class RenderInterface : public VectorMath::SurfaceMesh::RenderInterface
+		{
+		public:
+
+			RenderInterface( GAVisToolRender* render )
+			{
+				this->render = render;
+			}
+
+			/*virtual*/ void RenderTriangle( const VectorMath::Triangle& triangle, const VectorMath::Vector& color )
+			{
+				render->Color( color, 1.0 );
+				render->DrawTriangle( triangle );
+			}
+
+			/*virtual*/ void RenderEdge( const VectorMath::Vector& vertex0, const VectorMath::Vector& vertex1, const VectorMath::Vector& color )
+			{
+				render->Color( color, 1.0 );
+				render->DrawLine( vertex0, vertex1 );
+			}
+
+			GAVisToolRender* render;
+		};
+
+		RenderInterface renderInterface( &render );
+		surfaceMesh.Render( renderInterface, true );
 	}
 }
 
