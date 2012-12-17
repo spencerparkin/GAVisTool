@@ -39,7 +39,7 @@ SurfaceMesh::GenerationParameters::GenerationParameters( void )
 	epsilon = 1e-7;
 
 	// Do no more than this many iterations while generating a component of the mesh.
-	maxIterations = 1;
+	maxIterations = 10;		// 10th iter has a bug.
 
 	// This probably needs to be fine tuned for the situation at hand.
 	walkDistance = 1.5;
@@ -133,7 +133,7 @@ bool SurfaceMesh::PathConnectedComponent::Generate( const Surface& surface, cons
 
 	// We then build upon the initial triangle until the final triangle is generated.
 	int iterationCount = 0;
-	while( edgeList.Count() > 0 && iterationCount++ < genParms.maxIterations )
+	while( edgeList.Count() > 0 && ++iterationCount <= genParms.maxIterations )
 		if( !GenerateNewTriangle( surface, genParms ) )
 			return false;
 
@@ -354,6 +354,8 @@ SurfaceMesh::Vertex* SurfaceMesh::Edge::FindAdjacentVertex( VertexType vertexTyp
 	int vertexIndex = windingTriangle->FindVertexIndex( pivotVertex );
 	if( vertexType == CCW_VERTEX )
 		vertexIndex = ( vertexIndex + 2 ) % 3;
+	else if( vertexType == CW_VERTEX )
+		vertexIndex = ( vertexIndex + 1 ) % 3;
 	return windingTriangle->vertex[ vertexIndex ];
 }
 
