@@ -39,7 +39,7 @@ SurfaceMesh::GenerationParameters::GenerationParameters( void )
 	epsilon = 1e-7;
 
 	// Do no more than this many iterations while generating a component of the mesh.
-	maxIterations = 10;		// 10th iter has a bug.
+	maxIterations = 1;
 
 	// This probably needs to be fine tuned for the situation at hand.
 	walkDistance = 1.5;
@@ -233,12 +233,18 @@ bool SurfaceMesh::PathConnectedComponent::GenerateNewTriangle( const Surface& su
 	Vertex* newVertex = 0;
 	Vertex* ccwVertex = edge->FindAdjacentVertex( Edge::CCW_VERTEX );
 	Vertex* cwVertex = edge->FindAdjacentVertex( Edge::CW_VERTEX );
+	double ccwAngle = CalculateInteriorAngle( edge->vertex[0], edge->vertex[1], ccwVertex );
+	double cwAngle = CalculateInteriorAngle( edge->vertex[1], edge->vertex[0], cwVertex );
 	Plane edgePlane;
 	edge->MakeEdgePlane( edgePlane );
-	if( Plane::SIDE_FRONT == PlaneSide( edgePlane, ccwVertex->point, genParms.epsilon ) )
+	if( Plane::SIDE_FRONT == PlaneSide( edgePlane, ccwVertex->point, genParms.epsilon ) && ccwAngle < PI / 2.0 )
+	{
 		newVertex = ccwVertex;
-	else if( Plane::SIDE_FRONT == PlaneSide( edgePlane, cwVertex->point, genParms.epsilon ) )
+	}
+	else if( Plane::SIDE_FRONT == PlaneSide( edgePlane, cwVertex->point, genParms.epsilon ) && cwAngle < PI / 2.0 )
+	{
 		newVertex = cwVertex;
+	}
 	else
 	{
 		// Search the entire edge list.  If the edge we're processing is in the frontier
@@ -294,8 +300,43 @@ bool SurfaceMesh::PathConnectedComponent::GenerateNewTriangle( const Surface& su
 		edgeList.InsertRightOf( edgeList.RightMost(), adjacentEdge );
 	}
 
+	// Lastly, knowing that the new triangle points to its adjacent triangles,
+	// make sure that its adjacent triangles point back to it.
+	triangle->PatchAdjacencies();
+
 	// Return success.
 	return true;
+}
+
+//=============================================================================
+double SurfaceMesh::PathConnectedComponent::CalculateInteriorAngle( Vertex* vertex0, Vertex* vertex1, Vertex* vertex2 ) const
+{
+	Vector edge01, edge02;
+	Sub( edge01, vertex1->point, vertex0->point );
+	Sub( edge02, vertex2->point, vertex0->point );
+	double angle = AngleBetween( edge01, edge02 );
+	return angle;
+}
+
+//=============================================================================
+void SurfaceMesh::Triangle::PatchAdjacencies( void )
+{
+	for( int adjacentTriangleIndex = 0; adjacentTriangleIndex < 3; adjacentTriangleIndex++ )
+	{
+		Triangle* triangle = adjacentTriangle[ adjacentTriangleIndex ];
+		if( triangle )
+		{
+			int nonSharedVertexIndex = 0;
+			for( nonSharedVertexIndex = 0; nonSharedVertexIndex < 3; nonSharedVertexIndex++ )
+				if( FindVertexIndex( triangle->vertex[ nonSharedVertexIndex ] ) == -1 )
+					break;
+			assert->Condition( nonSharedVertexIndex < 3, "Could not find non-shared vertex index." );
+			int index = ( nonSharedVertexIndex + 1 ) % 3;
+			assert->Condition( FindVertexIndex( triangle->vertex[ index ] ) != -1, "Vertex should be shared." );
+			assert->Condition( FindVertexIndex( triangle->vertex[ ( index + 1 ) % 3 ] ) != -1, "Vertex should also be shared." );
+			triangle->adjacentTriangle[ index ] = this;
+		}
+	}
 }
 
 //=============================================================================
@@ -344,7 +385,7 @@ SurfaceMesh::Vertex* SurfaceMesh::Edge::FindAdjacentVertex( VertexType vertexTyp
 			triangleIndex = ( vertexIndex + 2 ) % 3;
 		else if( vertexType == CW_VERTEX )
 			triangleIndex = vertexIndex;
-		Triangle* adjacentTriangle = windingTriangle->adjacentTriangle[ vertexIndex ];
+		Triangle* adjacentTriangle = windingTriangle->adjacentTriangle[ triangleIndex ];
 		if( !adjacentTriangle )
 			break;
 		windingTriangle = adjacentTriangle;
@@ -477,16 +518,56 @@ void SurfaceMesh::PathConnectedComponent::Render( RenderInterface& renderInterfa
 	if( forDebug )
 	{
 		Vector color;
-		Set( color, 1.f, 0.f, 0.f );
+		Set( color, 1.0, 0.0, 0.0 );
+
 		for( const Edge* edge = ( const Edge* )edgeList.LeftMost(); edge; edge = ( const Edge* )edge->Right() )
 		{
 			Vector vertex0, vertex1;
 			Copy( vertex0, edge->vertex[0]->point );
 			Copy( vertex1, edge->vertex[1]->point );
 
-			renderInterface.RenderEdge( vertex0, vertex1, color, 1.0 );
+			renderInterface.RenderLine( vertex0, vertex1, color, 1.0 );
 		}
 	}
+
+	// In debug mode, it would be helpful to see the adjacency information.
+#if 0
+	if( forDebug )
+	{
+		Vector color;
+		Set( color, 0.0, 0.0, 1.0 );
+
+		for( const Triangle* triangle = ( const Triangle* )triangleList.LeftMost(); triangle; triangle = ( const Triangle* )triangle->Right() )
+		{
+			Vector center;
+			triangle->CalculateCenter( center );
+
+			for( int index = 0; index < 3; index++ )
+			{
+				const Triangle* adjacentTriangle = triangle->adjacentTriangle[ index ];
+				if( adjacentTriangle )
+				{
+					Vector adjacentCenter;
+					adjacentTriangle->CalculateCenter( adjacentCenter );
+
+					Vector edgePoint;
+					Lerp( edgePoint, triangle->vertex[ index ]->point, triangle->vertex[ ( index + 1 ) % 3 ]->point, 0.25 );
+
+					renderInterface.RenderArrow( center, edgePoint, color, 1.0 );
+					renderInterface.RenderArrow( edgePoint, adjacentCenter, color, 1.0 );
+				}
+			}
+		}
+	}
+#endif
+}
+
+//=============================================================================
+void SurfaceMesh::Triangle::CalculateCenter( Vector& center ) const
+{
+	Add( center, vertex[0]->point, vertex[1]->point );
+	Add( center, center, vertex[2]->point );
+	Scale( center, center, 1.0 / 3.0 );
 }
 
 // SurfaceMesh.cpp

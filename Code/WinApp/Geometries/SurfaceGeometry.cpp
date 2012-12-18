@@ -75,7 +75,9 @@ void SurfaceGeometry::RegenerateSurfaceGeometry( void )
 	}
 	else if( renderAs == RENDER_AS_TRIANGLE_MESH )
 	{
+		static int maxIters = 295;
 		VectorMath::SurfaceMesh::GenerationParameters genParms;
+		genParms.maxIterations = maxIters;//++;
 		surfaceMesh.Generate( *surface, genParms );
 	}
 }
@@ -123,10 +125,18 @@ void SurfaceGeometry::RegenerateSurfaceGeometry( void )
 				render->DrawTriangle( triangle );
 			}
 
-			/*virtual*/ void RenderEdge( const VectorMath::Vector& vertex0, const VectorMath::Vector& vertex1, const VectorMath::Vector& color, double alpha ) override
+			/*virtual*/ void RenderLine( const VectorMath::Vector& vertex0, const VectorMath::Vector& vertex1, const VectorMath::Vector& color, double alpha ) override
 			{
 				render->Color( color, alpha );
 				render->DrawLine( vertex0, vertex1 );
+			}
+
+			/*virtual*/ void RenderArrow( const VectorMath::Vector& vertex0, const VectorMath::Vector& vertex1, const VectorMath::Vector& color, double alpha ) override
+			{
+				VectorMath::Vector dir;
+				Sub( dir, vertex1, vertex0 );
+				render->Color( color, alpha );
+				render->DrawVector( vertex0, dir );
 			}
 
 			GAVisToolRender* render;

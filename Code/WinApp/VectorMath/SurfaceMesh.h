@@ -29,7 +29,8 @@ namespace VectorMath
 		public:
 
 			virtual void RenderTriangle( const VectorMath::Triangle& triangle, const Vector& color, double alpha ) = 0;
-			virtual void RenderEdge( const Vector& vertex0, const Vector& vertex1, const Vector& color, double alpha ) = 0;
+			virtual void RenderLine( const Vector& vertex0, const Vector& vertex1, const Vector& color, double alpha ) = 0;
+			virtual void RenderArrow( const Vector& vertex0, const Vector& vertex1, const Vector& color, double alpha ) {}
 		};
 
 		//=============================================================================
@@ -87,6 +88,12 @@ namespace VectorMath
 
 			// Assuming we have the given vertex, what index does it reside at?
 			int FindVertexIndex( Vertex* vertex ) const;
+
+			// Return the center of the triangle.
+			void CalculateCenter( Vector& center ) const;
+
+			// This is used to patch adjacencies of adjacent triangles.
+			void PatchAdjacencies( void );
 
 			// The vertices are ordered counter clock-wise.  That is, when you
 			// imagine the triangle on paper, the vertices are drawn in that order.
@@ -148,6 +155,7 @@ namespace VectorMath
 			bool GenerateInitialTriangle( const Surface& surface, const Vector& surfacePoint, const GenerationParameters& genParms );
 			bool GenerateNewTriangle( const Surface& surface, const GenerationParameters& genParms );
 			Edge* FindEdge( Vertex* vertex0, Vertex* vertex1 );
+			double CalculateInteriorAngle( Vertex* vertex0, Vertex* vertex1, Vertex* vertex2 ) const;
 
 			Utilities::List vertexList;
 			Utilities::List triangleList;
