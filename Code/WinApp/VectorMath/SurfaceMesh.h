@@ -76,6 +76,9 @@ namespace VectorMath
 
 			// Vertices are the positions in space for triangles and edges in the mesh.
 			Vector point;
+
+			// This is used in an algorithm for visiting the vertices of the mesh.
+			int visitationKey;
 		};
 
 		//=============================================================================
@@ -155,11 +158,13 @@ namespace VectorMath
 			bool GenerateInitialTriangle( const Surface& surface, const Vector& surfacePoint, const GenerationParameters& genParms );
 			bool GenerateNewTriangle( const Surface& surface, const GenerationParameters& genParms );
 			Edge* FindEdge( Vertex* vertex0, Vertex* vertex1 );
-			double CalculateInteriorAngle( Vertex* vertex0, Vertex* vertex1, Vertex* vertex2 ) const;
+			static double CalculateInteriorAngle( Vertex* vertex0, Vertex* vertex1, Vertex* vertex2 );
+			Vertex* FindVertexForEdge( Edge* processEdge, Vertex*& ccwVertex, Vertex*& cwVertex, Plane& edgePlane, const GenerationParameters& genParms );
 
 			Utilities::List vertexList;
 			Utilities::List triangleList;
 			Utilities::List edgeList;
+			int visitationKey;
 		};
 
 		// Tell us if the given point is on any current component of the surface.
