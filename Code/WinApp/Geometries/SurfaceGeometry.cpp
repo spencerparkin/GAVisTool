@@ -75,10 +75,9 @@ void SurfaceGeometry::RegenerateSurfaceGeometry( void )
 	}
 	else if( renderAs == RENDER_AS_TRIANGLE_MESH )
 	{
-		static int maxIters = 440;
 		VectorMath::SurfaceMesh::GenerationParameters genParms;
-		genParms.maxIterations = maxIters;
-		maxIters += 20;
+		genParms.maxIterations = 2000;
+		genParms.walkDistance = 0.5;
 		surfaceMesh.Generate( *surface, genParms );
 	}
 }
