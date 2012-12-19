@@ -591,7 +591,7 @@ void SurfaceMesh::PathConnectedComponent::Render( RenderInterface& renderInterfa
 	}
 
 	// In debug mode, it would be helpful to see the adjacency information.
-#if 0
+#if 1
 	if( forDebug )
 	{
 		Vector color;
