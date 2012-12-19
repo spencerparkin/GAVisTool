@@ -278,8 +278,7 @@ bool SurfaceMesh::PathConnectedComponent::GenerateNewTriangle( const Surface& su
 	Edge* adjacentEdge = FindEdge( processEdge->vertex[0], newVertex );
 	if( adjacentEdge )
 	{
-		if( ccwVertex == newVertex )
-			triangle->adjacentTriangle[1] = adjacentEdge->triangle;
+		triangle->adjacentTriangle[1] = adjacentEdge->triangle;
 		EdgeProcessed( adjacentEdge );
 	}
 	else
@@ -292,8 +291,7 @@ bool SurfaceMesh::PathConnectedComponent::GenerateNewTriangle( const Surface& su
 	adjacentEdge = FindEdge( newVertex, processEdge->vertex[1] );
 	if( adjacentEdge )
 	{
-		if( cwVertex == newVertex )
-			triangle->adjacentTriangle[2] = adjacentEdge->triangle;
+		triangle->adjacentTriangle[2] = adjacentEdge->triangle;
 		EdgeProcessed( adjacentEdge );
 	}
 	else
@@ -629,7 +627,7 @@ void SurfaceMesh::PathConnectedComponent::Render( RenderInterface& renderInterfa
 #endif
 
 	// In debug mode, it would be helpful to see the adjacency information.
-#if 1
+#if 0
 	if( forDebug )
 	{
 		Vector color;

@@ -14,17 +14,17 @@ do
 	geo_color(cylinder,0,1,0),
 	
 	/* Make the sphere. */
-	/*sph_c = 0,
+	sph_c = 0,
 	sph_r = 6,
 	bind_virtual(sph_c,sph_r),
 	bind_dual_sphere(sphere),
 	formula_constraint( "sphere = no + sph_c + 0.5*(sph_c.sph_c - sph_r*sph_r)*ni" ),
-	geo_color(sphere,1,0,0,0.2),*/
+	geo_color(sphere,1,0,0,0.2),
 	
 	/* Make the inversion of the cylinder in the sphere. */
-	/*bind_virtual(V),
+	bind_virtual(V),
 	formula_constraint( "V = sphere*bar(sphere)" ),
 	bind_conformal_quartic(inversion),
 	formula_constraint( "inversion = V*cylinder*V~" ),
-	geo_color(inversion,0,0,1),*/
+	geo_color(inversion,0,0,1),
 )
