@@ -57,6 +57,10 @@ namespace VectorMath
 			// or point to build upon the partially generated mesh.
 			double walkDistance;
 
+			// This is the maximum angle at which two adjacent edges can be
+			// incident and we'll still connect a triangle on these edges.
+			double frontierAngle;
+
 			// We try to find all the different components of the mesh by converging
 			// different seed points to the surface of the given surface.  This is
 			// not a very smart way to do it, but until I can think of something better,

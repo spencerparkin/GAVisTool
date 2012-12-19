@@ -42,7 +42,12 @@ SurfaceMesh::GenerationParameters::GenerationParameters( void )
 	maxIterations = 1;
 
 	// This probably needs to be fine tuned for the situation at hand.
-	walkDistance = 1.5;
+	walkDistance = 0.5;
+
+	// Our algorithm is actually not correct, because I have run into a case where,
+	// under all constraints and logic programmed, we encounter an edge that does
+	// not connect up to the right existing vertex.
+	frontierAngle = PI / 2.0;
 
 	// In theory, this means we can generate a mesh for a surface having up to
 	// four path connected components.
@@ -263,14 +268,12 @@ bool SurfaceMesh::PathConnectedComponent::GenerateNewTriangle( const Surface& su
 
 	// We either create a new CCW edge or delete an old one.
 	Edge* adjacentEdge = FindEdge( processEdge->vertex[0], newVertex );
-	if( ccwVertex == newVertex )
+	if( adjacentEdge )
 	{
-		assert->Condition( adjacentEdge != 0, "Should have found adjacent edge!" );
-		triangle->adjacentTriangle[1] = adjacentEdge->triangle;
+		if( ccwVertex == newVertex )
+			triangle->adjacentTriangle[1] = adjacentEdge->triangle;
 		edgeList.Remove( adjacentEdge, true );
 	}
-	else if( adjacentEdge )
-		edgeList.Remove( adjacentEdge, true );
 	else
 	{
 		adjacentEdge = new Edge( processEdge->vertex[0], newVertex, triangle );
@@ -279,14 +282,12 @@ bool SurfaceMesh::PathConnectedComponent::GenerateNewTriangle( const Surface& su
 	
 	// We either create a new CW edge or delete an old one.
 	adjacentEdge = FindEdge( newVertex, processEdge->vertex[1] );
-	if( cwVertex == newVertex )
+	if( adjacentEdge )
 	{
-		assert->Condition( adjacentEdge != 0, "Should have found adjacent edge!" );
-		triangle->adjacentTriangle[2] = adjacentEdge->triangle;
+		if( cwVertex == newVertex )
+			triangle->adjacentTriangle[2] = adjacentEdge->triangle;
 		edgeList.Remove( adjacentEdge, true );
 	}
-	else if( adjacentEdge )
-		edgeList.Remove( adjacentEdge, true );
 	else
 	{
 		adjacentEdge = new Edge( newVertex, processEdge->vertex[1], triangle );
@@ -310,12 +311,12 @@ SurfaceMesh::Vertex* SurfaceMesh::PathConnectedComponent::FindVertexForEdge( Edg
 	cwVertex = processEdge->FindAdjacentVertex( Edge::CW_VERTEX );
 	processEdge->MakeEdgePlane( edgePlane );
 	if( Plane::SIDE_FRONT == PlaneSide( edgePlane, ccwVertex->point, genParms.epsilon ) &&
-		CalculateInteriorAngle( processEdge->vertex[0], processEdge->vertex[1], ccwVertex ) < PI / 2.0 )
+		CalculateInteriorAngle( processEdge->vertex[0], processEdge->vertex[1], ccwVertex ) < genParms.frontierAngle )
 	{
 		foundVertex = ccwVertex;
 	}
 	else if( Plane::SIDE_FRONT == PlaneSide( edgePlane, cwVertex->point, genParms.epsilon ) &&
-		CalculateInteriorAngle( processEdge->vertex[1], processEdge->vertex[0], cwVertex ) < PI / 2.0 )
+		CalculateInteriorAngle( processEdge->vertex[1], processEdge->vertex[0], cwVertex ) < genParms.frontierAngle )
 	{
 		foundVertex = cwVertex;
 	}
@@ -340,8 +341,8 @@ SurfaceMesh::Vertex* SurfaceMesh::PathConnectedComponent::FindVertexForEdge( Edg
 					vertex->visitationKey = visitationKey;
 
 					if( Plane::SIDE_FRONT == PlaneSide( edgePlane, vertex->point, genParms.epsilon ) &&
-						CalculateInteriorAngle( processEdge->vertex[0], processEdge->vertex[1], vertex ) < PI / 2.0 &&
-						CalculateInteriorAngle( processEdge->vertex[1], processEdge->vertex[0], vertex ) < PI / 2.0 )
+						CalculateInteriorAngle( processEdge->vertex[0], processEdge->vertex[1], vertex ) < genParms.frontierAngle &&
+						CalculateInteriorAngle( processEdge->vertex[1], processEdge->vertex[0], vertex ) < genParms.frontierAngle )
 					{
 						Vector edgeVec;
 						Sub( edgeVec, processEdge->vertex[1]->point, processEdge->vertex[0]->point );
