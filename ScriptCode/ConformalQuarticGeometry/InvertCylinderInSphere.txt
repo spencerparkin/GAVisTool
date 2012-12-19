@@ -9,11 +9,15 @@ do
 	c = -7*e1,		/* This must be kept orthogonal to v. */
 	r = 2,
 	cylinder = Omega - v^bar(v) + 2*c*nib + (c.c - r*r)*ni^nib,
+	bind_quadric(cylinder),
+	geo_color(cylinder,1,0,0),
 	
 	/* Make the sphere. */
 	sph_c = 0,
 	sph_r = 6,
 	sphere = no + sph_c + 0.5*(sph_c.sph_c - sph_r*sph_r)*ni,
+	bind_dual_sphere(sphere),
+	geo_color(sphere,0,1,0),
 	
 	/* Make the inversion of the cylinder in the sphere. */
 	V = sphere*bar(sphere),
