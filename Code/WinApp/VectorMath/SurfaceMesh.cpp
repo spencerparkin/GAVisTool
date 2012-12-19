@@ -123,7 +123,8 @@ void SurfaceMesh::PathConnectedComponent::WipeClean( void )
 {
 	vertexList.RemoveAll( true );
 	triangleList.RemoveAll( true );
-	edgeList.RemoveAll( true );
+	edgeQueue.RemoveAll( true );
+	processedEdges.RemoveAll( true );
 }
 
 //=============================================================================
@@ -140,7 +141,7 @@ bool SurfaceMesh::PathConnectedComponent::Generate( const Surface& surface, cons
 
 	// We then build upon the initial triangle until the final triangle is generated.
 	int iterationCount = 0;
-	while( edgeList.Count() > 0 && ++iterationCount <= genParms.maxIterations )
+	while( edgeQueue.Count() > 0 && ++iterationCount <= genParms.maxIterations )
 		if( !GenerateNewTriangle( surface, genParms ) )
 			return false;
 
@@ -202,12 +203,19 @@ bool SurfaceMesh::PathConnectedComponent::GenerateInitialTriangle( const Surface
 	Edge* edge0 = new Edge( vertex0, vertex1, triangle );
 	Edge* edge1 = new Edge( vertex1, vertex2, triangle );
 	Edge* edge2 = new Edge( vertex2, vertex0, triangle );
-	edgeList.InsertRightOf( edgeList.RightMost(), edge0 );
-	edgeList.InsertRightOf( edgeList.RightMost(), edge1 );
-	edgeList.InsertRightOf( edgeList.RightMost(), edge2 );
+	edgeQueue.InsertRightOf( edgeQueue.RightMost(), edge0 );
+	edgeQueue.InsertRightOf( edgeQueue.RightMost(), edge1 );
+	edgeQueue.InsertRightOf( edgeQueue.RightMost(), edge2 );
 
 	// We're finished.
 	return true;
+}
+
+//=============================================================================
+void SurfaceMesh::PathConnectedComponent::EdgeProcessed( Edge* edge )
+{
+	edgeQueue.Remove( edge, false );
+	processedEdges.InsertRightOf( processedEdges.RightMost(), edge );
 }
 
 //=============================================================================
@@ -221,14 +229,14 @@ bool SurfaceMesh::PathConnectedComponent::GenerateInitialTriangle( const Surface
 bool SurfaceMesh::PathConnectedComponent::GenerateNewTriangle( const Surface& surface, const GenerationParameters& genParms )
 {
 	// If there is no edge to process, then our job is done.
-	Edge* processEdge = ( Edge* )edgeList.LeftMost();
+	Edge* processEdge = ( Edge* )edgeQueue.LeftMost();
 	if( !processEdge )
 		return true;
 
-	// No matter what happens with the edge, we remove it from the list
-	// to indicate that we have considered it and processed it.
-	edgeList.Remove( processEdge, false );
-	Utilities::ScopeDelete< Edge > scopeDelete( processEdge );
+	// No matter what happens with the edge, we remove it from the queue
+	// and add it to the processed list to indicate that we have considered
+	// it and processed it.
+	EdgeProcessed( processEdge );
 
 	// If the entire edge is out of bounds, then we're done.
 	if( Aabb::IS_OUTSIDE_BOX == AabbSide( genParms.aabb, processEdge->vertex[0]->point, genParms.epsilon ) )
@@ -272,12 +280,12 @@ bool SurfaceMesh::PathConnectedComponent::GenerateNewTriangle( const Surface& su
 	{
 		if( ccwVertex == newVertex )
 			triangle->adjacentTriangle[1] = adjacentEdge->triangle;
-		edgeList.Remove( adjacentEdge, true );
+		EdgeProcessed( adjacentEdge );
 	}
 	else
 	{
 		adjacentEdge = new Edge( processEdge->vertex[0], newVertex, triangle );
-		edgeList.InsertRightOf( edgeList.RightMost(), adjacentEdge );
+		edgeQueue.InsertRightOf( edgeQueue.RightMost(), adjacentEdge );
 	}
 	
 	// We either create a new CW edge or delete an old one.
@@ -286,12 +294,12 @@ bool SurfaceMesh::PathConnectedComponent::GenerateNewTriangle( const Surface& su
 	{
 		if( cwVertex == newVertex )
 			triangle->adjacentTriangle[2] = adjacentEdge->triangle;
-		edgeList.Remove( adjacentEdge, true );
+		EdgeProcessed( adjacentEdge );
 	}
 	else
 	{
 		adjacentEdge = new Edge( newVertex, processEdge->vertex[1], triangle );
-		edgeList.InsertRightOf( edgeList.RightMost(), adjacentEdge );
+		edgeQueue.InsertRightOf( edgeQueue.RightMost(), adjacentEdge );
 	}
 
 	// Lastly, knowing that the new triangle points to its adjacent triangles,
@@ -331,7 +339,7 @@ SurfaceMesh::Vertex* SurfaceMesh::PathConnectedComponent::FindVertexForEdge( Edg
 		// Look for a vertex that we need to connect with.
 		double minimumDistance = 0.0;
 		Vertex* likelyVertex = 0;
-		for( Edge* edge = ( Edge* )edgeList.LeftMost(); edge; edge = ( Edge* )edge->Right() )
+		for( Edge* edge = ( Edge* )edgeQueue.LeftMost(); edge; edge = ( Edge* )edge->Right() )
 		{
 			for( int index = 0; index < 2; index++ )
 			{
@@ -400,10 +408,14 @@ void SurfaceMesh::Triangle::PatchAdjacencies( void )
 }
 
 //=============================================================================
+// Here we search both the process pending edge list and the processed edges list.
 SurfaceMesh::Edge* SurfaceMesh::PathConnectedComponent::FindEdge( Vertex* vertex0, Vertex* vertex1 )
 {
 	Edge* foundEdge = 0;
-	for( Edge* edge = ( Edge* )edgeList.LeftMost(); edge && !foundEdge; edge = ( Edge* )edge->Right() )
+	for( Edge* edge = ( Edge* )edgeQueue.LeftMost(); edge && !foundEdge; edge = ( Edge* )edge->Right() )
+		if( ( edge->vertex[0] == vertex0 && edge->vertex[1] == vertex1 ) || ( edge->vertex[0] == vertex1 && edge->vertex[1] == vertex0 ) )
+			foundEdge = edge;
+	for( Edge* edge = ( Edge* )processedEdges.LeftMost(); edge && !foundEdge; edge = ( Edge* )edge->Right() )
 		if( ( edge->vertex[0] == vertex0 && edge->vertex[1] == vertex1 ) || ( edge->vertex[0] == vertex1 && edge->vertex[1] == vertex0 ) )
 			foundEdge = edge;
 	return foundEdge;
@@ -548,7 +560,7 @@ void SurfaceMesh::PathConnectedComponent::Render( RenderInterface& renderInterfa
 {
 	// Go draw all the triangles with various colors so
 	// that we can easily distinguish between them.
-	srand(0);		// A consistent seed gives us consistent colors between frames.
+	int colorIndex = 0;
 	for( const Triangle* triangle = ( const Triangle* )triangleList.LeftMost(); triangle; triangle = ( const Triangle* )triangle->Right() )
 	{
 		Vector color;
@@ -556,11 +568,19 @@ void SurfaceMesh::PathConnectedComponent::Render( RenderInterface& renderInterfa
 			Zero( color );
 		else
 		{
-			switch( rand() % 3 )
+			colorIndex = ( colorIndex + 1 ) % 10;
+			switch( colorIndex )
 			{
-				case 0: Set( color, 1.0, 1.0, 0.0 ); break;
-				case 1: Set( color, 0.0, 1.0, 0.0 ); break;
-				case 2: Set( color, 0.0, 0.0, 1.0 ); break;
+				case 0: Set( color, 0.7, 0.0, 0.0 ); break;
+				case 1: Set( color, 0.0, 0.7, 0.0 ); break;
+				case 2: Set( color, 0.0, 0.0, 0.7 ); break;
+				case 3: Set( color, 0.7, 0.7, 0.0 ); break;
+				case 4: Set( color, 0.0, 0.7, 0.7 ); break;
+				case 5: Set( color, 0.7, 0.0, 0.7 ); break;
+				case 6: Set( color, 0.7, 0.1, 0.3 ); break;
+				case 7: Set( color, 0.1, 0.3, 0.7 ); break;
+				case 8: Set( color, 0.3, 0.7, 0.1 ); break;
+				case 9: Set( color, 0.5, 0.5, 0.5 ); break;
 			}
 		}
 
@@ -580,7 +600,7 @@ void SurfaceMesh::PathConnectedComponent::Render( RenderInterface& renderInterfa
 		Vector color;
 		Set( color, 1.0, 0.0, 0.0 );
 
-		for( const Edge* edge = ( const Edge* )edgeList.LeftMost(); edge; edge = ( const Edge* )edge->Right() )
+		for( const Edge* edge = ( const Edge* )edgeQueue.LeftMost(); edge; edge = ( const Edge* )edge->Right() )
 		{
 			Vector vertex0, vertex1;
 			Copy( vertex0, edge->vertex[0]->point );
@@ -589,6 +609,24 @@ void SurfaceMesh::PathConnectedComponent::Render( RenderInterface& renderInterfa
 			renderInterface.RenderLine( vertex0, vertex1, color, 1.0 );
 		}
 	}
+
+	// Draw the edges we have already processed.
+#if 0
+	if( forDebug )
+	{
+		Vector color;
+		Set( color, 0.0, 0.0, 1.0 );
+
+		for( const Edge* edge = ( const Edge* )processedEdges.LeftMost(); edge; edge = ( const Edge* )edge->Right() )
+		{
+			Vector vertex0, vertex1;
+			Copy( vertex0, edge->vertex[0]->point );
+			Copy( vertex1, edge->vertex[1]->point );
+
+			renderInterface.RenderLine( vertex0, vertex1, color, 1.0 );
+		}
+	}
+#endif
 
 	// In debug mode, it would be helpful to see the adjacency information.
 #if 1

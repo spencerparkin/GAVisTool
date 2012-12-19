@@ -164,10 +164,12 @@ namespace VectorMath
 			Edge* FindEdge( Vertex* vertex0, Vertex* vertex1 );
 			static double CalculateInteriorAngle( Vertex* vertex0, Vertex* vertex1, Vertex* vertex2 );
 			Vertex* FindVertexForEdge( Edge* processEdge, Vertex*& ccwVertex, Vertex*& cwVertex, Plane& edgePlane, const GenerationParameters& genParms );
+			void EdgeProcessed( Edge* edge );
 
 			Utilities::List vertexList;
 			Utilities::List triangleList;
-			Utilities::List edgeList;
+			Utilities::List edgeQueue;
+			Utilities::List processedEdges;
 			int visitationKey;
 		};
 
