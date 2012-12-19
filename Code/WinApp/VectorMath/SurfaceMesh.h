@@ -28,7 +28,7 @@ namespace VectorMath
 		{
 		public:
 
-			virtual void RenderTriangle( const VectorMath::Triangle& triangle, const Vector& color, double alpha ) = 0;
+			virtual void RenderTriangle( const VectorMath::Triangle& triangle, const VectorMath::TriangleNormals* triangleNormals, const Vector& color, double alpha ) = 0;
 			virtual void RenderLine( const Vector& vertex0, const Vector& vertex1, const Vector& color, double alpha ) = 0;
 			virtual void RenderArrow( const Vector& vertex0, const Vector& vertex1, const Vector& color, double alpha ) {}
 		};
@@ -87,6 +87,9 @@ namespace VectorMath
 
 			// This is used in an algorithm for visiting the vertices of the mesh.
 			int visitationKey;
+
+			// This is used to get smooth shading of the surface.
+			Vector normal;
 		};
 
 		//=============================================================================
@@ -165,7 +168,7 @@ namespace VectorMath
 			virtual ~PathConnectedComponent( void );
 
 			bool IsPointOnSurface( const Vector& point, double epsilon ) const;
-			void Render( RenderInterface& renderInterface, bool forDebug ) const;
+			void Render( RenderInterface& renderInterface, const Vector& color, double alpha, bool forDebug ) const;
 
 		private:
 
@@ -179,6 +182,7 @@ namespace VectorMath
 			void EdgeProcessed( Edge* edge );
 			bool FrontierPointIsAcceptable( const Vector& point, Triangle* triangle, const GenerationParameters& genParms );
 			bool FrontierPointIsAcceptable( const Vector& point, const Vector& normal, Triangle* triangle, const GenerationParameters& genParms );
+			void CalculateVertexNormals( void );
 
 			Utilities::List vertexList;
 			Utilities::List triangleList;
@@ -194,7 +198,7 @@ namespace VectorMath
 		bool Generate( const Surface& surface, const GenerationParameters& genParms );
 
 		// Provide what might be a convenient way to render the mesh.
-		void Render( RenderInterface& renderInterface, bool forDebug ) const;
+		void Render( RenderInterface& renderInterface, const Vector& color, double alpha, bool forDebug = false ) const;
 
 	private:
 

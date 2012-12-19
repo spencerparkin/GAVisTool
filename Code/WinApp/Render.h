@@ -85,7 +85,7 @@ public:
 
 	// This is the main API for drawing stuff using the renderer.
 	void DrawPoint( const VectorMath::Vector& pos, const VectorMath::Vector& normal );
-	void DrawTriangle( const VectorMath::Triangle& triangleGeometry );
+	void DrawTriangle( const VectorMath::Triangle& triangleGeometry, const VectorMath::TriangleNormals* triangleNormals = 0 );
 	void DrawLine( const VectorMath::Vector& pos0, const VectorMath::Vector& pos1 );
 	void DrawTube( const VectorMath::Vector& pos0, const VectorMath::Vector& pos1, double tubeRadius, Resolution resolution = RES_USER );
 	void DrawSphere( const VectorMath::Vector& pos, double sphereRadius, Resolution resolution = RES_USER );

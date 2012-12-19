@@ -765,7 +765,7 @@ void GAVisToolRender::DrawPoint( const VectorMath::Vector& pos, const VectorMath
 }
 
 //=============================================================================
-void GAVisToolRender::DrawTriangle( const VectorMath::Triangle& triangleGeometry )
+void GAVisToolRender::DrawTriangle( const VectorMath::Triangle& triangleGeometry, const VectorMath::TriangleNormals* triangleNormals /*= 0*/ )
 {
 	Triangle* triangle = activePrimitiveCache->AllocateTriangle();
 	if( !triangle )
@@ -777,9 +777,14 @@ void GAVisToolRender::DrawTriangle( const VectorMath::Triangle& triangleGeometry
 
 	VectorMath::CopyTriangle( triangle->triangle, triangleGeometry );
 	VectorMath::CalcNormal( triangleGeometry, triangle->normal, true );
-	VectorMath::Copy( triangle->triangleNormals.normal[0], triangle->normal );
-	VectorMath::Copy( triangle->triangleNormals.normal[1], triangle->normal );
-	VectorMath::Copy( triangle->triangleNormals.normal[2], triangle->normal );
+	if( triangleNormals )
+		CopyTriangleNormals( triangle->triangleNormals, *triangleNormals );
+	else
+	{
+		VectorMath::Copy( triangle->triangleNormals.normal[0], triangle->normal );
+		VectorMath::Copy( triangle->triangleNormals.normal[1], triangle->normal );
+		VectorMath::Copy( triangle->triangleNormals.normal[2], triangle->normal );
+	}
 	VectorMath::MakePlane( triangle->triangle, triangle->trianglePlane );
 
 	if( renderMode == RENDER_MODE_SELECTION )

@@ -119,10 +119,10 @@ void SurfaceGeometry::RegenerateSurfaceGeometry( void )
 				this->render = render;
 			}
 
-			/*virtual*/ void RenderTriangle( const VectorMath::Triangle& triangle, const VectorMath::Vector& color, double alpha ) override
+			/*virtual*/ void RenderTriangle( const VectorMath::Triangle& triangle, const VectorMath::TriangleNormals* triangleNormals, const VectorMath::Vector& color, double alpha ) override
 			{
 				render->Color( color, alpha );
-				render->DrawTriangle( triangle );
+				render->DrawTriangle( triangle, triangleNormals );
 			}
 
 			/*virtual*/ void RenderLine( const VectorMath::Vector& vertex0, const VectorMath::Vector& vertex1, const VectorMath::Vector& color, double alpha ) override
@@ -143,7 +143,7 @@ void SurfaceGeometry::RegenerateSurfaceGeometry( void )
 		};
 
 		RenderInterface renderInterface( &render );
-		surfaceMesh.Render( renderInterface, true );
+		surfaceMesh.Render( renderInterface, color, alpha );
 	}
 }
 

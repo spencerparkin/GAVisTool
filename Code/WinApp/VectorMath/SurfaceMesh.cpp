@@ -71,6 +71,7 @@ SurfaceMesh::Vertex::Vertex( const Vector& point )
 {
 	Copy( this->point, point );
 	visitationKey = 0;
+	Set( normal, 1.0, 0.0, 0.0 );
 }
 
 //=============================================================================
@@ -103,6 +104,7 @@ SurfaceMesh::Triangle::Triangle( Vertex* vertex0, Vertex* vertex1, Vertex* verte
 	Cross( edge12Normal, edge12, normal );
 	Cross( edge20Normal, edge20, normal );
 
+	// These are used to define the "space" of the triangle.
 	MakePlane( edgePlane[0], vertex0->point, edge01Normal );
 	MakePlane( edgePlane[1], vertex1->point, edge12Normal );
 	MakePlane( edgePlane[2], vertex2->point, edge20Normal );
@@ -180,7 +182,31 @@ bool SurfaceMesh::PathConnectedComponent::Generate( const Surface& surface, cons
 		if( !GenerateNewTriangle( surface, genParms ) )
 			return false;
 
+	// Lastly, go calculate the vertex normals so that we can get smooth shading.
+	CalculateVertexNormals();
+
+	// Return success.
 	return true;
+}
+
+//=============================================================================
+void SurfaceMesh::PathConnectedComponent::CalculateVertexNormals( void )
+{
+	for( Vertex* vertex = ( Vertex* )vertexList.LeftMost(); vertex; vertex = ( Vertex* )vertex->Right() )
+	{
+		Zero( vertex->normal );
+		double triangleCount = 0.0;
+		for( Triangle* triangle = ( Triangle* )triangleList.LeftMost(); triangle; triangle = ( Triangle* )triangle->Right() )
+		{
+			if( triangle->FindVertexIndex( vertex ) != -1 )
+			{
+				triangleCount += 1.0;
+				Add( vertex->normal, vertex->normal, triangle->normal );
+			}
+		}
+		Scale( vertex->normal, vertex->normal, 1.0 / triangleCount );
+		Normalize( vertex->normal, vertex->normal );
+	}
 }
 
 //=============================================================================
@@ -513,6 +539,9 @@ void SurfaceMesh::Edge::MakeEdgePlane( Plane& edgePlane ) const
 }
 
 //=============================================================================
+// TODO: There is a bug where an pending edge has no CCW or CW vertex, because
+//       we infinitely loop here.  I'm not sure how this is happening.  I need
+//       to find a good test case.
 SurfaceMesh::Vertex* SurfaceMesh::Edge::FindAdjacentVertex( VertexType vertexType ) const
 {
 	// Which vertex are we pivoting about?
@@ -622,42 +651,42 @@ bool SurfaceMesh::Generate( const Surface& surface, const GenerationParameters& 
 }
 
 //=============================================================================
-void SurfaceMesh::Render( RenderInterface& renderInterface, bool forDebug ) const
+void SurfaceMesh::Render( RenderInterface& renderInterface, const Vector& color, double alpha, bool forDebug ) const
 {
 	const PathConnectedComponent* component = ( const PathConnectedComponent* )componentList.LeftMost();
 	while( component )
 	{
-		component->Render( renderInterface, forDebug );
+		component->Render( renderInterface, color, alpha, forDebug );
 		component = ( const PathConnectedComponent* )component->Right();
 	}
 }
 
 //=============================================================================
-void SurfaceMesh::PathConnectedComponent::Render( RenderInterface& renderInterface, bool forDebug ) const
+void SurfaceMesh::PathConnectedComponent::Render( RenderInterface& renderInterface, const Vector& color, double alpha, bool forDebug ) const
 {
+	Vector debugColor;
+	double debugAlpha = 0.5;
+
 	// Go draw all the triangles with various colors so
 	// that we can easily distinguish between them.
 	int colorIndex = 0;
 	for( const Triangle* triangle = ( const Triangle* )triangleList.LeftMost(); triangle; triangle = ( const Triangle* )triangle->Right() )
 	{
-		Vector color;
-		if( !forDebug )
-			Zero( color );
-		else
+		if( forDebug )
 		{
 			colorIndex = ( colorIndex + 1 ) % 10;
 			switch( colorIndex )
 			{
-				case 0: Set( color, 0.7, 0.0, 0.0 ); break;
-				case 1: Set( color, 0.0, 0.7, 0.0 ); break;
-				case 2: Set( color, 0.0, 0.0, 0.7 ); break;
-				case 3: Set( color, 0.7, 0.7, 0.0 ); break;
-				case 4: Set( color, 0.0, 0.7, 0.7 ); break;
-				case 5: Set( color, 0.7, 0.0, 0.7 ); break;
-				case 6: Set( color, 0.7, 0.1, 0.3 ); break;
-				case 7: Set( color, 0.1, 0.3, 0.7 ); break;
-				case 8: Set( color, 0.3, 0.7, 0.1 ); break;
-				case 9: Set( color, 0.5, 0.5, 0.5 ); break;
+				case 0: Set( debugColor, 0.7, 0.0, 0.0 ); break;
+				case 1: Set( debugColor, 0.0, 0.7, 0.0 ); break;
+				case 2: Set( debugColor, 0.0, 0.0, 0.7 ); break;
+				case 3: Set( debugColor, 0.7, 0.7, 0.0 ); break;
+				case 4: Set( debugColor, 0.0, 0.7, 0.7 ); break;
+				case 5: Set( debugColor, 0.7, 0.0, 0.7 ); break;
+				case 6: Set( debugColor, 0.7, 0.1, 0.3 ); break;
+				case 7: Set( debugColor, 0.1, 0.3, 0.7 ); break;
+				case 8: Set( debugColor, 0.3, 0.7, 0.1 ); break;
+				case 9: Set( debugColor, 0.5, 0.5, 0.5 ); break;
 			}
 		}
 
@@ -666,7 +695,15 @@ void SurfaceMesh::PathConnectedComponent::Render( RenderInterface& renderInterfa
 		Copy( triangleVertices.vertex[1], triangle->vertex[1]->point );
 		Copy( triangleVertices.vertex[2], triangle->vertex[2]->point );
 
-		renderInterface.RenderTriangle( triangleVertices, color, 0.5 );
+		VectorMath::TriangleNormals triangleNormals;
+		Copy( triangleNormals.normal[0], triangle->vertex[0]->normal );
+		Copy( triangleNormals.normal[1], triangle->vertex[1]->normal );
+		Copy( triangleNormals.normal[2], triangle->vertex[2]->normal );
+
+		if( forDebug )
+			renderInterface.RenderTriangle( triangleVertices, 0, debugColor, debugAlpha );
+		else
+			renderInterface.RenderTriangle( triangleVertices, &triangleNormals, color, alpha );
 	}
 	
 	// Now go draw all of the edges on the periphery.
