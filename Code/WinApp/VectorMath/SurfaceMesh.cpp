@@ -49,6 +49,9 @@ SurfaceMesh::GenerationParameters::GenerationParameters( void )
 	// not connect up to the right existing vertex.
 	frontierAngle = PI / 2.0;
 
+	// This should be kept fairly small.  We're trying to account for curvature of the surface here.
+	deviationAngle = PI / 4.0;
+
 	// In theory, this means we can generate a mesh for a surface having up to
 	// four path connected components.
 	Set( seedList[0], -10.0, -10.0, -10.0 );
@@ -85,11 +88,43 @@ SurfaceMesh::Triangle::Triangle( Vertex* vertex0, Vertex* vertex1, Vertex* verte
 	adjacentTriangle[0] = 0;
 	adjacentTriangle[1] = 0;
 	adjacentTriangle[2] = 0;
+
+	Vector edge01, edge12, edge20;
+	Sub( edge01, vertex1->point, vertex0->point );
+	Sub( edge12, vertex2->point, vertex1->point );
+	Sub( edge20, vertex0->point, vertex2->point );
+
+	// This should be non-zero if we're dealing with a non-degenerate triangle.
+	Cross( normal, edge01, edge12 );
+	Normalize( normal, normal );
+
+	Vector edge01Normal, edge12Normal, edge20Normal;
+	Cross( edge01Normal, edge01, normal );
+	Cross( edge12Normal, edge12, normal );
+	Cross( edge20Normal, edge20, normal );
+
+	MakePlane( edgePlane[0], vertex0->point, edge01Normal );
+	MakePlane( edgePlane[1], vertex1->point, edge12Normal );
+	MakePlane( edgePlane[2], vertex2->point, edge20Normal );
+
+	visitationKey = 0;
 }
 
 //=============================================================================
 /*virtual*/ SurfaceMesh::Triangle::~Triangle( void )
 {
+}
+
+//=============================================================================
+bool SurfaceMesh::Triangle::VertexIsInTriangleSpace( const Vector& vertex ) const
+{
+	if( Plane::SIDE_FRONT == PlaneSide( edgePlane[0], vertex ) )
+		return false;
+	if( Plane::SIDE_FRONT == PlaneSide( edgePlane[1], vertex ) )
+		return false;
+	if( Plane::SIDE_FRONT == PlaneSide( edgePlane[2], vertex ) )
+		return false;
+	return true;
 }
 
 //=============================================================================
@@ -258,11 +293,21 @@ bool SurfaceMesh::PathConnectedComponent::GenerateNewTriangle( const Surface& su
 	if( !newVertex )
 	{
 		// Walk into the new frontier.  We fail here if we fail to converge to the surface.
-		Vector point;
-		Lerp( point, processEdge->vertex[0]->point, processEdge->vertex[1]->point, 0.5 );
-		AddScale( point, point, edgePlane.normal, genParms.walkDistance );
-		if( !surface.ConvergePointToSurfaceInPlane( 0, point, genParms.epsilon ) )
-			return false;
+		Vector edgeMidpoint, point;
+		Lerp( edgeMidpoint, processEdge->vertex[0]->point, processEdge->vertex[1]->point, 0.5 );
+		bool pointIsAcceptable = false;
+		for( double scale = 1.0; scale > 0.1 && !pointIsAcceptable; scale *= 0.5 )
+		{
+			AddScale( point, edgeMidpoint, edgePlane.normal, genParms.walkDistance * scale );
+			if( !surface.ConvergePointToSurfaceInPlane( 0, point, genParms.epsilon ) )
+				return false;
+			pointIsAcceptable = FrontierPointIsAcceptable( point, processEdge->triangle, genParms );
+		}
+
+		// If ultimately the point is not acceptable, fail to create an new triangle.
+		// It's likely that an adjacent edge won't fail, and the final mesh won't have a hole in it.
+		if( !pointIsAcceptable )
+			return true;
 
 		// Add the new point to our list.
 		newVertex = new Vertex( point );
@@ -305,6 +350,40 @@ bool SurfaceMesh::PathConnectedComponent::GenerateNewTriangle( const Surface& su
 	triangle->PatchAdjacencies();
 
 	// Return success.
+	return true;
+}
+
+//=============================================================================
+// Visit all triangles at and around the given triangle that do not deviate
+// from the orientation of the given triangle by a pre-determined amount of angle.
+bool SurfaceMesh::PathConnectedComponent::FrontierPointIsAcceptable( const Vector& point, Triangle* triangle, const GenerationParameters& genParms )
+{
+	visitationKey++;
+	return FrontierPointIsAcceptable( point, triangle->normal, triangle, genParms );
+}
+
+//=============================================================================
+bool SurfaceMesh::PathConnectedComponent::FrontierPointIsAcceptable( const Vector& point, const Vector& normal, Triangle* triangle, const GenerationParameters& genParms )
+{
+	if( triangle->visitationKey == visitationKey )
+		return true;
+
+	triangle->visitationKey = visitationKey;
+
+	if( AngleBetween( triangle->normal, normal ) > genParms.deviationAngle )
+		return true;
+
+	if( triangle->VertexIsInTriangleSpace( point ) )
+		return false;
+
+	for( int index = 0; index < 3; index++ )
+	{
+		Triangle* adjacentTriangle = triangle->adjacentTriangle[ index ];
+		if( adjacentTriangle )
+			if( !FrontierPointIsAcceptable( point, normal, adjacentTriangle, genParms ) )
+				return false;
+	}
+
 	return true;
 }
 

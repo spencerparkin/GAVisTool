@@ -61,6 +61,10 @@ namespace VectorMath
 			// incident and we'll still connect a triangle on these edges.
 			double frontierAngle;
 
+			// This is the maximum amount of angle we can deviate from a root
+			// triangle used in a traversal algorithm about that root triangle.
+			double deviationAngle;
+
 			// We try to find all the different components of the mesh by converging
 			// different seed points to the surface of the given surface.  This is
 			// not a very smart way to do it, but until I can think of something better,
@@ -102,6 +106,9 @@ namespace VectorMath
 			// This is used to patch adjacencies of adjacent triangles.
 			void PatchAdjacencies( void );
 
+			// Tell us if the given vertex is in the space of this triangle.
+			bool VertexIsInTriangleSpace( const Vector& vertex ) const;
+
 			// The vertices are ordered counter clock-wise.  That is, when you
 			// imagine the triangle on paper, the vertices are drawn in that order.
 			Vertex* vertex[3];
@@ -109,6 +116,11 @@ namespace VectorMath
 			// An adjacent triangle K refers to the triangle sharing the edge
 			// having vertices K and (K+1) mod 3.
 			Triangle* adjacentTriangle[3];
+
+			// These are used to prevent the creation of unwanted triangles.
+			Vector normal;
+			Plane edgePlane[3];
+			int visitationKey;
 		};
 
 		//=============================================================================
@@ -165,6 +177,8 @@ namespace VectorMath
 			static double CalculateInteriorAngle( Vertex* vertex0, Vertex* vertex1, Vertex* vertex2 );
 			Vertex* FindVertexForEdge( Edge* processEdge, Vertex*& ccwVertex, Vertex*& cwVertex, Plane& edgePlane, const GenerationParameters& genParms );
 			void EdgeProcessed( Edge* edge );
+			bool FrontierPointIsAcceptable( const Vector& point, Triangle* triangle, const GenerationParameters& genParms );
+			bool FrontierPointIsAcceptable( const Vector& point, const Vector& normal, Triangle* triangle, const GenerationParameters& genParms );
 
 			Utilities::List vertexList;
 			Utilities::List triangleList;
