@@ -10,6 +10,7 @@
  */
 
 #include "SurfaceGeometry.h"
+#include "../ProgressBar.h"
 
 //=========================================================================================
 IMPLEMENT_CALCLIB_CLASS1( SurfaceGeometry, GAVisToolGeometry );
@@ -70,6 +71,7 @@ void SurfaceGeometry::RegenerateSurfaceGeometry( void )
 			VectorMath::Copy( traceParameters.axis, axis[ index ] );
 
 			// Append to the trace list all traces along this axis.
+			// TODO: Use the progress bar here too.
 			surface->GenerateTracesAlongAxis( traceParameters, traceList );
 		}
 	}
@@ -77,14 +79,18 @@ void SurfaceGeometry::RegenerateSurfaceGeometry( void )
 	{
 		// TODO: We need to create context menus for geometries in the inventory so that we can adjust these per geometry.
 		//       You should also have the option to switch to/from the more reliable wire-frame rendering mode.
-		// TODO: We should throw up a progress bar here.
-
+		
 		VectorMath::SurfaceMesh::GenerationParameters genParms;
 		genParms.maxIterations = 12000;
 		genParms.walkDistance = 0.5;
 		//genParms.walkDistance = 0.25;
 		//genParms.walkDistance = 0.15;
+#if 0
+		GAVisToolProgressBar progressBar;
+		surfaceMesh.Generate( *surface, genParms, &progressBar );
+#else
 		surfaceMesh.Generate( *surface, genParms );
+#endif
 	}
 }
 

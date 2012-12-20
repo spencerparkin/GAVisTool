@@ -12,6 +12,7 @@
 #pragma once
 
 #include "Surface.h"
+#include "ProgressInterface.h"
 
 namespace VectorMath
 {
@@ -175,7 +176,7 @@ namespace VectorMath
 		private:
 
 			void WipeClean( void );
-			bool Generate( const Surface& surface, const Vector& surfacePoint, const GenerationParameters& genParms );
+			bool Generate( const Surface& surface, const Vector& surfacePoint, const GenerationParameters& genParms, ProgressInterface* progressInterface );
 			bool GenerateInitialTriangle( const Surface& surface, const Vector& surfacePoint, const GenerationParameters& genParms );
 			bool GenerateNewTriangle( const Surface& surface, const GenerationParameters& genParms );
 			Edge* FindEdge( Vertex* vertex0, Vertex* vertex1 );
@@ -198,7 +199,7 @@ namespace VectorMath
 		bool IsPointOnSurface( const Vector& point, double epsilon ) const;
 
 		// Generate all components of the given surface.
-		bool Generate( const Surface& surface, const GenerationParameters& genParms );
+		bool Generate( const Surface& surface, const GenerationParameters& genParms, ProgressInterface* progressInterface = 0 );
 
 		// Provide what might be a convenient way to render the mesh.
 		void Render( RenderInterface& renderInterface, const Vector& color, double alpha, bool forDebug = false ) const;

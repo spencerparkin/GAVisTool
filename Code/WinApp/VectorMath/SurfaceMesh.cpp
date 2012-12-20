@@ -167,8 +167,17 @@ void SurfaceMesh::PathConnectedComponent::WipeClean( void )
 //=============================================================================
 // Generate the path connected component of the given surface that contains
 // the given surface point.
-bool SurfaceMesh::PathConnectedComponent::Generate( const Surface& surface, const Vector& surfacePoint, const GenerationParameters& genParms )
+bool SurfaceMesh::PathConnectedComponent::Generate( const Surface& surface, const Vector& surfacePoint, const GenerationParameters& genParms, ProgressInterface* progressInterface )
 {
+	// Throw up a progress indicator, if desired.
+	// We can't really given a progress percentage, because
+	// we don't know how many iterations it's going to take.
+	if( progressInterface )
+	{
+		progressInterface->Begin( "Calculating path-connected component of surface..." );
+		progressInterface->Update( 99.0 );
+	}
+
 	// Start with a clean slate.
 	WipeClean();
 
@@ -177,10 +186,24 @@ bool SurfaceMesh::PathConnectedComponent::Generate( const Surface& surface, cons
 		return false;
 
 	// We then build upon the initial triangle until the final triangle is generated.
-	int iterationCount = 0;
-	while( edgeQueue.Count() > 0 && ++iterationCount <= genParms.maxIterations )
+	for( int iterationCount = 0; iterationCount < genParms.maxIterations; iterationCount++ )
+	{
+		// This is our desired termination condition.
+		if( edgeQueue.Count() == 0 )
+			break;
+		
+		// Build up the mesh.
 		if( !GenerateNewTriangle( surface, genParms ) )
 			return false;
+
+		// Keep the use aprised of our progress.
+		if( progressInterface )
+			progressInterface->Pulse();
+	}
+
+	// The progress indicator is no longer needed.
+	if( progressInterface )
+		progressInterface->Finished();
 
 	// Lastly, go calculate the vertex normals so that we can get smooth shading.
 	CalculateVertexNormals();
@@ -627,7 +650,7 @@ bool SurfaceMesh::PathConnectedComponent::IsPointOnSurface( const Vector& point,
 }
 
 //=============================================================================
-bool SurfaceMesh::Generate( const Surface& surface, const GenerationParameters& genParms )
+bool SurfaceMesh::Generate( const Surface& surface, const GenerationParameters& genParms, ProgressInterface* progressInterface /*= 0*/ )
 {
 	// Begin with a blank slate.
 	componentList.RemoveAll( true );
@@ -649,7 +672,7 @@ bool SurfaceMesh::Generate( const Surface& surface, const GenerationParameters& 
 
 		// Try to generate the component.  Did we succeed?
 		PathConnectedComponent* component = new PathConnectedComponent();
-		if( !component->Generate( surface, surfacePoint, genParms ) )
+		if( !component->Generate( surface, surfacePoint, genParms, progressInterface ) )
 		{
 			// No.  Delete the component and return failure.
 			delete component;

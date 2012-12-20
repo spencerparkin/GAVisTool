@@ -13,6 +13,8 @@
 #include "Application.h"
 #include "wxAll.h"
 
+// TODO: Use the VectorMath::ProgressInterface while building the BSP tree.
+
 //=============================================================================
 GAVisToolRender::GAVisToolRender( void ) :
 			selectionPrimitiveCache( 1024, 1024, 128, 0 ),

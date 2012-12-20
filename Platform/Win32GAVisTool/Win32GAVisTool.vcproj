@@ -293,6 +293,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\Code\WinApp\ProgressBar.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Code\WinApp\ProgressBar.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\Code\WinApp\Render.cpp"
 				>
 			</File>
@@ -549,6 +557,14 @@
 				</File>
 				<File
 					RelativePath="..\..\Code\WinApp\VectorMath\Plane.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Code\WinApp\VectorMath\ProgressInterface.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Code\WinApp\VectorMath\ProgressInterface.h"
 					>
 				</File>
 				<File

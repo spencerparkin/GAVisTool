@@ -42,6 +42,7 @@
 #include <wx/slider.h>
 #include <wx/stattext.h>
 #include <wx/treectrl.h>
+#include <wx/progdlg.h>
 
 // This is cheating.
 extern "C" HINSTANCE wxGetInstance();
