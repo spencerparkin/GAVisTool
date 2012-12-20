@@ -17,6 +17,9 @@
 namespace VectorMath
 {
 	//=============================================================================
+	// A better way to solve this problem might be to generate
+	// a lattice from the surface first, then generate a triangular
+	// mesh from the lattice.
 	class SurfaceMesh
 	{
 	public:
