@@ -54,7 +54,9 @@ namespace VectorMath
 			int maxIterations;
 
 			// This is how far we walk out into the tangent space of an edge
-			// or point to build upon the partially generated mesh.
+			// or point to build upon the partially generated mesh.  It would
+			// be nice if we could do an adaptive step-size that is sensative
+			// to the amount of curvature in the surface as any given point.
 			double walkDistance;
 
 			// This is the maximum angle at which two adjacent edges can be
@@ -141,7 +143,7 @@ namespace VectorMath
 			// Wind through triangles as much as possible in the given direction
 			// to find an adjacent vertex.
 			enum VertexType { CW_VERTEX, CCW_VERTEX };
-			Vertex* FindAdjacentVertex( VertexType vertexType ) const;
+			Vertex* FindAdjacentVertex( VertexType vertexType, int visitationKey ) const;
 
 			// As part of a triangle, this edge, from vertex 0 to 1, goes in the
 			// counter clock-wise direction.
@@ -183,6 +185,7 @@ namespace VectorMath
 			bool FrontierPointIsAcceptable( const Vector& point, Triangle* triangle, const GenerationParameters& genParms );
 			bool FrontierPointIsAcceptable( const Vector& point, const Vector& normal, Triangle* triangle, const GenerationParameters& genParms );
 			void CalculateVertexNormals( void );
+			void AddPendingEdge( Vertex* vertex0, Vertex* vertex1, Triangle* triangle );
 
 			Utilities::List vertexList;
 			Utilities::List triangleList;

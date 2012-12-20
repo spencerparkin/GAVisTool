@@ -75,9 +75,15 @@ void SurfaceGeometry::RegenerateSurfaceGeometry( void )
 	}
 	else if( renderAs == RENDER_AS_TRIANGLE_MESH )
 	{
+		// TODO: We need to create context menus for geometries in the inventory so that we can adjust these per geometry.
+		//       You should also have the option to switch to/from the more reliable wire-frame rendering mode.
+		// TODO: We should throw up a progress bar here.
+
 		VectorMath::SurfaceMesh::GenerationParameters genParms;
-		genParms.maxIterations = 2000;
+		genParms.maxIterations = 12000;
 		genParms.walkDistance = 0.5;
+		//genParms.walkDistance = 0.25;
+		//genParms.walkDistance = 0.15;
 		surfaceMesh.Generate( *surface, genParms );
 	}
 }

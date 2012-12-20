@@ -280,6 +280,13 @@ void SurfaceMesh::PathConnectedComponent::EdgeProcessed( Edge* edge )
 }
 
 //=============================================================================
+void SurfaceMesh::PathConnectedComponent::AddPendingEdge( Vertex* vertex0, Vertex* vertex1, Triangle* triangle )
+{
+	Edge* edge = new Edge( vertex0, vertex1, triangle );
+	edgeQueue.InsertRightOf( edgeQueue.RightMost(), edge );
+}
+
+//=============================================================================
 // If at all possible, we always want to connect an edge to an existing
 // vertex.  Otherwise, our algorithm could never terminate in the way
 // that we would hope, having completely covered the surface.  The first
@@ -315,6 +322,10 @@ bool SurfaceMesh::PathConnectedComponent::GenerateNewTriangle( const Surface& su
 	Vertex* ccwVertex = 0, *cwVertex = 0;
 	Vertex* newVertex = FindVertexForEdge( processEdge, ccwVertex, cwVertex, edgePlane, genParms );
 
+	// If these weren't found, then something is wrong.
+	if( !( ccwVertex && cwVertex ) )
+		return true;
+
 	// Ultimately, if we couldn't find an existing vertex, we need to create a new one.
 	if( !newVertex )
 	{
@@ -347,28 +358,22 @@ bool SurfaceMesh::PathConnectedComponent::GenerateNewTriangle( const Surface& su
 
 	// We either create a new CCW edge or delete an old one.
 	Edge* adjacentEdge = FindEdge( processEdge->vertex[0], newVertex );
-	if( adjacentEdge )
+	if( !adjacentEdge )
+		AddPendingEdge( processEdge->vertex[0], newVertex, triangle );
+	else
 	{
 		triangle->adjacentTriangle[1] = adjacentEdge->triangle;
 		EdgeProcessed( adjacentEdge );
 	}
-	else
-	{
-		adjacentEdge = new Edge( processEdge->vertex[0], newVertex, triangle );
-		edgeQueue.InsertRightOf( edgeQueue.RightMost(), adjacentEdge );
-	}
 	
 	// We either create a new CW edge or delete an old one.
 	adjacentEdge = FindEdge( newVertex, processEdge->vertex[1] );
-	if( adjacentEdge )
+	if( !adjacentEdge )
+		AddPendingEdge( newVertex, processEdge->vertex[1], triangle );
+	else
 	{
 		triangle->adjacentTriangle[2] = adjacentEdge->triangle;
 		EdgeProcessed( adjacentEdge );
-	}
-	else
-	{
-		adjacentEdge = new Edge( newVertex, processEdge->vertex[1], triangle );
-		edgeQueue.InsertRightOf( edgeQueue.RightMost(), adjacentEdge );
 	}
 
 	// Lastly, knowing that the new triangle points to its adjacent triangles,
@@ -418,8 +423,10 @@ SurfaceMesh::Vertex* SurfaceMesh::PathConnectedComponent::FindVertexForEdge( Edg
 {
 	// We first try to find an existing vertex as the CW or CCW vertex WRT this edge.
 	Vertex* foundVertex = 0;
-	ccwVertex = processEdge->FindAdjacentVertex( Edge::CCW_VERTEX );
-	cwVertex = processEdge->FindAdjacentVertex( Edge::CW_VERTEX );
+	ccwVertex = processEdge->FindAdjacentVertex( Edge::CCW_VERTEX, ++visitationKey );
+	cwVertex = processEdge->FindAdjacentVertex( Edge::CW_VERTEX, ++visitationKey );
+	if( !( ccwVertex && cwVertex ) )
+		return 0;
 	processEdge->MakeEdgePlane( edgePlane );
 	if( Plane::SIDE_FRONT == PlaneSide( edgePlane, ccwVertex->point, genParms.epsilon ) &&
 		CalculateInteriorAngle( processEdge->vertex[0], processEdge->vertex[1], ccwVertex ) < genParms.frontierAngle )
@@ -539,10 +546,9 @@ void SurfaceMesh::Edge::MakeEdgePlane( Plane& edgePlane ) const
 }
 
 //=============================================================================
-// TODO: There is a bug where an pending edge has no CCW or CW vertex, because
-//       we infinitely loop here.  I'm not sure how this is happening.  I need
-//       to find a good test case.
-SurfaceMesh::Vertex* SurfaceMesh::Edge::FindAdjacentVertex( VertexType vertexType ) const
+// That we're passing in a visitation key is actually a sign that there's
+// a more fundamental bug going on.
+SurfaceMesh::Vertex* SurfaceMesh::Edge::FindAdjacentVertex( VertexType vertexType, int visitationKey ) const
 {
 	// Which vertex are we pivoting about?
 	Vertex* pivotVertex = 0;
@@ -554,9 +560,13 @@ SurfaceMesh::Vertex* SurfaceMesh::Edge::FindAdjacentVertex( VertexType vertexTyp
 
 	// Find the last triangle we can find while winding about that vertex
 	// in the desired direction.
+	bool windingTriangleFound = false;
 	Triangle* windingTriangle = triangle;
-	while( true )
+	do
 	{
+		if( windingTriangle->visitationKey == visitationKey )
+			break;
+		windingTriangle->visitationKey = visitationKey;
 		int vertexIndex = windingTriangle->FindVertexIndex( pivotVertex );
 		int triangleIndex = -1;
 		if( vertexType == CCW_VERTEX )
@@ -565,10 +575,16 @@ SurfaceMesh::Vertex* SurfaceMesh::Edge::FindAdjacentVertex( VertexType vertexTyp
 			triangleIndex = vertexIndex;
 		Triangle* adjacentTriangle = windingTriangle->adjacentTriangle[ triangleIndex ];
 		if( !adjacentTriangle )
-			break;
-		windingTriangle = adjacentTriangle;
+			windingTriangleFound = true;
+		else
+			windingTriangle = adjacentTriangle;
 	}
+	while( !windingTriangleFound );
 	
+	// Return null if the edge doesn't have such a vertex.
+	if( !windingTriangleFound )
+		return 0;
+
 	// Return the correct vertex of the found triangle.
 	int vertexIndex = windingTriangle->FindVertexIndex( pivotVertex );
 	if( vertexType == CCW_VERTEX )
@@ -765,8 +781,10 @@ void SurfaceMesh::PathConnectedComponent::Render( RenderInterface& renderInterfa
 					Vector edgePoint;
 					Lerp( edgePoint, triangle->vertex[ index ]->point, triangle->vertex[ ( index + 1 ) % 3 ]->point, 0.25 );
 
-					renderInterface.RenderArrow( center, edgePoint, color, 1.0 );
-					renderInterface.RenderArrow( edgePoint, adjacentCenter, color, 1.0 );
+					//renderInterface.RenderArrow( center, edgePoint, color, 1.0 );
+					//renderInterface.RenderArrow( edgePoint, adjacentCenter, color, 1.0 );
+					renderInterface.RenderLine( center, edgePoint, color, 1.0 );
+					renderInterface.RenderLine( edgePoint, adjacentCenter, color, 1.0 );
 				}
 			}
 		}
