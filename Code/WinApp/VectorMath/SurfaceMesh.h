@@ -19,7 +19,12 @@ namespace VectorMath
 	//=============================================================================
 	// A better way to solve this problem might be to generate
 	// a lattice from the surface first, then generate a triangular
-	// mesh from the lattice.
+	// mesh from the lattice.  A perhaps better approach would be
+	// to descritize a region of space around the surface using a
+	// tetrahedral BCC lattic, then remove all non-straddling tetrahedrons,
+	// and then the remaining triangular mesh on one side could be
+	// shrink-wrapped/converged to the surface.  This is similar to what
+	// was described in a recent thesis talk I attended.
 	class SurfaceMesh
 	{
 	public:
