@@ -85,7 +85,7 @@ void GAVisToolConsoleFrame::OnAbout( wxCommandEvent& WXUNUSED( event ) )
 										"Comments and questions are welcome.\n"
 										"Thank you for your interest in this program."  ) );
 	aboutDlgInfo.SetCopyright( wxT( "Copyright (C) 2012" ) );
-	aboutDlgInfo.SetWebSite( wxT( "http://sourceforge.net/projects/gavistool/" ) );
+	aboutDlgInfo.SetWebSite( wxT( "https://github.com/spencerparkin/GAVisTool" ) );
 	aboutDlgInfo.AddDeveloper( wxT( "Spencer T. Parkin" ) );
 	aboutDlgInfo.SetLicense( wxT( "MIT License" ) );
 
