@@ -149,11 +149,13 @@ void GAVisToolInventoryTree::OnItemContextMenu( wxTreeEvent& event )
 	if( !contextItem )
 		return;
 
-	// TODO: Let the context inventory item add its own context menu items.
-
-    wxMenu contextMenu( wxT( "Inventory Item Menu" ) );
+	// Build the context menu for the inventory item.
+	wxMenu contextMenu;
+	if( contextItem->AddContextMenuItems( this ) )
+		contextMenu.AppendSeparator();
 	contextMenu.Append( ID_InventoryTree_DeleteItem, wxT( "Delete" ) );
 
+	// Pop it up at the cursor.
 	wxPoint point = event.GetPoint();
 	PopupMenu( &contextMenu, point );
 

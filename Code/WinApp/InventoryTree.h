@@ -39,7 +39,7 @@ public:
 		virtual ~Item( void );
 
 		virtual void AddInventoryTreeItem( wxTreeCtrl* treeCtrl, wxTreeItemId parentItem ) const = 0;
-		//virtual void AddContextMenuItem( wxTreeCtrl* treeCtrl );
+		virtual bool AddContextMenuItems( wxTreeCtrl* treeCtrl ) const { return false; }
 
 		int ID( void ) const;
 

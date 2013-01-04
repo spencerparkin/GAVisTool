@@ -175,6 +175,20 @@ void SurfaceGeometry::DrawTrace( VectorMath::Surface::Trace* trace, GAVisToolRen
 }
 
 //=========================================================================================
+/*virtual*/ bool SurfaceGeometry::AddContextMenuItems( wxTreeCtrl* treeCtrl ) const
+{
+	// TODO: Upgrade to wxWidgets 2.9 so that we can use the bind() function.
+
+	//treeCtrl->Bind( wxEVT_COMMAND_MENU_SELECTED, &SurfaceGeometry::OnRenderTraces, this );
+	//treeCtrl->Bind( wxEVT_COMMAND_MENU_SELECTED, &SurfaceGeometry::OnRenderMesh, this );
+
+	//treeCtrl->Connect( wxEVT_COMMAND_MENU_SELECTED, 
+	//	wxObjectEventFunction
+
+	return false;
+}
+
+//=========================================================================================
 /*virtual*/ void SurfaceGeometry::CalcCenter( VectorMath::Vector& center ) const
 {
 	VectorMath::Zero( center );

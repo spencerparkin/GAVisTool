@@ -35,6 +35,8 @@ public:
 	virtual void Rotate( const VectorMath::Vector& unitAxis, float angle );
 	virtual void Scale( float scale );
 
+	virtual bool AddContextMenuItems( wxTreeCtrl* treeCtrl ) const override;
+
 protected:
 
 	void RegenerateSurfaceGeometry( void );
