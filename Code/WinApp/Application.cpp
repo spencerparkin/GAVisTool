@@ -405,8 +405,7 @@ bool GAVisToolApp::CreateLatexTexture( const wxString& latexCode, GLuint& textur
 // Can we capture the output of the command?
 bool GAVisToolApp::ExecuteCommand( const wxString& command, bool waitForProcessCompletion /*= true*/ )
 {
-	// Can't use wxExecute until I upgrade to a new version of WX.
-#if 0
+#if 1
 	
 	long exitCode = wxExecute( command, wxEXEC_SYNC | wxEXEC_HIDE_CONSOLE );
 	if( exitCode != 0 )
