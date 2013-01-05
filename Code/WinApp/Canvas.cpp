@@ -42,7 +42,8 @@ GAVisToolCanvas::GAVisToolCanvas( wxWindow* parent ) : wxGLCanvas( parent, wxID_
 	drawGeometryNames = false;
 	drawCoordinateAxes = true;
 
-	SetupOpenGL();
+	// We can't do this here anymore.  It must be done when the window is shown.
+	//SetupOpenGL();
 }
 
 //=========================================================================================

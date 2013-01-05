@@ -21,7 +21,7 @@
 			OutputDirectory="../../Build/$(ProjectName)/$(ConfigurationName)/"
 			IntermediateDirectory="../../Build/$(ProjectName)/$(ConfigurationName)/"
 			ConfigurationType="1"
-			CharacterSet="2"
+			CharacterSet="1"
 			BuildLogFile="../../Build/$(ProjectName)/$(ConfigurationName)/BuildLog.htm"
 			>
 			<Tool
@@ -42,8 +42,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../Code/CalcLib/;&quot;C:\wxWidgets-2.8.12\include&quot;;&quot;C:\wxWidgets-2.8.12\include\msvc&quot;"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
+				AdditionalIncludeDirectories="../../Code/CalcLib/;&quot;C:\wxWidgets-2.9.4\include&quot;;&quot;C:\wxWidgets-2.9.4\include\msvc&quot;"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;__WXMSW__;_UNICODE_;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -65,10 +65,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Win32CalcLib.lib wxmsw28d_core.lib wxbase28d.lib wxmsw28d_gl.lib glu32.lib comctl32.lib rpcrt4.lib winmm.lib advapi32.lib wsock32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib"
+				AdditionalDependencies="Win32CalcLib.lib wxmsw29ud_core.lib wxbase29ud.lib wxmsw29ud_gl.lib glu32.lib comctl32.lib rpcrt4.lib winmm.lib advapi32.lib wsock32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib"
 				OutputFile="../../Build/$(ProjectName)/$(ConfigurationName)/GAVisTool.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;C:\wxWidgets-2.8.12\lib\vc_lib&quot;;../../Build/Win32CalcLib/Debug/"
+				AdditionalLibraryDirectories="&quot;C:\wxWidgets-2.9.4\lib\vc_lib&quot;;../../Build/Win32CalcLib/Debug/"
 				ManifestFile="../../Build/$(ProjectName)/$(ConfigurationName)/$(TargetFileName).intermediate.manifest"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -101,7 +101,7 @@
 			OutputDirectory="../../Build/$(ProjectName)/$(ConfigurationName)/"
 			IntermediateDirectory="../../Build/$(ProjectName)/$(ConfigurationName)/"
 			ConfigurationType="1"
-			CharacterSet="2"
+			CharacterSet="1"
 			WholeProgramOptimization="1"
 			BuildLogFile="../../Build/$(ProjectName)/$(ConfigurationName)/BuildLog.htm"
 			>
@@ -124,8 +124,8 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../../Code/CalcLib/;&quot;C:\wxWidgets-2.8.12\include&quot;;&quot;C:\wxWidgets-2.8.12\include\msvc&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
+				AdditionalIncludeDirectories="../../Code/CalcLib/;&quot;C:\wxWidgets-2.9.4\include&quot;;&quot;C:\wxWidgets-2.9.4\include\msvc&quot;"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;__WXMSW__;_UNICODE_;_CRT_SECURE_NO_WARNINGS;NDEBUG"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
@@ -146,10 +146,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Win32CalcLib.lib wxmsw28_core.lib wxbase28.lib wxmsw28_gl.lib glu32.lib comctl32.lib rpcrt4.lib winmm.lib advapi32.lib wsock32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib"
+				AdditionalDependencies="Win32CalcLib.lib wxmsw29u_core.lib wxbase29u.lib wxmsw29u_gl.lib glu32.lib comctl32.lib rpcrt4.lib winmm.lib advapi32.lib wsock32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib"
 				OutputFile="../../Build/$(ProjectName)/$(ConfigurationName)/GAVisTool.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;C:\wxWidgets-2.8.12\lib\vc_lib&quot;;../../Build/Win32CalcLib/Release/"
+				AdditionalLibraryDirectories="&quot;C:\wxWidgets-2.9.4\lib\vc_lib&quot;;../../Build/Win32CalcLib/Release/"
 				ManifestFile="../../Build/$(ProjectName)/$(ConfigurationName)/$(TargetFileName).intermediate.manifest"
 				GenerateDebugInformation="true"
 				SubSystem="2"

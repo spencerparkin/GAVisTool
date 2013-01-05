@@ -15,6 +15,7 @@
 //=========================================================================================
 BEGIN_EVENT_TABLE( GAVisToolCanvasFrame, wxFrame )
 	
+	EVT_SHOW( GAVisToolCanvasFrame::OnShow )
 	EVT_SIZE( GAVisToolCanvasFrame::OnSize )
 	EVT_CLOSE( GAVisToolCanvasFrame::OnClose )
 
@@ -72,6 +73,13 @@ GAVisToolCanvasFrame::GAVisToolCanvasFrame( const wxPoint& pos, const wxSize& si
 	}
 
 	auiManager.UnInit();
+}
+
+//=========================================================================================
+void GAVisToolCanvasFrame::OnShow( wxShowEvent& event )
+{
+	if( event.IsShown() )
+		canvas->SetupOpenGL();
 }
 
 //=========================================================================================

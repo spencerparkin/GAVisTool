@@ -382,8 +382,12 @@ void GAVisToolRender::PrimitiveCache::OptimizeForAlphaSorting( BspTreeCreationMe
 			lineGrowthFactor = float( bspTree->postBspLineCount ) / float( bspTree->preBspLineCount );
 
 		wxString bspStats = wxString::Format(
+#if 0
 						wxT( "triangles{ pre-bsp: %d, post-bsp: %d, cuts: %d, growth: %f }; "
 								"lines{ pre-bsp: %d, post-bsp: %d, cuts %d, growth: %f }" ),
+#else
+						wxT( "triangles{ pre-bsp: %d, post-bsp: %d, cuts: %d, growth: %f }; lines{ pre-bsp: %d, post-bsp: %d, cuts %d, growth: %f }" ),
+#endif
 						bspTree->preBspTriangleCount,
 						bspTree->postBspTriangleCount,
 						bspTree->triangleSplitCount,

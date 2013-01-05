@@ -79,7 +79,6 @@ bool GAVisToolApp::OnInit( void )
 	canvasFrame->UpdateUserInterface();
 	canvasFrame->canvas->RedrawNeeded( true );
 
-	// This doesn't work.  :(
 	HICON hIcon = ::LoadIcon( wxGetInstance(), MAKEINTRESOURCE( IDI_ICON ) );
 	if( hIcon != NULL )
 	{
@@ -424,7 +423,7 @@ bool GAVisToolApp::ExecuteCommand( const wxString& command, bool waitForProcessC
 	memset( &processInformation, 0, sizeof( PROCESS_INFORMATION ) );
 
 	// Try to execute the command.
-	LPSTR lpszCommand = ( LPSTR )( const char* )command;
+	LPWSTR lpszCommand = ( LPWSTR )( const char* )command;
 	if( 0 == CreateProcess( NULL, lpszCommand, NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &startupInfo, &processInformation ) )
 		return false;
 	

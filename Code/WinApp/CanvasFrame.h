@@ -23,6 +23,7 @@ public:
 	GAVisToolCanvasFrame( const wxPoint& pos, const wxSize& size );
 	virtual ~GAVisToolCanvasFrame( void );
 
+	void OnShow( wxShowEvent& event );
 	void OnSize( wxSizeEvent& event );
 	void OnClose( wxCloseEvent& event );
 

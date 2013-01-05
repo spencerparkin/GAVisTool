@@ -81,9 +81,13 @@ void GAVisToolConsoleFrame::OnAbout( wxCommandEvent& WXUNUSED( event ) )
 
 	aboutDlgInfo.SetName( wxT( "GAVisTool" ) );
 	aboutDlgInfo.SetVersion( wxT( "0.5 Beta" ) );
+#if 0
 	aboutDlgInfo.SetDescription( wxT( "Please send bugs to spencer.parkin@gmail.com.\n"
 										"Comments and questions are welcome.\n"
-										"Thank you for your interest in this program."  ) );
+										"Thank you for your interest in this program." ) );
+#else
+	aboutDlgInfo.SetDescription( wxT( "Please send bugs to spencer.parkin@gmail.com.\nComments and questions are welcome.\nThank you for your interest in this program." ) );
+#endif
 	aboutDlgInfo.SetCopyright( wxT( "Copyright (C) 2012" ) );
 	aboutDlgInfo.SetWebSite( wxT( "https://github.com/spencerparkin/GAVisTool" ) );
 	aboutDlgInfo.AddDeveloper( wxT( "Spencer T. Parkin" ) );
