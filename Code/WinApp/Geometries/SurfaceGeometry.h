@@ -35,7 +35,10 @@ public:
 	virtual void Rotate( const VectorMath::Vector& unitAxis, float angle );
 	virtual void Scale( float scale );
 
-	virtual bool AddContextMenuItems( wxTreeCtrl* treeCtrl ) const override;
+	virtual bool AddContextMenuItems( wxTreeCtrl* treeCtrl, wxMenu* menu, int highestUnusedID ) override;
+
+	void OnRenderTraces( wxCommandEvent& event );
+	void OnRenderMeshes( wxCommandEvent& event );
 
 protected:
 

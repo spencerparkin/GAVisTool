@@ -151,7 +151,7 @@ void GAVisToolInventoryTree::OnItemContextMenu( wxTreeEvent& event )
 
 	// Build the context menu for the inventory item.
 	wxMenu contextMenu;
-	if( contextItem->AddContextMenuItems( this ) )
+	if( contextItem->AddContextMenuItems( this, &contextMenu, ID_InventoryTree_Unused ) )
 		contextMenu.AppendSeparator();
 	contextMenu.Append( ID_InventoryTree_DeleteItem, wxT( "Delete" ) );
 

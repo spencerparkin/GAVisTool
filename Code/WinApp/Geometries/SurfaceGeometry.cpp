@@ -10,6 +10,7 @@
  */
 
 #include "SurfaceGeometry.h"
+#include "../Application.h"
 #include "../ProgressBar.h"
 
 //=========================================================================================
@@ -175,17 +176,41 @@ void SurfaceGeometry::DrawTrace( VectorMath::Surface::Trace* trace, GAVisToolRen
 }
 
 //=========================================================================================
-/*virtual*/ bool SurfaceGeometry::AddContextMenuItems( wxTreeCtrl* treeCtrl ) const
+/*virtual*/ bool SurfaceGeometry::AddContextMenuItems( wxTreeCtrl* treeCtrl, wxMenu* menu, int highestUnusedID )
 {
-	// TODO: Upgrade to wxWidgets 2.9 so that we can use the bind() function.
+	int itemID = highestUnusedID;
 
-	//treeCtrl->Bind( wxEVT_COMMAND_MENU_SELECTED, &SurfaceGeometry::OnRenderTraces, this );
-	//treeCtrl->Bind( wxEVT_COMMAND_MENU_SELECTED, &SurfaceGeometry::OnRenderMesh, this );
+	treeCtrl->Bind( wxEVT_COMMAND_MENU_SELECTED, &SurfaceGeometry::OnRenderTraces, this, itemID++ );
+	treeCtrl->Bind( wxEVT_COMMAND_MENU_SELECTED, &SurfaceGeometry::OnRenderMeshes, this, itemID++ );
 
-	//treeCtrl->Connect( wxEVT_COMMAND_MENU_SELECTED, 
-	//	wxObjectEventFunction
+	itemID = highestUnusedID;
 
-	return false;
+	menu->Append( itemID++, wxT( "Render Traces" ) );
+	menu->Append( itemID++, wxT( "Render Meshes" ) );
+
+	return true;
+}
+
+//=========================================================================================
+void SurfaceGeometry::OnRenderTraces( wxCommandEvent& event )
+{
+	if( renderAs != RENDER_AS_SET_OF_TRACES )
+	{
+		renderAs = RENDER_AS_SET_OF_TRACES;
+		surfaceGeometryValid = false;
+		wxGetApp().canvasFrame->canvas->RedrawNeeded( true );
+	}
+}
+
+//=========================================================================================
+void SurfaceGeometry::OnRenderMeshes( wxCommandEvent& event )
+{
+	if( renderAs != RENDER_AS_TRIANGLE_MESH )
+	{
+		renderAs = RENDER_AS_TRIANGLE_MESH;
+		surfaceGeometryValid = false;
+		wxGetApp().canvasFrame->canvas->RedrawNeeded( true );
+	}
 }
 
 //=========================================================================================

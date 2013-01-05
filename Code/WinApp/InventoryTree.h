@@ -39,7 +39,7 @@ public:
 		virtual ~Item( void );
 
 		virtual void AddInventoryTreeItem( wxTreeCtrl* treeCtrl, wxTreeItemId parentItem ) const = 0;
-		virtual bool AddContextMenuItems( wxTreeCtrl* treeCtrl ) const { return false; }
+		virtual bool AddContextMenuItems( wxTreeCtrl* treeCtrl, wxMenu* menu, int highestUnusedID ) { return false; }
 
 		int ID( void ) const;
 
@@ -54,6 +54,7 @@ public:
 	{
 		ID_InventoryTree = wxID_HIGHEST,
 		ID_InventoryTree_DeleteItem,
+		ID_InventoryTree_Unused,
 	};
 
 	void OnSelectionChanged( wxTreeEvent& event );
