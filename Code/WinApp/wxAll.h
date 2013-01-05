@@ -11,6 +11,8 @@
 
 #pragma once
 
+// TODO: Clean up all header inclusion stuff and setup a pre-compiled header.
+
 #pragma warning( disable : 4267 )		// Disable warning about conversions from 'size_t' to 'unsigned int', etc.
 
 #include <wx/setup.h>
