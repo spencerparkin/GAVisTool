@@ -1,7 +1,7 @@
 // Scalar.cpp
 
 /*
- * Copyright (C) 2012 Spencer T. Parkin
+ * Copyright (C) 2013 Spencer T. Parkin
  *
  * This software has been released under the MIT License.
  * See the "License.txt" file in the project root directory
