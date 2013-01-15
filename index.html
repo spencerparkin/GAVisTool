@@ -1,75 +1,63 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>GAVisTool by spencerparkin</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/respond.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/ie.css">
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
-  </head>
-  <body>
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="https://github.com/spencerparkin/GAVisTool">View On GitHub</a></li>
-          <li class="downloads"><a href="https://github.com/spencerparkin/GAVisTool/zipball/master">ZIP</a></li>
-          <li class="downloads"><a href="https://github.com/spencerparkin/GAVisTool/tarball/master">TAR</a></li>
-          <li class="title">DOWNLOADS</li>
-        </nav>
-      </div><!-- end header -->
-
-    <div class="wrapper">
-
-      <section>
-        <div id="title">
-          <h1>GAVisTool</h1>
-          <p>Geometric Algebra Visualization Tool</p>
-          <hr>
-          <span class="credits left">Project maintained by <a href="https://github.com/spencerparkin">spencerparkin</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
-        </div>
-
-        <h3>Welcome to GitHub Pages.</h3>
-
-<p>Trying to figure this out...</p>
-		
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-
-    </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
-  </body>
+	<body>
+	<center><h1>GAVisTool</h1></center>
+	<center><h2>Geometric Algebra Visualization Tool</h2></center>
+	<center><h3>By Spencer T. Parkin</h3></center>
+	
+	<h2>Introduction</h2>
+	
+	<p>Hi!  You've happened upon the GAVisTool website.
+	(I know; it doesn't look very impressive.)  Anyhow, this
+	site is designed to introduce you to the GAVisTool software,
+	and show you how to use it.  Some basic knowledge of
+	geometric algebra (GA) is assumed.  For more information
+	on that, the following links come highly recommended by yours truely.</p>
+	
+	<ul>
+		<li><a href="http://www.science.uva.nl/ga/">The University of Amsterdam GA Website</a>
+		-- Here you'll find tutorials on GA and CGA using the GAViewer software.
+		After visiting this site, you may not decide to come back to this one.</li>
+		<li><a href="http://geocalc.clas.asu.edu/">Geometric Calculus R & D Home Page</a>
+		-- Maintained by David Hestenes himself, this site contains a great deal of information
+		on GA and GC, though perhaps not very accessible to the average reader.</li>
+		<li><a href="http://faculty.luther.edu/~macdonal/">Professor Macdonald's Home Page</a>
+		-- Professor Macdonald is the author of a number of introductory undergraduate
+		texts on the subjects of linear and geometric algebra, as well as geometric
+		calculus.</li>
+		<li><a href="http://www.mrao.cam.ac.uk/~clifford/">The University of Cambridge GA Website</a>
+		-- The researchers at this university have written a book on GA targeted at physicists, but
+		you don't have to one to get something out of their book.</li>
+	</ul>
+	
+	<p>Those are just a few sources.  Googling the internet, you're bound to run into
+	several tutorials on GA that a number of people have been kind enough to put together.</p>
+	
+	<p>That said, what is GAVisTool?  GAVisTool is an interactive computer graphics program
+	designed to demonstrate and explore concepts from GA and conformal geometric algebra.
+	It provides the user with a computation environment and view of 3D Euclidean space
+	where experaments may be rigged.  The term rig is used here in the same sense as it
+	is in common modeling programs such as Maya.</p>
+	
+	<h2>Getting Started</h2>
+	
+	<p>To get started, you need the GAVisTool software installed on your computer.
+	This is as simple as copying down the executable from <a href="">here</a>.
+	At the time of this writing, only windows is supported.  If you prefer to
+	download the source code and compile the project, you can do that by visiting
+	the GAVisTool project on git-hub
+	<a href="https://github.com/spencerparkin/GAVisTool">here</a>, and then
+	simply clone the repository.  Alternatively, you can download a ZIP file of
+	the project from
+	<a href="https://github.com/spencerparkin/GAVisTool/zipball/master">here</a>,
+	or a tar-ball from
+	<a href="https://github.com/spencerparkin/GAVisTool/tarball/master">here</a>.
+	
+	<h2>User Interface Overview</h2>
+	
+	<h2>The Console</h2>
+	
+	<h2>The Canvas</h2>
+	
+	</body>
 </html>
