@@ -7,6 +7,8 @@
 	
 	<p>To get started, you need the GAVisTool software installed on your computer.
 	This is as simple as copying down the executable from <a href="">here</a>.
+	An optimized version is available <a href="">here</a>, which has the symbolic
+	manipulation support compiled out.
 	At the time of this writing, only windows is supported.  If you prefer to
 	download the source code and compile the project, you can do that by visiting
 	the GAVisTool project on git-hub
@@ -62,12 +64,20 @@
 	such as for-loops and if-statements, but those are beyond the scope of this tutorial.</p>
 	
 	<p>One of the things that makes the GAVisTool computation engine slower than most
-	is its limited support for symbolic manipulation.  See the following screen-shot.</p>
+	is its limited support for symbolic manipulation, if you have that feature compiled
+	into the exectuable.  See the following screen-shot.</p>
 	
 	<center><img src="images/consolesymbolusage.jpg" alt="GAVisTool console symbol usage."></center>
 	
 	<p>If you compiled GAVisTool, there is a way to compile all symbolic manipulation
-	support out of the computation engine.  This should give you better performance.</p>
+	support out of the computation engine.  This should give you better performance.
+	In any case, you'll notice above that there are variables beginning with a dollars sign.
+	These variables are symbolic literal values, not the kind of variables you have
+	already seen where you can store values into them and retrieve values from them.
+	Symbolic literal values exist on the same par as numeric and string literal values.
+	You can do math with such values and get a literal result.  Take care to note that
+	no geometry can be visualized from a variable containing a value that has any
+	mix of symbolic	literal values.</p>
 	
 	<p>Don't expect GAVisTool to factor your polynomials or solve equations for you.
 	It is not that sophsiticated; although stubs in code have been placed for such things
@@ -81,17 +91,17 @@
 	<p>One think you might have noticed in the previous screen-shot is the string "x".
 	Officially, there is one and only one data-type in the GAVisTool computation engine,
 	and it is the general multivector of a geometric algebra.  The string data-type, however,
-	has snuck it's way in there as, admittedly, somewhat of a hack.  Strings serve a veriety
+	has snuck its way in there as, admittedly, somewhat of a hack.  Strings serve a veriety
 	of purposes as input to various functions, but mostly as containers for expressions and
-	commands that you want stored so that they can be executed by GAVisTool at a later time.
-	We'll see an example of this soon.</p>
+	commands that you want stored for later execution by GAVisTool at a future point in time.
+	Examples of this are given in subsequent tutorials.</p>
 	
 	<h2>The Canvas</h2>
 	
 	<p>So by now it's clear that you can do a bunch of math in the console window, but
 	the entire purpose of GAVisTool is to allow you to visualize the math and interact
 	with it graphically.  To that end, go ahead and run the expressions in the following
-	screen-shot.</p>
+	screen-shot.  Only type the lines of text that appear left of the "-->" arrows.</p>
 	
 	<center><img src="images/consolemakesphere.jpg" alt="GAVisTool console create shpere."></center>
 	
@@ -127,8 +137,8 @@
 	
 	<p>At this point we have covered the most basic set of tools for expirementation
 	with the GAVisTool software.  There are more features to be discussed in sperate
-	tutorials, but to make this tutorial complete, a full list of bind functions needs
-	to be presented.  They are as follows, where in the following table, the asterisk
+	tutorials, but to make this tutorial complete, a full list of bind functions for CGA needs
+	to be presented.  They are as follows, where in the table below, the asterisk
 	may be deleted or replace by "dual_"</p>
 	
 	<center><table border="1">
