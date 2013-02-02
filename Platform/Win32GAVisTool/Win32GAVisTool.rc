@@ -1,5 +1,6 @@
 // Microsoft Visual C++ generated resource script.
 //
+#if 0
 #include "../../Code/WinApp/resource.h"
 
 #define APSTUDIO_READONLY_SYMBOLS
@@ -70,3 +71,4 @@ IDI_ICON               ICON                    "icon.ico"
 /////////////////////////////////////////////////////////////////////////////
 #endif    // not APSTUDIO_INVOKED
 
+#endif
