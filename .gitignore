@@ -7,6 +7,8 @@ RCa02968
 
 # Ignore intermediate build files.
 Build/
+win32-release/
+win32-debug/
 
 # Ignore intermediate latex files.
 *.dvi

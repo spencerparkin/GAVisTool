@@ -1,0 +1,156 @@
+# Jamfile for GAVisTool
+
+SubDir GAVISTOOL ;
+
+# Assume that CalcLib is in a sibling directory.
+# If it's installed elsewhere, you need to change this to point to it.
+CALC_LIB_DIR = $(SUBDIR)/../CalcLib ;
+SubInclude CALC_LIB_DIR ;
+
+{ # Enter scope so that we don't pollute some other Jamfile's name space.
+
+local VECTOR_MATH_SRCS =
+	Code/WinApp/VectorMath/Assert.cpp
+	Code/WinApp/VectorMath/Assert.h
+	Code/WinApp/VectorMath/AxisAlignedBoundingBox.cpp
+	Code/WinApp/VectorMath/AxisAlignedBoundingBox.h
+	Code/WinApp/VectorMath/BinaryFunctionSearch.cpp
+	Code/WinApp/VectorMath/BinaryFunctionSearch.h
+	Code/WinApp/VectorMath/ConvexHull.cpp
+	Code/WinApp/VectorMath/ConvexHull.h
+	Code/WinApp/VectorMath/CoordFrame.cpp
+	Code/WinApp/VectorMath/CoordFrame.h
+	Code/WinApp/VectorMath/Plane.cpp
+	Code/WinApp/VectorMath/Plane.h
+	Code/WinApp/VectorMath/ProgressInterface.cpp
+	Code/WinApp/VectorMath/ProgressInterface.h
+	Code/WinApp/VectorMath/Spline.cpp
+	Code/WinApp/VectorMath/Spline.h
+	Code/WinApp/VectorMath/Surface.cpp
+	Code/WinApp/VectorMath/Surface.h
+	Code/WinApp/VectorMath/SurfaceMesh.cpp
+	Code/WinApp/VectorMath/SurfaceMesh.h
+	Code/WinApp/VectorMath/Triangle.cpp
+	Code/WinApp/VectorMath/Triangle.h
+	Code/WinApp/VectorMath/Vector.cpp
+	Code/WinApp/VectorMath/Vector.h
+;
+
+local CONSTRAINTS_SRCS =
+	Code/WinApp/Constraints/FormulatedConstraint.cpp
+	Code/WinApp/Constraints/FormulatedConstraint.h
+;
+
+local FUNCTIONS_SRCS =
+	Code/WinApp/Functions/BindFunction.cpp
+	Code/WinApp/Functions/BindFunction.h
+	Code/WinApp/Functions/ColorFunction.cpp
+	Code/WinApp/Functions/ColorFunction.h
+	Code/WinApp/Functions/DumpInfoFunction.cpp
+	Code/WinApp/Functions/DumpInfoFunction.h
+	Code/WinApp/Functions/FormulatedConstraintFunction.cpp
+	Code/WinApp/Functions/FormulatedConstraintFunction.h
+	Code/WinApp/Functions/PointFunction.cpp
+	Code/WinApp/Functions/PointFunction.h
+	Code/WinApp/Functions/ReduceBivectorFunction.cpp
+	Code/WinApp/Functions/ReduceBivectorFunction.h
+	Code/WinApp/Functions/VectorToFromBivectorFunction.cpp
+	Code/WinApp/Functions/VectorToFromBivectorFunction.h
+	Code/WinApp/Functions/WipeEnvFunction.cpp
+	Code/WinApp/Functions/WipeEnvFunction.h
+;
+
+local GEOMETRIES_SRCS =
+	Code/WinApp/Geometries/ConformalQuarticGeometry.cpp
+	Code/WinApp/Geometries/ConformalQuarticGeometry.h
+	Code/WinApp/Geometries/FlatGeometry.cpp
+	Code/WinApp/Geometries/FlatGeometry.h
+	Code/WinApp/Geometries/InferredGeometry.h
+	Code/WinApp/Geometries/NormalVectorGeometry.h
+	Code/WinApp/Geometries/PointCloudGeometry.cpp
+	Code/WinApp/Geometries/PointCloudGeometry.h
+	Code/WinApp/Geometries/PointLightGeometry.cpp
+	Code/WinApp/Geometries/PointLightGeometry.h
+	Code/WinApp/Geometries/PositionVectorGeometry.cpp
+	Code/WinApp/Geometries/PositionVectorGeometry.h
+	Code/WinApp/Geometries/ProjectiveGeometry.cpp
+	Code/WinApp/Geometries/ProjectiveGeometry.h
+	Code/WinApp/Geometries/QuadricGeometry.cpp
+	Code/WinApp/Geometries/QuadricGeometry.h
+	Code/WinApp/Geometries/RoundGeometry.cpp
+	Code/WinApp/Geometries/RoundGeometry.h
+	Code/WinApp/Geometries/SurfaceGeometry.cpp
+	Code/WinApp/Geometries/SurfaceGeometry.h
+	Code/WinApp/Geometries/TransformGeometry.cpp
+	Code/WinApp/Geometries/TransformGeometry.h
+;
+
+local INTERFACE_SRCS =
+	Code/WinApp/Interfaces/ScalarInterface.cpp
+	Code/WinApp/Interfaces/ScalarInterface.h
+;
+
+local APP_SRCS =
+	Code/WinApp/Application.cpp
+	Code/WinApp/Application.h
+	Code/WinApp/BindTarget.cpp
+	Code/WinApp/BindTarget.h
+	Code/WinApp/Camera.cpp
+	Code/WinApp/Camera.h
+	Code/WinApp/Canvas.cpp
+	Code/WinApp/Canvas.h
+	Code/WinApp/CanvasFrame.cpp
+	Code/WinApp/CanvasFrame.h
+	Code/WinApp/ConsoleFrame.cpp
+	Code/WinApp/ConsoleFrame.h
+	Code/WinApp/Constraint.cpp
+	Code/WinApp/Constraint.h
+	Code/WinApp/Environment.cpp
+	Code/WinApp/Environment.h
+	Code/WinApp/Geometry.cpp
+	Code/WinApp/Geometry.h
+	Code/WinApp/Interface.cpp
+	Code/WinApp/Interface.h
+	Code/WinApp/InventoryTree.cpp
+	Code/WinApp/InventoryTree.h
+	Code/WinApp/MathAssert.cpp
+	Code/WinApp/MathAssert.h
+	Code/WinApp/ObjectHeap.h
+	Code/WinApp/ObjectHeap.hpp
+	Code/WinApp/ProgressBar.cpp
+	Code/WinApp/ProgressBar.h
+	Code/WinApp/Render.cpp
+	Code/WinApp/Render.h
+	Code/WinApp/resource.h
+	Code/WinApp/VirtualBindTarget.cpp
+	Code/WinApp/VirtualBindTarget.h
+	Code/WinApp/wxAll.h
+;
+
+local SRCS =
+	$(CONSTRAINTS_SRCS)
+	$(FUNCTIONS_SRCS)
+	$(GEOMETRIES_SRCS)
+	$(INTERFACES_SRCS)
+	$(VECTOR_MATH_SRCS)
+	$(APP_SRCS)
+;
+
+SourceGroup GAVisTool : "Code\\Constraints" : $(CONSTRAINTS_SRCS) ;
+SourceGroup GAVisTool : "Code\\Functions" : $(FUNCTIONS_SRCS) ;
+SourceGroup GAVisTool : "Code\\Geometries" : $(GEOMETRIES_SRCS) ;
+SourceGroup GAVisTool : "Code\\Interfaces" : $(INTERFACES_SRCS) ;
+SourceGroup GAVisTool : "Code\\VectorMath" : $(VECTOR_MATH_SRCS) ;
+SourceGroup GAVisTool : "Code" : $(APP_SRCS) ;
+
+IncludeModule c/wxwidgets ;
+
+C.Defines GAVisTool : _UNICODE_ _CRT_SECURE_NO_WARNINGS_ __WXMSW__ _WINDOWS_ WIN32 ;
+C.Defines GAVisTool : _DEBUG : debug ;
+
+C.IncludeDirectories GAVisTool : $(CALC_LIB_DIR)/Code ;
+C.LinkLibraries GAVisTool : CalcLib ;
+C.UseWxWidgets GAVisTool : base core adv aui gl : linklibs ;
+C.Application GAVisTool : $(SRCS) : windows ;
+
+} # End of scope.
