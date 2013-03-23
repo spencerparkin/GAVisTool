@@ -147,3 +147,5 @@ C.UseWxWidgets GAVisTool : base core adv aui gl : linklibs ;
 C.Application GAVisTool : $(SRCS) : windows ;
 
 SubInclude SPENCERS_PROJECTS CalcLib ;
+
+# Jamfile for GAVisTool
