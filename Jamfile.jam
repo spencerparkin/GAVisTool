@@ -1,15 +1,8 @@
 # Jamfile for GAVisTool
 
-SubDir GAVISTOOL ;
+SubDir SPENCERS_PROJECTS GAVisTool ;
 
-# Assume that CalcLib is in a sibling directory.
-# If it's installed elsewhere, you need to change this to point to it.
-CALC_LIB_DIR = $(SUBDIR)/../CalcLib ;
-SubInclude CALC_LIB_DIR ;
-
-{ # Enter scope so that we don't pollute some other Jamfile's name space.
-
-local VECTOR_MATH_SRCS =
+VECTOR_MATH_SRCS =
 	Code/WinApp/VectorMath/Assert.cpp
 	Code/WinApp/VectorMath/Assert.h
 	Code/WinApp/VectorMath/AxisAlignedBoundingBox.cpp
@@ -36,12 +29,12 @@ local VECTOR_MATH_SRCS =
 	Code/WinApp/VectorMath/Vector.h
 ;
 
-local CONSTRAINTS_SRCS =
+CONSTRAINTS_SRCS =
 	Code/WinApp/Constraints/FormulatedConstraint.cpp
 	Code/WinApp/Constraints/FormulatedConstraint.h
 ;
 
-local FUNCTIONS_SRCS =
+FUNCTIONS_SRCS =
 	Code/WinApp/Functions/BindFunction.cpp
 	Code/WinApp/Functions/BindFunction.h
 	Code/WinApp/Functions/ColorFunction.cpp
@@ -60,7 +53,7 @@ local FUNCTIONS_SRCS =
 	Code/WinApp/Functions/WipeEnvFunction.h
 ;
 
-local GEOMETRIES_SRCS =
+GEOMETRIES_SRCS =
 	Code/WinApp/Geometries/ConformalQuarticGeometry.cpp
 	Code/WinApp/Geometries/ConformalQuarticGeometry.h
 	Code/WinApp/Geometries/FlatGeometry.cpp
@@ -85,12 +78,12 @@ local GEOMETRIES_SRCS =
 	Code/WinApp/Geometries/TransformGeometry.h
 ;
 
-local INTERFACE_SRCS =
+INTERFACE_SRCS =
 	Code/WinApp/Interfaces/ScalarInterface.cpp
 	Code/WinApp/Interfaces/ScalarInterface.h
 ;
 
-local APP_SRCS =
+APP_SRCS =
 	Code/WinApp/Application.cpp
 	Code/WinApp/Application.h
 	Code/WinApp/BindTarget.cpp
@@ -127,7 +120,7 @@ local APP_SRCS =
 	Code/WinApp/wxAll.h
 ;
 
-local SRCS =
+SRCS =
 	$(CONSTRAINTS_SRCS)
 	$(FUNCTIONS_SRCS)
 	$(GEOMETRIES_SRCS)
@@ -148,9 +141,9 @@ IncludeModule c/wxwidgets ;
 C.Defines GAVisTool : _UNICODE_ _CRT_SECURE_NO_WARNINGS_ __WXMSW__ _WINDOWS_ WIN32 ;
 C.Defines GAVisTool : _DEBUG : debug ;
 
-C.IncludeDirectories GAVisTool : $(CALC_LIB_DIR)/Code ;
+C.IncludeDirectories GAVisTool : ../CalcLib/Code ;
 C.LinkLibraries GAVisTool : CalcLib ;
 C.UseWxWidgets GAVisTool : base core adv aui gl : linklibs ;
 C.Application GAVisTool : $(SRCS) : windows ;
 
-} # End of scope.
+SubInclude SPENCERS_PROJECTS CalcLib ;
