@@ -3,6 +3,7 @@
 *.suo
 *.ncb
 *.aps
+*.tss
 RCa02968
 
 # Ignore intermediate build files.

@@ -2,11 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Win32GAVisTool", "Win32GAVisTool.vcproj", "{CD064BEF-F1E6-4959-A2BD-878947F8BF32}"
-	ProjectSection(ProjectDependencies) = postProject
-		{8A2D802B-F951-47A1-9564-F36E3D86C804} = {8A2D802B-F951-47A1-9564-F36E3D86C804}
-	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CalcLib", "..\..\..\CalcLib\ProjectFiles\CalcLib.vcproj", "{8A2D802B-F951-47A1-9564-F36E3D86C804}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CalcLib", "..\..\..\CalcLib\CalcLib.vcproj", "{A310C18D-EE52-462A-9A1C-12E8F7863DBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,10 +15,10 @@ Global
 		{CD064BEF-F1E6-4959-A2BD-878947F8BF32}.Debug|Win32.Build.0 = Debug|Win32
 		{CD064BEF-F1E6-4959-A2BD-878947F8BF32}.Release|Win32.ActiveCfg = Release|Win32
 		{CD064BEF-F1E6-4959-A2BD-878947F8BF32}.Release|Win32.Build.0 = Release|Win32
-		{8A2D802B-F951-47A1-9564-F36E3D86C804}.Debug|Win32.ActiveCfg = Debug|Win32
-		{8A2D802B-F951-47A1-9564-F36E3D86C804}.Debug|Win32.Build.0 = Debug|Win32
-		{8A2D802B-F951-47A1-9564-F36E3D86C804}.Release|Win32.ActiveCfg = Release|Win32
-		{8A2D802B-F951-47A1-9564-F36E3D86C804}.Release|Win32.Build.0 = Release|Win32
+		{A310C18D-EE52-462A-9A1C-12E8F7863DBD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A310C18D-EE52-462A-9A1C-12E8F7863DBD}.Debug|Win32.Build.0 = Debug|Win32
+		{A310C18D-EE52-462A-9A1C-12E8F7863DBD}.Release|Win32.ActiveCfg = Release|Win32
+		{A310C18D-EE52-462A-9A1C-12E8F7863DBD}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
