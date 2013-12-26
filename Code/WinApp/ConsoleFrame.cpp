@@ -71,7 +71,7 @@ void GAVisToolConsoleFrame::OnSize( wxSizeEvent& event )
 //=========================================================================================
 void GAVisToolConsoleFrame::OnExit( wxCommandEvent& event )
 {
-	wxGetApp().ExitApp();
+	Close( true );
 }
 
 //=========================================================================================

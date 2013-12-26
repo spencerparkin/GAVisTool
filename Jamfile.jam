@@ -136,7 +136,7 @@ SourceGroup GAVisTool : "Code\\Interfaces" : $(INTERFACES_SRCS) ;
 SourceGroup GAVisTool : "Code\\VectorMath" : $(VECTOR_MATH_SRCS) ;
 SourceGroup GAVisTool : "Code" : $(APP_SRCS) ;
 
-IncludeModule c/wxwidgets ;
+IncludeModule d/wxwidgets-2.9.5 ;
 
 C.Defines GAVisTool : _UNICODE_ _CRT_SECURE_NO_WARNINGS_ __WXMSW__ _WINDOWS_ WIN32 ;
 C.Defines GAVisTool : _DEBUG : debug ;
