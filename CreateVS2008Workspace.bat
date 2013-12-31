@@ -1,1 +1,0 @@
-@jam --workspace --gen=vs2008 Jamfile.jam ./Build
