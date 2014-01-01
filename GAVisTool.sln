@@ -2,11 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual C++ Express 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GAVisTool", "GAVisTool.vcproj", "{32109BF5-F59A-4D29-83C1-6D9E724AAAB5}"
-	ProjectSection(ProjectDependencies) = postProject
-		{D55C48DA-F506-4CCF-90A1-9BD2C527BAC0} = {D55C48DA-F506-4CCF-90A1-9BD2C527BAC0}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CalcLib", "..\CalcLib\CalcLib.vcproj", "{D55C48DA-F506-4CCF-90A1-9BD2C527BAC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,10 +13,6 @@ Global
 		{32109BF5-F59A-4D29-83C1-6D9E724AAAB5}.Debug|Win32.Build.0 = Debug|Win32
 		{32109BF5-F59A-4D29-83C1-6D9E724AAAB5}.Release|Win32.ActiveCfg = Release|Win32
 		{32109BF5-F59A-4D29-83C1-6D9E724AAAB5}.Release|Win32.Build.0 = Release|Win32
-		{D55C48DA-F506-4CCF-90A1-9BD2C527BAC0}.Debug|Win32.ActiveCfg = Debug|Win32
-		{D55C48DA-F506-4CCF-90A1-9BD2C527BAC0}.Debug|Win32.Build.0 = Debug|Win32
-		{D55C48DA-F506-4CCF-90A1-9BD2C527BAC0}.Release|Win32.ActiveCfg = Release|Win32
-		{D55C48DA-F506-4CCF-90A1-9BD2C527BAC0}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

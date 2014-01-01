@@ -604,6 +604,10 @@
 		<Filter
 			Name="ScriptCode"
 			>
+			<File
+				RelativePath=".\ScriptCode\Test.txt"
+				>
+			</File>
 			<Filter
 				Name="ConformalGeometry"
 				>
