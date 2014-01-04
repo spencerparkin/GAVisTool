@@ -439,6 +439,14 @@
 						>
 					</File>
 					<File
+						RelativePath=".\Code\WinApp\Geometries\PointSampledGeometry.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Code\WinApp\Geometries\PointSampledGeometry.h"
+						>
+					</File>
+					<File
 						RelativePath=".\Code\WinApp\Geometries\PositionVectorGeometry.cpp"
 						>
 					</File>
