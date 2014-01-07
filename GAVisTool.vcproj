@@ -613,6 +613,10 @@
 			Name="ScriptCode"
 			>
 			<File
+				RelativePath=".\ScriptCode\Ellipse.txt"
+				>
+			</File>
+			<File
 				RelativePath=".\ScriptCode\Test.txt"
 				>
 			</File>

@@ -45,6 +45,7 @@ namespace VectorMath
 	Aabb::Side AabbSide( const Aabb& aabb, const Vector& pos, double epsilon = 0.0 );
 	Aabb::Plane LargestExtentDimension( const Aabb& aabb );
 	void AabbSplit( const Aabb& aabb, const Vector& pos, Aabb::Plane splitPlane, Aabb& aabb0, Aabb& aabb1 );
+	int AabbSplit( const Aabb& aabb, const Vector& pos, Aabb* aabbArray8 );
 	void CalcCenter( const Aabb& aabb, VectorMath::Vector& center );
 	double VolumeOfAabb( const Aabb& aabb );
 	bool IsTriangleInsideAabb( const Aabb& aabb, const Triangle& triangle, double epsilon = 0.0 );

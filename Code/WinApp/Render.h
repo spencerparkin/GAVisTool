@@ -252,7 +252,7 @@ private:
 		Point( void );
 		virtual ~Point( void );
 
-		void Draw( bool doLighting, VectorMath::CoordFrame& cameraFrame );
+		void Draw( bool doLighting, bool asPoint, VectorMath::CoordFrame& cameraFrame );
 
 		virtual void CalcCenter( VectorMath::Vector& center );
 

@@ -43,7 +43,38 @@ public:
 
 private:
 
-	GeometricAlgebra::Blade blade;
+	double TestPoint( const VectorMath::Vector& point );
+
+	class Box : public Utilities::List::Item
+	{
+	public:
+		virtual Utilities::List::SortComparison SortCompare( const Utilities::List::Item* compareWithItem ) const override;
+		VectorMath::Aabb aabb;
+		double test;
+	};
+
+	Utilities::List positiveBoxList, negativeBoxList;
+	VectorMath::Aabb::Plane splitPlane;
+
+	void SortNewBox( const VectorMath::Aabb& aabb );
+	void CullBoxList( Utilities::List& boxList );
+	void RefineBoxList( Utilities::List& boxList );
+	void ProcessBoxList( const Utilities::List& boxList );
+
+	class Point : public Utilities::List::Item
+	{
+	public:
+		VectorMath::Vector point;
+	};
+
+	Utilities::List pointCache;
+
+	void GeneratePointCache( void );
+	void WipePointCache( void );
+
+	GeometricAlgebra::SumOfBlades element;
+
+	CalcLib::Evaluator* testEvaluator;
 };
 
 // PointSampledGeometry.h

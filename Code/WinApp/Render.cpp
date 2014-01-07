@@ -18,8 +18,8 @@
 //=============================================================================
 GAVisToolRender::GAVisToolRender( void ) :
 			selectionPrimitiveCache( 1024, 1024, 128, 0 ),
-			noAlphaBlendingPrimitiveCache( 1024 * 8, 1024 * 8, 128, 0 ),
-			alphaBlendingPrimitiveCache( 1024 * 64, 1024 * 16, 256, 1024 * 16 )
+			noAlphaBlendingPrimitiveCache( 1024 * 8, 1024 * 8, 1024 * 16, 0 ),
+			alphaBlendingPrimitiveCache( 1024 * 64, 1024 * 16, 1024 * 16, 1024 * 16 )
 {
 	SetRenderMode( RENDER_MODE_NO_ALPHA_SORTING );
 	userResolution = RES_MEDIUM;
@@ -304,10 +304,11 @@ void GAVisToolRender::PrimitiveCache::Draw( GAVisToolRender& render )
 	// everything else anyway.
 	if( pointList.Count() > 0 )
 	{
+		glPointSize( 3.f );
 		VectorMath::CoordFrame cameraFrame;
 		wxGetApp().canvasFrame->canvas->camera.CameraFrame( cameraFrame );
 		for( Point* point = ( Point* )pointList.LeftMost(); point; point = ( Point* )point->Right() )
-			point->Draw( render.GetDoLighting(), cameraFrame );
+			point->Draw( render.GetDoLighting(), true, cameraFrame );
 	}
 
 	// Now go draw all the lines and triangles.
@@ -651,29 +652,39 @@ GAVisToolRender::Point::Point( void )
 // We draw points as triangle fans, mainly because OpenGL selection
 // does not work with GL_POINTS very well for some reason that I am
 // too retarded to figure out.
-void GAVisToolRender::Point::Draw( bool doLighting, VectorMath::CoordFrame& cameraFrame )
+void GAVisToolRender::Point::Draw( bool doLighting, bool asPoint, VectorMath::CoordFrame& cameraFrame )
 {
 	Color( doLighting, false );
 
-	glBegin( GL_TRIANGLE_FAN );
-
-	glNormal3f( normal.x, normal.y, normal.z );
-	glVertex3f( vertex.x, vertex.y, vertex.z );
-
-	double dotRadius = 0.4;
-	int segmentCount = 10;
-	for( int segment = 0; segment <= segmentCount; segment++ )
+	if( asPoint )
 	{
-		double angle = 2.0 * PI * double( segment ) / double( segmentCount );
-		VectorMath::Vector circleVertex;
-		VectorMath::Set( circleVertex, dotRadius * cos( angle ), dotRadius * sin( angle ), 0.0 );
-		VectorMath::Transform( circleVertex, cameraFrame, circleVertex );
-		VectorMath::Add( circleVertex, circleVertex, vertex );
+		glBegin( GL_POINTS );
 		glNormal3f( normal.x, normal.y, normal.z );
-		glVertex3f( circleVertex.x, circleVertex.y, circleVertex.z );
+		glVertex3f( vertex.x, vertex.y, vertex.z );
+		glEnd();
 	}
+	else
+	{
+		glBegin( GL_TRIANGLE_FAN );
 
-	glEnd();
+		glNormal3f( normal.x, normal.y, normal.z );
+		glVertex3f( vertex.x, vertex.y, vertex.z );
+
+		double dotRadius = 0.4;
+		int segmentCount = 10;
+		for( int segment = 0; segment <= segmentCount; segment++ )
+		{
+			double angle = 2.0 * PI * double( segment ) / double( segmentCount );
+			VectorMath::Vector circleVertex;
+			VectorMath::Set( circleVertex, dotRadius * cos( angle ), dotRadius * sin( angle ), 0.0 );
+			VectorMath::Transform( circleVertex, cameraFrame, circleVertex );
+			VectorMath::Add( circleVertex, circleVertex, vertex );
+			glNormal3f( normal.x, normal.y, normal.z );
+			glVertex3f( circleVertex.x, circleVertex.y, circleVertex.z );
+		}
+
+		glEnd();
+	}
 }
 
 //=============================================================================

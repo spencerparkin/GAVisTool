@@ -26,6 +26,7 @@
 #include "Geometries/ProjectiveGeometry.h"
 #include "Geometries/QuadricGeometry.h"
 #include "Geometries/ConformalQuarticGeometry.h"
+#include "Geometries/PointSampledGeometry.h"
 #include "Interfaces/ScalarInterface.h"
 #include "VirtualBindTarget.h"
 #include "wxAll.h"
@@ -92,6 +93,8 @@ GAVisToolEnvironment::GAVisToolEnvironment( void )
 		return new GAVisToolBindFunctionEvaluator( &ConformalTransformGeometry::Create, GAVisToolBindTarget::DOESNT_MATTER );
 	else if( 0 == strcmp( functionName, "bind_scalar_iface" ) )
 		return new GAVisToolBindFunctionEvaluator( &ScalarInterface::Create, GAVisToolBindTarget::DOESNT_MATTER );
+	else if( 0 == strcmp( functionName, "bind_psg" ) )
+		return new GAVisToolBindFunctionEvaluator( &PointSampledGeometry::Create, GAVisToolBindTarget::DOESNT_MATTER );
 	else if( 0 == strcmp( functionName, "geo_color" ) )
 		return new GAVisToolColorFunctionEvaluator();
 	else if( 0 == strcmp( functionName, "formula_constraint" ) )

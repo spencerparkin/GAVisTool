@@ -160,6 +160,49 @@ void VectorMath::AabbSplit( const Aabb& aabb, const Vector& pos, Aabb::Plane spl
 }
 
 //=============================================================================
+// Here we assume that the given AABB array has room for at least 8 boxes.
+int VectorMath::AabbSplit( const Aabb& aabb, const Vector& pos, Aabb* aabbArray8 )
+{
+	Aabb::Side side = AabbSide( aabb, pos );
+	if( side == Aabb::IS_OUTSIDE_BOX )
+		return 0;
+
+	if( side == Aabb::IS_ON_BOX )
+	{
+		// For now, we're not going to handle this case, but if we did,
+		// we would return 1, 2 or 4 boxes in the case that the point
+		// is on a corner, edge or face, respectively.
+		return 0;
+	}
+
+	VectorMath::Copy( aabbArray8[0].min, aabb.min );
+	VectorMath::Copy( aabbArray8[0].max, pos );
+
+	VectorMath::Set( aabbArray8[1].min, aabb.min.x, aabb.min.y, pos.z );
+	VectorMath::Set( aabbArray8[1].max, pos.x, pos.y, aabb.max.z );
+
+	VectorMath::Set( aabbArray8[2].min, aabb.min.x, pos.y, aabb.min.z );
+	VectorMath::Set( aabbArray8[2].max, pos.x, aabb.max.y, pos.z );
+
+	VectorMath::Set( aabbArray8[3].min, pos.x, aabb.min.y, aabb.min.z );
+	VectorMath::Set( aabbArray8[3].max, aabb.max.x, pos.y, pos.z );
+
+	VectorMath::Copy( aabbArray8[4].min, pos );
+	VectorMath::Copy( aabbArray8[4].max, aabb.max );
+
+	VectorMath::Set( aabbArray8[5].min, aabb.min.x, pos.y, pos.z );
+	VectorMath::Set( aabbArray8[5].max, pos.x, aabb.max.y, aabb.max.z );
+
+	VectorMath::Set( aabbArray8[6].min, pos.x, aabb.min.y, pos.z );
+	VectorMath::Set( aabbArray8[6].max, aabb.max.x, pos.y, aabb.max.z );
+
+	VectorMath::Set( aabbArray8[7].min, pos.x, pos.y, aabb.min.z );
+	VectorMath::Set( aabbArray8[7].max, aabb.max.x, aabb.max.y, pos.z );
+
+	return 8;
+}
+
+//=============================================================================
 void VectorMath::CalcCenter( const Aabb& aabb, VectorMath::Vector& center )
 {
 	Lerp( center, aabb.min, aabb.max, 0.5 );
