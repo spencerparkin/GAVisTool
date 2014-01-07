@@ -71,13 +71,14 @@ namespace VectorMath
 		virtual double EvaluatePartialZ( const VectorMath::Vector& point ) const = 0;
 		virtual void EvaluateGradientAt( const VectorMath::Vector& point, VectorMath::Vector& gradient ) const;
 
+		bool ConvergePointToSurfaceInPlane( const Plane* plane, Vector& point, double epsilon ) const;
+
 	private:
 
 		void CalculateTracePlane( const TraceParameters& traceParameters, int index, Plane& plane, Vector& planeCenter ) const;
 		void CalculateTracesInPlane( const Plane& plane, const Vector& center, double extent, Utilities::List& traceList ) const;
 		Trace* CalculateTraceInPlane( const Plane& plane, const Vector& seed, const Aabb& aabb ) const;
 		bool StepTraceInPlane( const Plane& plane, int direction, Vector& point, double traceDelta, double epsilon ) const;
-		bool ConvergePointToSurfaceInPlane( const Plane* plane, Vector& point, double epsilon ) const;
 	};
 
 	class Quadric : public Surface

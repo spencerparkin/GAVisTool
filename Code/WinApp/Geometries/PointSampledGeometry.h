@@ -12,6 +12,7 @@
 #pragma once
 
 #include "../Geometry.h"
+#include "../VectorMath/Surface.h"
 
 //=========================================================================================
 class PointSampledGeometry : public GAVisToolGeometry
@@ -43,7 +44,43 @@ public:
 
 private:
 
-	GeometricAlgebra::SumOfBlades element;
+	//=========================================================================================
+	class Surface : public VectorMath::Surface
+	{
+	public:
+		Surface( void );
+		virtual ~Surface( void );
+
+		virtual double EvaluateAt( const VectorMath::Vector& point ) const override;
+		virtual double EvaluatePartialX( const VectorMath::Vector& point ) const override;
+		virtual double EvaluatePartialY( const VectorMath::Vector& point ) const override;
+		virtual double EvaluatePartialZ( const VectorMath::Vector& point ) const override;
+
+		double EvaluateWith( CalcLib::Evaluator* evaluator, const VectorMath::Vector& point ) const;
+
+		mutable CalcLib::Calculator calculator;
+		CalcLib::Number* number;
+
+		CalcLib::Evaluator* functionEvaluator;
+		CalcLib::Evaluator* functionPartialXEvaluator;
+		CalcLib::Evaluator* functionPartialYEvaluator;
+		CalcLib::Evaluator* functionPartialZEvaluator;
+
+		GeometricAlgebra::SumOfBlades element;
+	};
+
+	Surface surface;
+
+	//=========================================================================================
+	class Point : public Utilities::List::Item
+	{
+	public:
+		VectorMath::Vector point;
+	};
+
+	Utilities::List pointList;
+
+	void RegeneratePointListIfNeeded( void );
 };
 
 // PointSampledGeometry.h
