@@ -9,7 +9,7 @@ RCa02968
 # Ignore intermediate build files.
 Build/
 CalcLib/
-GAVisTool/
+latexOutput/
 
 # Ignore intermediate latex files.
 *.dvi
