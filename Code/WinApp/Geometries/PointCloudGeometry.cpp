@@ -56,6 +56,7 @@ PointCloudGeometry::PointCloudGeometry( void ) : GAVisToolGeometry( NORMAL_FORM 
 		render.Highlight( GAVisToolRender::NO_HIGHLIGHTING );
 	render.Color( color, alpha );
 
+	/*
 	for( int index = 0; index < convexHull.CloudSize(); index++ )
 	{
 		Vector& point = convexHull[ index ];
@@ -79,6 +80,7 @@ PointCloudGeometry::PointCloudGeometry( void ) : GAVisToolGeometry( NORMAL_FORM 
 			render.DrawTriangle( triangleGeometry );
 		}
 	}
+	*/
 }
 
 //=========================================================================================
@@ -90,33 +92,33 @@ PointCloudGeometry::PointCloudGeometry( void ) : GAVisToolGeometry( NORMAL_FORM 
 //=========================================================================================
 /*virtual*/ void PointCloudGeometry::Translate( const VectorMath::Vector& delta )
 {
-	VectorMath::Add( center, center, delta );
-	for( int index = 0; index < convexHull.CloudSize(); index++ )
-		VectorMath::Add( convexHull[ index ], convexHull[ index ], delta );
+//	VectorMath::Add( center, center, delta );
+//	for( int index = 0; index < convexHull.CloudSize(); index++ )
+//		VectorMath::Add( convexHull[ index ], convexHull[ index ], delta );
 }
 
 //=========================================================================================
 /*virtual*/ void PointCloudGeometry::Rotate( const VectorMath::Vector& unitAxis, float angle )
 {
-	for( int index = 0; index < convexHull.CloudSize(); index++ )
+	/*for( int index = 0; index < convexHull.CloudSize(); index++ )
 	{
 		VectorMath::Vector vec;
 		VectorMath::Sub( vec, convexHull[ index ], center );
 		VectorMath::Rotate( vec, vec, unitAxis, angle );
 		VectorMath::Add( convexHull[ index ], center, vec );
-	}
+	}*/
 }
 
 //=========================================================================================
 /*virtual*/ void PointCloudGeometry::Scale( float scale )
 {
-	for( int index = 0; index < convexHull.CloudSize(); index++ )
+	/*for( int index = 0; index < convexHull.CloudSize(); index++ )
 	{
 		VectorMath::Vector vec;
 		VectorMath::Sub( vec, convexHull[ index ], center );
 		VectorMath::Scale( vec, vec, scale );
 		VectorMath::Add( convexHull[ index ], center, vec );
-	}
+	}*/
 }
 
 // PointCloudGeometry.cpp

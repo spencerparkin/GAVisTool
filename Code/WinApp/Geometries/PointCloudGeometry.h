@@ -40,7 +40,7 @@ public:
 	virtual void Scale( float scale ) override;
 
 	VectorMath::Vector center;
-	VectorMath::ConvexHull convexHull;
+	//VectorMath::ConvexHull convexHull;
 };
 
 // PointCloudGeometry.h
