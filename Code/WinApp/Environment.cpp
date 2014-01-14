@@ -27,6 +27,7 @@
 #include "Geometries/QuadricGeometry.h"
 #include "Geometries/ConformalQuarticGeometry.h"
 #include "Geometries/PointSampledGeometry.h"
+#include "Geometries/PointCloudGeometry.h"
 #include "Interfaces/ScalarInterface.h"
 #include "VirtualBindTarget.h"
 #include "wxAll.h"
@@ -113,6 +114,8 @@ GAVisToolEnvironment::GAVisToolEnvironment( void )
 		return new GAVisToolBindFunctionEvaluator( &QuadricGeometry::Create, GAVisToolBindTarget::DOESNT_MATTER );
 	else if( 0 == strcmp( functionName, "bind_conformal_quartic" ) )
 		return new GAVisToolBindFunctionEvaluator( &ConformalQuarticGeometry::Create, GAVisToolBindTarget::DOESNT_MATTER );
+	else if( 0 == strcmp( functionName, "bind_pt_cloud" ) )
+		return new GAVisToolBindFunctionEvaluator( &PointCloudGeometry::Create, GAVisToolBindTarget::DOESNT_MATTER );
 	else if( 0 == strcmp( functionName, "reduce_bivector" ) )
 		return new GAVisToolReduceBivectorFunctionEvaluator();
 	else if( 0 == strcmp( functionName, "as_vector" ) )

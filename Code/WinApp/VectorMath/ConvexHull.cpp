@@ -14,12 +14,12 @@
 using namespace VectorMath;
 
 //=============================================================================
-ConvexHullFinder::ConvexHullFinder( void )
+ConvexHull::ConvexHull( void )
 {
 }
 
 //=============================================================================
-ConvexHullFinder::~ConvexHullFinder( void )
+ConvexHull::~ConvexHull( void )
 {
 	pointList.RemoveAll( true );
 	triangleList.RemoveAll( true );
@@ -27,25 +27,51 @@ ConvexHullFinder::~ConvexHullFinder( void )
 }
 
 //=============================================================================
-void ConvexHullFinder::AddVertex( const VectorMath::Vector& vertex )
+void ConvexHull::AddVertex( double x, double y, double z )
+{
+	VectorMath::Vector vertex;
+	VectorMath::Set( vertex, x, y, z );
+	AddVertex( vertex );
+}
+
+//=============================================================================
+void ConvexHull::AddVertex( const VectorMath::Vector& vertex )
 {
 	vertexArray.Append( vertex );
 }
 
 //=============================================================================
-void ConvexHullFinder::RemoveAllVertices( void )
+void ConvexHull::RemoveAllVertices( void )
 {
 	vertexArray.Clear();
 }
 
 //=============================================================================
-const Utilities::List& ConvexHullFinder::GetTriangleList( void )
+const Utilities::List& ConvexHull::TriangleList( void ) const
 {
 	return triangleList;
 }
 
 //=============================================================================
-bool ConvexHullFinder::RegenerateTriangleList( void )
+const VectorMath::Vector& ConvexHull::operator[]( int index ) const
+{
+	return vertexArray[ index ];
+}
+
+//=============================================================================
+VectorMath::Vector& ConvexHull::operator[]( int index )
+{
+	return vertexArray[ index ];
+}
+
+//=============================================================================
+int ConvexHull::VertexCount( void ) const
+{
+	return vertexArray.Count();
+}
+
+//=============================================================================
+bool ConvexHull::RegenerateTriangleList( void )
 {
 	pointList.RemoveAll( true );
 	triangleList.RemoveAll( true );
@@ -79,7 +105,7 @@ bool ConvexHullFinder::RegenerateTriangleList( void )
 }
 
 //=============================================================================
-void ConvexHullFinder::IntegrateTetrahedron( int* tetrahedron )
+void ConvexHull::IntegrateTetrahedron( int* tetrahedron )
 {
 	for( int index = 0; index < 4; index++ )
 	{
@@ -112,7 +138,7 @@ void ConvexHullFinder::IntegrateTetrahedron( int* tetrahedron )
 }
 
 //=============================================================================
-ConvexHullFinder::Triangle* ConvexHullFinder::FindTriangle( const Triangle* triangle )
+ConvexHull::Triangle* ConvexHull::FindTriangle( const Triangle* triangle )
 {
 	for( Triangle* foundTriangle = ( Triangle* )triangleList.LeftMost(); foundTriangle; foundTriangle = ( Triangle* )foundTriangle->Right() )
 	{
@@ -133,7 +159,7 @@ ConvexHullFinder::Triangle* ConvexHullFinder::FindTriangle( const Triangle* tria
 }
 
 //=============================================================================
-void ConvexHullFinder::ExpandHull( const Point* point )
+void ConvexHull::ExpandHull( const Point* point )
 {
 	Utilities::List processList;
 	triangleList.EmptyIntoOnRight( processList );
@@ -160,7 +186,7 @@ void ConvexHullFinder::ExpandHull( const Point* point )
 }
 
 //=============================================================================
-bool ConvexHullFinder::IsDegenerate( int* tetrahedron )
+bool ConvexHull::IsDegenerate( int* tetrahedron )
 {
 	for( int i = 0; i < 4; i++ )
 		for( int j = i + 1; j < 4; j++ )
@@ -170,13 +196,13 @@ bool ConvexHullFinder::IsDegenerate( int* tetrahedron )
 }
 
 //=============================================================================
-const ConvexHullFinder::Point* ConvexHullFinder::ChoosePoint( void )
+const ConvexHull::Point* ConvexHull::ChoosePoint( void )
 {
 	return ( const Point* )pointList.LeftMost();
 }
 
 //=============================================================================
-void ConvexHullFinder::CullPoints( void )
+void ConvexHull::CullPoints( void )
 {
 	Point* nextPoint = 0;
 	for( Point* point = ( Point* )pointList.LeftMost(); point; point = nextPoint )
@@ -188,7 +214,7 @@ void ConvexHullFinder::CullPoints( void )
 }
 
 //=============================================================================
-bool ConvexHullFinder::PointIsOnOrInsideHull( const Point* point )
+bool ConvexHull::PointIsOnOrInsideHull( const Point* point )
 {
 	for( Triangle* triangle = ( Triangle* )triangleList.LeftMost(); triangle; triangle = ( Triangle* )triangle->Right() )
 		if( CalculateTriangleSide( triangle, point, 1e-3 ) == FRONT )
@@ -197,7 +223,7 @@ bool ConvexHullFinder::PointIsOnOrInsideHull( const Point* point )
 }
 
 //=============================================================================
-ConvexHullFinder::TriangleSide ConvexHullFinder::CalculateTriangleSide( const Triangle* triangle, const Point* point, double epsilon /*= 1e-7*/ )
+ConvexHull::TriangleSide ConvexHull::CalculateTriangleSide( const Triangle* triangle, const Point* point, double epsilon /*= 1e-7*/ )
 {
 	VectorMath::Vector vertex0, vertex1, vertex2, vertex;
 
@@ -222,7 +248,7 @@ ConvexHullFinder::TriangleSide ConvexHullFinder::CalculateTriangleSide( const Tr
 }
 
 //=============================================================================
-bool ConvexHullFinder::FindFourNonCoplanarPoints( int* tetrahedron )
+bool ConvexHull::FindFourNonCoplanarPoints( int* tetrahedron )
 {
 	for( tetrahedron[0] = 0; tetrahedron[0] < vertexArray.Count(); tetrahedron[0]++ )
 		for( tetrahedron[1] = tetrahedron[0] + 1; tetrahedron[1] < vertexArray.Count(); tetrahedron[1]++ )
@@ -234,7 +260,7 @@ bool ConvexHullFinder::FindFourNonCoplanarPoints( int* tetrahedron )
 }
 
 //=============================================================================
-double ConvexHullFinder::TetrahedronVolume( int* tetrahedron )
+double ConvexHull::TetrahedronVolume( int* tetrahedron )
 {
 	VectorMath::Vector vertex0, vertex1, vertex2, vertex3;
 

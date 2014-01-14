@@ -24,6 +24,8 @@ public:
 	PointCloudGeometry( void );
 	virtual ~PointCloudGeometry( void );
 
+	static GAVisToolBindTarget* Create( BindType bindType );
+
 	virtual void DecomposeFrom( const GeometricAlgebra::SumOfBlades& element );
 	virtual void ComposeTo( GeometricAlgebra::SumOfBlades& element ) const;
 
@@ -40,7 +42,7 @@ public:
 	virtual void Scale( float scale ) override;
 
 	VectorMath::Vector center;
-	//VectorMath::ConvexHull convexHull;
+	VectorMath::ConvexHull convexHull;
 };
 
 // PointCloudGeometry.h

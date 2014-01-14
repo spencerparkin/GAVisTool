@@ -19,12 +19,12 @@
 
 namespace VectorMath
 {
-	class ConvexHullFinder
+	class ConvexHull
 	{
 	public:
 
-		ConvexHullFinder( void );
-		~ConvexHullFinder( void );
+		ConvexHull( void );
+		~ConvexHull( void );
 
 		class Triangle : public Utilities::List::Item
 		{
@@ -38,11 +38,15 @@ namespace VectorMath
 			int vertexIndex;
 		};
 
+		bool RegenerateTriangleList( void );
+		const Utilities::List& TriangleList( void ) const;
+
+		void AddVertex( double x, double y, double z );
 		void AddVertex( const Vector& vertex );
 		void RemoveAllVertices( void );
-
-		bool RegenerateTriangleList( void );
-		const Utilities::List& GetTriangleList( void );
+		const VectorMath::Vector& operator[]( int index ) const;
+		VectorMath::Vector& operator[]( int index );
+		int VertexCount( void ) const;
 
 	private:
 
