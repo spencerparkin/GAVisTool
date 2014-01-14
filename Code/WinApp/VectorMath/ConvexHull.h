@@ -19,7 +19,57 @@
 
 namespace VectorMath
 {
-	// TODO: Grab the algorithm you wrote for work and stick it here, ported.
+	class ConvexHullFinder
+	{
+	public:
+
+		ConvexHullFinder( void );
+		~ConvexHullFinder( void );
+
+		class Triangle : public Utilities::List::Item
+		{
+		public:
+			int vertexIndex[3];
+		};
+
+		class Point : public Utilities::List::Item
+		{
+		public:
+			int vertexIndex;
+		};
+
+		void AddVertex( const Vector& vertex );
+		void RemoveAllVertices( void );
+
+		bool RegenerateTriangleList( void );
+		const Utilities::List& GetTriangleList( void );
+
+	private:
+
+		enum TriangleSide
+		{
+			NEITHER,
+			FRONT,
+			BACK,
+		};
+
+		void CullPoints( void );
+		bool PointIsOnOrInsideHull( const Point* point );
+		TriangleSide CalculateTriangleSide( const Triangle* triangle, const Point* point, double epsilon = 1e-7 );
+		bool FindFourNonCoplanarPoints( int* tetrahedron );
+		double TetrahedronVolume( int* tetrahedron );
+		void IntegrateTetrahedron( int* tetrahedron );
+		Triangle* FindTriangle( const Triangle* triangle );
+		void ExpandHull( const Point* point );
+		const Point* ChoosePoint( void );
+		bool IsDegenerate( int* tetrahedron );
+
+		typedef Utilities::Array< VectorMath::Vector > VertexArray;
+
+		Utilities::List triangleList;
+		Utilities::List pointList;
+		VertexArray vertexArray;
+	};
 }
 
 // ConvexHull.h
