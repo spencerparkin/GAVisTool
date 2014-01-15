@@ -18,49 +18,6 @@ IMPLEMENT_CALCLIB_CLASS1( PointCloudGeometry, GAVisToolGeometry );
 PointCloudGeometry::PointCloudGeometry( void ) : GAVisToolGeometry( NORMAL_FORM )
 {
 	VectorMath::Set( center, 0.0, 0.0, 0.0 );
-
-	double gr = 0.5 * ( 1.0 + sqrt( 5.0 ) );
-
-	convexHull.AddVertex( 0.0, 0.0, gr );
-	convexHull.AddVertex( 0.0, 0.0, -gr );
-
-	convexHull.AddVertex( 0.0, gr, 0.0 );
-	convexHull.AddVertex( 0.0, -gr, 0.0 );
-
-	convexHull.AddVertex( gr, 0.0, 0.0 );
-	convexHull.AddVertex( -gr, 0.0, 0.0 );
-
-	convexHull.AddVertex( -0.5, -0.5 * gr, 0.5 * ( 1.0 + gr ) );
-	convexHull.AddVertex( 0.5, -0.5 * gr, 0.5 * ( 1.0 + gr ) );
-	convexHull.AddVertex( -0.5, 0.5 * gr, 0.5 * ( 1.0 + gr ) );
-	convexHull.AddVertex( 0.5, 0.5 * gr, 0.5 * ( 1.0 + gr ) );
-
-	convexHull.AddVertex( -0.5, -0.5 * gr, -0.5 * ( 1.0 + gr ) );
-	convexHull.AddVertex( 0.5, -0.5 * gr, -0.5 * ( 1.0 + gr ) );
-	convexHull.AddVertex( -0.5, 0.5 * gr, -0.5 * ( 1.0 + gr ) );
-	convexHull.AddVertex( 0.5, 0.5 * gr, -0.5 * ( 1.0 + gr ) );
-
-	convexHull.AddVertex( -0.5 * gr, -0.5 * ( 1.0 + gr ), 0.5 );
-	convexHull.AddVertex( 0.5 * gr, -0.5 * ( 1.0 + gr ), 0.5 );
-	convexHull.AddVertex( -0.5 * gr, 0.5 * ( 1.0 + gr ), 0.5 );
-	convexHull.AddVertex( 0.5 * gr, 0.5 * ( 1.0 + gr ), 0.5 );
-
-	convexHull.AddVertex( -0.5 * gr, -0.5 * ( 1.0 + gr ), -0.5 );
-	convexHull.AddVertex( 0.5 * gr, -0.5 * ( 1.0 + gr ), -0.5 );
-	convexHull.AddVertex( -0.5 * gr, 0.5 * ( 1.0 + gr ), -0.5 );
-	convexHull.AddVertex( 0.5 * gr, 0.5 * ( 1.0 + gr ), -0.5 );
-
-	convexHull.AddVertex( -0.5 * ( 1.0 + gr ), -0.5, 0.5 * gr );
-	convexHull.AddVertex( 0.5 * ( 1.0 + gr ), -0.5, 0.5 * gr );
-	convexHull.AddVertex( -0.5 * ( 1.0 + gr ), 0.5, 0.5 * gr );
-	convexHull.AddVertex( 0.5 * ( 1.0 + gr ), 0.5, 0.5 * gr );
-
-	convexHull.AddVertex( -0.5 * ( 1.0 + gr ), -0.5, -0.5 * gr );
-	convexHull.AddVertex( 0.5 * ( 1.0 + gr ), -0.5, -0.5 * gr );
-	convexHull.AddVertex( -0.5 * ( 1.0 + gr ), 0.5, -0.5 * gr );
-	convexHull.AddVertex( 0.5 * ( 1.0 + gr ), 0.5, -0.5 * gr );
-
-	convexHull.RegenerateTriangleList();
 }
 
 //=========================================================================================
