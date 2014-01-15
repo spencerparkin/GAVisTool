@@ -48,6 +48,8 @@ namespace VectorMath
 		VectorMath::Vector& operator[]( int index );
 		int VertexCount( void ) const;
 
+		void DumpCode( char* code, int codeSize ) const;
+
 	private:
 
 		enum TriangleSide

@@ -281,4 +281,32 @@ double ConvexHull::TetrahedronVolume( int* tetrahedron )
 	return fabs( dot ) / 6.f;
 }
 
+//=============================================================================
+void ConvexHull::DumpCode( char* code, int codeSize ) const
+{
+	code[0] = '\0';
+	char line[ 512 ];
+	sprintf_s( line, sizeof( line ), "float vertexArray[%d][3] =\n{\n", vertexArray.Count() );
+	strcat_s( code, codeSize, line );
+	
+	for( int index = 0; index < vertexArray.Count(); index++ )
+	{
+		const VectorMath::Vector& point = vertexArray[ index ];
+		sprintf_s( line, sizeof( line ), "\t{ %ff, %ff, %ff },\n", point.x, point.y, point.z );
+		strcat_s( code, codeSize, line );
+	}
+
+	sprintf_s( line, sizeof( line ), "};\n\nint triangleArray[%d][3] =\n{\n", triangleList.Count() );
+	strcat_s( code, codeSize, line );
+
+	for( const Triangle* triangle = ( const Triangle* )triangleList.LeftMost(); triangle; triangle = ( const Triangle* )triangle->Right() )
+	{
+		sprintf_s( line, sizeof( line ), "\t{ %d, %d, %d },\n", triangle->vertexIndex[0], triangle->vertexIndex[1], triangle->vertexIndex[2] );
+		strcat_s( code, codeSize, line );
+	}
+
+	sprintf_s( line, sizeof( line ), "};" );
+	strcat_s( code, codeSize, line );
+}
+
 // ConvexHull.cpp
