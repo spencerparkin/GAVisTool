@@ -1,7 +1,7 @@
 // ConsoleFrame.cpp
 
 /*
- * Copyright (C) 2013 Spencer T. Parkin
+ * Copyright (C) 2013-2014 Spencer T. Parkin
  *
  * This software has been released under the MIT License.
  * See the "License.txt" file in the project root directory
@@ -88,7 +88,7 @@ void GAVisToolConsoleFrame::OnAbout( wxCommandEvent& WXUNUSED( event ) )
 #else
 	aboutDlgInfo.SetDescription( wxT( "Please send bugs to spencer.parkin@gmail.com.\nComments and questions are welcome.\nThank you for your interest in this program." ) );
 #endif
-	aboutDlgInfo.SetCopyright( wxT( "Copyright (C) 2013" ) );
+	aboutDlgInfo.SetCopyright( wxT( "Copyright (C) 2013-2014" ) );
 	aboutDlgInfo.SetWebSite( wxT( "https://github.com/spencerparkin/GAVisTool" ) );
 	aboutDlgInfo.AddDeveloper( wxT( "Spencer T. Parkin" ) );
 	aboutDlgInfo.SetLicense( wxT( "MIT License" ) );
