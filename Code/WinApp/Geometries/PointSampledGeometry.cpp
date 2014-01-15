@@ -166,7 +166,7 @@ PointSampledGeometry::Surface::Surface( void ) : calculator( "geoalg" )
 				"y*y*e8 + "
 				"z*z*e9"
 			") . E,"
-			"result = scalar_part( dot * dot ),"
+			"result = grade_part( 0, dot * dot ),"
 		")" );
 	functionEvaluator = calculator.CompileEvaluator( code );
 	wxASSERT( functionEvaluator != 0 );
@@ -194,7 +194,7 @@ PointSampledGeometry::Surface::Surface( void ) : calculator( "geoalg" )
 				"y*e6 + "
 				"2*x*e7"
 			") . E,"
-			"result = 2 * scalar_part( dot * partial_dot ),"
+			"result = 2 * grade_part( 0, dot * partial_dot ),"
 		")" );
 	functionPartialXEvaluator = calculator.CompileEvaluator( code );
 	wxASSERT( functionPartialXEvaluator != 0 ); 
@@ -222,7 +222,7 @@ PointSampledGeometry::Surface::Surface( void ) : calculator( "geoalg" )
 				"x*e6 + "
 				"2*y*e8"
 			") . E,"
-			"result = 2 * scalar_part( dot * partial_dot ),"
+			"result = 2 * grade_part( 0, dot * partial_dot ),"
 		")" );
 	functionPartialYEvaluator = calculator.CompileEvaluator( code );
 	wxASSERT( functionPartialYEvaluator != 0 );
@@ -250,7 +250,7 @@ PointSampledGeometry::Surface::Surface( void ) : calculator( "geoalg" )
 				"x*e5 + "
 				"2*z*e9"
 			") . E,"
-			"result = 2 * scalar_part( dot * partial_dot ),"
+			"result = 2 * grade_part( 0, dot * partial_dot ),"
 		")" );
 	functionPartialZEvaluator = calculator.CompileEvaluator( code );
 	wxASSERT( functionPartialZEvaluator != 0 );
