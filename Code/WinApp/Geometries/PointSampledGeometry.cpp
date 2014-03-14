@@ -110,7 +110,7 @@ void PointSampledGeometry::RegeneratePointListIfNeeded( void )
 	if( pointList.Count() > 0 )
 		return;
 
-	double angleStepCount = 40.0;
+	double angleStepCount = 5.0;
 	double deltaTheta = 2.0 * M_PI / angleStepCount;
 	double deltaPhi = M_PI / angleStepCount;
 	double radius = 5.0;
@@ -197,7 +197,7 @@ PointSampledGeometry::Surface::Surface( void ) : calculator( "geoalg" )
 			"result = 2 * grade_part( 0, dot * partial_dot ),"
 		")" );
 	functionPartialXEvaluator = calculator.CompileEvaluator( code );
-	wxASSERT( functionPartialXEvaluator != 0 ); 
+	wxASSERT( functionPartialXEvaluator != 0 );
 
 	sprintf_s( code, sizeof( code ),
 		"do"

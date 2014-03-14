@@ -4,33 +4,13 @@
 
 do
 (
-	func = "e0 + v + (v.e2)*(v.e3)*e4 + (v.e1)*(v.e3)*e5 + (v.e1)*(v.e2)*e6 + (v.v)*e7",
+	func = "e0 + v + (v.e2)*(v.e3)*e4 + (v.e1)*(v.e3)*e5 + (v.e1)*(v.e2)*e6 + (v.e1)*(v.e1)*e7 + (v.e2)*(v.e2)*e8 + (v.e3)*(v.e3)*e9",
 	
-	/* These are solutions to the equation 4x^2 + 25y^2 = 100. */
-	/*
-	p0 = do( v = -5*e1, #func ),
-	p1 = do( v = 2*e2, #func ),
-	p2 = do( v = -2*e2, #func ),
-	p3 = do( v = -4*e1 + 1.2*e2, #func ),
-	p4 = do( v = -3*e1 + 1.6*e2, #func ),
-	p5 = do( v = -3*e1 - 1.6*e2, #func ),
-	*/
+	p0 = do( v = ( $h +- $a )*e1 + $k*e2, #func ),
+	p1 = do( v = ( $h + $a )*e1 + $k*e2, #func ),
+	p2 = do( v = $h*e1 + ( $k +- $b )*e2, #func ),
+	p3 = do( v = $h*e1 + ( $k + $b )*e2, #func ),
+	p4 = do( v = ( $h + 0.5*$a )*e1 + 0.5*$sqrtThree*$b*e2, #func ),
 	
-	p0 = do( v = $x0*e1 + $y0*e2 + $z0*e3, #func ),
-	p1 = do( v = $x1*e1 + $y1*e2 + $z1*e3, #func ),
-	p2 = do( v = $x2*e1 + $y2*e2 + $z2*e3, #func ),
-	p3 = do( v = $x3*e1 + $y3*e2 + $z3*e3, #func ),
-	p4 = do( v = $x4*e1 + $y4*e2 + $z4*e3, #func ),
-	p5 = do( v = $x5*e1 + $y5*e2 + $z5*e3, #func ),
-	
-	/*
-	p0 = do( v = $x0*e1 + $y0*e2, #func ),
-	p1 = do( v = $x1*e1 + $y1*e2, #func ),
-	p2 = do( v = $x2*e1 + $y2*e2, #func ),
-	p3 = do( v = $x3*e1 + $y3*e2, #func ),
-	p4 = do( v = $x4*e1 + $y4*e2, #func ),
-	p5 = do( v = $x5*e1 + $y5*e2, #func ),
-	*/
-	
-	blade = p0^p1^p2^p3^p4^p5,
+	B = p0^p1^p2^p3^p4,
 )

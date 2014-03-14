@@ -299,7 +299,7 @@ bool VectorMath::Surface::ConvergePointToSurfaceInPlane( const Plane* plane, Vec
 	double deltaLength = 0.1;
 
 	// Is there a way to prove or disprove that this algorithm converges?
-	int maxIters = 1000;
+	int maxIters = 200; //1000;
 	for( int count = 0; count < maxIters; count++ )
 	{
 		// Project the point down onto the plane.
