@@ -91,6 +91,8 @@ bool GAVisToolApp::OnInit( void )
 	environment = new GAVisToolEnvironment();
 	calculator = new CalcLib::Calculator( environment );
 
+	GeometricAlgebra::MotherVector::Setup();
+
 	// Return true here to indicate our desire to keep processing the message loop.
 	return true;
 }
@@ -118,6 +120,8 @@ int GAVisToolApp::OnExit( void )
 
 	delete config;
 	config = 0;
+
+	GeometricAlgebra::MotherVector::Shutdown();
 
 	return wxApp::OnExit();
 }
