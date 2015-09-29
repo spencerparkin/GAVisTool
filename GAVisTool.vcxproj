@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{32109BF5-F59A-4D29-83C1-6D9E724AAAB5}</ProjectGuid>
+    <RootNamespace>GAVisTool</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>12.0.30501.0</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)/Build/$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)/Build/$(Configuration)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)/Build/$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)/Build/$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>../CalcLib/Code;../wxWidgets-3.0.2/include;../wxWidgets-3.0.2/include/msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;__WXMSW__;_UNICODE_;_CRT_SECURE_NO_WARNINGS;_USE_MATH_DEFINES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>CalcLib.lib;wxmsw30ud_core.lib;wxbase30ud.lib;wxmsw30ud_gl.lib;comctl32.lib;rpcrt4.lib;advapi32.lib;wsock32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../wxWidgets-3.0.2/lib/vc_lib;../CalcLib/Build/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>../CalcLib/Code;../wxWidgets-3.0.2/include;../wxWidgets-3.0.2/include/msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;__WXMSW__;_UNICODE_;_CRT_SECURE_NO_WARNINGS;_USE_MATH_DEFINES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>CalcLib.lib;wxmsw30u_core.lib;wxbase30u.lib;wxmsw30u_gl.lib;comctl32.lib;rpcrt4.lib;advapi32.lib;wsock32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../wxWidgets-3.0.2/lib/vc_lib;../CalcLib/Build/Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Code\WinApp\Application.cpp" />
+    <ClCompile Include="Code\WinApp\BindTarget.cpp" />
+    <ClCompile Include="Code\WinApp\Camera.cpp" />
+    <ClCompile Include="Code\WinApp\Canvas.cpp" />
+    <ClCompile Include="Code\WinApp\CanvasFrame.cpp" />
+    <ClCompile Include="Code\WinApp\ConsoleFrame.cpp" />
+    <ClCompile Include="Code\WinApp\Constraint.cpp" />
+    <ClCompile Include="Code\WinApp\Constraints\FormulatedConstraint.cpp" />
+    <ClCompile Include="Code\WinApp\Environment.cpp" />
+    <ClCompile Include="Code\WinApp\Functions\BindFunction.cpp" />
+    <ClCompile Include="Code\WinApp\Functions\ColorFunction.cpp" />
+    <ClCompile Include="Code\WinApp\Functions\DumpInfoFunction.cpp" />
+    <ClCompile Include="Code\WinApp\Functions\FormulatedConstraintFunction.cpp" />
+    <ClCompile Include="Code\WinApp\Functions\PointFunction.cpp" />
+    <ClCompile Include="Code\WinApp\Functions\ReduceBivectorFunction.cpp" />
+    <ClCompile Include="Code\WinApp\Functions\VectorToFromBivectorFunction.cpp" />
+    <ClCompile Include="Code\WinApp\Functions\WipeEnvFunction.cpp" />
+    <ClCompile Include="Code\WinApp\Geometries\ConformalQuarticGeometry.cpp" />
+    <ClCompile Include="Code\WinApp\Geometries\FlatGeometry.cpp" />
+    <ClCompile Include="Code\WinApp\Geometries\PointCloudGeometry.cpp" />
+    <ClCompile Include="Code\WinApp\Geometries\PointLightGeometry.cpp" />
+    <ClCompile Include="Code\WinApp\Geometries\PointSampledGeometry.cpp" />
+    <ClCompile Include="Code\WinApp\Geometries\PositionVectorGeometry.cpp" />
+    <ClCompile Include="Code\WinApp\Geometries\ProjectiveGeometry.cpp" />
+    <ClCompile Include="Code\WinApp\Geometries\QuadricGeometry.cpp" />
+    <ClCompile Include="Code\WinApp\Geometries\RoundGeometry.cpp" />
+    <ClCompile Include="Code\WinApp\Geometries\SurfaceGeometry.cpp" />
+    <ClCompile Include="Code\WinApp\Geometries\TransformGeometry.cpp" />
+    <ClCompile Include="Code\WinApp\Geometry.cpp" />
+    <ClCompile Include="Code\WinApp\Interface.cpp" />
+    <ClCompile Include="Code\WinApp\Interfaces\ScalarInterface.cpp" />
+    <ClCompile Include="Code\WinApp\InventoryTree.cpp" />
+    <ClCompile Include="Code\WinApp\MathAssert.cpp" />
+    <ClCompile Include="Code\WinApp\ProgressBar.cpp" />
+    <ClCompile Include="Code\WinApp\Render.cpp" />
+    <ClCompile Include="Code\WinApp\VectorMath\Assert.cpp" />
+    <ClCompile Include="Code\WinApp\VectorMath\AxisAlignedBoundingBox.cpp" />
+    <ClCompile Include="Code\WinApp\VectorMath\BinaryFunctionSearch.cpp" />
+    <ClCompile Include="Code\WinApp\VectorMath\ConvexHull.cpp" />
+    <ClCompile Include="Code\WinApp\VectorMath\CoordFrame.cpp" />
+    <ClCompile Include="Code\WinApp\VectorMath\Plane.cpp" />
+    <ClCompile Include="Code\WinApp\VectorMath\ProgressInterface.cpp" />
+    <ClCompile Include="Code\WinApp\VectorMath\Spline.cpp" />
+    <ClCompile Include="Code\WinApp\VectorMath\Surface.cpp" />
+    <ClCompile Include="Code\WinApp\VectorMath\SurfaceMesh.cpp" />
+    <ClCompile Include="Code\WinApp\VectorMath\Triangle.cpp" />
+    <ClCompile Include="Code\WinApp\VectorMath\Vector.cpp" />
+    <ClCompile Include="Code\WinApp\VirtualBindTarget.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Code\WinApp\Application.h" />
+    <ClInclude Include="Code\WinApp\BindTarget.h" />
+    <ClInclude Include="Code\WinApp\Camera.h" />
+    <ClInclude Include="Code\WinApp\Canvas.h" />
+    <ClInclude Include="Code\WinApp\CanvasFrame.h" />
+    <ClInclude Include="Code\WinApp\ConsoleFrame.h" />
+    <ClInclude Include="Code\WinApp\Constraint.h" />
+    <ClInclude Include="Code\WinApp\Constraints\FormulatedConstraint.h" />
+    <ClInclude Include="Code\WinApp\Environment.h" />
+    <ClInclude Include="Code\WinApp\Functions\BindFunction.h" />
+    <ClInclude Include="Code\WinApp\Functions\ColorFunction.h" />
+    <ClInclude Include="Code\WinApp\Functions\DumpInfoFunction.h" />
+    <ClInclude Include="Code\WinApp\Functions\FormulatedConstraintFunction.h" />
+    <ClInclude Include="Code\WinApp\Functions\PointFunction.h" />
+    <ClInclude Include="Code\WinApp\Functions\ReduceBivectorFunction.h" />
+    <ClInclude Include="Code\WinApp\Functions\VectorToFromBivectorFunction.h" />
+    <ClInclude Include="Code\WinApp\Functions\WipeEnvFunction.h" />
+    <ClInclude Include="Code\WinApp\Geometries\ConformalQuarticGeometry.h" />
+    <ClInclude Include="Code\WinApp\Geometries\FlatGeometry.h" />
+    <ClInclude Include="Code\WinApp\Geometries\InferredGeometry.h" />
+    <ClInclude Include="Code\WinApp\Geometries\NormalVectorGeometry.h" />
+    <ClInclude Include="Code\WinApp\Geometries\PointCloudGeometry.h" />
+    <ClInclude Include="Code\WinApp\Geometries\PointLightGeometry.h" />
+    <ClInclude Include="Code\WinApp\Geometries\PointSampledGeometry.h" />
+    <ClInclude Include="Code\WinApp\Geometries\PositionVectorGeometry.h" />
+    <ClInclude Include="Code\WinApp\Geometries\ProjectiveGeometry.h" />
+    <ClInclude Include="Code\WinApp\Geometries\QuadricGeometry.h" />
+    <ClInclude Include="Code\WinApp\Geometries\RoundGeometry.h" />
+    <ClInclude Include="Code\WinApp\Geometries\SurfaceGeometry.h" />
+    <ClInclude Include="Code\WinApp\Geometries\TransformGeometry.h" />
+    <ClInclude Include="Code\WinApp\Geometry.h" />
+    <ClInclude Include="Code\WinApp\Interface.h" />
+    <ClInclude Include="Code\WinApp\Interfaces\ScalarInterface.h" />
+    <ClInclude Include="Code\WinApp\InventoryTree.h" />
+    <ClInclude Include="Code\WinApp\MathAssert.h" />
+    <ClInclude Include="Code\WinApp\ObjectHeap.h" />
+    <ClInclude Include="Code\WinApp\ObjectHeap.hpp" />
+    <ClInclude Include="Code\WinApp\ProgressBar.h" />
+    <ClInclude Include="Code\WinApp\Render.h" />
+    <ClInclude Include="Code\WinApp\resource.h" />
+    <ClInclude Include="Code\WinApp\VectorMath\Assert.h" />
+    <ClInclude Include="Code\WinApp\VectorMath\AxisAlignedBoundingBox.h" />
+    <ClInclude Include="Code\WinApp\VectorMath\BinaryFunctionSearch.h" />
+    <ClInclude Include="Code\WinApp\VectorMath\ConvexHull.h" />
+    <ClInclude Include="Code\WinApp\VectorMath\CoordFrame.h" />
+    <ClInclude Include="Code\WinApp\VectorMath\Plane.h" />
+    <ClInclude Include="Code\WinApp\VectorMath\ProgressInterface.h" />
+    <ClInclude Include="Code\WinApp\VectorMath\Spline.h" />
+    <ClInclude Include="Code\WinApp\VectorMath\Surface.h" />
+    <ClInclude Include="Code\WinApp\VectorMath\SurfaceMesh.h" />
+    <ClInclude Include="Code\WinApp\VectorMath\Triangle.h" />
+    <ClInclude Include="Code\WinApp\VectorMath\Vector.h" />
+    <ClInclude Include="Code\WinApp\VirtualBindTarget.h" />
+    <ClInclude Include="Code\WinApp\wxAll.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="License.txt" />
+    <Text Include="ScriptCode\ConformalGeometry\Fittings\FitCircleToPointPairAndPoint.txt" />
+    <Text Include="ScriptCode\ConformalGeometry\Fittings\FitCircleToPoints.txt" />
+    <Text Include="ScriptCode\ConformalGeometry\Fittings\FitLineToPointPair.txt" />
+    <Text Include="ScriptCode\ConformalGeometry\Fittings\FitLineToPoints.txt" />
+    <Text Include="ScriptCode\ConformalGeometry\Fittings\FitPlaneToPoints.txt" />
+    <Text Include="ScriptCode\ConformalGeometry\Fittings\FitPlaneToProjectedPoints.txt" />
+    <Text Include="ScriptCode\ConformalGeometry\Fittings\FitPointPairToPoints.txt" />
+    <Text Include="ScriptCode\ConformalGeometry\Fittings\FitSphereToCircleAndPoint.txt" />
+    <Text Include="ScriptCode\ConformalGeometry\Fittings\FitSphereToPointPairs.txt" />
+    <Text Include="ScriptCode\ConformalGeometry\Fittings\FitSphereToPoints.txt" />
+    <Text Include="ScriptCode\ConformalGeometry\FunPicture.txt" />
+    <Text Include="ScriptCode\ConformalGeometry\Geometries\Circle.txt" />
+    <Text Include="ScriptCode\ConformalGeometry\Geometries\Line.txt" />
+    <Text Include="ScriptCode\ConformalGeometry\Geometries\Plane.txt" />
+    <Text Include="ScriptCode\ConformalGeometry\Geometries\PointPair.txt" />
+    <Text Include="ScriptCode\ConformalGeometry\Geometries\Sphere.txt" />
+    <Text Include="ScriptCode\ConformalGeometry\Intersections\IntersectPlaneWithCircle.txt" />
+    <Text Include="ScriptCode\ConformalGeometry\Intersections\IntersectPlaneWithLine.txt" />
+    <Text Include="ScriptCode\ConformalGeometry\Intersections\IntersectPlaneWithPlane.txt" />
+    <Text Include="ScriptCode\ConformalGeometry\Intersections\IntersectPlaneWithPlaneWithPlane.txt" />
+    <Text Include="ScriptCode\ConformalGeometry\Intersections\IntersectSphereWithCircle.txt" />
+    <Text Include="ScriptCode\ConformalGeometry\Intersections\IntersectSphereWithLine.txt" />
+    <Text Include="ScriptCode\ConformalGeometry\Intersections\IntersectSphereWithPlane.txt" />
+    <Text Include="ScriptCode\ConformalGeometry\Intersections\IntersectSphereWithSphere.txt" />
+    <Text Include="ScriptCode\ConformalGeometry\Intersections\IntersectSphereWithSphereWithSphere.txt" />
+    <Text Include="ScriptCode\ConformalGeometry\RobotArm.txt" />
+    <Text Include="ScriptCode\ConformalGeometry\Tube.txt" />
+    <Text Include="ScriptCode\ConformalQuarticGeometry\FitToPointAndIntersection.txt" />
+    <Text Include="ScriptCode\ConformalQuarticGeometry\GenerateConformalQuarticPolynomial.txt" />
+    <Text Include="ScriptCode\ConformalQuarticGeometry\InvertCylinderInSphere.txt" />
+    <Text Include="ScriptCode\ConformalQuarticGeometry\PointFitTest.txt" />
+    <Text Include="ScriptCode\ConformalQuarticGeometry\ReflectDoubleConeInSphere.txt" />
+    <Text Include="ScriptCode\ConformalQuarticGeometry\TestTranslation2.txt" />
+    <Text Include="ScriptCode\ConformalQuarticGeometry\TestTranslations.txt" />
+    <Text Include="ScriptCode\Ellipse.txt" />
+    <Text Include="ScriptCode\IrreducibleForm.txt" />
+    <Text Include="ScriptCode\NonUniformScale.txt" />
+    <Text Include="ScriptCode\ProjectiveGeometry\LineDemo0.txt" />
+    <Text Include="ScriptCode\ProjectiveGeometry\LineDemo1.txt" />
+    <Text Include="ScriptCode\ProjectiveGeometry\PlaneDemo0.txt" />
+    <Text Include="ScriptCode\ProjectiveGeometry\PlaneDemo1.txt" />
+    <Text Include="ScriptCode\ProjectiveGeometry\PlaneDemo2.txt" />
+    <Text Include="ScriptCode\QuadricGeometry\Surfaces\Cylinder.txt" />
+    <Text Include="ScriptCode\QuadricGeometry\Surfaces\Debug.txt" />
+    <Text Include="ScriptCode\QuadricGeometry\Surfaces\Sphere.txt" />
+    <Text Include="ScriptCode\QuadricGeometry\Surfaces\Spheroid.txt" />
+    <Text Include="ScriptCode\QuadricGeometry\Transformations\PlanarReflect.txt" />
+    <Text Include="ScriptCode\QuadricGeometry\Transformations\SphericalReflect.txt" />
+    <Text Include="ScriptCode\QuadricGeometry\Transformations\Translate.txt" />
+    <Text Include="ScriptCode\Test.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

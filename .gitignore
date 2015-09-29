@@ -4,6 +4,9 @@
 *.ncb
 *.aps
 *.tss
+*.opensdf
+*.filters
+*.sdf
 RCa02968
 
 # Ignore intermediate build files.
