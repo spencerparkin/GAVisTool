@@ -10,24 +10,24 @@ do
 
 	place_obj = "do
 	(
-		t = x*e0 + y*e1 + z*e2,
+		t = x*e1 + y*e2 + z*e3,
 		T = 1 - 0.5*t*ni,
 		obj = T*obj*T~,
 	)",
 	
-	bind_dual_point( p0, p1, p2, p3 ),
-	geo_color( p0, 1, 0, 0 ),
+	bind_dual_point( p1, p2, p3, p4 ),
 	geo_color( p1, 1, 0, 0 ),
 	geo_color( p2, 1, 0, 0 ),
 	geo_color( p3, 1, 0, 0 ),
+	geo_color( p4, 1, 0, 0 ),
 	
-	p0 = do( x=5, y=0, z=5, obj=p0, #place_obj ),
-	p1 = do( x=-5, y=0, z=7, obj=p1, #place_obj ),
-	p2 = do( x=7, y=0, z=-5, obj=p2, #place_obj ),
-	p3 = do( x=-5, y=0, z=-5, obj=p3, #place_obj ),
+	p1 = do( x=5, y=0, z=5, obj=p1, #place_obj ),
+	p2 = do( x=-5, y=0, z=7, obj=p2, #place_obj ),
+	p3 = do( x=7, y=0, z=-5, obj=p3, #place_obj ),
+	p4 = do( x=-5, y=0, z=-5, obj=p4, #place_obj ),
 	
-	plane_pos = 3*e1,
-	plane_norm = e1,
+	plane_pos = 3*e2,
+	plane_norm = e2,
 	bind_virtual( plane_pos, plane_norm ),
 	
 	bind_dual_point( p0_proj, p1_proj, p2_proj, p3_proj ),
@@ -39,29 +39,29 @@ do
 	proj_func = "do
 	(
 		pt = pt / scalar_part( pt, no ),
-		v = scalar_part( pt, e0 )*e0 + scalar_part( pt, e1 )*e1 + scalar_part( pt, e2 )*e2,
+		v = scalar_part( pt, e1 )*e1 + scalar_part( pt, e2 )*e2 + scalar_part( pt, e3 )*e3,
 		v = v + ( ( plane_pos - v ) . plane_norm ) * plane_norm,
 		no + v + 0.5*(v . v)*ni,
 	)",
 	
-	formula_constraint( "p0_proj = do( pt = p0, #proj_func )" ),
 	formula_constraint( "p1_proj = do( pt = p1, #proj_func )" ),
 	formula_constraint( "p2_proj = do( pt = p2, #proj_func )" ),
 	formula_constraint( "p3_proj = do( pt = p3, #proj_func )" ),
+	formula_constraint( "p4_proj = do( pt = p4, #proj_func )" ),
 	
 	bind_plane( pln ),
-	formula_constraint( "pln = p0_proj^p1_proj^p2_proj^p3_proj" ),
+	formula_constraint( "pln = p1_proj^p2_proj^p3_proj^p4_proj" ),
 	
 	/*
 	 * It's best to view this with the skinny geometry mode.
 	 */
-	bind_circle( cir0, cir1, cir2, cir3 ),
-	formula_constraint( "cir0 = p1_proj^p2_proj^p3_proj" ),
-	formula_constraint( "cir1 = p0_proj^p2_proj^p3_proj" ),
-	formula_constraint( "cir2 = p0_proj^p1_proj^p3_proj" ),
-	formula_constraint( "cir3 = p0_proj^p1_proj^p2_proj" ),
-	geo_color( cir0, 0, 0, 0 ),
+	bind_circle( cir1, cir2, cir3, cir4 ),
+	formula_constraint( "cir1 = p2_proj^p3_proj^p4_proj" ),
+	formula_constraint( "cir2 = p1_proj^p3_proj^p4_proj" ),
+	formula_constraint( "cir3 = p1_proj^p2_proj^p4_proj" ),
+	formula_constraint( "cir4 = p1_proj^p2_proj^p3_proj" ),
 	geo_color( cir1, 0, 0, 0 ),
 	geo_color( cir2, 0, 0, 0 ),
 	geo_color( cir3, 0, 0, 0 ),
+	geo_color( cir4, 0, 0, 0 ),
 )

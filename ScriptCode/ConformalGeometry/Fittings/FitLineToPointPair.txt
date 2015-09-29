@@ -7,8 +7,8 @@ do
 	make_pt = "no + v + 0.5*(v . v)*ni",
 
 	bind_dual_pointpair( ppr ),
-	pt_a = do( v = -3*e0 - 3*e1 - 3*e2, #make_pt ),
-	pt_b = do( v = 3*e0 + 3*e1 + 3*e2, #make_pt ),
+	pt_a = do( v = -3*e1 - 3*e2 - 3*e3, #make_pt ),
+	pt_b = do( v = 3*e1 + 3*e2 + 3*e3, #make_pt ),
 	ppr = -( pt_a ^ pt_b )*I,
 	
 	bind_dual_line( lin ),

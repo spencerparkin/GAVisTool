@@ -3,21 +3,21 @@
  */
 do(
 	wipe_env(),
-	bind_dual_point( p0, p1 ),
+	bind_dual_point( p1, p2 ),
 	
 	place_obj = "do(
-		t = x*e0 + y*e1 + z*e2,
+		t = x*e1 + y*e2 + z*e3,
 		T = 1 - 0.5*t*ni,
 		obj = T*obj*T~
 	)",
 	
-	p0 = do( x=-3, y=-5, z=6, obj=p0, #place_obj ),
-	p1 = do( x=-5, y=3, z=8, obj=p1, #place_obj ),
+	p1 = do( x=-3, y=-5, z=6, obj=p1, #place_obj ),
+	p2 = do( x=-5, y=3, z=8, obj=p2, #place_obj ),
 	
 	bind_dual_pointpair( ppr ),
-	formula_constraint( "ppr = ( p0^p1 )*-I" ),
+	formula_constraint( "ppr = ( p1^p2 )*-I" ),
 	
-	geo_color( p0, 1, 0, 0 ),
-	geo_color( p1, 0, 1, 0 ),
+	geo_color( p1, 1, 0, 0 ),
+	geo_color( p2, 0, 1, 0 ),
 	geo_color( ppr, 0, 1, 1 )
 )
