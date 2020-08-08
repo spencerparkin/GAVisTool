@@ -8,7 +8,7 @@ do(
 	wipe_env(),
 
 	place_obj = "do(
-		t = x*e0 + y*e1 + z*e2,
+		t = x*e1 + y*e2 + z*e3,
 		T = 1 - 0.5*t*ni,
 		obj = T*obj*T~
 	)",

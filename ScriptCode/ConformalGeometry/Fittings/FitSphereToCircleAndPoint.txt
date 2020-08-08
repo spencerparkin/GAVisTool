@@ -18,6 +18,9 @@ do
 	bind_dual_sphere( sph ),
 	geo_color( sph, 1, 0, 0 ),
 	
+	geo_color( cir, 0, 1, 0 ),
+	geo_color( pt, 0, 0, 1 ),
+
 	/*
 	 * Notice that this is the simplification
 	 * of "sph = ((cir*I)^pt)*I".
